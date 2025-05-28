@@ -1,36 +1,34 @@
 ---
-import { type CollectionEntry, getCollection } from 'astro:content';
+import { type CollectionEntry, getCollection, render } from 'astro:content';
 import BlogPost from '../layouts/BlogPost.astro';
 
 export async function getStaticPaths() {
 	const posts = await getCollection('blog');
-	const paths = await Promise.all(
-		posts.map(async (post: CollectionEntry<'blog'>) => {
-			// Use explicit slug if provided, otherwise generate from the file path
-			const slug = post.data.slug || post.id.replace(/\.[^/.]+$/, '');
-			// console.log(`Generated slug: ${slug}`); // 슬러그 생성 확인용 (필요시 제거)
-			// post.render()는 getStaticPaths에서 호출하지 않습니다.
-			return {
-				params: { slug },
-				// 페이지 컴포넌트에서 필요한 데이터만 props로 전달합니다.
-				// Content는 Astro가 자동으로 제공합니다.
-				props: { post }, // post 객체 전체를 props로 전달하여 render 속성에 접근
-			};
-		})
-	);
-	return paths;
+	return posts.map((post) => {
+		// Use explicit slug if provided, otherwise generate from the file path
+		const slug = post.data.slug || post.id.replace(/\.[^/.]+$/, '');
+		return {
+			params: { slug },
+			props: { post }, // Pass the whole post object
+		};
+	});
 }
 
-// 이 페이지 자체의 props 타입
-// Astro가 자동으로 제공하는 render 속성을 포함합니다.
-type PageProps = {
-	post: CollectionEntry<'blog'>; // post 객체 전체를 받도록 타입 정의
+// This page component's props type
+// Astro automatically provides the Content component alongside the props from getStaticPaths.
+type Props = {
+	post: CollectionEntry<'blog'>;
+	// Content는 render(post) 호출로 얻습니다.
 };
 
-const { post } = Astro.props; // Astro에서 post 객체를 받음
-const { Content } = await post.render(); // post.render()를 호출하여 Content를 얻음
+// Destructure only 'post' from Astro.props
+const { post } = Astro.props;
+
+// Use the render helper to get the Content component
+const { Content } = await render(post);
+
 ---
 
-<BlogPost data={post.data}> // post.data 객체를 props로 전달
-	<Content /> // 렌더링된 내용을 슬롯으로 전달
+<BlogPost data={post.data}> // Pass the post's data to the layout
+	<Content /> // Use the Content component obtained from render(post)
 </BlogPost> 
