@@ -9,10 +9,12 @@ export async function getStaticPaths() {
 			// Use explicit slug if provided, otherwise generate from the file path
 			const slug = post.data.slug || post.id.replace(/\.[^/.]+$/, '');
 			// console.log(`Generated slug: ${slug}`); // 슬러그 생성 확인용 (필요시 제거)
-			const { Content } = await post.render(); // 마크다운 내용을 HTML로 렌더링
+			// post.render()는 getStaticPaths에서 호출하지 않습니다.
 			return {
 				params: { slug },
-				props: { data: post.data, Content }, // 게시물 데이터(data)와 렌더링된 내용을 props로 전달
+				// 페이지 컴포넌트에서 필요한 데이터만 props로 전달합니다.
+				// Content는 Astro가 자동으로 제공합니다.
+				props: { post }, // post 객체 전체를 props로 전달하여 render 속성에 접근
 			};
 		})
 	);
@@ -20,14 +22,15 @@ export async function getStaticPaths() {
 }
 
 // 이 페이지 자체의 props 타입
+// Astro가 자동으로 제공하는 render 속성을 포함합니다.
 type PageProps = {
-	data: CollectionEntry<'blog'>['data'];
-	Content: any; // 렌더링된 내용의 타입
+	post: CollectionEntry<'blog'>; // post 객체 전체를 받도록 타입 정의
 };
 
-const { data, Content } = Astro.props; // 이 페이지는 data와 Content를 받음
+const { post } = Astro.props; // Astro에서 post 객체를 받음
+const { Content } = await post.render(); // post.render()를 호출하여 Content를 얻음
 ---
 
-<BlogPost data={data}> // data 객체를 props로 전달
+<BlogPost data={post.data}> // post.data 객체를 props로 전달
 	<Content /> // 렌더링된 내용을 슬롯으로 전달
 </BlogPost> 
