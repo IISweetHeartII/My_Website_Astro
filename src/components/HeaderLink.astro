@@ -1,0 +1,30 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+
+type Props = HTMLAttributes<'a'>;
+
+const { href, class: className, ...props } = Astro.props;
+const pathname = Astro.url.pathname.replace(import.meta.env.BASE_URL, '');
+const subpath = pathname.match(/[^\/]+/g);
+const isActive = href === pathname || href === '/' + (subpath?.[0] || '');
+---
+
+<a 
+	href={href} 
+	class:list={[ 
+		className, 
+		'text-[#F9FAFB]',
+		'font-semibold',
+		'hover:bg-[#F9FAFB]',
+		'hover:bg-opacity-10',
+		'transition-colors',
+		'duration-200',
+		'rounded',
+		'px-2',
+		'py-1',
+		'-my-1',
+		{ 'text-[#00FF6A]': isActive } // Active 상태일 때 형광 연두색 적용
+	]}
+	{...props}>
+	<slot />
+</a>

@@ -1,0 +1,38 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+**색상 팔레트:**
+
+- 배경: `#FFFFFF` (흰색) 또는 `#F9FAFB` (밝은 회색)
+- 텍스트(테두리): `#1F2937` (다크 그레이)
+- 메인 강조 색: `#00FF6A` (형광 연두)
+- 포인트 색: `#FF6B6B` or `#2DD4BF` (코랄 or 민트 호버 효과나 키워드 강조)
+- 블루그레이: `#485E8E`
+- 밝은블루: `#E5F0FF`
+- 뮤트퍼플: `#8590B3`
+
+**폰트:**
+
+- 모든 폰트는 `/public/fonts` 디렉토리의 pretendard를 사용할 것
+
+예시
+```
+@font-face {
+  font-family: 'Pretendard';
+  src: url('/fonts/pretendard-subset.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+}
+```
+
+**개발 언어:**
+
+- Astro를 사용하여 블로그를 개발합니다. Astro의 강점(예: 성능, SEO 등)을 활용합니다.
+- 모든 디자인은 tailwind를 사용
+
+**광고 통합:**
+
+- Google AdSense를 사용하여 광고를 통합합니다.
+- 광고 배치는 사용자 경험을 해치지 않도록 신중하게 고려합니다.

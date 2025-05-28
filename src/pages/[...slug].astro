@@ -1,0 +1,33 @@
+---
+import { type CollectionEntry, getCollection } from 'astro:content';
+import BlogPost from '../layouts/BlogPost.astro';
+
+export async function getStaticPaths() {
+	const posts = await getCollection('blog');
+	const paths = await Promise.all(
+		posts.map(async (post: CollectionEntry<'blog'>) => {
+			// Use explicit slug if provided, otherwise generate from the file path
+			const slug = post.data.slug || post.id.replace(/\.[^/.]+$/, '');
+			// console.log(`Generated slug: ${slug}`); // 슬러그 생성 확인용 (필요시 제거)
+			const { Content } = await post.render(); // 마크다운 내용을 HTML로 렌더링
+			return {
+				params: { slug },
+				props: { data: post.data, Content }, // 게시물 데이터(data)와 렌더링된 내용을 props로 전달
+			};
+		})
+	);
+	return paths;
+}
+
+// 이 페이지 자체의 props 타입
+type PageProps = {
+	data: CollectionEntry<'blog'>['data'];
+	Content: any; // 렌더링된 내용의 타입
+};
+
+const { data, Content } = Astro.props; // 이 페이지는 data와 Content를 받음
+---
+
+<BlogPost data={data}> // data 객체를 props로 전달
+	<Content /> // 렌더링된 내용을 슬롯으로 전달
+</BlogPost> 

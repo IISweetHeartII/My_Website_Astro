@@ -1,0 +1,55 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import BlogCard from '../components/BlogCard.astro';
+import { getCollection, type CollectionEntry } from 'astro:content';
+
+// Helper function to get a valid timestamp or fallback
+function getValidTimestamp(date: Date | null | undefined): number {
+    if (!date) return 0;
+    const timestamp = date.getTime();
+    return isNaN(timestamp) ? 0 : timestamp;
+}
+
+const posts = (await getCollection('blog'))
+    .filter((post: CollectionEntry<'blog'>) => post.data.publish)
+    .sort((a: CollectionEntry<'blog'>, b: CollectionEntry<'blog'>) => {
+        const dateA = getValidTimestamp(a.data.created_date);
+        const dateB = getValidTimestamp(b.data.created_date);
+        return dateB - dateA;
+    });
+---
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <BaseHead title="Blog - Ideas & Insights" description="Explore our collection of articles, ideas, insights, and everything in between." />
+    </head>
+    <body class="min-h-screen flex flex-col m-0">
+        <Header />
+        <main class="flex-1 w-full max-w-screen-xl mx-auto p-8 flex flex-col">
+            <div class="text-center mb-16 p-16 bg-gray-100 rounded-3xl dark:bg-gray-800 md:p-12 md:mb-12">
+                <h1 class="text-4xl font-extrabold text-gray-900 mb-4 leading-tight md:text-3xl dark:text-white">Ideas & Insights</h1>
+                <p class="text-lg text-gray-700 max-w-2xl mx-auto leading-relaxed md:text-base md:px-4 dark:text-gray-300">Explore our collection of articles, thoughts, and everything in between.</p>
+            </div>
+            {posts.length > 0 ? (
+                <div class="grid grid-cols-1 gap-6 md:grid-cols-auto-fill-minmax-400 flex-1 mb-8">
+                    {posts.map((post: CollectionEntry<'blog'>) => (
+                        <BlogCard
+                            title={post.data.title}
+                            description={post.data.description ?? undefined}
+                            date={post.data.created_date ?? undefined}
+                            slug={post.data.slug ?? post.id.replace(/\.[^/.]+$/, '')}
+                        />
+                    ))}
+                </div>
+            ) : (
+                <div class="text-center p-16 text-gray-700 text-lg flex-1 md:p-12 md:text-base dark:text-gray-300">
+                    No posts found. Check back soon!
+                </div>
+            )}
+        </main>
+        <Footer />
+    </body>
+</html> 

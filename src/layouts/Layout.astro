@@ -1,0 +1,31 @@
+---
+import Header from '../components/Header.astro';
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+
+interface Props {
+	title: string;
+	description?: string;
+}
+
+const { title, description } = Astro.props;
+---
+
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>{title}</title>
+    <BaseHead title={title} description={description ?? undefined} />
+    <slot name="head" />
+  </head>
+  <body class="bg-background text-primary font-sans flex flex-col min-h-screen">
+    <Header />
+    <main class="flex-grow pt-20">
+    <slot />
+    </main>
+    <Footer />
+  </body>
+</html> 

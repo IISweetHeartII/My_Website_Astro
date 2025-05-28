@@ -1,0 +1,40 @@
+---
+import { getUrl } from '../utils/url';
+
+const fonts = {
+    bold: getUrl('/fonts/woff2-subset/Pretendard-Bold.subset.woff2'),
+    regular: getUrl('/fonts/woff2-subset/Pretendard-Regular.subset.woff2'),
+    light: getUrl('/fonts/woff2-subset/Pretendard-Light.subset.woff2')
+};
+---
+
+<!-- Pretendard 폰트 CSS 직접 import -->
+<link rel="stylesheet" href="/fonts/pretendard-subset.css" />
+
+<!-- Font styles (필요시 개별 폰트 설정) -->
+<style is:global>
+    @font-face {
+        font-family: 'Pretendard';
+        font-weight: 700;
+        font-display: swap;
+        src: url('/fonts/woff2-subset/Pretendard-Bold.subset.woff2') format('woff2');
+    }
+    @font-face {
+        font-family: 'Pretendard';
+        font-weight: 400;
+        font-display: swap;
+        src: url('/fonts/woff2-subset/Pretendard-Regular.subset.woff2') format('woff2');
+    }
+    @font-face {
+        font-family: 'Pretendard';
+        font-weight: 300;
+        font-style: normal;
+        font-display: swap;
+        src: url('/fonts/woff2-subset/Pretendard-Light.subset.woff2') format('woff2');
+    }
+</style>
+
+<!-- Preload font files -->
+<link rel="preload" href="/fonts/woff2-subset/Pretendard-Bold.subset.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="/fonts/woff2-subset/Pretendard-Regular.subset.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="/fonts/woff2-subset/Pretendard-Light.subset.woff2" as="font" type="font/woff2" crossorigin /> 

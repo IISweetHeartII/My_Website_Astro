@@ -1,0 +1,43 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Who is 덕환 | Log8">
+  <main class="container mx-auto p-8">
+    <section class="flex flex-col md:flex-row items-center gap-8">
+      <div class="flex-shrink-0">
+        <img
+          src="/images/design/DH_ID.jpg"
+          alt="Profile Photo of 덕환"
+          class="w-48 h-48 rounded-full object-cover shadow-lg"
+        />
+      </div>
+      <div class="flex-grow text-center md:text-left">
+        <h1 class="text-4xl font-bold text-primary mb-2">덕환</h1>
+        <p class="text-xl text-primary mb-4">AI Researcher | Developer | Content Creator</p>
+        <p class="text-lg text-gray-700 leading-relaxed">
+          안녕하세요! 덕환입니다. AI 기술 연구와 개발에 참여하고 있으며,
+          일상 속에서 배우고 경험하는 것들을 콘텐츠로 만들어 공유하고 있습니다.
+          이 페이지에서는 저에 대한 더 자세한 정보와 활동들을 확인하실 수 있습니다.
+        </p>
+      </div>
+    </section>
+
+    <section class="mt-12">
+      <h2 class="text-3xl font-semibold text-primary mb-6 text-center">Connect</h2>
+      <div class="flex justify-center md:justify-start gap-6">
+        <a
+          href="https://ai-syllable-showdown.vercel.app/ai1"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-accent hover:underline text-lg font-medium"
+        >
+          My Littlelink
+        </a>
+        <!-- Add more social/contact links here -->
+      </div>
+    </section>
+
+    <!-- Add sections for resume/experience if needed -->
+  </main>
+</Layout> 
