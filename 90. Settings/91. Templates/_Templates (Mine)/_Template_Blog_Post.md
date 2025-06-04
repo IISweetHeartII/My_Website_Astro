@@ -1,6 +1,6 @@
 ---
 title:
-publish: true
+publish:
 
 subtitle:
 description:
