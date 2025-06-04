@@ -1,4 +1,7 @@
 {
   "trashOption": "local",
-  "newFileLocation": "folder"
+  "newFileLocation": "folder",
+  "newFileFolderPath": "00. Inbox/08. Unlisted",
+  "attachmentFolderPath": "public/images/blogs",
+  "promptDelete": false
 }
