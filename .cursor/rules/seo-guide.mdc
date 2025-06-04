@@ -1,0 +1,51 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# 블로그 게시물 Frontmatter 가이드 (SEO 포함)
+
+이 가이드는 블로그 게시물 작성을 위해 Obsidian 템플릿에 정의된 Frontmatter 속성들을 채우는 방법을 설명합니다. SEO 최적화와 일반적인 게시물 정보 설정에 필요한 모든 속성을 다룹니다.
+자세한 내용은 [A complete SEO optimization guide with Obsidian Blogger.ko.md](mdc:Blog/A complete SEO optimization guide with Obsidian Blogger.ko.md) 및 관련 템플릿 파일들을 참고하세요.
+
+## 필수 속성 (Required Properties)
+
+모든 블로그 게시물에 반드시 포함되어야 하는 속성입니다.
+
+- `title`: 게시물의 메인 제목입니다. 사이트 제목 및 기본 SEO 제목으로 사용됩니다.
+- `publish`: 게시물 공개 여부를 결정합니다. `true`로 설정해야 블로그에 게시됩니다 (`false`, `draft: true`, 또는 누락 시 초안 상태).
+
+## 선택 속성 (Optional Properties)
+
+게시물을 더 풍부하게 만들거나 특정 정보를 제공하기 위해 사용할 수 있는 속성입니다.
+
+- `subtitle`: 제목 아래에 표시될 부제목입니다.
+- `description`: 게시물의 간략한 요약입니다. SEO 메타 설명 및 블로그 카드 미리보기에 사용됩니다 (150-160자 권장).
+- `created_date`: 게시물 작성 날짜입니다. `YYYY-MM-DD` 형식을 권장하며, 템플릿에서 자동 생성될 수 있습니다.
+- `featured_image`: 게시물의 대표 이미지 URL입니다. 게시물 상단, 소셜 미디어 카드, SEO 이미지 메타 태그에 사용됩니다.
+- `featured_image_alt`: `featured_image`에 대한 대체 텍스트(Alt text)입니다. 이미지 로딩 실패 시 표시되며, 접근성 및 SEO에 중요합니다. `featured_image` 사용 시 필수로 입력하는 것이 좋습니다.
+- `slug`: 게시물의 사용자 지정 URL 경로입니다. 지정하지 않으면 `title`을 기반으로 자동 생성됩니다 (`소문자-하이픈` 형식 권장).
+- `tags`: 게시물의 카테고리 또는 주제 목록입니다. 배열 형태로 입력하며, 게시물 필터링 및 탐색, 콘텐츠 구성, 검색 가능성 향상에 사용됩니다. (예: `[tag1, tag2]`).
+
+## SEO 관련 속성 (SEO-specific Properties)
+
+SEO 및 소셜 미디어 공유 설정을 세밀하게 제어하기 위한 속성입니다. 이 필드를 비워두면 `title`, `description`, `featured_image` 등 다른 속성에서 값을 가져와 자동으로 채워집니다.
+
+- `meta_title`: 검색 결과에 표시될 SEO 메타 제목을 사용자 지정합니다. 지정 시 `title`보다 우선합니다 (60자 미만 권장).
+- `meta_description`: 검색 결과에 표시될 SEO 메타 설명을 사용자 지정합니다. 지정 시 `description`보다 우선합니다 (150-160자 권장).
+- `keywords`: 검색 엔진 최적화를 위한 키워드 목록입니다 (쉼표로 구분).
+- `og_title`: 소셜 미디어(Open Graph) 공유 시 사용될 제목입니다. 지정 시 `meta_title`/`title`보다 우선합니다.
+- `og_description`: 소셜 미디어 공유 시 사용될 설명입니다. 지정 시 `meta_description`/`description`보다 우선합니다.
+- `og_type`: Open Graph 타입입니다 (예: `article`).
+- `twitter_card`: 트위터 카드 타입입니다 (예: `summary_large_image`).
+
+### 속성값 대체(Fallback) 우선순위 예시:
+- **SEO 제목**: `meta_title` > `title`
+- **SEO 설명**: `meta_description` > `description`
+- **소셜 제목**: `og_title` > `meta_title` > `title`
+- **소셜 설명**: `og_description` > `meta_description` > `description`
+
+이 가이드와 함께 템플릿 파일을 참고하여 블로그 게시물의 Frontmatter를 완성하세요.
+
+
+

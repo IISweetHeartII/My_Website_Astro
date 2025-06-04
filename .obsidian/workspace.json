@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "90. Settings/91. Templates/_Templates (Mine)/Obsidian Blog Post Template Clean.md",
+                "file": "90. Settings/91. Templates/_Templates (Mine)/_Template_Blog_Post_details.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Obsidian Blog Post Template Clean"
+              "title": "_Template_Blog_Post_details"
             }
           }
         ]
@@ -157,9 +157,8 @@
   },
   "active": "f2e3daca0090ec18",
   "lastOpenFiles": [
-    "90. Settings/91. Templates/_Templates (Mine)/Obsidian Blog Post Templater with Prompts.md",
-    "90. Settings/91. Templates/_Templates (Mine)/Obsidian Blog Post Template Clean.md",
     "90. Settings/91. Templates/_Templates (Mine)/_Template_Blog_Post.md",
+    "90. Settings/91. Templates/_Templates (Mine)/_Template_Blog_Post_details.md",
     "90. Settings/91. Templates/Environment Files/env.js",
     "90. Settings/91. Templates/Environment Files/env.js.md",
     "90. Settings/91. Templates/Environment Files",
