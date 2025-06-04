@@ -1,6 +1,6 @@
 ---
-title: ㅈㄷㄱㅈ
-publish: false
+title: 이거 왜 안돼요?!
+publish: true
 
 subtitle:
 description:
