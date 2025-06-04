@@ -1,6 +1,6 @@
 ---
 title: ㅈㄷㄱㅈ
-publish: true
+publish: false
 
 subtitle:
 description:
