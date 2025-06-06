@@ -1,6 +1,6 @@
 ---
 title: 이거 왜 안돼요?!
-publish: false
+publish: true
 
 subtitle: 코딩하며 만나는 재미있는 에러 해결기
 description: 코딩 초보 개발자의 좌충우돌 에러 해결 경험 공유! 함께 웃고 배우며 성장해요.
