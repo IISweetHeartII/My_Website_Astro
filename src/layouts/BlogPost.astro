@@ -67,14 +67,19 @@ const safeTags = tags ?? [];
 				border-radius: 0.5rem;
 				margin: 1rem 0;
 			}
+			/* Force prose content to take full width */
+			.prose {
+				max-width: none !important;
+				width: 100%;
+			}
 		</style>
 	</head>
 
 	<body class="min-h-screen flex flex-col m-0">
 		<Header />
-		<main class="flex-1 w-full max-w-[calc(100%-2em)] md:max-w-[920px] mx-auto p-4">
-			<article>
-				<div class="prose">
+		<main class="flex-1 w-full p-4">
+			<article class="max-w-screen-xl mx-auto">
+				<div class="prose prose-xl">
 					<div class="title mb-4 py-4 text-center leading-none">
 						{created_date && (
 							<div class="date mb-2 text-gray-700">
