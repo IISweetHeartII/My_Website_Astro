@@ -8,17 +8,13 @@
         "type": "tabs",
         "children": [
           {
-            "id": "f2e3daca0090ec18",
+            "id": "fb90c4e42098af40",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "90. Settings/91. Templates/_Templates (Mine)/_Template_Blog_Post_details.md",
-                "mode": "source",
-                "source": false
-              },
+              "type": "empty",
+              "state": {},
               "icon": "lucide-file",
-              "title": "_Template_Blog_Post_details"
+              "title": "새 탭"
             }
           }
         ]
@@ -155,10 +151,10 @@
       "command-palette:명령어 팔레트 열기": false
     }
   },
-  "active": "f2e3daca0090ec18",
+  "active": "fb90c4e42098af40",
   "lastOpenFiles": [
-    "00. Inbox/07. Clippings/Youtube - 아무도 알려준 적 없을겁니다. 쓰면 '인생이 바뀌는' 챗GPT 활용법 (흔한 내용 ❌) 허성범의 AI 학개론 3강.md",
     "90. Settings/91. Templates/_Templates (Mine)/_Template_Blog_Post_details.md",
+    "00. Inbox/07. Clippings/Youtube - 아무도 알려준 적 없을겁니다. 쓰면 '인생이 바뀌는' 챗GPT 활용법 (흔한 내용 ❌) 허성범의 AI 학개론 3강.md",
     "00. Inbox/07. Clippings",
     "src/content/blog/_Template_Blog_Post.md",
     "Blog/_Template_Blog_Post.md",
