@@ -82,19 +82,19 @@ const safeTags = tags ?? [];
 				<div class="prose prose-xl">
 					<div class="title mb-4 py-4 text-center leading-none">
 						{created_date && (
-							<div class="date mb-2 text-gray-700">
+							<div class="date mb-2 text-text-default">
 								<FormattedDate date={created_date} />
 								{updated_date && updated_date > created_date && (
 									<span> (Updated: <FormattedDate date={updated_date} />)</span>
 								)}
 							</div>
 						)}
-						<h1 class="m-0 mb-2 text-3xl md:text-4xl font-bold text-gray-900">{title}</h1>
-						{subtitle && <div class="subtitle text-xl text-gray-700 mb-4">{subtitle}</div>}
+						<h1 class="m-0 mb-2 text-3xl md:text-4xl font-bold text-text-default">{title}</h1>
+						{subtitle && <div class="subtitle text-xl text-text-default mb-4">{subtitle}</div>}
 						{safeTags.length > 0 && (
 							<div class="tags flex flex-wrap gap-2 my-4 justify-center">
 								{safeTags.map((tag: string) => (
-									<a href={getUrl(`/tag/${tag}/`)} class="tag bg-gray-100 text-gray-700 px-3 py-0.5 rounded-full text-sm no-underline transition-all duration-200 hover:bg-gray-400 hover:text-gray-900 hover:-translate-y-px">#{tag}</a>
+									<a href={getUrl(`/tag/${tag}/`)} class="tag bg-surface-light text-text-default px-3 py-0.5 rounded-full text-sm no-underline transition-all duration-200 hover:bg-brand-secondary hover:text-text-default hover:-translate-y-px">#{tag}</a>
 								))}
 							</div>
 						)}

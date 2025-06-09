@@ -34,15 +34,15 @@ const allTags: string[] = [...new Set(allPosts.flatMap((post: CollectionEntry<'b
             <!-- New section for search and tags -->
             <section class="mb-8">
                 <div class="mb-6">
-                    <input type="text" id="post-search" placeholder="블로그 글 검색..." class="w-full p-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white" />
+                    <input type="text" id="post-search" placeholder="블로그 글 검색..." class="w-full p-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-brand-primary dark:border-brand-secondary dark:text-surface-light" />
                 </div>
                 <div class="flex flex-wrap justify-center gap-2 mb-6" id="tag-filter-container">
-                    <a href="#" data-tag="all" class="px-4 py-2 bg-green-400 text-gray-900 rounded-full hover:bg-teal-400 transition-colors duration-200 font-medium text-sm md:text-base current-tag">
+                    <a href="#" data-tag="all" class="px-4 py-2 bg-green-400 text-text-default rounded-full hover:bg-teal-400 transition-colors duration-200 font-medium text-sm md:text-base current-tag">
                         All Posts
                     </a>
                     {allTags.map((tagItem: string) => (
                         <a href="#" data-tag={tagItem}
-                            class="px-4 py-2 rounded-full transition-colors duration-200 text-sm md:text-base font-medium bg-gray-100 text-gray-700 hover:bg-gray-400 hover:text-gray-900">
+                            class="px-4 py-2 rounded-full transition-colors duration-200 text-sm md:text-base font-medium bg-surface-light text-text-default hover:bg-brand-secondary hover:text-text-default">
                             #{tagItem}
                         </a>
                     ))}
@@ -64,7 +64,7 @@ const allTags: string[] = [...new Set(allPosts.flatMap((post: CollectionEntry<'b
                     ))}
                 </div>
             ) : (
-                <div class="text-center p-16 text-gray-700 text-lg flex-1 md:p-12 md:text-base dark:text-gray-300">
+                <div class="text-center p-16 text-text-default text-lg flex-1 md:p-12 md:text-base dark:text-surface-light">
                     No posts found. Check back soon!
                 </div>
             )}
@@ -141,12 +141,12 @@ const allTags: string[] = [...new Set(allPosts.flatMap((post: CollectionEntry<'b
                             // Update active tag styling
                             const previousActiveTag = tagFilterContainer.querySelector('.current-tag');
                             if (previousActiveTag) {
-                                previousActiveTag.classList.remove('bg-green-400', 'text-gray-900', 'current-tag');
-                                previousActiveTag.classList.add('bg-gray-100', 'text-gray-700', 'hover:bg-gray-400', 'hover:text-gray-900');
+                                previousActiveTag.classList.remove('bg-green-400', 'text-text-default', 'current-tag');
+                                previousActiveTag.classList.add('bg-surface-light', 'text-text-default', 'hover:bg-brand-secondary', 'hover:text-text-default');
                             }
 
-                            targetLink.classList.remove('bg-gray-100', 'text-gray-700', 'hover:bg-gray-400', 'hover:text-gray-900');
-                            targetLink.classList.add('bg-green-400', 'text-gray-900', 'current-tag');
+                            targetLink.classList.remove('bg-surface-light', 'text-text-default', 'hover:bg-brand-secondary', 'hover:text-text-default');
+                            targetLink.classList.add('bg-green-400', 'text-text-default', 'current-tag');
 
 
                             currentSelectedTag = targetLink.dataset.tag.toLowerCase();

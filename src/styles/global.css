@@ -121,13 +121,13 @@ b {
 }
 
 a {
-  color: var(--accent);
+  color: var(--accent-vibrant);
   text-decoration: none;
   font-weight: 500;
 }
 
 a:hover {
-  color: var(--accent);
+  color: var(--accent-vibrant);
 }
 
 p {
@@ -200,7 +200,7 @@ pre > code {
 }
 
 blockquote {
-  border-left: 4px solid var(--accent);
+  border-left: 4px solid var(--accent-vibrant);
   padding: 0 0 0 1.5rem;
   margin: 2rem 0;
   font-size: 1.125em;
@@ -396,7 +396,7 @@ li {
 .prose blockquote {
   margin: 2em 0;
   padding: 1em 1.5em;
-  border-left: 4px solid var(--accent);
+  border-left: 4px solid var(--accent-vibrant);
   background-color: rgba(var(--gray-light), 0.3);
   border-radius: 0 8px 8px 0;
   font-style: italic;
@@ -424,7 +424,7 @@ li {
 
 /* Links */
 .prose a {
-  color: var(--accent);
+  color: var(--accent-vibrant);
   text-decoration: none;
   font-weight: 500;
   border-bottom: 1px solid transparent;
@@ -432,7 +432,7 @@ li {
 }
 
 .prose a:hover {
-  border-bottom-color: var(--accent);
+  border-bottom-color: var(--accent-vibrant);
   text-decoration: none;
 }
 

@@ -25,42 +25,42 @@ const latestBlogPosts = allPosts.slice(0, 3);
   <main>
     <IntroSection />
     <!-- Hero Section -->
-    <section class="bg-background text-primary py-20">
+    <section class="bg-surface-light text-brand-primary py-20">
       <div class="container mx-auto text-center">
-        <h1 class="text-5xl md:text-6xl font-bold mb-4">AI를 팀메이트 삼아 문제를 해결하는 <span class="text-accent">개발자, 김덕환입니다.</span></h1>
-        <p class="text-xl md:text-2xl text-gray-700">AI 활용 기반의 문제 해결과 풀스택 역량 확장을 기록하고 공유합니다.</p>
-        <a href="/blog" class="mt-8 inline-block bg-accent text-white py-3 px-8 rounded-lg text-lg font-semibold hover:bg-blue-700 transition duration-300">블로그 살펴보기 &rarr;</a>
+        <h1 class="text-5xl md:text-6xl font-bold mb-4">AI를 팀메이트 삼아 문제를 해결하는 <span class="text-accent-vibrant">개발자, 김덕환입니다.</span></h1>
+        <p class="text-xl md:text-2xl text-text-default">AI 활용 기반의 문제 해결과 풀스택 역량 확장을 기록하고 공유합니다.</p>
+        <a href="/blog" class="mt-8 inline-block bg-accent-vibrant text-surface-light py-3 px-8 rounded-lg text-lg font-semibold hover:bg-brand-secondary transition duration-300">블로그 살펴보기 &rarr;</a>
       </div>
     </section>
 
     <!-- About/Intro Section (Who is 덕환 Preview) -->
     <section class="py-16 bg-gray-100">
       <div class="container mx-auto text-center">
-        <h2 class="text-3xl font-bold text-primary mb-8">Who is 덕환?</h2>
-        <p class="text-lg text-gray-700 max-w-2xl mx-auto mb-8">AI Researcher, Developer, and Content Creator sharing insights and experiences.</p>
-        <a href="/who-is-dh" class="text-accent hover:underline font-medium text-lg">Learn More &rarr;</a>
+        <h2 class="text-3xl font-bold text-brand-primary mb-8">Who is 덕환?</h2>
+        <p class="text-lg text-text-default max-w-2xl mx-auto mb-8">AI Researcher, Developer, and Content Creator sharing insights and experiences.</p>
+        <a href="/who-is-dh" class="text-accent-vibrant hover:underline font-medium text-lg">Learn More &rarr;</a>
       </div>
     </section>
 
     <!-- Content Preview Section (YouTube Preview) -->
     <section class="py-16">
       <div class="container mx-auto">
-        <h2 class="text-3xl font-bold text-primary text-center mb-8">Latest YouTube Videos</h2>
+        <h2 class="text-3xl font-bold text-brand-primary text-center mb-8">Latest YouTube Videos</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
           <!-- Placeholder for latest YouTube video previews -->
           <div class="bg-white p-6 rounded-lg shadow-md">
-            <h3 class="text-xl font-semibold text-primary mb-2">Lucky Dukky 최신 영상</h3>
-            <p class="text-gray-700 mb-4">Lucky Dukky 채널의 최신 콘텐츠를 확인해보세요.</p>
-            <a href="/youtube#lucky-dukky" class="text-accent hover:underline font-medium">Watch Now &rarr;</a>
+            <h3 class="text-xl font-semibold text-brand-primary mb-2">Lucky Dukky 최신 영상</h3>
+            <p class="text-text-default mb-4">Lucky Dukky 채널의 최신 콘텐츠를 확인해보세요.</p>
+            <a href="/youtube#lucky-dukky" class="text-accent-vibrant hover:underline font-medium">Watch Now &rarr;</a>
           </div>
           <div class="bg-white p-6 rounded-lg shadow-md">
-            <h3 class="text-xl font-semibold text-primary mb-2">Sponge Duk 최신 영상</h3>
-            <p class="text-gray-700 mb-4">개발과 일상을 기록하는 Sponge Duk의 최신 영상입니다.</p>
-            <a href="/youtube#sponge-duk" class="text-accent hover:underline font-medium">Watch Now &rarr;</a>
+            <h3 class="text-xl font-semibold text-brand-primary mb-2">Sponge Duk 최신 영상</h3>
+            <p class="text-text-default mb-4">개발과 일상을 기록하는 Sponge Duk의 최신 영상입니다.</p>
+            <a href="/youtube#sponge-duk" class="text-accent-vibrant hover:underline font-medium">Watch Now &rarr;</a>
           </div>
         </div>
         <div class="text-center mt-8">
-           <a href="/youtube" class="text-accent hover:underline font-medium text-lg">See All Videos &rarr;</a>
+           <a href="/youtube" class="text-accent-vibrant hover:underline font-medium text-lg">See All Videos &rarr;</a>
         </div>
       </div>
     </section>
@@ -68,7 +68,7 @@ const latestBlogPosts = allPosts.slice(0, 3);
     <!-- Blog Preview Section -->
     <section class="py-16 bg-gray-100">
       <div class="container mx-auto">
-        <h2 class="text-3xl font-bold text-primary text-center mb-8">Latest Blog Posts</h2>
+        <h2 class="text-3xl font-bold text-brand-primary text-center mb-8">Latest Blog Posts</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {latestBlogPosts.length > 0 ? (
             latestBlogPosts.map((post: CollectionEntry<'blog'>) => (
@@ -83,11 +83,11 @@ const latestBlogPosts = allPosts.slice(0, 3);
               />
             ))
           ) : (
-            <p class="col-span-full text-center text-gray-700">아직 작성된 블로그 글이 없습니다.</p>
+            <p class="col-span-full text-center text-text-default">아직 작성된 블로그 글이 없습니다.</p>
           )}
         </div>
         <div class="text-center mt-8">
-           <a href="/blog" class="text-accent hover:underline font-medium text-lg">Read All Posts &rarr;</a>
+           <a href="/blog" class="text-accent-vibrant hover:underline font-medium text-lg">Read All Posts &rarr;</a>
         </div>
       </div>
     </section>
@@ -95,36 +95,36 @@ const latestBlogPosts = allPosts.slice(0, 3);
     <!-- Project Preview Section (Showcase Preview) -->
     <section class="py-16">
       <div class="container mx-auto">
-        <h2 class="text-3xl font-bold text-primary text-center mb-8">Featured Projects</h2>
+        <h2 class="text-3xl font-bold text-brand-primary text-center mb-8">Featured Projects</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           <!-- Placeholder for featured project previews -->
            <div class="bg-white rounded-lg shadow-md overflow-hidden">
             <img src="/images/design/ready.png" alt="Project Image" class="w-full h-48 object-cover">
             <div class="p-6">
-              <h3 class="text-xl font-semibold text-primary mb-2">AI Syllable Showdown</h3>
-              <p class="text-gray-700 mb-4">An example project showcasing AI capabilities.</p>
-              <a href="/showcase" class="text-accent hover:underline font-medium">View Project &rarr;</a>
+              <h3 class="text-xl font-semibold text-brand-primary mb-2">AI Syllable Showdown</h3>
+              <p class="text-text-default mb-4">An example project showcasing AI capabilities.</p>
+              <a href="/showcase" class="text-accent-vibrant hover:underline font-medium">View Project &rarr;</a>
             </div>
           </div>
            <div class="bg-white rounded-lg shadow-md overflow-hidden">
             <img src="/images/design/ready.png" alt="Project Image" class="w-full h-48 object-cover">
             <div class="p-6">
-              <h3 class="text-xl font-semibold text-primary mb-2">Another Project</h3>
-              <p class="text-gray-700 mb-4">Brief description of another project.</p>
-              <a href="/showcase" class="text-accent hover:underline font-medium">View Project &rarr;</a>
+              <h3 class="text-xl font-semibold text-brand-primary mb-2">Another Project</h3>
+              <p class="text-text-default mb-4">Brief description of another project.</p>
+              <a href="/showcase" class="text-accent-vibrant hover:underline font-medium">View Project &rarr;</a>
             </div>
           </div>
             <div class="bg-white rounded-lg shadow-md overflow-hidden">
             <img src="/images/design/ready.png" alt="Project Image" class="w-full h-48 object-cover">
             <div class="p-6">
-              <h3 class="text-xl font-semibold text-primary mb-2">Third Project Idea</h3>
-              <p class="text-gray-700 mb-4">Brief description of a third project.</p>
-              <a href="/showcase" class="text-accent hover:underline font-medium">View Project &rarr;</a>
+              <h3 class="text-xl font-semibold text-brand-primary mb-2">Third Project Idea</h3>
+              <p class="text-text-default mb-4">Brief description of a third project.</p>
+              <a href="/showcase" class="text-accent-vibrant hover:underline font-medium">View Project &rarr;</a>
             </div>
           </div>
         </div>
          <div class="text-center mt-8">
-           <a href="/showcase" class="text-accent hover:underline font-medium text-lg">See All Projects &rarr;</a>
+           <a href="/showcase" class="text-accent-vibrant hover:underline font-medium text-lg">See All Projects &rarr;</a>
         </div>
       </div>
     </section>
@@ -132,22 +132,22 @@ const latestBlogPosts = allPosts.slice(0, 3);
     <!-- Now... Preview Section -->
     <section class="py-16">
       <div class="container mx-auto">
-        <h2 class="text-3xl font-bold text-primary text-center mb-8">What's Happening Now</h2>
+        <h2 class="text-3xl font-bold text-brand-primary text-center mb-8">What's Happening Now</h2>
         <div class="space-y-6 max-w-2xl mx-auto">
            <!-- Placeholder for Now... items -->
             <div class="bg-white p-6 rounded-lg shadow-md">
-              <h3 class="text-xl font-semibold text-primary mb-2">Building the Log8 Blog</h3>
-              <p class="text-gray-700">Continuing development and refinement of this platform.</p>
-               <a href="/now" class="text-accent hover:underline font-medium text-sm">Read More &rarr;</a>
+              <h3 class="text-xl font-semibold text-brand-primary mb-2">Building the Log8 Blog</h3>
+              <p class="text-text-default">Continuing development and refinement of this platform.</p>
+               <a href="/now" class="text-accent-vibrant hover:underline font-medium text-sm">Read More &rarr;</a>
             </div>
             <div class="bg-white p-6 rounded-lg shadow-md">
-              <h3 class="text-xl font-semibold text-primary mb-2">New Research Area</h3>
-              <p class="text-gray-700">Exploring potential new research directions in AI.</p>
-               <a href="/now" class="text-accent hover:underline font-medium text-sm">Read More &rarr;</a>
+              <h3 class="text-xl font-semibold text-brand-primary mb-2">New Research Area</h3>
+              <p class="text-text-default">Exploring potential new research directions in AI.</p>
+               <a href="/now" class="text-accent-vibrant hover:underline font-medium text-sm">Read More &rarr;</a>
             </div>
         </div>
         <div class="text-center mt-8">
-           <a href="/now" class="text-accent hover:underline font-medium text-lg">See All Updates &rarr;</a>
+           <a href="/now" class="text-accent-vibrant hover:underline font-medium text-lg">See All Updates &rarr;</a>
         </div>
       </div>
     </section>

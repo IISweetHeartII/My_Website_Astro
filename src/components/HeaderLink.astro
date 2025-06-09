@@ -13,18 +13,11 @@ const isActive = href === pathname || href === '/' + (subpath?.[0] || '');
 	href={href} 
 	class:list={[ 
 		className, 
-		'text-[#F9FAFB]',
-		'font-semibold',
-		'hover:bg-[#F9FAFB]',
-		'hover:bg-opacity-10',
-		'transition-colors',
-		'duration-200',
-		'rounded',
-		'px-2',
-		'py-1',
-		'-my-1',
-		'hover:text-[#00FF6A]',
-		{ 'text-[#00FF6A]': isActive }
+		"inline-block py-2 px-4 rounded-lg transition-colors duration-200",
+		"text-surface-light",
+		"hover:bg-surface-light hover:bg-opacity-10",
+		"hover:text-accent-vibrant",
+		{ "text-accent-vibrant": isActive }
 	]}
 	{...props}>
 	<slot />
