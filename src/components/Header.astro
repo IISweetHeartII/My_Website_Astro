@@ -68,27 +68,40 @@ import { getUrl } from '../utils/url';
 	const mobileMenu = document.getElementById('mobile-menu');
 	const mobileMenuClose = document.getElementById('mobile-menu-close');
 
-	mobileMenuToggle.addEventListener('click', () => {
-		mobileMenu.classList.remove('translate-x-full');
-		mobileMenu.classList.add('translate-x-0');
-	});
+	if (mobileMenuToggle) {
+		mobileMenuToggle.addEventListener('click', () => {
+			if (mobileMenu) {
+				mobileMenu.classList.remove('translate-x-full');
+				mobileMenu.classList.add('translate-x-0');
+			}
+		});
+	}
 
-	mobileMenuClose.addEventListener('click', () => {
-		mobileMenu.classList.remove('translate-x-0');
-		mobileMenu.classList.add('translate-x-full');
-	});
+	if (mobileMenuClose) {
+		mobileMenuClose.addEventListener('click', () => {
+			if (mobileMenu) {
+				mobileMenu.classList.remove('translate-x-0');
+				mobileMenu.classList.add('translate-x-full');
+			}
+		});
+	}
 
 	// Close menu when a link is clicked
-	mobileMenu.querySelectorAll('a').forEach(link => {
-		link.addEventListener('click', () => {
-			mobileMenu.classList.remove('translate-x-0');
-			mobileMenu.classList.add('translate-x-full');
+	if (mobileMenu) {
+		mobileMenu.querySelectorAll('a').forEach(link => {
+			link.addEventListener('click', () => {
+				if (mobileMenu) {
+					mobileMenu.classList.remove('translate-x-0');
+					mobileMenu.classList.add('translate-x-full');
+				}
+			});
 		});
-	});
+	}
 
 	// Close menu when clicking outside
 	window.addEventListener('click', (event) => {
-		if (!mobileMenu.contains(event.target) && !mobileMenuToggle.contains(event.target)) {
+		const target = event.target as Node; // Cast event.target to Node
+		if (mobileMenu && mobileMenuToggle && !mobileMenu.contains(target) && !mobileMenuToggle.contains(target)) {
 			mobileMenu.classList.remove('translate-x-0');			
 			mobileMenu.classList.add('translate-x-full');
 		}
