@@ -31,34 +31,39 @@ export default {
       },
       typography: ({ theme }) => ({
         DEFAULT: {
-          a: {
-            color: theme("colors.accent-vibrant"), // 새 이름으로 업데이트
-            "&:hover": {
-              opacity: "0.8",
+          css: {
+            h1: {
+              color: theme("colors.brand-primary"),
             },
-          },
-          blockquote: {
-            borderLeftColor: theme("colors.accent-vibrant"), // 새 이름으로 업데이트
-            color: theme("colors.text-default"), // 새 이름으로 업데이트
-          },
-          h2: {
-            color: theme("colors.text-default"), // 새 이름으로 업데이트
-          },
-          h3: {
-            color: theme("colors.text-default"), // 새 이름으로 업데이트
-          },
-          h4: {
-            color: theme("colors.text-default"), // 새 이름으로 업데이트
-          },
-          strong: {
-            color: theme("colors.text-default"), // 새 이름으로 업데이트
-          },
-          code: {
-            // color: theme('colors.palette-text-dark'), // 주석 처리된 부분 유지
-          },
-          pre: {
-            // backgroundColor: theme('colors.palette-background-grey'), // 주석 처리된 부분 유지
-            // color: theme('colors.palette-text-dark'), // 주석 처리된 부분 유지
+            h2: {
+              color: theme("colors.accent-vibrant"),
+            },
+            h3: {
+              color: theme("colors.text-default"),
+            },
+            h4: {
+              color: theme("colors.text-default"),
+            },
+            a: {
+              color: theme("colors.accent-vibrant"), // 새 이름으로 업데이트
+              "&:hover": {
+                opacity: "0.8",
+              },
+            },
+            blockquote: {
+              borderLeftColor: theme("colors.accent-vibrant"), // 새 이름으로 업데이트
+              color: theme("colors.text-default"), // 새 이름으로 업데이트
+            },
+            strong: {
+              color: theme("colors.text-default"), // 새 이름으로 업데이트
+            },
+            code: {
+              // color: theme('colors.palette-text-dark'), // 주석 처리된 부분 유지
+            },
+            pre: {
+              // backgroundColor: theme('colors.palette-background-grey'), // 주석 처리된 부분 유지
+              // color: theme('colors.palette-text-dark'), // 주석 처리된 부분 유지
+            },
           },
         },
       }),
