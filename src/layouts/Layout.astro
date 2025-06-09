@@ -20,6 +20,7 @@ const { title, description } = Astro.props;
     <title>{title}</title>
     <BaseHead title={title} description={description ?? undefined} />
     <slot name="head" />
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4653332352131854" crossorigin="anonymous"></script>
   </head>
   <body class="bg-background text-primary font-sans flex flex-col min-h-screen">
     <Header />
