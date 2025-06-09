@@ -28,11 +28,7 @@ const posts = (await getCollection('blog'))
     </head>
     <body class="min-h-screen flex flex-col m-0">
         <Header />
-        <main class="flex-1 w-full max-w-screen-xl mx-auto p-8 flex flex-col">
-            <div class="text-center mb-16 p-16 bg-palette-blue-grey rounded-3xl dark:bg-gray-800 md:p-12 md:mb-12">
-                <h1 class="text-4xl font-extrabold text-white mb-4 leading-tight md:text-3xl dark:text-white">Ideas & Insights</h1>
-                <p class="text-lg text-gray-300 max-w-2xl mx-auto leading-relaxed md:text-base md:px-4 dark:text-gray-300">Explore our collection of articles, thoughts, and everything in between.</p>
-            </div>
+        <main class="flex-1 w-full max-w-screen-lg mx-auto p-8 flex flex-col">
             {posts.length > 0 ? (
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 flex-1 mb-8">
                     {posts.map((post: CollectionEntry<'blog'>) => (
