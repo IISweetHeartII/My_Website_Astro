@@ -12,13 +12,15 @@ function getValidTimestamp(date: Date | null | undefined): number {
     return isNaN(timestamp) ? 0 : timestamp;
 }
 
-const posts = (await getCollection('blog'))
+const allPosts = (await getCollection('blog'))
     .filter((post: CollectionEntry<'blog'>) => post.data.publish)
     .sort((a: CollectionEntry<'blog'>, b: CollectionEntry<'blog'>) => {
         const dateA = getValidTimestamp(a.data.created_date);
         const dateB = getValidTimestamp(b.data.created_date);
         return dateB - dateA;
     });
+
+const allTags: string[] = [...new Set(allPosts.flatMap((post: CollectionEntry<'blog'>) => (post.data.tags ?? []) as string[]))];
 ---
 
 <!doctype html>
@@ -29,14 +31,35 @@ const posts = (await getCollection('blog'))
     <body class="min-h-screen flex flex-col m-0">
         <Header />
         <main class="flex-1 w-full max-w-screen-lg mx-auto p-8 flex flex-col">
-            {posts.length > 0 ? (
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 flex-1 mb-8">
-                    {posts.map((post: CollectionEntry<'blog'>) => (
+            <!-- New section for search and tags -->
+            <section class="mb-8">
+                <div class="mb-6">
+                    <input type="text" id="post-search" placeholder="블로그 글 검색..." class="w-full p-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white" />
+                </div>
+                <div class="flex flex-wrap justify-center gap-2 mb-6" id="tag-filter-container">
+                    <a href="#" data-tag="all" class="px-4 py-2 bg-green-400 text-gray-900 rounded-full hover:bg-teal-400 transition-colors duration-200 font-medium text-sm md:text-base current-tag">
+                        All Posts
+                    </a>
+                    {allTags.map((tagItem: string) => (
+                        <a href="#" data-tag={tagItem}
+                            class="px-4 py-2 rounded-full transition-colors duration-200 text-sm md:text-base font-medium bg-gray-100 text-gray-700 hover:bg-gray-400 hover:text-gray-900">
+                            #{tagItem}
+                        </a>
+                    ))}
+                </div>
+            </section>
+
+            {allPosts.length > 0 ? (
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 flex-1 mb-8" id="blog-posts-grid">
+                    {allPosts.map((post: CollectionEntry<'blog'>) => (
                         <BlogCard
                             title={post.data.title}
                             description={post.data.description ?? undefined}
                             date={post.data.created_date ?? undefined}
                             slug={post.data.slug ?? post.id.replace(/\.[^/.]+$/, '')}
+                            dataTags={post.data.tags ? post.data.tags.join(',') : ''}
+                            dataTitle={post.data.title}
+                            dataDescription={post.data.description ?? ''}
                         />
                     ))}
                 </div>
@@ -47,5 +70,97 @@ const posts = (await getCollection('blog'))
             )}
         </main>
         <Footer />
+        <script is:inline>
+            document.addEventListener('DOMContentLoaded', () => {
+                console.log('Script started: DOMContentLoaded'); // Debug log 1
+
+                const searchInput = document.getElementById('post-search');
+                const tagFilterContainer = document.getElementById('tag-filter-container');
+                const blogPostsGrid = document.getElementById('blog-posts-grid');
+
+                console.log('Elements selected:', { searchInput, tagFilterContainer, blogPostsGrid }); // Debug log 2
+
+                if (!blogPostsGrid) {
+                    console.error('blogPostsGrid element not found!'); // Critical error log
+                    return; // Stop if the main container is not found
+                }
+
+                const allBlogCards = Array.from(blogPostsGrid.children);
+                console.log('Number of BlogCards found:', allBlogCards.length); // Debug log 3
+                if (allBlogCards.length === 0) {
+                    console.warn('No BlogCard elements found inside #blog-posts-grid. Filtering will not work.');
+                }
+
+
+                let currentSearchTerm = '';
+                let currentSelectedTag = 'all'; // Default to 'all'
+
+                const filterPosts = () => {
+                    console.log('Filtering posts with search:', currentSearchTerm, 'and tag:', currentSelectedTag); // Debug log 4
+                    allBlogCards.forEach(card => {
+                        const cardTitle = card.dataset.title ? card.dataset.title.toLowerCase() : '';
+                        const cardTags = card.dataset.tags ? card.dataset.tags.toLowerCase().split(',') : [];
+                        const cardDescription = card.dataset.description ? card.dataset.description.toLowerCase() : '';
+
+                        console.log('Card data:', { title: cardTitle, tags: cardTags, description: cardDescription, currentDisplay: card.style.display }); // Debug log 5 (per card)
+
+                        const matchesSearch = currentSearchTerm === '' || cardTitle.includes(currentSearchTerm) || cardDescription.includes(currentSearchTerm);
+                        const matchesTag = currentSelectedTag === 'all' || cardTags.includes(currentSelectedTag);
+
+                        if (matchesSearch && matchesTag) {
+                            card.style.display = 'block'; // Show the card
+                            console.log('Showing card:', cardTitle); // Debug log 6
+                        } else {
+                            card.style.display = 'none'; // Hide the card
+                            console.log('Hiding card:', cardTitle); // Debug log 7
+                        }
+                    });
+                };
+
+                // Search input event listener
+                if (searchInput) { // Add null check for robustness
+                    searchInput.addEventListener('input', (event) => {
+                        currentSearchTerm = event.target.value.toLowerCase();
+                        console.log('Search input changed:', currentSearchTerm); // Debug log 8
+                        filterPosts();
+                    });
+                } else {
+                    console.warn('Search input element not found.');
+                }
+
+
+                // Tag filter event listener
+                if (tagFilterContainer) { // Add null check for robustness
+                    tagFilterContainer.addEventListener('click', (event) => {
+                        const targetLink = event.target.closest('a[data-tag]'); // closest()를 사용하여 올바른 <a> 태그를 찾습니다.
+
+                        if (targetLink) {
+                            event.preventDefault(); // Prevent page navigation
+                            console.log('Tag clicked:', targetLink.dataset.tag); // Debug log 9
+
+                            // Update active tag styling
+                            const previousActiveTag = tagFilterContainer.querySelector('.current-tag');
+                            if (previousActiveTag) {
+                                previousActiveTag.classList.remove('bg-green-400', 'text-gray-900', 'current-tag');
+                                previousActiveTag.classList.add('bg-gray-100', 'text-gray-700', 'hover:bg-gray-400', 'hover:text-gray-900');
+                            }
+
+                            targetLink.classList.remove('bg-gray-100', 'text-gray-700', 'hover:bg-gray-400', 'hover:text-gray-900');
+                            targetLink.classList.add('bg-green-400', 'text-gray-900', 'current-tag');
+
+
+                            currentSelectedTag = targetLink.dataset.tag.toLowerCase();
+                            filterPosts();
+                        }
+                    });
+                } else {
+                    console.warn('Tag filter container not found.');
+                }
+
+
+                // Initial filter on page load
+                filterPosts();
+            });
+        </script>
     </body>
 </html> 

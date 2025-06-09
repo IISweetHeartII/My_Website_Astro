@@ -7,12 +7,19 @@ interface Props {
     description?: string;
     date?: Date;
     slug: string;
+    dataTitle: string;
+    dataTags: string;
+    dataDescription: string;
 }
 
-const { title, description, date, slug } = Astro.props;
+const { title, description, date, slug, dataTitle, dataTags, dataDescription } = Astro.props;
 ---
 
-<article class="relative rounded-lg bg-palette-blue-grey shadow-md transition-all duration-300 ease-in-out overflow-hidden hover:-translate-y-1 hover:shadow-xl dark:bg-gray-800">
+<article class="relative rounded-lg bg-palette-blue-grey shadow-md transition-all duration-300 ease-in-out overflow-hidden hover:-translate-y-1 hover:shadow-xl dark:bg-gray-800"
+    data-title={dataTitle}
+    data-tags={dataTags}
+    data-description={dataDescription}
+>
     <a href={getUrl(`/${slug}/`)} class="block text-inherit no-underline">
         <div class="relative z-10 p-4 flex flex-col gap-3 h-full md:p-5">
             <div class="flex-1 flex flex-col gap-2">
