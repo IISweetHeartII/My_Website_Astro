@@ -1,6 +1,24 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import IntroSection from '../components/IntroSection.astro';
+import BlogCard from '../components/BlogCard.astro';
+import { getCollection, type CollectionEntry } from 'astro:content';
+
+function getValidTimestamp(date: Date | null | undefined): number {
+    if (!date) return 0;
+    const timestamp = date.getTime();
+    return isNaN(timestamp) ? 0 : timestamp;
+}
+
+const allPosts = (await getCollection('blog'))
+    .filter((post: CollectionEntry<'blog'>) => post.data.publish)
+    .sort((a: CollectionEntry<'blog'>, b: CollectionEntry<'blog'>) => {
+        const dateA = getValidTimestamp(a.data.created_date);
+        const dateB = getValidTimestamp(b.data.created_date);
+        return dateB - dateA;
+    });
+
+const latestBlogPosts = allPosts.slice(0, 3);
 ---
 
 <Layout title="Home | Log8">
@@ -9,10 +27,9 @@ import IntroSection from '../components/IntroSection.astro';
     <!-- Hero Section -->
     <section class="bg-background text-primary py-20">
       <div class="container mx-auto text-center">
-        <h1 class="text-5xl md:text-6xl font-bold mb-4">Welcome to <span class="text-accent">Log8</span></h1>
-        <p class="text-xl md:text-2xl text-gray-700">Exploring AI, Development, and Life through Content.</p>
-        <!-- Optional: Add a call to action button -->
-        <!-- <a href="/blog" class="mt-8 inline-block bg-accent text-white py-3 px-8 rounded-lg text-lg font-semibold hover:bg-blue-700 transition duration-300">Explore Blog</a> -->
+        <h1 class="text-5xl md:text-6xl font-bold mb-4">AI를 팀메이트 삼아 문제를 해결하는 <span class="text-accent">개발자, 김덕환입니다.</span></h1>
+        <p class="text-xl md:text-2xl text-gray-700">AI 활용 기반의 문제 해결과 풀스택 역량 확장을 기록하고 공유합니다.</p>
+        <a href="/blog" class="mt-8 inline-block bg-accent text-white py-3 px-8 rounded-lg text-lg font-semibold hover:bg-blue-700 transition duration-300">블로그 살펴보기 &rarr;</a>
       </div>
     </section>
 
@@ -53,22 +70,21 @@ import IntroSection from '../components/IntroSection.astro';
       <div class="container mx-auto">
         <h2 class="text-3xl font-bold text-primary text-center mb-8">Latest Blog Posts</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <!-- Placeholder for latest blog post previews -->
-          <div class="bg-white p-6 rounded-lg shadow-md">
-            <h3 class="text-xl font-semibold text-primary mb-2">AI와 개발</h3>
-            <p class="text-gray-700 mb-4">인공지능과 개발에 대한 최신 인사이트를 공유합니다.</p>
-            <a href="/blog" class="text-accent hover:underline font-medium">Read More &rarr;</a>
-          </div>
-          <div class="bg-white p-6 rounded-lg shadow-md">
-            <h3 class="text-xl font-semibold text-primary mb-2">성장 기록</h3>
-            <p class="text-gray-700 mb-4">개발자로서의 성장과 학습 과정을 기록합니다.</p>
-            <a href="/blog" class="text-accent hover:underline font-medium">Read More &rarr;</a>
-          </div>
-          <div class="bg-white p-6 rounded-lg shadow-md">
-            <h3 class="text-xl font-semibold text-primary mb-2">기술 리뷰</h3>
-            <p class="text-gray-700 mb-4">새로운 기술과 도구들에 대한 리뷰와 경험을 나눕니다.</p>
-            <a href="/blog" class="text-accent hover:underline font-medium">Read More &rarr;</a>
-          </div>
+          {latestBlogPosts.length > 0 ? (
+            latestBlogPosts.map((post: CollectionEntry<'blog'>) => (
+              <BlogCard
+                title={post.data.title}
+                description={post.data.description ?? undefined}
+                date={post.data.created_date ?? undefined}
+                slug={post.data.slug ?? post.id.replace(/\.[^/.]+$/, '')}
+                dataTags={post.data.tags ? post.data.tags.join(',') : ''}
+                dataTitle={post.data.title}
+                dataDescription={post.data.description ?? ''}
+              />
+            ))
+          ) : (
+            <p class="col-span-full text-center text-gray-700">아직 작성된 블로그 글이 없습니다.</p>
+          )}
         </div>
         <div class="text-center mt-8">
            <a href="/blog" class="text-accent hover:underline font-medium text-lg">Read All Posts &rarr;</a>
