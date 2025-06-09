@@ -157,6 +157,8 @@
   },
   "active": "fb90c4e42098af40",
   "lastOpenFiles": [
+    "src/types/adsense.d.ts",
+    "src/types",
     "src/content/blog/007. 제 22회 비즈니스 교류회 강연 후기.md",
     "src/content/blog/003. 오늘의 결심! 새로운 시작!.md",
     "src/content/blog/001. 블로그 글쓰기 시작 - 기록의 중요성...md",
@@ -193,8 +195,6 @@
     "Obsidian",
     "무제 2.md",
     "90. Settings/91. Templates/_Templates (Mine)/무제.md",
-    "90. Settings/91. Templates/_Templates (Mine)",
-    "90. Settings/91. Templates",
-    "무제 1.md"
+    "90. Settings/91. Templates/_Templates (Mine)"
   ]
 }
