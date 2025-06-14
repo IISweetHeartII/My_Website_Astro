@@ -1,0 +1,124 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="로그인 처리 중...">
+  <div class="min-h-screen flex items-center justify-center bg-[#F9FAFB]">
+    <div class="bg-white p-8 rounded-lg shadow-lg text-center max-w-md mx-4">
+      <div class="mb-6">
+        <div class="inline-flex items-center justify-center w-16 h-16 bg-[#E5F0FF] rounded-full mb-4">
+          <svg class="w-8 h-8 text-[#485E8E] animate-spin" fill="none" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" class="opacity-25"></circle>
+            <path fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" class="opacity-75"></path>
+          </svg>
+        </div>
+        <h1 class="text-2xl font-bold text-[#1F2937] mb-2">로그인 처리 중</h1>
+        <p class="text-[#8590B3]">잠시만 기다려주세요...</p>
+      </div>
+      
+      <div id="error-message" class="hidden bg-[#FEF2F2] border border-[#FECACA] rounded-lg p-4 mb-4">
+        <div class="flex">
+          <div class="flex-shrink-0">
+            <svg class="h-5 w-5 text-[#F56565]" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
+            </svg>
+          </div>
+          <div class="ml-3">
+            <h3 class="text-sm font-medium text-[#991B1B]">로그인 오류</h3>
+            <div class="mt-2 text-sm text-[#B91C1C]" id="error-text">
+              로그인 처리 중 오류가 발생했습니다.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <button 
+        id="retry-btn" 
+        class="hidden bg-[#00FF6A] text-[#1F2937] px-6 py-2 rounded-lg font-medium hover:bg-[#00E55A] transition-colors mr-3"
+      >
+        다시 시도
+      </button>
+      
+      <button 
+        id="home-btn" 
+        class="hidden bg-[#8590B3] text-white px-6 py-2 rounded-lg font-medium hover:bg-[#485E8E] transition-colors"
+      >
+        홈으로 돌아가기
+      </button>
+    </div>
+  </div>
+
+  <script>
+    import { supabase } from '../../lib/supabase';
+
+    const errorMessage = document.getElementById('error-message');
+    const errorText = document.getElementById('error-text');
+    const retryBtn = document.getElementById('retry-btn');
+    const homeBtn = document.getElementById('home-btn');
+
+    async function handleAuthCallback() {
+      try {
+        // URL에서 인증 코드 처리
+        const { data, error } = await supabase.auth.getSession();
+        
+        if (error) {
+          throw error;
+        }
+
+        if (data.session) {
+          // 로그인 성공 - 사용자 프로필 생성/업데이트
+          const user = data.session.user;
+          
+          if (user) {
+            const { error: profileError } = await supabase
+              .from('profiles')
+              .upsert({
+                id: user.id,
+                email: user.email,
+                services_enabled: { dearvoice: true }
+              });
+
+            if (profileError) {
+              console.error('프로필 업데이트 오류:', profileError);
+              // 프로필 오류는 치명적이지 않으므로 계속 진행
+            }
+          }
+
+          // 메인 페이지로 리다이렉션
+          setTimeout(() => {
+            window.location.href = '/';
+          }, 1000);
+        } else {
+          throw new Error('세션을 찾을 수 없습니다.');
+        }
+      } catch (error) {
+        console.error('인증 콜백 오류:', error);
+        const errorMessage = error instanceof Error ? error.message : '로그인 처리 중 오류가 발생했습니다.';
+        showError(errorMessage);
+      }
+    }
+
+    function showError(message: string) {
+      if (errorMessage) errorMessage.classList.remove('hidden');
+      if (errorText) errorText.textContent = message;
+      if (retryBtn) retryBtn.classList.remove('hidden');
+      if (homeBtn) homeBtn.classList.remove('hidden');
+    }
+
+    // 이벤트 리스너
+    if (retryBtn) {
+      retryBtn.addEventListener('click', () => {
+        window.location.reload();
+      });
+    }
+
+    if (homeBtn) {
+      homeBtn.addEventListener('click', () => {
+        window.location.href = '/';
+      });
+    }
+
+    // 페이지 로드 시 콜백 처리
+    handleAuthCallback();
+  </script>
+</Layout> 

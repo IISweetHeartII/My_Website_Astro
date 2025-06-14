@@ -1,5 +1,6 @@
 ---
 import HeaderLink from './HeaderLink.astro';
+import AuthButton from './AuthButton.astro';
 import { SITE_TITLE } from '../consts';
 import { getUrl } from '../utils/url';
 ---
@@ -23,6 +24,10 @@ import { getUrl } from '../utils/url';
 		</div>
 
 		<div class="flex items-center space-x-4">
+			<!-- 데스크톱 로그인 버튼 -->
+			<div class="hidden md:block">
+				<AuthButton />
+			</div>
 			
 			<a href={getUrl('/contact')} class="hidden md:inline-flex items-center bg-brand-secondary text-surface-light border-0 py-1 px-3 focus:outline-none hover:bg-accent-vibrant hover:text-text-default rounded text-base transition-colors duration-200">
 		      Contact
@@ -57,6 +62,11 @@ import { getUrl } from '../utils/url';
 			<a href={getUrl('/now')} class="text-surface-light hover:text-accent-vibrant text-xl font-semibold transition-colors duration-200">Now</a>
 			<a href={getUrl('/portfolio')} class="text-surface-light hover:text-accent-vibrant text-xl font-semibold transition-colors duration-200">Portfolio</a>
 			<a href={getUrl('/contact')} class="text-surface-light hover:text-accent-vibrant text-xl font-semibold transition-colors duration-200">Contact</a>
+			
+			<!-- 모바일 로그인 버튼 -->
+			<div class="pt-4 border-t border-[#8590B3]/30">
+				<AuthButton />
+			</div>
 		</nav>
 	</div>
 </header>

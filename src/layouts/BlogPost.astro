@@ -3,7 +3,8 @@ import type { CollectionEntry } from 'astro:content';
 import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import FormattedDate from '../components/FormattedDate.astro';
+import FormattedDate from '../components/FormattedDate.astro';  
+import Comments from '../components/Comments.astro';
 import { getUrl } from '../utils/url';
 
 interface Props extends Pick<CollectionEntry<'blog'>, 'data'> {}
@@ -36,6 +37,9 @@ const {
 } = Astro.props;
 
 const safeTags = tags ?? [];
+
+// 포스트 slug 추출 (URL 경로에서)
+const postSlug = Astro.url.pathname.replace('/blog/', '').replace('/', '') || 'unknown';
 ---
 
 <html lang="ko">
@@ -113,6 +117,9 @@ const safeTags = tags ?? [];
 							)}
 						</div>
 						<slot />
+						
+						<!-- 댓글 섹션 -->
+						<Comments postSlug={postSlug} />
 					</div>
 				</article>
 				<div class="md:w-1/4">
@@ -125,7 +132,7 @@ const safeTags = tags ?? [];
 							 data-ad-format="auto"
 							 data-full-width-responsive="true"></ins>
 						<script>
-							(adsbygoogle = window.adsbygoogle || []).push({});
+							(window.adsbygoogle = window.adsbygoogle || []).push({});
 						</script>
 					</div>
 				</div>
