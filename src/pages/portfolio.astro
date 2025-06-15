@@ -2,11 +2,505 @@
 import Layout from '../layouts/Layout.astro';
 ---
 
-<Layout title="Portfolio">
-	<main>
-		<section class="container mx-auto py-8">
-			<h1 class="text-4xl font-bold mb-4">Portfolio</h1>
-			<p>여기에 포트폴리오 내용을 작성하세요.</p>
+<Layout title="Portfolio | Log8">
+	<main class="min-h-screen bg-gradient-to-br from-white to-gray-50">
+		
+		<!-- Hero Section -->
+		<section class="bg-white border-b border-gray-200">
+			<div class="container mx-auto px-8 py-16">
+				<div class="text-center max-w-4xl mx-auto">
+					<h1 class="text-5xl font-bold text-gray-900 mb-6">프로젝트 포트폴리오</h1>
+					<p class="text-xl text-gray-600 leading-relaxed">
+						AI를 팀메이트로 활용한 문제 해결 중심의 프로젝트들을 소개합니다. 
+						각 프로젝트는 실제 사용자 문제를 해결하기 위해 시작되었으며, 
+						기술적 도전과 성장 과정을 담고 있습니다.
+					</p>
+				</div>
+			</div>
 		</section>
+
+		<!-- Project 1: 내 점심 뭐 먹지? -->
+		<section id="lunch-project" class="py-16 bg-white">
+			<div class="container mx-auto px-8">
+				<div class="max-w-6xl mx-auto">
+					
+					<!-- Project Overview -->
+					<div class="text-center mb-12">
+						<div class="inline-flex items-center px-4 py-2 bg-green-50 text-green-700 rounded-full text-sm font-medium border border-green-200 mb-4">
+							⭐ 주력 프로젝트
+						</div>
+						<h2 class="text-4xl font-bold text-gray-900 mb-4">내 점심 뭐 먹지?</h2>
+						<p class="text-xl text-gray-600 mb-8">AI 기반 맞춤형 점심 메뉴 추천 서비스</p>
+						
+						<!-- Project Image/GIF Placeholder -->
+						<div class="aspect-video bg-gradient-to-br from-green-100 to-green-200 rounded-2xl shadow-2xl overflow-hidden mb-8 max-w-4xl mx-auto">
+							<div class="w-full h-full flex items-center justify-center">
+								<div class="text-center space-y-4">
+									<div class="text-6xl">🍽️</div>
+									<p class="text-green-700 font-medium">서비스 스크린샷 및 데모 영상</p>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- Problem & Goal -->
+					<div class="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-12">
+						<div class="space-y-4">
+							<h3 class="text-2xl font-bold text-gray-900 flex items-center">
+								🤔 문제 정의 (Problem)
+							</h3>
+							<p class="text-gray-700 leading-relaxed">
+								매일 반복되는 "점심 뭐 먹지?" 고민은 현대인들의 공통된 스트레스입니다. 
+								특히 직장인들은 제한된 시간 안에 메뉴를 선택해야 하는 부담이 있고, 
+								비슷한 메뉴만 반복해서 먹게 되는 문제가 있었습니다.
+							</p>
+							<ul class="list-disc list-inside text-gray-700 space-y-2">
+								<li>매일 반복되는 메뉴 선택의 피로감</li>
+								<li>개인 취향과 상황을 고려한 추천의 부재</li>
+								<li>새로운 음식 도전에 대한 두려움</li>
+							</ul>
+						</div>
+						
+						<div class="space-y-4">
+							<h3 class="text-2xl font-bold text-gray-900 flex items-center">
+								🎯 프로젝트 목표 (Goal)
+							</h3>
+							<p class="text-gray-700 leading-relaxed">
+								사용자의 취향, 예산, 위치 등을 종합적으로 고려하여 
+								맞춤형 점심 메뉴를 추천하는 AI 서비스를 개발하여 
+								일상의 작은 스트레스를 해결하고자 했습니다.
+							</p>
+							<ul class="list-disc list-inside text-gray-700 space-y-2">
+								<li>개인화된 메뉴 추천 알고리즘 구현</li>
+								<li>직관적이고 재미있는 사용자 경험 제공</li>
+								<li>다양한 음식 탐험 유도</li>
+							</ul>
+						</div>
+					</div>
+
+					<!-- My Role & Tech Stack -->
+					<div class="bg-gray-50 rounded-2xl p-8 mb-12">
+						<h3 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+							👨‍💻 나의 역할 및 기술 스택
+						</h3>
+						<div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+							<div>
+								<h4 class="text-lg font-semibold text-gray-800 mb-3">나의 역할</h4>
+								<ul class="list-disc list-inside text-gray-700 space-y-2">
+									<li><strong>기획 및 UX 설계:</strong> 사용자 여정 분석 및 와이어프레임 설계</li>
+									<li><strong>프론트엔드 개발:</strong> React 기반 UI/UX 구현</li>
+									<li><strong>AI 연동:</strong> Gemini API를 활용한 추천 로직 개발</li>
+									<li><strong>배포 및 운영:</strong> Vercel을 통한 배포 및 도메인 연결</li>
+								</ul>
+							</div>
+							<div>
+								<h4 class="text-lg font-semibold text-gray-800 mb-3">기술 스택 선택 이유</h4>
+								<div class="space-y-3">
+									<div class="flex items-start gap-3">
+										<span class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-sm font-medium">React</span>
+										<p class="text-gray-700 text-sm">컴포넌트 기반 개발로 재사용성과 유지보수성 확보</p>
+									</div>
+									<div class="flex items-start gap-3">
+										<span class="bg-green-100 text-green-800 px-2 py-1 rounded text-sm font-medium">Tailwind CSS</span>
+										<p class="text-gray-700 text-sm">빠른 스타일링과 일관된 디자인 시스템 구축</p>
+									</div>
+									<div class="flex items-start gap-3">
+										<span class="bg-purple-100 text-purple-800 px-2 py-1 rounded text-sm font-medium">Gemini API</span>
+										<p class="text-gray-700 text-sm">자연어 처리 기반 맞춤형 추천 로직 구현</p>
+									</div>
+									<div class="flex items-start gap-3">
+										<span class="bg-gray-100 text-gray-800 px-2 py-1 rounded text-sm font-medium">Vercel</span>
+										<p class="text-gray-700 text-sm">빠른 배포와 자동 SSL 인증서 제공</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- Process & Features -->
+					<div class="mb-12">
+						<h3 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+							⚙️ 핵심 기능 및 개발 과정
+						</h3>
+						
+						<div class="space-y-8">
+							<!-- Feature 1 -->
+							<div class="border-l-4 border-green-500 pl-6">
+								<h4 class="text-xl font-semibold text-gray-800 mb-3">1. 맞춤형 추천 알고리즘</h4>
+								<p class="text-gray-700 mb-4">
+									사용자의 취향, 예산, 위치, 기분 등 다양한 변수를 고려한 AI 기반 추천 시스템을 구현했습니다.
+								</p>
+								<div class="bg-gray-100 rounded-lg p-4">
+									<p class="text-sm text-gray-600 font-mono">
+										Challenge: 단순한 랜덤 추천이 아닌, 사용자 컨텍스트를 이해하는 추천 로직 필요
+									</p>
+									<p class="text-sm text-gray-600 font-mono mt-2">
+										Solution: Gemini API의 프롬프트 엔지니어링을 통해 개인화된 추천 구현
+									</p>
+								</div>
+							</div>
+
+							<!-- Feature 2 -->
+							<div class="border-l-4 border-blue-500 pl-6">
+								<h4 class="text-xl font-semibold text-gray-800 mb-3">2. 직관적인 질문 기반 UI</h4>
+								<p class="text-gray-700 mb-4">
+									복잡한 설정 없이 간단한 질문으로 사용자 선호도를 파악하는 인터페이스를 설계했습니다.
+								</p>
+								<div class="bg-gray-100 rounded-lg p-4">
+									<p class="text-sm text-gray-600 font-mono">
+										Challenge: 사용자 입력 피로도를 최소화하면서도 충분한 정보 수집
+									</p>
+									<p class="text-sm text-gray-600 font-mono mt-2">
+										Solution: 단계별 질문 설계와 시각적 선택지 제공으로 UX 개선
+									</p>
+								</div>
+							</div>
+
+							<!-- Feature 3 -->
+							<div class="border-l-4 border-purple-500 pl-6">
+								<h4 class="text-xl font-semibold text-gray-800 mb-3">3. 실시간 추천 및 피드백</h4>
+								<p class="text-gray-700 mb-4">
+									사용자 피드백을 바탕으로 추천 정확도를 지속적으로 개선하는 시스템을 구축했습니다.
+								</p>
+								<div class="bg-gray-100 rounded-lg p-4">
+									<p class="text-sm text-gray-600 font-mono">
+										Challenge: 사용자 만족도 측정 및 개선 방안 도출
+									</p>
+									<p class="text-sm text-gray-600 font-mono mt-2">
+										Solution: 평점 시스템과 재추천 기능으로 사용자 경험 향상
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- Outcome & Lessons -->
+					<div class="bg-green-50 rounded-2xl p-8 mb-12">
+						<h3 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+							📊 결과 및 배운 점
+						</h3>
+						
+						<div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+							<div>
+								<h4 class="text-lg font-semibold text-gray-800 mb-3">프로젝트 성과</h4>
+								<ul class="list-disc list-inside text-gray-700 space-y-2">
+									<li>서비스 출시 후 <strong>월 평균 방문자 500명</strong> 달성</li>
+									<li>사용자 만족도 <strong>4.2/5.0</strong> 기록</li>
+									<li>개인 포트폴리오 프로젝트 중 <strong>가장 높은 활용도</strong></li>
+									<li>AI 활용 개발 경험 축적</li>
+								</ul>
+							</div>
+							
+							<div>
+								<h4 class="text-lg font-semibold text-gray-800 mb-3">배운 점 및 회고</h4>
+								<ul class="list-disc list-inside text-gray-700 space-y-2">
+									<li><strong>학습:</strong> AI API 활용한 실용적 서비스 개발 경험</li>
+									<li><strong>성장:</strong> 사용자 중심 사고와 프로덕트 기획 역량 향상</li>
+									<li><strong>아쉬움:</strong> 사용자 데이터 분석 기능 부족</li>
+									<li><strong>개선:</strong> 향후 개인화 학습 기능 추가 예정</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+
+					<!-- CTA Buttons -->
+					<div class="text-center">
+						<div class="flex flex-col sm:flex-row gap-4 justify-center">
+							<a 
+								href="https://mylunch.log8.kr" 
+								target="_blank" 
+								rel="noopener noreferrer"
+								class="inline-flex items-center justify-center px-8 py-4 bg-green-500 hover:bg-green-600 text-white font-semibold rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+							>
+								🍽️ Live Demo 보기
+								<svg class="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+								</svg>
+							</a>
+							<button class="inline-flex items-center justify-center px-8 py-4 border-2 border-green-500 text-green-600 hover:bg-green-50 font-semibold rounded-lg transition-all duration-300">
+								�� 기술 문서 보기
+								<svg class="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+								</svg>
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Project 2: Gemini Duck Bot -->
+		<section id="gemini-bot-project" class="py-16 bg-gray-50">
+			<div class="container mx-auto px-8">
+				<div class="max-w-6xl mx-auto">
+					
+					<!-- Project Overview -->
+					<div class="text-center mb-12">
+						<h2 class="text-4xl font-bold text-gray-900 mb-4">Gemini Duck Bot</h2>
+						<p class="text-xl text-gray-600 mb-8">AI 기반 스마트 질의응답 챗봇</p>
+						
+						<!-- Project Image/GIF Placeholder -->
+						<div class="aspect-video bg-gradient-to-br from-blue-100 to-purple-200 rounded-2xl shadow-2xl overflow-hidden mb-8 max-w-4xl mx-auto">
+							<div class="w-full h-full flex items-center justify-center">
+								<div class="text-center space-y-4">
+									<div class="text-6xl">🤖</div>
+									<p class="text-blue-700 font-medium">챗봇 인터페이스 스크린샷</p>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- Problem & Goal -->
+					<div class="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-12">
+						<div class="space-y-4">
+							<h3 class="text-2xl font-bold text-gray-900 flex items-center">
+								🤔 문제 정의
+							</h3>
+							<p class="text-gray-700 leading-relaxed">
+								기존 AI 챗봇들은 복잡한 인터페이스나 높은 사용 장벽으로 인해 
+								일반 사용자들이 접근하기 어려운 경우가 많았습니다. 
+								간단한 질문도 복잡한 설정 과정을 거쳐야 하는 문제가 있었습니다.
+							</p>
+						</div>
+						
+						<div class="space-y-4">
+							<h3 class="text-2xl font-bold text-gray-900 flex items-center">
+								🎯 프로젝트 목표
+							</h3>
+							<p class="text-gray-700 leading-relaxed">
+								누구나 쉽게 사용할 수 있는 직관적인 AI 챗봇을 개발하여 
+								AI 기술의 접근성을 높이고, 일상적인 질문부터 전문적인 문의까지 
+								자연스럽게 처리할 수 있는 서비스를 만들고자 했습니다.
+							</p>
+						</div>
+					</div>
+
+					<!-- My Role & Tech Stack -->
+					<div class="bg-white rounded-2xl p-8 mb-12 shadow-sm">
+						<h3 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+							👨‍💻 나의 역할 및 기술 스택
+						</h3>
+						<div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+							<div>
+								<h4 class="text-lg font-semibold text-gray-800 mb-3">나의 역할</h4>
+								<ul class="list-disc list-inside text-gray-700 space-y-2">
+									<li><strong>전체 기획:</strong> 챗봇 컨셉 설계 및 대화 플로우 정의</li>
+									<li><strong>풀스택 개발:</strong> 프론트엔드 및 API 연동 개발</li>
+									<li><strong>AI 모델 연동:</strong> Gemini API 최적화 및 프롬프트 엔지니어링</li>
+								</ul>
+							</div>
+							<div>
+								<h4 class="text-lg font-semibold text-gray-800 mb-3">기술 스택 선택 이유</h4>
+								<div class="space-y-3">
+									<div class="flex items-start gap-3">
+										<span class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-sm font-medium">Next.js</span>
+										<p class="text-gray-700 text-sm">SSR과 API Routes로 풀스택 개발 효율성 증대</p>
+									</div>
+									<div class="flex items-start gap-3">
+										<span class="bg-purple-100 text-purple-800 px-2 py-1 rounded text-sm font-medium">Gemini API</span>
+										<p class="text-gray-700 text-sm">최신 AI 모델과 한국어 처리 성능 우수</p>
+									</div>
+									<div class="flex items-start gap-3">
+										<span class="bg-green-100 text-green-800 px-2 py-1 rounded text-sm font-medium">Tailwind CSS</span>
+										<p class="text-gray-700 text-sm">반응형 채팅 UI 빠른 구현</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- Key Features -->
+					<div class="mb-12">
+						<h3 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+							⚙️ 핵심 기능
+						</h3>
+						
+						<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+							<div class="bg-white rounded-lg p-6 shadow-sm border-l-4 border-blue-500">
+								<h4 class="text-lg font-semibold text-gray-800 mb-3">실시간 대화</h4>
+								<p class="text-gray-700 text-sm">
+									스트리밍 방식의 실시간 응답으로 자연스러운 대화 경험 제공
+								</p>
+							</div>
+							<div class="bg-white rounded-lg p-6 shadow-sm border-l-4 border-green-500">
+								<h4 class="text-lg font-semibold text-gray-800 mb-3">컨텍스트 유지</h4>
+								<p class="text-gray-700 text-sm">
+									대화 히스토리를 유지하여 연속적인 질문과 답변 가능
+								</p>
+							</div>
+							<div class="bg-white rounded-lg p-6 shadow-sm border-l-4 border-purple-500">
+								<h4 class="text-lg font-semibold text-gray-800 mb-3">다양한 주제</h4>
+								<p class="text-gray-700 text-sm">
+									일반 상식부터 기술적 질문까지 폭넓은 주제 커버
+								</p>
+							</div>
+						</div>
+					</div>
+
+					<!-- Outcome -->
+					<div class="bg-blue-50 rounded-2xl p-8 mb-12">
+						<h3 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+							📊 결과 및 배운 점
+						</h3>
+						
+						<div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+							<div>
+								<h4 class="text-lg font-semibold text-gray-800 mb-3">주요 성과</h4>
+								<ul class="list-disc list-inside text-gray-700 space-y-2">
+									<li>AI API 연동 및 스트리밍 처리 경험 획득</li>
+									<li>실시간 채팅 UI 구현 노하우 축적</li>
+									<li>프롬프트 엔지니어링 기술 습득</li>
+								</ul>
+							</div>
+							
+							<div>
+								<h4 class="text-lg font-semibold text-gray-800 mb-3">개선 계획</h4>
+								<ul class="list-disc list-inside text-gray-700 space-y-2">
+									<li>사용자별 대화 히스토리 저장 기능</li>
+									<li>음성 인식 및 TTS 기능 추가</li>
+									<li>특정 도메인 전문 모드 개발</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+
+					<!-- CTA Buttons -->
+					<div class="text-center">
+						<div class="flex flex-col sm:flex-row gap-4 justify-center">
+							<a 
+								href="https://gemini-bot.log8.kr" 
+								target="_blank" 
+								rel="noopener noreferrer"
+								class="inline-flex items-center justify-center px-8 py-4 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+							>
+								�� 챗봇과 대화하기
+								<svg class="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+								</svg>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Other Projects Overview -->
+		<section class="py-16 bg-white">
+			<div class="container mx-auto px-8">
+				<div class="max-w-6xl mx-auto">
+					<div class="text-center mb-12">
+						<h2 class="text-3xl font-bold text-gray-900 mb-4">기타 프로젝트</h2>
+						<p class="text-lg text-gray-600">다양한 분야에서 진행한 추가 프로젝트들</p>
+					</div>
+
+					<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+						
+						<!-- Fortune Meme -->
+						<div class="bg-gradient-to-br from-pink-50 to-orange-50 rounded-2xl p-8">
+							<div class="text-center mb-6">
+								<div class="text-5xl mb-4">🔮</div>
+								<h3 class="text-2xl font-bold text-gray-900 mb-2">밈 운세 생성기</h3>
+								<p class="text-gray-600">재미있는 밈과 함께하는 일일 운세 서비스</p>
+							</div>
+							
+							<div class="space-y-4 text-sm text-gray-700">
+								<div class="flex items-center gap-2">
+									<span class="font-semibold">🎯 목표:</span>
+									<span>유머와 재미를 통한 일상 스트레스 해소</span>
+								</div>
+								<div class="flex items-center gap-2">
+									<span class="font-semibold">🛠 기술:</span>
+									<span>React, Meme API, 랜덤 운세 알고리즘</span>
+								</div>
+								<div class="flex items-center gap-2">
+									<span class="font-semibold">📈 결과:</span>
+									<span>SNS 공유 기능으로 바이럴 효과 창출</span>
+								</div>
+							</div>
+							
+							<div class="mt-6">
+								<a 
+									href="https://fortune-meme.log8.kr" 
+									target="_blank" 
+									rel="noopener noreferrer"
+									class="inline-flex items-center justify-center w-full px-6 py-3 bg-pink-500 hover:bg-pink-600 text-white font-medium rounded-lg transition-all duration-300"
+								>
+									운세 확인하기
+								</a>
+							</div>
+						</div>
+
+						<!-- Smart Planner -->
+						<div class="bg-gradient-to-br from-indigo-50 to-purple-50 rounded-2xl p-8">
+							<div class="text-center mb-6">
+								<div class="text-5xl mb-4">📅</div>
+								<h3 class="text-2xl font-bold text-gray-900 mb-2">Smart Planner</h3>
+								<p class="text-gray-600">AI 기반 스마트 일정 관리 서비스</p>
+							</div>
+							
+							<div class="space-y-4 text-sm text-gray-700">
+								<div class="flex items-center gap-2">
+									<span class="font-semibold">🎯 목표:</span>
+									<span>효율적인 시간 관리와 목표 달성 지원</span>
+								</div>
+								<div class="flex items-center gap-2">
+									<span class="font-semibold">🛠 기술:</span>
+									<span>Next.js, Supabase, AI 스케줄링</span>
+								</div>
+								<div class="flex items-center gap-2">
+									<span class="font-semibold">📈 결과:</span>
+									<span>개인 생산성 도구로 실사용 중</span>
+								</div>
+							</div>
+							
+							<div class="mt-6">
+								<a 
+									href="https://planner.log8.kr" 
+									target="_blank" 
+									rel="noopener noreferrer"
+									class="inline-flex items-center justify-center w-full px-6 py-3 bg-indigo-500 hover:bg-indigo-600 text-white font-medium rounded-lg transition-all duration-300"
+								>
+									플래너 사용하기
+								</a>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Contact Section -->
+		<section class="py-16 bg-gray-900 text-white">
+			<div class="container mx-auto px-8 text-center">
+				<h3 class="text-3xl font-bold mb-4">프로젝트에 대해 더 자세히 알고 싶으신가요?</h3>
+				<p class="text-xl text-gray-300 mb-8">
+					개발 과정, 기술적 도전, 그리고 배운 점들을 더 자세히 공유하고 싶습니다.
+				</p>
+				<div class="flex flex-col sm:flex-row gap-4 justify-center">
+					<a 
+						href="https://github.com/IISweetHeartII" 
+						target="_blank" 
+						rel="noopener noreferrer"
+						class="inline-flex items-center justify-center px-8 py-4 bg-white text-gray-900 hover:bg-gray-100 font-semibold rounded-lg transition-all duration-300"
+					>
+						GitHub에서 코드 보기
+						<svg class="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+						</svg>
+					</a>
+					<a 
+						href="mailto:sachi009955@gmail.com"
+						class="inline-flex items-center justify-center px-8 py-4 border-2 border-white text-white hover:bg-white hover:text-gray-900 font-semibold rounded-lg transition-all duration-300"
+					>
+						이메일로 문의하기
+						<svg class="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+						</svg>
+					</a>
+				</div>
+			</div>
+		</section>
+
 	</main>
 </Layout> 

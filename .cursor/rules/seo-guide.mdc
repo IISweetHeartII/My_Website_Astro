@@ -3,49 +3,139 @@ description:
 globs: 
 alwaysApply: false
 ---
-# 블로그 게시물 Frontmatter 가이드 (SEO 포함)
+# 블로그 게시물 Frontmatter 가이드 (SEO/AEO 최적화 포함)
 
-이 가이드는 블로그 게시물 작성을 위해 Obsidian 템플릿에 정의된 Frontmatter 속성들을 채우는 방법을 설명합니다. SEO 최적화와 일반적인 게시물 정보 설정에 필요한 모든 속성을 다룹니다.
-자세한 내용은 [A complete SEO optimization guide with Obsidian Blogger.ko.md](mdc:Blog/A complete SEO optimization guide with Obsidian Blogger.ko.md) 및 관련 템플릿 파일들을 참고하세요.
+이 가이드는 블로그 게시물 작성을 위해 Obsidian 템플릿에 정의된 Frontmatter 속성들을 채우는 방법을 설명합니다. 
+AI 시대의 AEO(Answer Engine Optimization) 및 기존 SEO 최적화와 일반적인 게시물 정보 설정에 필요한 모든 속성을 다룹니다.
+
+자세한 내용은 [A complete SEO optimization guide with Obsidian Blogger.ko.md](mdc:Blog/A complete SEO optimization guide with Obsidian Blogger.ko.md) 및 [AEO 전략 가이드](mdc:.cursor/rules/aeo-strategy.mdc)를 참고하세요.
 
 ## 필수 속성 (Required Properties)
 
 모든 블로그 게시물에 반드시 포함되어야 하는 속성입니다.
 
 - `title`: 게시물의 메인 제목입니다. 사이트 제목 및 기본 SEO 제목으로 사용됩니다.
+  - **AEO 팁**: 질문 형식으로 작성하면 AI가 답변하기 좋은 형태가 됩니다. (예: "Astro에서 View Transitions API를 어떻게 구현하나요?")
 - `publish`: 게시물 공개 여부를 결정합니다. `true`로 설정해야 블로그에 게시됩니다 (`false`, `draft: true`, 또는 누락 시 초안 상태).
 
-## 선택 속성 (Optional Properties)
+## 중요도 높은 선택 속성 (High-Priority Optional Properties)
+
+AI와 검색 엔진에서의 노출을 위해 강력히 권장되는 속성입니다.
+
+- `subtitle`: 제목 아래에 표시될 부제목입니다.
+  - **AEO 팁**: 본문에서 다룰 핵심 내용이나 독창적인 관점을 미리 알려주세요.
+- `description`: 게시물의 간략한 요약입니다. SEO 메타 설명 및 블로그 카드 미리보기에 사용됩니다 (150-160자 권장).
+  - **AEO 팁**: 실제 경험이나 독창적인 인사이트가 포함되어 있음을 언급하세요.
+- `created_date`: 게시물 작성 날짜입니다. `YYYY-MM-DD` 형식을 권장하며, 템플릿에서 자동 생성될 수 있습니다.
+  - **AEO 팁**: 최신성을 보여주는 중요한 신호입니다. 업데이트 시 `last_modified` 필드도 고려하세요.
+- `featured_image`: 게시물의 대표 이미지 URL입니다. 게시물 상단, 소셜 미디어 카드, SEO 이미지 메타 태그에 사용됩니다.
+  - **권장**: Unsplash나 고품질 이미지를 사용하고, 내용과 관련성이 높은 이미지를 선택하세요.
+- `featured_image_alt`: `featured_image`에 대한 대체 텍스트(Alt text)입니다. 이미지 로딩 실패 시 표시되며, 접근성 및 SEO에 중요합니다. `featured_image` 사용 시 필수로 입력하는 것이 좋습니다.
+- `tags`: 게시물의 카테고리 또는 주제 목록입니다. 배열 형태로 입력하며, 게시물 필터링 및 탐색, 콘텐츠 구성, 검색 가능성 향상에 사용됩니다. (예: `[개발, React, 경험담]`).
+  - **AEO 팁**: 전문 분야와 관련된 태그를 포함하여 전문성을 보여주세요.
+
+## 일반 선택 속성 (General Optional Properties)
 
 게시물을 더 풍부하게 만들거나 특정 정보를 제공하기 위해 사용할 수 있는 속성입니다.
 
-- `subtitle`: 제목 아래에 표시될 부제목입니다.
-- `description`: 게시물의 간략한 요약입니다. SEO 메타 설명 및 블로그 카드 미리보기에 사용됩니다 (150-160자 권장).
-- `created_date`: 게시물 작성 날짜입니다. `YYYY-MM-DD` 형식을 권장하며, 템플릿에서 자동 생성될 수 있습니다.
-- `featured_image`: 게시물의 대표 이미지 URL입니다. 게시물 상단, 소셜 미디어 카드, SEO 이미지 메타 태그에 사용됩니다.
-- `featured_image_alt`: `featured_image`에 대한 대체 텍스트(Alt text)입니다. 이미지 로딩 실패 시 표시되며, 접근성 및 SEO에 중요합니다. `featured_image` 사용 시 필수로 입력하는 것이 좋습니다.
 - `slug`: 게시물의 사용자 지정 URL 경로입니다. 지정하지 않으면 `title`을 기반으로 자동 생성됩니다 (`소문자-하이픈` 형식 권장).
-- `tags`: 게시물의 카테고리 또는 주제 목록입니다. 배열 형태로 입력하며, 게시물 필터링 및 탐색, 콘텐츠 구성, 검색 가능성 향상에 사용됩니다. (예: `[tag1, tag2]`).
+  - **SEO 팁**: 핵심 키워드를 포함한 의미 있는 URL을 만드세요.
 
-## SEO 관련 속성 (SEO-specific Properties)
+## SEO/AEO 관련 속성 (SEO/AEO-specific Properties)
 
-SEO 및 소셜 미디어 공유 설정을 세밀하게 제어하기 위한 속성입니다. 이 필드를 비워두면 `title`, `description`, `featured_image` 등 다른 속성에서 값을 가져와 자동으로 채워집니다.
+SEO, AEO 및 소셜 미디어 공유 설정을 세밀하게 제어하기 위한 속성입니다. 이 필드를 비워두면 `title`, `description`, `featured_image` 등 다른 속성에서 값을 가져와 자동으로 채워집니다.
 
+### 검색 엔진 최적화 (SEO)
 - `meta_title`: 검색 결과에 표시될 SEO 메타 제목을 사용자 지정합니다. 지정 시 `title`보다 우선합니다 (60자 미만 권장).
 - `meta_description`: 검색 결과에 표시될 SEO 메타 설명을 사용자 지정합니다. 지정 시 `description`보다 우선합니다 (150-160자 권장).
-- `keywords`: 검색 엔진 최적화를 위한 키워드 목록입니다 (쉼표로 구분).
+- `keywords`: 검색 엔진 최적화를 위한 키워드 목록입니다. 배열 형태로 입력하세요.
+  - 예: `["대학생", "알고리즘", "경험담", "ChatGPT"]`
+
+### 소셜 미디어 최적화 (Open Graph)
 - `og_title`: 소셜 미디어(Open Graph) 공유 시 사용될 제목입니다. 지정 시 `meta_title`/`title`보다 우선합니다.
 - `og_description`: 소셜 미디어 공유 시 사용될 설명입니다. 지정 시 `meta_description`/`description`보다 우선합니다.
-- `og_type`: Open Graph 타입입니다 (예: `article`).
-- `twitter_card`: 트위터 카드 타입입니다 (예: `summary_large_image`).
+- `og_type`: Open Graph 타입입니다 (기본값: `article`).
+- `twitter_card`: 트위터 카드 타입입니다 (기본값: `summary_large_image`).
 
-### 속성값 대체(Fallback) 우선순위 예시:
+### 속성값 대체(Fallback) 우선순위
 - **SEO 제목**: `meta_title` > `title`
 - **SEO 설명**: `meta_description` > `description`
 - **소셜 제목**: `og_title` > `meta_title` > `title`
 - **소셜 설명**: `og_description` > `meta_description` > `description`
 
-이 가이드와 함께 템플릿 파일을 참고하여 블로그 게시물의 Frontmatter를 완성하세요.
+## AEO 시대를 위한 추가 권장 속성
+
+AI 봇이 콘텐츠를 더 잘 이해하고 인용할 수 있도록 도와주는 속성들입니다.
+
+- `author`: 작성자 이름 (기본값: "김덕환")
+  - **AEO 중요**: 전문성과 권위성을 보여주는 중요한 신호입니다.
+- `expertise_area`: 전문 분야 (예: "프론트엔드 개발", "PM", "블록체인")
+- `content_type`: 콘텐츠 유형 (예: "경험담", "튜토리얼", "분석", "리뷰")
+- `difficulty_level`: 난이도 (예: "초급", "중급", "고급")
+- `read_time`: 예상 읽기 시간 (분 단위)
+- `last_updated`: 마지막 업데이트 날짜 (`YYYY-MM-DD` 형식)
+  - **AEO 중요**: 콘텐츠의 최신성을 보여주는 강력한 신호입니다.
+
+## Frontmatter 작성 예시
+
+다음은 AEO/SEO 최적화된 Frontmatter 예시입니다:
+
+```yaml
+---
+title: "알고리즘 족보 사기 당한 썰 (feat. ChatGPT)"
+subtitle: "대학가 온라인 거래의 함정, 2만 원 주고 산 족보의 충격적인 실체"
+description: "대학생 커뮤니티 '에브리타임'에서 알고리즘 시험 족보를 구매했다가 겪은 황당한 사기 경험담과, ChatGPT의 도움을 받아 환불을 요구하기까지의 과정을 생생하게 공유합니다."
+publish: true
+created_date: 2025-01-15
+last_updated: 2025-01-15
+author: "김덕환"
+expertise_area: "대학생활"
+content_type: "경험담"
+
+# SEO 최적화
+meta_title: "대학생 족보 사기 경험담 | 온라인 거래 주의보"
+meta_description: "에브리타임에서 2만 원에 구매한 알고리즘 족보가 가짜였다는 사실을 알게 된 후, ChatGPT의 조언을 통해 판매자에게 환불을 요구한 실제 경험 이야기."
+keywords:
+  - "대학생"
+  - "에브리타임"
+  - "족보"
+  - "온라인거래"
+  - "사기"
+  - "경험담"
+  - "알고리즘"
+  - "ChatGPT"
+
+# 소셜 미디어 최적화
+og_title: "알고리즘 족보 사기 당한 썰 (feat. ChatGPT)"
+og_description: "대학생 커뮤니티에서 족보를 구매했다가 겪은 황당한 사기 경험과 환불 과정 이야기."
+og_type: "article"
+twitter_card: "summary_large_image"
+
+# 이미지
+featured_image: "https://images.unsplash.com/photo-1551818255-e6e10975842a"
+featured_image_alt: "노트북 앞에서 머리를 감싸쥐고 고민하는 사람"
+
+# 분류
+slug: "algorithm-cheat-sheet-scam-story"
+tags:
+  - "대학생활"
+  - "경험담"
+  - "알고리즘"
+  - "ChatGPT"
+---
+```
+
+## AEO 최적화를 위한 콘텐츠 작성 팁
+
+Frontmatter 외에도 본문 작성 시 다음 사항들을 고려하세요:
+
+1. **실제 경험 중심**: 직접 겪은 일, 실제 사용해본 도구에 대한 솔직한 후기
+2. **구체적인 예시**: 코드, 스크린샷, 수치 등 구체적인 증거 자료
+3. **출처 명시**: 참고한 자료나 공식 문서에 대한 링크
+4. **질문-답변 구조**: 독자가 궁금해할 만한 질문을 소제목으로 활용
+5. **정기적 업데이트**: 새로운 정보나 경험이 생기면 기존 글을 업데이트
+
+이 가이드와 함께 [AEO 전략 가이드](mdc:.cursor/rules/aeo-strategy.mdc)를 참고하여 AI 시대에 최적화된 블로그 게시물을 작성하세요.
 
 
 
