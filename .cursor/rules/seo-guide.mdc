@@ -1,5 +1,5 @@
 ---
-description: 
+description: when writing blog content
 globs: 
 alwaysApply: false
 ---
@@ -27,7 +27,7 @@ AI와 검색 엔진에서의 노출을 위해 강력히 권장되는 속성입�
 - `description`: 게시물의 간략한 요약입니다. SEO 메타 설명 및 블로그 카드 미리보기에 사용됩니다 (150-160자 권장).
   - **AEO 팁**: 실제 경험이나 독창적인 인사이트가 포함되어 있음을 언급하세요.
 - `created_date`: 게시물 작성 날짜입니다. `YYYY-MM-DD` 형식을 권장하며, 템플릿에서 자동 생성될 수 있습니다.
-  - **AEO 팁**: 최신성을 보여주는 중요한 신호입니다. 업데이트 시 `last_modified` 필드도 고려하세요.
+  - **AEO 팁**: 최신성을 보여주는 중요한 신호입니다. 업데이트 시 `updated_date` 필드도 고려하세요.
 - `featured_image`: 게시물의 대표 이미지 URL입니다. 게시물 상단, 소셜 미디어 카드, SEO 이미지 메타 태그에 사용됩니다.
   - **권장**: Unsplash나 고품질 이미지를 사용하고, 내용과 관련성이 높은 이미지를 선택하세요.
 - `featured_image_alt`: `featured_image`에 대한 대체 텍스트(Alt text)입니다. 이미지 로딩 실패 시 표시되며, 접근성 및 SEO에 중요합니다. `featured_image` 사용 시 필수로 입력하는 것이 좋습니다.
@@ -73,7 +73,7 @@ AI 봇이 콘텐츠를 더 잘 이해하고 인용할 수 있도록 도와주는
 - `content_type`: 콘텐츠 유형 (예: "경험담", "튜토리얼", "분석", "리뷰")
 - `difficulty_level`: 난이도 (예: "초급", "중급", "고급")
 - `read_time`: 예상 읽기 시간 (분 단위)
-- `last_updated`: 마지막 업데이트 날짜 (`YYYY-MM-DD` 형식)
+- `updated_date`: 마지막 업데이트 날짜 (`YYYY-MM-DD` 형식)
   - **AEO 중요**: 콘텐츠의 최신성을 보여주는 강력한 신호입니다.
 
 ## Frontmatter 작성 예시
@@ -87,7 +87,7 @@ subtitle: "대학가 온라인 거래의 함정, 2만 원 주고 산 족보의 �
 description: "대학생 커뮤니티 '에브리타임'에서 알고리즘 시험 족보를 구매했다가 겪은 황당한 사기 경험담과, ChatGPT의 도움을 받아 환불을 요구하기까지의 과정을 생생하게 공유합니다."
 publish: true
 created_date: 2025-01-15
-last_updated: 2025-01-15
+updated_date: 2025-01-15
 author: "김덕환"
 expertise_area: "대학생활"
 content_type: "경험담"
