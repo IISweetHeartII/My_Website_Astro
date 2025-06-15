@@ -25,6 +25,14 @@ export default defineConfig({
         },
       ],
     ],
+    remarkRehype: {
+      allowDangerousHtml: true,
+    },
+    syntaxHighlight: "shiki",
+    shikiConfig: {
+      theme: "github-light",
+      wrap: true,
+    },
   },
   integrations: [expressiveCode(), mdx(), sitemap(), tailwind()],
   output: "static",

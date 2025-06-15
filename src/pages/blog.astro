@@ -3,6 +3,7 @@ import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import BlogCard from '../components/BlogCard.astro';
+import ImprovedTagFilter from '../components/ImprovedTagFilter.astro';
 import { getCollection, type CollectionEntry } from 'astro:content';
 
 // Helper function to get a valid timestamp or fallback
@@ -28,25 +29,12 @@ const allTags: string[] = [...new Set(allPosts.flatMap((post: CollectionEntry<'b
     <head>
         <BaseHead title="Blog - Ideas & Insights" description="Explore our collection of articles, ideas, insights, and everything in between." />
     </head>
-    <body class="min-h-screen flex flex-col m-0">
+    <body class="min-h-screen flex flex-col m-0" data-all-tags={JSON.stringify(allTags)}>
         <Header />
         <main class="flex-1 w-full max-w-screen-lg mx-auto p-8 flex flex-col">
-            <!-- New section for search and tags -->
+            <!-- 개선된 태그 관리 시스템 -->
             <section class="mb-8">
-                <div class="mb-6">
-                    <input type="text" id="post-search" placeholder="블로그 글 검색..." class="w-full p-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-brand-primary dark:border-brand-secondary dark:text-surface-light" />
-                </div>
-                <div class="flex flex-wrap justify-center gap-2 mb-6" id="tag-filter-container">
-                    <a href="#" data-tag="all" class="px-4 py-2 bg-green-400 text-text-default rounded-full hover:bg-teal-400 transition-colors duration-200 font-medium text-sm md:text-base current-tag">
-                        All Posts
-                    </a>
-                    {allTags.map((tagItem: string) => (
-                        <a href="#" data-tag={tagItem}
-                            class="px-4 py-2 rounded-full transition-colors duration-200 text-sm md:text-base font-medium bg-surface-light text-text-default hover:bg-brand-secondary hover:text-text-default">
-                            #{tagItem}
-                        </a>
-                    ))}
-                </div>
+                <ImprovedTagFilter allTags={allTags} />
             </section>
 
             {allPosts.length > 0 ? (
@@ -72,93 +60,135 @@ const allTags: string[] = [...new Set(allPosts.flatMap((post: CollectionEntry<'b
         <Footer />
         <script is:inline>
             document.addEventListener('DOMContentLoaded', () => {
-                console.log('Script started: DOMContentLoaded'); // Debug log 1
-
                 const searchInput = document.getElementById('post-search');
                 const tagFilterContainer = document.getElementById('tag-filter-container');
                 const blogPostsGrid = document.getElementById('blog-posts-grid');
-
-                console.log('Elements selected:', { searchInput, tagFilterContainer, blogPostsGrid }); // Debug log 2
+                const showMoreButton = document.getElementById('show-more-tags');
+                const moreTags = document.getElementById('more-tags');
+                const resultsInfo = document.getElementById('results-info');
 
                 if (!blogPostsGrid) {
-                    console.error('blogPostsGrid element not found!'); // Critical error log
-                    return; // Stop if the main container is not found
+                    console.warn('Blog posts grid not found');
+                    return;
                 }
 
                 const allBlogCards = Array.from(blogPostsGrid.children);
-                console.log('Number of BlogCards found:', allBlogCards.length); // Debug log 3
-                if (allBlogCards.length === 0) {
-                    console.warn('No BlogCard elements found inside #blog-posts-grid. Filtering will not work.');
-                }
-
-
                 let currentSearchTerm = '';
-                let currentSelectedTag = 'all'; // Default to 'all'
+                let currentSelectedTag = 'all';
 
+                // 필터링 함수
                 const filterPosts = () => {
-                    console.log('Filtering posts with search:', currentSearchTerm, 'and tag:', currentSelectedTag); // Debug log 4
+                    let visibleCount = 0;
+                    
                     allBlogCards.forEach(card => {
-                        const cardTitle = card.dataset.title ? card.dataset.title.toLowerCase() : '';
-                        const cardTags = card.dataset.tags ? card.dataset.tags.toLowerCase().split(',') : [];
-                        const cardDescription = card.dataset.description ? card.dataset.description.toLowerCase() : '';
+                        const cardTitle = (card.dataset.title || '').toLowerCase();
+                        const cardTags = (card.dataset.tags || '').toLowerCase().split(',');
+                        const cardDescription = (card.dataset.description || '').toLowerCase();
 
-                        console.log('Card data:', { title: cardTitle, tags: cardTags, description: cardDescription, currentDisplay: card.style.display }); // Debug log 5 (per card)
-
-                        const matchesSearch = currentSearchTerm === '' || cardTitle.includes(currentSearchTerm) || cardDescription.includes(currentSearchTerm);
-                        const matchesTag = currentSelectedTag === 'all' || cardTags.includes(currentSelectedTag);
+                        const matchesSearch = currentSearchTerm === '' || 
+                            cardTitle.includes(currentSearchTerm) || 
+                            cardDescription.includes(currentSearchTerm);
+                        
+                        const matchesTag = currentSelectedTag === 'all' || 
+                            cardTags.includes(currentSelectedTag);
 
                         if (matchesSearch && matchesTag) {
-                            card.style.display = 'block'; // Show the card
-                            console.log('Showing card:', cardTitle); // Debug log 6
+                            card.style.display = 'block';
+                            visibleCount++;
                         } else {
-                            card.style.display = 'none'; // Hide the card
-                            console.log('Hiding card:', cardTitle); // Debug log 7
+                            card.style.display = 'none';
                         }
                     });
+
+                    // 결과 정보 업데이트
+                    if (resultsInfo) {
+                        const searchText = currentSearchTerm ? ` "${currentSearchTerm}"` : '';
+                        const tagText = currentSelectedTag !== 'all' ? ` #${currentSelectedTag}` : '';
+                        resultsInfo.innerHTML = `
+                            <div class="flex items-center gap-2">
+                                <svg class="w-4 h-4 text-brand-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                                </svg>
+                                <span>${searchText}${tagText} 검색 결과: <strong>${visibleCount}개</strong> / 전체 ${allBlogCards.length}개</span>
+                            </div>
+                        `;
+                    }
                 };
 
-                // Search input event listener
-                if (searchInput) { // Add null check for robustness
+                // 검색 이벤트
+                if (searchInput) {
                     searchInput.addEventListener('input', (event) => {
-                        currentSearchTerm = event.target.value.toLowerCase();
-                        console.log('Search input changed:', currentSearchTerm); // Debug log 8
+                        currentSearchTerm = event.target.value.toLowerCase().trim();
                         filterPosts();
                     });
-                } else {
-                    console.warn('Search input element not found.');
                 }
 
-
-                // Tag filter event listener
-                if (tagFilterContainer) { // Add null check for robustness
+                // 태그 클릭 이벤트
+                if (tagFilterContainer) {
                     tagFilterContainer.addEventListener('click', (event) => {
-                        const targetLink = event.target.closest('a[data-tag]'); // closest()를 사용하여 올바른 <a> 태그를 찾습니다.
-
+                        const targetLink = event.target.closest('a[data-tag]');
+                        
                         if (targetLink) {
-                            event.preventDefault(); // Prevent page navigation
-                            console.log('Tag clicked:', targetLink.dataset.tag); // Debug log 9
-
-                            // Update active tag styling
-                            const previousActiveTag = tagFilterContainer.querySelector('.current-tag');
-                            if (previousActiveTag) {
-                                previousActiveTag.classList.remove('bg-green-400', 'text-text-default', 'current-tag');
-                                previousActiveTag.classList.add('bg-surface-light', 'text-text-default', 'hover:bg-brand-secondary', 'hover:text-text-default');
-                            }
-
-                            targetLink.classList.remove('bg-surface-light', 'text-text-default', 'hover:bg-brand-secondary', 'hover:text-text-default');
-                            targetLink.classList.add('bg-green-400', 'text-text-default', 'current-tag');
-
-
-                            currentSelectedTag = targetLink.dataset.tag.toLowerCase();
+                            event.preventDefault();
+                            
+                            // 이전 활성 태그 스타일 제거
+                            document.querySelectorAll('.current-tag').forEach(tag => {
+                                tag.classList.remove('current-tag', 'bg-brand-secondary', 'text-white');
+                                tag.classList.add('bg-gray-100', 'text-gray-700');
+                            });
+                            
+                            // 새 활성 태그 스타일 적용
+                            targetLink.classList.remove('bg-gray-100', 'text-gray-700');
+                            targetLink.classList.add('current-tag', 'bg-brand-secondary', 'text-white');
+                            
+                            currentSelectedTag = targetLink.dataset.tag;
                             filterPosts();
                         }
                     });
-                } else {
-                    console.warn('Tag filter container not found.');
                 }
 
+                // 더보기 버튼 이벤트
+                if (showMoreButton && moreTags) {
+                    showMoreButton.addEventListener('click', () => {
+                        const isHidden = moreTags.classList.contains('hidden');
+                        
+                        if (isHidden) {
+                            moreTags.classList.remove('hidden');
+                            moreTags.classList.add('show');
+                            showMoreButton.querySelector('span').textContent = '접기';
+                            showMoreButton.querySelector('svg').style.transform = 'rotate(180deg)';
+                        } else {
+                            moreTags.classList.remove('show');
+                            moreTags.classList.add('hidden');
+                            const hiddenCount = showMoreButton.querySelector('span').textContent.match(/\d+/)[0];
+                            showMoreButton.querySelector('span').textContent = `+${hiddenCount}개 더보기`;
+                            showMoreButton.querySelector('svg').style.transform = 'rotate(0deg)';
+                        }
+                    });
+                }
 
-                // Initial filter on page load
+                // 숨겨진 태그들도 클릭 이벤트 적용
+                if (moreTags) {
+                    moreTags.addEventListener('click', (event) => {
+                        const targetLink = event.target.closest('a[data-tag]');
+                        
+                        if (targetLink) {
+                            event.preventDefault();
+                            
+                            // 모든 활성 태그 스타일 제거
+                            document.querySelectorAll('.current-tag').forEach(tag => {
+                                tag.classList.remove('current-tag', 'bg-brand-secondary', 'text-white');
+                            });
+                            
+                            targetLink.classList.add('current-tag', 'bg-brand-secondary', 'text-white');
+                            
+                            currentSelectedTag = targetLink.dataset.tag;
+                            filterPosts();
+                        }
+                    });
+                }
+
+                // 초기 필터링
                 filterPosts();
             });
         </script>

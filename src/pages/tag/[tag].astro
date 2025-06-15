@@ -3,6 +3,7 @@ import BaseHead from '../../components/BaseHead.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import BlogCard from '../../components/BlogCard.astro';
+import ImprovedTagFilter from '../../components/ImprovedTagFilter.astro';
 import { getCollection, type CollectionEntry } from 'astro:content';
 
 export async function getStaticPaths() {
@@ -54,7 +55,7 @@ const allTags: string[] = [...new Set((await getCollection('blog')).flatMap((pos
         <BaseHead title={title} description={description} />
         
     </head>
-    <body class="min-h-screen flex flex-col m-0">
+    <body class="min-h-screen flex flex-col m-0" data-all-tags={JSON.stringify(allTags)}>
         <Header />
         <main class="flex-1 w-full max-w-screen-xl mx-auto p-8 flex flex-col">
             <section class="text-center mb-12 p-16 bg-surface-light rounded-3xl dark:bg-brand-primary md:p-12 md:mb-8">
@@ -63,25 +64,7 @@ const allTags: string[] = [...new Set((await getCollection('blog')).flatMap((pos
             </section>
 
             <section class="mb-8">
-                <div class="flex flex-wrap justify-center gap-2 mb-6">
-                    <a href="/blog" 
-                       class="px-4 py-2 bg-green-400 text-gray-900 rounded-full hover:bg-teal-400 transition-colors duration-200 font-medium text-sm md:text-base">
-                      All Posts
-                    </a>
-                    {allTags.map((tagItem: string) => (
-                      <a href={`/tag/${tagItem}`} 
-                         class="px-4 py-2 rounded-full transition-colors duration-200 text-sm md:text-base"
-                         class:list={[
-                            'font-medium',
-                            tagItem === tag 
-                                ? 'bg-brand-secondary text-text-default' 
-                                : 'bg-surface-light text-text-default hover:bg-brand-secondary hover:text-text-default' 
-                         ]}
-                         >
-                        #{tagItem}
-                      </a>
-                    ))}
-                </div>
+                <ImprovedTagFilter allTags={allTags} currentTag={tag} />
             </section>
 
             {sortedPosts.length > 0 ? (

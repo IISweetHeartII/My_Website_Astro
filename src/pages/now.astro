@@ -1,26 +1,677 @@
 ---
 import Layout from '../layouts/Layout.astro';
+
+interface ExpertiseItem {
+  id: string;
+  title: string;
+  description: string;
+  status: string;
+}
+
+interface ActivityItem {
+  id: string;
+  title: string;
+  description: string;
+  date: string;
+}
+
+interface NowData {
+  expertise: ExpertiseItem[];
+  activities: ActivityItem[];
+}
+
+// API에서 데이터를 가져옴
+let nowData: NowData = { expertise: [], activities: [] };
+try {
+  const response = await fetch(`${Astro.url.origin}/api/now.json`);
+  if (response.ok) {
+    nowData = await response.json();
+  }
+} catch (error) {
+  console.error('Failed to fetch now data:', error);
+  // 기본 데이터 사용
+  nowData = {
+    expertise: [
+      {
+        id: "1",
+        title: "Astro 블로그 플랫폼 개발",
+        description: "Astro와 TailwindCSS를 활용한 개인 블로그 플랫폼 개발 및 최적화 작업을 진행하고 있습니다.",
+        status: "진행중"
+      }
+    ],
+    activities: [
+      {
+        id: "1",
+        title: "Showcase 페이지 리뉴얼",
+        description: "프로젝트 소개 페이지를 사용자 중심으로 완전히 재설계했습니다.",
+        date: "2024-12-15"
+      }
+    ]
+  };
+}
+
+// 디스플레이용 데이터 변환 (기존 디자인과 호환)
+const displayData = [
+  {
+    id: 1,
+    title: "Building the Log8 Blog",
+    description: "Astro와 TailwindCSS를 활용한 개인 블로그 플랫폼 개발 및 최적화 작업을 진행하고 있습니다. 사용자 경험과 성능 향상에 집중하고 있어요.",
+    category: "개발",
+    icon: "🚀",
+    color: "from-blue-100 to-cyan-200",
+    textColor: "text-blue-700",
+    activities: nowData.activities.slice(0, 3).map(activity => ({
+      date: new Date(activity.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }),
+      activity: activity.description
+    }))
+  },
+  {
+    id: 2,
+    title: "Exploring New AI Models",
+    description: "최신 LLM들의 아키텍처와 성능을 비교 분석하며, few-shot learning과 프롬프트 엔지니어링에 대해 깊이 연구하고 있습니다.",
+    category: "AI/ML",
+    icon: "🤖",
+    color: "from-purple-100 to-pink-200",
+    textColor: "text-purple-700",
+    activities: [
+      { date: "Dec 12", activity: "Claude 3.5 Sonnet과 GPT-4o 성능 비교 실험" },
+      { date: "Dec 8", activity: "프롬프트 최적화 기법 연구 및 적용" },
+      { date: "Dec 3", activity: "Anthropic의 Constitutional AI 논문 분석" }
+    ]
+  },
+  {
+    id: 3,
+    title: "Learning System Design",
+    description: "대규모 시스템 설계와 마이크로서비스 아키텍처에 대해 학습하며, 실제 프로젝트에 적용 가능한 패턴들을 연구하고 있습니다.",
+    category: "아키텍처",
+    icon: "🏗️",
+    color: "from-green-100 to-teal-200",
+    textColor: "text-green-700",
+    activities: [
+      { date: "Dec 14", activity: "Redis를 활용한 캐싱 전략 설계 및 구현" },
+      { date: "Dec 9", activity: "마이크로서비스간 통신 패턴 연구" },
+      { date: "Dec 4", activity: "데이터베이스 샤딩 전략 학습" }
+    ]
+  }
+];
 ---
 
 <Layout title="Now... | Log8">
-  <main class="container mx-auto p-8">
-    <h1 class="text-4xl font-bold text-brand-primary text-center mb-8">What I'm Doing Now...</h1>
-
-    <section class="space-y-8">
-      <!-- Sample Item 1 -->
-      <div class="bg-white p-6 rounded-lg shadow-md">
-        <h2 class="text-xl font-semibold text-brand-primary mb-2">Building the Log8 Blog</h2>
-        <p class="text-gray-700">Currently working on developing and refining this personal blog platform using Astro and TailwindCSS.</p>
+  <main class="min-h-screen bg-gradient-to-br from-white to-gray-50">
+    <!-- Header Section -->
+    <section class="bg-white border-b border-gray-200">
+      <div class="container mx-auto px-8 py-12">
+        <div class="text-center space-y-4">
+          <h1 class="text-4xl lg:text-5xl font-bold text-gray-900">
+            What I'm Doing <span class="text-green-500">Now</span>
+          </h1>
+          <p class="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
+            지금 이 순간 제가 몰두하고 있는 것들과 성장하고 있는 분야들을 공유합니다.
+            살아있는 지적 호기심과 꾸준한 실행력을 확인해보세요.
+          </p>
+          <div class="flex items-center justify-center space-x-2 text-sm text-gray-500">
+            <div class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+            <span>Live Updates</span>
+          </div>
+        </div>
       </div>
-
-      <!-- Sample Item 2 -->
-      <div class="bg-white p-6 rounded-lg shadow-md">
-        <h2 class="text-xl font-semibold text-brand-primary mb-2">Exploring New AI Models</h2>
-        <p class="text-gray-700">Researching and experimenting with the latest advancements in large language models and generative AI.</p>
-      </div>
-
-      <!-- Add more items here -->
-
     </section>
+
+    <!-- Admin Controls (only visible when logged in) -->
+    <div id="admin-controls" class="hidden bg-green-50 border-b border-green-200 py-3">
+      <div class="container mx-auto px-8">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center space-x-2">
+            <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+            <span class="text-green-700 font-medium">Admin Mode</span>
+          </div>
+          <div class="flex space-x-3">
+            <button id="manage-content-btn" class="px-4 py-2 bg-green-500 hover:bg-green-600 text-white text-sm font-medium rounded-lg transition-colors">
+              컨텐츠 관리
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <section class="py-12">
+      <div class="container mx-auto px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8" id="now-items">
+          {displayData.map((item) => (
+            <div class="group bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1" data-id={item.id}>
+              <!-- Card Header -->
+              <div class={`bg-gradient-to-br ${item.color} p-6 relative overflow-hidden`}>
+                <div class="flex items-start justify-between">
+                  <div class="flex items-center space-x-3">
+                    <div class="text-3xl">{item.icon}</div>
+                    <div>
+                      <span class={`inline-block px-3 py-1 ${item.textColor} bg-white bg-opacity-60 rounded-full text-sm font-medium`}>
+                        {item.category}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <h2 class="text-2xl font-bold text-gray-900 mt-4 mb-3">{item.title}</h2>
+                <p class="text-gray-700 leading-relaxed">{item.description}</p>
+                <!-- Decorative elements -->
+                <div class="absolute -top-4 -right-4 w-24 h-24 bg-white bg-opacity-20 rounded-full"></div>
+                <div class="absolute -bottom-6 -left-6 w-32 h-32 bg-white bg-opacity-10 rounded-full"></div>
+              </div>
+
+              <!-- Timeline Section -->
+              <div class="p-6">
+                <div class="flex items-center space-x-2 mb-4">
+                  <div class="w-4 h-4 bg-green-500 rounded-full flex items-center justify-center">
+                    <div class="w-2 h-2 bg-white rounded-full"></div>
+                  </div>
+                  <h3 class="text-lg font-semibold text-gray-900">Recent Activities</h3>
+                </div>
+                
+                <div class="space-y-3" data-activities={item.id}>
+                  {item.activities.map((activity, index) => (
+                    <div class="flex items-start space-x-3 group/activity">
+                      <div class="flex-shrink-0 mt-2">
+                        <div class={`w-2 h-2 rounded-full ${index === 0 ? 'bg-green-500' : 'bg-gray-300'}`}></div>
+                      </div>
+                      <div class="flex-1 min-w-0">
+                        <div class="flex items-center space-x-2 mb-1">
+                          <span class="text-sm font-medium text-gray-500">{activity.date}</span>
+                        </div>
+                        <p class="text-sm text-gray-700 leading-relaxed">{activity.activity}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Content Management Modal -->
+    <div id="content-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-50">
+      <div class="bg-white rounded-xl p-6 w-full max-w-4xl mx-4 max-h-screen overflow-y-auto">
+        <div class="flex justify-between items-center mb-6">
+          <h2 class="text-2xl font-bold text-[#1F2937]">컨텐츠 관리</h2>
+          <button id="close-content-btn" class="text-[#FF6B6B] hover:text-[#FF5555] text-xl">✕</button>
+        </div>
+        
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <!-- 집중 영역 관리 -->
+          <div class="border border-gray-200 rounded-lg p-6">
+            <h3 class="text-lg font-semibold mb-4 text-[#1F2937]">집중 영역 관리</h3>
+            <div class="space-y-3 mb-4">
+              <input type="text" id="expertise-title" placeholder="영역 제목" class="w-full p-2 border border-gray-300 rounded-lg">
+              <textarea id="expertise-description" placeholder="영역 설명" rows="3" class="w-full p-2 border border-gray-300 rounded-lg"></textarea>
+              <input type="text" id="expertise-status" placeholder="진행 상태 (예: 진행중, 완료)" class="w-full p-2 border border-gray-300 rounded-lg">
+              <button id="add-expertise-btn" class="w-full bg-[#00FF6A] text-[#1F2937] py-2 rounded-lg hover:bg-[#00E55A] transition-colors">
+                영역 추가
+              </button>
+            </div>
+            
+            <div id="expertise-list" class="space-y-2 max-h-60 overflow-y-auto">
+              <!-- 동적으로 로드 -->
+            </div>
+          </div>
+
+          <!-- 활동 관리 -->
+          <div class="border border-gray-200 rounded-lg p-6">
+            <h3 class="text-lg font-semibold mb-4 text-[#1F2937]">활동 관리</h3>
+            <div class="space-y-3 mb-4">
+              <input type="text" id="activity-title" placeholder="활동 제목" class="w-full p-2 border border-gray-300 rounded-lg">
+              <textarea id="activity-description" placeholder="활동 설명" rows="3" class="w-full p-2 border border-gray-300 rounded-lg"></textarea>
+              <input type="date" id="activity-date" class="w-full p-2 border border-gray-300 rounded-lg">
+              <button id="add-activity-btn" class="w-full bg-[#2DD4BF] text-white py-2 rounded-lg hover:bg-[#14B8A6] transition-colors">
+                활동 추가
+              </button>
+            </div>
+            
+            <div id="activities-list" class="space-y-2 max-h-60 overflow-y-auto">
+              <!-- 동적으로 로드 -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Edit Modals -->
+    <!-- Edit Expertise Modal -->
+    <div id="edit-expertise-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-50">
+      <div class="bg-white rounded-xl p-6 w-full max-w-md mx-4">
+        <h3 class="text-lg font-semibold mb-4">집중 영역 수정</h3>
+        <div class="space-y-3">
+          <input type="hidden" id="edit-expertise-id">
+          <input type="text" id="edit-expertise-title" placeholder="영역 제목" class="w-full p-2 border border-gray-300 rounded-lg">
+          <textarea id="edit-expertise-description" placeholder="영역 설명" rows="3" class="w-full p-2 border border-gray-300 rounded-lg"></textarea>
+          <input type="text" id="edit-expertise-status" placeholder="진행 상태" class="w-full p-2 border border-gray-300 rounded-lg">
+          <div class="flex space-x-3">
+            <button id="save-expertise-btn" class="flex-1 bg-[#00FF6A] text-[#1F2937] py-2 rounded-lg hover:bg-[#00E55A] transition-colors">
+              저장
+            </button>
+            <button id="cancel-expertise-btn" class="flex-1 bg-gray-300 text-gray-700 py-2 rounded-lg hover:bg-gray-400 transition-colors">
+              취소
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Edit Activity Modal -->
+    <div id="edit-activity-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-50">
+      <div class="bg-white rounded-xl p-6 w-full max-w-md mx-4">
+        <h3 class="text-lg font-semibold mb-4">활동 수정</h3>
+        <div class="space-y-3">
+          <input type="hidden" id="edit-activity-id">
+          <input type="text" id="edit-activity-title" placeholder="활동 제목" class="w-full p-2 border border-gray-300 rounded-lg">
+          <textarea id="edit-activity-description" placeholder="활동 설명" rows="3" class="w-full p-2 border border-gray-300 rounded-lg"></textarea>
+          <input type="date" id="edit-activity-date" class="w-full p-2 border border-gray-300 rounded-lg">
+          <div class="flex space-x-3">
+            <button id="save-activity-btn" class="flex-1 bg-[#2DD4BF] text-white py-2 rounded-lg hover:bg-[#14B8A6] transition-colors">
+              저장
+            </button>
+            <button id="cancel-activity-btn" class="flex-1 bg-gray-300 text-gray-700 py-2 rounded-lg hover:bg-gray-400 transition-colors">
+              취소
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Floating Admin Button -->
+    <button id="admin-toggle" class="fixed bottom-8 right-8 w-12 h-12 bg-green-500 hover:bg-green-600 text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-110 flex items-center justify-center z-40">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+      </svg>
+    </button>
   </main>
-</Layout> 
+
+  <script>
+    import { supabase, getUser } from '../lib/supabase';
+
+    interface ExpertiseItem {
+      id: string;
+      title: string;
+      description: string;
+      status: string;
+    }
+
+    interface ActivityItem {
+      id: string;
+      title: string;
+      description: string;
+      date: string;
+    }
+
+    interface NowData {
+      expertise: ExpertiseItem[];
+      activities: ActivityItem[];
+    }
+
+    let isAdmin = false;
+    let nowData: NowData = {
+      expertise: [],
+      activities: []
+    };
+
+    // 관리자 권한 확인
+    async function checkAdminAccess() {
+      try {
+        const user = await getUser();
+        if (user && user.email === 'sachi009955@gmail.com') {
+          isAdmin = true;
+          const adminControls = document.getElementById('admin-controls');
+          if (adminControls) {
+            adminControls.classList.remove('hidden');
+          }
+        }
+      } catch (error) {
+        console.error('사용자 확인 오류:', error);
+      }
+    }
+
+    // 데이터 로드
+    async function loadData() {
+      try {
+        const response = await fetch('/api/now.json');
+        if (response.ok) {
+          nowData = await response.json();
+          renderExpertise();
+          renderActivities();
+        }
+      } catch (error) {
+        console.error('데이터 로드 오류:', error);
+      }
+    }
+
+    // 집중 영역 렌더링
+    function renderExpertise() {
+      const container = document.getElementById('expertise-list');
+      if (!container) return;
+      
+      container.innerHTML = nowData.expertise.map(item => `
+        <div class="border border-gray-200 rounded-lg p-3 flex justify-between items-start">
+          <div class="flex-1">
+            <h4 class="font-medium text-sm">${item.title}</h4>
+            <p class="text-xs text-gray-600 mt-1">${item.description}</p>
+            <span class="inline-block px-2 py-1 bg-blue-100 text-blue-700 text-xs rounded mt-2">${item.status}</span>
+          </div>
+          <div class="flex space-x-1 ml-2">
+            <button onclick="editExpertise('${item.id}')" class="text-blue-500 hover:text-blue-700 text-xs">✏️</button>
+            <button onclick="deleteExpertise('${item.id}')" class="text-red-500 hover:text-red-700 text-xs">🗑️</button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // 활동 렌더링
+    function renderActivities() {
+      const container = document.getElementById('activities-list');
+      if (!container) return;
+      
+      container.innerHTML = nowData.activities.map(item => `
+        <div class="border border-gray-200 rounded-lg p-3 flex justify-between items-start">
+          <div class="flex-1">
+            <h4 class="font-medium text-sm">${item.title}</h4>
+            <p class="text-xs text-gray-600 mt-1">${item.description}</p>
+            <span class="text-xs text-gray-500 mt-1">${new Date(item.date).toLocaleDateString('ko-KR')}</span>
+          </div>
+          <div class="flex space-x-1 ml-2">
+            <button onclick="editActivity('${item.id}')" class="text-blue-500 hover:text-blue-700 text-xs">✏️</button>
+            <button onclick="deleteActivity('${item.id}')" class="text-red-500 hover:text-red-700 text-xs">🗑️</button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // 관리자 패널 토글
+    document.getElementById('admin-toggle')?.addEventListener('click', async () => {
+      if (!isAdmin) {
+        // Supabase 로그인 시도
+        const { signInWithGoogle } = await import('../lib/supabase');
+        await signInWithGoogle();
+        return;
+      }
+      
+      // 이미 로그인된 경우 컨텐츠 관리 모달 열기
+      const contentModal = document.getElementById('content-modal');
+      if (contentModal) {
+        contentModal.classList.remove('hidden');
+      }
+    });
+
+    document.getElementById('manage-content-btn')?.addEventListener('click', () => {
+      const contentModal = document.getElementById('content-modal');
+      if (contentModal) {
+        contentModal.classList.remove('hidden');
+      }
+    });
+
+    document.getElementById('close-content-btn')?.addEventListener('click', () => {
+      const contentModal = document.getElementById('content-modal');
+      if (contentModal) {
+        contentModal.classList.add('hidden');
+      }
+    });
+
+    // 집중 영역 추가
+    document.getElementById('add-expertise-btn')?.addEventListener('click', async () => {
+      const titleInput = document.getElementById('expertise-title') as HTMLInputElement;
+      const descriptionInput = document.getElementById('expertise-description') as HTMLTextAreaElement;
+      const statusInput = document.getElementById('expertise-status') as HTMLInputElement;
+      
+      if (!titleInput || !descriptionInput || !statusInput) return;
+      
+      const title = titleInput.value;
+      const description = descriptionInput.value;
+      const status = statusInput.value;
+
+      if (!title || !description || !status) {
+        alert('모든 필드를 입력해주세요.');
+        return;
+      }
+
+      const newItem = {
+        id: Date.now().toString(),
+        title,
+        description,
+        status
+      };
+
+      nowData.expertise.push(newItem);
+      await saveData();
+      renderExpertise();
+
+      // 입력 필드 초기화
+      titleInput.value = '';
+      descriptionInput.value = '';
+      statusInput.value = '';
+    });
+
+    // 활동 추가
+    document.getElementById('add-activity-btn')?.addEventListener('click', async () => {
+      const titleInput = document.getElementById('activity-title') as HTMLInputElement;
+      const descriptionInput = document.getElementById('activity-description') as HTMLTextAreaElement;
+      const dateInput = document.getElementById('activity-date') as HTMLInputElement;
+      
+      if (!titleInput || !descriptionInput || !dateInput) return;
+      
+      const title = titleInput.value;
+      const description = descriptionInput.value;
+      const date = dateInput.value;
+
+      if (!title || !description || !date) {
+        alert('모든 필드를 입력해주세요.');
+        return;
+      }
+
+      const newItem = {
+        id: Date.now().toString(),
+        title,
+        description,
+        date
+      };
+
+      nowData.activities.unshift(newItem);
+      await saveData();
+      renderActivities();
+
+      // 입력 필드 초기화
+      titleInput.value = '';
+      descriptionInput.value = '';
+      dateInput.value = '';
+    });
+
+    // 데이터 저장
+    async function saveData() {
+      if (!isAdmin) return;
+      
+      try {
+        const response = await fetch('/api/now.json', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(nowData)
+        });
+
+        if (!response.ok) {
+          throw new Error('저장 실패');
+        }
+      } catch (error) {
+        console.error('저장 오류:', error);
+        alert('저장에 실패했습니다.');
+      }
+    }
+
+    // 편집/삭제 함수들
+    (window as any).editExpertise = (id: string) => {
+      const item = nowData.expertise.find(e => e.id === id);
+      if (item) {
+        const modal = document.getElementById('edit-expertise-modal');
+        const idInput = document.getElementById('edit-expertise-id') as HTMLInputElement;
+        const titleInput = document.getElementById('edit-expertise-title') as HTMLInputElement;
+        const descriptionInput = document.getElementById('edit-expertise-description') as HTMLTextAreaElement;
+        const statusInput = document.getElementById('edit-expertise-status') as HTMLInputElement;
+        
+        if (modal && idInput && titleInput && descriptionInput && statusInput) {
+          idInput.value = id;
+          titleInput.value = item.title;
+          descriptionInput.value = item.description;
+          statusInput.value = item.status;
+          modal.classList.remove('hidden');
+        }
+      }
+    };
+
+    (window as any).deleteExpertise = async (id: string) => {
+      if (confirm('정말 삭제하시겠습니까?')) {
+        nowData.expertise = nowData.expertise.filter(e => e.id !== id);
+        await saveData();
+        renderExpertise();
+      }
+    };
+
+    (window as any).editActivity = (id: string) => {
+      const item = nowData.activities.find(a => a.id === id);
+      if (item) {
+        const modal = document.getElementById('edit-activity-modal');
+        const idInput = document.getElementById('edit-activity-id') as HTMLInputElement;
+        const titleInput = document.getElementById('edit-activity-title') as HTMLInputElement;
+        const descriptionInput = document.getElementById('edit-activity-description') as HTMLTextAreaElement;
+        const dateInput = document.getElementById('edit-activity-date') as HTMLInputElement;
+        
+        if (modal && idInput && titleInput && descriptionInput && dateInput) {
+          idInput.value = id;
+          titleInput.value = item.title;
+          descriptionInput.value = item.description;
+          dateInput.value = item.date;
+          modal.classList.remove('hidden');
+        }
+      }
+    };
+
+    (window as any).deleteActivity = async (id: string) => {
+      if (confirm('정말 삭제하시겠습니까?')) {
+        nowData.activities = nowData.activities.filter(a => a.id !== id);
+        await saveData();
+        renderActivities();
+      }
+    };
+
+    // 모달 이벤트 리스너들
+    document.getElementById('save-expertise-btn')?.addEventListener('click', async () => {
+      const idInput = document.getElementById('edit-expertise-id') as HTMLInputElement;
+      const titleInput = document.getElementById('edit-expertise-title') as HTMLInputElement;
+      const descriptionInput = document.getElementById('edit-expertise-description') as HTMLTextAreaElement;
+      const statusInput = document.getElementById('edit-expertise-status') as HTMLInputElement;
+      
+      if (!idInput || !titleInput || !descriptionInput || !statusInput) return;
+      
+      const id = idInput.value;
+      const title = titleInput.value;
+      const description = descriptionInput.value;
+      const status = statusInput.value;
+
+      if (!title || !description || !status) {
+        alert('모든 필드를 입력해주세요.');
+        return;
+      }
+
+      const item = nowData.expertise.find(e => e.id === id);
+      if (item) {
+        item.title = title;
+        item.description = description;
+        item.status = status;
+        await saveData();
+        renderExpertise();
+        const modal = document.getElementById('edit-expertise-modal');
+        if (modal) {
+          modal.classList.add('hidden');
+        }
+      }
+    });
+
+    document.getElementById('cancel-expertise-btn')?.addEventListener('click', () => {
+      const modal = document.getElementById('edit-expertise-modal');
+      if (modal) {
+        modal.classList.add('hidden');
+      }
+    });
+
+    document.getElementById('save-activity-btn')?.addEventListener('click', async () => {
+      const idInput = document.getElementById('edit-activity-id') as HTMLInputElement;
+      const titleInput = document.getElementById('edit-activity-title') as HTMLInputElement;
+      const descriptionInput = document.getElementById('edit-activity-description') as HTMLTextAreaElement;
+      const dateInput = document.getElementById('edit-activity-date') as HTMLInputElement;
+      
+      if (!idInput || !titleInput || !descriptionInput || !dateInput) return;
+      
+      const id = idInput.value;
+      const title = titleInput.value;
+      const description = descriptionInput.value;
+      const date = dateInput.value;
+
+      if (!title || !description || !date) {
+        alert('모든 필드를 입력해주세요.');
+        return;
+      }
+
+      const item = nowData.activities.find(a => a.id === id);
+      if (item) {
+        item.title = title;
+        item.description = description;
+        item.date = date;
+        await saveData();
+        renderActivities();
+        const modal = document.getElementById('edit-activity-modal');
+        if (modal) {
+          modal.classList.add('hidden');
+        }
+      }
+    });
+
+    document.getElementById('cancel-activity-btn')?.addEventListener('click', () => {
+      const modal = document.getElementById('edit-activity-modal');
+      if (modal) {
+        modal.classList.add('hidden');
+      }
+    });
+
+    // 모달 외부 클릭 시 닫기
+    document.getElementById('content-modal')?.addEventListener('click', (e) => {
+      if (e.target === e.currentTarget) {
+        const modal = document.getElementById('content-modal');
+        if (modal) {
+          modal.classList.add('hidden');
+        }
+      }
+    });
+
+    document.getElementById('edit-expertise-modal')?.addEventListener('click', (e) => {
+      if (e.target === e.currentTarget) {
+        const modal = document.getElementById('edit-expertise-modal');
+        if (modal) {
+          modal.classList.add('hidden');
+        }
+      }
+    });
+
+    document.getElementById('edit-activity-modal')?.addEventListener('click', (e) => {
+      if (e.target === e.currentTarget) {
+        const modal = document.getElementById('edit-activity-modal');
+        if (modal) {
+          modal.classList.add('hidden');
+        }
+      }
+    });
+
+    // 페이지 로드 시 실행
+    document.addEventListener('DOMContentLoaded', async () => {
+      await checkAdminAccess();
+      await loadData();
+    });
+  </script>
+</Layout>

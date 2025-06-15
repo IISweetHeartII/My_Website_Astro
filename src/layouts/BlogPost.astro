@@ -77,6 +77,77 @@ const postSlug = Astro.url.pathname.replace('/blog/', '').replace('/', '') || 'u
 				max-width: none !important;
 				width: 80%;
 			}
+			/* 마크다운 강조 표시 스타일링 */
+			.prose strong, .prose b {
+				font-weight: 700 !important;
+				color: #1f2937 !important;
+			}
+			.prose em, .prose i {
+				font-style: italic !important;
+			}
+			/* 추가적인 마크다운 스타일링 */
+			.prose h1, .prose h2, .prose h3, .prose h4, .prose h5, .prose h6 {
+				font-weight: 700 !important;
+				color: #1f2937 !important;
+				margin-top: 2rem !important;
+				margin-bottom: 1rem !important;
+			}
+			.prose blockquote {
+				border-left: 4px solid #00ff6a !important;
+				padding-left: 1rem !important;
+				margin: 1.5rem 0 !important;
+				font-style: italic !important;
+				background: #f8f9fa !important;
+				padding: 1rem !important;
+				border-radius: 0.5rem !important;
+			}
+			.prose code {
+				background: #f1f3f4 !important;
+				padding: 0.125rem 0.25rem !important;
+				border-radius: 0.25rem !important;
+				font-size: 0.875em !important;
+				color: #d63384 !important;
+			}
+			.prose pre {
+				background: #f8f9fa !important;
+				padding: 1rem !important;
+				border-radius: 0.5rem !important;
+				overflow-x: auto !important;
+				margin: 1.5rem 0 !important;
+			}
+			.prose pre code {
+				background: transparent !important;
+				color: #212529 !important;
+				padding: 0 !important;
+			}
+			/* AdSense 광고 스타일링 */
+			.ad-container {
+				min-height: 250px;
+				background: #f8f9fa;
+				border: 1px dashed #e9ecef;
+				border-radius: 8px;
+				padding: 16px;
+				margin-bottom: 20px;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				position: relative;
+			}
+			.ad-container::before {
+				content: '광고';
+				position: absolute;
+				top: 8px;
+				left: 12px;
+				font-size: 11px;
+				color: #6c757d;
+				background: #fff;
+				padding: 2px 6px;
+				border-radius: 3px;
+			}
+			.adsbygoogle {
+				min-height: 250px;
+				width: 100%;
+			}
 		</style>
 	</head>
 
@@ -125,15 +196,30 @@ const postSlug = Astro.url.pathname.replace('/blog/', '').replace('/', '') || 'u
 				<div class="md:w-1/4">
 					<div class="sticky top-4">
 						<!-- Responsive AdSense Ad Unit -->
-						<ins class="adsbygoogle"
-							 style="display:block"
-							 data-ad-client="ca-pub-4653332352131854"
-							 data-ad-slot="2433987375"
-							 data-ad-format="auto"
-							 data-full-width-responsive="true"></ins>
-						<script>
-							(window.adsbygoogle = window.adsbygoogle || []).push({});
-						</script>
+						<div class="ad-container">
+							<ins class="adsbygoogle"
+								 style="display:block"
+								 data-ad-client="ca-pub-4653332352131854"
+								 data-ad-slot="2433987375"
+								 data-ad-format="auto"
+								 data-full-width-responsive="true"></ins>
+							<script>
+								(window.adsbygoogle = window.adsbygoogle || []).push({});
+							</script>
+						</div>
+						
+						<!-- 추가 광고 영역 (필요시) -->
+						<div class="ad-container mt-4">
+							<ins class="adsbygoogle"
+								 style="display:block"
+								 data-ad-client="ca-pub-4653332352131854"
+								 data-ad-slot="2433987375"
+								 data-ad-format="auto"
+								 data-full-width-responsive="true"></ins>
+							<script>
+								(window.adsbygoogle = window.adsbygoogle || []).push({});
+							</script>
+						</div>
 					</div>
 				</div>
 			</div>
