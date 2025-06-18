@@ -6,17 +6,17 @@ interface Props {
 const { postSlug } = Astro.props;
 ---
 
-<div class="mt-12 border-t border-[#E5F0FF] pt-8">
-  <h3 class="text-2xl font-bold text-[#1F2937] mb-6">댓글</h3>
+<div class="mt-12 border-t border-background-lighter pt-8">
+  <h3 class="text-2xl font-bold text-text mb-6">댓글</h3>
   
   <!-- 댓글 작성 폼 -->
   <div id="comment-form-container" class="mb-8">
     <div id="login-required" class="hidden">
-      <div class="bg-[#E5F0FF] p-4 rounded-lg text-center">
-        <p class="text-[#485E8E] mb-3">댓글을 작성하려면 로그인이 필요합니다.</p>
+      <div class="bg-background-lighter p-4 rounded-lg text-center">
+        <p class="text-primary mb-3">댓글을 작성하려면 로그인이 필요합니다.</p>
         <button 
           id="comment-login-btn" 
-          class="bg-[#00FF6A] text-[#1F2937] px-6 py-2 rounded-lg font-medium hover:bg-[#00E55A] transition-colors"
+          class="bg-accent text-text px-6 py-2 rounded-lg font-medium hover:bg-accent-light transition-colors"
         >
           로그인하기
         </button>
@@ -25,22 +25,23 @@ const { postSlug } = Astro.props;
     
     <div id="comment-form" class="hidden">
       <textarea
-        id="comment-content"
-        placeholder="댓글을 작성해주세요..."
-        class="w-full p-4 border border-[#8590B3] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#00FF6A] focus:border-[#00FF6A] resize-vertical min-h-[120px] text-[#1F2937] font-['Pretendard']"
+        id="comment-input"
+        placeholder="댓글을 입력하세요..."
+        rows="4"
+        class="w-full p-4 border border-text-light rounded-lg focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent resize-vertical min-h-[120px] text-text font-['Pretendard']"
       ></textarea>
       <div class="flex justify-between items-center mt-3">
-        <div id="user-info" class="text-sm text-[#8590B3]"></div>
+        <div id="user-info" class="text-sm text-light"></div>
         <div class="flex space-x-3">
           <button
             id="cancel-comment-btn"
-            class="px-4 py-2 text-[#8590B3] hover:text-[#485E8E] transition-colors"
+            class="px-4 py-2 text-text-muted hover:text-primary transition-colors"
           >
             취소
           </button>
           <button
-            id="submit-comment-btn"
-            class="bg-[#00FF6A] text-[#1F2937] px-6 py-2 rounded-lg font-medium hover:bg-[#00E55A] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            id="submit-comment"
+            class="bg-accent text-text px-6 py-2 rounded-lg font-medium hover:bg-accent-light transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           >
             댓글 작성
           </button>
@@ -50,14 +51,18 @@ const { postSlug } = Astro.props;
   </div>
 
   <!-- 댓글 목록 -->
-  <div id="comments-list">
+  <div id="comments-container">
+    <!-- Loading state -->
     <div id="comments-loading" class="text-center py-8">
-      <div class="text-[#8590B3]">댓글을 불러오는 중...</div>
+      <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-accent mx-auto mb-4"></div>
+      <div class="text-light">댓글을 불러오는 중...</div>
     </div>
-    <div id="comments-empty" class="hidden text-center py-8">
-      <div class="text-[#8590B3]">아직 댓글이 없습니다. 첫 번째 댓글을 작성해보세요!</div>
+    
+    <div id="comments-empty" class="text-center py-8 hidden">
+      <div class="text-light">아직 댓글이 없습니다. 첫 번째 댓글을 작성해보세요!</div>
     </div>
-    <div id="comments-container" class="space-y-4">
+    
+    <div id="comments-list" class="space-y-4 hidden">
       <!-- 댓글들이 여기에 동적으로 추가됩니다 -->
     </div>
   </div>
@@ -69,10 +74,10 @@ const { postSlug } = Astro.props;
   const loginRequiredDiv = document.getElementById('login-required');
   const commentForm = document.getElementById('comment-form');
   const commentLoginBtn = document.getElementById('comment-login-btn');
-  const commentContent = document.getElementById('comment-content');
+  const commentInput = document.getElementById('comment-input');
   const userInfo = document.getElementById('user-info');
   const cancelCommentBtn = document.getElementById('cancel-comment-btn');
-  const submitCommentBtn = document.getElementById('submit-comment-btn');
+  const submitCommentBtn = document.getElementById('submit-comment');
   const commentsLoading = document.getElementById('comments-loading');
   const commentsEmpty = document.getElementById('comments-empty');
   const commentsContainer = document.getElementById('comments-container');
@@ -124,10 +129,10 @@ const { postSlug } = Astro.props;
       // 댓글 표시
       if (commentsContainer) {
         commentsContainer.innerHTML = comments.map(comment => `
-          <div class="bg-[#F9FAFB] p-4 rounded-lg border border-[#E5F0FF]">
+          <div class="bg-background-light p-4 rounded-lg border border-background-lighter">
             <div class="flex justify-between items-start mb-2">
-              <div class="font-medium text-[#485E8E]">${comment.profiles?.email || '익명'}</div>
-              <div class="text-sm text-[#8590B3]">${new Date(comment.created_at).toLocaleDateString('ko-KR', {
+              <div class="font-medium text-primary">${comment.profiles?.email || '익명'}</div>
+              <div class="text-sm text-text-muted">${new Date(comment.created_at).toLocaleDateString('ko-KR', {
                 year: 'numeric',
                 month: 'long',
                 day: 'numeric',
@@ -135,7 +140,7 @@ const { postSlug } = Astro.props;
                 minute: '2-digit'
               })}</div>
             </div>
-            <div class="text-[#1F2937] whitespace-pre-wrap">${comment.content}</div>
+            <div class="text-text whitespace-pre-wrap">${comment.content}</div>
           </div>
         `).join('');
       }
@@ -147,7 +152,7 @@ const { postSlug } = Astro.props;
 
   // 댓글 작성
   async function submitComment() {
-    const content = commentContent?.value?.trim();
+    const content = commentInput?.value?.trim();
     
     if (!content) {
       alert('댓글 내용을 입력해주세요.');
@@ -171,7 +176,7 @@ const { postSlug } = Astro.props;
       }
 
       // 댓글 작성 성공
-      if (commentContent) commentContent.value = '';
+      if (commentInput) commentInput.value = '';
       await loadComments(); // 댓글 목록 새로고침
       
     } catch (error) {
@@ -200,7 +205,7 @@ const { postSlug } = Astro.props;
 
   if (cancelCommentBtn) {
     cancelCommentBtn.addEventListener('click', () => {
-      if (commentContent) commentContent.value = '';
+      if (commentInput) commentInput.value = '';
     });
   }
 
@@ -208,8 +213,8 @@ const { postSlug } = Astro.props;
     submitCommentBtn.addEventListener('click', submitComment);
   }
 
-  if (commentContent) {
-    commentContent.addEventListener('keydown', (e) => {
+  if (commentInput) {
+    commentInput.addEventListener('keydown', (e) => {
       if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) {
         submitComment();
       }

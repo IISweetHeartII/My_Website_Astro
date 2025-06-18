@@ -10,9 +10,9 @@
     "sync": "node scripts/sync-obsidian.js"
   },
   "dependencies": {
-    "@astrojs/rss": "^4.0.10",
+    "@astrojs/rss": "^4.0.12",
     "@supabase/supabase-js": "^2.50.0",
-    "astro": "^5.0.5",
+    "astro": "^5.9.4",
     "astro-robots-txt": "^1.0.0",
     "gray-matter": "^4.0.3",
     "mermaid": "^11.4.1",
@@ -23,9 +23,9 @@
     "node": ">=18.17.1"
   },
   "devDependencies": {
-    "@astrojs/mdx": "^4.0.3",
-    "@astrojs/sitemap": "^3.2.1",
-    "@astrojs/tailwind": "^5.1.4",
+    "@astrojs/mdx": "^4.3.0",
+    "@astrojs/sitemap": "^3.4.1",
+    "@astrojs/tailwind": "^6.0.2",
     "astro-expressive-code": "^0.38.3",
     "playwright": "^1.49.1",
     "remark-mermaid": "^0.2.0"

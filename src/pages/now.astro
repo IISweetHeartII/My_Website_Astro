@@ -194,19 +194,19 @@ const displayData = [
     <div id="content-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-50">
       <div class="bg-white rounded-xl p-6 w-full max-w-4xl mx-4 max-h-screen overflow-y-auto">
         <div class="flex justify-between items-center mb-6">
-          <h2 class="text-2xl font-bold text-[#1F2937]">컨텐츠 관리</h2>
-          <button id="close-content-btn" class="text-[#FF6B6B] hover:text-[#FF5555] text-xl">✕</button>
+          <h2 class="text-2xl font-bold text-text">컨텐츠 관리</h2>
+          <button id="close-content-btn" class="text-error hover:text-error-light text-xl">✕</button>
         </div>
         
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
           <!-- 집중 영역 관리 -->
           <div class="border border-gray-200 rounded-lg p-6">
-            <h3 class="text-lg font-semibold mb-4 text-[#1F2937]">집중 영역 관리</h3>
+            <h3 class="text-lg font-semibold mb-4 text-text">집중 영역 관리</h3>
             <div class="space-y-3 mb-4">
               <input type="text" id="expertise-title" placeholder="영역 제목" class="w-full p-2 border border-gray-300 rounded-lg">
               <textarea id="expertise-description" placeholder="영역 설명" rows="3" class="w-full p-2 border border-gray-300 rounded-lg"></textarea>
               <input type="text" id="expertise-status" placeholder="진행 상태 (예: 진행중, 완료)" class="w-full p-2 border border-gray-300 rounded-lg">
-              <button id="add-expertise-btn" class="w-full bg-[#00FF6A] text-[#1F2937] py-2 rounded-lg hover:bg-[#00E55A] transition-colors">
+              <button id="add-expertise-btn" class="w-full bg-accent text-text py-2 rounded-lg hover:bg-accent-light transition-colors">
                 영역 추가
               </button>
             </div>
@@ -218,12 +218,12 @@ const displayData = [
 
           <!-- 활동 관리 -->
           <div class="border border-gray-200 rounded-lg p-6">
-            <h3 class="text-lg font-semibold mb-4 text-[#1F2937]">활동 관리</h3>
+            <h3 class="text-lg font-semibold mb-4 text-text">활동 관리</h3>
             <div class="space-y-3 mb-4">
               <input type="text" id="activity-title" placeholder="활동 제목" class="w-full p-2 border border-gray-300 rounded-lg">
               <textarea id="activity-description" placeholder="활동 설명" rows="3" class="w-full p-2 border border-gray-300 rounded-lg"></textarea>
               <input type="date" id="activity-date" class="w-full p-2 border border-gray-300 rounded-lg">
-              <button id="add-activity-btn" class="w-full bg-[#2DD4BF] text-white py-2 rounded-lg hover:bg-[#14B8A6] transition-colors">
+              <button id="add-activity-btn" class="w-full bg-accent-mint text-white py-2 rounded-lg hover:bg-accent-light transition-colors">
                 활동 추가
               </button>
             </div>
@@ -247,7 +247,7 @@ const displayData = [
           <textarea id="edit-expertise-description" placeholder="영역 설명" rows="3" class="w-full p-2 border border-gray-300 rounded-lg"></textarea>
           <input type="text" id="edit-expertise-status" placeholder="진행 상태" class="w-full p-2 border border-gray-300 rounded-lg">
           <div class="flex space-x-3">
-            <button id="save-expertise-btn" class="flex-1 bg-[#00FF6A] text-[#1F2937] py-2 rounded-lg hover:bg-[#00E55A] transition-colors">
+            <button id="save-expertise-btn" class="flex-1 bg-accent text-text py-2 rounded-lg hover:bg-accent-light transition-colors">
               저장
             </button>
             <button id="cancel-expertise-btn" class="flex-1 bg-gray-300 text-gray-700 py-2 rounded-lg hover:bg-gray-400 transition-colors">
@@ -268,7 +268,7 @@ const displayData = [
           <textarea id="edit-activity-description" placeholder="활동 설명" rows="3" class="w-full p-2 border border-gray-300 rounded-lg"></textarea>
           <input type="date" id="edit-activity-date" class="w-full p-2 border border-gray-300 rounded-lg">
           <div class="flex space-x-3">
-            <button id="save-activity-btn" class="flex-1 bg-[#2DD4BF] text-white py-2 rounded-lg hover:bg-[#14B8A6] transition-colors">
+            <button id="save-activity-btn" class="flex-1 bg-accent-mint text-white py-2 rounded-lg hover:bg-accent-light transition-colors">
               저장
             </button>
             <button id="cancel-activity-btn" class="flex-1 bg-gray-300 text-gray-700 py-2 rounded-lg hover:bg-gray-400 transition-colors">

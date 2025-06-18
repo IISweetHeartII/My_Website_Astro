@@ -54,7 +54,7 @@ const allTags: string[] = [...new Set(allPosts.flatMap((post: CollectionEntry<'b
                     ))}
                 </div>
             ) : (
-                <div class="text-center p-16 text-text-default text-lg flex-1 md:p-12 md:text-base dark:text-surface-light">
+                <div class="text-center p-16 text-text text-lg flex-1 md:p-12 md:text-base">
                     No posts found. Check back soon!
                 </div>
             )}
@@ -108,7 +108,7 @@ const allTags: string[] = [...new Set(allPosts.flatMap((post: CollectionEntry<'b
                         const tagText = currentSelectedTag !== 'all' ? ` #${currentSelectedTag}` : '';
                         resultsInfo.innerHTML = `
                             <div class="flex items-center gap-2">
-                                <svg class="w-4 h-4 text-brand-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <svg class="w-4 h-4 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
                                 </svg>
                                 <span>${searchText}${tagText} 검색 결과: <strong>${visibleCount}개</strong> / 전체 ${allBlogCards.length}개</span>
@@ -135,13 +135,13 @@ const allTags: string[] = [...new Set(allPosts.flatMap((post: CollectionEntry<'b
                             
                             // 이전 활성 태그 스타일 제거
                             document.querySelectorAll('.current-tag').forEach(tag => {
-                                tag.classList.remove('current-tag', 'bg-brand-secondary', 'text-white');
-                                tag.classList.add('bg-gray-100', 'text-gray-700');
+                                tag.classList.remove('current-tag', 'bg-primary', 'text-background');
+                                tag.classList.add('bg-background-light', 'text-light');
                             });
                             
                             // 새 활성 태그 스타일 적용
-                            targetLink.classList.remove('bg-gray-100', 'text-gray-700');
-                            targetLink.classList.add('current-tag', 'bg-brand-secondary', 'text-white');
+                            targetLink.classList.remove('bg-background-light', 'text-light');
+                            targetLink.classList.add('current-tag', 'bg-primary', 'text-background');
                             
                             currentSelectedTag = targetLink.dataset.tag;
                             filterPosts();
@@ -179,10 +179,10 @@ const allTags: string[] = [...new Set(allPosts.flatMap((post: CollectionEntry<'b
                             
                             // 모든 활성 태그 스타일 제거
                             document.querySelectorAll('.current-tag').forEach(tag => {
-                                tag.classList.remove('current-tag', 'bg-brand-secondary', 'text-white');
+                                tag.classList.remove('current-tag', 'bg-primary', 'text-background');
                             });
                             
-                            targetLink.classList.add('current-tag', 'bg-brand-secondary', 'text-white');
+                            targetLink.classList.add('current-tag', 'bg-primary', 'text-background');
                             
                             currentSelectedTag = targetLink.dataset.tag;
                             filterPosts();

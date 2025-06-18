@@ -6,25 +6,53 @@ export default {
   theme: {
     extend: {
       colors: {
-        // 핵심 팔레트 - 의미론적 이름
-        "surface-light": "#F9FAFB", // 일반적인 밝은 배경
-        "surface-dark": "#FFFFFF", // 더 밝은 배경 (필요시 사용)
-        "text-default": "#1F2937", // 기본 텍스트 색상
+        // 브랜드 컬러 시스템 - 일관성 있는 네이밍
+        primary: {
+          DEFAULT: "#485E8E", // 블루그레이: 헤더, 메인 브랜드
+          light: "#8590B3", // 뮤트퍼플: 서브 컬러
+          lighter: "#E5F0FF", // 밝은 블루: 배경용
+        },
 
-        // 브랜드 색상 - 김덕환님의 페르소나 반영
-        "brand-primary": "#485E8E", // 블루그레이: 기술, 신뢰, 문제 해결
-        "brand-secondary": "#8590B3", // 뮤트퍼플: 보완적, 세련됨
+        // 악센트 컬러 - 브랜드 강조
+        accent: {
+          DEFAULT: "#00FF6A", // 형광 연두: CTA, 중요 요소
+          coral: "#FF6B6B", // 코랄: 호버, 경고
+          mint: "#2DD4BF", // 민트: 성공, 보조 강조
+        },
 
-        // 악센트 색상 - 에너지, 생산성, 하이라이트
-        "accent-vibrant": "#00FF6A", // 형광 연두: 고에너지, CTA
+        // 기본 색상 시스템
+        background: {
+          DEFAULT: "#FFFFFF", // 메인 배경
+          light: "#F9FAFB", // 서브 배경
+          lighter: "#E5F0FF", // 밝은 블루: 배경용
+        },
 
-        // 보조 색상 - 부드러운 배경, 테두리 등
-        "ui-light-blue": "#E5F0FF", // 밝은 블루: 가벼운 UI 요소
+        text: {
+          DEFAULT: "#1F2937", // 기본 텍스트
+          light: "#6B7280", // 보조 텍스트
+          lighter: "#9CA3AF", // 연한 텍스트
+        },
 
-        // Tailwind CSS 기본 중립 회색을 위한 별칭
-        // 이전에 `colors.neutral`을 직접 참조했으므로, 더 이상 필요하지 않으면 삭제하거나 주석 처리할 수 있습니다.
-        // 기존 CSS에서 `gray`를 사용하는 부분이 있다면 유지하는 것이 좋습니다.
-        gray: colors.neutral, // tailwindcss/colors에서 중립 색상 가져옴
+        // 상태 색상
+        success: {
+          DEFAULT: "#10B981",
+          light: "#D1FAE5",
+        },
+        error: {
+          DEFAULT: "#EF4444",
+          light: "#FEE2E2",
+        },
+        warning: {
+          DEFAULT: "#F59E0B",
+          light: "#FEF3C7",
+        },
+        info: {
+          DEFAULT: "#3B82F6",
+          light: "#DBEAFE",
+        },
+
+        // Tailwind 호환성을 위한 그레이 스케일
+        gray: colors.neutral,
       },
       fontFamily: {
         sans: ["Pretendard", "sans-serif"],
@@ -33,36 +61,51 @@ export default {
         DEFAULT: {
           css: {
             h1: {
-              color: theme("colors.brand-primary"),
+              color: theme("colors.primary.DEFAULT"),
+              fontWeight: "700",
             },
             h2: {
-              color: theme("colors.accent-vibrant"),
+              color: theme("colors.accent.DEFAULT"),
+              fontWeight: "600",
             },
             h3: {
-              color: theme("colors.text-default"),
+              color: theme("colors.text.DEFAULT"),
+              fontWeight: "600",
             },
             h4: {
-              color: theme("colors.text-default"),
+              color: theme("colors.text.DEFAULT"),
+              fontWeight: "500",
             },
             a: {
-              color: theme("colors.accent-vibrant"), // 새 이름으로 업데이트
+              color: theme("colors.accent.DEFAULT"),
+              textDecoration: "none",
               "&:hover": {
-                opacity: "0.8",
+                color: theme("colors.accent.coral"),
+                textDecoration: "underline",
               },
             },
             blockquote: {
-              borderLeftColor: theme("colors.accent-vibrant"), // 새 이름으로 업데이트
-              color: theme("colors.text-default"), // 새 이름으로 업데이트
+              borderLeftColor: theme("colors.accent.DEFAULT"),
+              color: theme("colors.text.light"),
+              backgroundColor: theme("colors.background.light"),
+              padding: "1rem 1.5rem",
+              borderRadius: "0.5rem",
             },
             strong: {
-              color: theme("colors.text-default"), // 새 이름으로 업데이트
+              color: theme("colors.text.DEFAULT"),
+              fontWeight: "600",
             },
             code: {
-              // color: theme('colors.palette-text-dark'), // 주석 처리된 부분 유지
+              color: theme("colors.accent.DEFAULT"),
+              backgroundColor: theme("colors.background.light"),
+              padding: "0.125rem 0.25rem",
+              borderRadius: "0.25rem",
+              fontSize: "0.875em",
             },
             pre: {
-              // backgroundColor: theme('colors.palette-background-grey'), // 주석 처리된 부분 유지
-              // color: theme('colors.palette-text-dark'), // 주석 처리된 부분 유지
+              backgroundColor: theme("colors.primary.DEFAULT"),
+              color: theme("colors.background.DEFAULT"),
+              borderRadius: "0.5rem",
             },
           },
         },
