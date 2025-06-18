@@ -16,6 +16,7 @@ export default {
         // 악센트 컬러 - 브랜드 강조
         accent: {
           DEFAULT: "#00FF6A", // 형광 연두: CTA, 중요 요소
+          light: "#66FF9A", // 밝은 형광 연두: 호버 효과
           coral: "#FF6B6B", // 코랄: 호버, 경고
           mint: "#2DD4BF", // 민트: 성공, 보조 강조
         },
@@ -31,6 +32,7 @@ export default {
           DEFAULT: "#1F2937", // 기본 텍스트
           light: "#6B7280", // 보조 텍스트
           lighter: "#9CA3AF", // 연한 텍스트
+          muted: "#9CA3AF", // 뮤트 텍스트
         },
 
         // 상태 색상
@@ -40,6 +42,7 @@ export default {
         },
         error: {
           DEFAULT: "#EF4444",
+          dark: "#DC2626",
           light: "#FEE2E2",
         },
         warning: {

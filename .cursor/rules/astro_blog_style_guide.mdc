@@ -3,36 +3,79 @@ description:
 globs: 
 alwaysApply: true
 ---
-**색상 팔레트:**
+**색상 팔레트 (Tailwind 기반):**
 
-- 배경: `#FFFFFF` (흰색) 또는 `#F9FAFB` (밝은 회색)
-- 텍스트(테두리): `#1F2937` (다크 그레이)
-- 메인 강조 색: `#00FF6A` (형광 연두)
-- 포인트 색: `#FF6B6B` or `#2DD4BF` (코랄 or 민트 호버 효과나 키워드 강조)
-- 블루그레이: `#485E8E`
-- 밝은블루: `#E5F0FF`
-- 뮤트퍼플: `#8590B3`
+**주요 브랜드 색상 (Primary):**
+- `primary`: `#485E8E` (블루그레이) - 헤더, 메인 브랜드
+- `primary-light`: `#8590B3` (뮤트퍼플) - 서브 컬러  
+- `primary-lighter`: `#E5F0FF` (밝은 블루) - 배경용
 
-**폰트:**
+**강조 색상 (Accent):**
+- `accent`: `#00FF6A` (형광 연두) - CTA, 중요 요소
+- `accent-light`: `#66FF9A` (밝은 형광 연두) - 호버 효과
+- `accent-coral`: `#FF6B6B` (코랄) - 호버, 경고
+- `accent-mint`: `#2DD4BF` (민트) - 성공, 보조 강조
 
-- 모든 폰트는 `/public/fonts` 디렉토리의 pretendard를 사용할 것
+**배경 색상 (Background):**
+- `background`: `#FFFFFF` (메인 배경)
+- `background-light`: `#F9FAFB` (서브 배경)
+- `background-lighter`: `#E5F0FF` (밝은 블루 배경)
 
-예시
-```
+**텍스트 색상 (Text):**
+- `text`: `#1F2937` (기본 텍스트)
+- `text-light`: `#6B7280` (보조 텍스트)
+- `text-lighter`: `#9CA3AF` (연한 텍스트)
+- `text-muted`: `#9CA3AF` (뮤트 텍스트)
+
+**상태 색상:**
+- 성공: `#10B981` / 연한 성공: `#D1FAE5`
+- 오류: `#EF4444` / 연한 오류: `#FEE2E2`
+- 경고: `#F59E0B` / 연한 경고: `#FEF3C7`
+- 정보: `#3B82F6` / 연한 정보: `#DBEAFE`
+
+**폰트 시스템 (Pretendard):**
+
+- **기본 폰트**: Pretendard (한글 최적화)
+- **폰트 가중치**: 300 (Light), 400 (Regular), 600 (SemiBold), 700 (Bold)
+- **로드 순서**: Regular → Bold → Light (성능 최적화)
+
+**사용 예시:**
+```css
+/* CSS에서 직접 사용 */
 @font-face {
-  font-family: 'Pretendard';
-  src: url('/fonts/pretendard-subset.woff2') format('woff2');
+  font-family: "Pretendard";
   font-weight: 400;
   font-style: normal;
+  font-display: swap;
+  src: url("/fonts/woff2-subset/Pretendard-Regular.subset.woff2") format("woff2");
+  unicode-range: U+AC00-D7AF, U+1100-11FF, U+3130-318F, U+A960-A97F, U+D7B0-D7FF;
 }
 ```
 
-**개발 언어:**
+```html
+<!-- Tailwind 클래스 사용 -->
+<h1 class="text-primary font-bold">메인 제목</h1>
+<h2 class="text-accent font-semibold">강조 제목</h2>
+<p class="text-text-light">본문 텍스트</p>
+<button class="bg-accent text-background hover:bg-accent-coral">버튼</button>
+```
 
-- Astro를 사용하여 블로그를 개발합니다. Astro의 강점(예: 성능, SEO 등)을 활용합니다.
-- 모든 디자인은 tailwind를 사용
+**개발 언어 및 프레임워크:**
+
+- **프레임워크**: Astro (성능, SEO 최적화)
+- **스타일링**: Tailwind CSS (위 색상 시스템 사용 필수)
+- **폰트**: Pretendard (한글 웹폰트 최적화)
+
+**색상 사용 가이드라인:**
+
+1. **일관성**: 반드시 tailwind.config.mjs에 정의된 색상만 사용
+2. **접근성**: 텍스트와 배경 간 충분한 대비 유지
+3. **브랜딩**: Primary 색상군은 브랜드 아이덴티티용
+4. **강조**: Accent 색상군은 CTA 및 중요 요소용
+5. **계층구조**: Text 색상군으로 정보 계층 표현
 
 **광고 통합:**
 
-- Google AdSense를 사용하여 광고를 통합합니다.
-- 광고 배치는 사용자 경험을 해치지 않도록 신중하게 고려합니다.
+- Google AdSense 사용
+- 사용자 경험을 해치지 않는 배치
+- 브랜드 색상과 조화로운 광고 스타일링
