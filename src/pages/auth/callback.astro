@@ -3,207 +3,104 @@ import Layout from '../../layouts/Layout.astro';
 ---
 
 <Layout title="로그인 처리 중...">
-  <div class="min-h-screen flex items-center justify-center bg-background-light">
+  <div class="min-h-screen flex items-center justify-center bg-[#F9FAFB]">
     <div class="bg-white p-8 rounded-lg shadow-lg text-center max-w-md mx-4">
-      <div class="mb-6" id="loading-section">
-        <div class="inline-flex items-center justify-center w-16 h-16 bg-background-lighter rounded-full mb-4">
-          <svg class="w-8 h-8 text-primary animate-spin" fill="none" viewBox="0 0 24 24">
+      <div class="mb-6">
+        <div class="inline-flex items-center justify-center w-16 h-16 bg-[#E5F0FF] rounded-full mb-4">
+          <svg class="w-8 h-8 text-[#485E8E] animate-spin" fill="none" viewBox="0 0 24 24">
             <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" class="opacity-25"></circle>
             <path fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" class="opacity-75"></path>
           </svg>
         </div>
-        <h1 class="text-2xl font-bold text-text mb-2">로그인 처리 중</h1>
-        <p class="text-text-muted">잠시만 기다려주세요...</p>
-      </div>
-
-      <!-- 성공 섹션 -->
-      <div id="success-section" class="hidden mb-6">
-        <div class="inline-flex items-center justify-center w-16 h-16 bg-green-100 rounded-full mb-4">
-          <svg class="w-8 h-8 text-green-600" fill="currentColor" viewBox="0 0 20 20">
-            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-          </svg>
-        </div>
-        <h1 class="text-2xl font-bold text-green-600 mb-2">로그인 성공!</h1>
-        <p class="text-text-muted" id="redirect-message">원래 페이지로 이동합니다...</p>
+        <h1 class="text-2xl font-bold text-[#1F2937] mb-2">로그인 처리 중</h1>
+        <p class="text-[#8590B3]">잠시만 기다려주세요...</p>
       </div>
       
-      <!-- 오류 섹션 -->
-      <div id="error-message" class="hidden bg-error-light border border-error rounded-lg p-4 mb-4">
+      <div id="error-message" class="hidden bg-[#FEF2F2] border border-[#FECACA] rounded-lg p-4 mb-4">
         <div class="flex">
           <div class="flex-shrink-0">
-            <svg class="h-5 w-5 text-error" viewBox="0 0 20 20" fill="currentColor">
+            <svg class="h-5 w-5 text-[#F56565]" viewBox="0 0 20 20" fill="currentColor">
               <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
             </svg>
           </div>
           <div class="ml-3">
-            <h3 class="text-sm font-medium text-error">로그인 오류</h3>
-            <div class="mt-2 text-sm text-error" id="error-text">
+            <h3 class="text-sm font-medium text-[#991B1B]">로그인 오류</h3>
+            <div class="mt-2 text-sm text-[#B91C1C]" id="error-text">
               로그인 처리 중 오류가 발생했습니다.
             </div>
-            <div class="mt-2 text-xs text-error-light" id="error-details"></div>
           </div>
         </div>
       </div>
 
-      <div class="flex gap-3 justify-center">
-        <button 
-          id="retry-btn" 
-          class="hidden bg-accent text-text px-6 py-2 rounded-lg font-medium hover:bg-accent-light transition-colors"
-        >
-          다시 시도
-        </button>
-        
-        <button 
-          id="home-btn" 
-          class="hidden bg-text-muted text-white px-6 py-2 rounded-lg font-medium hover:bg-primary transition-colors"
-        >
-          홈으로 돌아가기
-        </button>
-      </div>
+      <button 
+        id="retry-btn" 
+        class="hidden bg-[#00FF6A] text-[#1F2937] px-6 py-2 rounded-lg font-medium hover:bg-[#00E55A] transition-colors mr-3"
+      >
+        다시 시도
+      </button>
+      
+      <button 
+        id="home-btn" 
+        class="hidden bg-[#8590B3] text-white px-6 py-2 rounded-lg font-medium hover:bg-[#485E8E] transition-colors"
+      >
+        홈으로 돌아가기
+      </button>
     </div>
   </div>
 
   <script>
     import { supabase } from '../../lib/supabase';
 
-    const loadingSection = document.getElementById('loading-section');
-    const successSection = document.getElementById('success-section');
-    const redirectMessage = document.getElementById('redirect-message');
     const errorMessage = document.getElementById('error-message');
     const errorText = document.getElementById('error-text');
-    const errorDetails = document.getElementById('error-details');
     const retryBtn = document.getElementById('retry-btn');
     const homeBtn = document.getElementById('home-btn');
 
-    // 리다이렉션 URL 결정 함수
-    function getRedirectUrl() {
-      // 저장된 URL 확인
-      const savedUrl = localStorage.getItem('auth_redirect_url');
-      
-      if (savedUrl) {
-        console.log('저장된 URL로 리다이렉션:', savedUrl);
-        
-        // URL이 현재 도메인과 다른 경우 (예: localhost vs log8.kr)
-        const savedUrlObj = new URL(savedUrl);
-        const currentUrlObj = new URL(window.location.href);
-        
-        if (savedUrlObj.hostname !== currentUrlObj.hostname) {
-          // 도메인이 다르면 현재 도메인의 같은 경로로 이동
-          const redirectPath = savedUrlObj.pathname + savedUrlObj.search + savedUrlObj.hash;
-          const newUrl = `${currentUrlObj.protocol}//${currentUrlObj.hostname}${currentUrlObj.port ? ':' + currentUrlObj.port : ''}${redirectPath}`;
-          console.log('도메인 변경으로 인한 URL 조정:', newUrl);
-          return newUrl;
-        }
-        
-        return savedUrl;
-      }
-      
-      // 저장된 URL이 없으면 현재 도메인의 홈으로
-      const currentUrl = new URL(window.location.href);
-      const homeUrl = `${currentUrl.protocol}//${currentUrl.hostname}${currentUrl.port ? ':' + currentUrl.port : ''}/`;
-      console.log('저장된 URL이 없어 홈으로 이동:', homeUrl);
-      return homeUrl;
-    }
-
     async function handleAuthCallback() {
       try {
-        console.log('시작: 인증 콜백 처리');
+        // URL에서 인증 코드 처리
+        const { data, error } = await supabase.auth.getSession();
         
-        // URL 파라미터 확인
-        const urlParams = new URLSearchParams(window.location.search);
-        const errorParam = urlParams.get('error');
-        const errorDescription = urlParams.get('error_description');
-        
-        if (errorParam) {
-          throw new Error(`OAuth 오류: ${errorParam} - ${errorDescription || '상세 정보 없음'}`);
+        if (error) {
+          throw error;
         }
 
-        // 현재 세션 확인
-        const { data: sessionData, error: sessionError } = await supabase.auth.getSession();
-        
-        if (sessionError) {
-          console.error('세션 확인 오류:', sessionError);
-          throw new Error(`세션 확인 실패: ${sessionError.message}`);
-        }
-
-        console.log('세션 데이터:', sessionData);
-
-        if (sessionData.session) {
-          const user = sessionData.session.user;
-          console.log('사용자 정보:', user);
+        if (data.session) {
+          // 로그인 성공 - 사용자 프로필 생성/업데이트
+          const user = data.session.user;
           
           if (user) {
-            try {
-              // 사용자 프로필 생성/업데이트
-              const { error: profileError } = await supabase
-                .from('profiles')
-                .upsert({
-                  id: user.id,
-                  email: user.email,
-                  services_enabled: { dearvoice: true },
-                  updated_at: new Date().toISOString()
-                }, {
-                  onConflict: 'id'
-                });
+            const { error: profileError } = await supabase
+              .from('profiles')
+              .upsert({
+                id: user.id,
+                email: user.email,
+                services_enabled: { dearvoice: true }
+              });
 
-              if (profileError) {
-                console.error('프로필 업데이트 오류:', profileError);
-                // 프로필 오류는 치명적이지 않으므로 경고만 로깅
-              } else {
-                console.log('프로필 업데이트 성공');
-              }
-            } catch (profileErr) {
-              console.error('프로필 처리 중 오류:', profileErr);
-              // 프로필 관련 오류는 로그인 성공을 방해하지 않음
+            if (profileError) {
+              console.error('프로필 업데이트 오류:', profileError);
+              // 프로필 오류는 치명적이지 않으므로 계속 진행
             }
           }
 
-          // 리다이렉션 URL 결정
-          const redirectUrl = getRedirectUrl();
-          
-          // 성공 UI 표시
-          showSuccess(redirectUrl);
-          
-          // 저장된 URL 제거
-          localStorage.removeItem('auth_redirect_url');
-          
-          // 리다이렉션 실행
+          // 메인 페이지로 리다이렉션
           setTimeout(() => {
-            window.location.href = redirectUrl;
-          }, 2000);
+            window.location.href = '/';
+          }, 1000);
         } else {
-          throw new Error('유효한 세션을 찾을 수 없습니다. 로그인이 완료되지 않았을 수 있습니다.');
+          throw new Error('세션을 찾을 수 없습니다.');
         }
       } catch (error) {
         console.error('인증 콜백 오류:', error);
-        const errorMessage = error instanceof Error ? error.message : '알 수 없는 오류가 발생했습니다.';
-        const errorStack = error instanceof Error ? error.stack : '';
-        showError(errorMessage, errorStack);
+        const errorMessage = error instanceof Error ? error.message : '로그인 처리 중 오류가 발생했습니다.';
+        showError(errorMessage);
       }
     }
 
-    function showSuccess(redirectUrl: string) {
-      if (loadingSection) loadingSection.classList.add('hidden');
-      if (successSection) successSection.classList.remove('hidden');
-      
-      // 리다이렉션 메시지 업데이트
-      if (redirectMessage) {
-        const url = new URL(redirectUrl);
-        if (url.pathname === '/') {
-          redirectMessage.textContent = '홈페이지로 이동합니다...';
-        } else {
-          redirectMessage.textContent = '원래 페이지로 돌아갑니다...';
-        }
-      }
-    }
-
-    function showError(message: string, details?: string) {
-      if (loadingSection) loadingSection.classList.add('hidden');
+    function showError(message: string) {
       if (errorMessage) errorMessage.classList.remove('hidden');
       if (errorText) errorText.textContent = message;
-      if (errorDetails && details) {
-        errorDetails.textContent = `상세 정보: ${details.substring(0, 200)}...`;
-      }
       if (retryBtn) retryBtn.classList.remove('hidden');
       if (homeBtn) homeBtn.classList.remove('hidden');
     }
@@ -217,16 +114,11 @@ import Layout from '../../layouts/Layout.astro';
 
     if (homeBtn) {
       homeBtn.addEventListener('click', () => {
-        const currentUrl = new URL(window.location.href);
-        const homeUrl = `${currentUrl.protocol}//${currentUrl.hostname}${currentUrl.port ? ':' + currentUrl.port : ''}/`;
-        window.location.href = homeUrl;
+        window.location.href = '/';
       });
     }
 
     // 페이지 로드 시 콜백 처리
-    document.addEventListener('DOMContentLoaded', () => {
-      // 약간의 지연을 두어 사용자가 로딩 상태를 볼 수 있도록 함
-      setTimeout(handleAuthCallback, 500);
-    });
+    handleAuthCallback();
   </script>
 </Layout> 

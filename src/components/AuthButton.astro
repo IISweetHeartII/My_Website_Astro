@@ -2,37 +2,21 @@
 // 서버 사이드에서는 인증 상태 확인 불가능하므로 클라이언트에서 처리
 ---
 
-<div id="auth-button-container" class="flex items-center">
-  <!-- 로딩 상태 -->
-  <div id="loading-auth" class="text-sm text-text-light flex items-center space-x-2">
-    <svg class="animate-spin h-4 w-4 text-white" fill="none" viewBox="0 0 24 24">
-      <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" class="opacity-25"></circle>
-      <path fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" class="opacity-75"></path>
-    </svg>
-    <span class="text-white text-sm">로딩 중...</span>
-  </div>
-  
-  <!-- 로그아웃 상태 -->
+<div id="auth-button-container" class="flex items-center space-x-4">
+  <div id="loading-auth" class="text-sm text-[#8590B3]">로딩 중...</div>
   <div id="logged-out" class="hidden">
     <button 
       id="login-btn" 
-      class="bg-accent text-text px-4 py-2 rounded-lg font-medium hover:bg-accent-light transition-all duration-200 shadow-sm hover:shadow-md transform hover:scale-105"
+      class="bg-[#00FF6A] text-[#1F2937] px-4 py-2 rounded-lg font-medium hover:bg-[#00E55A] transition-colors"
     >
       로그인
     </button>
   </div>
-  
-  <!-- 로그인 상태 -->
   <div id="logged-in" class="hidden flex items-center space-x-3">
-    <div class="hidden md:flex items-center space-x-2 bg-white/10 rounded-lg px-3 py-1">
-      <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
-        <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
-      </svg>
-      <span id="user-email" class="text-sm text-white font-medium max-w-[120px] truncate"></span>
-    </div>
+    <span id="user-email" class="text-sm text-[#1F2937]"></span>
     <button 
       id="logout-btn" 
-      class="bg-error text-white px-4 py-2 rounded-lg font-medium hover:bg-error-dark transition-all duration-200 shadow-sm hover:shadow-md"
+      class="bg-[#FF6B6B] text-white px-4 py-2 rounded-lg font-medium hover:bg-[#FF5555] transition-colors"
     >
       로그아웃
     </button>
@@ -41,7 +25,6 @@
 
 <script>
   import { supabase, signInWithGoogle, signOut, getUser } from '../lib/supabase';
-  import { showToast } from '../scripts/toast';
 
   const loadingElement = document.getElementById('loading-auth');
   const loggedOutElement = document.getElementById('logged-out');
@@ -49,13 +32,6 @@
   const userEmailElement = document.getElementById('user-email');
   const loginBtn = document.getElementById('login-btn');
   const logoutBtn = document.getElementById('logout-btn');
-
-  // 현재 URL을 저장하는 함수
-  function saveCurrentUrl() {
-    const currentUrl = window.location.href;
-    localStorage.setItem('auth_redirect_url', currentUrl);
-    console.log('저장된 리다이렉션 URL:', currentUrl);
-  }
 
   // 인증 상태 확인 및 UI 업데이트
   async function updateAuthUI() {
@@ -68,11 +44,7 @@
         // 로그인된 상태
         if (loggedOutElement) loggedOutElement.classList.add('hidden');
         if (loggedInElement) loggedInElement.classList.remove('hidden');
-        if (userEmailElement) {
-          const email = user.email || '';
-          userEmailElement.textContent = email.length > 15 ? email.substring(0, 15) + '...' : email;
-          userEmailElement.title = email; // 전체 이메일을 툴팁으로 표시
-        }
+        if (userEmailElement) userEmailElement.textContent = user.email || '';
       } else {
         // 로그아웃된 상태
         if (loggedInElement) loggedInElement.classList.add('hidden');
@@ -80,98 +52,53 @@
       }
     } catch (error) {
       console.error('인증 상태 확인 오류:', error);
-      showToast('인증 상태를 확인할 수 없습니다.', { type: 'error' });
       if (loadingElement) loadingElement.classList.add('hidden');
       if (loggedOutElement) loggedOutElement.classList.remove('hidden');
     }
   }
 
   // 로그인 버튼 클릭
-  if (loginBtn && loginBtn instanceof HTMLButtonElement) {
+  if (loginBtn) {
     loginBtn.addEventListener('click', async () => {
       try {
-        // 현재 URL 저장
-        saveCurrentUrl();
-        
-        loginBtn.disabled = true;
-        loginBtn.innerHTML = `
-          <svg class="animate-spin h-4 w-4 text-text inline mr-2" fill="none" viewBox="0 0 24 24">
-            <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" class="opacity-25"></circle>
-            <path fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" class="opacity-75"></path>
-          </svg>
-          로그인 중...
-        `;
-        
         const { error } = await signInWithGoogle();
         if (error) {
           console.error('로그인 오류:', error);
-          showToast('로그인에 실패했습니다. 다시 시도해주세요.', { type: 'error' });
-          throw error;
+          alert('로그인에 실패했습니다. 다시 시도해주세요.');
         }
       } catch (error) {
         console.error('로그인 오류:', error);
-        showToast('로그인 중 오류가 발생했습니다.', { type: 'error' });
-      } finally {
-        loginBtn.disabled = false;
-        loginBtn.textContent = '로그인';
+        alert('로그인에 실패했습니다. 다시 시도해주세요.');
       }
     });
   }
 
   // 로그아웃 버튼 클릭
-  if (logoutBtn && logoutBtn instanceof HTMLButtonElement) {
+  if (logoutBtn) {
     logoutBtn.addEventListener('click', async () => {
       try {
-        logoutBtn.disabled = true;
-        logoutBtn.innerHTML = `
-          <svg class="animate-spin h-4 w-4 text-white inline mr-2" fill="none" viewBox="0 0 24 24">
-            <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" class="opacity-25"></circle>
-            <path fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" class="opacity-75"></path>
-          </svg>
-          로그아웃 중...
-        `;
-        
         const { error } = await signOut();
         if (error) {
           console.error('로그아웃 오류:', error);
-          showToast('로그아웃에 실패했습니다. 다시 시도해주세요.', { type: 'error' });
-          throw error;
+          alert('로그아웃에 실패했습니다. 다시 시도해주세요.');
         } else {
-          showToast('성공적으로 로그아웃되었습니다.', { type: 'success' });
-          // 저장된 리다이렉션 URL 제거
-          localStorage.removeItem('auth_redirect_url');
-          // 로그아웃 성공 시 UI 즉시 업데이트
-          updateAuthUI();
+          // 로그아웃 성공 시 페이지 새로고침
+          window.location.reload();
         }
       } catch (error) {
         console.error('로그아웃 오류:', error);
-        showToast('로그아웃 중 오류가 발생했습니다.', { type: 'error' });
-      } finally {
-        logoutBtn.disabled = false;
-        logoutBtn.textContent = '로그아웃';
+        alert('로그아웃에 실패했습니다. 다시 시도해주세요.');
       }
     });
   }
 
   // 인증 상태 변경 감지
-  supabase.auth.onAuthStateChange(async (event, session) => {
-    console.log('Auth state changed:', event, session);
-    
-    if (event === 'SIGNED_IN') {
-      showToast('성공적으로 로그인되었습니다!', { type: 'success' });
-      await updateAuthUI();
-    } else if (event === 'SIGNED_OUT') {
-      await updateAuthUI();
-    } else if (event === 'TOKEN_REFRESHED') {
-      console.log('Token refreshed');
+  supabase.auth.onAuthStateChange((event, session) => {
+    if (event === 'SIGNED_IN' || event === 'SIGNED_OUT') {
+      updateAuthUI();
     }
   });
 
   // 초기 로드 시 인증 상태 확인
-  document.addEventListener('DOMContentLoaded', () => {
-    updateAuthUI();
-  });
-
-  // 페이지 로드 시에도 인증 상태 확인
   updateAuthUI();
 </script> 
