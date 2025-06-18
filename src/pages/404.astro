@@ -2,6 +2,7 @@
 import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import GoogleAnalytics from '../components/GoogleAnalytics.astro';
 import { SITE_TITLE } from '../consts';
 
 const title = `404 Not Found - ${SITE_TITLE}`;
@@ -11,6 +12,7 @@ const description = "Oops! The page you're looking for has wandered off into the
 <!doctype html>
 <html lang="en">
 	<head>
+		<GoogleAnalytics />
 		<BaseHead title={title} description={description} />
 	</head>
 	<body>

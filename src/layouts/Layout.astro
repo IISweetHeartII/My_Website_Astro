@@ -2,6 +2,7 @@
 import Header from '../components/Header.astro';
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
+import GoogleAnalytics from '../components/GoogleAnalytics.astro';
 import '../styles/global.css';
 
 interface Props {
@@ -15,13 +16,7 @@ const { title, description } = Astro.props;
 <!doctype html>
 <html lang="ko">
   <head>
-    <!-- Google Tag Manager -->
-    <script is:inline>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-      })(window,document,'script','dataLayer','GTM-M9GB8LD5');</script>
-    <!-- End Google Tag Manager -->
+    <GoogleAnalytics />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <title>{title}</title>
@@ -31,9 +26,9 @@ const { title, description } = Astro.props;
   </head>
   <body class="bg-surface-light text-brand-primary font-sans flex flex-col min-h-screen">
     <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M9GB8LD5"
+    <!-- <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M9GB8LD5"
       height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    <!-- End Google Tag Manager (noscript) -->
+    <!-- End Google Tag Manager (noscript) --> -->
     <Header />
     <main class="flex-grow pt-20">
     <slot />

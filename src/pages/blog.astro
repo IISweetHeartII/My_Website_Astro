@@ -5,6 +5,7 @@ import Footer from '../components/Footer.astro';
 import BlogCard from '../components/BlogCard.astro';
 import ImprovedTagFilter from '../components/ImprovedTagFilter.astro';
 import { getCollection, type CollectionEntry } from 'astro:content';
+import GoogleAnalytics from '../components/GoogleAnalytics.astro';
 
 // Helper function to get a valid timestamp or fallback
 function getValidTimestamp(date: Date | null | undefined): number {
@@ -27,6 +28,7 @@ const allTags: string[] = [...new Set(allPosts.flatMap((post: CollectionEntry<'b
 <!doctype html>
 <html lang="en">
     <head>
+        <GoogleAnalytics />
         <BaseHead title="Blog - Ideas & Insights" description="Explore our collection of articles, ideas, insights, and everything in between." />
     </head>
     <body class="min-h-screen flex flex-col m-0" data-all-tags={JSON.stringify(allTags)}>
