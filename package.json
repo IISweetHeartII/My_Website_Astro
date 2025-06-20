@@ -3,11 +3,16 @@
   "type": "module",
   "version": "0.0.1",
   "scripts": {
-    "dev": "node scripts/sync-obsidian.js && astro dev",
-    "build": "node scripts/sync-obsidian.js && astro build",
+    "dev": "node tools/scripts/sync-obsidian.js && astro dev",
+    "build": "node tools/scripts/sync-obsidian.js && astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "sync": "node scripts/sync-obsidian.js"
+    "sync": "node tools/scripts/sync-obsidian.js",
+    "test": "vitest",
+    "test:ui": "vitest --ui",
+    "test:run": "vitest run",
+    "test:watch": "vitest --watch",
+    "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
     "@astrojs/rss": "^4.0.12",
@@ -26,8 +31,13 @@
     "@astrojs/mdx": "^4.3.0",
     "@astrojs/sitemap": "^3.4.1",
     "@astrojs/tailwind": "^6.0.2",
+    "@testing-library/dom": "^10.4.0",
+    "@vitest/ui": "^3.2.4",
     "astro-expressive-code": "^0.38.3",
+    "happy-dom": "^18.0.1",
+    "jsdom": "^26.1.0",
     "playwright": "^1.49.1",
-    "remark-mermaid": "^0.2.0"
+    "remark-mermaid": "^0.2.0",
+    "vitest": "^3.2.4"
   }
 }

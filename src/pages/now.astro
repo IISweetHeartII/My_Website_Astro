@@ -289,7 +289,7 @@ const displayData = [
   </main>
 
   <script>
-    import { supabase, getUser } from '../lib/supabase';
+    import { supabase, getUser } from '@/lib/supabase';
 
     interface ExpertiseItem {
       id: string;
@@ -390,7 +390,7 @@ const displayData = [
     document.getElementById('admin-toggle')?.addEventListener('click', async () => {
       if (!isAdmin) {
         // Supabase 로그인 시도
-        const { signInWithGoogle } = await import('../lib/supabase');
+        const { signInWithGoogle } = await import('@/lib/supabase');
         await signInWithGoogle();
         return;
       }

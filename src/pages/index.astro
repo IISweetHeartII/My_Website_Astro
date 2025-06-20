@@ -1,7 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import IntroSection from '../components/IntroSection.astro';
-import BlogCard from '../components/BlogCard.astro';
+import IntroSection from '@/components/features/IntroSection.astro';
+import BlogCard from '@/components/ui/BlogCard.astro';
 import { getCollection, type CollectionEntry } from 'astro:content';
 
 function getValidTimestamp(date: Date | null | undefined): number {

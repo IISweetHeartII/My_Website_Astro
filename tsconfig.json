@@ -4,6 +4,20 @@
   "exclude": ["dist"],
   "compilerOptions": {
     "strictNullChecks": true,
-    "typeRoots": ["./node_modules/@types", "./src/types"]
+    "typeRoots": ["./node_modules/@types", "./src/types"],
+    "baseUrl": ".",
+    "paths": {
+      "@/components/*": ["./src/components/*"],
+      "@/components/layout/*": ["./src/components/layout/*"],
+      "@/components/ui/*": ["./src/components/ui/*"],
+      "@/components/features/*": ["./src/components/features/*"],
+      "@/components/seo/*": ["./src/components/seo/*"],
+      "@/layouts/*": ["./src/layouts/*"],
+      "@/utils/*": ["./src/utils/*"],
+      "@/types/*": ["./src/types/*"],
+      "@/lib/*": ["./src/lib/*"],
+      "@/styles/*": ["./src/styles/*"],
+      "@/content/*": ["./src/content/*"]
+    }
   }
 }

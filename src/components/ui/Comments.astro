@@ -69,7 +69,7 @@ const { postSlug } = Astro.props;
 </div>
 
 <script define:vars={{ postSlug }}>
-  import { getComments, addComment, getUser, signInWithGoogle } from '../lib/supabase';
+  import { getComments, addComment, getUser, signInWithGoogle } from '@/lib/supabase';
 
   const loginRequiredDiv = document.getElementById('login-required');
   const commentForm = document.getElementById('comment-form');

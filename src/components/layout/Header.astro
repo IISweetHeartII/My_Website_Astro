@@ -1,8 +1,8 @@
 ---
 import HeaderLink from './HeaderLink.astro';
-import AuthButton from './AuthButton.astro';
-import { SITE_TITLE } from '../consts';
-import { getUrl } from '../utils/url';
+import AuthButton from '@/components/ui/AuthButton.astro';
+import { SITE_TITLE } from '../../consts';
+import { getUrl } from '@/utils/url';
 ---
 
 <header class="sticky top-0 z-50 bg-primary border-b border-primary-light transition-colors duration-200">
@@ -73,7 +73,7 @@ import { getUrl } from '../utils/url';
 </header>
 
 <script>
-	import { setupMobileMenu } from '../scripts/mobileMenu';
+	import { setupMobileMenu } from '../../../tools/scripts/mobileMenu';
 	
 	document.addEventListener('DOMContentLoaded', () => {
 		setupMobileMenu();

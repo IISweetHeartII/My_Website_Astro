@@ -1,11 +1,11 @@
 ---
-import BaseHead from '../components/BaseHead.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import BlogCard from '../components/BlogCard.astro';
-import ImprovedTagFilter from '../components/ImprovedTagFilter.astro';
+import BaseHead from '@/components/layout/BaseHead.astro';
+import Header from '@/components/layout/Header.astro';
+import Footer from '@/components/layout/Footer.astro';
+import BlogCard from '@/components/ui/BlogCard.astro';
+import ImprovedTagFilter from '@/components/features/ImprovedTagFilter.astro';
 import { getCollection, type CollectionEntry } from 'astro:content';
-import GoogleAnalytics from '../components/GoogleAnalytics.astro';
+import GoogleAnalytics from '@/components/seo/GoogleAnalytics.astro';
 
 // Helper function to get a valid timestamp or fallback
 function getValidTimestamp(date: Date | null | undefined): number {
