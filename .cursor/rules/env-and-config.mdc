@@ -1,0 +1,21 @@
+---
+alwaysApply: true
+description: Next.js 환경변수 규칙(.env.local)과 제거 대상 안내
+---
+
+# 환경변수 규칙 (Next.js)
+
+- 런타임 클라이언트에서 접근해야 하는 값만 `NEXT_PUBLIC_` 접두어 사용
+- 서버 전용 비밀 값은 접두어 없이 `.env.local`에만 저장하고 커밋 금지
+- 예시 파일은 `.env.local.example`로 제공
+
+## 이 프로젝트에서 사용하는 키
+
+- `NEXT_PUBLIC_SUPABASE_URL`
+- `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+- `NEXT_PUBLIC_SITE_URL` (권장) – RSS/사이트맵/robots에서 기본 URL 주입 시 사용
+
+## 제거 대상 (Astro 잔재)
+
+- `SITE_URL`, `BASE_URL` 등 Astro 배포용 키는 사용하지 않음 → `.env`에서 삭제
+- `PUBLIC_SUPABASE_URL`, `PUBLIC_SUPABASE_ANON_KEY` → Next.js에서는 `NEXT_PUBLIC_`로 변경

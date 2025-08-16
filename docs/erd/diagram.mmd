@@ -1,0 +1,87 @@
+erDiagram
+  blogs ||--o{ roles : has
+  blogs ||--o{ posts : has
+  blogs ||--o{ comments : has
+  blogs ||--o{ categories : has
+  blogs ||--o{ attachments : has
+  blogs ||--o{ user_roles : has
+
+  roles ||--o{ role_permissions : maps
+  permissions ||--o{ role_permissions : maps
+
+  posts ||--o{ comments : has
+  posts ||--o{ attachments : has
+
+  categories ||--o{ categories : parent_of
+  comments ||--o{ comments : parent_of
+
+  blogs {
+    bigint id
+    text name
+    text domain
+    uuid owner_id
+    timestamptz created_at
+  }
+  roles {
+    bigint id
+    bigint blog_id
+    varchar name
+  }
+  permissions {
+    int id
+    varchar name
+  }
+  role_permissions {
+    bigint role_id
+    int permission_id
+  }
+  user_roles {
+    uuid user_id
+    bigint role_id
+    bigint blog_id
+  }
+  posts {
+    bigint id
+    bigint blog_id
+    uuid author_id
+    text title
+    text slug
+    text content
+    text excerpt
+    text status
+    text visibility
+    bigint view_count
+    timestamptz published_at
+    timestamptz created_at
+    timestamptz updated_at
+  }
+  comments {
+    bigint id
+    bigint blog_id
+    bigint post_id
+    uuid author_id
+    bigint parent_id
+    text content
+    text status
+    timestamptz created_at
+    timestamptz updated_at
+  }
+  categories {
+    bigint id
+    bigint blog_id
+    bigint parent_id
+    text name
+    text slug
+  }
+  attachments {
+    bigint id
+    bigint blog_id
+    bigint post_id
+    uuid uploader_id
+    text file_name
+    text file_path
+    text file_type
+    bigint file_size_kb
+    timestamptz created_at
+  }
+

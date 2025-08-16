@@ -1,0 +1,41 @@
+@import "tailwindcss";
+
+:root {
+  color-scheme: light dark;
+}
+
+@theme {
+  --font-sans: "Pretendard", ui-sans-serif, system-ui, -apple-system, Segoe UI,
+    Roboto, Noto Sans, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol,
+    "Noto Color Emoji";
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-white text-gray-900 dark:bg-gray-950 dark:text-gray-100 antialiased;
+}
+
+.container-responsive {
+  @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+}
+
+.btn {
+  @apply inline-flex items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500;
+}
+.btn-primary {
+  @apply bg-indigo-600 text-white hover:opacity-90;
+}
+.btn-ghost {
+  @apply bg-transparent text-gray-900 dark:text-gray-100 hover:bg-black/5 dark:hover:bg-white/10;
+}
+
+.card {
+  @apply rounded-xl border border-black/5 dark:border-white/10 bg-white/70 dark:bg-white/5 backdrop-blur p-6;
+}
+
+.section {
+  @apply py-16 sm:py-20;
+}
