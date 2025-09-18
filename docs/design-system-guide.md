@@ -1,45 +1,45 @@
----
-description: 
-globs: 
-alwaysApply: true
----
-**색상 팔레트 (Tailwind 기반):**
+# 디자인 시스템 가이드
 
-**주요 브랜드 색상 (Primary):**
+Obsidian Blogger 프로젝트의 색상 시스템, 폰트, 그리고 스타일 가이드입니다.
+
+## 🎨 색상 팔레트 (TailwindCSS 기반)
+
+### 주요 브랜드 색상 (Primary)
 - `primary`: `#485E8E` (블루그레이) - 헤더, 메인 브랜드
-- `primary-light`: `#8590B3` (뮤트퍼플) - 서브 컬러  
+- `primary-light`: `#8590B3` (뮤트퍼플) - 서브 컬러
 - `primary-lighter`: `#E5F0FF` (밝은 블루) - 배경용
 
-**강조 색상 (Accent):**
+### 강조 색상 (Accent)
 - `accent`: `#00FF6A` (형광 연두) - CTA, 중요 요소
 - `accent-light`: `#66FF9A` (밝은 형광 연두) - 호버 효과
 - `accent-coral`: `#FF6B6B` (코랄) - 호버, 경고
 - `accent-mint`: `#2DD4BF` (민트) - 성공, 보조 강조
 
-**배경 색상 (Background):**
+### 배경 색상 (Background)
 - `background`: `#FFFFFF` (메인 배경)
 - `background-light`: `#F9FAFB` (서브 배경)
 - `background-lighter`: `#E5F0FF` (밝은 블루 배경)
 
-**텍스트 색상 (Text):**
+### 텍스트 색상 (Text)
 - `text`: `#1F2937` (기본 텍스트)
 - `text-light`: `#6B7280` (보조 텍스트)
 - `text-lighter`: `#9CA3AF` (연한 텍스트)
 - `text-muted`: `#9CA3AF` (뮤트 텍스트)
 
-**상태 색상:**
+### 상태 색상
 - 성공: `#10B981` / 연한 성공: `#D1FAE5`
 - 오류: `#EF4444` / 연한 오류: `#FEE2E2`
 - 경고: `#F59E0B` / 연한 경고: `#FEF3C7`
 - 정보: `#3B82F6` / 연한 정보: `#DBEAFE`
 
-**폰트 시스템 (Pretendard):**
+## 🔤 폰트 시스템 (Pretendard)
 
 - **기본 폰트**: Pretendard (한글 최적화)
 - **폰트 가중치**: 300 (Light), 400 (Regular), 600 (SemiBold), 700 (Bold)
 - **로드 순서**: Regular → Bold → Light (성능 최적화)
 
-**사용 예시:**
+### 사용 예시
+
 ```css
 /* CSS에서 직접 사용 */
 @font-face {
@@ -60,21 +60,21 @@ alwaysApply: true
 <button class="bg-accent text-background hover:bg-accent-coral">버튼</button>
 ```
 
-**개발 언어 및 프레임워크:**
+## 🛠️ 개발 언어 및 프레임워크
 
 - **프레임워크**: Astro (성능, SEO 최적화)
-- **스타일링**: Tailwind CSS (위 색상 시스템 사용 필수)
+- **스타일링**: TailwindCSS v4 (위 색상 시스템 사용 필수)
 - **폰트**: Pretendard (한글 웹폰트 최적화)
 
-**색상 사용 가이드라인:**
+## 📐 색상 사용 가이드라인
 
-1. **일관성**: 반드시 tailwind.config.mjs에 정의된 색상만 사용
+1. **일관성**: 반드시 CSS 변수에 정의된 색상만 사용
 2. **접근성**: 텍스트와 배경 간 충분한 대비 유지
 3. **브랜딩**: Primary 색상군은 브랜드 아이덴티티용
 4. **강조**: Accent 색상군은 CTA 및 중요 요소용
 5. **계층구조**: Text 색상군으로 정보 계층 표현
 
-**광고 통합:**
+## 💰 광고 통합
 
 - Google AdSense 사용
 - 사용자 경험을 해치지 않는 배치

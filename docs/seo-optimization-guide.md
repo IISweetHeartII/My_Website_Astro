@@ -1,16 +1,10 @@
----
-description: when writing blog content
-globs: 
-alwaysApply: false
----
-# 블로그 게시물 Frontmatter 가이드 (SEO/AEO 최적화 포함)
+# SEO/AEO 최적화 가이드
 
-이 가이드는 블로그 게시물 작성을 위해 Obsidian 템플릿에 정의된 Frontmatter 속성들을 채우는 방법을 설명합니다. 
-AI 시대의 AEO(Answer Engine Optimization) 및 기존 SEO 최적화와 일반적인 게시물 정보 설정에 필요한 모든 속성을 다룹니다.
+AI 시대의 검색 최적화 전략으로, SEO(Search Engine Optimization)와 AEO(Answer Engine Optimization)를 모두 다룹니다.
 
-자세한 내용은 [A complete SEO optimization guide with Obsidian Blogger.ko.md](mdc:Blog/A complete SEO optimization guide with Obsidian Blogger.ko.md) 및 [AEO 전략 가이드](mdc:.cursor/rules/aeo-strategy.mdc)를 참고하세요.
+## 📝 블로그 게시물 Frontmatter 가이드
 
-## 필수 속성 (Required Properties)
+### 필수 속성 (Required Properties)
 
 모든 블로그 게시물에 반드시 포함되어야 하는 속성입니다.
 
@@ -18,7 +12,7 @@ AI 시대의 AEO(Answer Engine Optimization) 및 기존 SEO 최적화와 일반�
   - **AEO 팁**: 질문 형식으로 작성하면 AI가 답변하기 좋은 형태가 됩니다. (예: "Astro에서 View Transitions API를 어떻게 구현하나요?")
 - `publish`: 게시물 공개 여부를 결정합니다. `true`로 설정해야 블로그에 게시됩니다 (`false`, `draft: true`, 또는 누락 시 초안 상태).
 
-## 중요도 높은 선택 속성 (High-Priority Optional Properties)
+### 중요도 높은 선택 속성 (High-Priority Optional Properties)
 
 AI와 검색 엔진에서의 노출을 위해 강력히 권장되는 속성입니다.
 
@@ -34,36 +28,36 @@ AI와 검색 엔진에서의 노출을 위해 강력히 권장되는 속성입�
 - `tags`: 게시물의 카테고리 또는 주제 목록입니다. 배열 형태로 입력하며, 게시물 필터링 및 탐색, 콘텐츠 구성, 검색 가능성 향상에 사용됩니다. (예: `[개발, React, 경험담]`).
   - **AEO 팁**: 전문 분야와 관련된 태그를 포함하여 전문성을 보여주세요.
 
-## 일반 선택 속성 (General Optional Properties)
+### 일반 선택 속성 (General Optional Properties)
 
 게시물을 더 풍부하게 만들거나 특정 정보를 제공하기 위해 사용할 수 있는 속성입니다.
 
 - `slug`: 게시물의 사용자 지정 URL 경로입니다. 지정하지 않으면 `title`을 기반으로 자동 생성됩니다 (`소문자-하이픈` 형식 권장).
   - **SEO 팁**: 핵심 키워드를 포함한 의미 있는 URL을 만드세요.
 
-## SEO/AEO 관련 속성 (SEO/AEO-specific Properties)
+### SEO/AEO 관련 속성 (SEO/AEO-specific Properties)
 
 SEO, AEO 및 소셜 미디어 공유 설정을 세밀하게 제어하기 위한 속성입니다. 이 필드를 비워두면 `title`, `description`, `featured_image` 등 다른 속성에서 값을 가져와 자동으로 채워집니다.
 
-### 검색 엔진 최적화 (SEO)
+#### 검색 엔진 최적화 (SEO)
 - `meta_title`: 검색 결과에 표시될 SEO 메타 제목을 사용자 지정합니다. 지정 시 `title`보다 우선합니다 (60자 미만 권장).
 - `meta_description`: 검색 결과에 표시될 SEO 메타 설명을 사용자 지정합니다. 지정 시 `description`보다 우선합니다 (150-160자 권장).
 - `keywords`: 검색 엔진 최적화를 위한 키워드 목록입니다. 배열 형태로 입력하세요.
   - 예: `["대학생", "알고리즘", "경험담", "ChatGPT"]`
 
-### 소셜 미디어 최적화 (Open Graph)
+#### 소셜 미디어 최적화 (Open Graph)
 - `og_title`: 소셜 미디어(Open Graph) 공유 시 사용될 제목입니다. 지정 시 `meta_title`/`title`보다 우선합니다.
 - `og_description`: 소셜 미디어 공유 시 사용될 설명입니다. 지정 시 `meta_description`/`description`보다 우선합니다.
 - `og_type`: Open Graph 타입입니다 (기본값: `article`).
 - `twitter_card`: 트위터 카드 타입입니다 (기본값: `summary_large_image`).
 
-### 속성값 대체(Fallback) 우선순위
+#### 속성값 대체(Fallback) 우선순위
 - **SEO 제목**: `meta_title` > `title`
 - **SEO 설명**: `meta_description` > `description`
 - **소셜 제목**: `og_title` > `meta_title` > `title`
 - **소셜 설명**: `og_description` > `meta_description` > `description`
 
-## AEO 시대를 위한 추가 권장 속성
+### AEO 시대를 위한 추가 권장 속성
 
 AI 봇이 콘텐츠를 더 잘 이해하고 인용할 수 있도록 도와주는 속성들입니다.
 
@@ -76,7 +70,84 @@ AI 봇이 콘텐츠를 더 잘 이해하고 인용할 수 있도록 도와주는
 - `updated_date`: 마지막 업데이트 날짜 (`YYYY-MM-DD` 형식)
   - **AEO 중요**: 콘텐츠의 최신성을 보여주는 강력한 신호입니다.
 
-## Frontmatter 작성 예시
+## 🤖 AEO (Answer Engine Optimization) 전략
+
+### 1. 궁극의 신뢰성 구축: E-E-A-T 원칙의 극대화
+
+구글이 강조하던 E-E-A-T(경험, 전문성, 권위성, 신뢰성)는 AI 시대에 더욱 중요해졌습니다. AI는 이 정보를 바탕으로 출처의 신뢰도를 평가합니다.
+
+#### Experience (경험): "직접 해본 이야기"를 쓰세요
+
+- AI는 뻔한 정보의 나열보다, 실제 경험에서 우러나온 독창적인 인사이트를 매우 높게 평가합니다.
+- **나쁜 예시**: "Astro는 빠른 속도를 자랑하는 프레임워크입니다."
+- **좋은 예시**: "Astro 프로젝트에 직접 View Transitions API를 적용해보니, SPA와 같은 사용자 경험을 얻었지만 초기 로딩 시 특정 환경에서 깜빡임 문제가 발생했습니다. 저는 이렇게 해결했습니다."
+
+#### Expertise (전문성): 주제에 대해 깊이 있는 정보를 제공하세요
+
+- 다른 곳에서는 찾기 힘든 구체적인 예시, 데이터, 코드 조각을 포함할수록 좋습니다.
+- 단순한 개념 설명을 넘어서 실제 구현 방법과 세부 사항을 포함하세요.
+
+#### Authoritativeness (권위성): "나"라는 사람을 명확히 하세요
+
+- 모든 글에 작성자(김덕환)를 명시하고, 그 이름이 당신의 전문성을 보여주는 About 페이지나 포트폴리오로 링크되게 하세요.
+- 당신의 GitHub, LinkedIn 등 전문적인 소셜 프로필을 연결하여 '이 분야에 실존하는 전문가'임을 증명하세요.
+
+#### Trustworthiness (신뢰성): 주장에 대한 근거를 대세요
+
+- 통계나 데이터를 인용할 때는 반드시 원문 출처(Official Docs, 연구 논문 등)로 아웃바운드 링크를 거세요.
+- 이는 당신의 글이 잘 연구된 정보임을 AI에게 알려주는 강력한 신호입니다.
+
+### 2. 명확한 맥락과 구조: AI가 '이해하기 쉽게' 만들기
+
+AI는 인간의 언어를 이해하지만, 그 이해를 돕기 위한 구조화된 정보(Structured Data)를 가장 좋아합니다.
+
+#### 질의응답 형식의 콘텐츠
+
+- 사용자가 AI에게 할 법한 질문을 제목이나 소제목으로 사용하고, 그에 대한 명확한 답변을 본문에 작성하세요.
+- **나쁜 예시**: "Cloudflare Pages"
+- **좋은 예시**: "Cloudflare Pages에 Astro 프로젝트를 배포하는 방법은 무엇인가요?"
+
+#### 구조화된 데이터 (Schema Markup) 활용
+
+스키마 마크업은 당신의 콘텐츠가 '무엇'인지 AI에게 명찰을 달아주는 것과 같습니다.
+
+- **Article 스키마**: 모든 블로그 글에 적용하여 작성자, 발행일, 수정일 등을 명시합니다.
+- **Person 스키마**: About 페이지에 적용하여 당신이 누구인지, 어떤 전문성을 가졌는지 AI에게 공식적으로 알립니다.
+- **FAQPage 스키마**: Q&A 형식의 글에 사용하여 질문과 답변의 쌍을 명확히 구분해줍니다.
+- **HowTo 스키마**: 특정 절차를 안내하는 글에 사용하여 단계별 가이드임을 알려줍니다.
+
+#### 시맨틱 HTML과 목차
+
+- `<h1>`, `<h2>`, `<h3>` 태그를 위계에 맞게 사용하여 글의 구조를 명확히 합니다.
+- 글 상단에 목차(Table of Contents)를 제공하여 전체 맥락을 쉽게 파악할 수 있도록 돕습니다.
+
+### 3. 최신성과 독창성: '살아있는 정보' 되기
+
+AI는 오래되고 낡은 정보보다 최신의, 그리고 다른 곳에 없는 유일한 정보를 선호합니다.
+
+#### 콘텐츠 정기 업데이트
+
+- 과거에 작성했던 글이라도 새로운 정보가 생기면 주기적으로 내용을 업데이트합니다.
+- 글에 '마지막 수정일(Last updated on...)'을 명시하여 이 정보가 여전히 유효하고 관리되고 있음을 보여줍니다.
+
+#### 개인적인 의견과 분석 추가
+
+- 사실 정보의 나열을 넘어, 그에 대한 당신만의 분석이나 독창적인 의견을 덧붙이세요.
+- AI는 여러 출처의 정보를 종합하는데, 당신의 독창적인 관점은 AI가 인용하고 싶어 하는 매력적인 조각이 됩니다.
+
+## ✅ 블로그 글 작성 시 체크리스트
+
+모든 블로그 글을 작성할 때 다음 사항들을 확인하세요:
+
+- [ ] 실제 경험을 바탕으로 한 독창적인 인사이트가 포함되어 있는가?
+- [ ] 질문 형식의 제목이나 소제목을 사용했는가?
+- [ ] 주장에 대한 근거와 출처 링크가 포함되어 있는가?
+- [ ] 작성자 정보가 명확히 표시되어 있는가?
+- [ ] 최신 정보와 개인적인 분석이 포함되어 있는가?
+- [ ] 구조화된 HTML 태그(`<h1>`, `<h2>`, `<h3>`)를 올바르게 사용했는가?
+- [ ] 필요한 경우 스키마 마크업을 적용했는가?
+
+## 📋 Frontmatter 작성 예시
 
 다음은 AEO/SEO 최적화된 Frontmatter 예시입니다:
 
@@ -125,17 +196,4 @@ tags:
 ---
 ```
 
-## AEO 최적화를 위한 콘텐츠 작성 팁
-
-Frontmatter 외에도 본문 작성 시 다음 사항들을 고려하세요:
-
-1. **실제 경험 중심**: 직접 겪은 일, 실제 사용해본 도구에 대한 솔직한 후기
-2. **구체적인 예시**: 코드, 스크린샷, 수치 등 구체적인 증거 자료
-3. **출처 명시**: 참고한 자료나 공식 문서에 대한 링크
-4. **질문-답변 구조**: 독자가 궁금해할 만한 질문을 소제목으로 활용
-5. **정기적 업데이트**: 새로운 정보나 경험이 생기면 기존 글을 업데이트
-
-이 가이드와 함께 [AEO 전략 가이드](mdc:.cursor/rules/aeo-strategy.mdc)를 참고하여 AI 시대에 최적화된 블로그 게시물을 작성하세요.
-
-
-
+이 전략들을 통해 AI가 당신의 콘텐츠를 신뢰할 수 있는 전문가의 답변으로 인식하고 인용하게 만들 수 있습니다.
