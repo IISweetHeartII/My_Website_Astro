@@ -7,11 +7,11 @@ interface Props {
 
 const { id = "giscus-comments", className = "" } = Astro.props;
 
-// GitHub 저장소 정보 (나중에 환경변수로 분리 가능)
+// GitHub 저장소 정보 (실제 Giscus 설정값)
 const REPO = "IISweetHeartII/My_Website_Astro";
-const REPO_ID = "R_kgDONWYVrA"; // giscus 설정에서 가져올 예정
-const CATEGORY = "Comments";
-const CATEGORY_ID = "DIC_kwDONWYVrM4CkkXa"; // giscus 설정에서 가져올 예정
+const REPO_ID = "R_kgDOOx8Ylg";
+const CATEGORY = "General";
+const CATEGORY_ID = "DIC_kwDOOx8Yls4Cvm-Z";
 
 // 현재 페이지 정보
 const currentUrl = Astro.url.pathname;
@@ -46,9 +46,9 @@ const pageTitle = Astro.url.pathname.replace('/blog/', '').replace('/', '') || '
     script.setAttribute('data-mapping', 'pathname');
     script.setAttribute('data-strict', '0');
     script.setAttribute('data-reactions-enabled', '1');
-    script.setAttribute('data-emit-metadata', '0');
+    script.setAttribute('data-emit-metadata', '1');
     script.setAttribute('data-input-position', 'bottom');
-    script.setAttribute('data-theme', 'light');
+    script.setAttribute('data-theme', 'preferred_color_scheme');
     script.setAttribute('data-lang', 'ko');
     script.setAttribute('data-loading', 'lazy');
 
