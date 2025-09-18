@@ -2,7 +2,7 @@
 import { defineConfig } from "astro/config";
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
-import tailwind from "@astrojs/tailwind";
+import tailwindcss from "@tailwindcss/vite";
 import expressiveCode from "astro-expressive-code";
 import remarkMermaid from "remark-mermaid";
 import robotsTxt from "astro-robots-txt";
@@ -34,6 +34,9 @@ export default defineConfig({
       theme: "github-light",
       wrap: true,
     },
+  },
+  vite: {
+    plugins: [tailwindcss()],
   },
   integrations: [
     expressiveCode(),
@@ -92,7 +95,6 @@ export default defineConfig({
       ],
       sitemap: true,
     }),
-    tailwind(),
   ],
   output: "static",
 });
