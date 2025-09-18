@@ -134,9 +134,33 @@ If you find this project helpful, please consider:
 - Sharing it with others
 - Contributing to its development
 
+## 📚 Documentation
+
+### Development Guides
+- [Cursor IDE Rules Guide](docs/cursor-rules-guide.md) - `.cursor` 폴더 규칙 시스템 가이드
+- [TailwindCSS v4 Migration](CHANGELOG.md) - v3 → v4 마이그레이션 과정
+- [Prettier & VS Code Setup](.vscode/settings.json) - 개발 환경 설정
+
+### Content Creation
+- [SEO Optimization Guide](.cursor/rules/seo-guide.mdc) - 블로그 게시물 SEO/AEO 최적화
+- [Style Guide](.cursor/rules/astro_blog_style_guide.mdc) - 색상 시스템 & 디자인 가이드
+- [Publishing Guide](.cursor/rules/publishing-guide.mdc) - Obsidian → Astro 발행 프로세스
+
+### Deployment
+- [Deployment Guide](.cursor/rules/DEPLOYMENT.md) - 다양한 플랫폼 배포 가이드
+- [Environment Setup](astro.config.mjs) - Astro 설정 및 환경 변수
+
 ## 🔗 Links
 
 - [Documentation](https://github.com/yourusername/obsidian-blogger/wiki)
 - [Issues](https://github.com/yourusername/obsidian-blogger/issues)
 - [Discussions](https://github.com/yourusername/obsidian-blogger/discussions)
-# My_Website_Astro
+
+## 🎨 Tech Stack
+
+- **Framework**: Astro v5.13.8
+- **Styling**: TailwindCSS v4.0.0 (with @tailwindcss/vite)
+- **Package Manager**: pnpm
+- **IDE Support**: Cursor IDE with custom rules system
+- **Font**: Pretendard (Korean optimized)
+- **SEO**: Built-in SEO/AEO optimization
