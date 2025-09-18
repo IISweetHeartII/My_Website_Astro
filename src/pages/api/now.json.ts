@@ -77,9 +77,9 @@ function getDefaultData(): NowData {
       },
       {
         id: "2",
-        title: "Now 페이지 관리자 기능 구현",
+        title: "Now 페이지 정적 데이터 구조 개선",
         description:
-          "Supabase 인증을 활용한 컨텐츠 관리 시스템을 구축했습니다.",
+          "더 나은 사용자 경험을 위한 정적 데이터 구조로 개선했습니다.",
         date: "2024-12-15",
       },
       {
@@ -113,27 +113,4 @@ export const GET: APIRoute = async () => {
   }
 };
 
-// POST - 전체 데이터 업데이트 (관리자만)
-export const POST: APIRoute = async ({ request }) => {
-  try {
-    const body = await request.json();
-
-    // Supabase 인증은 클라이언트 측에서 처리하므로
-    // 여기서는 데이터 저장만 수행
-    await writeData(body);
-
-    return new Response(JSON.stringify({ success: true }), {
-      status: 200,
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-  } catch (error) {
-    return new Response(JSON.stringify({ error: "Failed to save data" }), {
-      status: 500,
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-  }
-};
+// POST 기능 제거됨 - 읽기 전용 API
