@@ -11,7 +11,17 @@ import robotsTxt from "astro-robots-txt";
 export default defineConfig({
   site: "https://log8.kr",
   base: "/",
+  // 이미지 최적화 설정
+  image: {
+    service: "sharp",           // Sharp 서비스 사용 (3-5배 성능 향상)
+    domains: ["log8.kr"],       // 원격 이미지 도메인 보안
+    remotePatterns: [
+      { protocol: "https" },    // HTTPS 이미지만 허용
+    ],
+  },
   markdown: {
+    gfm: true,                  // GitHub Flavored Markdown 활성화
+    smartypants: true,          // 타이포그래피 최적화
     remarkPlugins: [
       [
         remarkMermaid,
@@ -37,6 +47,17 @@ export default defineConfig({
   },
   vite: {
     plugins: [tailwindcss()],
+    build: {
+      cssCodeSplit: true,       // CSS 청크 분할로 성능 향상
+      rollupOptions: {
+        output: {
+          manualChunks: {
+            vendor: ["astro"],   // Astro 코어 별도 번들
+            utils: ["gray-matter", "slugify"], // 유틸리티 라이브러리 분리
+          },
+        },
+      },
+    },
   },
   integrations: [
     expressiveCode(),
