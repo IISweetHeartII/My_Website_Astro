@@ -1,26 +1,26 @@
 @import "tailwindcss";
 
 @theme {
-  /* 브랜드 컬러 시스템 - 일관성 있는 네이밍 */
-  --color-primary: #485E8E; /* 블루그레이: 헤더, 메인 브랜드 */
-  --color-primary-light: #8590B3; /* 뮤트퍼플: 서브 컬러 */
-  --color-primary-lighter: #E5F0FF; /* 밝은 블루: 배경용 */
+  /* 브랜드 컬러 시스템 */
+  --color-primary: #485E8E;
+  --color-primary-light: #8590B3;
+  --color-primary-lighter: #E5F0FF;
 
-  /* 악센트 컬러 - 브랜드 강조 */
-  --color-accent: #00FF6A; /* 형광 연두: CTA, 중요 요소 */
-  --color-accent-light: #66FF9A; /* 밝은 형광 연두: 호버 효과 */
-  --color-accent-coral: #FF6B6B; /* 코랄: 호버, 경고 */
-  --color-accent-mint: #2DD4BF; /* 민트: 성공, 보조 강조 */
+  /* 악센트 컬러 */
+  --color-accent: #00FF6A;
+  --color-accent-light: #66FF9A;
+  --color-accent-coral: #FF6B6B;
+  --color-accent-mint: #2DD4BF;
 
   /* 기본 색상 시스템 */
-  --color-background: #FFFFFF; /* 메인 배경 */
-  --color-background-light: #F9FAFB; /* 서브 배경 */
-  --color-background-lighter: #E5F0FF; /* 밝은 블루: 배경용 */
+  --color-background: #FFFFFF;
+  --color-background-light: #F9FAFB;
+  --color-background-lighter: #E5F0FF;
 
-  --color-text: #1F2937; /* 기본 텍스트 */
-  --color-text-light: #6B7280; /* 보조 텍스트 */
-  --color-text-lighter: #9CA3AF; /* 연한 텍스트 */
-  --color-text-muted: #9CA3AF; /* 뮤트 텍스트 */
+  --color-text: #1F2937;
+  --color-text-light: #6B7280;
+  --color-text-lighter: #9CA3AF;
+  --color-text-muted: #9CA3AF;
 
   /* 상태 색상 */
   --color-success: #10B981;
@@ -33,7 +33,7 @@
   --color-info: #3B82F6;
   --color-info-light: #DBEAFE;
 
-  /* Tailwind 호환성을 위한 그레이 스케일 */
+  /* 그레이 스케일 */
   --color-gray-50: #F9FAFB;
   --color-gray-100: #F3F4F6;
   --color-gray-200: #E5E7EB;
@@ -45,9 +45,7 @@
   --color-gray-800: #1F2937;
   --color-gray-900: #111827;
   --color-gray-950: #030712;
-
-  /* 폰트 패밀리 */
-  --font-family-sans: "Pretendard", sans-serif;
+  --color-white: #FFFFFF;
 
   /* 그라데이션 색상 */
   --color-blue-100: #DBEAFE;
@@ -60,5 +58,7 @@
   --color-blue-700: #1D4ED8;
   --color-purple-700: #7C3AED;
   --color-green-700: #047857;
-  --color-white: #FFFFFF;
+
+  /* 폰트 패밀리 */
+  --font-family-sans: "Pretendard", sans-serif;
 }

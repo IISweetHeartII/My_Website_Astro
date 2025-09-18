@@ -4,7 +4,6 @@ import BaseHead from '@/components/layout/BaseHead.astro';
 import Header from '@/components/layout/Header.astro';
 import Footer from '@/components/layout/Footer.astro';
 import FormattedDate from '@/components/ui/FormattedDate.astro';  
-import Comments from '@/components/ui/Comments.astro';
 import { getUrl } from '@/utils/url';
 import GoogleAnalytics from '@/components/seo/GoogleAnalytics.astro';
 
@@ -82,7 +81,7 @@ const postSlug = Astro.url.pathname.replace('/blog/', '').replace('/', '') || 'u
 			/* 마크다운 강조 표시 스타일링 */
 			.prose strong, .prose b {
 				font-weight: 700 !important;
-				color: theme('colors.text.DEFAULT') !important;
+				color: var(--color-text) !important;
 			}
 			.prose em, .prose i {
 				font-style: italic !important;
@@ -90,28 +89,28 @@ const postSlug = Astro.url.pathname.replace('/blog/', '').replace('/', '') || 'u
 			/* 추가적인 마크다운 스타일링 */
 			.prose h1, .prose h2, .prose h3, .prose h4, .prose h5, .prose h6 {
 				font-weight: 700 !important;
-				color: theme('colors.text.DEFAULT') !important;
+				color: var(--color-text) !important;
 				margin-top: 2rem !important;
 				margin-bottom: 1rem !important;
 			}
 			.prose blockquote {
-				border-left: 4px solid theme('colors.accent.DEFAULT') !important;
+				border-left: 4px solid var(--color-accent) !important;
 				padding-left: 1rem !important;
 				margin: 1.5rem 0 !important;
 				font-style: italic !important;
-				background: theme('colors.background.light') !important;
+				background: var(--color-background-light) !important;
 				padding: 1rem !important;
 				border-radius: 0.5rem !important;
 			}
 			.prose code {
-				background: theme('colors.background.lighter') !important;
+				background: var(--color-background-lighter) !important;
 				padding: 0.125rem 0.25rem !important;
 				border-radius: 0.25rem !important;
 				font-size: 0.875em !important;
-				color: theme('colors.accent.coral') !important;
+				color: var(--color-accent-coral) !important;
 			}
 			.prose pre {
-				background: theme('colors.background.light') !important;
+				background: var(--color-background-light) !important;
 				padding: 1rem !important;
 				border-radius: 0.5rem !important;
 				overflow-x: auto !important;
@@ -119,14 +118,14 @@ const postSlug = Astro.url.pathname.replace('/blog/', '').replace('/', '') || 'u
 			}
 			.prose pre code {
 				background: transparent !important;
-				color: theme('colors.text.DEFAULT') !important;
+				color: var(--color-text) !important;
 				padding: 0 !important;
 			}
 			/* AdSense 광고 스타일링 */
 			.ad-container {
 				min-height: 250px;
-				background: theme('colors.background.light');
-				border: 1px dashed theme('colors.background.lighter');
+				background: var(--color-background-light);
+				border: 1px dashed var(--color-background-lighter);
 				border-radius: 8px;
 				padding: 16px;
 				margin-bottom: 20px;
@@ -141,8 +140,8 @@ const postSlug = Astro.url.pathname.replace('/blog/', '').replace('/', '') || 'u
 				top: 8px;
 				left: 12px;
 				font-size: 11px;
-				color: theme('colors.text.DEFAULT');
-				background: theme('colors.background.DEFAULT');
+				color: var(--color-text);
+				background: var(--color-background);
 				padding: 2px 6px;
 				border-radius: 3px;
 			}
@@ -192,7 +191,6 @@ const postSlug = Astro.url.pathname.replace('/blog/', '').replace('/', '') || 'u
 						<slot />
 						
 						<!-- 댓글 섹션 -->
-						<Comments postSlug={postSlug} />
 					</div>
 				</article>
 				<div class="md:w-1/4">
