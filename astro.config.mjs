@@ -1,5 +1,5 @@
 // @ts-check
-import { defineConfig, sharpImageService } from "astro/config";
+import { defineConfig } from "astro/config";
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
 import tailwindcss from "@tailwindcss/vite";
@@ -11,9 +11,8 @@ import robotsTxt from "astro-robots-txt";
 export default defineConfig({
   site: "https://log8.kr",
   base: "/",
-  // 이미지 최적화 설정
+  // 이미지 최적화 설정 (Sharp는 기본값)
   image: {
-    service: sharpImageService(), // Sharp 서비스 사용 (3-5배 성능 향상)
     domains: ["log8.kr"],         // 원격 이미지 도메인 보안
     remotePatterns: [
       { protocol: "https" },      // HTTPS 이미지만 허용

@@ -1,0 +1,120 @@
+---
+import { Image, Picture } from 'astro:assets';
+
+interface Props {
+  src: string;
+  alt: string;
+  width?: number;
+  height?: number;
+  class?: string;
+  loading?: 'lazy' | 'eager';
+  formats?: string[];
+  densities?: number[];
+  widths?: number[];
+  aspectRatio?: string;
+}
+
+const {
+  src,
+  alt,
+  width = 800,
+  height = 600,
+  class: className = '',
+  loading = 'lazy',
+  formats = ['avif', 'webp'],
+  densities = [1, 1.5, 2],
+  widths = [400, 800, 1200],
+  aspectRatio = '4:3',
+} = Astro.props;
+
+// 외부 이미지인지 확인
+const isExternalImage = src.startsWith('http');
+
+// 로컬 이미지의 경우 import 처리가 필요하지만,
+// 이 컴포넌트는 외부 이미지용으로 설계
+---
+
+{isExternalImage ? (
+  <Picture
+    src={src}
+    alt={alt}
+    width={width}
+    height={height}
+    formats={formats}
+    densities={densities}
+    loading={loading}
+    class={`rounded-lg shadow-md transition-transform duration-300 hover:scale-105 ${className}`}
+    style={`aspect-ratio: ${aspectRatio};`}
+  />
+) : (
+  <Image
+    src={src}
+    alt={alt}
+    width={width}
+    height={height}
+    densities={densities}
+    loading={loading}
+    class={`rounded-lg shadow-md transition-transform duration-300 hover:scale-105 ${className}`}
+    style={`aspect-ratio: ${aspectRatio};`}
+  />
+)}
+
+<style>
+  /* 반응형 이미지 스타일 */
+  img, picture {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+
+  /* 로딩 플레이스홀더 */
+  img[loading="lazy"] {
+    background: linear-gradient(
+      90deg,
+      var(--color-background-light) 0%,
+      var(--color-background-lighter) 50%,
+      var(--color-background-light) 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s ease-in-out infinite;
+  }
+
+  @keyframes shimmer {
+    0% {
+      background-position: -200% 0;
+    }
+    100% {
+      background-position: 200% 0;
+    }
+  }
+
+  /* 반응형 브레이크포인트 */
+  @media (max-width: 768px) {
+    img, picture {
+      border-radius: 0.375rem; /* rounded-md */
+    }
+  }
+
+  /* 고해상도 디스플레이 최적화 */
+  @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    img {
+      image-rendering: -webkit-optimize-contrast;
+      image-rendering: crisp-edges;
+    }
+  }
+
+  /* 다크모드 지원 */
+  @media (prefers-color-scheme: dark) {
+    img, picture {
+      filter: brightness(0.9);
+    }
+  }
+
+  /* 모션 감소 설정 지원 */
+  @media (prefers-reduced-motion: reduce) {
+    img, picture {
+      transition: none;
+      transform: none !important;
+    }
+  }
+</style>

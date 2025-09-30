@@ -1,0 +1,148 @@
+---
+import { Picture } from 'astro:assets';
+
+interface Props {
+  src: string;
+  alt: string;
+  width?: number;
+  height?: number;
+  class?: string;
+  loading?: 'lazy' | 'eager';
+  caption?: string;
+}
+
+const {
+  src,
+  alt,
+  width = 1200,
+  height = 675,
+  class: className = '',
+  loading = 'lazy',
+  caption,
+} = Astro.props;
+
+// 블로그 포스트에 최적화된 반응형 크기
+const responsiveWidths = [400, 600, 800, 1200];
+const modernFormats = ['avif', 'webp'];
+---
+
+<figure class={`blog-image-container ${className}`}>
+  <Picture
+    src={src}
+    alt={alt}
+    width={width}
+    height={height}
+    widths={responsiveWidths}
+    formats={modernFormats}
+    loading={loading}
+    class="blog-image"
+    sizes="(max-width: 640px) 100vw, (max-width: 768px) 90vw, (max-width: 1024px) 80vw, 70vw"
+  />
+  {caption && (
+    <figcaption class="image-caption">
+      {caption}
+    </figcaption>
+  )}
+</figure>
+
+<style>
+  .blog-image-container {
+    margin: 2rem 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .blog-image {
+    width: 100%;
+    height: auto;
+    border-radius: 0.75rem;
+    box-shadow:
+      0 10px 25px -5px rgba(0, 0, 0, 0.1),
+      0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    object-fit: cover;
+  }
+
+  .blog-image:hover {
+    transform: translateY(-2px);
+    box-shadow:
+      0 20px 25px -5px rgba(0, 0, 0, 0.15),
+      0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  }
+
+  .image-caption {
+    margin-top: 0.75rem;
+    font-size: 0.875rem;
+    color: var(--color-text-light);
+    text-align: center;
+    font-style: italic;
+    max-width: 90%;
+    line-height: 1.5;
+  }
+
+  /* 반응형 이미지 최적화 */
+  @media (max-width: 640px) {
+    .blog-image-container {
+      margin: 1.5rem 0;
+    }
+
+    .blog-image {
+      border-radius: 0.5rem;
+    }
+
+    .image-caption {
+      font-size: 0.8rem;
+      max-width: 95%;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .blog-image {
+      border-radius: 0.375rem;
+    }
+  }
+
+  /* 고해상도 디스플레이 최적화 */
+  @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .blog-image {
+      image-rendering: -webkit-optimize-contrast;
+    }
+  }
+
+  /* 다크모드 지원 */
+  @media (prefers-color-scheme: dark) {
+    .blog-image {
+      filter: brightness(0.95);
+    }
+
+    .image-caption {
+      color: var(--color-text-light);
+    }
+  }
+
+  /* 모션 감소 설정 */
+  @media (prefers-reduced-motion: reduce) {
+    .blog-image {
+      transition: none;
+    }
+
+    .blog-image:hover {
+      transform: none;
+    }
+  }
+
+  /* 인쇄 최적화 */
+  @media print {
+    .blog-image-container {
+      margin: 1rem 0;
+      break-inside: avoid;
+    }
+
+    .blog-image {
+      box-shadow: none;
+      border: 1px solid #ddd;
+    }
+  }
+</style>

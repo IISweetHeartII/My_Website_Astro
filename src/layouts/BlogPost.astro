@@ -7,6 +7,8 @@ import FormattedDate from '@/components/ui/FormattedDate.astro';
 import { getUrl } from '@/utils/url';
 import GoogleAnalytics from '@/components/seo/GoogleAnalytics.astro';
 import GiscusComments from '@/components/comments/GiscusComments.astro';
+import ResponsiveBlogImage from '@/components/ui/ResponsiveBlogImage.astro';
+import { ViewTransitions } from 'astro:transitions';
 
 interface Props extends Pick<CollectionEntry<'blog'>, 'data'> {}
 
@@ -66,6 +68,41 @@ const postSlug = Astro.url.pathname.replace('/blog/', '').replace('/', '') || 'u
 			author={author ?? ''}
 			no_index={no_index}
 		/>
+		<ViewTransitions />
+
+		<!-- SEO Structured Data (JSON-LD) -->
+		<script type="application/ld+json" set:html={JSON.stringify({
+			"@context": "https://schema.org",
+			"@type": "BlogPosting",
+			"headline": title,
+			"description": description,
+			"image": featured_image || undefined,
+			"author": {
+				"@type": "Person",
+				"name": author || "김덕환",
+				"url": "https://log8.kr/who-is-dh"
+			},
+			"publisher": {
+				"@type": "Organization",
+				"name": "김덕환의 WebSite",
+				"url": "https://log8.kr",
+				"logo": {
+					"@type": "ImageObject",
+					"url": "https://log8.kr/favicon.svg"
+				}
+			},
+			"datePublished": created_date?.toISOString(),
+			"dateModified": updated_date?.toISOString() || created_date?.toISOString(),
+			"mainEntityOfPage": {
+				"@type": "WebPage",
+				"@id": `https://log8.kr/blog/${postSlug}`
+			},
+			"keywords": safeTags,
+			"articleSection": "Blog",
+			"inLanguage": "ko-KR",
+			"url": `https://log8.kr/blog/${postSlug}`
+		})}></script>
+
 		<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4653332352131854" crossorigin="anonymous"></script>
 		<style>
 			:global(.mermaid) {
@@ -178,15 +215,14 @@ const postSlug = Astro.url.pathname.replace('/blog/', '').replace('/', '') || 'u
 								</div>
 							)}
 							{featured_image && typeof featured_image === 'string' && (
-								<div class="hero-image w-full">
-									<img
-										width={1020}
-										height={510}
-										src={featured_image}
-										alt={featured_image_alt || ''}
-										class="block mx-auto rounded-xl shadow"
-									/>
-								</div>
+								<ResponsiveBlogImage
+									src={featured_image}
+									alt={featured_image_alt || title || '블로그 포스트 이미지'}
+									width={1200}
+									height={675}
+									loading="eager"
+									class="featured-image"
+								/>
 							)}
 						</div>
 						<slot />

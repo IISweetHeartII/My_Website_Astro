@@ -1,23 +1,12 @@
 ---
-import BaseHead from '@/components/layout/BaseHead.astro';
-import Header from '@/components/layout/Header.astro';
-import Footer from '@/components/layout/Footer.astro';
-import GoogleAnalytics from '@/components/seo/GoogleAnalytics.astro';
+import Layout from '@/layouts/Layout.astro';
 import { SITE_TITLE } from '../consts';
 
 const title = `404 Not Found - ${SITE_TITLE}`;
 const description = "Oops! The page you're looking for has wandered off into the digital wilderness.";
 ---
 
-<!doctype html>
-<html lang="en">
-	<head>
-		<GoogleAnalytics />
-		<BaseHead title={title} description={description} />
-	</head>
-	<body>
-		<Header />
-		<main>
+<Layout title={title} description={description}>
 			<div class="min-h-[calc(100vh-16rem)] flex items-center justify-center p-8">
 				<div class="text-center max-w-xl mx-auto py-12 px-8 bg-primary/20 rounded-2xl shadow relative overflow-hidden md:py-8 md:px-6">
 					<div class="inline-block px-4 py-2 bg-accent/10 text-accent rounded-full text-sm font-medium mb-6">404 Error</div>
@@ -47,10 +36,7 @@ const description = "Oops! The page you're looking for has wandered off into the
 					</p>
 				</div>
 			</div>
-		</main>
-		<Footer />
-	</body>
-</html>
+</Layout>
 
 <style>
 	/* Keep keyframe animations */

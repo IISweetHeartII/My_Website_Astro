@@ -1,11 +1,8 @@
 ---
-import BaseHead from '@/components/layout/BaseHead.astro';
-import Header from '@/components/layout/Header.astro';
-import Footer from '@/components/layout/Footer.astro';
+import Layout from '@/layouts/Layout.astro';
 import BlogCard from '@/components/ui/BlogCard.astro';
 import ImprovedTagFilter from '@/components/features/ImprovedTagFilter.astro';
 import { getCollection, type CollectionEntry } from 'astro:content';
-import GoogleAnalytics from '@/components/seo/GoogleAnalytics.astro';
 
 // Helper function to get a valid timestamp or fallback
 function getValidTimestamp(date: Date | null | undefined): number {
@@ -25,15 +22,8 @@ const allPosts = (await getCollection('blog'))
 const allTags: string[] = [...new Set(allPosts.flatMap((post: CollectionEntry<'blog'>) => (post.data.tags ?? []) as string[]))];
 ---
 
-<!doctype html>
-<html lang="en">
-    <head>
-        <GoogleAnalytics />
-        <BaseHead title="Blog - Ideas & Insights" description="Explore our collection of articles, ideas, insights, and everything in between." />
-    </head>
-    <body class="min-h-screen flex flex-col m-0" data-all-tags={JSON.stringify(allTags)}>
-        <Header />
-        <main class="flex-1 w-full max-w-screen-lg mx-auto p-8 flex flex-col">
+<Layout title="Blog - Ideas & Insights" description="Explore our collection of articles, ideas, insights, and everything in between.">
+    <div class="w-full max-w-screen-lg mx-auto p-8 flex flex-col" data-all-tags={JSON.stringify(allTags)}>
             <!-- 개선된 태그 관리 시스템 -->
             <section class="mb-8">
                 <ImprovedTagFilter allTags={allTags} />
@@ -58,9 +48,8 @@ const allTags: string[] = [...new Set(allPosts.flatMap((post: CollectionEntry<'b
                     No posts found. Check back soon!
                 </div>
             )}
-        </main>
-        <Footer />
-        <script is:inline>
+    </div>
+    <script is:inline>
             document.addEventListener('DOMContentLoaded', () => {
                 const searchInput = document.getElementById('post-search');
                 const tagFilterContainer = document.getElementById('tag-filter-container');
@@ -194,5 +183,4 @@ const allTags: string[] = [...new Set(allPosts.flatMap((post: CollectionEntry<'b
                 filterPosts();
             });
         </script>
-    </body>
-</html> 
+</Layout> 
