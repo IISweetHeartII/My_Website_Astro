@@ -183,4 +183,12 @@ const allTags: string[] = [...new Set(allPosts.flatMap((post: CollectionEntry<'b
                 filterPosts();
             });
         </script>
+
+        <script>
+            import { setupScrollAnimations } from '../../tools/scripts/scrollAnimation.ts';
+
+            document.addEventListener('DOMContentLoaded', () => {
+                setupScrollAnimations();
+            });
+        </script>
 </Layout> 

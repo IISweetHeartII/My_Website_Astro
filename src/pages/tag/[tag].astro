@@ -96,5 +96,13 @@ const allTags: string[] = [...new Set((await getCollection('blog')).flatMap((pos
             )}
         </main>
         <Footer />
+
+        <script>
+            import { setupScrollAnimations } from '../../../tools/scripts/scrollAnimation.ts';
+
+            document.addEventListener('DOMContentLoaded', () => {
+                setupScrollAnimations();
+            });
+        </script>
     </body>
 </html> 

@@ -153,4 +153,12 @@ const latestBlogPosts = allPosts.slice(0, 3);
     </section>
 
   </main>
+
+  <script>
+    import { setupScrollAnimations } from '../../tools/scripts/scrollAnimation.ts';
+
+    document.addEventListener('DOMContentLoaded', () => {
+      setupScrollAnimations();
+    });
+  </script>
 </Layout>

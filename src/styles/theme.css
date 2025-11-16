@@ -1,26 +1,27 @@
 @import "tailwindcss";
 
 @theme {
-  /* 브랜드 컬러 시스템 */
-  --color-primary: #485E8E;
-  --color-primary-light: #8590B3;
-  --color-primary-lighter: #E5F0FF;
+  /* 한화시스템 브랜드 컬러 시스템 */
+  --color-primary: #F26430;        /* 한화 시그니처 오렌지 */
+  --color-primary-light: #FF8C42;  /* 밝은 오렌지 */
+  --color-primary-lighter: #FFF4ED; /* 매우 연한 오렌지 배경 */
 
   /* 악센트 컬러 */
-  --color-accent: #00FF6A;
-  --color-accent-light: #66FF9A;
-  --color-accent-coral: #FF6B6B;
-  --color-accent-mint: #2DD4BF;
+  --color-accent: #FF8C42;         /* 골든 오렌지 */
+  --color-accent-light: #FFB574;   /* 라이트 오렌지 */
+  --color-accent-coral: #FF6B6B;   /* 코랄 (유지) */
+  --color-accent-mint: #2DD4BF;    /* 민트 (유지) */
 
   /* 기본 색상 시스템 */
   --color-background: #FFFFFF;
   --color-background-light: #F9FAFB;
-  --color-background-lighter: #E5F0FF;
+  --color-background-lighter: #FFF8F3;  /* 매우 연한 오렌지 톤 */
+  --color-background-muted: #F3F4F6;    /* Muted 배경 (회색톤) */
 
-  --color-text: #1F2937;
-  --color-text-light: #6B7280;
-  --color-text-lighter: #9CA3AF;
-  --color-text-muted: #9CA3AF;
+  --color-text: #1A1A2E;           /* 다크 네이비 (가독성 향상) */
+  --color-text-light: #4A5568;     /* 중간 회색 */
+  --color-text-lighter: #718096;   /* 연한 회색 */
+  --color-text-muted: #A0AEC0;     /* 뮤트 회색 */
 
   /* 상태 색상 */
   --color-success: #10B981;
@@ -61,4 +62,21 @@
 
   /* 폰트 패밀리 */
   --font-family-sans: "Pretendard", sans-serif;
+  --font-body: "Pretendard", sans-serif;
+  --font-heading: "Pretendard", sans-serif;
+  --font-mono: "Consolas", "Monaco", "Courier New", monospace;
+
+  /* 레거시 변수 (호환성 유지) */
+  --accent-vibrant: #FF8C42;       /* accent와 동일 */
+  --black: #1A1A2E;                /* text와 동일 */
+  --gray: #6B7280;                 /* gray-500와 동일 */
+  --gray-light: #F3F4F6;           /* gray-100과 동일 */
+  --gray-dark: #374151;            /* gray-700과 동일 */
+  --theme-transition: all 0.2s ease-in-out;
+
+  /* 구 디자인 시스템 호환성 */
+  --color-text-default: #1A1A2E;   /* text와 동일 */
+  --color-surface-light: #F9FAFB;  /* background-light와 동일 */
+  --color-brand-primary: #F26430;  /* primary와 동일 */
+  --color-brand-secondary: #FF8C42; /* accent와 동일 */
 }
