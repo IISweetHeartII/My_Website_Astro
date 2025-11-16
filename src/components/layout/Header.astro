@@ -2,6 +2,7 @@
 import HeaderLink from './HeaderLink.astro';
 import { SITE_TITLE } from '../../consts';
 import { getUrl } from '@/utils/url';
+import { Menu, X, ArrowRight } from 'lucide-astro';
 ---
 
 <header class="sticky top-0 z-50 bg-primary border-b border-primary-light transition-colors duration-200">
@@ -26,9 +27,7 @@ import { getUrl } from '@/utils/url';
 			<!-- Contact 버튼 -->
 			<a href={getUrl('/contact')} class="hidden md:inline-flex items-center bg-primary-light text-white border-0 py-1 px-3 focus:outline-none hover:bg-accent hover:text-text rounded text-base transition-colors duration-200">
 				Contact
-				<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-1" viewBox="0 0 24 24">
-					<path d="M5 12h14M12 5l7 7-7 7"></path>
-				</svg>
+				<ArrowRight class="w-4 h-4 ml-1" />
 			</a>
 			
 			<!-- 데스크톱 로그인/로그아웃 버튼 - Contact 버튼 오른쪽에 위치 -->
@@ -37,9 +36,7 @@ import { getUrl } from '@/utils/url';
 			
 			<!-- Mobile menu toggle button -->
 			<button class="md:hidden text-white focus:outline-none" id="mobile-menu-toggle">
-				<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-				</svg>
+				<Menu class="w-6 h-6" />
 			</button>
 		</div>
 	</nav>
@@ -48,9 +45,7 @@ import { getUrl } from '@/utils/url';
 	<div class="md:hidden fixed inset-0 bg-primary/95 z-40 transition-transform duration-300 ease-in-out transform translate-x-full" id="mobile-menu">
 		<div class="flex justify-end p-4">
 			<button class="text-white focus:outline-none" id="mobile-menu-close">
-				<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-				</svg>
+				<X class="w-6 h-6" />
 			</button>
 		</div>
 		<nav class="flex flex-col items-center space-y-6 py-8">
