@@ -42,7 +42,7 @@ export default defineConfig({
         output: {
           manualChunks: {
             vendor: ["astro"],   // Astro 코어 별도 번들
-            utils: ["gray-matter", "slugify"], // 유틸리티 라이브러리 분리
+            utils: ["slugify"],  // 유틸리티 라이브러리 분리
           },
         },
       },
@@ -117,8 +117,8 @@ export default defineConfig({
     prefetchAll: true,           // 링크 프리페치로 페이지 속도 향상
     defaultStrategy: 'hover',    // 호버 시 프리페치
   },
-  // 실험적 기능
-  experimental: {
-    contentLayer: true,          // 콘텐츠 레이어로 성능 향상
+  // 빌드 최적화
+  build: {
+    inlineStylesheets: 'auto',   // 작은 CSS는 인라인으로 성능 향상
   },
 });

@@ -172,8 +172,8 @@ pnpm run build
 
 ## 🔗 기술 스택
 
-- **Framework**: Astro v5.13.8
-- **Styling**: TailwindCSS v4.0.0 (with @tailwindcss/vite)
+- **Framework**: Astro v5.15.8
+- **Styling**: TailwindCSS v4.1.17 (with @tailwindcss/vite)
 - **Package Manager**: pnpm
 - **Font**: Pretendard (Korean optimized)
 - **SEO**: Built-in SEO/AEO optimization

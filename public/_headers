@@ -1,0 +1,28 @@
+/*
+  # 보안 헤더
+  X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
+  X-XSS-Protection: 1; mode=block
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: interest-cohort=(), geolocation=(), microphone=(), camera=()
+
+  # 성능 최적화
+  Cache-Control: public, max-age=31536000, immutable
+
+# HTML 페이지는 짧은 캐시
+/*.html
+  Cache-Control: public, max-age=3600, must-revalidate
+
+# API 엔드포인트는 캐시 안함
+/api/*
+  Cache-Control: no-cache, no-store, must-revalidate
+
+# 정적 자산은 긴 캐시
+/_astro/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/images/*
+  Cache-Control: public, max-age=2592000, immutable

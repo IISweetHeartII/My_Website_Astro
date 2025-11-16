@@ -1,5 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { Image } from 'astro:assets';
+import profileImage from '@/assets/images/design/DH_ID.jpg';
 ---
 
 <Layout title="Who is 덕환 | Log8">
@@ -13,10 +15,12 @@ import Layout from '../layouts/Layout.astro';
           <!-- 프로필 이미지 -->
           <div class="flex justify-center lg:justify-start">
             <div class="relative">
-              <img
-                src="/images/design/DH_ID.jpg"
+              <Image
+                src={profileImage}
                 alt="Profile Photo of 덕환"
                 class="w-64 h-64 rounded-full object-cover shadow-2xl border-8 border-white"
+                widths={[256, 512]}
+                sizes="256px"
               />
               <!-- 장식 요소 -->
               <div class="absolute -top-4 -right-4 w-24 h-24 bg-blue-200 rounded-full opacity-60 animate-pulse"></div>

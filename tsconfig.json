@@ -3,14 +3,39 @@
   "include": [".astro/types.d.ts", "**/*"],
   "exclude": ["dist", "node_modules"],
   "compilerOptions": {
+    // Strict Type Checking (실무 필수!)
+    "strict": true,
     "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "strictBindCallApply": true,
+    "strictPropertyInitialization": true,
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "alwaysStrict": true,
+
+    // 추가 엄격한 검사
+    "noUncheckedIndexedAccess": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitOverride": true,
+    "noPropertyAccessFromIndexSignature": true,
+
+    // JSX 설정
     "jsx": "react-jsx",
     "jsxImportSource": "astro",
+
+    // Module 설정
     "module": "ESNext",
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "allowImportingTsExtensions": true,
+
+    // Type Roots
     "typeRoots": ["./node_modules/@types", "./src/types"],
+
+    // Path Aliases
     "baseUrl": ".",
     "paths": {
       "@/components/*": ["./src/components/*"],
@@ -19,7 +44,8 @@
       "@/types/*": ["./src/types/*"],
       "@/lib/*": ["./src/lib/*"],
       "@/styles/*": ["./src/styles/*"],
-      "@/content/*": ["./src/content/*"]
+      "@/content/*": ["./src/content/*"],
+      "@/assets/*": ["./src/assets/*"]
     }
   }
 }

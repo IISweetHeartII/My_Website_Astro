@@ -6,10 +6,10 @@
 ## 📊 현재 상태 분석
 
 ### ✅ 잘 구성된 부분
-- Astro v5.13.8 최신 버전 사용
-- TailwindCSS v4.0.0 최신 버전
+- Astro v5.15.8 최신 버전 사용
+- TailwindCSS v4.1.17 최신 버전
 - 필수 통합: MDX, Sitemap, ExpressiveCode, RobotsTxt
-- Obsidian 동기화 시스템 구축
+- Obsidian 직접 통합 (src/content/blog/에서 직접 작성)
 
 ### ⚠️ 개선 필요 영역
 - 이미지 최적화 서비스 미설정
@@ -53,7 +53,7 @@ vite: {
       output: {
         manualChunks: {
           vendor: ['astro'],  // Vendor 청크 분리
-          utils: ['gray-matter', 'slugify']
+          utils: ['slugify']  // 유틸리티 라이브러리 분리
         }
       }
     }
