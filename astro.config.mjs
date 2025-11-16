@@ -4,7 +4,7 @@ import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
 import tailwindcss from "@tailwindcss/vite";
 import expressiveCode from "astro-expressive-code";
-import remarkMermaid from "remark-mermaid";
+import rehypeMermaid from "rehype-mermaid";
 import robotsTxt from "astro-robots-txt";
 
 // https://astro.build/config
@@ -21,27 +21,17 @@ export default defineConfig({
   markdown: {
     gfm: true,                  // GitHub Flavored Markdown 활성화
     smartypants: true,          // 타이포그래피 최적화
-    remarkPlugins: [
+    syntaxHighlight: false,     // expressiveCode 사용하므로 비활성화
+    rehypePlugins: [
       [
-        remarkMermaid,
+        rehypeMermaid,
         {
-          simple: true, // Use simpler renderer
-          wrap: null, // Don't wrap the output
-          mermaidConfig: {
-            theme: "default",
-            securityLevel: "loose",
-            startOnLoad: true,
-          },
+          strategy: 'inline-svg', // 빌드 시 SVG로 변환 (번들 크기 감소!)
         },
       ],
     ],
     remarkRehype: {
       allowDangerousHtml: true,
-    },
-    syntaxHighlight: "shiki",
-    shikiConfig: {
-      theme: "github-light",
-      wrap: true,
     },
   },
   vite: {
@@ -59,7 +49,12 @@ export default defineConfig({
     },
   },
   integrations: [
-    expressiveCode(),
+    expressiveCode({
+      themes: ['github-light', 'github-dark'],  // 다크모드 지원
+      defaultProps: {
+        wrap: true,
+      },
+    }),
     mdx(),
     sitemap({
       // 더 자세한 sitemap 설정
@@ -117,4 +112,13 @@ export default defineConfig({
     }),
   ],
   output: "static",
+  // 성능 최적화
+  prefetch: {
+    prefetchAll: true,           // 링크 프리페치로 페이지 속도 향상
+    defaultStrategy: 'hover',    // 호버 시 프리페치
+  },
+  // 실험적 기능
+  experimental: {
+    contentLayer: true,          // 콘텐츠 레이어로 성능 향상
+  },
 });
