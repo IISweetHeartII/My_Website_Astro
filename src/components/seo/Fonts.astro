@@ -7,11 +7,21 @@
   1. CSS 파일에서 @font-face 정의
   2. 필수 폰트만 preload (Regular 우선)
   3. 중복 제거로 성능 향상
--->
-
-<!-- 폰트 CSS 파일 로드 -->
+--><!-- 폰트 CSS 파일 로드 -->
 <link rel="stylesheet" href="/fonts/pretendard-subset.css" />
 
 <!-- 중요한 폰트만 preload: Regular > Bold > Light 순서 -->
-<link rel="preload" href="/fonts/woff2-subset/Pretendard-Regular.subset.woff2" as="font" type="font/woff2" crossorigin />
-<link rel="preload" href="/fonts/woff2-subset/Pretendard-Bold.subset.woff2" as="font" type="font/woff2" crossorigin /> 
+<link
+  rel="preload"
+  href="/fonts/woff2-subset/Pretendard-Regular.subset.woff2"
+  as="font"
+  type="font/woff2"
+  crossorigin
+/>
+<link
+  rel="preload"
+  href="/fonts/woff2-subset/Pretendard-Bold.subset.woff2"
+  as="font"
+  type="font/woff2"
+  crossorigin
+/>
