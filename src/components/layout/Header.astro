@@ -1,73 +1,124 @@
 ---
-import HeaderLink from './HeaderLink.astro';
-import { SITE_TITLE } from '../../consts';
-import { getUrl } from '@/utils/url';
-import { Menu, X, ArrowRight } from 'lucide-astro';
+import HeaderLink from "./HeaderLink.astro";
+import { SITE_TITLE } from "@/consts";
+import { getUrl } from "@/utils/url";
+import { Menu, X, ArrowRight } from "lucide-astro";
 ---
 
-<header class="sticky top-0 z-50 bg-primary border-b border-primary-light transition-colors duration-200">
-	<nav class="container mx-auto px-4 h-16 flex items-center justify-between">
-		<div class="flex items-center">
-			<a href={getUrl('/')} class="flex items-center space-x-2 text-white font-semibold text-lg hover:text-accent transition-colors duration-200 hover:bg-white hover:bg-opacity-10 rounded px-2 -ml-2 py-1 transition duration-300">
-				<img src={getUrl('/images/design/icon.png')} alt="Log8 Icon" class="w-6 h-6 rounded-md hover:scale-105 transition-transform duration-300" />
-				<span>{SITE_TITLE}</span>
-			</a>
-		</div>
+<header
+  id="main-header"
+  class="sticky top-0 z-50 bg-primary border-b border-primary-light transition-all duration-300"
+>
+  <nav class="container mx-auto px-4 h-16 flex items-center justify-between">
+    <div class="flex items-center">
+      <a
+        href={getUrl("/")}
+        class="flex items-center space-x-2 text-white font-semibold text-lg hover:text-accent transition-colors duration-200 hover:bg-white hover:bg-opacity-10 rounded px-2 -ml-2 py-1"
+      >
+        <img
+          src={getUrl("/images/design/icon.png")}
+          alt="Log8 Icon"
+          class="w-6 h-6 rounded-md hover:scale-105 transition-transform duration-300"
+        />
+        <span>{SITE_TITLE}</span>
+      </a>
+    </div>
 
-		<div class="hidden md:flex items-center space-x-6">
-			<HeaderLink href={getUrl('/who-is-dh')}>Who is 덕환</HeaderLink>
-			<HeaderLink href={getUrl('/blog')}>Blog</HeaderLink>
-			<HeaderLink href={getUrl('/youtube')}>YouTube</HeaderLink>
-			<HeaderLink href={getUrl('/showcase')}>Showcase</HeaderLink>
-			<HeaderLink href={getUrl('/now')}>Now</HeaderLink>
-			<HeaderLink href={getUrl('/portfolio')}>Portfolio</HeaderLink>
-		</div>
+    <div class="hidden md:flex items-center space-x-6">
+      <HeaderLink href={getUrl("/who-is-dh")}>Who is 덕환</HeaderLink>
+      <HeaderLink href={getUrl("/blog")}>Blog</HeaderLink>
+      <HeaderLink href={getUrl("/youtube")}>YouTube</HeaderLink>
+      <HeaderLink href={getUrl("/showcase")}>Showcase</HeaderLink>
+      <HeaderLink href={getUrl("/now")}>Now</HeaderLink>
+      <HeaderLink href={getUrl("/portfolio")}>Portfolio</HeaderLink>
+    </div>
 
-		<div class="flex items-center space-x-4">
-			<!-- Contact 버튼 -->
-			<a href={getUrl('/contact')} class="hidden md:inline-flex items-center bg-primary-light text-white border-0 py-1 px-3 focus:outline-none hover:bg-accent hover:text-text rounded text-base transition-colors duration-200">
-				Contact
-				<ArrowRight class="w-4 h-4 ml-1" />
-			</a>
-			
-			<!-- 데스크톱 로그인/로그아웃 버튼 - Contact 버튼 오른쪽에 위치 -->
-			<div class="hidden md:block">
-			</div>
-			
-			<!-- Mobile menu toggle button -->
-			<button class="md:hidden text-white focus:outline-none" id="mobile-menu-toggle">
-				<Menu class="w-6 h-6" />
-			</button>
-		</div>
-	</nav>
+    <div class="flex items-center space-x-4">
+      <!-- Contact 버튼 -->
+      <a
+        href={getUrl("/contact")}
+        class="hidden md:inline-flex items-center bg-white/20 text-white border-0 py-2 px-5 focus:outline-none hover:bg-white hover:text-primary rounded-xl text-base font-semibold transition-all duration-300 ease-out hover:shadow-lg"
+      >
+        Contact
+        <ArrowRight
+          class="w-4 h-4 ml-1.5 transition-transform duration-300 group-hover:translate-x-0.5"
+        />
+      </a>
 
-	<!-- Mobile menu content (initially hidden) -->
-	<div class="md:hidden fixed inset-0 bg-primary/95 z-40 transition-transform duration-300 ease-in-out transform translate-x-full" id="mobile-menu">
-		<div class="flex justify-end p-4">
-			<button class="text-white focus:outline-none" id="mobile-menu-close">
-				<X class="w-6 h-6" />
-			</button>
-		</div>
-		<nav class="flex flex-col items-center space-y-6 py-8">
-			<a href={getUrl('/who-is-dh')} class="text-white hover:text-accent text-xl font-semibold transition-colors duration-200">Who is 덕환</a>
-			<a href={getUrl('/blog')} class="text-white hover:text-accent text-xl font-semibold transition-colors duration-200">Blog</a>
-			<a href={getUrl('/youtube')} class="text-white hover:text-accent text-xl font-semibold transition-colors duration-200">YouTube</a>
-			<a href={getUrl('/showcase')} class="text-white hover:text-accent text-xl font-semibold transition-colors duration-200">Showcase</a>
-			<a href={getUrl('/now')} class="text-white hover:text-accent text-xl font-semibold transition-colors duration-200">Now</a>
-			<a href={getUrl('/portfolio')} class="text-white hover:text-accent text-xl font-semibold transition-colors duration-200">Portfolio</a>
-			<a href={getUrl('/contact')} class="text-white hover:text-accent text-xl font-semibold transition-colors duration-200">Contact</a>
-			
-			<!-- 모바일 로그인/로그아웃 버튼 -->
-			<div class="pt-4 border-t border-primary-light/30">
-			</div>
-		</nav>
-	</div>
+      <!-- Mobile menu toggle button -->
+      <button class="md:hidden text-white focus:outline-none" id="mobile-menu-toggle">
+        <Menu class="w-6 h-6" />
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile menu content (initially hidden) -->
+  <div
+    class="md:hidden fixed inset-0 bg-primary/95 z-40 transition-transform duration-300 ease-in-out transform translate-x-full"
+    id="mobile-menu"
+  >
+    <div class="flex justify-end p-4">
+      <button class="text-white focus:outline-none" id="mobile-menu-close">
+        <X class="w-6 h-6" />
+      </button>
+    </div>
+    <nav class="flex flex-col items-center space-y-6 py-8">
+      <a
+        href={getUrl("/who-is-dh")}
+        class="text-white hover:text-accent text-xl font-semibold transition-colors duration-200"
+        >Who is 덕환</a
+      >
+      <a
+        href={getUrl("/blog")}
+        class="text-white hover:text-accent text-xl font-semibold transition-colors duration-200"
+        >Blog</a
+      >
+      <a
+        href={getUrl("/youtube")}
+        class="text-white hover:text-accent text-xl font-semibold transition-colors duration-200"
+        >YouTube</a
+      >
+      <a
+        href={getUrl("/showcase")}
+        class="text-white hover:text-accent text-xl font-semibold transition-colors duration-200"
+        >Showcase</a
+      >
+      <a
+        href={getUrl("/now")}
+        class="text-white hover:text-accent text-xl font-semibold transition-colors duration-200"
+        >Now</a
+      >
+      <a
+        href={getUrl("/portfolio")}
+        class="text-white hover:text-accent text-xl font-semibold transition-colors duration-200"
+        >Portfolio</a
+      >
+      <a
+        href={getUrl("/contact")}
+        class="text-white hover:text-accent text-xl font-semibold transition-colors duration-200"
+        >Contact</a
+      >
+    </nav>
+  </div>
 </header>
 
 <script>
-	import { setupMobileMenu } from '../../../tools/scripts/mobileMenu';
-	
-	document.addEventListener('DOMContentLoaded', () => {
-		setupMobileMenu();
-	});
+  import { setupMobileMenu } from "@/tools/scripts/mobile-menu";
+
+  document.addEventListener("DOMContentLoaded", () => {
+    setupMobileMenu();
+
+    // Header scroll effect
+    const header = document.getElementById("main-header");
+
+    window.addEventListener("scroll", () => {
+      const currentScroll = window.pageYOffset;
+
+      if (currentScroll > 50) {
+        header?.classList.add("shadow-lg", "backdrop-blur-sm", "bg-primary/95");
+      } else {
+        header?.classList.remove("shadow-lg", "backdrop-blur-sm", "bg-primary/95");
+      }
+    });
+  });
 </script>

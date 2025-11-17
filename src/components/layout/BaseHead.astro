@@ -1,52 +1,51 @@
 ---
-// Import the global.css file here so that it is included on
-// all pages through the use of the <BaseHead /> component.
-import '@/styles/global.css';
-import { getUrl } from '@/utils/url';
-import Fonts from '@/components/seo/Fonts.astro';
+import "@/styles/global.css";
+import { getUrl } from "@/utils/url";
+import Fonts from "@/components/seo/Fonts.astro";
+import { DEFAULT_OG_IMAGE } from "@/consts";
 
 interface Props {
-	title: string;
-	description?: string;
-	featured_image?: string;
-	featured_image_alt?: string;
-	meta_title?: string;
-	meta_description?: string;
-	canonical_url?: string;
-	og_title?: string;
-	og_description?: string;
-	og_image?: string;
-	og_type?: string;
-	twitter_title?: string;
-	twitter_description?: string;
-	twitter_image?: string;
-	twitter_card?: string;
-	keywords?: string[];
-	author?: string;
-	no_index?: boolean;
+  title: string;
+  description?: string;
+  featured_image?: string;
+  featured_image_alt?: string;
+  meta_title?: string;
+  meta_description?: string;
+  canonical_url?: string;
+  og_title?: string;
+  og_description?: string;
+  og_image?: string;
+  og_type?: string;
+  twitter_title?: string;
+  twitter_description?: string;
+  twitter_image?: string;
+  twitter_card?: string;
+  keywords?: string[];
+  author?: string;
+  no_index?: boolean;
 }
 
-const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const canonicalURL = new globalThis.URL(Astro.url.pathname, Astro.site);
 
 const {
-	title,
-	description,
-	featured_image = '/images/design/ready.webp',
-	featured_image_alt,
-	meta_title,
-	meta_description,
-	canonical_url,
-	og_title,
-	og_description,
-	og_image,
-	og_type = 'article',
-	twitter_title,
-	twitter_description,
-	twitter_image,
-	twitter_card = 'summary_large_image',
-	keywords = [],
-	author,
-	no_index = false,
+  title,
+  description,
+  featured_image = DEFAULT_OG_IMAGE,
+  featured_image_alt,
+  meta_title,
+  meta_description,
+  canonical_url,
+  og_title,
+  og_description,
+  og_image,
+  og_type = "article",
+  twitter_title,
+  twitter_description,
+  twitter_image,
+  twitter_card = "summary_large_image",
+  keywords = [],
+  author,
+  no_index = false,
 } = Astro.props;
 
 // Implement cascading fallbacks for all metadata fields
@@ -65,14 +64,13 @@ const finalTwitterImage = twitter_image || finalOgImage;
 
 // Ensure all image URLs are absolute
 const getAbsoluteImageUrl = (imageUrl: string) => {
-    try {
-        return new URL(imageUrl, Astro.url).toString();
-    } catch (e) {
-        return imageUrl;
-    }
+  try {
+    return new globalThis.URL(imageUrl, Astro.url).toString();
+  } catch (e) {
+    return imageUrl;
+  }
 };
 
-const absoluteFeaturedImage = getAbsoluteImageUrl(featured_image);
 const absoluteOgImage = getAbsoluteImageUrl(finalOgImage);
 const absoluteTwitterImage = getAbsoluteImageUrl(finalTwitterImage);
 ---
@@ -83,7 +81,7 @@ const absoluteTwitterImage = getAbsoluteImageUrl(finalTwitterImage);
 <meta name="mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-<link rel="icon" type="image/png" href={getUrl('/images/design/icon.png')} />
+<link rel="icon" type="image/png" href={getUrl("/images/design/icon.png")} />
 <meta name="generator" content={Astro.generator} />
 <meta name="naver-site-verification" content="18e465aad2a2421233f4ec39c0f509141b3f8048" />
 
@@ -97,11 +95,15 @@ const absoluteTwitterImage = getAbsoluteImageUrl(finalTwitterImage);
 <title>{finalMetaTitle}</title>
 <meta name="title" content={finalMetaTitle} />
 <meta name="description" content={finalMetaDescription} />
-{keywords.length > 0 && <meta name="keywords" content={keywords.join(', ')} />}
+{keywords.length > 0 && <meta name="keywords" content={keywords.join(", ")} />}
 {author && <meta name="author" content={author} />}
 
 <!-- Robots Meta Tags -->
 {no_index && <meta name="robots" content="noindex, nofollow" />}
+
+<!-- AEO (Answer Engine Optimization) Meta Tags -->
+{finalMetaDescription && <meta name="abstract" content={finalMetaDescription.substring(0, 150)} />}
+{keywords.length > 0 && <meta name="topic" content={keywords[0]} />}
 
 <!-- Open Graph / Facebook -->
 <meta property="og:type" content={og_type} />
@@ -121,9 +123,11 @@ const absoluteTwitterImage = getAbsoluteImageUrl(finalTwitterImage);
 {featured_image_alt && <meta property="twitter:image:alt" content={featured_image_alt} />}
 
 <!-- PWA Support -->
-<link rel="manifest" href={getUrl('/manifest.json')} />
-<link rel="apple-touch-icon" href={getUrl('/images/design/icon.png')} />
+<link rel="manifest" href={getUrl("/manifest.json")} />
+<link rel="apple-touch-icon" href={getUrl("/images/design/icon.png")} />
 
 <!-- Google AdSense -->
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4653332352131854"
-     crossorigin="anonymous"></script>
+<script
+  async
+  src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4653332352131854"
+  crossorigin="anonymous"></script>

@@ -1,57 +1,81 @@
 ---
-import { Youtube, Instagram, Github } from 'lucide-astro';
+import { Youtube, Instagram, Github } from "lucide-astro";
 
 const today = new Date();
 ---
 
 <footer class="bg-primary text-background body-font py-8">
-	<div class="container mx-auto px-5 flex flex-col items-center">
-		<!-- Social Media Links -->
-		<div class="flex space-x-6 mb-6">
-			<a href="https://www.youtube.com/@Luckyducky-official" target="_blank" rel="noopener noreferrer"
-			   class="text-background hover:text-primary hover:bg-background hover:bg-opacity-10 rounded-full p-2 transition-all duration-200 hover:-translate-y-px"
-			   title="YouTube">
-				<Youtube class="w-7 h-7" />
-			</a>
-			
-			<a href="https://blog.naver.com/lucky_ducky_" target="_blank" rel="noopener noreferrer" 
-			   class="text-background hover:text-primary hover:bg-background hover:bg-opacity-10 rounded-full p-2 transition-all duration-200 hover:-translate-y-px" 
-			   title="Naver Blog">
-				<span class="text-2xl font-bold">N</span>
-			</a>
+  <div class="container mx-auto px-5 flex flex-col items-center">
+    <!-- Social Media Links -->
+    <div class="flex space-x-6 mb-6">
+      <a
+        href="https://www.youtube.com/@Luckyducky-official"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-background hover:text-primary hover:bg-white hover:bg-opacity-20 rounded-full p-3 transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-lg"
+        title="YouTube"
+      >
+        <Youtube class="w-6 h-6" />
+      </a>
 
-			<a href="https://www.instagram.com/1ucky_ducky_/" target="_blank" rel="noopener noreferrer"
-			   class="text-background hover:text-primary.DEFAULT hover:bg-background hover:bg-opacity-10 rounded-full p-2 transition-all duration-200 hover:-translate-y-px"
-			   title="Instagram">
-				<Instagram class="w-7 h-7" />
-			</a>
-			
-			<a href="https://github.com/IISweetHeartII" target="_blank" rel="noopener noreferrer"
-			   class="text-background hover:text-primary hover:bg-background hover:bg-opacity-10 rounded-full p-2 transition-all duration-200 hover:-translate-y-px"
-			   title="GitHub">
-				<Github class="w-7 h-7" />
-			</a>
+      <a
+        href="https://blog.naver.com/lucky_ducky_"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-background hover:text-primary hover:bg-white hover:bg-opacity-20 rounded-full p-3 transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-lg"
+        title="Naver Blog"
+      >
+        <span class="text-xl font-bold">N</span>
+      </a>
 
-		</div>
+      <a
+        href="https://www.instagram.com/1ucky_ducky_/"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-background hover:text-primary hover:bg-white hover:bg-opacity-20 rounded-full p-3 transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-lg"
+        title="Instagram"
+      >
+        <Instagram class="w-6 h-6" />
+      </a>
 
-		<!-- Policy Links -->
-		<div class="flex flex-wrap justify-center gap-4 mb-4">
-			<a href="/privacy" class="text-background hover:text-accent text-sm transition-colors duration-200 underline">
-				개인정보처리방침
-			</a>
-			<span class="text-background text-sm">•</span>
-			<a href="/terms" class="text-background hover:text-accent text-sm transition-colors duration-200 underline">
-				이용약관
-			</a>
-			<span class="text-background text-sm">•</span>
-			<a href="/contact" class="text-background hover:text-accent text-sm transition-colors duration-200 underline">
-				문의하기
-			</a>
-		</div>
+      <a
+        href="https://github.com/IISweetHeartII"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-background hover:text-primary hover:bg-white hover:bg-opacity-20 rounded-full p-3 transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-lg"
+        title="GitHub"
+      >
+        <Github class="w-6 h-6" />
+      </a>
+    </div>
 
-		<!-- Copyright -->
-		<div class="text-sm text-center">
-			<p>&copy; {today.getFullYear()} KIM DEOG HWAN. All rights reserved.</p>
-		</div>
-	</div>
+    <!-- Policy Links -->
+    <div class="flex flex-wrap justify-center gap-4 mb-4">
+      <a
+        href="/privacy"
+        class="text-background hover:text-accent text-sm transition-colors duration-200 underline"
+      >
+        개인정보처리방침
+      </a>
+      <span class="text-background text-sm">•</span>
+      <a
+        href="/terms"
+        class="text-background hover:text-accent text-sm transition-colors duration-200 underline"
+      >
+        이용약관
+      </a>
+      <span class="text-background text-sm">•</span>
+      <a
+        href="/contact"
+        class="text-background hover:text-accent text-sm transition-colors duration-200 underline"
+      >
+        문의하기
+      </a>
+    </div>
+
+    <!-- Copyright -->
+    <div class="text-sm text-center">
+      <p>&copy; {today.getFullYear()} KIM DEOG HWAN. All rights reserved.</p>
+    </div>
+  </div>
 </footer>
