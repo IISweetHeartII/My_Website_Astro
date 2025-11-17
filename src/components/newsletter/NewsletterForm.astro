@@ -73,14 +73,6 @@
         message.textContent = "✅ 구독되었습니다! 환영 이메일을 확인해주세요.";
         message.className = "mt-4 text-sm text-green-200 font-semibold";
         input.value = "";
-
-        // // Google Analytics 이벤트 (있다면)
-        // if (typeof gtag !== "undefined") {
-        //   gtag("event", "newsletter_subscribe", {
-        //     event_category: "engagement",
-        //     event_label: "Newsletter Subscription",
-        //   });
-        // }
       } else {
         message.textContent = `❌ 오류: ${data.error || "알 수 없는 오류"}`;
         message.className = "mt-4 text-sm text-red-200";
