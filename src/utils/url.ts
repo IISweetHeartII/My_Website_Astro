@@ -3,7 +3,7 @@
  * This will be / for custom domains and /repo-name/ for GitHub Pages
  */
 export const getBaseUrl = (): string => {
-    return import.meta.env.BASE_URL.replace(/\/$/, '');
+  return import.meta.env.BASE_URL.replace(/\/$/, "");
 };
 
 /**
@@ -12,7 +12,7 @@ export const getBaseUrl = (): string => {
  * @returns The complete URL path with proper base URL
  */
 export const getUrl = (path: string): string => {
-    const baseUrl = getBaseUrl();
-    const cleanPath = path.replace(/^\//, '');
-    return `${baseUrl}/${cleanPath}`.replace(/\/+/g, '/');
-}; 
+  const baseUrl = getBaseUrl();
+  const cleanPath = path.replace(/^\//, "");
+  return `${baseUrl}/${cleanPath}`.replace(/\/+/g, "/");
+};

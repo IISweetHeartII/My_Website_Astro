@@ -1,0 +1,117 @@
+---
+// Newsletter subscription form component
+---
+
+<div class="newsletter-widget bg-linear-to-r from-primary to-accent p-8 rounded-xl shadow-lg my-12">
+  <div class="max-w-2xl mx-auto text-center">
+    <h3 class="text-2xl font-bold text-white mb-2">📧 새 글 알림 받기</h3>
+    <p class="text-white/90 mb-6">
+      새로운 블로그 포스트가 발행되면 이메일로 알려드립니다. 무료입니다!
+    </p>
+
+    <form id="newsletter-form" class="flex flex-col sm:flex-row gap-3">
+      <input
+        type="email"
+        id="email-input"
+        name="email"
+        placeholder="your@email.com"
+        required
+        autocomplete="email"
+        class="flex-1 px-4 py-3 rounded-lg border-0 focus:ring-2 focus:ring-white/50 outline-none text-gray-900"
+      />
+      <button
+        type="submit"
+        class="px-6 py-3 bg-white text-primary font-semibold rounded-lg hover:bg-gray-100 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+      >
+        구독하기
+      </button>
+    </form>
+
+    <p id="newsletter-message" class="mt-4 text-sm text-white"></p>
+
+    <p class="mt-4 text-xs text-white/70">
+      스팸 메일은 절대 보내지 않습니다. 언제든 구독을 취소할 수 있습니다.
+    </p>
+  </div>
+</div>
+
+<script>
+  const form = document.getElementById("newsletter-form") as HTMLFormElement;
+  const input = document.getElementById("email-input") as HTMLInputElement;
+  const message = document.getElementById("newsletter-message") as HTMLParagraphElement;
+
+  form?.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const email = input.value.trim();
+    const button = form.querySelector("button") as HTMLButtonElement;
+    const originalText = button.textContent;
+
+    // 기본 유효성 검사
+    if (!email || !email.includes("@")) {
+      message.textContent = "❌ 올바른 이메일 주소를 입력해주세요.";
+      message.className = "mt-4 text-sm text-red-200 font-semibold";
+      return;
+    }
+
+    button.textContent = "처리 중...";
+    button.disabled = true;
+    message.textContent = "";
+
+    try {
+      const response = await fetch("/api/newsletter/subscribe", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        message.textContent = "✅ 구독되었습니다! 환영 이메일을 확인해주세요.";
+        message.className = "mt-4 text-sm text-green-200 font-semibold";
+        input.value = "";
+
+        // // Google Analytics 이벤트 (있다면)
+        // if (typeof gtag !== "undefined") {
+        //   gtag("event", "newsletter_subscribe", {
+        //     event_category: "engagement",
+        //     event_label: "Newsletter Subscription",
+        //   });
+        // }
+      } else {
+        message.textContent = `❌ 오류: ${data.error || "알 수 없는 오류"}`;
+        message.className = "mt-4 text-sm text-red-200";
+      }
+    } catch (error) {
+      console.error("Newsletter subscription error:", error);
+      message.textContent = "❌ 네트워크 오류가 발생했습니다. 잠시 후 다시 시도해주세요.";
+      message.className = "mt-4 text-sm text-red-200";
+    } finally {
+      button.textContent = originalText;
+      button.disabled = false;
+    }
+  });
+</script>
+
+<style>
+  .newsletter-widget {
+    background: linear-gradient(
+      135deg,
+      var(--color-primary, #485e8e) 0%,
+      var(--color-accent, #00ff6a) 100%
+    );
+  }
+
+  @media (max-width: 640px) {
+    .newsletter-widget {
+      padding: 1.5rem;
+    }
+
+    .newsletter-widget h3 {
+      font-size: 1.5rem;
+    }
+  }
+</style>

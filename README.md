@@ -1,5 +1,10 @@
 # Obsidian Blogger
 
+[![CI](https://github.com/IISweetHeartII/My_Website_Nextjs/actions/workflows/ci.yml/badge.svg)](https://github.com/IISweetHeartII/My_Website_Nextjs/actions/workflows/ci.yml)
+[![Cloudflare Pages](https://img.shields.io/badge/Cloudflare-Pages-F38020?logo=cloudflare&logoColor=white)](https://log8.kr)
+[![Made with Astro](https://img.shields.io/badge/Astro-5.15.8-BC52EE.svg?logo=astro&logoColor=white)](https://astro.build)
+[![pnpm](https://img.shields.io/badge/pnpm-8.x-F69220?logo=pnpm&logoColor=white)](https://pnpm.io)
+
 Transform your Obsidian notes into a beautiful, modern blog with ease. Built with Astro.js for blazing-fast performance and seamless Markdown support.
 
 ![Obsidian Blogger](public/images/design/icon.png)
@@ -21,12 +26,14 @@ Transform your Obsidian notes into a beautiful, modern blog with ease. Built wit
 ## 🚀 Quick Start
 
 1. Clone the repository:
+
 ```bash
 git clone https://github.com/yourusername/obsidian-blogger.git
 cd obsidian-blogger
 ```
 
 2. Install dependencies:
+
 ```bash
 npm install
 ```
@@ -36,6 +43,7 @@ npm install
    - Update the environment variables for your deployment
 
 4. Start the development server:
+
 ```bash
 npm run dev
 ```
@@ -46,10 +54,11 @@ npm run dev
 
 1. Add your Markdown files to `src/content/blog/`
 2. Include required frontmatter:
+
 ```yaml
 ---
-title: 'Your Post Title'
-description: 'Post description for SEO'
+title: "Your Post Title"
+description: "Post description for SEO"
 publish: true
 created_date: 2024-01-19
 slug: custom-url
@@ -61,22 +70,23 @@ tags:
 
 ### Supported Frontmatter Fields
 
-| Field | Required | Description |
-|-------|----------|-------------|
-| `title` | Yes | Post title |
-| `description` | No | SEO description |
-| `publish` | Yes | Set to `true` to publish |
-| `created_date` | No | Publication date |
-| `slug` | No | Custom URL slug |
-| `tags` | No | Array of tags |
-| `featured_image` | No | Hero image URL |
-| `subtitle` | No | Optional subtitle |
+| Field            | Required | Description              |
+| ---------------- | -------- | ------------------------ |
+| `title`          | Yes      | Post title               |
+| `description`    | No       | SEO description          |
+| `publish`        | Yes      | Set to `true` to publish |
+| `created_date`   | No       | Publication date         |
+| `slug`           | No       | Custom URL slug          |
+| `tags`           | No       | Array of tags            |
+| `featured_image` | No       | Hero image URL           |
+| `subtitle`       | No       | Optional subtitle        |
 
 ## 🎨 Customization
 
 ### Site Configuration
 
 Update `src/consts.ts` to modify:
+
 - Site title
 - Site description
 - Other global constants
@@ -90,6 +100,7 @@ Update `src/consts.ts` to modify:
 ## 🚀 Deployment
 
 See [DEPLOYMENT.md](DEPLOYMENT.md) for detailed deployment instructions for:
+
 - GitHub Pages
 - Netlify
 - Vercel
@@ -113,11 +124,64 @@ obsidian-blogger/
 
 ## 🛠️ Development Commands
 
-| Command | Action |
-|---------|--------|
-| `npm run dev` | Start dev server |
-| `npm run build` | Build for production |
-| `npm run preview` | Preview production build |
+| Command             | Action                                 |
+| ------------------- | -------------------------------------- |
+| `pnpm dev`          | Start dev server                       |
+| `pnpm build`        | Build for production                   |
+| `pnpm preview`      | Preview production build               |
+| `pnpm format`       | Format code with Prettier              |
+| `pnpm format:check` | Check code formatting                  |
+| `pnpm lint`         | Run ESLint                             |
+| `pnpm lint:fix`     | Auto-fix ESLint errors                 |
+| `pnpm type-check`   | Run TypeScript type checking           |
+| `pnpm check`        | Run all checks (format + lint + types) |
+| `pnpm fix`          | Auto-fix all issues                    |
+
+## 🏢 Production-Ready Features
+
+### Code Quality
+
+- ✅ **ESLint**: Code quality & bug prevention
+- ✅ **Prettier**: Consistent code formatting
+- ✅ **TypeScript Strict**: Maximum type safety
+- ✅ **Husky**: Pre-commit hooks
+- ✅ **lint-staged**: Fast incremental linting
+- ✅ **commitlint**: Conventional commit messages
+
+### Setup
+
+```bash
+# Install production tools
+./install-dev-tools.sh
+
+# Initialize Git hooks
+pnpm run prepare
+
+# Run all checks
+pnpm run check
+```
+
+📖 See [Setup Guide](SETUP_PRODUCTION_TOOLS.md) for detailed instructions.
+
+## 🔄 CI/CD
+
+이 프로젝트는 **GitHub Actions** (CI) + **Cloudflare Pages** (CD)로 자동화되어 있습니다.
+
+### GitHub Actions (자동 품질 검사)
+
+- ✅ 코드 포맷팅 검사 (Prettier)
+- ✅ TypeScript 타입 체크
+- ✅ 프로젝트 빌드
+- ✅ 보안 감사 (npm audit)
+- ✅ Lighthouse 성능 측정 (PR)
+
+### Cloudflare Pages (자동 배포)
+
+- 🚀 **Production**: `main` → https://log8.kr
+- 🔍 **Preview**: `develop` → https://\*.pages.dev
+- 📝 **PR Previews**: 자동 생성
+
+자세한 내용은 [CI/CD 가이드](docs/ci-cd-guide.md)를 참조하세요.
 
 ## 🤝 Contributing
 
@@ -130,6 +194,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 💖 Support
 
 If you find this project helpful, please consider:
+
 - Starring the repository
 - Sharing it with others
 - Contributing to its development
@@ -137,16 +202,19 @@ If you find this project helpful, please consider:
 ## 📚 Documentation
 
 ### Development Guides
+
 - [Development Guide](docs/development-guide.md) - 개발 환경 설정 및 가이드라인
 - [Design System Guide](docs/design-system-guide.md) - 색상 시스템 & 스타일 가이드
 - [TailwindCSS v4 Migration](CHANGELOG.md) - v3 → v4 마이그레이션 과정
 
 ### Content Creation
+
 - [Publishing Workflow Guide](docs/publishing-workflow-guide.md) - Obsidian → Astro 발행 프로세스
 - [SEO Optimization Guide](docs/seo-optimization-guide.md) - 블로그 게시물 SEO/AEO 최적화
 - [Markdown Writing Guide](docs/markdown-writing-guide.md) - 마크다운 작성 가이드
 
 ### Deployment
+
 - [Deployment Guide](DEPLOYMENT.md) - 다양한 플랫폼 배포 가이드
 - [Environment Setup](astro.config.mjs) - Astro 설정 및 환경 변수
 
