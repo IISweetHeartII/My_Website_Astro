@@ -312,11 +312,27 @@ const blogPostSchema = {
     <Footer />
     <script>
       import mermaid from "mermaid";
+
+      // Astro View Transitions 지원
       document.addEventListener("astro:page-load", () => {
+        // mermaid 코드 블록을 mermaid가 인식할 수 있는 형식으로 변환
+        const mermaidBlocks = document.querySelectorAll("code.language-mermaid");
+        mermaidBlocks.forEach((block) => {
+          const pre = block.parentElement;
+          if (pre && pre.tagName === "PRE") {
+            const div = document.createElement("div");
+            div.className = "mermaid";
+            div.textContent = block.textContent || "";
+            pre.replaceWith(div);
+          }
+        });
+
+        // Mermaid 초기화 및 렌더링
         mermaid.initialize({
           startOnLoad: true,
           theme: "default",
         });
+        mermaid.run();
       });
     </script>
   </body>

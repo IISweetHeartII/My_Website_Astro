@@ -4,7 +4,6 @@ import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
 import tailwindcss from "@tailwindcss/vite";
 import expressiveCode from "astro-expressive-code";
-import rehypeMermaid from "rehype-mermaid";
 import robotsTxt from "astro-robots-txt";
 
 // https://astro.build/config
@@ -22,14 +21,6 @@ export default defineConfig({
     gfm: true, // GitHub Flavored Markdown 활성화
     smartypants: true, // 타이포그래피 최적화
     syntaxHighlight: false, // expressiveCode 사용하므로 비활성화
-    rehypePlugins: [
-      [
-        rehypeMermaid,
-        {
-          strategy: "inline-svg", // 빌드 시 SVG로 변환 (번들 크기 감소!)
-        },
-      ],
-    ],
     remarkRehype: {
       allowDangerousHtml: true,
     },
