@@ -3,6 +3,7 @@ import Layout from "@/layouts/Layout.astro";
 import BlogCard from "@/features/blog/components/BlogCard.astro";
 import CategoryFilter from "@/features/blog/components/CategoryFilter.astro";
 import { getCollection, type CollectionEntry } from "astro:content";
+import { categoryMap } from "@/shared/config/categories";
 
 // Helper function to get a valid timestamp or fallback
 function getValidTimestamp(date: Date | null | undefined): number {
@@ -18,18 +19,6 @@ const allPosts = (await getCollection("blog"))
     const dateB = getValidTimestamp(b.data.created_date);
     return dateB - dateA;
   });
-
-// 카테고리 한글 -> 영문 ID 매핑
-const categoryMap: Record<string, string> = {
-  일상: "daily",
-  개발: "dev",
-  AI: "ai",
-  보안: "security",
-  교육: "education",
-  DevOps: "devops",
-  생산성: "productivity",
-  블로그운영: "blog",
-};
 ---
 
 <Layout
