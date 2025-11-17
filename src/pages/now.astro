@@ -1,12 +1,13 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import Layout from "../layouts/Layout.astro";
 
 // 정적 데이터로 변경
 const displayData = [
   {
     id: 1,
     title: "Building the Log8 Blog",
-    description: "Astro와 TailwindCSS를 활용한 개인 블로그 플랫폼 개발 및 최적화 작업을 진행하고 있습니다. 사용자 경험과 성능 향상에 집중하고 있어요.",
+    description:
+      "Astro와 TailwindCSS를 활용한 개인 블로그 플랫폼 개발 및 최적화 작업을 진행하고 있습니다. 사용자 경험과 성능 향상에 집중하고 있어요.",
     category: "개발",
     icon: "🚀",
     color: "from-blue-100 to-cyan-200",
@@ -14,13 +15,14 @@ const displayData = [
     activities: [
       { date: "Dec 15", activity: "프로젝트 소개 페이지를 사용자 중심으로 완전히 재설계했습니다." },
       { date: "Dec 12", activity: "TailwindCSS v4로 업그레이드 및 성능 최적화" },
-      { date: "Dec 10", activity: "블로그 AdSense 최적화 완료" }
-    ]
+      { date: "Dec 10", activity: "블로그 AdSense 최적화 완료" },
+    ],
   },
   {
     id: 2,
     title: "Exploring New AI Models",
-    description: "최신 LLM들의 아키텍처와 성능을 비교 분석하며, few-shot learning과 프롬프트 엔지니어링에 대해 깊이 연구하고 있습니다.",
+    description:
+      "최신 LLM들의 아키텍처와 성능을 비교 분석하며, few-shot learning과 프롬프트 엔지니어링에 대해 깊이 연구하고 있습니다.",
     category: "AI/ML",
     icon: "🤖",
     color: "from-purple-100 to-pink-200",
@@ -28,13 +30,14 @@ const displayData = [
     activities: [
       { date: "Dec 12", activity: "Claude 3.5 Sonnet과 GPT-4o 성능 비교 실험" },
       { date: "Dec 8", activity: "프롬프트 최적화 기법 연구 및 적용" },
-      { date: "Dec 3", activity: "Anthropic의 Constitutional AI 논문 분석" }
-    ]
+      { date: "Dec 3", activity: "Anthropic의 Constitutional AI 논문 분석" },
+    ],
   },
   {
     id: 3,
     title: "Learning System Design",
-    description: "대규모 시스템 설계와 마이크로서비스 아키텍처에 대해 학습하며, 실제 프로젝트에 적용 가능한 패턴들을 연구하고 있습니다.",
+    description:
+      "대규모 시스템 설계와 마이크로서비스 아키텍처에 대해 학습하며, 실제 프로젝트에 적용 가능한 패턴들을 연구하고 있습니다.",
     category: "아키텍처",
     icon: "🏗️",
     color: "from-green-100 to-teal-200",
@@ -42,9 +45,9 @@ const displayData = [
     activities: [
       { date: "Dec 14", activity: "Redis를 활용한 캐싱 전략 설계 및 구현" },
       { date: "Dec 9", activity: "마이크로서비스간 통신 패턴 연구" },
-      { date: "Dec 4", activity: "데이터베이스 샤딩 전략 학습" }
-    ]
-  }
+      { date: "Dec 4", activity: "데이터베이스 샤딩 전략 학습" },
+    ],
+  },
 ];
 ---
 
@@ -58,8 +61,8 @@ const displayData = [
             What I'm Doing <span class="text-green-500">Now</span>
           </h1>
           <p class="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
-            지금 이 순간 제가 몰두하고 있는 것들과 성장하고 있는 분야들을 공유합니다.
-            살아있는 지적 호기심과 꾸준한 실행력을 확인해보세요.
+            지금 이 순간 제가 몰두하고 있는 것들과 성장하고 있는 분야들을 공유합니다. 살아있는 지적
+            호기심과 꾸준한 실행력을 확인해보세요.
           </p>
           <div class="flex items-center justify-center space-x-2 text-sm text-gray-500">
             <div class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
@@ -73,54 +76,60 @@ const displayData = [
     <section class="py-12">
       <div class="container mx-auto px-8">
         <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8">
-          {displayData.map((item) => (
-            <div class="group bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
-              <!-- Card Header -->
-              <div class={`bg-gradient-to-br ${item.color} p-6 relative overflow-hidden`}>
-                <div class="flex items-start justify-between">
-                  <div class="flex items-center space-x-3">
-                    <div class="text-3xl">{item.icon}</div>
-                    <div>
-                      <span class={`inline-block px-3 py-1 ${item.textColor} bg-white bg-opacity-60 rounded-full text-sm font-medium`}>
-                        {item.category}
-                      </span>
+          {
+            displayData.map((item) => (
+              <div class="group bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
+                {/* Card Header */}
+                <div class={`bg-gradient-to-br ${item.color} p-6 relative overflow-hidden`}>
+                  <div class="flex items-start justify-between">
+                    <div class="flex items-center space-x-3">
+                      <div class="text-3xl">{item.icon}</div>
+                      <div>
+                        <span
+                          class={`inline-block px-3 py-1 ${item.textColor} bg-white bg-opacity-60 rounded-full text-sm font-medium`}
+                        >
+                          {item.category}
+                        </span>
+                      </div>
                     </div>
                   </div>
+                  <h2 class="text-2xl font-bold text-gray-900 mt-4 mb-3">{item.title}</h2>
+                  <p class="text-gray-700 leading-relaxed">{item.description}</p>
+                  {/* Decorative elements */}
+                  <div class="absolute -top-4 -right-4 w-24 h-24 bg-white bg-opacity-20 rounded-full" />
+                  <div class="absolute -bottom-6 -left-6 w-32 h-32 bg-white bg-opacity-10 rounded-full" />
                 </div>
-                <h2 class="text-2xl font-bold text-gray-900 mt-4 mb-3">{item.title}</h2>
-                <p class="text-gray-700 leading-relaxed">{item.description}</p>
-                <!-- Decorative elements -->
-                <div class="absolute -top-4 -right-4 w-24 h-24 bg-white bg-opacity-20 rounded-full"></div>
-                <div class="absolute -bottom-6 -left-6 w-32 h-32 bg-white bg-opacity-10 rounded-full"></div>
-              </div>
 
-              <!-- Timeline Section -->
-              <div class="p-6">
-                <div class="flex items-center space-x-2 mb-4">
-                  <div class="w-4 h-4 bg-green-500 rounded-full flex items-center justify-center">
-                    <div class="w-2 h-2 bg-white rounded-full"></div>
+                {/* Timeline Section */}
+                <div class="p-6">
+                  <div class="flex items-center space-x-2 mb-4">
+                    <div class="w-4 h-4 bg-green-500 rounded-full flex items-center justify-center">
+                      <div class="w-2 h-2 bg-white rounded-full" />
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-900">Recent Activities</h3>
                   </div>
-                  <h3 class="text-lg font-semibold text-gray-900">Recent Activities</h3>
-                </div>
 
-                <div class="space-y-3">
-                  {item.activities.map((activity, index) => (
-                    <div class="flex items-start space-x-3 group/activity">
-                      <div class="flex-shrink-0 mt-2">
-                        <div class={`w-2 h-2 rounded-full ${index === 0 ? 'bg-green-500' : 'bg-gray-300'}`}></div>
-                      </div>
-                      <div class="flex-1 min-w-0">
-                        <div class="flex items-center space-x-2 mb-1">
-                          <span class="text-sm font-medium text-gray-500">{activity.date}</span>
+                  <div class="space-y-3">
+                    {item.activities.map((activity, index) => (
+                      <div class="flex items-start space-x-3 group/activity">
+                        <div class="shrink-0 mt-2">
+                          <div
+                            class={`w-2 h-2 rounded-full ${index === 0 ? "bg-green-500" : "bg-gray-300"}`}
+                          />
                         </div>
-                        <p class="text-sm text-gray-700 leading-relaxed">{activity.activity}</p>
+                        <div class="flex-1 min-w-0">
+                          <div class="flex items-center space-x-2 mb-1">
+                            <span class="text-sm font-medium text-gray-500">{activity.date}</span>
+                          </div>
+                          <p class="text-sm text-gray-700 leading-relaxed">{activity.activity}</p>
+                        </div>
                       </div>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))
+          }
         </div>
       </div>
     </section>

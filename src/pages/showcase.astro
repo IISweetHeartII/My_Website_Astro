@@ -1,49 +1,64 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout title="Showcase | Log8">
-  <main class="min-h-screen bg-gradient-to-br from-white to-gray-50">
+  <main class="min-h-screen bg-linear-to-br from-white to-gray-50">
     <!-- Hero Section - 주력 프로젝트 -->
     <section class="relative overflow-hidden bg-white">
       <div class="container mx-auto px-8 py-16">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <!-- 텍스트 영역 -->
           <div class="space-y-6">
-            <div class="inline-flex items-center px-4 py-2 bg-green-50 text-green-700 rounded-full text-sm font-medium border border-green-200">
+            <div
+              class="inline-flex items-center px-4 py-2 bg-green-50 text-green-700 rounded-full text-sm font-medium border border-green-200"
+            >
               ⭐ 주력 프로젝트
             </div>
             <h1 class="text-4xl lg:text-5xl font-bold text-gray-900 leading-tight">
               내 점심 뭐 먹지?
             </h1>
             <p class="text-xl text-gray-600 leading-relaxed">
-              매일 반복되는 식사 고민을 해결해주는 똑똑한 점심 추천 서비스입니다. 
-              AI가 당신의 취향과 상황을 고려해 완벽한 점심을 추천해드려요.
+              매일 반복되는 식사 고민을 해결해주는 똑똑한 점심 추천 서비스입니다. AI가 당신의 취향과
+              상황을 고려해 완벽한 점심을 추천해드려요.
             </p>
             <div class="flex flex-col sm:flex-row gap-4">
-              <a 
-                href="https://mylunch.log8.kr" 
-                target="_blank" 
+              <a
+                href="https://mylunch.log8.kr"
+                target="_blank"
                 rel="noopener noreferrer"
                 class="inline-flex items-center justify-center px-8 py-4 bg-green-500 hover:bg-green-600 text-white font-semibold rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
               >
                 🍽️ 점심 추천받기
                 <svg class="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                  ></path>
                 </svg>
               </a>
-              <button class="inline-flex items-center justify-center px-8 py-4 border-2 border-gray-300 hover:border-green-500 text-gray-700 hover:text-green-600 font-semibold rounded-lg transition-all duration-300">
+              <button
+                class="inline-flex items-center justify-center px-8 py-4 border-2 border-gray-300 hover:border-green-500 text-gray-700 hover:text-green-600 font-semibold rounded-lg transition-all duration-300"
+              >
                 개발 과정 보기
                 <svg class="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M9 5l7 7-7 7"></path>
                 </svg>
               </button>
             </div>
           </div>
-          
+
           <!-- 이미지/GIF 영역 -->
           <div class="relative">
-            <div class="aspect-video bg-gradient-to-br from-green-100 to-green-200 rounded-2xl shadow-2xl overflow-hidden">
+            <div
+              class="aspect-video bg-linear-to-br from-green-100 to-green-200 rounded-2xl shadow-2xl overflow-hidden"
+            >
               <!-- 임시 플레이스홀더 - 나중에 실제 GIF로 교체 -->
               <div class="w-full h-full flex items-center justify-center">
                 <div class="text-center space-y-4">
@@ -51,15 +66,25 @@ import Layout from '../layouts/Layout.astro';
                   <p class="text-green-700 font-medium">점심 추천 서비스 미리보기</p>
                   <div class="flex justify-center space-x-2">
                     <div class="w-3 h-3 bg-green-500 rounded-full animate-bounce"></div>
-                    <div class="w-3 h-3 bg-green-500 rounded-full animate-bounce" style="animation-delay: 0.1s"></div>
-                    <div class="w-3 h-3 bg-green-500 rounded-full animate-bounce" style="animation-delay: 0.2s"></div>
+                    <div
+                      class="w-3 h-3 bg-green-500 rounded-full animate-bounce"
+                      style="animation-delay: 0.1s"
+                    >
+                    </div>
+                    <div
+                      class="w-3 h-3 bg-green-500 rounded-full animate-bounce"
+                      style="animation-delay: 0.2s"
+                    >
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
             <!-- 장식 요소 -->
-            <div class="absolute -top-4 -right-4 w-24 h-24 bg-green-200 rounded-full opacity-60"></div>
-            <div class="absolute -bottom-6 -left-6 w-32 h-32 bg-blue-200 rounded-full opacity-40"></div>
+            <div class="absolute -top-4 -right-4 w-24 h-24 bg-green-200 rounded-full opacity-60">
+            </div>
+            <div class="absolute -bottom-6 -left-6 w-32 h-32 bg-blue-200 rounded-full opacity-40">
+            </div>
           </div>
         </div>
       </div>
@@ -74,10 +99,13 @@ import Layout from '../layouts/Layout.astro';
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          
           <!-- Gemini Duck Bot -->
-          <div class="group bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
-            <div class="aspect-video bg-gradient-to-br from-blue-100 to-purple-200 relative overflow-hidden">
+          <div
+            class="group bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2"
+          >
+            <div
+              class="aspect-video bg-linear-to-br from-blue-100 to-purple-200 relative overflow-hidden"
+            >
               <!-- 임시 플레이스홀더 -->
               <div class="w-full h-full flex items-center justify-center">
                 <div class="text-center">
@@ -85,32 +113,46 @@ import Layout from '../layouts/Layout.astro';
                   <p class="text-blue-700 font-medium text-sm">AI 챗봇 미리보기</p>
                 </div>
               </div>
-              <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-10 transition-all duration-300"></div>
+              <div
+                class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-10 transition-all duration-300"
+              >
+              </div>
             </div>
             <div class="p-6">
-              <h3 class="text-xl font-bold text-gray-900 mb-2 group-hover:text-green-600 transition-colors">
+              <h3
+                class="text-xl font-bold text-gray-900 mb-2 group-hover:text-green-600 transition-colors"
+              >
                 Gemini Duck Bot
               </h3>
               <p class="text-gray-600 mb-4 text-sm leading-relaxed">
                 Gemini AI를 활용한 똑똑한 질의응답 챗봇으로, 자연스러운 대화가 가능합니다.
               </p>
-              <a 
-                href="https://gemini-bot.log8.kr" 
-                target="_blank" 
+              <a
+                href="https://gemini-bot.log8.kr"
+                target="_blank"
                 rel="noopener noreferrer"
                 class="inline-flex items-center justify-center w-full px-4 py-3 bg-blue-500 hover:bg-blue-600 text-white font-medium rounded-lg transition-all duration-300 group-hover:bg-green-500"
               >
                 챗봇과 대화하기
                 <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                  ></path>
                 </svg>
               </a>
             </div>
           </div>
 
           <!-- Fortune Meme -->
-          <div class="group bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
-            <div class="aspect-video bg-gradient-to-br from-pink-100 to-orange-200 relative overflow-hidden">
+          <div
+            class="group bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2"
+          >
+            <div
+              class="aspect-video bg-linear-to-br from-pink-100 to-orange-200 relative overflow-hidden"
+            >
               <!-- 임시 플레이스홀더 -->
               <div class="w-full h-full flex items-center justify-center">
                 <div class="text-center">
@@ -118,32 +160,46 @@ import Layout from '../layouts/Layout.astro';
                   <p class="text-pink-700 font-medium text-sm">밈 운세 미리보기</p>
                 </div>
               </div>
-              <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-10 transition-all duration-300"></div>
+              <div
+                class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-10 transition-all duration-300"
+              >
+              </div>
             </div>
             <div class="p-6">
-              <h3 class="text-xl font-bold text-gray-900 mb-2 group-hover:text-green-600 transition-colors">
+              <h3
+                class="text-xl font-bold text-gray-900 mb-2 group-hover:text-green-600 transition-colors"
+              >
                 밈 운세 생성기
               </h3>
               <p class="text-gray-600 mb-4 text-sm leading-relaxed">
                 재미있는 밈과 함께 오늘의 운세를 확인해보세요. 웃음과 재미가 가득합니다.
               </p>
-              <a 
-                href="https://fortune-meme.log8.kr" 
-                target="_blank" 
+              <a
+                href="https://fortune-meme.log8.kr"
+                target="_blank"
                 rel="noopener noreferrer"
                 class="inline-flex items-center justify-center w-full px-4 py-3 bg-pink-500 hover:bg-pink-600 text-white font-medium rounded-lg transition-all duration-300 group-hover:bg-green-500"
               >
                 운세 확인하기
                 <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                  ></path>
                 </svg>
               </a>
             </div>
           </div>
 
           <!-- Mockly -->
-          <div class="group bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
-            <div class="aspect-video bg-gradient-to-br from-teal-100 to-cyan-200 relative overflow-hidden">
+          <div
+            class="group bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2"
+          >
+            <div
+              class="aspect-video bg-linear-to-br from-teal-100 to-cyan-200 relative overflow-hidden"
+            >
               <!-- 임시 플레이스홀더 -->
               <div class="w-full h-full flex items-center justify-center">
                 <div class="text-center">
@@ -151,32 +207,46 @@ import Layout from '../layouts/Layout.astro';
                   <p class="text-teal-700 font-medium text-sm">디자인 툴 미리보기</p>
                 </div>
               </div>
-              <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-10 transition-all duration-300"></div>
+              <div
+                class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-10 transition-all duration-300"
+              >
+              </div>
             </div>
             <div class="p-6">
-              <h3 class="text-xl font-bold text-gray-900 mb-2 group-hover:text-green-600 transition-colors">
+              <h3
+                class="text-xl font-bold text-gray-900 mb-2 group-hover:text-green-600 transition-colors"
+              >
                 Mockly
               </h3>
               <p class="text-gray-600 mb-4 text-sm leading-relaxed">
                 빠르고 쉬운 목업 디자인 도구로 아이디어를 시각적으로 구현해보세요.
               </p>
-              <a 
-                href="https://mockly.log8.kr" 
-                target="_blank" 
+              <a
+                href="https://mockly.log8.kr"
+                target="_blank"
                 rel="noopener noreferrer"
                 class="inline-flex items-center justify-center w-full px-4 py-3 bg-teal-500 hover:bg-teal-600 text-white font-medium rounded-lg transition-all duration-300 group-hover:bg-green-500"
               >
                 목업 만들기
                 <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                  ></path>
                 </svg>
               </a>
             </div>
           </div>
 
           <!-- Planner -->
-          <div class="group bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
-            <div class="aspect-video bg-gradient-to-br from-indigo-100 to-purple-200 relative overflow-hidden">
+          <div
+            class="group bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2"
+          >
+            <div
+              class="aspect-video bg-linear-to-br from-indigo-100 to-purple-200 relative overflow-hidden"
+            >
               <!-- 임시 플레이스홀더 -->
               <div class="w-full h-full flex items-center justify-center">
                 <div class="text-center">
@@ -184,29 +254,38 @@ import Layout from '../layouts/Layout.astro';
                   <p class="text-indigo-700 font-medium text-sm">플래너 미리보기</p>
                 </div>
               </div>
-              <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-10 transition-all duration-300"></div>
+              <div
+                class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-10 transition-all duration-300"
+              >
+              </div>
             </div>
             <div class="p-6">
-              <h3 class="text-xl font-bold text-gray-900 mb-2 group-hover:text-green-600 transition-colors">
+              <h3
+                class="text-xl font-bold text-gray-900 mb-2 group-hover:text-green-600 transition-colors"
+              >
                 Smart Planner
               </h3>
               <p class="text-gray-600 mb-4 text-sm leading-relaxed">
                 효율적인 일정 관리와 목표 달성을 위한 스마트 플래너 서비스입니다.
               </p>
-              <a 
-                href="https://planner.log8.kr" 
-                target="_blank" 
+              <a
+                href="https://planner.log8.kr"
+                target="_blank"
                 rel="noopener noreferrer"
                 class="inline-flex items-center justify-center w-full px-4 py-3 bg-indigo-500 hover:bg-indigo-600 text-white font-medium rounded-lg transition-all duration-300 group-hover:bg-green-500"
               >
                 플래너 사용하기
                 <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                  ></path>
                 </svg>
               </a>
             </div>
           </div>
-
         </div>
       </div>
     </section>
@@ -215,14 +294,17 @@ import Layout from '../layouts/Layout.astro';
     <section class="py-16 bg-white">
       <div class="container mx-auto px-8 text-center">
         <h3 class="text-2xl font-bold text-gray-900 mb-4">더 많은 프로젝트가 궁금하신가요?</h3>
-        <p class="text-lg text-gray-600 mb-8">개발 과정과 기술적 세부사항은 포트폴리오에서 확인하실 수 있습니다.</p>
-        <a 
-          href="/portfolio" 
+        <p class="text-lg text-gray-600 mb-8">
+          개발 과정과 기술적 세부사항은 포트폴리오에서 확인하실 수 있습니다.
+        </p>
+        <a
+          href="/portfolio"
           class="inline-flex items-center justify-center px-8 py-4 bg-gray-900 hover:bg-green-600 text-white font-semibold rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
         >
           포트폴리오 보기
           <svg class="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"
+            ></path>
           </svg>
         </a>
       </div>

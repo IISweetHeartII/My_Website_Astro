@@ -1,24 +1,24 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import IntroSection from '@/components/features/IntroSection.astro';
-import BlogCard from '@/components/ui/BlogCard.astro';
-import { getCollection, type CollectionEntry } from 'astro:content';
-import { Image } from 'astro:assets';
-import readyImage from '@/assets/images/design/ready.png';
+import Layout from "../layouts/Layout.astro";
+import IntroSection from "@/components/features/IntroSection.astro";
+import BlogCard from "@/components/ui/BlogCard.astro";
+import { getCollection, type CollectionEntry } from "astro:content";
+import { Image } from "astro:assets";
+import readyImage from "@/assets/images/design/ready.png";
 
 function getValidTimestamp(date: Date | null | undefined): number {
-    if (!date) return 0;
-    const timestamp = date.getTime();
-    return isNaN(timestamp) ? 0 : timestamp;
+  if (!date) return 0;
+  const timestamp = date.getTime();
+  return isNaN(timestamp) ? 0 : timestamp;
 }
 
-const allPosts = (await getCollection('blog'))
-    .filter((post: CollectionEntry<'blog'>) => post.data.publish)
-    .sort((a: CollectionEntry<'blog'>, b: CollectionEntry<'blog'>) => {
-        const dateA = getValidTimestamp(a.data.created_date);
-        const dateB = getValidTimestamp(b.data.created_date);
-        return dateB - dateA;
-    });
+const allPosts = (await getCollection("blog"))
+  .filter((post: CollectionEntry<"blog">) => post.data.publish)
+  .sort((a: CollectionEntry<"blog">, b: CollectionEntry<"blog">) => {
+    const dateA = getValidTimestamp(a.data.created_date);
+    const dateB = getValidTimestamp(b.data.created_date);
+    return dateB - dateA;
+  });
 
 const latestBlogPosts = allPosts.slice(0, 3);
 ---
@@ -27,20 +27,32 @@ const latestBlogPosts = allPosts.slice(0, 3);
   <main>
     <IntroSection />
     <!-- Hero Section -->
-    		<section class="bg-background-light text-primary py-20">
-			<div class="container mx-auto text-center">
-				<h1 class="text-5xl md:text-6xl font-bold mb-4">AI를 팀메이트 삼아 문제를 해결하는 <span class="text-accent">개발자, 김덕환입니다.</span></h1>
-				<p class="text-xl md:text-2xl text-text">AI 활용 기반의 문제 해결과 풀스택 역량 확장을 기록하고 공유합니다.</p>
-				<a href="/blog" class="mt-8 inline-block bg-accent text-background py-3 px-8 rounded-lg text-lg font-semibold hover:bg-primary transition duration-300">블로그 살펴보기 &rarr;</a>
-			</div>
-		</section>
+    <section class="bg-background-light text-primary py-20">
+      <div class="container mx-auto text-center">
+        <h1 class="text-5xl md:text-6xl font-bold mb-4">
+          AI를 팀메이트 삼아 문제를 해결하는 <span class="text-accent">개발자, 김덕환입니다.</span>
+        </h1>
+        <p class="text-xl md:text-2xl text-text">
+          AI 활용 기반의 문제 해결과 풀스택 역량 확장을 기록하고 공유합니다.
+        </p>
+        <a
+          href="/blog"
+          class="mt-8 inline-block bg-accent text-background py-3 px-8 rounded-lg text-lg font-semibold hover:bg-primary transition duration-300"
+          >블로그 살펴보기 &rarr;</a
+        >
+      </div>
+    </section>
 
     <!-- About/Intro Section (Who is 덕환 Preview) -->
     <section class="py-16 bg-background-light">
       <div class="container mx-auto text-center">
         <h2 class="text-3xl font-bold text-primary mb-8">Who is 덕환?</h2>
-        <p class="text-lg text-text max-w-2xl mx-auto mb-8">AI Researcher, Developer, and Content Creator sharing insights and experiences.</p>
-        <a href="/who-is-dh" class="text-accent hover:underline font-medium text-lg">Learn More &rarr;</a>
+        <p class="text-lg text-text max-w-2xl mx-auto mb-8">
+          AI Researcher, Developer, and Content Creator sharing insights and experiences.
+        </p>
+        <a href="/who-is-dh" class="text-accent hover:underline font-medium text-lg"
+          >Learn More &rarr;</a
+        >
       </div>
     </section>
 
@@ -53,16 +65,22 @@ const latestBlogPosts = allPosts.slice(0, 3);
           <div class="bg-white p-6 rounded-lg shadow-md">
             <h3 class="text-xl font-semibold text-primary mb-2">Lucky Dukky 최신 영상</h3>
             <p class="text-text mb-4">Lucky Dukky 채널의 최신 콘텐츠를 확인해보세요.</p>
-            <a href="/youtube#lucky-dukky" class="text-accent hover:underline font-medium">Watch Now &rarr;</a>
+            <a href="/youtube#lucky-dukky" class="text-accent hover:underline font-medium"
+              >Watch Now &rarr;</a
+            >
           </div>
           <div class="bg-white p-6 rounded-lg shadow-md">
             <h3 class="text-xl font-semibold text-primary mb-2">Sponge Duk 최신 영상</h3>
             <p class="text-text mb-4">개발과 일상을 기록하는 Sponge Duk의 최신 영상입니다.</p>
-            <a href="/youtube#sponge-duk" class="text-accent hover:underline font-medium">Watch Now &rarr;</a>
+            <a href="/youtube#sponge-duk" class="text-accent hover:underline font-medium"
+              >Watch Now &rarr;</a
+            >
           </div>
         </div>
         <div class="text-center mt-8">
-           <a href="/youtube" class="text-accent hover:underline font-medium text-lg">See All Videos &rarr;</a>
+          <a href="/youtube" class="text-accent hover:underline font-medium text-lg"
+            >See All Videos &rarr;</a
+          >
         </div>
       </div>
     </section>
@@ -72,24 +90,28 @@ const latestBlogPosts = allPosts.slice(0, 3);
       <div class="container mx-auto">
         <h2 class="text-3xl font-bold text-primary text-center mb-8">Latest Blog Posts</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {latestBlogPosts.length > 0 ? (
-            latestBlogPosts.map((post: CollectionEntry<'blog'>) => (
-              <BlogCard
-                title={post.data.title}
-                description={post.data.description ?? undefined}
-                date={post.data.created_date ?? undefined}
-                slug={post.data.slug ?? post.id.replace(/\.[^/.]+$/, '')}
-                dataTags={post.data.tags ? post.data.tags.join(',') : ''}
-                dataTitle={post.data.title}
-                dataDescription={post.data.description ?? ''}
-              />
-            ))
-          ) : (
-            <p class="col-span-full text-center text-text">아직 작성된 블로그 글이 없습니다.</p>
-          )}
+          {
+            latestBlogPosts.length > 0 ? (
+              latestBlogPosts.map((post) => (
+                <BlogCard
+                  title={post.data.title}
+                  description={post.data.description ?? undefined}
+                  date={post.data.created_date ?? undefined}
+                  slug={post.data.slug ?? post.id.replace(/\.[^/.]+$/, "")}
+                  dataTags={post.data.tags ? post.data.tags.join(",") : ""}
+                  dataTitle={post.data.title}
+                  dataDescription={post.data.description ?? ""}
+                />
+              ))
+            ) : (
+              <p class="col-span-full text-center text-text">아직 작성된 블로그 글이 없습니다.</p>
+            )
+          }
         </div>
         <div class="text-center mt-8">
-           <a href="/blog" class="text-accent hover:underline font-medium text-lg">Read All Posts &rarr;</a>
+          <a href="/blog" class="text-accent hover:underline font-medium text-lg"
+            >Read All Posts &rarr;</a
+          >
         </div>
       </div>
     </section>
@@ -100,33 +122,59 @@ const latestBlogPosts = allPosts.slice(0, 3);
         <h2 class="text-3xl font-bold text-primary text-center mb-8">Featured Projects</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           <!-- Placeholder for featured project previews -->
-           <div class="bg-white rounded-lg shadow-md overflow-hidden">
-            <Image src={readyImage} alt="AI Syllable Showdown project preview" class="w-full h-48 object-cover" widths={[400, 800]} sizes="(max-width: 768px) 100vw, 33vw" />
+          <div class="bg-white rounded-lg shadow-md overflow-hidden">
+            <Image
+              src={readyImage}
+              alt="AI Syllable Showdown project preview"
+              class="w-full h-48 object-cover"
+              widths={[400, 800]}
+              sizes="(max-width: 768px) 100vw, 33vw"
+            />
             <div class="p-6">
               <h3 class="text-xl font-semibold text-primary mb-2">AI Syllable Showdown</h3>
               <p class="text-text mb-4">An example project showcasing AI capabilities.</p>
-              <a href="/showcase" class="text-accent hover:underline font-medium">View Project &rarr;</a>
+              <a href="/showcase" class="text-accent hover:underline font-medium"
+                >View Project &rarr;</a
+              >
             </div>
           </div>
-           <div class="bg-white rounded-lg shadow-md overflow-hidden">
-            <Image src={readyImage} alt="Featured project preview" class="w-full h-48 object-cover" widths={[400, 800]} sizes="(max-width: 768px) 100vw, 33vw" />
+          <div class="bg-white rounded-lg shadow-md overflow-hidden">
+            <Image
+              src={readyImage}
+              alt="Featured project preview"
+              class="w-full h-48 object-cover"
+              widths={[400, 800]}
+              sizes="(max-width: 768px) 100vw, 33vw"
+            />
             <div class="p-6">
               <h3 class="text-xl font-semibold text-primary mb-2">Another Project</h3>
               <p class="text-text mb-4">Brief description of another project.</p>
-              <a href="/showcase" class="text-accent hover:underline font-medium">View Project &rarr;</a>
+              <a href="/showcase" class="text-accent hover:underline font-medium"
+                >View Project &rarr;</a
+              >
             </div>
           </div>
-            <div class="bg-white rounded-lg shadow-md overflow-hidden">
-            <Image src={readyImage} alt="Project showcase preview" class="w-full h-48 object-cover" widths={[400, 800]} sizes="(max-width: 768px) 100vw, 33vw" />
+          <div class="bg-white rounded-lg shadow-md overflow-hidden">
+            <Image
+              src={readyImage}
+              alt="Project showcase preview"
+              class="w-full h-48 object-cover"
+              widths={[400, 800]}
+              sizes="(max-width: 768px) 100vw, 33vw"
+            />
             <div class="p-6">
               <h3 class="text-xl font-semibold text-primary mb-2">Third Project Idea</h3>
               <p class="text-text mb-4">Brief description of a third project.</p>
-              <a href="/showcase" class="text-accent hover:underline font-medium">View Project &rarr;</a>
+              <a href="/showcase" class="text-accent hover:underline font-medium"
+                >View Project &rarr;</a
+              >
             </div>
           </div>
         </div>
-         <div class="text-center mt-8">
-           <a href="/showcase" class="text-accent hover:underline font-medium text-lg">See All Projects &rarr;</a>
+        <div class="text-center mt-8">
+          <a href="/showcase" class="text-accent hover:underline font-medium text-lg"
+            >See All Projects &rarr;</a
+          >
         </div>
       </div>
     </section>
@@ -136,30 +184,35 @@ const latestBlogPosts = allPosts.slice(0, 3);
       <div class="container mx-auto">
         <h2 class="text-3xl font-bold text-primary text-center mb-8">What's Happening Now</h2>
         <div class="space-y-6 max-w-2xl mx-auto">
-           <!-- Placeholder for Now... items -->
-            <div class="bg-white p-6 rounded-lg shadow-md">
-              <h3 class="text-xl font-semibold text-primary mb-2">Building the Log8 Blog</h3>
-              <p class="text-text">Continuing development and refinement of this platform.</p>
-               <a href="/now" class="text-accent hover:underline font-medium text-sm">Read More &rarr;</a>
-            </div>
-            <div class="bg-white p-6 rounded-lg shadow-md">
-              <h3 class="text-xl font-semibold text-primary mb-2">New Research Area</h3>
-              <p class="text-text">Exploring potential new research directions in AI.</p>
-               <a href="/now" class="text-accent hover:underline font-medium text-sm">Read More &rarr;</a>
-            </div>
+          <!-- Placeholder for Now... items -->
+          <div class="bg-white p-6 rounded-lg shadow-md">
+            <h3 class="text-xl font-semibold text-primary mb-2">Building the Log8 Blog</h3>
+            <p class="text-text">Continuing development and refinement of this platform.</p>
+            <a href="/now" class="text-accent hover:underline font-medium text-sm"
+              >Read More &rarr;</a
+            >
+          </div>
+          <div class="bg-white p-6 rounded-lg shadow-md">
+            <h3 class="text-xl font-semibold text-primary mb-2">New Research Area</h3>
+            <p class="text-text">Exploring potential new research directions in AI.</p>
+            <a href="/now" class="text-accent hover:underline font-medium text-sm"
+              >Read More &rarr;</a
+            >
+          </div>
         </div>
         <div class="text-center mt-8">
-           <a href="/now" class="text-accent hover:underline font-medium text-lg">See All Updates &rarr;</a>
+          <a href="/now" class="text-accent hover:underline font-medium text-lg"
+            >See All Updates &rarr;</a
+          >
         </div>
       </div>
     </section>
-
   </main>
 
   <script>
-    import { setupScrollAnimations } from '../../tools/scripts/scrollAnimation.ts';
+    import { setupScrollAnimations } from "@/tools/scripts/scroll-animation";
 
-    document.addEventListener('DOMContentLoaded', () => {
+    document.addEventListener("DOMContentLoaded", () => {
       setupScrollAnimations();
     });
   </script>

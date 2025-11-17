@@ -1,24 +1,24 @@
 ---
-import { type CollectionEntry, getCollection, render } from 'astro:content';
-import BlogPost from '../../layouts/BlogPost.astro';
+import { type CollectionEntry, getCollection, render } from "astro:content";
+import BlogPost from "../../layouts/BlogPost.astro";
 
 export async function getStaticPaths() {
-	const posts = await getCollection('blog');
-	return posts.map((post) => {
-		// Use explicit slug if provided, otherwise generate from the file path
-		const slug = post.data.slug || post.id.replace(/\.[^/.]+$/, '');
-		return {
-			params: { slug },
-			props: { post }, // Pass the whole post object
-		};
-	});
+  const posts = await getCollection("blog");
+  return posts.map((post) => {
+    // Use explicit slug if provided, otherwise generate from the file path
+    const slug = post.data.slug || post.id.replace(/\.[^/.]+$/, "");
+    return {
+      params: { slug },
+      props: { post }, // Pass the whole post object
+    };
+  });
 }
 
 // This page component's props type
 // Astro automatically provides the Content component alongside the props from getStaticPaths.
 type Props = {
-	post: CollectionEntry<'blog'>;
-	// Content는 render(post) 호출로 얻습니다.
+  post: CollectionEntry<"blog">;
+  // Content는 render(post) 호출로 얻습니다.
 };
 
 // Destructure only 'post' from Astro.props
@@ -26,9 +26,8 @@ const { post } = Astro.props;
 
 // Use the render helper to get the Content component
 const { Content } = await render(post);
-
 ---
 
 <BlogPost data={post.data}>
-	<Content />
-</BlogPost> 
+  <Content />
+</BlogPost>
