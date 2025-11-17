@@ -1,6 +1,7 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 import { SITE_TITLE } from "@/shared/config/consts";
+import { FileQuestion, ArrowRight } from "lucide-astro";
 
 const title = `404 Not Found - ${SITE_TITLE}`;
 const description =
@@ -22,26 +23,7 @@ const description =
         Oops! Looks like this page has wandered off into the digital wilderness.
       </p>
       <div class="relative w-32 h-32 mx-auto mb-8 md:w-24 md:h-24">
-        <svg
-          class="lost-file text-primary w-full h-full"
-          width="120"
-          height="120"
-          viewBox="0 0 24 24"
-        >
-          <path
-            fill="currentColor"
-            d="M14 2H6C4.89543 2 4 2.89543 4 4V20C4 21.1046 4.89543 22 6 22H18C19.1046 22 20 21.1046 20 20V8L14 2ZM14 4L18 8H14V4ZM9.995 16.886C9.625 16.886 9.315 16.806 9.065 16.646C8.815 16.486 8.62 16.266 8.48 15.986C8.34 15.706 8.27 15.396 8.27 15.056C8.27 14.716 8.34 14.406 8.48 14.126C8.62 13.846 8.815 13.626 9.065 13.466C9.315 13.306 9.625 13.226 9.995 13.226C10.365 13.226 10.675 13.306 10.925 13.466C11.175 13.626 11.37 13.846 11.51 14.126C11.65 14.406 11.72 14.716 11.72 15.056C11.72 15.396 11.65 15.706 11.51 15.986C11.37 16.266 11.175 16.486 10.925 16.646C10.675 16.806 10.365 16.886 9.995 16.886ZM14.995 16.886C14.625 16.886 14.315 16.806 14.065 16.646C13.815 16.486 13.62 16.266 13.48 15.986C13.34 15.706 13.27 15.396 13.27 15.056C13.27 14.716 13.34 14.406 13.48 14.126C13.62 13.846 13.815 13.626 14.065 13.466C14.315 13.306 14.625 13.226 14.995 13.226C15.365 13.226 15.675 13.306 15.925 13.466C16.175 13.626 16.37 13.846 16.51 14.126C16.65 14.406 16.72 14.716 16.72 15.056C16.72 15.396 16.65 15.706 16.51 15.986C16.37 16.266 16.175 16.486 15.925 16.646C15.675 16.806 15.365 16.886 14.995 16.886Z"
-          ></path>
-        </svg>
-        <div
-          class="lost-face absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-15 h-15 pointer-events-none md:w-12 md:h-12"
-        >
-          <div class="eyes relative top-6 flex justify-center gap-4"></div>
-          <div
-            class="mouth absolute bottom-4 left-1/2 transform -translate-x-1/2 rotate-45 w-5 h-5 border-3 border-text border-t-transparent border-r-transparent border-l-transparent"
-          >
-          </div>
-        </div>
+        <FileQuestion class="lost-file text-primary w-full h-full" />
       </div>
       <div class="action-buttons mb-6">
         <a
@@ -49,20 +31,7 @@ const description =
           class="inline-flex items-center gap-2 px-6 py-3 bg-accent text-text rounded-xl no-underline font-semibold transition-all duration-200 hover:bg-accent-mint hover:-translate-y-px"
         >
           Take Me Home
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="20"
-            height="20"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            class="transition-transform duration-200 group-hover:translate-x-1"
-          >
-            <path d="M5 12h14m-7-7 7 7-7 7"></path>
-          </svg>
+          <ArrowRight class="w-5 h-5 transition-transform duration-200 group-hover:translate-x-1" />
         </a>
       </div>
       <p class="help-text text-sm text-primary m-0 md:text-xs">
