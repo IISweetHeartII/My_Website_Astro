@@ -28,6 +28,9 @@ const blog = defineCollection({
     featured_image: z.string().optional().nullable(),
     featured_image_alt: z.string().optional().nullable(),
     slug: z.string().optional().nullable(),
+    category: z
+      .enum(["일상", "개발", "AI", "보안", "교육", "DevOps", "생산성", "블로그운영"])
+      .default("일상"),
     tags: z.array(z.string()).default([]).nullable(),
     // SEO specific fields
     meta_title: z.string().optional().nullable(),

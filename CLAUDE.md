@@ -35,44 +35,74 @@ This is **Obsidian Blogger** - an Astro-based blog optimized for writing in Obsi
 
 ## Architecture Overview
 
+### Architecture Philosophy
+
+This project uses **Feature-First Architecture** (domain-driven organization):
+
+- **features/**: Domain-specific features (blog, newsletter, about) with collocated components
+- **shared/**: Reusable components, utilities, and configuration used across domains
+- **Benefits**: Better scalability, clear boundaries, easier maintenance as project grows
+
 ### Content System
 
 - **Direct Obsidian Integration**: Write blog posts directly in `src/content/blog/` using Obsidian
 - **Content Filtering**: Posts with `publish: true` frontmatter are included in builds (filtered at runtime)
 - **No Sync Script**: Astro reads markdown files directly from `src/content/blog/` using Content Collections API
 
-### Project Structure
+### Project Structure (Feature-First Architecture)
 
 ```
 src/
-├── components/
-│   ├── features/     # Feature-specific components (IntroSection, TagFilter)
-│   ├── layout/       # Layout components (Header, Footer, BaseHead)
-│   ├── seo/          # SEO components (GoogleAnalytics, Fonts)
-│   └── ui/           # UI components (BlogCard, FormattedDate)
-├── content/blog/     # Blog posts - write directly here with Obsidian!
-├── layouts/          # Astro layouts (Layout.astro, BlogPost.astro)
-├── pages/            # Route files (.astro pages)
-├── styles/           # Global styles and CSS
-├── lib/              # Utility functions
-└── utils/            # Helper utilities
+├── features/                    # Business domains (feature-first organization)
+│   ├── blog/                   # Blog domain
+│   │   └── components/
+│   │       ├── BlogCard.astro
+│   │       └── TagFilter.astro
+│   ├── newsletter/             # Newsletter domain
+│   │   └── components/
+│   │       └── NewsletterForm.astro
+│   └── about/                  # About/intro domain
+│       └── components/
+│           └── IntroSection.astro
+│
+├── shared/                      # Shared/common code
+│   ├── components/
+│   │   ├── layout/             # Global layout (Header, Footer, BaseHead)
+│   │   ├── ui/                 # Reusable UI (FormattedDate, Images)
+│   │   ├── seo/                # SEO components (Analytics, Fonts, Schema)
+│   │   └── comments/           # Comments (Giscus)
+│   ├── scripts/                # Client-side scripts (mobile-menu, scroll-animation)
+│   ├── utils/                  # Utility functions (url.ts)
+│   └── config/                 # Config files (consts.ts)
+│
+├── content/
+│   └── blog/                   # Blog posts - write here with Obsidian!
+├── layouts/                    # Astro layouts (Layout, BlogPost)
+├── pages/                      # Route files + API endpoints
+│   ├── api/newsletter/         # Newsletter API endpoints
+│   └── ...
+├── styles/                     # Global CSS
+├── assets/                     # Static assets (images)
+└── content.config.ts           # Content Collections schema
 ```
 
 ### Key Configuration Files
 
-- `astro.config.mjs`: Main Astro config with TailwindCSS v4, MDX, sitemap, robots.txt, prefetch, experimental features
-- `src/consts.ts`: Site constants (title, description, author, keywords, URL)
+- `astro.config.mjs`: Main Astro config with TailwindCSS v4, MDX, sitemap, robots.txt, prefetch
+- `src/shared/config/consts.ts`: Site constants (title, description, author, keywords, URL)
+- `src/content.config.ts`: Content Collections schema
 - `tsconfig.json`: TypeScript paths configured for `@/` imports with modern bundler settings
 - `.prettierrc`: Code formatting with Astro plugin
 
 ### Path Aliases (tsconfig.json)
 
-- `@/components/*` → `./src/components/*`
+- `@/features/*` → `./src/features/*` (domain-specific features)
+- `@/shared/*` → `./src/shared/*` (shared components, utils, config)
 - `@/layouts/*` → `./src/layouts/*`
-- `@/utils/*` → `./src/utils/*`
-- `@/lib/*` → `./src/lib/*`
+- `@/pages/*` → `./src/pages/*`
 - `@/styles/*` → `./src/styles/*`
 - `@/content/*` → `./src/content/*`
+- `@/assets/*` → `./src/assets/*`
 
 ## Content Publishing Workflow
 

@@ -47,7 +47,7 @@
 
 ### 4단계: Cloudflare 환경 변수 설정 (1분)
 
-1. Cloudflare Dashboard → Workers & Pages → `My_Website_Nextjs`
+1. Cloudflare Dashboard → Workers & Pages → `My_Website_Astro`
 2. **Settings** → **Environment variables**
 3. 다음 3개 변수 추가:
 

@@ -1,6 +1,6 @@
 # Obsidian Blogger
 
-[![CI](https://github.com/IISweetHeartII/My_Website_Nextjs/actions/workflows/ci.yml/badge.svg)](https://github.com/IISweetHeartII/My_Website_Nextjs/actions/workflows/ci.yml)
+[![CI](https://github.com/IISweetHeartII/My_Website_Astro/actions/workflows/ci.yml/badge.svg)](https://github.com/IISweetHeartII/My_Website_Astro/actions/workflows/ci.yml)
 [![Cloudflare Pages](https://img.shields.io/badge/Cloudflare-Pages-F38020?logo=cloudflare&logoColor=white)](https://log8.kr)
 [![Made with Astro](https://img.shields.io/badge/Astro-5.15.8-BC52EE.svg?logo=astro&logoColor=white)](https://astro.build)
 [![pnpm](https://img.shields.io/badge/pnpm-8.x-F69220?logo=pnpm&logoColor=white)](https://pnpm.io)

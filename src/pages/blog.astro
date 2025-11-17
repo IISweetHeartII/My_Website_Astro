@@ -1,7 +1,7 @@
 ---
 import Layout from "@/layouts/Layout.astro";
-import BlogCard from "@/components/ui/BlogCard.astro";
-import ImprovedTagFilter from "@/components/features/ImprovedTagFilter.astro";
+import BlogCard from "@/features/blog/components/BlogCard.astro";
+import CategoryFilter from "@/features/blog/components/CategoryFilter.astro";
 import { getCollection, type CollectionEntry } from "astro:content";
 
 // Helper function to get a valid timestamp or fallback
@@ -19,21 +19,27 @@ const allPosts = (await getCollection("blog"))
     return dateB - dateA;
   });
 
-const allTags: string[] = [
-  ...new Set(
-    allPosts.flatMap((post: CollectionEntry<"blog">) => (post.data.tags ?? []) as string[])
-  ),
-];
+// 카테고리 한글 -> 영문 ID 매핑
+const categoryMap: Record<string, string> = {
+  일상: "daily",
+  개발: "dev",
+  AI: "ai",
+  보안: "security",
+  교육: "education",
+  DevOps: "devops",
+  생산성: "productivity",
+  블로그운영: "blog",
+};
 ---
 
 <Layout
   title="Blog - Ideas & Insights"
   description="Explore our collection of articles, ideas, insights, and everything in between."
 >
-  <div class="w-full max-w-4xl mx-auto p-8 flex flex-col" data-all-tags={JSON.stringify(allTags)}>
-    <!-- 개선된 태그 관리 시스템 -->
+  <div class="w-full max-w-4xl mx-auto p-8 flex flex-col">
+    <!-- 카테고리 필터 시스템 -->
     <section class="mb-8">
-      <ImprovedTagFilter allTags={allTags} />
+      <CategoryFilter />
     </section>
 
     {
@@ -48,6 +54,7 @@ const allTags: string[] = [
               dataTags={post.data.tags ? post.data.tags.join(",") : ""}
               dataTitle={post.data.title}
               dataDescription={post.data.description ?? ""}
+              dataCategory={categoryMap[post.data.category] || "daily"}
             />
           ))}
         </div>
@@ -61,10 +68,8 @@ const allTags: string[] = [
   <script is:inline>
     document.addEventListener("DOMContentLoaded", () => {
       const searchInput = document.getElementById("post-search");
-      const tagFilterContainer = document.getElementById("tag-filter-container");
+      const categoryFilterContainer = document.getElementById("category-filter-container");
       const blogPostsGrid = document.getElementById("blog-posts-grid");
-      const showMoreButton = document.getElementById("show-more-tags");
-      const moreTags = document.getElementById("more-tags");
       const resultsInfo = document.getElementById("results-info");
 
       if (!blogPostsGrid) {
@@ -74,7 +79,20 @@ const allTags: string[] = [
 
       const allBlogCards = Array.from(blogPostsGrid.children);
       let currentSearchTerm = "";
-      let currentSelectedTag = "all";
+      let currentSelectedCategory = "all";
+
+      // 카테고리 이름 매핑
+      const categoryNames = {
+        all: "전체",
+        daily: "일상",
+        dev: "개발",
+        ai: "AI",
+        security: "보안",
+        education: "교육",
+        devops: "DevOps",
+        productivity: "생산성",
+        blog: "블로그운영",
+      };
 
       // 필터링 함수
       const filterPosts = () => {
@@ -82,7 +100,7 @@ const allTags: string[] = [
 
         allBlogCards.forEach((card) => {
           const cardTitle = (card.dataset.title || "").toLowerCase();
-          const cardTags = (card.dataset.tags || "").toLowerCase().split(",");
+          const cardCategory = (card.dataset.category || "").toLowerCase();
           const cardDescription = (card.dataset.description || "").toLowerCase();
 
           const matchesSearch =
@@ -90,9 +108,10 @@ const allTags: string[] = [
             cardTitle.includes(currentSearchTerm) ||
             cardDescription.includes(currentSearchTerm);
 
-          const matchesTag = currentSelectedTag === "all" || cardTags.includes(currentSelectedTag);
+          const matchesCategory =
+            currentSelectedCategory === "all" || cardCategory === currentSelectedCategory;
 
-          if (matchesSearch && matchesTag) {
+          if (matchesSearch && matchesCategory) {
             card.style.display = "block";
             visibleCount++;
           } else {
@@ -103,15 +122,16 @@ const allTags: string[] = [
         // 결과 정보 업데이트
         if (resultsInfo) {
           const searchText = currentSearchTerm ? ` "${currentSearchTerm}"` : "";
-          const tagText = currentSelectedTag !== "all" ? ` #${currentSelectedTag}` : "";
+          const categoryText =
+            currentSelectedCategory !== "all" ? ` [${categoryNames[currentSelectedCategory]}]` : "";
           resultsInfo.innerHTML = `
-                            <div class="flex items-center gap-2">
-                                <svg class="w-4 h-4 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-                                </svg>
-                                <span>${searchText}${tagText} 검색 결과: <strong>${visibleCount}개</strong> / 전체 ${allBlogCards.length}개</span>
-                            </div>
-                        `;
+            <div class="flex items-center gap-2">
+              <svg class="w-4 h-4 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+              </svg>
+              <span>${searchText}${categoryText} 검색 결과: <strong>${visibleCount}개</strong> / 전체 ${allBlogCards.length}개</span>
+            </div>
+          `;
         }
       };
 
@@ -123,66 +143,23 @@ const allTags: string[] = [
         });
       }
 
-      // 태그 클릭 이벤트
-      if (tagFilterContainer) {
-        tagFilterContainer.addEventListener("click", (event) => {
-          const targetLink = event.target.closest("a[data-tag]");
+      // 카테고리 클릭 이벤트
+      if (categoryFilterContainer) {
+        categoryFilterContainer.addEventListener("click", (event) => {
+          const targetButton = event.target.closest("button[data-category]");
 
-          if (targetLink) {
-            event.preventDefault();
-
-            // 이전 활성 태그 스타일 제거
-            document.querySelectorAll(".current-tag").forEach((tag) => {
-              tag.classList.remove("current-tag", "bg-primary", "text-background");
-              tag.classList.add("bg-background-light", "text-light");
+          if (targetButton) {
+            // 이전 활성 카테고리 스타일 제거
+            document.querySelectorAll(".current-category").forEach((btn) => {
+              btn.classList.remove("current-category", "bg-primary", "text-background");
+              btn.classList.add("bg-background-muted", "text-text-muted");
             });
 
-            // 새 활성 태그 스타일 적용
-            targetLink.classList.remove("bg-background-light", "text-light");
-            targetLink.classList.add("current-tag", "bg-primary", "text-background");
+            // 새 활성 카테고리 스타일 적용
+            targetButton.classList.remove("bg-background-muted", "text-text-muted");
+            targetButton.classList.add("current-category", "bg-primary", "text-background");
 
-            currentSelectedTag = targetLink.dataset.tag;
-            filterPosts();
-          }
-        });
-      }
-
-      // 더보기 버튼 이벤트
-      if (showMoreButton && moreTags) {
-        showMoreButton.addEventListener("click", () => {
-          const isHidden = moreTags.classList.contains("hidden");
-
-          if (isHidden) {
-            moreTags.classList.remove("hidden");
-            moreTags.classList.add("show");
-            showMoreButton.querySelector("span").textContent = "접기";
-            showMoreButton.querySelector("svg").style.transform = "rotate(180deg)";
-          } else {
-            moreTags.classList.remove("show");
-            moreTags.classList.add("hidden");
-            const hiddenCount = showMoreButton.querySelector("span").textContent.match(/\d+/)[0];
-            showMoreButton.querySelector("span").textContent = `+${hiddenCount}개 더보기`;
-            showMoreButton.querySelector("svg").style.transform = "rotate(0deg)";
-          }
-        });
-      }
-
-      // 숨겨진 태그들도 클릭 이벤트 적용
-      if (moreTags) {
-        moreTags.addEventListener("click", (event) => {
-          const targetLink = event.target.closest("a[data-tag]");
-
-          if (targetLink) {
-            event.preventDefault();
-
-            // 모든 활성 태그 스타일 제거
-            document.querySelectorAll(".current-tag").forEach((tag) => {
-              tag.classList.remove("current-tag", "bg-primary", "text-background");
-            });
-
-            targetLink.classList.add("current-tag", "bg-primary", "text-background");
-
-            currentSelectedTag = targetLink.dataset.tag;
+            currentSelectedCategory = targetButton.dataset.category;
             filterPosts();
           }
         });
@@ -194,7 +171,7 @@ const allTags: string[] = [
   </script>
 
   <script>
-    import { setupScrollAnimations } from "@/tools/scripts/scroll-animation";
+    import { setupScrollAnimations } from "@/shared/scripts/scroll-animation";
 
     document.addEventListener("DOMContentLoaded", () => {
       setupScrollAnimations();

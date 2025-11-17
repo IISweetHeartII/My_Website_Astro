@@ -1,7 +1,7 @@
 ---
 import HeaderLink from "./HeaderLink.astro";
-import { SITE_TITLE } from "@/consts";
-import { getUrl } from "@/utils/url";
+import { SITE_TITLE } from "@/shared/config/consts";
+import { getUrl } from "@/shared/utils/url";
 import { Menu, X, ArrowRight } from "lucide-astro";
 ---
 
@@ -103,7 +103,7 @@ import { Menu, X, ArrowRight } from "lucide-astro";
 </header>
 
 <script>
-  import { setupMobileMenu } from "@/tools/scripts/mobile-menu";
+  import { setupMobileMenu } from "@/shared/scripts/mobile-menu";
 
   document.addEventListener("DOMContentLoaded", () => {
     setupMobileMenu();

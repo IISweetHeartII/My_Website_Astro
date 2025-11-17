@@ -1,0 +1,235 @@
+---
+import BaseHead from "@/shared/components/layout/BaseHead.astro";
+import Header from "@/shared/components/layout/Header.astro";
+import Footer from "@/shared/components/layout/Footer.astro";
+import BlogCard from "@/features/blog/components/BlogCard.astro";
+import { getCollection, type CollectionEntry } from "astro:content";
+
+// 카테고리 정의
+const categories = [
+  { id: "daily", name: "일상", icon: "✨", description: "일상, 회고, 경험 이야기" },
+  { id: "dev", name: "개발", icon: "💻", description: "웹개발, 프로그래밍, 코딩 이야기" },
+  { id: "ai", name: "AI", icon: "🤖", description: "ChatGPT, AI 도구, 프롬프트 엔지니어링 이야기" },
+  { id: "security", name: "보안", icon: "🔒", description: "웹 보안, 인증, 보안 기술 이야기" },
+  { id: "education", name: "교육", icon: "📖", description: "강연, 수업, 교육 실습 이야기" },
+  { id: "devops", name: "DevOps", icon: "⚙️", description: "인프라, 서버, 배포, CI/CD 이야기" },
+  {
+    id: "productivity",
+    name: "생산성",
+    icon: "⚡",
+    description: "Obsidian, 워크플로우, 자동화 도구 이야기",
+  },
+  { id: "blog", name: "블로그운영", icon: "📝", description: "블로그 설정, 최적화, 운영 이야기" },
+];
+
+// 카테고리 ID를 한글 이름으로 매핑
+const categoryMap: Record<string, string> = {
+  일상: "daily",
+  개발: "dev",
+  AI: "ai",
+  보안: "security",
+  교육: "education",
+  DevOps: "devops",
+  생산성: "productivity",
+  블로그운영: "blog",
+};
+
+// 역매핑 (ID -> 한글 이름)
+const reverseCategoryMap: Record<string, string> = {
+  daily: "일상",
+  dev: "개발",
+  ai: "AI",
+  security: "보안",
+  education: "교육",
+  devops: "DevOps",
+  productivity: "생산성",
+  blog: "블로그운영",
+};
+
+export async function getStaticPaths() {
+  const posts = await getCollection("blog", ({ data }: CollectionEntry<"blog">) => {
+    return data.publish !== false;
+  });
+
+  return categories.map((category) => {
+    const categoryName = reverseCategoryMap[category.id] || "일상";
+    const filteredPosts = posts.filter((post: CollectionEntry<"blog">) => {
+      const postCategoryId = categoryMap[post.data.category] || "daily";
+      return postCategoryId === category.id;
+    });
+
+    return {
+      params: { category: category.id },
+      props: {
+        posts: filteredPosts,
+        category: category,
+      },
+    };
+  });
+}
+
+const { category } = Astro.props;
+const { posts } = Astro.props;
+
+// Sort posts by date
+const sortedPosts = [...posts].sort((a: CollectionEntry<"blog">, b: CollectionEntry<"blog">) => {
+  const dateA = a.data.created_date ?? new Date(0);
+  const dateB = b.data.created_date ?? new Date(0);
+  return dateB.valueOf() - dateA.valueOf();
+});
+
+// Prepare post data for rendering
+const postsData = sortedPosts.map((post) => ({
+  title: post.data.title,
+  description: post.data.description ?? undefined,
+  date: post.data.created_date ?? undefined,
+  slug: post.data.slug ?? post.id.replace(/\.[^/.]+$/, ""),
+  dataTags: post.data.tags ? post.data.tags.join(",") : "",
+  dataTitle: post.data.title,
+  dataDescription: post.data.description ?? "",
+  dataCategory: categoryMap[post.data.category] || "daily",
+}));
+
+const title = `${category.icon} ${category.name}`;
+const description = category.description;
+---
+
+<!doctype html>
+<html lang="ko">
+  <head>
+    <BaseHead title={title} description={description} />
+  </head>
+  <body class="min-h-screen flex flex-col m-0">
+    <Header />
+    <main class="flex-1 w-full max-w-7xl mx-auto p-8 flex flex-col">
+      <!-- 헤더 섹션 -->
+      <section
+        class="text-center mb-12 p-16 bg-gradient-to-br from-primary/10 to-accent/10 rounded-3xl border-2 border-primary/20 md:p-12 md:mb-8"
+      >
+        <div class="text-6xl mb-4">{category.icon}</div>
+        <h1 class="text-4xl md:text-5xl font-extrabold text-text mb-4 leading-tight">
+          {category.name}
+        </h1>
+        <p class="text-lg text-text-muted max-w-2xl mx-auto leading-relaxed">
+          {category.description}
+        </p>
+        <div class="mt-6 flex items-center justify-center gap-2 text-sm text-text-muted">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+            ></path>
+          </svg>
+          <span><strong>{postsData.length}개</strong>의 글</span>
+        </div>
+      </section>
+
+      <!-- 카테고리 네비게이션 -->
+      <section class="mb-8">
+        <div class="bg-background-light rounded-2xl p-6 border border-background-lighter">
+          <h3 class="text-sm font-semibold text-text-muted mb-4 flex items-center gap-2">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"
+              ></path>
+            </svg>
+            다른 카테고리
+          </h3>
+          <div class="flex flex-wrap gap-2">
+            {
+              categories
+                .filter((cat) => cat.id !== category.id)
+                .map((cat) => (
+                  <a
+                    href={`/category/${cat.id}/`}
+                    class="px-4 py-2 rounded-lg bg-background hover:bg-primary hover:text-background transition-all duration-200 font-medium text-sm flex items-center gap-2 border border-background-lighter hover:border-primary"
+                  >
+                    <span>{cat.icon}</span>
+                    <span>{cat.name}</span>
+                  </a>
+                ))
+            }
+            <a
+              href="/blog/"
+              class="px-4 py-2 rounded-lg bg-background hover:bg-accent hover:text-background transition-all duration-200 font-medium text-sm flex items-center gap-2 border border-background-lighter hover:border-accent"
+            >
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
+                ></path>
+              </svg>
+              <span>전체 글</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- 포스트 목록 -->
+      {
+        postsData.length > 0 ? (
+          <section class="flex-1">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {postsData.map((postData) => (
+                <BlogCard
+                  title={postData.title}
+                  description={postData.description}
+                  date={postData.date}
+                  slug={postData.slug}
+                  dataTags={postData.dataTags}
+                  dataTitle={postData.dataTitle}
+                  dataDescription={postData.dataDescription}
+                  dataCategory={postData.dataCategory}
+                />
+              ))}
+            </div>
+          </section>
+        ) : (
+          <section class="flex-1 text-center py-16">
+            <div class="text-text-muted mb-4">
+              <svg
+                class="w-24 h-24 mx-auto mb-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"
+                />
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-text mb-2">
+              '{category.name}' 카테고리에 글이 아직 없어요
+            </h3>
+            <p class="text-text-muted">곧 멋진 글을 작성할 예정이니 기대해주세요!</p>
+            <a
+              href="/blog/"
+              class="inline-block mt-6 px-6 py-3 bg-primary text-background rounded-lg font-medium hover:bg-accent transition-colors"
+            >
+              전체 글 보기
+            </a>
+          </section>
+        )
+      }
+    </main>
+    <Footer />
+
+    <script>
+      import { setupScrollAnimations } from "@/shared/scripts/scroll-animation";
+
+      document.addEventListener("DOMContentLoaded", () => {
+        setupScrollAnimations();
+      });
+    </script>
+  </body>
+</html>

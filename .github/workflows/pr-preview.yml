@@ -24,7 +24,7 @@ jobs:
             ### Cloudflare Pages Preview
             Cloudflare Pages는 이 PR에 대한 미리보기를 자동으로 생성합니다.
 
-            **Preview URL**: \`https://<commit-hash>.my-website-nextjs.pages.dev\`
+            **Preview URL**: \`https://<commit-hash>.my-website-Astro.pages.dev\`
 
             > Cloudflare Dashboard에서 정확한 URL을 확인하세요:
             > https://dash.cloudflare.com → Workers & Pages → Pages

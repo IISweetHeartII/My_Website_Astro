@@ -2,11 +2,15 @@
   "name": "Log8 Blog",
   "short_name": "Log8",
   "description": "성장과 기록을 통해 가치를 공유하는 개발 블로그입니다.",
+  "lang": "ko",
+  "dir": "ltr",
   "start_url": "/",
+  "scope": "/",
   "display": "standalone",
   "background_color": "#FFFFFF",
-  "theme_color": "#485E8E",
+  "theme_color": "#8b5cf6",
   "orientation": "portrait-primary",
+  "categories": ["education", "technology", "productivity"],
   "icons": [
     {
       "src": "/images/design/icon-192x192.png",
@@ -19,6 +23,20 @@
       "type": "image/png",
       "sizes": "512x512",
       "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "블로그 글 보기",
+      "short_name": "블로그",
+      "description": "최신 블로그 글 보기",
+      "url": "/blog",
+      "icons": [
+        {
+          "src": "/images/design/icon-192x192.png",
+          "sizes": "192x192"
+        }
+      ]
     }
   ]
 }

@@ -60,7 +60,7 @@ FROM_EMAIL=newsletter@log8.kr
 
 ### 2.2 Cloudflare Pages
 
-1. Cloudflare Dashboard → Workers & Pages → `My_Website_Nextjs`
+1. Cloudflare Dashboard → Workers & Pages → `My_Website_Astro`
 2. **Settings** → **Environment variables**
 3. **Add variable** 클릭
 
@@ -69,7 +69,7 @@ FROM_EMAIL=newsletter@log8.kr
 | `RESEND_API_KEY` | `re_your_key...`     | Production + Preview |
 | `FROM_EMAIL`     | `newsletter@log8.kr` | Production + Preview |
 
----
+## 여기까지 설정 완료!
 
 ## 💻 3단계: 패키지 설치
 

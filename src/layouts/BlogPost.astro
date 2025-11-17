@@ -1,17 +1,23 @@
 ---
 import type { CollectionEntry } from "astro:content";
-import BaseHead from "@/components/layout/BaseHead.astro";
-import Header from "@/components/layout/Header.astro";
-import Footer from "@/components/layout/Footer.astro";
-import FormattedDate from "@/components/ui/FormattedDate.astro";
-import { getUrl } from "@/utils/url";
-import GoogleAnalytics from "@/components/seo/GoogleAnalytics.astro";
-import GiscusComments from "@/components/comments/GiscusComments.astro";
-import ResponsiveBlogImage from "@/components/ui/ResponsiveBlogImage.astro";
-import NewsletterForm from "@/components/newsletter/NewsletterForm.astro";
-import FAQSchema from "@/components/seo/FAQSchema.astro";
-import { ViewTransitions } from "astro:transitions";
-import { SITE_AUTHOR, AUTHOR_GITHUB, AUTHOR_LINKEDIN, SITE_TITLE, SITE_URL } from "@/consts";
+import BaseHead from "@/shared/components/layout/BaseHead.astro";
+import Header from "@/shared/components/layout/Header.astro";
+import Footer from "@/shared/components/layout/Footer.astro";
+import FormattedDate from "@/shared/components/ui/FormattedDate.astro";
+import { getUrl } from "@/shared/utils/url";
+import GoogleAnalytics from "@/shared/components/seo/GoogleAnalytics.astro";
+import GiscusComments from "@/shared/components/comments/GiscusComments.astro";
+import ResponsiveBlogImage from "@/shared/components/ui/ResponsiveBlogImage.astro";
+import NewsletterForm from "@/features/newsletter/components/NewsletterForm.astro";
+import FAQSchema from "@/shared/components/seo/FAQSchema.astro";
+import {
+  SITE_AUTHOR,
+  AUTHOR_GITHUB,
+  AUTHOR_LINKEDIN,
+  SITE_TITLE,
+  SITE_URL,
+} from "@/shared/config/consts";
+import "@/styles/theme.css";
 
 interface Props extends Pick<CollectionEntry<"blog">, "data"> {}
 
@@ -110,7 +116,6 @@ const blogPostSchema = {
       author={author ?? ""}
       no_index={no_index}
     />
-    <ViewTransitions />
 
     <!-- SEO Structured Data (JSON-LD) - AEO Optimized -->
     <script type="application/ld+json" is:inline set:text={JSON.stringify(blogPostSchema)} />
@@ -118,73 +123,22 @@ const blogPostSchema = {
     <!-- FAQ Schema for AEO (Answer Engine Optimization) -->
     {faq && <FAQSchema faq={faq} />}
 
-    <script
-      async
-      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4653332352131854"
-      crossorigin="anonymous"></script>
     <style>
+      /* Mermaid 다이어그램 스타일 */
       :global(.mermaid) {
         background: rgb(248, 250, 252);
         padding: 1.5rem;
         border-radius: 0.5rem;
         margin: 1rem 0;
       }
-      /* Force prose content to take full width */
+
+      /* BlogPost 레이아웃: prose를 전체 너비로 확장 */
       .prose {
         max-width: none !important;
         width: 100%;
       }
-      /* 마크다운 강조 표시 스타일링 */
-      .prose strong,
-      .prose b {
-        font-weight: 700 !important;
-        color: var(--color-text) !important;
-      }
-      .prose em,
-      .prose i {
-        font-style: italic !important;
-      }
-      /* 추가적인 마크다운 스타일링 */
-      .prose h1,
-      .prose h2,
-      .prose h3,
-      .prose h4,
-      .prose h5,
-      .prose h6 {
-        font-weight: 700 !important;
-        color: var(--color-text) !important;
-        margin-top: 2rem !important;
-        margin-bottom: 1rem !important;
-      }
-      .prose blockquote {
-        border-left: 4px solid var(--color-accent) !important;
-        padding-left: 1rem !important;
-        margin: 1.5rem 0 !important;
-        font-style: italic !important;
-        background: var(--color-background-light) !important;
-        padding: 1rem !important;
-        border-radius: 0.5rem !important;
-      }
-      .prose code {
-        background: var(--color-background-lighter) !important;
-        padding: 0.125rem 0.25rem !important;
-        border-radius: 0.25rem !important;
-        font-size: 0.875em !important;
-        color: var(--color-accent-coral) !important;
-      }
-      .prose pre {
-        background: var(--color-background-light) !important;
-        padding: 1rem !important;
-        border-radius: 0.5rem !important;
-        overflow-x: auto !important;
-        margin: 1.5rem 0 !important;
-      }
-      .prose pre code {
-        background: transparent !important;
-        color: var(--color-text) !important;
-        padding: 0 !important;
-      }
-      /* AdSense 광고 스타일링 */
+
+      /* AdSense 광고 스타일 */
       .ad-container {
         min-height: 250px;
         background: var(--color-background-light);
@@ -220,60 +174,90 @@ const blogPostSchema = {
     <main class="flex-1 w-full p-4">
       <div class="flex flex-col md:flex-row max-w-7xl mx-auto gap-4">
         <article class="md:w-3/4">
+          <!-- 제목, 날짜, 태그, 이미지 섹션 (prose 밖) -->
+          <div class="title mb-4 py-4 text-center leading-none">
+            {
+              created_date && (
+                <div class="date mb-2 text-text">
+                  <FormattedDate date={created_date} />
+                  {updated_date && updated_date > created_date && (
+                    <span>
+                      {" "}
+                      (Updated: <FormattedDate date={updated_date} />)
+                    </span>
+                  )}
+                </div>
+              )
+            }
+            <h1 class="m-0 mb-2 text-3xl md:text-4xl font-bold text-text">{title}</h1>
+            {subtitle && <div class="subtitle text-xl text-text mb-4">{subtitle}</div>}
+            {
+              safeTags.length > 0 && (
+                <div class="tags flex flex-wrap gap-2 my-4 justify-center">
+                  {safeTags.map((tag: string) => (
+                    <a
+                      href={getUrl(`/tag/${tag}/`)}
+                      class="tag bg-background-light text-text px-3 py-0.5 rounded-full text-sm no-underline transition-all duration-200 hover:bg-primary hover:text-background hover:-translate-y-px"
+                    >
+                      #{tag}
+                    </a>
+                  ))}
+                </div>
+              )
+            }
+            {
+              featured_image && typeof featured_image === "string" && (
+                <ResponsiveBlogImage
+                  src={featured_image}
+                  alt={featured_image_alt || title || "블로그 포스트 이미지"}
+                  width={1200}
+                  height={675}
+                  loading="eager"
+                  class="featured-image"
+                />
+              )
+            }
+          </div>
+
+          <!-- 실제 블로그 콘텐츠만 prose로 감싸기 -->
           <div class="prose prose-xl">
-            <div class="title mb-4 py-4 text-center leading-none">
-              {
-                created_date && (
-                  <div class="date mb-2 text-text">
-                    <FormattedDate date={created_date} />
-                    {updated_date && updated_date > created_date && (
-                      <span>
-                        {" "}
-                        (Updated: <FormattedDate date={updated_date} />)
-                      </span>
-                    )}
-                  </div>
-                )
-              }
-              <h1 class="m-0 mb-2 text-3xl md:text-4xl font-bold text-text">{title}</h1>
-              {subtitle && <div class="subtitle text-xl text-text mb-4">{subtitle}</div>}
-              {
-                safeTags.length > 0 && (
-                  <div class="tags flex flex-wrap gap-2 my-4 justify-center">
-                    {safeTags.map((tag: string) => (
-                      <a
-                        href={getUrl(`/tag/${tag}/`)}
-                        class="tag bg-background-light text-text px-3 py-0.5 rounded-full text-sm no-underline transition-all duration-200 hover:bg-primary hover:text-background hover:-translate-y-px"
-                      >
-                        #{tag}
-                      </a>
-                    ))}
-                  </div>
-                )
-              }
-              {
-                featured_image && typeof featured_image === "string" && (
-                  <ResponsiveBlogImage
-                    src={featured_image}
-                    alt={featured_image_alt || title || "블로그 포스트 이미지"}
-                    width={1200}
-                    height={675}
-                    loading="eager"
-                    class="featured-image"
-                  />
-                )
-              }
-            </div>
             <slot />
+          </div>
 
-            <!-- 뉴스레터 구독 폼 -->
-            <NewsletterForm />
+          <!-- In-Article 광고 (본문 끝) -->
+          <div class="ad-container my-8">
+            <ins
+              class="adsbygoogle"
+              style="display:block; text-align:center;"
+              data-ad-layout="in-article"
+              data-ad-format="fluid"
+              data-ad-client="ca-pub-4653332352131854"
+              data-ad-slot="1234567890"></ins>
+            <script is:inline>
+              (window.adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+          </div>
 
-            <!-- 댓글 섹션 -->
-            <div class="comments-section mt-12 pt-8 border-t border-background-lighter">
-              <h3 class="text-2xl font-bold text-text mb-6 text-center">💬 댓글</h3>
-              <GiscusComments />
-            </div>
+          <!-- 뉴스레터 구독 폼 (prose 밖) -->
+          <NewsletterForm />
+
+          <!-- 댓글 위 광고 -->
+          <div class="ad-container my-8">
+            <ins
+              class="adsbygoogle"
+              style="display:block"
+              data-ad-format="autorelaxed"
+              data-ad-client="ca-pub-4653332352131854"
+              data-ad-slot="9876543210"></ins>
+            <script is:inline>
+              (window.adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+          </div>
+
+          <!-- 댓글 섹션 (prose 밖) -->
+          <div class="comments-section mt-12 pt-8 border-t border-background-lighter">
+            <h3 class="text-2xl font-bold text-text mb-6 text-center">💬 댓글</h3>
+            <GiscusComments />
           </div>
         </article>
         <div class="md:w-1/4">
@@ -287,21 +271,7 @@ const blogPostSchema = {
                 data-ad-slot="2433987375"
                 data-ad-format="auto"
                 data-full-width-responsive="true"></ins>
-              <script>
-                (window.adsbygoogle = window.adsbygoogle || []).push({});
-              </script>
-            </div>
-
-            <!-- 추가 광고 영역 (필요시) -->
-            <div class="ad-container mt-4">
-              <ins
-                class="adsbygoogle"
-                style="display:block"
-                data-ad-client="ca-pub-4653332352131854"
-                data-ad-slot="2433987375"
-                data-ad-format="auto"
-                data-full-width-responsive="true"></ins>
-              <script>
+              <script is:inline>
                 (window.adsbygoogle = window.adsbygoogle || []).push({});
               </script>
             </div>

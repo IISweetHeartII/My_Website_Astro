@@ -39,14 +39,13 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"],
-      "@/components/*": ["./src/components/*"],
+      "@/features/*": ["./src/features/*"],
+      "@/shared/*": ["./src/shared/*"],
       "@/layouts/*": ["./src/layouts/*"],
-      "@/utils/*": ["./src/utils/*"],
-      "@/types/*": ["./src/types/*"],
+      "@/pages/*": ["./src/pages/*"],
       "@/styles/*": ["./src/styles/*"],
       "@/content/*": ["./src/content/*"],
-      "@/assets/*": ["./src/assets/*"],
-      "@/tools/*": ["./tools/*"]
+      "@/assets/*": ["./src/assets/*"]
     }
   }
 }

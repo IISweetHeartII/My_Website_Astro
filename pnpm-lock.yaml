@@ -16,6 +16,9 @@ importers:
       astro-robots-txt:
         specifier: ^1.0.0
         version: 1.0.0
+      lucide:
+        specifier: ^0.554.0
+        version: 0.554.0
       lucide-astro:
         specifier: ^0.553.0
         version: 0.553.0(astro@5.15.8(@types/node@24.10.1)(jiti@2.6.1)(lightningcss@1.30.2)(rollup@4.53.2)(typescript@5.9.2)(yaml@2.8.1))
@@ -3966,6 +3969,12 @@ packages:
       }
     peerDependencies:
       astro: ">=2.7.1"
+
+  lucide@0.554.0:
+    resolution:
+      {
+        integrity: sha512-heltqxp+r6FbXs5FKMwARbE9aiDLLz9rlAlOU48NYHU4nWi2oVkQIz+Uv7LHZNsFVfgtgLBv7VOjM7QUvT6F3A==,
+      }
 
   magic-string@0.30.21:
     resolution:
@@ -8412,6 +8421,8 @@ snapshots:
   lucide-astro@0.553.0(astro@5.15.8(@types/node@24.10.1)(jiti@2.6.1)(lightningcss@1.30.2)(rollup@4.53.2)(typescript@5.9.2)(yaml@2.8.1)):
     dependencies:
       astro: 5.15.8(@types/node@24.10.1)(jiti@2.6.1)(lightningcss@1.30.2)(rollup@4.53.2)(typescript@5.9.2)(yaml@2.8.1)
+
+  lucide@0.554.0: {}
 
   magic-string@0.30.21:
     dependencies:

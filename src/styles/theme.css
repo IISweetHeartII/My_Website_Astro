@@ -1,82 +1,43 @@
 @import "tailwindcss";
 
 @theme {
-  /* 토스 스타일 연보라 컬러 시스템 */
-  --color-primary: #8b5cf6; /* 토스 스타일 보라 */
-  --color-primary-light: #a78bfa; /* 밝은 보라 */
+  /* ============================================
+     Primary Colors (보라색 시스템)
+     ============================================ */
+  --color-primary: #8b5cf6; /* 메인 보라 */
   --color-primary-lighter: #f5f3ff; /* 매우 연한 보라 배경 */
 
-  /* 악센트 컬러 */
+  /* ============================================
+     Accent Colors (강조 색상)
+     ============================================ */
   --color-accent: #c084fc; /* 생동감 있는 보라 */
-  --color-accent-light: #ddd6fe; /* 연한 보라 */
-  --color-accent-coral: #f472b6; /* 핑크 */
-  --color-accent-mint: #2dd4bf; /* 민트 (유지) */
+  --accent-vibrant: #7c3aed; /* 링크 및 강조 (접근성 개선, 콘트라스트 4.54:1) */
 
-  /* 기본 색상 시스템 */
+  /* ============================================
+     Background Colors
+     ============================================ */
   --color-background: #ffffff;
   --color-background-light: #f9fafb;
-  --color-background-lighter: #faf5ff; /* 매우 연한 보라 톤 */
-  --color-background-muted: #f3f4f6; /* Muted 배경 (회색톤) */
+  --color-background-lighter: #faf5ff; /* 연한 보라 톤 */
 
-  --color-text: #1a1a2e; /* 다크 네이비 (가독성 향상) */
-  --color-text-light: #4a5568; /* 중간 회색 */
-  --color-text-lighter: #718096; /* 연한 회색 */
-  --color-text-muted: #a0aec0; /* 뮤트 회색 */
+  /* ============================================
+     Text Colors
+     ============================================ */
+  --color-text: #1a1a2e; /* 다크 네이비 (메인 텍스트) */
+  --color-text-light: #4a5568; /* 중간 회색 (보조 텍스트) */
 
-  /* 상태 색상 */
-  --color-success: #10b981;
-  --color-success-light: #d1fae5;
-  --color-error: #ef4444;
-  --color-error-dark: #dc2626;
-  --color-error-light: #fee2e2;
-  --color-warning: #f59e0b;
-  --color-warning-light: #fef3c7;
-  --color-info: #3b82f6;
-  --color-info-light: #dbeafe;
-
-  /* 그레이 스케일 */
+  /* ============================================
+     Grayscale (필요한 것만)
+     ============================================ */
   --color-gray-50: #f9fafb;
-  --color-gray-100: #f3f4f6;
   --color-gray-200: #e5e7eb;
   --color-gray-300: #d1d5db;
-  --color-gray-400: #9ca3af;
   --color-gray-500: #6b7280;
-  --color-gray-600: #4b5563;
   --color-gray-700: #374151;
-  --color-gray-800: #1f2937;
-  --color-gray-900: #111827;
-  --color-gray-950: #030712;
-  --color-white: #ffffff;
 
-  /* 그라데이션 색상 */
-  --color-blue-100: #dbeafe;
-  --color-cyan-200: #a5f3fc;
-  --color-purple-100: #e9d5ff;
-  --color-pink-200: #fbcfe8;
-  --color-green-100: #dcfce7;
-  --color-teal-200: #99f6e4;
-  --color-green-500: #10b981;
-  --color-blue-700: #1d4ed8;
-  --color-purple-700: #7c3aed;
-  --color-green-700: #047857;
-
-  /* 폰트 패밀리 */
-  --font-family-sans: "Pretendard", sans-serif;
+  /* ============================================
+     Typography
+     ============================================ */
   --font-body: "Pretendard", sans-serif;
-  --font-heading: "Pretendard", sans-serif;
   --font-mono: "Consolas", "Monaco", "Courier New", monospace;
-
-  /* 레거시 변수 (호환성 유지) */
-  --accent-vibrant: #c084fc; /* accent와 동일 */
-  --black: #1a1a2e; /* text와 동일 */
-  --gray: #6b7280; /* gray-500와 동일 */
-  --gray-light: #f3f4f6; /* gray-100과 동일 */
-  --gray-dark: #374151; /* gray-700과 동일 */
-  --theme-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-
-  /* 구 디자인 시스템 호환성 */
-  --color-text-default: #1a1a2e; /* text와 동일 */
-  --color-surface-light: #f9fafb; /* background-light와 동일 */
-  --color-brand-primary: #8b5cf6; /* primary와 동일 */
-  --color-brand-secondary: #a78bfa; /* accent와 동일 */
 }

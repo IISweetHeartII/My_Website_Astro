@@ -15,45 +15,42 @@ const CATEGORY_ID = "DIC_kwDOOx8Yls4Cvm-Z";
 
 // 현재 페이지 정보
 const currentUrl = Astro.url.pathname;
-const pageTitle = Astro.url.pathname.replace('/blog/', '').replace('/', '') || 'home';
+const pageTitle = Astro.url.pathname.replace("/blog/", "").replace("/", "") || "home";
 ---
 
-<div
-  id={id}
-  class={`giscus-container w-full mt-8 mb-4 ${className}`}
->
+<div id={id} class={`giscus-container w-full mt-8 mb-4 ${className}`}>
   <!-- Giscus가 여기에 로드됩니다 -->
 </div>
 
 <script define:vars={{ REPO, REPO_ID, CATEGORY, CATEGORY_ID, currentUrl, pageTitle }}>
   function loadGiscus() {
     // 이미 로드된 경우 중복 방지
-    if (document.querySelector('iframe.giscus-frame')) {
+    if (document.querySelector("iframe.giscus-frame")) {
       return;
     }
 
     // Giscus 스크립트 동적 생성
-    const script = document.createElement('script');
-    script.src = 'https://giscus.app/client.js';
+    const script = document.createElement("script");
+    script.src = "https://giscus.app/client.js";
     script.async = true;
-    script.crossOrigin = 'anonymous';
+    script.crossOrigin = "anonymous";
 
     // Giscus 설정
-    script.setAttribute('data-repo', REPO);
-    script.setAttribute('data-repo-id', REPO_ID);
-    script.setAttribute('data-category', CATEGORY);
-    script.setAttribute('data-category-id', CATEGORY_ID);
-    script.setAttribute('data-mapping', 'pathname');
-    script.setAttribute('data-strict', '0');
-    script.setAttribute('data-reactions-enabled', '1');
-    script.setAttribute('data-emit-metadata', '1');
-    script.setAttribute('data-input-position', 'bottom');
-    script.setAttribute('data-theme', 'preferred_color_scheme');
-    script.setAttribute('data-lang', 'ko');
-    script.setAttribute('data-loading', 'lazy');
+    script.setAttribute("data-repo", REPO);
+    script.setAttribute("data-repo-id", REPO_ID);
+    script.setAttribute("data-category", CATEGORY);
+    script.setAttribute("data-category-id", CATEGORY_ID);
+    script.setAttribute("data-mapping", "pathname");
+    script.setAttribute("data-strict", "0");
+    script.setAttribute("data-reactions-enabled", "1");
+    script.setAttribute("data-emit-metadata", "1");
+    script.setAttribute("data-input-position", "bottom");
+    script.setAttribute("data-theme", "preferred_color_scheme");
+    script.setAttribute("data-lang", "ko");
+    script.setAttribute("data-loading", "lazy");
 
     // 컨테이너에 스크립트 추가
-    const container = document.getElementById('giscus-comments');
+    const container = document.getElementById("giscus-comments");
     if (container) {
       container.appendChild(script);
     }
@@ -61,12 +58,12 @@ const pageTitle = Astro.url.pathname.replace('/blog/', '').replace('/', '') || '
 
   // Intersection Observer를 사용한 성능 최적화 (lazy loading)
   function initGiscusObserver() {
-    const container = document.getElementById('giscus-comments');
+    const container = document.getElementById("giscus-comments");
     if (!container) return;
 
     const observer = new IntersectionObserver(
       (entries) => {
-        entries.forEach(entry => {
+        entries.forEach((entry) => {
           if (entry.isIntersecting) {
             loadGiscus();
             observer.unobserve(entry.target);
@@ -74,8 +71,8 @@ const pageTitle = Astro.url.pathname.replace('/blog/', '').replace('/', '') || '
         });
       },
       {
-        rootMargin: '100px', // 100px 미리 로딩
-        threshold: 0.1
+        rootMargin: "100px", // 100px 미리 로딩
+        threshold: 0.1,
       }
     );
 
@@ -83,11 +80,11 @@ const pageTitle = Astro.url.pathname.replace('/blog/', '').replace('/', '') || '
   }
 
   // Astro 페이지 로드 이벤트에서 초기화
-  document.addEventListener('astro:page-load', initGiscusObserver);
+  document.addEventListener("astro:page-load", initGiscusObserver);
 
   // 첫 로드 시에도 실행
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initGiscusObserver);
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initGiscusObserver);
   } else {
     initGiscusObserver();
   }
@@ -96,7 +93,13 @@ const pageTitle = Astro.url.pathname.replace('/blog/', '').replace('/', '') || '
 <style>
   .giscus-container {
     /* Pretendard 폰트 적용 */
-    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+    font-family:
+      "Pretendard",
+      -apple-system,
+      BlinkMacSystemFont,
+      "Segoe UI",
+      "Roboto",
+      sans-serif;
   }
 
   /* Giscus iframe 스타일링 */
@@ -109,7 +112,7 @@ const pageTitle = Astro.url.pathname.replace('/blog/', '').replace('/', '') || '
 
   /* 로딩 상태 스타일 */
   .giscus-container:empty::before {
-    content: '💬 댓글을 불러오는 중...';
+    content: "💬 댓글을 불러오는 중...";
     display: block;
     text-align: center;
     padding: 2rem;
@@ -130,7 +133,7 @@ const pageTitle = Astro.url.pathname.replace('/blog/', '').replace('/', '') || '
 
   /* 댓글 섹션 헤더 */
   .giscus-container::after {
-    content: '';
+    content: "";
     display: block;
     width: 100%;
     height: 1px;

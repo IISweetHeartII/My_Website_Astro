@@ -1,7 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import IntroSection from "@/components/features/IntroSection.astro";
-import BlogCard from "@/components/ui/BlogCard.astro";
+import IntroSection from "@/features/about/components/IntroSection.astro";
+import BlogCard from "@/features/blog/components/BlogCard.astro";
 import { getCollection, type CollectionEntry } from "astro:content";
 import { Image } from "astro:assets";
 import readyImage from "@/assets/images/design/ready.png";
@@ -210,7 +210,7 @@ const latestBlogPosts = allPosts.slice(0, 3);
   </main>
 
   <script>
-    import { setupScrollAnimations } from "@/tools/scripts/scroll-animation";
+    import { setupScrollAnimations } from "@/shared/scripts/scroll-animation";
 
     document.addEventListener("DOMContentLoaded", () => {
       setupScrollAnimations();

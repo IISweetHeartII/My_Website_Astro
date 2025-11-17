@@ -1,0 +1,215 @@
+---
+interface Props {
+  allTags: string[];
+}
+
+const { allTags } = Astro.props;
+
+// 핵심 태그 정의 (블로그의 주요 카테고리)
+const featuredTags = ["ChatGPT", "AI", "Astro", "개발", "SEO", "생산성", "일상"];
+
+// 표시할 태그들 선별 (핵심 태그 우선)
+const priorityTags = featuredTags.filter((tag) => allTags.includes(tag));
+const otherTags = allTags.filter((tag) => !featuredTags.includes(tag));
+const displayTags = [...priorityTags, ...otherTags.slice(0, 8 - priorityTags.length)];
+const remainingTags = otherTags.slice(8 - priorityTags.length);
+---
+
+<div class="improved-tag-filter">
+  <!-- 검색 섹션 -->
+  <div class="search-section mb-6">
+    <div class="relative">
+      <input
+        type="text"
+        id="post-search"
+        placeholder="제목이나 내용으로 검색하세요..."
+        class="w-full px-4 py-3 pl-12 pr-4 text-sm bg-background border-2 border-text-light rounded-full focus:border-primary focus:outline-none transition-all duration-200 placeholder-text-light shadow-sm hover:shadow-md"
+      />
+      <svg
+        class="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-primary pointer-events-none"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+      </svg>
+    </div>
+  </div>
+
+  <!-- 태그 섹션 -->
+  <div class="tags-section">
+    <div class="flex items-center justify-between mb-4">
+      <h3 class="text-lg font-semibold text-gray-800 flex items-center gap-2">
+        <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"
+          ></path>
+        </svg>
+        주요 토픽
+      </h3>
+      {
+        remainingTags.length > 0 && (
+          <button
+            id="show-more-tags"
+            class="text-sm text-primary hover:text-text transition-colors duration-200 font-medium flex items-center gap-1"
+          >
+            <span>+{remainingTags.length}개 더보기</span>
+            <svg
+              class="w-4 h-4 transform transition-transform duration-200"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M19 9l-7 7-7-7"
+              />
+            </svg>
+          </button>
+        )
+      }
+    </div>
+
+    <!-- 메인 태그들 -->
+    <div class="main-tags mb-4" id="tag-filter-container">
+      <div class="flex flex-wrap gap-2">
+        <!-- 전체글 버튼 -->
+        <a
+          href="#"
+          data-tag="all"
+          class="tag-item px-4 py-2 rounded-full transition-all duration-200 font-medium text-sm hover:scale-105 hover:shadow-md current-tag bg-primary text-background shadow-md"
+        >
+          <span class="flex items-center gap-1">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
+              ></path>
+            </svg>
+            전체글
+          </span>
+        </a>
+
+        <!-- 주요 태그들 -->
+        {
+          displayTags.map((tag: string) => (
+            <a
+              href="#"
+              data-tag={tag.toLowerCase()}
+              class="tag-item px-3 py-2 rounded-full transition-all duration-200 text-sm font-medium hover:scale-105 hover:shadow-md bg-background-muted text-text-muted hover:bg-primary hover:text-background"
+            >
+              #{tag}
+            </a>
+          ))
+        }
+      </div>
+    </div>
+
+    <!-- 숨겨진 태그들 -->
+    {
+      remainingTags.length > 0 && (
+        <div id="more-tags" class="more-tags hidden">
+          <div class="border-t pt-4">
+            <h4 class="text-md font-medium text-gray-600 mb-3">기타 태그</h4>
+            <div class="flex flex-wrap gap-2">
+              {remainingTags.map((tag: string) => (
+                <a
+                  href="#"
+                  data-tag={tag.toLowerCase()}
+                  class="tag-item px-3 py-1.5 rounded-full text-xs font-medium transition-all duration-200 hover:scale-105 bg-gray-50 text-gray-600 hover:bg-gray-200"
+                >
+                  #{tag}
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
+      )
+    }
+  </div>
+
+  <!-- 결과 표시 -->
+  <div class="results-info mt-4 text-sm text-gray-600" id="results-info">
+    <!-- 검색 결과가 여기에 표시됩니다 -->
+  </div>
+</div>
+
+<style>
+  .improved-tag-filter {
+    background: linear-gradient(
+      135deg,
+      var(--color-background-light) 0%,
+      var(--color-background) 100%
+    );
+    border-radius: 1rem;
+    padding: 1.5rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    border: 1px solid var(--color-background-lighter);
+  }
+
+  .tag-item {
+    white-space: nowrap;
+    user-select: none;
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+  }
+
+  .tag-item:hover {
+    transform: translateY(-1px);
+  }
+
+  .more-tags {
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
+
+  .more-tags.show {
+    opacity: 1;
+    max-height: 300px;
+  }
+
+  /* 모바일 최적화 */
+  @media (max-width: 640px) {
+    .improved-tag-filter {
+      padding: 1rem;
+      margin-left: -0.5rem;
+      margin-right: -0.5rem;
+      border-radius: 0.75rem;
+    }
+
+    .tag-item {
+      font-size: 0.75rem;
+      padding: 0.375rem 0.75rem;
+    }
+
+    .tags-section h3 {
+      font-size: 1rem;
+    }
+
+    #post-search {
+      font-size: 0.875rem;
+      padding-left: 2.5rem;
+    }
+  }
+
+  /* 현재 활성 태그 스타일 */
+  .current-tag {
+    position: relative;
+    background: var(--color-accent) !important;
+    color: var(--color-text) !important;
+  }
+</style>

@@ -1,238 +1,26 @@
-body {
-  transition: var(--theme-transition);
-}
+/* ============================================
+   Global Styles - Minimal & Clean
+   - 디자인 토큰은 theme.css에서 관리
+   - 컴포넌트 스타일은 Tailwind 클래스 사용
+   - 여기서는 최소한의 전역 설정만!
+   ============================================ */
 
-a,
-button,
-input {
-  transition: var(--theme-transition);
-}
-
+/* ============================================
+   1. Body 기본 설정
+   ============================================ */
 body {
   font-family: var(--font-body);
   margin: 0;
   padding: 0;
-  text-align: left;
-  background-size: 100% 100%;
-  word-wrap: break-word;
-  overflow-wrap: break-word;
   color: var(--color-text);
-  font-size: 1.0625rem;
-  line-height: 1.7;
+  background: var(--color-background);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-weight: 400;
 }
 
-main {
-  width: 1100px;
-  max-width: calc(100% - 2em);
-  margin: auto;
-  padding: 3em 1em;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  margin: 0 0 0.5rem 0;
-  color: var(--color-text);
-  line-height: 1.2;
-  font-family: var(--font-heading);
-  font-weight: 600;
-  letter-spacing: -0.015em;
-}
-
-h1 {
-  font-size: 2.5rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
-  letter-spacing: -0.02em;
-}
-
-h2 {
-  font-size: 2rem;
-  margin-top: 2.5rem;
-}
-
-h3 {
-  font-size: 1.5rem;
-  margin-top: 2rem;
-}
-
-h4 {
-  font-size: 1.25rem;
-  margin-top: 1.5rem;
-}
-
-h5 {
-  font-size: 1.125rem;
-  margin-top: 1.25rem;
-}
-
-strong,
-b {
-  font-weight: 600;
-}
-
-a {
-  color: var(--accent-vibrant);
-  text-decoration: none;
-  font-weight: 500;
-}
-
-a:hover {
-  color: var(--accent-vibrant);
-}
-
-p {
-  margin-bottom: 1.25em;
-  font-size: 1.0625rem;
-  line-height: 1.75;
-  font-weight: 400;
-}
-
-.prose p {
-  margin-bottom: 1.5em;
-}
-
-textarea {
-  width: 100%;
-  font-size: 16px;
-  font-family: var(--font-mono);
-  padding: 0.75rem;
-  border-radius: 10px;
-  border: 1.5px solid var(--color-gray-200);
-  transition: all 0.3s ease-out;
-}
-
-textarea:focus {
-  outline: none;
-  border-color: var(--color-primary);
-  box-shadow: 0 0 0 3px var(--color-primary-lighter);
-}
-
-input {
-  font-size: 16px;
-  font-family: var(--font-body);
-  padding: 0.75rem;
-  border-radius: 10px;
-  border: 1.5px solid var(--color-gray-200);
-  transition: all 0.3s ease-out;
-}
-
-input:focus {
-  outline: none;
-  border-color: var(--color-primary);
-  box-shadow: 0 0 0 3px var(--color-primary-lighter);
-}
-
-table {
-  width: 100%;
-  margin: 2rem 0;
-  border-collapse: collapse;
-}
-
-table td,
-table th {
-  padding: 0.75rem;
-  border: 1px solid var(--color-gray-300);
-}
-
-img {
-  max-width: 100%;
-  height: auto;
-  border-radius: 12px;
-  margin: 2rem 0;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
-}
-
-code {
-  padding: 0.25em 0.5em;
-  background-color: var(--color-primary-lighter);
-  border-radius: 6px;
-  font-family: var(--font-mono);
-  font-size: 0.875em;
-  font-weight: 500;
-  color: var(--color-text);
-}
-
-pre {
-  padding: 1.5em;
-  border-radius: 12px;
-  background-color: var(--color-gray-50);
-  overflow-x: auto;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px 0 rgba(0, 0, 0, 0.03);
-}
-
-pre > code {
-  all: unset;
-  font-family: var(--font-mono);
-  font-size: 0.875em;
-  background-color: transparent !important;
-  color: inherit !important;
-  padding: 0 !important;
-}
-
-blockquote {
-  border-left: 4px solid var(--accent-vibrant);
-  padding: 0 0 0 1.5rem;
-  margin: 2rem 0;
-  font-size: 1.125em;
-  font-style: italic;
-  color: var(--color-text);
-  background-color: var(--color-primary-lighter);
-  padding: 1.5rem;
-  border-radius: 0 12px 12px 0;
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.03);
-}
-
-hr {
-  border: none;
-  border-top: 1px solid var(--color-gray-300);
-  margin: 3rem 0;
-}
-
-/* Improved list styling */
-ul,
-ol {
-  padding-left: 1.5rem;
-  margin: 1.5rem 0;
-}
-
-li {
-  margin: 0.5rem 0;
-  line-height: 1.7;
-}
-
-@media (max-width: 720px) {
-  body {
-    font-size: 1rem;
-  }
-
-  h1 {
-    font-size: 2rem;
-  }
-
-  h2 {
-    font-size: 1.5rem;
-  }
-
-  h3 {
-    font-size: 1.25rem;
-  }
-
-  main {
-    padding: 1em;
-  }
-
-  .prose p {
-    margin-bottom: 1.25em;
-  }
-}
-
+/* ============================================
+   2. 유틸리티 클래스
+   ============================================ */
 .sr-only {
   border: 0;
   padding: 0;
@@ -247,43 +35,87 @@ li {
   white-space: nowrap;
 }
 
-/* Markdown Content Styling */
+/* ============================================
+   3. Markdown Content (.prose)
+   블로그 포스트의 markdown 콘텐츠에만 적용
+   ============================================ */
 .prose {
   max-width: 65ch;
-  margin: 0 auto;
+  color: var(--color-text);
 }
 
+/* Headings */
 .prose h1,
 .prose h2,
 .prose h3,
 .prose h4,
 .prose h5,
 .prose h6 {
+  color: var(--color-text);
+  font-weight: 600;
+  line-height: 1.3;
   margin-top: 2em;
   margin-bottom: 1em;
-  color: var(--black);
-  font-weight: 600;
 }
 
 .prose h1 {
-  font-size: 2.5rem;
+  font-size: 2.25rem;
   margin-top: 0;
+  font-weight: 700;
 }
 
 .prose h2 {
-  font-size: 1.75rem;
+  font-size: 1.875rem;
 }
 
 .prose h3 {
   font-size: 1.5rem;
 }
 
+.prose h4 {
+  font-size: 1.25rem;
+}
+
+.prose h5 {
+  font-size: 1.125rem;
+}
+
+.prose h6 {
+  font-size: 1rem;
+}
+
+/* Paragraphs */
 .prose p {
   margin-bottom: 1.5em;
   line-height: 1.75;
 }
 
-/* Enhanced List Styling */
+/* Links */
+.prose a {
+  color: var(--accent-vibrant);
+  text-decoration: none;
+  font-weight: 500;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s ease;
+}
+
+.prose a:hover {
+  border-bottom-color: var(--accent-vibrant);
+}
+
+/* Strong & Emphasis */
+.prose strong,
+.prose b {
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.prose em,
+.prose i {
+  font-style: italic;
+}
+
+/* Lists */
 .prose ul,
 .prose ol {
   margin: 1.5em 0;
@@ -301,6 +133,7 @@ li {
 .prose li {
   margin: 0.5em 0;
   padding-left: 0.5em;
+  line-height: 1.7;
 }
 
 .prose ul ul,
@@ -314,19 +147,7 @@ li {
   list-style-type: square;
 }
 
-/* Code Blocks */
-.prose pre {
-  padding: 1.25em 1.5em;
-  margin: 1.5em 0;
-  background-color: var(--gray-light);
-  border-radius: 12px;
-  overflow-x: auto;
-  font-family: var(--font-mono);
-  font-size: 0.9em;
-  line-height: 1.7;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px 0 rgba(0, 0, 0, 0.03);
-}
-
+/* Code */
 .prose code {
   font-family: var(--font-mono);
   font-size: 0.875em;
@@ -337,6 +158,18 @@ li {
   border-radius: 6px;
 }
 
+.prose pre {
+  padding: 1.25em 1.5em;
+  margin: 1.5em 0;
+  background-color: var(--color-gray-50);
+  border-radius: 12px;
+  overflow-x: auto;
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+  line-height: 1.7;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px 0 rgba(0, 0, 0, 0.03);
+}
+
 .prose pre code {
   background-color: transparent !important;
   padding: 0 !important;
@@ -344,6 +177,30 @@ li {
   color: inherit !important;
   font-size: 0.9em;
   white-space: pre;
+}
+
+/* Blockquotes */
+.prose blockquote {
+  margin: 2em 0;
+  padding: 1em 1.5em;
+  border-left: 4px solid var(--accent-vibrant);
+  background-color: var(--color-primary-lighter);
+  border-radius: 0 12px 12px 0;
+  font-style: italic;
+  color: var(--color-gray-700);
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.03);
+}
+
+.prose blockquote p {
+  margin: 0.5em 0;
+}
+
+.prose blockquote cite {
+  display: block;
+  margin-top: 1em;
+  font-size: 0.875em;
+  font-style: normal;
+  opacity: 0.8;
 }
 
 /* Tables */
@@ -372,49 +229,11 @@ li {
   border-bottom: none;
 }
 
-/* Blockquotes */
-.prose blockquote {
-  margin: 2em 0;
-  padding: 1em 1.5em;
-  border-left: 4px solid var(--accent-vibrant);
-  background-color: var(--color-primary-lighter);
-  border-radius: 0 12px 12px 0;
-  font-style: italic;
-  color: var(--gray-dark);
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.03);
-}
-
-.prose blockquote p {
-  margin: 0.5em 0;
-}
-
-.prose blockquote cite {
-  display: block;
-  margin-top: 1em;
-  font-size: 0.875em;
-  font-style: normal;
-  opacity: 0.8;
-}
-
 /* Horizontal Rule */
 .prose hr {
   margin: 3em 0;
   border: 0;
   border-top: 1px solid var(--color-gray-300);
-}
-
-/* Links */
-.prose a {
-  color: var(--accent-vibrant);
-  text-decoration: none;
-  font-weight: 500;
-  border-bottom: 1px solid transparent;
-  transition: border-color 0.2s ease;
-}
-
-.prose a:hover {
-  border-bottom-color: var(--accent-vibrant);
-  text-decoration: none;
 }
 
 /* Images */
@@ -433,7 +252,7 @@ li {
 .prose figcaption {
   text-align: center;
   font-size: 0.875em;
-  color: var(--gray);
+  color: var(--color-gray-500);
   margin-top: 0.5em;
 }
 
@@ -459,7 +278,7 @@ li {
 .prose .footnotes {
   margin-top: 3em;
   font-size: 0.875em;
-  color: var(--gray);
+  color: var(--color-gray-500);
 }
 
 .prose .footnotes::before {
@@ -471,7 +290,10 @@ li {
   border-top: 1px solid var(--color-gray-300);
 }
 
-/* Scroll animations - 토스 스타일 부드러운 애니메이션 */
+/* ============================================
+   4. Scroll Animations
+   토스 스타일 부드러운 애니메이션
+   ============================================ */
 .scroll-animate {
   opacity: 0;
   transform: translateY(30px);
