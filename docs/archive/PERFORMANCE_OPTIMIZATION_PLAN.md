@@ -6,12 +6,14 @@
 ## 📊 현재 상태 분석
 
 ### ✅ 잘 구성된 부분
+
 - Astro v5.15.8 최신 버전 사용
 - TailwindCSS v4.1.17 최신 버전
 - 필수 통합: MDX, Sitemap, ExpressiveCode, RobotsTxt
 - Obsidian 직접 통합 (src/content/blog/에서 직접 작성)
 
 ### ⚠️ 개선 필요 영역
+
 - 이미지 최적화 서비스 미설정
 - Vite 빌드 최적화 미적용
 - Markdown 설정 불완전 (gfm, smartypants 누락)
@@ -35,6 +37,7 @@ image: {
 ```
 
 **필요 패키지**:
+
 ```bash
 pnpm add sharp
 ```
@@ -91,6 +94,7 @@ markdown: {
 ### 시스템 선택: Giscus
 
 **선택 이유**:
+
 - GitHub Discussions 기반 (요구사항 부합)
 - 한국어 완벽 지원
 - 활발한 커뮤니티와 업데이트
@@ -99,12 +103,14 @@ markdown: {
 ### 구현 계획
 
 **A. Giscus 설정**
+
 ```bash
 # 필요 패키지
 pnpm add @giscus/react
 ```
 
 **B. 컴포넌트 구조**
+
 ```
 src/components/
 ├── comments/
@@ -113,11 +119,13 @@ src/components/
 ```
 
 **C. 블로그 포스트 통합**
+
 - 모든 블로그 포스트에 자동 댓글 섹션 추가
 - frontmatter로 댓글 비활성화 옵션 제공
 - Pretendard 폰트와 일관된 디자인
 
 **D. GitHub 저장소 설정**
+
 - 현재 프로젝트 저장소 활용
 - Discussions 기능 활성화
 - 카테고리 구조:
@@ -126,6 +134,7 @@ src/components/
   - 🗣️ General (일반 토론)
 
 ### 테마 설정
+
 ```javascript
 // 사이트 테마와 일치
 {
@@ -140,6 +149,7 @@ src/components/
 ## 📅 실행 일정
 
 ### Phase 1: 성능 최적화 (우선)
+
 1. ✅ 계획 수립 및 문서화
 2. ⏳ Sharp 이미지 최적화 도입
 3. ⏳ Vite 빌드 설정 최적화
@@ -148,6 +158,7 @@ src/components/
 6. ⏳ 성능 테스트 및 검증
 
 ### Phase 2: 댓글 시스템 (후순위)
+
 1. ⏳ GitHub Discussions 활성화
 2. ⏳ Giscus 설정 및 테스트
 3. ⏳ 컴포넌트 개발
@@ -158,12 +169,14 @@ src/components/
 ## 🎯 성공 지표
 
 ### 성능 최적화
+
 - **이미지 로딩**: 30% 이상 개선
 - **빌드 시간**: 20% 이상 단축
 - **번들 크기**: 15% 이상 감소
 - **Lighthouse 점수**: 95+ 유지
 
 ### 댓글 시스템
+
 - **사용자 경험**: 직관적인 댓글 작성
 - **디자인 일관성**: 사이트 테마와 완전 통합
 - **성능 영향**: 페이지 로딩 시간 5% 이내 증가

@@ -5,28 +5,33 @@ Obsidian Blogger 프로젝트의 색상 시스템, 폰트, 그리고 스타일 �
 ## 🎨 색상 팔레트 (TailwindCSS 기반)
 
 ### 주요 브랜드 색상 (Primary)
+
 - `primary`: `#485E8E` (블루그레이) - 헤더, 메인 브랜드
 - `primary-light`: `#8590B3` (뮤트퍼플) - 서브 컬러
 - `primary-lighter`: `#E5F0FF` (밝은 블루) - 배경용
 
 ### 강조 색상 (Accent)
+
 - `accent`: `#00FF6A` (형광 연두) - CTA, 중요 요소
 - `accent-light`: `#66FF9A` (밝은 형광 연두) - 호버 효과
 - `accent-coral`: `#FF6B6B` (코랄) - 호버, 경고
 - `accent-mint`: `#2DD4BF` (민트) - 성공, 보조 강조
 
 ### 배경 색상 (Background)
+
 - `background`: `#FFFFFF` (메인 배경)
 - `background-light`: `#F9FAFB` (서브 배경)
 - `background-lighter`: `#E5F0FF` (밝은 블루 배경)
 
 ### 텍스트 색상 (Text)
+
 - `text`: `#1F2937` (기본 텍스트)
 - `text-light`: `#6B7280` (보조 텍스트)
 - `text-lighter`: `#9CA3AF` (연한 텍스트)
 - `text-muted`: `#9CA3AF` (뮤트 텍스트)
 
 ### 상태 색상
+
 - 성공: `#10B981` / 연한 성공: `#D1FAE5`
 - 오류: `#EF4444` / 연한 오류: `#FEE2E2`
 - 경고: `#F59E0B` / 연한 경고: `#FEF3C7`
