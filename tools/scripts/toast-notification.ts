@@ -1,12 +1,8 @@
+/* global document, requestAnimationFrame, setTimeout */
 export interface ToastOptions {
   type?: "success" | "error" | "info" | "warning";
   duration?: number;
-  position?:
-    | "top-right"
-    | "top-left"
-    | "bottom-right"
-    | "bottom-left"
-    | "top-center";
+  position?: "top-right" | "top-left" | "bottom-right" | "bottom-left" | "top-center";
 }
 
 export class ToastManager {
@@ -34,7 +30,7 @@ export class ToastManager {
   show(message: string, options: ToastOptions = {}): void {
     if (!this.container) return;
 
-    const { type = "info", duration = 4000, position = "top-right" } = options;
+    const { type = "info", duration = 4000, position: _position = "top-right" } = options;
 
     // 토스트 엘리먼트 생성
     const toast = document.createElement("div");
@@ -48,7 +44,7 @@ export class ToastManager {
     // 메시지 내용
     toast.innerHTML = `
       <div class="flex items-center">
-        <div class="flex-shrink-0">
+        <div class="shrink-0">
           ${this.getIcon(type)}
         </div>
         <div class="ml-3">

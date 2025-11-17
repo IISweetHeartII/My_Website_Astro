@@ -1,3 +1,4 @@
+/* global document, window */
 export function setupMobileMenu(): void {
   const mobileMenuToggle = document.getElementById("mobile-menu-toggle");
   const mobileMenu = document.getElementById("mobile-menu");
