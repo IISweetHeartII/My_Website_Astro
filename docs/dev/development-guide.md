@@ -24,7 +24,7 @@ obsidian-blogger/
 
 ### 필수 요구사항
 
-- **Node.js**: >=18.17.1
+- **Node.js**: >=18.20.8
 - **패키지 매니저**: pnpm (권장)
 - **IDE**: VS Code 또는 Cursor IDE
 
