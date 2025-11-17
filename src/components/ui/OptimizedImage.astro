@@ -1,5 +1,5 @@
 ---
-import { Image, Picture } from 'astro:assets';
+import { Image, Picture } from "astro:assets";
 
 interface Props {
   src: string;
@@ -7,10 +7,9 @@ interface Props {
   width?: number;
   height?: number;
   class?: string;
-  loading?: 'lazy' | 'eager';
+  loading?: "lazy" | "eager";
   formats?: string[];
   densities?: number[];
-  widths?: number[];
   aspectRatio?: string;
 }
 
@@ -19,49 +18,51 @@ const {
   alt,
   width = 800,
   height = 600,
-  class: className = '',
-  loading = 'lazy',
-  formats = ['avif', 'webp'],
+  class: className = "",
+  loading = "lazy",
+  formats = ["avif", "webp"],
   densities = [1, 1.5, 2],
-  widths = [400, 800, 1200],
-  aspectRatio = '4:3',
+  aspectRatio = "4:3",
 } = Astro.props;
 
 // 외부 이미지인지 확인
-const isExternalImage = src.startsWith('http');
+const isExternalImage = src.startsWith("http");
 
 // 로컬 이미지의 경우 import 처리가 필요하지만,
 // 이 컴포넌트는 외부 이미지용으로 설계
 ---
 
-{isExternalImage ? (
-  <Picture
-    src={src}
-    alt={alt}
-    width={width}
-    height={height}
-    formats={formats}
-    densities={densities}
-    loading={loading}
-    class={`rounded-lg shadow-md transition-transform duration-300 hover:scale-105 ${className}`}
-    style={`aspect-ratio: ${aspectRatio};`}
-  />
-) : (
-  <Image
-    src={src}
-    alt={alt}
-    width={width}
-    height={height}
-    densities={densities}
-    loading={loading}
-    class={`rounded-lg shadow-md transition-transform duration-300 hover:scale-105 ${className}`}
-    style={`aspect-ratio: ${aspectRatio};`}
-  />
-)}
+{
+  isExternalImage ? (
+    <Picture
+      src={src}
+      alt={alt}
+      width={width}
+      height={height}
+      formats={formats}
+      densities={densities}
+      loading={loading}
+      class={`rounded-lg shadow-md transition-transform duration-300 hover:scale-105 ${className}`}
+      style={`aspect-ratio: ${aspectRatio};`}
+    />
+  ) : (
+    <Image
+      src={src}
+      alt={alt}
+      width={width}
+      height={height}
+      densities={densities}
+      loading={loading}
+      class={`rounded-lg shadow-md transition-transform duration-300 hover:scale-105 ${className}`}
+      style={`aspect-ratio: ${aspectRatio};`}
+    />
+  )
+}
 
 <style>
   /* 반응형 이미지 스타일 */
-  img, picture {
+  img,
+  picture {
     width: 100%;
     height: auto;
     object-fit: cover;
@@ -90,7 +91,8 @@ const isExternalImage = src.startsWith('http');
 
   /* 반응형 브레이크포인트 */
   @media (max-width: 768px) {
-    img, picture {
+    img,
+    picture {
       border-radius: 0.375rem; /* rounded-md */
     }
   }
@@ -105,14 +107,16 @@ const isExternalImage = src.startsWith('http');
 
   /* 다크모드 지원 */
   @media (prefers-color-scheme: dark) {
-    img, picture {
+    img,
+    picture {
       filter: brightness(0.9);
     }
   }
 
   /* 모션 감소 설정 지원 */
   @media (prefers-reduced-motion: reduce) {
-    img, picture {
+    img,
+    picture {
       transition: none;
       transform: none !important;
     }

@@ -1,46 +1,72 @@
 ---
-import FormattedDate from './FormattedDate.astro';
-import { getUrl } from '@/utils/url';
-import { ArrowRight } from 'lucide-astro';
+import FormattedDate from "./FormattedDate.astro";
+import { getUrl } from "@/utils/url";
+import { ArrowRight } from "lucide-astro";
 
 interface Props {
-    title: string;
-    description?: string;
-    date?: Date;
-    slug: string;
-    dataTitle: string;
-    dataTags: string;
-    dataDescription: string;
+  title: string;
+  description?: string;
+  date?: Date;
+  slug: string;
+  dataTitle: string;
+  dataTags: string;
+  dataDescription: string;
 }
 
 const { title, description, date, slug, dataTitle, dataTags, dataDescription } = Astro.props;
 ---
 
-<article class="relative rounded-lg bg-primary shadow-md transition-all duration-300 ease-in-out overflow-hidden hover:-translate-y-1 hover:shadow-xl"
-    data-title={dataTitle}
-    data-tags={dataTags}
-    data-description={dataDescription}
+<article
+  class="scroll-animate group relative rounded-2xl bg-white border border-gray-100 shadow-sm transition-all duration-300 ease-out overflow-hidden hover:-translate-y-1 hover:shadow-xl hover:border-primary/30"
+  data-title={dataTitle}
+  data-tags={dataTags}
+  data-description={dataDescription}
 >
-    <a href={getUrl(`/blog/${slug}/`)} class="block text-inherit no-underline" transition:name={`blog-card-${slug}`}>
-        <div class="relative z-10 p-4 flex flex-col gap-3 h-full md:p-5">
-            <div class="flex-1 flex flex-col gap-2">
-                <h2 class="text-xl font-semibold leading-tight mt-2 text-background transition-colors duration-200 ease-in-out group-hover:text-accent">
-                    {title}
-                </h2>
-                {description && <p class="text-background leading-relaxed line-clamp-3">{description}</p>}
-            </div>
+  <a
+    href={getUrl(`/blog/${slug}/`)}
+    class="block text-inherit no-underline h-full"
+    transition:name={`blog-card-${slug}`}
+  >
+    <div class="relative z-10 p-7 flex flex-col gap-4 h-full">
+      <!-- Accent bar -->
+      <div
+        class="absolute top-0 left-0 w-1.5 h-0 bg-gradient-to-b from-primary via-accent to-primary-light rounded-r-full transition-all duration-500 ease-out group-hover:h-full"
+      >
+      </div>
 
-            <div class="flex justify-between items-center mt-auto pt-4 border-t border-primary-light">
-                {date && (
-                    <time class="text-sm text-background">
-                        <FormattedDate date={date} />
-                    </time>
-                )}
-                <div class="inline-flex items-center gap-2 text-sm font-medium text-accent transition-all duration-300 ease-in-out group-hover:gap-3">
-                    Read More
-                    <ArrowRight class="w-[18px] h-[18px]" strokeWidth={1.5} />
-                </div>
-            </div>
+      <div class="flex-1 flex flex-col gap-3 pl-4">
+        <h2
+          class="text-xl md:text-2xl font-bold leading-tight text-gray-900 transition-colors duration-300 group-hover:text-primary"
+        >
+          {title}
+        </h2>
+        {
+          description && (
+            <p class="text-gray-600 leading-relaxed line-clamp-2 text-sm md:text-base">
+              {description}
+            </p>
+          )
+        }
+      </div>
+
+      <div class="flex justify-between items-center mt-auto pt-5 border-t border-gray-100 pl-4">
+        {
+          date && (
+            <time class="text-sm text-gray-500 font-medium">
+              <FormattedDate date={date} />
+            </time>
+          )
+        }
+        <div
+          class="inline-flex items-center gap-2 text-sm font-semibold text-primary transition-all duration-300 ease-out group-hover:gap-3 group-hover:text-accent"
+        >
+          <span>Read More</span>
+          <ArrowRight
+            class="w-4 h-4 transition-transform duration-500 ease-out group-hover:translate-x-1.5"
+            strokeWidth={2.5}
+          />
         </div>
-    </a>
-</article> 
+      </div>
+    </div>
+  </a>
+</article>

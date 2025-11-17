@@ -1,5 +1,5 @@
 ---
-import { Picture } from 'astro:assets';
+import { Picture } from "astro:assets";
 
 interface Props {
   src: string;
@@ -7,7 +7,7 @@ interface Props {
   width?: number;
   height?: number;
   class?: string;
-  loading?: 'lazy' | 'eager';
+  loading?: "lazy" | "eager";
   caption?: string;
 }
 
@@ -16,14 +16,14 @@ const {
   alt,
   width = 1200,
   height = 675,
-  class: className = '',
-  loading = 'lazy',
+  class: className = "",
+  loading = "lazy",
   caption,
 } = Astro.props;
 
 // 블로그 포스트에 최적화된 반응형 크기
 const responsiveWidths = [400, 600, 800, 1200];
-const modernFormats = ['avif', 'webp'];
+const modernFormats = ["avif", "webp"];
 ---
 
 <figure class={`blog-image-container ${className}`}>
@@ -38,11 +38,7 @@ const modernFormats = ['avif', 'webp'];
     class="blog-image"
     sizes="(max-width: 640px) 100vw, (max-width: 768px) 90vw, (max-width: 1024px) 80vw, 70vw"
   />
-  {caption && (
-    <figcaption class="image-caption">
-      {caption}
-    </figcaption>
-  )}
+  {caption && <figcaption class="image-caption">{caption}</figcaption>}
 </figure>
 
 <style>
