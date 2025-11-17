@@ -1,15 +1,5 @@
 ---
-// 카테고리 정의
-const categories = [
-  { id: "daily", name: "일상", icon: "✨", color: "from-purple-500 to-pink-500" },
-  { id: "dev", name: "개발", icon: "💻", color: "from-blue-500 to-cyan-500" },
-  { id: "ai", name: "AI", icon: "🤖", color: "from-green-500 to-teal-500" },
-  { id: "security", name: "보안", icon: "🔒", color: "from-red-500 to-orange-500" },
-  { id: "education", name: "교육", icon: "📖", color: "from-yellow-500 to-amber-500" },
-  { id: "devops", name: "DevOps", icon: "⚙️", color: "from-gray-500 to-slate-500" },
-  { id: "productivity", name: "생산성", icon: "⚡", color: "from-indigo-500 to-purple-500" },
-  { id: "blog", name: "블로그운영", icon: "📝", color: "from-pink-500 to-rose-500" },
-];
+import { categories } from "@/shared/config/categories";
 ---
 
 <div class="category-filter">
