@@ -1,0 +1,54 @@
+---
+/**
+ * FAQ Schema Component for AEO (Answer Engine Optimization)
+ *
+ * AI 답변 엔진(ChatGPT, Perplexity, Claude)이 FAQ를 잘 이해하도록 Schema.org FAQPage 구조화된 데이터를 추가합니다.
+ *
+ * @example
+ * ```astro
+ * ---
+ * import FAQSchema from '@/components/seo/FAQSchema.astro';
+ *
+ * const faq = [
+ *   {
+ *     question: "React란 무엇인가요?",
+ *     answer: "React는 사용자 인터페이스를 만들기 위한 JavaScript 라이브러리입니다."
+ *   }
+ * ];
+ * ---
+ * <FAQSchema faq={faq} />
+ * ```
+ */
+
+interface FAQItem {
+  question: string;
+  answer: string;
+}
+
+interface Props {
+  faq: FAQItem[];
+}
+
+const { faq } = Astro.props;
+
+// FAQ가 없으면 아무것도 렌더링하지 않음
+if (!faq || faq.length === 0) {
+  return null;
+}
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faq.map((item) => ({
+    "@type": "Question",
+    name: item.question,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: item.answer,
+    },
+  })),
+};
+---
+
+<!-- FAQ Schema (JSON-LD) for AEO -->
+<script type="application/ld+json" is:inline set:text={JSON.stringify(schema)} />
