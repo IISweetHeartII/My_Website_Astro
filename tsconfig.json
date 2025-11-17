@@ -38,14 +38,15 @@
     // Path Aliases
     "baseUrl": ".",
     "paths": {
+      "@/*": ["./src/*"],
       "@/components/*": ["./src/components/*"],
       "@/layouts/*": ["./src/layouts/*"],
       "@/utils/*": ["./src/utils/*"],
       "@/types/*": ["./src/types/*"],
-      "@/lib/*": ["./src/lib/*"],
       "@/styles/*": ["./src/styles/*"],
       "@/content/*": ["./src/content/*"],
-      "@/assets/*": ["./src/assets/*"]
+      "@/assets/*": ["./src/assets/*"],
+      "@/tools/*": ["./tools/*"]
     }
   }
 }

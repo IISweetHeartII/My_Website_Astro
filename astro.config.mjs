@@ -13,20 +13,20 @@ export default defineConfig({
   base: "/",
   // 이미지 최적화 설정 (Sharp는 기본값)
   image: {
-    domains: ["log8.kr"],         // 원격 이미지 도메인 보안
+    domains: ["log8.kr"], // 원격 이미지 도메인 보안
     remotePatterns: [
-      { protocol: "https" },      // HTTPS 이미지만 허용
+      { protocol: "https" }, // HTTPS 이미지만 허용
     ],
   },
   markdown: {
-    gfm: true,                  // GitHub Flavored Markdown 활성화
-    smartypants: true,          // 타이포그래피 최적화
-    syntaxHighlight: false,     // expressiveCode 사용하므로 비활성화
+    gfm: true, // GitHub Flavored Markdown 활성화
+    smartypants: true, // 타이포그래피 최적화
+    syntaxHighlight: false, // expressiveCode 사용하므로 비활성화
     rehypePlugins: [
       [
         rehypeMermaid,
         {
-          strategy: 'inline-svg', // 빌드 시 SVG로 변환 (번들 크기 감소!)
+          strategy: "inline-svg", // 빌드 시 SVG로 변환 (번들 크기 감소!)
         },
       ],
     ],
@@ -37,12 +37,12 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
     build: {
-      cssCodeSplit: true,       // CSS 청크 분할로 성능 향상
+      cssCodeSplit: true, // CSS 청크 분할로 성능 향상
       rollupOptions: {
         output: {
           manualChunks: {
-            vendor: ["astro"],   // Astro 코어 별도 번들
-            utils: ["slugify"],  // 유틸리티 라이브러리 분리
+            vendor: ["astro"], // Astro 코어 별도 번들
+            utils: ["slugify"], // 유틸리티 라이브러리 분리
           },
         },
       },
@@ -50,7 +50,7 @@ export default defineConfig({
   },
   integrations: [
     expressiveCode({
-      themes: ['github-light', 'github-dark'],  // 다크모드 지원
+      themes: ["github-light", "github-dark"], // 다크모드 지원
       defaultProps: {
         wrap: true,
       },
@@ -107,6 +107,26 @@ export default defineConfig({
           allow: "/",
           crawlDelay: 1,
         },
+        {
+          userAgent: "PerplexityBot",
+          allow: "/",
+          crawlDelay: 1,
+        },
+        {
+          userAgent: "ClaudeBot",
+          allow: "/",
+          crawlDelay: 1,
+        },
+        {
+          userAgent: "Bard",
+          allow: "/",
+          crawlDelay: 1,
+        },
+        {
+          userAgent: "Applebot-Extended", // Apple Intelligence
+          allow: "/",
+          crawlDelay: 1,
+        },
       ],
       sitemap: true,
     }),
@@ -114,11 +134,11 @@ export default defineConfig({
   output: "static",
   // 성능 최적화
   prefetch: {
-    prefetchAll: true,           // 링크 프리페치로 페이지 속도 향상
-    defaultStrategy: 'hover',    // 호버 시 프리페치
+    prefetchAll: true, // 링크 프리페치로 페이지 속도 향상
+    defaultStrategy: "hover", // 호버 시 프리페치
   },
   // 빌드 최적화
   build: {
-    inlineStylesheets: 'auto',   // 작은 CSS는 인라인으로 성능 향상
+    inlineStylesheets: "auto", // 작은 CSS는 인라인으로 성능 향상
   },
 });
