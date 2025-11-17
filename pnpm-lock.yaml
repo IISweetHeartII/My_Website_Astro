@@ -86,9 +86,6 @@ importers:
       prettier-plugin-astro:
         specifier: ^0.14.1
         version: 0.14.1
-      rehype-mermaid:
-        specifier: ^3.0.0
-        version: 3.0.0(playwright@1.56.1)
       tailwindcss:
         specifier: ^4.1.17
         version: 4.1.17
@@ -693,13 +690,6 @@ packages:
       {
         integrity: sha512-SN8tkIzDpA0HLAscEYD2IVrfLiid6qEdE9QLlGVSxO1KEw7qYvjpbNBQjUjMr5/jvTJ7ys6zysU2vLPHE0sb2g==,
       }
-
-  "@fortawesome/fontawesome-free@6.7.2":
-    resolution:
-      {
-        integrity: sha512-JUOtgFW6k9u4Y+xeIaEiLr3+cjoUPiAuLXoyKOJSia6Duzb7pq+A76P9ZdPDoAoxHdHzq6gE9/jKBGXlZT8FbA==,
-      }
-    engines: { node: ">=6" }
 
   "@humanfs/core@0.19.1":
     resolution:
@@ -3180,14 +3170,6 @@ packages:
         integrity: sha512-syetQadaUEDNdxdugga9CpEYVaQIxOwk7GlwZWWZ19//qW4zE5bknOKeMBDYAASwnpaSHKJITRLMF9m1fp3s6g==,
       }
 
-  fsevents@2.3.2:
-    resolution:
-      {
-        integrity: sha512-xiqMQR4xAeHTuB9uWm+fFRcIOgKBMiOBP+eXiyT7jsgVCq1bkVygt00oASowB7EdtpOHaaPgKt812P9ab+DDKA==,
-      }
-    engines: { node: ^8.16.0 || ^10.6.0 || >=11.0.0 }
-    os: [darwin]
-
   fsevents@2.3.3:
     resolution:
       {
@@ -3296,18 +3278,6 @@ packages:
         integrity: sha512-EykJT/Q1KjTWctppgIAgfSO0tKVuZUjhgMr17kqTumMl6Afv3EISleU7qZUzoXDFTAHTDC4NOoG/ZxU3EvlMPQ==,
       }
     engines: { node: ">=8" }
-
-  hast-util-from-dom@5.0.1:
-    resolution:
-      {
-        integrity: sha512-N+LqofjR2zuzTjCPzyDUdSshy4Ma6li7p/c3pA78uTwzFgENbgbUrm2ugwsOdcjI1muO+o6Dgzp9p8WHtn/39Q==,
-      }
-
-  hast-util-from-html-isomorphic@2.0.0:
-    resolution:
-      {
-        integrity: sha512-zJfpXq44yff2hmE0XmwEOzdWin5xwH+QIhMLOScpX91e/NSGPsAzNCvLQDIEPyO2TXi+lBmU6hjLIhV8MwP2kw==,
-      }
 
   hast-util-from-html@2.0.3:
     resolution:
@@ -4131,17 +4101,6 @@ packages:
       }
     engines: { node: ">= 8" }
 
-  mermaid-isomorphic@3.0.4:
-    resolution:
-      {
-        integrity: sha512-XQTy7H1XwHK3DPEHf+ZNWiqUEd9BwX3Xws38R9Fj2gx718srmgjlZoUzHr+Tca+O+dqJOJsAJaKzCoP65QDfDg==,
-      }
-    peerDependencies:
-      playwright: "1"
-    peerDependenciesMeta:
-      playwright:
-        optional: true
-
   mermaid@11.12.1:
     resolution:
       {
@@ -4371,13 +4330,6 @@ packages:
         integrity: sha512-VP79XUPxV2CigYP3jWwAUFSku2aKqBH7uTAapFWCBqutsbmDo96KY5o8uh6U+/YSIn5OxJnXp73beVkpqMIGhA==,
       }
     engines: { node: ">=18" }
-
-  mini-svg-data-uri@1.4.4:
-    resolution:
-      {
-        integrity: sha512-r9deDe9p5FJUPZAk3A59wGH7Ii9YrjjWw0jmw/liSbHl2CHiyXj6FcDXDu2K3TjVAXqiJdaw3xxwlZZr9E6nHg==,
-      }
-    hasBin: true
 
   minimatch@3.1.2:
     resolution:
@@ -4694,22 +4646,6 @@ packages:
         integrity: sha512-SIqCzDRg0s9npO5XQ3tNZioRY1uK06lA41ynBC1YmFTmnY6FjUjVt6s4LoADmwoig1qqD0oK8h1p/8mlMx8Oig==,
       }
 
-  playwright-core@1.56.1:
-    resolution:
-      {
-        integrity: sha512-hutraynyn31F+Bifme+Ps9Vq59hKuUCz7H1kDOcBs+2oGguKkWTU50bBWrtz34OUWmIwpBTWDxaRPXrIXkgvmQ==,
-      }
-    engines: { node: ">=18" }
-    hasBin: true
-
-  playwright@1.56.1:
-    resolution:
-      {
-        integrity: sha512-aFi5B0WovBHTEvpM3DzXTUaeN6eN0qWnTkKx4NQaH4Wvcmc153PdaY2UBdSYKaGYw+UyWXSVyxDUg5DoPEttjw==,
-      }
-    engines: { node: ">=18" }
-    hasBin: true
-
   points-on-curve@0.2.0:
     resolution:
       {
@@ -4887,17 +4823,6 @@ packages:
       {
         integrity: sha512-8d9Py4c/V6I/Od2VIXFAdpiO2kc0SV2qTJsRAaqSIcM9aruW4ASLNe2kOEo1inXAAkIhpFzAHTc358HKbvpNUg==,
       }
-
-  rehype-mermaid@3.0.0:
-    resolution:
-      {
-        integrity: sha512-fxrD5E4Fa1WXUjmjNDvLOMT4XB1WaxcfycFIWiYU0yEMQhcTDElc9aDFnbDFRLxG1Cfo1I3mfD5kg4sjlWaB+Q==,
-      }
-    peerDependencies:
-      playwright: "1"
-    peerDependenciesMeta:
-      playwright:
-        optional: true
 
   rehype-parse@9.0.1:
     resolution:
@@ -6353,8 +6278,6 @@ snapshots:
   "@expressive-code/plugin-text-markers@0.41.3":
     dependencies:
       "@expressive-code/core": 0.41.3
-
-  "@fortawesome/fontawesome-free@6.7.2": {}
 
   "@humanfs/core@0.19.1": {}
 
@@ -7942,9 +7865,6 @@ snapshots:
       unicode-properties: 1.4.1
       unicode-trie: 2.0.0
 
-  fsevents@2.3.2:
-    optional: true
-
   fsevents@2.3.3:
     optional: true
 
@@ -7997,19 +7917,6 @@ snapshots:
   hachure-fill@0.5.2: {}
 
   has-flag@4.0.0: {}
-
-  hast-util-from-dom@5.0.1:
-    dependencies:
-      "@types/hast": 3.0.4
-      hastscript: 9.0.1
-      web-namespaces: 2.0.1
-
-  hast-util-from-html-isomorphic@2.0.0:
-    dependencies:
-      "@types/hast": 3.0.4
-      hast-util-from-dom: 5.0.1
-      hast-util-from-html: 2.0.3
-      unist-util-remove-position: 5.0.0
 
   hast-util-from-html@2.0.3:
     dependencies:
@@ -8615,15 +8522,6 @@ snapshots:
 
   merge2@1.4.1: {}
 
-  mermaid-isomorphic@3.0.4(playwright@1.56.1):
-    dependencies:
-      "@fortawesome/fontawesome-free": 6.7.2
-      mermaid: 11.12.1
-    optionalDependencies:
-      playwright: 1.56.1
-    transitivePeerDependencies:
-      - supports-color
-
   mermaid@11.12.1:
     dependencies:
       "@braintree/sanitize-url": 7.1.1
@@ -8920,8 +8818,6 @@ snapshots:
 
   mimic-function@5.0.1: {}
 
-  mini-svg-data-uri@1.4.4: {}
-
   minimatch@3.1.2:
     dependencies:
       brace-expansion: 1.1.12
@@ -9093,16 +8989,6 @@ snapshots:
       exsolve: 1.0.7
       pathe: 2.0.3
 
-  playwright-core@1.56.1:
-    optional: true
-
-  playwright@1.56.1:
-    dependencies:
-      playwright-core: 1.56.1
-    optionalDependencies:
-      fsevents: 2.3.2
-    optional: true
-
   points-on-curve@0.2.0: {}
 
   points-on-path@0.2.1:
@@ -9206,22 +9092,6 @@ snapshots:
   rehype-expressive-code@0.41.3:
     dependencies:
       expressive-code: 0.41.3
-
-  rehype-mermaid@3.0.0(playwright@1.56.1):
-    dependencies:
-      "@types/hast": 3.0.4
-      hast-util-from-html-isomorphic: 2.0.0
-      hast-util-to-text: 4.0.2
-      mermaid-isomorphic: 3.0.4(playwright@1.56.1)
-      mini-svg-data-uri: 1.4.4
-      space-separated-tokens: 2.0.2
-      unified: 11.0.5
-      unist-util-visit-parents: 6.0.2
-      vfile: 6.0.3
-    optionalDependencies:
-      playwright: 1.56.1
-    transitivePeerDependencies:
-      - supports-color
 
   rehype-parse@9.0.1:
     dependencies:
