@@ -1,0 +1,81 @@
+---
+interface Props {
+  question: string;
+  answer: string;
+  delay?: number;
+}
+
+const { question, answer, delay = 0 } = Astro.props;
+
+// Generate unique ID for accordion
+const id = `faq-${Math.random().toString(36).substring(7)}`;
+---
+
+<div
+  class="scroll-animate border-b border-gray-200 last:border-0"
+  style={`animation-delay: ${delay}s`}
+>
+  <button
+    type="button"
+    class="faq-question w-full text-left py-6 flex items-center justify-between gap-4 hover:text-blue-600 transition-colors duration-300 group"
+    aria-expanded="false"
+    aria-controls={id}
+  >
+    <span
+      class="text-lg font-semibold text-gray-900 group-hover:text-blue-600 transition-colors duration-300"
+    >
+      {question}
+    </span>
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="faq-icon w-6 h-6 text-gray-400 group-hover:text-blue-600 transition-all duration-300 transform"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+    >
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"
+      ></path>
+    </svg>
+  </button>
+
+  <div id={id} class="faq-answer overflow-hidden transition-all duration-300 ease-in-out max-h-0">
+    <div class="pb-6 text-gray-600 leading-relaxed">
+      {answer}
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const questions = document.querySelectorAll(".faq-question");
+
+    questions.forEach((question) => {
+      question.addEventListener("click", () => {
+        const answer = question.nextElementSibling as HTMLElement;
+        const icon = question.querySelector(".faq-icon") as HTMLElement;
+        const isExpanded = question.getAttribute("aria-expanded") === "true";
+
+        // Toggle current item
+        if (isExpanded) {
+          question.setAttribute("aria-expanded", "false");
+          answer.style.maxHeight = "0";
+          icon.style.transform = "rotate(0deg)";
+        } else {
+          // Close all other items
+          questions.forEach((q) => {
+            const a = q.nextElementSibling as HTMLElement;
+            const i = q.querySelector(".faq-icon") as HTMLElement;
+            q.setAttribute("aria-expanded", "false");
+            a.style.maxHeight = "0";
+            i.style.transform = "rotate(0deg)";
+          });
+
+          // Open clicked item
+          question.setAttribute("aria-expanded", "true");
+          answer.style.maxHeight = answer.scrollHeight + "px";
+          icon.style.transform = "rotate(180deg)";
+        }
+      });
+    });
+  });
+</script>

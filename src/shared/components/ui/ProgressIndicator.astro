@@ -1,0 +1,85 @@
+---
+// Progress indicator for scroll position
+---
+
+<!-- Progress Bar -->
+<div
+  id="progress-container"
+  class="fixed top-0 left-0 right-0 z-50 h-1 bg-gray-200 opacity-0 transition-opacity duration-300"
+>
+  <div
+    id="progress-bar"
+    class="h-full bg-gradient-to-r from-blue-600 to-purple-600 transition-all duration-150 ease-out"
+    style="width: 0%"
+  >
+  </div>
+</div>
+
+<!-- Scroll to Top Button -->
+<button
+  id="scroll-to-top"
+  type="button"
+  class="fixed bottom-8 right-8 z-50 w-12 h-12 bg-blue-600 hover:bg-blue-700 text-white rounded-full shadow-lg hover:shadow-xl transform translate-y-20 opacity-0 transition-all duration-300 flex items-center justify-center group"
+  aria-label="Scroll to top"
+>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    class="w-6 h-6 transform group-hover:-translate-y-1 transition-transform duration-300"
+    fill="none"
+    viewBox="0 0 24 24"
+    stroke="currentColor"
+  >
+    <path
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+      d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+  </svg>
+</button>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const progressContainer = document.getElementById("progress-container");
+    const progressBar = document.getElementById("progress-bar");
+    const scrollToTopBtn = document.getElementById("scroll-to-top");
+
+    if (!progressContainer || !progressBar || !scrollToTopBtn) return;
+
+    // Update progress bar on scroll
+    const updateProgress = () => {
+      const windowHeight = window.innerHeight;
+      const documentHeight = document.documentElement.scrollHeight;
+      const scrollTop = window.scrollY || document.documentElement.scrollTop;
+
+      // Calculate scroll percentage
+      const scrollPercentage = (scrollTop / (documentHeight - windowHeight)) * 100;
+      progressBar.style.width = `${scrollPercentage}%`;
+
+      // Show/hide progress bar and scroll to top button
+      if (scrollTop > 100) {
+        progressContainer.style.opacity = "1";
+        scrollToTopBtn.style.transform = "translateY(0)";
+        scrollToTopBtn.style.opacity = "1";
+      } else {
+        progressContainer.style.opacity = "0";
+        scrollToTopBtn.style.transform = "translateY(20px)";
+        scrollToTopBtn.style.opacity = "0";
+      }
+    };
+
+    // Scroll to top function
+    const scrollToTop = () => {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+    };
+
+    // Event listeners
+    window.addEventListener("scroll", updateProgress, { passive: true });
+    scrollToTopBtn.addEventListener("click", scrollToTop);
+
+    // Initial update
+    updateProgress();
+  });
+</script>
