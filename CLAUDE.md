@@ -37,7 +37,7 @@ This is **Obsidian Blogger** - an Astro-based blog optimized for writing in Obsi
 - **Preview**: `develop` 브랜치 및 PR → `*.pages.dev` (자동 프리뷰)
 - **설정 위치**: Cloudflare Dashboard (https://dash.cloudflare.com)
 
-자세한 내용은 [CI/CD 가이드](docs/ci-cd-guide.md)를 참조하세요.
+자세한 내용은 `.github/workflows/` 폴더의 워크플로우 파일을 참조하세요.
 
 ## Architecture Overview
 

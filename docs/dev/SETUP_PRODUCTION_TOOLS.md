@@ -238,9 +238,10 @@ pnpm run lint:fix
 
 ## 📚 관련 문서
 
-- [실무 Best Practices](docs/production-best-practices.md)
-- [CI/CD 가이드](docs/ci-cd-guide.md)
-- [개발 가이드](docs/development-guide.md)
+- [실무 Best Practices](production-best-practices.md)
+- [개발 가이드](development-guide.md)
+- [디자인 시스템 가이드](design-system-guide.md)
+- [발행 워크플로우 가이드](publishing-workflow-guide.md)
 
 ---
 

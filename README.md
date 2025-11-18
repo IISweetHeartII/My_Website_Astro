@@ -181,7 +181,7 @@ pnpm run check
 - 🔍 **Preview**: `develop` → https://\*.pages.dev
 - 📝 **PR Previews**: 자동 생성
 
-자세한 내용은 [CI/CD 가이드](docs/ci-cd-guide.md)를 참조하세요.
+자세한 내용은 `.github/workflows/` 폴더의 워크플로우 파일을 참조하세요.
 
 ## 🤝 Contributing
 
@@ -203,15 +203,17 @@ If you find this project helpful, please consider:
 
 ### Development Guides
 
-- [Development Guide](docs/development-guide.md) - 개발 환경 설정 및 가이드라인
-- [Design System Guide](docs/design-system-guide.md) - 색상 시스템 & 스타일 가이드
+- [Development Guide](docs/dev/development-guide.md) - 개발 환경 설정 및 가이드라인
+- [Design System Guide](docs/dev/design-system-guide.md) - 색상 시스템 & 스타일 가이드
+- [Production Best Practices](docs/dev/production-best-practices.md) - 실무급 개발 Best Practices
+- [Setup Production Tools](docs/dev/SETUP_PRODUCTION_TOOLS.md) - 개발 도구 설정 가이드
 - [TailwindCSS v4 Migration](CHANGELOG.md) - v3 → v4 마이그레이션 과정
 
 ### Content Creation
 
-- [Publishing Workflow Guide](docs/publishing-workflow-guide.md) - Obsidian → Astro 발행 프로세스
-- [SEO Optimization Guide](docs/seo-optimization-guide.md) - 블로그 게시물 SEO/AEO 최적화
-- [Markdown Writing Guide](docs/markdown-writing-guide.md) - 마크다운 작성 가이드
+- [Publishing Workflow Guide](docs/dev/publishing-workflow-guide.md) - Obsidian → Astro 발행 프로세스
+- [SEO Optimization Guide](docs/blog-drafts/seo-optimization-guide.md) - 블로그 게시물 SEO/AEO 최적화
+- [Markdown Writing Guide](docs/blog-drafts/markdown-writing-guide.md) - 마크다운 작성 가이드
 
 ### Deployment
 
