@@ -2,25 +2,12 @@
 import Layout from "../layouts/Layout.astro";
 import IntroSection from "@/features/about/components/IntroSection.astro";
 import BlogCard from "@/features/blog/components/BlogCard.astro";
-import { getCollection, type CollectionEntry } from "astro:content";
+import { getSortedPublishedPosts, getLatestPosts } from "@/shared/utils/blog";
 import { Image } from "astro:assets";
 import readyImage from "@/assets/images/design/ready.png";
 
-function getValidTimestamp(date: Date | null | undefined): number {
-  if (!date) return 0;
-  const timestamp = date.getTime();
-  return isNaN(timestamp) ? 0 : timestamp;
-}
-
-const allPosts = (await getCollection("blog"))
-  .filter((post: CollectionEntry<"blog">) => post.data.publish)
-  .sort((a: CollectionEntry<"blog">, b: CollectionEntry<"blog">) => {
-    const dateA = getValidTimestamp(a.data.created_date);
-    const dateB = getValidTimestamp(b.data.created_date);
-    return dateB - dateA;
-  });
-
-const latestBlogPosts = allPosts.slice(0, 3);
+const allPosts = await getSortedPublishedPosts();
+const latestBlogPosts = getLatestPosts(allPosts, 3);
 ---
 
 <Layout title="Home | Log8">

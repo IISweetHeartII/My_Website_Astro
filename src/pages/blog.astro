@@ -2,23 +2,10 @@
 import Layout from "@/layouts/Layout.astro";
 import BlogCard from "@/features/blog/components/BlogCard.astro";
 import CategoryFilter from "@/features/blog/components/CategoryFilter.astro";
-import { getCollection, type CollectionEntry } from "astro:content";
-import { categoryMap } from "@/shared/config/categories";
+import { getSortedPublishedPosts, transformPostForCard } from "@/shared/utils/blog";
 
-// Helper function to get a valid timestamp or fallback
-function getValidTimestamp(date: Date | null | undefined): number {
-  if (!date) return 0;
-  const timestamp = date.getTime();
-  return isNaN(timestamp) ? 0 : timestamp;
-}
-
-const allPosts = (await getCollection("blog"))
-  .filter((post: CollectionEntry<"blog">) => post.data.publish)
-  .sort((a: CollectionEntry<"blog">, b: CollectionEntry<"blog">) => {
-    const dateA = getValidTimestamp(a.data.created_date);
-    const dateB = getValidTimestamp(b.data.created_date);
-    return dateB - dateA;
-  });
+const allPosts = await getSortedPublishedPosts();
+const postsData = allPosts.map((post) => transformPostForCard(post));
 ---
 
 <Layout
@@ -32,18 +19,18 @@ const allPosts = (await getCollection("blog"))
     </section>
 
     {
-      allPosts.length > 0 ? (
+      postsData.length > 0 ? (
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 flex-1 mb-8" id="blog-posts-grid">
-          {allPosts.map((post: CollectionEntry<"blog">) => (
+          {postsData.map((post) => (
             <BlogCard
-              title={post.data.title}
-              description={post.data.description ?? undefined}
-              date={post.data.created_date ?? undefined}
-              slug={post.data.slug ?? post.id.replace(/\.[^/.]+$/, "")}
-              dataTags={post.data.tags ? post.data.tags.join(",") : ""}
-              dataTitle={post.data.title}
-              dataDescription={post.data.description ?? ""}
-              dataCategory={categoryMap[post.data.category] || "daily"}
+              title={post.title}
+              description={post.description}
+              date={post.date}
+              slug={post.slug}
+              dataTags={post.dataTags}
+              dataTitle={post.dataTitle}
+              dataDescription={post.dataDescription}
+              dataCategory={post.dataCategory}
             />
           ))}
         </div>
