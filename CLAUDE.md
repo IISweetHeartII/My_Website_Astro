@@ -148,6 +148,9 @@ tags:
 - Site is deployed to `https://log8.kr`
 - All paths use `@/` aliases for cleaner imports
 - TailwindCSS v4 is used (different from v3 syntax)
+  - **CRITICAL**: Use `bg-linear-to-*` (NOT `bg-gradient-to-*`) for gradients in TailwindCSS v4
+  - ✅ Correct: `bg-linear-to-br`, `bg-linear-to-r`, `bg-linear-to-t`
+  - ❌ Wrong: `bg-gradient-to-br`, `bg-gradient-to-r`, `bg-gradient-to-t`
 - **Git Workflow**: `develop` is the main development branch; `main` is for production releases
 - **API Endpoints**: Newsletter subscription at `/api/newsletter/subscribe` (uses Resend)
 

@@ -14,7 +14,7 @@ const latestPost = latestBlogPosts[0];
   <main class="min-h-screen bg-background">
     <!-- Full-screen Hero Section -->
     <section
-      class="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-purple-50 via-white to-blue-50"
+      class="relative min-h-screen flex items-center justify-center overflow-hidden bg-linear-to-br from-purple-50 via-white to-blue-50"
     >
       <!-- Animated Background Elements -->
       <div class="absolute inset-0 overflow-hidden opacity-30" aria-hidden="true">
@@ -52,7 +52,7 @@ const latestPost = latestBlogPosts[0];
               <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold text-gray-900 leading-tight">
                 감동과 사랑을 전하는<br />
                 <span
-                  class="bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent"
+                  class="bg-linear-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent"
                 >
                   기술 번역가
                 </span>
@@ -84,7 +84,7 @@ const latestPost = latestBlogPosts[0];
                 </a>
                 <a
                   href="/portfolio"
-                  class="group inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold rounded-xl transition-all duration-300 shadow-lg hover:shadow-2xl transform hover:-translate-y-1"
+                  class="group inline-flex items-center gap-2 px-8 py-4 bg-linear-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold rounded-xl transition-all duration-300 shadow-lg hover:shadow-2xl transform hover:-translate-y-1"
                 >
                   포트폴리오 보기
                   <Briefcase class="w-5 h-5" />
@@ -134,7 +134,7 @@ const latestPost = latestBlogPosts[0];
             latestPost && (
               <a
                 href={`/blog/${latestPost.data.slug ?? latestPost.id.replace(/\.[^/.]+$/, "")}`}
-                class="group lg:col-span-2 lg:row-span-2 bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-purple-100"
+                class="group lg:col-span-2 lg:row-span-2 bg-linear-to-br from-purple-50 to-pink-50 rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-purple-100"
               >
                 <div class="h-full flex flex-col justify-between">
                   <div>
@@ -168,7 +168,7 @@ const latestPost = latestBlogPosts[0];
           <!-- Current Projects Card -->
           <a
             href="/now"
-            class="group lg:col-span-1 bg-gradient-to-br from-green-50 to-teal-50 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-green-100"
+            class="group lg:col-span-1 bg-linear-to-br from-green-50 to-teal-50 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-green-100"
           >
             <div class="h-full flex flex-col justify-between">
               <div>
@@ -189,7 +189,7 @@ const latestPost = latestBlogPosts[0];
 
           <!-- Tech Stack Card -->
           <div
-            class="lg:col-span-1 bg-gradient-to-br from-blue-50 to-cyan-50 rounded-2xl p-6 shadow-lg border border-blue-100"
+            class="lg:col-span-1 bg-linear-to-br from-blue-50 to-cyan-50 rounded-2xl p-6 shadow-lg border border-blue-100"
           >
             <div class="h-full flex flex-col">
               <Code2 class="w-10 h-10 text-blue-600 mb-4" />
@@ -220,7 +220,7 @@ const latestPost = latestBlogPosts[0];
           <!-- About Me Card -->
           <a
             href="/portfolio"
-            class="group lg:col-span-2 bg-gradient-to-br from-orange-50 to-yellow-50 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-orange-100"
+            class="group lg:col-span-2 bg-linear-to-br from-orange-50 to-yellow-50 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-orange-100"
           >
             <div class="h-full flex flex-col justify-between">
               <div>
@@ -243,7 +243,7 @@ const latestPost = latestBlogPosts[0];
 
           <!-- Achievement Badge 1 -->
           <div
-            class="lg:col-span-1 bg-gradient-to-br from-yellow-50 to-amber-50 rounded-2xl p-6 shadow-lg border border-yellow-100"
+            class="lg:col-span-1 bg-linear-to-br from-yellow-50 to-amber-50 rounded-2xl p-6 shadow-lg border border-yellow-100"
           >
             <div class="h-full flex flex-col justify-center items-center text-center">
               <div class="text-5xl mb-3">🏆</div>
@@ -254,7 +254,7 @@ const latestPost = latestBlogPosts[0];
 
           <!-- Achievement Badge 2 -->
           <div
-            class="lg:col-span-1 bg-gradient-to-br from-indigo-50 to-purple-50 rounded-2xl p-6 shadow-lg border border-indigo-100"
+            class="lg:col-span-1 bg-linear-to-br from-indigo-50 to-purple-50 rounded-2xl p-6 shadow-lg border border-indigo-100"
           >
             <div class="h-full flex flex-col justify-center items-center text-center">
               <div class="text-5xl mb-3">🎖️</div>
@@ -268,7 +268,7 @@ const latestPost = latestBlogPosts[0];
             href="https://mylunch.log8.kr"
             target="_blank"
             rel="noopener noreferrer"
-            class="group lg:col-span-1 bg-gradient-to-br from-green-50 to-yellow-50 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-green-100"
+            class="group lg:col-span-1 bg-linear-to-br from-green-50 to-yellow-50 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-green-100"
           >
             <div class="h-full flex flex-col justify-between">
               <div>
@@ -294,7 +294,7 @@ const latestPost = latestBlogPosts[0];
             href="https://safety-navigator.log8.kr"
             target="_blank"
             rel="noopener noreferrer"
-            class="group lg:col-span-1 bg-gradient-to-br from-red-50 to-orange-50 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-red-100"
+            class="group lg:col-span-1 bg-linear-to-br from-red-50 to-orange-50 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-red-100"
           >
             <div class="h-full flex flex-col justify-between">
               <div>
