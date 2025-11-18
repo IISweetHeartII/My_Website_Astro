@@ -1,137 +1,213 @@
 ---
 import Layout from "../layouts/Layout.astro";
 
-// 정적 데이터로 변경
-const displayData = [
+const currentActivities = [
   {
-    id: 1,
-    title: "Building the Log8 Blog",
-    description:
-      "Astro와 TailwindCSS를 활용한 개인 블로그 플랫폼 개발 및 최적화 작업을 진행하고 있습니다. 사용자 경험과 성능 향상에 집중하고 있어요.",
-    category: "개발",
-    icon: "🚀",
-    color: "from-blue-100 to-cyan-200",
-    textColor: "text-blue-700",
-    activities: [
-      { date: "Dec 15", activity: "프로젝트 소개 페이지를 사용자 중심으로 완전히 재설계했습니다." },
-      { date: "Dec 12", activity: "TailwindCSS v4로 업그레이드 및 성능 최적화" },
-      { date: "Dec 10", activity: "블로그 AdSense 최적화 완료" },
-    ],
+    icon: "📝",
+    title: "블로그 개편",
+    description: "log8.kr 블로그를 Astro + TailwindCSS v4로 완전히 새롭게 리뉴얼 중입니다",
+    link: "https://log8.kr",
+    color: "from-primary-lighter to-background-light",
   },
   {
-    id: 2,
-    title: "Exploring New AI Models",
-    description:
-      "최신 LLM들의 아키텍처와 성능을 비교 분석하며, few-shot learning과 프롬프트 엔지니어링에 대해 깊이 연구하고 있습니다.",
-    category: "AI/ML",
     icon: "🤖",
-    color: "from-purple-100 to-pink-200",
-    textColor: "text-purple-700",
-    activities: [
-      { date: "Dec 12", activity: "Claude 3.5 Sonnet과 GPT-4o 성능 비교 실험" },
-      { date: "Dec 8", activity: "프롬프트 최적화 기법 연구 및 적용" },
-      { date: "Dec 3", activity: "Anthropic의 Constitutional AI 논문 분석" },
+    title: "FlowBot 사이트 제작",
+    description: "사용자 친화적인 챗봇 인터페이스를 가진 새로운 프로젝트를 개발하고 있습니다",
+    color: "from-blue-50 to-cyan-50",
+  },
+  {
+    icon: "🎯",
+    title: "Error Tracking 도구 제작",
+    description: "효율적인 에러 추적 및 로깅 도구 제작 중",
+    color: "from-red-50 to-orange-50",
+  },
+];
+
+const timeline = [
+  {
+    month: "2025년 11월",
+    period: "현재",
+    badge: "🚀 진행 중",
+    badgeColor: "bg-green-500",
+    items: [
+      { text: "log8.kr 블로그 개편", highlight: true },
+      { text: "FlowBot 사이트 제작", highlight: true },
+      { text: "Error Tracking 도구 제작", highlight: true },
     ],
   },
   {
-    id: 3,
-    title: "Learning System Design",
-    description:
-      "대규모 시스템 설계와 마이크로서비스 아키텍처에 대해 학습하며, 실제 프로젝트에 적용 가능한 패턴들을 연구하고 있습니다.",
-    category: "아키텍처",
-    icon: "🏗️",
-    color: "from-green-100 to-teal-200",
-    textColor: "text-green-700",
-    activities: [
-      { date: "Dec 14", activity: "Redis를 활용한 캐싱 전략 설계 및 구현" },
-      { date: "Dec 9", activity: "마이크로서비스간 통신 패턴 연구" },
-      { date: "Dec 4", activity: "데이터베이스 샤딩 전략 학습" },
+    month: "2025년 10월",
+    period: "최근",
+    badge: "🏆 성과",
+    badgeColor: "bg-yellow-500",
+    items: [
+      {
+        text: "ICAN-LABS 대학원 창업프로그램 최우수상 수상",
+        highlight: true,
+        link: "https://mathfigure.log8.kr",
+        linkText: "MathFigure",
+      },
     ],
+  },
+  {
+    month: "2025년 9월",
+    period: "학업 & 성과",
+    badge: "🎓 학업",
+    badgeColor: "bg-blue-500",
+    items: [
+      { text: "중앙대학교 수학과 마지막 학기 16학점 재학 중" },
+      { text: "정보처리기사 자격증 취득", highlight: true },
+      { text: "SQLD 자격증 취득", highlight: true },
+      { text: "관광AI 공모전 장려상 수상", highlight: true },
+    ],
+  },
+];
+
+const goals = [
+  {
+    icon: "🎥",
+    title: "Lucky Ducky 유튜브 복귀",
+    description: "먹방과 노래 콘텐츠로 12월 유튜브 활동 재개 예정",
+    link: "https://www.youtube.com/@Luckyducky-official",
   },
 ];
 ---
 
-<Layout title="Now... | Log8">
-  <main class="min-h-screen bg-linear-to-br from-white to-gray-50">
-    <!-- Header Section -->
-    <section class="bg-white border-b border-gray-200">
-      <div class="container mx-auto px-8 py-12">
-        <div class="text-center space-y-4">
-          <h1 class="text-4xl lg:text-5xl font-bold text-gray-900">
-            What I'm Doing <span class="text-green-500">Now</span>
-          </h1>
-          <p class="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
-            지금 이 순간 제가 몰두하고 있는 것들과 성장하고 있는 분야들을 공유합니다. 살아있는 지적
-            호기심과 꾸준한 실행력을 확인해보세요.
-          </p>
-          <div class="flex items-center justify-center space-x-2 text-sm text-gray-500">
-            <div class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-            <span>Live Updates</span>
-          </div>
-        </div>
+<Layout title="Now | Log8">
+  <main class="max-w-7xl mx-auto px-8 py-16">
+    <!-- Page Header -->
+    <div class="text-center mb-16">
+      <div class="flex items-center justify-center space-x-2 mb-4">
+        <div class="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
+        <span class="text-sm text-gray-500 font-medium">Live Updates</span>
       </div>
-    </section>
+      <h1 class="text-5xl font-bold text-text mb-4">
+        What I'm Doing <span class="text-primary">Now</span>
+      </h1>
+      <p class="text-xl text-text-light max-w-2xl mx-auto">
+        지금 이 순간 제가 집중하고 있는 것들과 성장하고 있는 분야들을 공유합니다
+      </p>
+    </div>
 
-    <!-- Main Content -->
-    <section class="py-12">
-      <div class="container mx-auto px-8">
-        <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8">
-          {
-            displayData.map((item) => (
-              <div class="group bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
-                {/* Card Header */}
-                <div class={`bg-linear-to-br ${item.color} p-6 relative overflow-hidden`}>
-                  <div class="flex items-start justify-between">
-                    <div class="flex items-center space-x-3">
-                      <div class="text-3xl">{item.icon}</div>
-                      <div>
-                        <span
-                          class={`inline-block px-3 py-1 ${item.textColor} bg-white bg-opacity-60 rounded-full text-sm font-medium`}
-                        >
-                          {item.category}
-                        </span>
-                      </div>
-                    </div>
+    <!-- Current Activities -->
+    <div class="mb-16">
+      <h2 class="text-2xl font-bold text-text mb-6">🚀 현재 진행 중인 프로젝트</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {
+          currentActivities.map((activity) => (
+            <div class="group bg-background rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 flex flex-col">
+              <div class={`bg-linear-to-br ${activity.color} p-6 relative overflow-hidden flex-1`}>
+                <div class="text-5xl mb-3">{activity.icon}</div>
+                <h3 class="text-xl font-bold text-text mb-2">{activity.title}</h3>
+                <p class="text-gray-700 text-sm leading-relaxed">{activity.description}</p>
+                {activity.link && (
+                  <a
+                    href={activity.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="inline-flex items-center mt-3 text-primary hover:text-accent-vibrant font-medium text-sm transition-colors"
+                  >
+                    바로가기 →
+                  </a>
+                )}
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+
+    <!-- Timeline -->
+    <div class="mb-16">
+      <h2 class="text-2xl font-bold text-text mb-6">📅 타임라인</h2>
+      <div class="space-y-6">
+        {
+          timeline.map((period) => (
+            <div class="bg-background rounded-2xl shadow-lg p-8">
+              <div class="flex items-center justify-between mb-6">
+                <div class="flex items-center space-x-4">
+                  <div>
+                    <h3 class="text-2xl font-bold text-text">{period.month}</h3>
+                    <p class="text-sm text-gray-500">{period.period}</p>
                   </div>
-                  <h2 class="text-2xl font-bold text-gray-900 mt-4 mb-3">{item.title}</h2>
-                  <p class="text-gray-700 leading-relaxed">{item.description}</p>
-                  {/* Decorative elements */}
-                  <div class="absolute -top-4 -right-4 w-24 h-24 bg-white bg-opacity-20 rounded-full" />
-                  <div class="absolute -bottom-6 -left-6 w-32 h-32 bg-white bg-opacity-10 rounded-full" />
                 </div>
-
-                {/* Timeline Section */}
-                <div class="p-6">
-                  <div class="flex items-center space-x-2 mb-4">
-                    <div class="w-4 h-4 bg-green-500 rounded-full flex items-center justify-center">
-                      <div class="w-2 h-2 bg-white rounded-full" />
+                <span
+                  class={`${period.badgeColor} text-white px-4 py-2 rounded-full text-sm font-semibold`}
+                >
+                  {period.badge}
+                </span>
+              </div>
+              <div class="space-y-3">
+                {period.items.map((item) => (
+                  <div class="flex items-start space-x-3">
+                    <div class="shrink-0 mt-2">
+                      <div
+                        class={`w-2 h-2 rounded-full ${item.highlight ? "bg-primary" : "bg-gray-300"}`}
+                      />
                     </div>
-                    <h3 class="text-lg font-semibold text-gray-900">Recent Activities</h3>
+                    <div class="flex-1">
+                      <p class={`${item.highlight ? "text-text font-medium" : "text-gray-700"}`}>
+                        {item.text}
+                        {item.link && (
+                          <a
+                            href={item.link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="ml-2 text-primary hover:text-accent-vibrant font-semibold transition-colors"
+                          >
+                            ({item.linkText})
+                          </a>
+                        )}
+                      </p>
+                    </div>
                   </div>
+                ))}
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
 
-                  <div class="space-y-3">
-                    {item.activities.map((activity, index) => (
-                      <div class="flex items-start space-x-3 group/activity">
-                        <div class="shrink-0 mt-2">
-                          <div
-                            class={`w-2 h-2 rounded-full ${index === 0 ? "bg-green-500" : "bg-gray-300"}`}
-                          />
-                        </div>
-                        <div class="flex-1 min-w-0">
-                          <div class="flex items-center space-x-2 mb-1">
-                            <span class="text-sm font-medium text-gray-500">{activity.date}</span>
-                          </div>
-                          <p class="text-sm text-gray-700 leading-relaxed">{activity.activity}</p>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
+    <!-- Next Goals -->
+    <div class="mb-16">
+      <h2 class="text-2xl font-bold text-text mb-6">🎯 다음 목표 (2025년 12월)</h2>
+      <div class="grid grid-cols-1 gap-6">
+        {
+          goals.map((goal) => (
+            <div class="bg-linear-to-r from-primary to-accent-vibrant rounded-2xl p-8 text-white shadow-xl">
+              <div class="flex items-start space-x-4">
+                <div class="text-5xl">{goal.icon}</div>
+                <div class="flex-1">
+                  <h3 class="text-2xl font-bold mb-2">{goal.title}</h3>
+                  <p class="text-white/90 mb-4">{goal.description}</p>
+                  {goal.link && (
+                    <a
+                      href={goal.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="inline-flex items-center px-6 py-3 bg-background text-primary rounded-lg hover:bg-background-light transition-all duration-300 font-semibold shadow-lg hover:shadow-xl"
+                    >
+                      채널 방문하기 →
+                    </a>
+                  )}
                 </div>
               </div>
-            ))
-          }
-        </div>
+            </div>
+          ))
+        }
       </div>
-    </section>
+    </div>
+
+    <!-- Fun Fact -->
+    <div
+      class="bg-linear-to-br from-primary-lighter to-background-light rounded-2xl p-8 text-center"
+    >
+      <p class="text-gray-700 text-lg">
+        💡 <strong>Fun Fact:</strong> 중앙대학교 수학과를 졸업하는 개발자입니다! 수학적 사고와 개발을
+        결합하여 문제를 해결하는 것을 좋아해요.
+      </p>
+      <p class="text-sm text-gray-500 mt-3">마지막 업데이트: 2025년 11월 18일</p>
+    </div>
   </main>
 </Layout>
