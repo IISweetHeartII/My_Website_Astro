@@ -24,13 +24,19 @@ const description = "잘못 들어온 것 같아요! 만약 버그가 있다면 
       <div class="relative w-32 h-32 mx-auto mb-8 md:w-24 md:h-24">
         <FileQuestion class="lost-file text-primary w-full h-full" />
       </div>
-      <div class="action-buttons mb-6">
+      <div class="action-buttons mb-6 flex flex-wrap gap-3 justify-center">
         <a
           href="/"
           class="inline-flex items-center gap-2 px-6 py-3 bg-accent text-text rounded-xl no-underline font-semibold transition-all duration-200 hover:bg-accent-mint hover:-translate-y-px"
         >
           홈으로 가기
           <ArrowRight class="w-5 h-5 transition-transform duration-200 group-hover:translate-x-1" />
+        </a>
+        <a
+          href="/contact"
+          class="inline-flex items-center gap-2 px-6 py-3 bg-primary/30 text-text rounded-xl no-underline font-semibold transition-all duration-200 hover:bg-primary/40 hover:-translate-y-px"
+        >
+          Contact
         </a>
       </div>
       <p class="help-text text-sm text-primary m-0 md:text-xs">
