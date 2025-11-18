@@ -1,60 +1,90 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import { SITE_TITLE } from "@/shared/config/consts";
+import { Mail, Send } from "lucide-astro";
 ---
 
 <Layout
   title={`Contact - ${SITE_TITLE}`}
-  description="Get in touch with us for any questions or concerns."
+  description="덕환에게 연락하고 싶으신가요? 이메일이나 소셜 미디어로 언제든지 연락주세요!"
 >
-  <main class="container mx-auto p-8">
-    <h1 class="text-4xl md:text-5xl font-bold text-text text-center mb-8 tracking-tight">
-      Get in Touch
-    </h1>
-    <div class="max-w-lg mx-auto">
+  <main class="max-w-7xl mx-auto px-4 md:px-8 py-8 md:py-16">
+    <!-- Page Header -->
+    <div class="text-center mb-12 md:mb-16">
+      <div class="flex items-center justify-center mb-4">
+        <div class="p-3 bg-primary-lighter rounded-full">
+          <Mail class="w-8 h-8 text-primary" />
+        </div>
+      </div>
+      <h1 class="text-3xl md:text-5xl font-bold text-text mb-4">
+        Get in <span class="text-primary">Touch</span>
+      </h1>
+      <p class="text-lg md:text-xl text-text-light max-w-2xl mx-auto">
+        프로젝트 협업, 질문, 또는 그냥 인사하고 싶으시다면 언제든지 연락주세요!
+      </p>
+    </div>
+
+    <!-- Contact Form -->
+    <div class="bg-background rounded-2xl shadow-lg p-6 md:p-8 max-w-2xl mx-auto">
+      <h2 class="text-2xl font-bold text-text mb-6">💌 메시지 보내기</h2>
       <form action="https://formspree.io/f/xrbqwgov" method="POST" class="space-y-6">
         <div>
-          <label for="name" class="block text-sm font-medium text-text">Name</label>
+          <label for="name" class="block text-sm font-semibold text-text mb-2">
+            이름 <span class="text-red-500">*</span>
+          </label>
           <input
             type="text"
             name="name"
             id="name"
             required
-            class="mt-1 block w-full p-3 border border-primary-light rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent text-text"
+            placeholder="홍길동"
+            class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-200 text-text placeholder-gray-400"
           />
         </div>
         <div>
-          <label for="email" class="block text-sm font-medium text-text">Email</label>
+          <label for="email" class="block text-sm font-semibold text-text mb-2">
+            이메일 <span class="text-red-500">*</span>
+          </label>
           <input
             type="email"
             name="_replyto"
             id="email"
             required
-            class="mt-1 block w-full p-3 border border-primary-light rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent text-text"
+            placeholder="your@email.com"
+            class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-200 text-text placeholder-gray-400"
           />
         </div>
         <div>
-          <label for="message" class="block text-sm font-medium text-text">Message</label>
+          <label for="message" class="block text-sm font-semibold text-text mb-2">
+            메시지 <span class="text-red-500">*</span>
+          </label>
           <textarea
             name="message"
             id="message"
-            rows="4"
+            rows="6"
             required
-            class="mt-1 block w-full p-3 border border-primary-light rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent text-text"
+            placeholder="무엇을 도와드릴까요?"
+            class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-200 text-text placeholder-gray-400 resize-none"
           ></textarea>
         </div>
-        <div class="text-center">
-          <button
-            type="submit"
-            class="inline-flex justify-center py-3 px-6 border border-transparent shadow-sm text-base font-medium rounded-md text-text bg-accent hover:bg-accent-mint focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent"
-          >
-            Send Message
-          </button>
-        </div>
+        <button
+          type="submit"
+          class="w-full inline-flex items-center justify-center px-6 py-3.5 bg-primary hover:bg-accent-vibrant text-white font-semibold rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+        >
+          <Send class="w-5 h-5 mr-2" />
+          메시지 전송하기
+        </button>
+        <p class="text-xs text-gray-500 text-center">🔒 Formspree를 통해 안전하게 전송됩니다</p>
       </form>
     </div>
-    <p class="mt-8 text-center text-sm text-primary">
-      Your email will be sent to sachi009955@gmail.com via Formspree.
-    </p>
   </main>
+
+  <!-- FAQ or Additional Info -->
+  <div
+    class="bg-linear-to-br from-primary-lighter to-background-light rounded-2xl p-6 md:p-8 text-center"
+  >
+    <p class="text-gray-700 text-base md:text-lg">
+      💡 <strong>협업이나 프로젝트 제안</strong>은 언제나 환영입니다! <br class="hidden md:block" />
+    </p>
+  </div>
 </Layout>
