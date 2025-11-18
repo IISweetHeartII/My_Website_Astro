@@ -4,8 +4,7 @@ import { SITE_TITLE } from "@/shared/config/consts";
 import { FileQuestion, ArrowRight } from "lucide-astro";
 
 const title = `404 Not Found - ${SITE_TITLE}`;
-const description =
-  "Oops! The page you're looking for has wandered off into the digital wilderness.";
+const description = "잘못 들어온 것 같아요! 만약 버그가 있다면 메일로 알려주세요.";
 ---
 
 <Layout title={title} description={description}>
@@ -20,7 +19,7 @@ const description =
       </div>
       <h1 class="text-3xl md:text-4xl mb-4 text-text font-bold tracking-tight">Page Not Found</h1>
       <p class="text-lg text-primary mb-8 leading-relaxed md:text-base">
-        Oops! Looks like this page has wandered off into the digital wilderness.
+        잘못 들어온 것 같아요! 만약 버그가 있다면 메일로 알려주세요.
       </p>
       <div class="relative w-32 h-32 mx-auto mb-8 md:w-24 md:h-24">
         <FileQuestion class="lost-file text-primary w-full h-full" />
@@ -30,15 +29,15 @@ const description =
           href="/"
           class="inline-flex items-center gap-2 px-6 py-3 bg-accent text-text rounded-xl no-underline font-semibold transition-all duration-200 hover:bg-accent-mint hover:-translate-y-px"
         >
-          Take Me Home
+          홈으로 가기
           <ArrowRight class="w-5 h-5 transition-transform duration-200 group-hover:translate-x-1" />
         </a>
       </div>
       <p class="help-text text-sm text-primary m-0 md:text-xs">
-        Looking for something urgent? <a
+        급한 일이 있다면 <a
           href="/contact"
           class="contact-link text-accent no-underline font-medium transition-all duration-200 border-b border-transparent hover:border-accent"
-          >Contact us</a
+          >메일로 알려주세요</a
         >
       </p>
     </div>

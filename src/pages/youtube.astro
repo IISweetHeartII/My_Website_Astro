@@ -3,98 +3,130 @@ import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout title="YouTube | Log8">
-  <main class="max-w-4xl mx-auto p-8">
-    <h1 class="text-4xl font-bold text-brand-primary text-center mb-8">YouTube</h1>
-    <p class="text-center text-text-default mb-12 text-lg">
-      성장과 기록을 통해 가치를 공유하는 개발 블로그입니다.
-    </p>
+  <main class="max-w-5xl mx-auto px-8">
+    <div class="text-center mb-16">
+      <h1 class="text-5xl font-bold text-gray-900 mb-4">YouTube</h1>
+      <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+        개발 여정과 일상을 기록하는 덕환의 유튜브 채널
+      </p>
+    </div>
 
-    <section class="mb-12">
-      <h2 class="text-3xl font-bold text-brand-primary mb-6">Sponge Duk</h2>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <!-- Sponge Duk Latest Episode Embed -->
-        <div class="w-full h-64 md:h-96 md:col-span-2">
-          <iframe
-            src="https://www.youtube.com/embed/8Lq06pG_s_o"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen
-            class="w-full h-full rounded-lg shadow-md"
-          >
-          </iframe>
-        </div>
-        <!-- Sponge Duk Description -->
-        <div class="flex flex-col justify-center md:col-span-1">
-          <h3 class="text-xl font-semibold text-brand-primary mb-4">Latest from Sponge Duk</h3>
-          <p class="text-text-default mb-4">
-            AI 개발 여정과 실전 문제 해결 노하우를 담은 스펀지덕의 최신 기술 인사이트를 만나보세요.
-          </p>
-          <a
-            href="https://www.youtube.com/@sponge-duck"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="text-accent-vibrant hover:underline font-medium">채널 방문하기 &rarr;</a
-          >
+    <section class="mb-20">
+      <div class="bg-linear-to-br from-purple-50 to-blue-50 rounded-2xl p-8 shadow-sm">
+        <h2 class="text-3xl font-bold text-gray-900 mb-8">🧠 Sponge Duck</h2>
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <!-- Sponge Duk Latest Episode Embed -->
+          <div class="lg:col-span-2">
+            <div class="relative w-full" style="padding-bottom: 56.25%;">
+              <iframe
+                src="https://www.youtube.com/embed/8Lq06pG_s_o"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+                class="absolute top-0 left-0 w-full h-full rounded-xl shadow-lg"
+              >
+              </iframe>
+            </div>
+          </div>
+          <!-- Sponge Duk Description -->
+          <div class="flex flex-col justify-center">
+            <h3 class="text-xl font-bold text-gray-900 mb-4">최신 에피소드</h3>
+            <p class="text-gray-700 mb-6 leading-relaxed">
+              개발 여정과 AI활용 꿀팁을 공유하기 위해 스펀지덕 채널을 운영하고 있습니다.
+            </p>
+            <a
+              href="https://www.youtube.com/@sponge-duck"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center text-purple-600 hover:text-purple-700 font-semibold transition-colors group text-2xl"
+            >
+              채널 방문하기
+              <svg
+                class="ml-2 w-5 h-5 transform group-hover:translate-x-1 transition-transform"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+              </svg>
+            </a>
+          </div>
         </div>
       </div>
     </section>
 
-    <hr class="my-12" />
-
-    <section>
-      <h2 class="text-3xl font-bold text-brand-primary mb-6">Lucky Dukky</h2>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <!-- Lucky Dukky Latest Episode Embed -->
-        <div class="w-full h-64 md:h-96 md:col-span-2">
-          <iframe
-            src="https://www.youtube.com/embed/_zS1hzQVIxY"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen
-            class="w-full h-full rounded-lg shadow-md"
-          >
-          </iframe>
-        </div>
-        <!-- Lucky Dukky Description -->
-        <div class="flex flex-col justify-center md:col-span-1">
-          <h3 class="text-xl font-semibold text-brand-primary mb-4">Latest from Lucky Dukky</h3>
-          <p class="text-text-default mb-4">
-            일상 속 AI 활용 팁, 생산성 향상 아이디어, 그리고 개발자 김덕환의 솔직한 이야기들을
-            럭키덕키 채널에서 확인하세요.
-          </p>
-          <a
-            href="https://www.youtube.com/@Luckyducky-official"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="text-accent-vibrant hover:underline font-medium">채널 방문하기 &rarr;</a
-          >
+    <section class="mb-20">
+      <div class="bg-linear-to-br from-green-50 to-yellow-50 rounded-2xl p-8 shadow-sm">
+        <h2 class="text-3xl font-bold text-gray-900 mb-8">🍀 Lucky Ducky</h2>
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <!-- Lucky Ducky Latest Episode Embed -->
+          <div class="lg:col-span-2">
+            <div class="relative w-full" style="padding-bottom: 56.25%;">
+              <iframe
+                src="https://www.youtube.com/embed/_zS1hzQVIxY"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+                class="absolute top-0 left-0 w-full h-full rounded-xl shadow-lg"
+              >
+              </iframe>
+            </div>
+          </div>
+          <!-- Lucky Ducky Description -->
+          <div class="flex flex-col justify-center">
+            <h3 class="text-xl font-bold text-gray-900 mb-4">최신 에피소드</h3>
+            <p class="text-gray-700 mb-6 leading-relaxed">
+              먹방과 노래를 포함한 일상을 확인하기 위해 럭키덕키 채널을 운영하고 있습니다.
+            </p>
+            <a
+              href="https://www.youtube.com/@Luckyducky-official"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center text-green-600 hover:text-green-700 font-semibold transition-colors group text-2xl"
+            >
+              채널 방문하기
+              <svg
+                class="ml-2 w-5 h-5 transform group-hover:translate-x-1 transition-transform"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+              </svg>
+            </a>
+          </div>
         </div>
       </div>
     </section>
 
     <!-- YouTube 구독 섹션 -->
-    <section class="mt-16 bg-surface-light rounded-lg p-8">
-      <div class="text-center">
-        <h2 class="text-2xl font-bold text-brand-primary mb-4">
-          YouTube에서 더 많은 콘텐츠를 만나보세요
-        </h2>
-        <p class="text-text-default mb-6">
-          개발 여정과 일상을 공유하는 다양한 영상들을 확인해보세요.
-        </p>
-        <div class="flex justify-center gap-4">
+    <section
+      class="bg-linear-to-r from-purple-600 to-blue-600 rounded-2xl p-12 text-white text-center shadow-xl mb-12"
+    >
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-3xl font-bold mb-4">YouTube에서 더 많은 콘텐츠를 만나보세요</h2>
+        <div class="flex flex-col sm:flex-row justify-center gap-4">
           <a
             href="https://www.youtube.com/@sponge-duck"
             target="_blank"
             rel="noopener noreferrer"
-            class="bg-brand-primary text-surface-light px-6 py-3 rounded-lg hover:bg-brand-secondary transition-colors duration-200 font-medium"
+            class="inline-flex items-center justify-center px-8 py-4 bg-white text-purple-600 rounded-lg hover:bg-gray-100 transition-all duration-300 font-semibold shadow-lg hover:shadow-xl transform hover:-translate-y-1"
           >
-            Sponge Duk 구독
+            <span class="mr-2">🧠</span> Sponge Duck 구독
           </a>
           <a
             href="https://www.youtube.com/@Luckyducky-official"
             target="_blank"
             rel="noopener noreferrer"
-            class="bg-brand-primary text-surface-light px-6 py-3 rounded-lg hover:bg-brand-secondary transition-colors duration-200 font-medium"
+            class="inline-flex items-center justify-center px-8 py-4 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-all duration-300 font-semibold shadow-lg hover:shadow-xl transform hover:-translate-y-1"
           >
-            Lucky Ducky 구독
+            <span class="mr-2">🍀</span> Lucky Ducky 구독
           </a>
         </div>
       </div>

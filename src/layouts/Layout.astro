@@ -3,6 +3,7 @@ import Header from "@/shared/components/layout/Header.astro";
 import BaseHead from "@/shared/components/layout/BaseHead.astro";
 import Footer from "@/shared/components/layout/Footer.astro";
 import GoogleAnalytics from "@/shared/components/seo/GoogleAnalytics.astro";
+import ProgressIndicator from "@/shared/components/ui/ProgressIndicator.astro";
 import "@/styles/theme.css";
 
 interface Props {
@@ -23,7 +24,8 @@ const { title, description } = Astro.props;
     <BaseHead title={title} description={description ?? undefined} />
     <slot name="head" />
   </head>
-  <body class="bg-background text-text font-sans flex flex-col min-h-screen">
+  <body class="bg-white text-gray-900 font-sans flex flex-col min-h-screen">
+    <ProgressIndicator />
     <Header />
     <main class="grow pt-20">
       <slot />

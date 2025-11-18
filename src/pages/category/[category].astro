@@ -1,7 +1,5 @@
 ---
-import BaseHead from "@/shared/components/layout/BaseHead.astro";
-import Header from "@/shared/components/layout/Header.astro";
-import Footer from "@/shared/components/layout/Footer.astro";
+import Layout from "@/layouts/Layout.astro";
 import BlogCard from "@/features/blog/components/BlogCard.astro";
 import { getCollection, type CollectionEntry } from "astro:content";
 import { FileText, Tag, Archive, Files } from "lucide-astro";
@@ -55,109 +53,93 @@ const title = `${category.icon} ${category.name}`;
 const description = category.description;
 ---
 
-<!doctype html>
-<html lang="ko">
-  <head>
-    <BaseHead title={title} description={description} />
-  </head>
-  <body class="min-h-screen flex flex-col m-0">
-    <Header />
-    <main class="flex-1 w-full max-w-7xl mx-auto p-8 flex flex-col">
-      <!-- 헤더 섹션 -->
-      <section
-        class="text-center mb-12 p-16 bg-linear-to-br from-primary/10 to-accent/10 rounded-3xl border-2 border-primary/20 md:p-12 md:mb-8"
-      >
-        <div class="text-6xl mb-4">{category.icon}</div>
-        <h1 class="text-4xl md:text-5xl font-extrabold text-text mb-4 leading-tight">
-          {category.name}
-        </h1>
-        <p class="text-lg text-text-muted max-w-2xl mx-auto leading-relaxed">
-          {category.description}
-        </p>
-        <div class="mt-6 flex items-center justify-center gap-2 text-sm text-text-muted">
-          <FileText class="w-5 h-5" />
-          <span><strong>{postsData.length}개</strong>의 글</span>
-        </div>
-      </section>
+<Layout title={title} description={description}>
+  <div class="w-full max-w-7xl mx-auto p-8 flex flex-col">
+    <!-- 헤더 섹션 -->
+    <section
+      class="text-center mb-12 p-16 bg-linear-to-br from-primary/10 to-accent/10 rounded-3xl border-2 border-primary/20 md:p-12 md:mb-8"
+    >
+      <div class="text-6xl mb-4">{category.icon}</div>
+      <h1 class="text-4xl md:text-5xl font-extrabold text-text mb-4 leading-tight">
+        {category.name}
+      </h1>
+      <p class="text-lg text-text-muted max-w-2xl mx-auto leading-relaxed">
+        {category.description}
+      </p>
+      <div class="mt-6 flex items-center justify-center gap-2 text-sm text-text-muted">
+        <FileText class="w-5 h-5" />
+        <span><strong>{postsData.length}개</strong>의 글</span>
+      </div>
+    </section>
 
-      <!-- 카테고리 네비게이션 -->
-      <section class="mb-8">
-        <div class="bg-background-light rounded-2xl p-6 border border-background-lighter">
-          <h3 class="text-sm font-semibold text-text-muted mb-4 flex items-center gap-2">
-            <Tag class="w-4 h-4" />
-            다른 카테고리
-          </h3>
-          <div class="flex flex-wrap gap-2">
-            {
-              allCategories
-                .filter((cat) => cat.id !== category.id)
-                .map((cat) => (
-                  <a
-                    href={`/category/${cat.id}/`}
-                    class="px-4 py-2 rounded-lg bg-background hover:bg-primary hover:text-background transition-all duration-200 font-medium text-sm flex items-center gap-2 border border-background-lighter hover:border-primary"
-                  >
-                    <span>{cat.icon}</span>
-                    <span>{cat.name}</span>
-                  </a>
-                ))
-            }
-            <a
-              href="/blog/"
-              class="px-4 py-2 rounded-lg bg-background hover:bg-accent hover:text-background transition-all duration-200 font-medium text-sm flex items-center gap-2 border border-background-lighter hover:border-accent"
-            >
-              <Archive class="w-4 h-4" />
-              <span>전체 글</span>
-            </a>
+    <!-- 카테고리 네비게이션 -->
+    <section class="mb-8">
+      <div class="bg-background-light rounded-2xl p-6 border border-background-lighter">
+        <h3 class="text-sm font-semibold text-text-muted mb-4 flex items-center gap-2">
+          <Tag class="w-4 h-4" />
+          다른 카테고리
+        </h3>
+        <div class="flex flex-wrap gap-2">
+          {
+            allCategories
+              .filter((cat) => cat.id !== category.id)
+              .map((cat) => (
+                <a
+                  href={`/category/${cat.id}/`}
+                  class="px-4 py-2 rounded-lg bg-background hover:bg-primary hover:text-background transition-all duration-200 font-medium text-sm flex items-center gap-2 border border-background-lighter hover:border-primary"
+                >
+                  <span>{cat.icon}</span>
+                  <span>{cat.name}</span>
+                </a>
+              ))
+          }
+          <a
+            href="/blog/"
+            class="px-4 py-2 rounded-lg bg-background hover:bg-accent hover:text-background transition-all duration-200 font-medium text-sm flex items-center gap-2 border border-background-lighter hover:border-accent"
+          >
+            <Archive class="w-4 h-4" />
+            <span>전체 글</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 포스트 목록 -->
+    {
+      postsData.length > 0 ? (
+        <section class="flex-1">
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {postsData.map((postData) => (
+              <BlogCard
+                title={postData.title}
+                description={postData.description}
+                date={postData.date}
+                slug={postData.slug}
+                dataTags={postData.dataTags}
+                dataTitle={postData.dataTitle}
+                dataDescription={postData.dataDescription}
+                dataCategory={postData.dataCategory}
+              />
+            ))}
           </div>
-        </div>
-      </section>
-
-      <!-- 포스트 목록 -->
-      {
-        postsData.length > 0 ? (
-          <section class="flex-1">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {postsData.map((postData) => (
-                <BlogCard
-                  title={postData.title}
-                  description={postData.description}
-                  date={postData.date}
-                  slug={postData.slug}
-                  dataTags={postData.dataTags}
-                  dataTitle={postData.dataTitle}
-                  dataDescription={postData.dataDescription}
-                  dataCategory={postData.dataCategory}
-                />
-              ))}
-            </div>
-          </section>
-        ) : (
-          <section class="flex-1 text-center py-16">
-            <div class="text-text-muted mb-4">
-              <Files class="w-24 h-24 mx-auto mb-4" />
-            </div>
-            <h3 class="text-xl font-semibold text-text mb-2">
-              '{category.name}' 카테고리에 글이 아직 없어요
-            </h3>
-            <p class="text-text-muted">곧 멋진 글을 작성할 예정이니 기대해주세요!</p>
-            <a
-              href="/blog/"
-              class="inline-block mt-6 px-6 py-3 bg-primary text-background rounded-lg font-medium hover:bg-accent transition-colors"
-            >
-              전체 글 보기
-            </a>
-          </section>
-        )
-      }
-    </main>
-    <Footer />
-
-    <script>
-      import { setupScrollAnimations } from "@/shared/scripts/scroll-animation";
-
-      document.addEventListener("DOMContentLoaded", () => {
-        setupScrollAnimations();
-      });
-    </script>
-  </body>
-</html>
+        </section>
+      ) : (
+        <section class="flex-1 text-center py-16">
+          <div class="text-text-muted mb-4">
+            <Files class="w-24 h-24 mx-auto mb-4" />
+          </div>
+          <h3 class="text-xl font-semibold text-text mb-2">
+            '{category.name}' 카테고리에 글이 아직 없어요
+          </h3>
+          <p class="text-text-muted">곧 멋진 글을 작성할 예정이니 기대해주세요!</p>
+          <a
+            href="/blog/"
+            class="inline-block mt-6 px-6 py-3 bg-primary text-background rounded-lg font-medium hover:bg-accent transition-colors"
+          >
+            전체 글 보기
+          </a>
+        </section>
+      )
+    }
+  </div>
+</Layout>

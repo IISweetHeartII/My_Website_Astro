@@ -4,22 +4,15 @@ import { Image } from "astro:assets";
 import profileImage from "@/assets/images/design/DH_ID.jpg";
 import { Mail, Github, Globe, ChevronRight } from "lucide-astro";
 
-// Import new UI components
-import ProgressIndicator from "@/shared/components/ui/ProgressIndicator.astro";
-import StatCard from "@/shared/components/ui/StatCard.astro";
+// Import UI components
 import TechBadge from "@/shared/components/ui/TechBadge.astro";
 import ProjectPreviewCard from "@/shared/components/ui/ProjectPreviewCard.astro";
-import FAQItem from "@/shared/components/ui/FAQItem.astro";
 ---
 
 <Layout title="Who is 덕환 | Log8">
-  <!-- Progress Indicator -->
-  <ProgressIndicator />
-
-  <main class="min-h-screen bg-gradient-to-br from-white to-gray-50">
-    <!-- Hero Section - 나의 철학/미션 -->
-    <section class="relative overflow-hidden bg-white">
-      <div class="absolute inset-0 bg-gradient-to-r from-blue-50 to-green-50 opacity-50"></div>
+  <main class="min-h-screen bg-white">
+    <!-- Hero Section -->
+    <section class="relative overflow-hidden bg-gradient-to-br from-purple-50 to-white">
       <div class="container mx-auto px-8 py-20 relative">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <!-- 프로필 이미지 -->
@@ -34,11 +27,11 @@ import FAQItem from "@/shared/components/ui/FAQItem.astro";
               />
               <!-- 장식 요소 -->
               <div
-                class="absolute -top-4 -right-4 w-24 h-24 bg-blue-200 rounded-full opacity-60 animate-pulse"
+                class="absolute -top-4 -right-4 w-24 h-24 bg-purple-200 rounded-full opacity-60 animate-pulse"
               >
               </div>
               <div
-                class="absolute -bottom-6 -left-6 w-32 h-32 bg-green-200 rounded-full opacity-40 animate-pulse"
+                class="absolute -bottom-6 -left-6 w-32 h-32 bg-purple-300 rounded-full opacity-40 animate-pulse"
                 style="animation-delay: 1s"
               >
               </div>
@@ -48,38 +41,35 @@ import FAQItem from "@/shared/components/ui/FAQItem.astro";
           <!-- 철학 및 소개 -->
           <div class="text-center lg:text-left space-y-6">
             <div
-              class="inline-flex items-center px-4 py-2 bg-blue-100 text-blue-700 rounded-full text-sm font-medium border border-blue-200"
+              class="inline-flex items-center px-4 py-2 bg-purple-50 text-purple-600 rounded-full text-sm font-medium border border-purple-200"
             >
               👋 안녕하세요!
             </div>
 
             <h1 class="text-4xl lg:text-5xl font-bold text-gray-900 leading-tight">
               복잡한 문제를 기술로 해결하여<br />
-              <span
-                class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-green-600"
-              >
-                사람들의 시간을 아껴주는 것
-              </span><br />
+              <span class="text-purple-600 font-bold"> 사람들의 시간을 아껴주는 것 </span><br />
               에 희열을 느끼는 개발자입니다.
             </h1>
 
             <p class="text-xl text-gray-600 leading-relaxed">
-              저는 <strong>김덕환</strong>입니다. AI를 단순한 도구가 아닌 함께 문제를 해결하는
-              팀메이트로 활용하며, 일상의 작은 불편함도 놓치지 않고 기술로 풀어내려 합니다.
+              저는 <strong class="text-gray-900">김덕환</strong>입니다. AI를 단순한 도구가 아닌 함께
+              문제를 해결하는 팀메이트로 활용하며, 일상의 작은 불편함도 놓치지 않고 기술로 풀어내려
+              합니다.
             </p>
 
             <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
               <a
                 href="#my-story"
-                class="inline-flex items-center justify-center px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white font-medium rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+                class="inline-flex items-center justify-center px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white font-medium rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
               >
                 📖 나의 이야기 보기
               </a>
               <a
                 href="#contact"
-                class="inline-flex items-center justify-center px-6 py-3 border-2 border-blue-500 text-blue-600 hover:bg-blue-50 font-medium rounded-lg transition-all duration-300"
+                class="inline-flex items-center justify-center px-6 py-3 border-2 border-purple-600 text-purple-600 hover:bg-purple-50 font-medium rounded-lg transition-all duration-300"
               >
-                ☕ 커피챗 제안하기
+                📬 연락하기
               </a>
             </div>
           </div>
@@ -87,62 +77,15 @@ import FAQItem from "@/shared/components/ui/FAQItem.astro";
       </div>
     </section>
 
-    <!-- Statistics Section -->
-    <section class="py-16 bg-gradient-to-br from-gray-50 to-white">
-      <div class="container mx-auto px-8">
-        <div class="max-w-5xl mx-auto">
-          <div class="text-center mb-12">
-            <h2 class="scroll-animate text-3xl font-bold text-gray-900 mb-4">
-              📊 숫자로 보는 덕환
-            </h2>
-            <p class="scroll-animate text-lg text-gray-600" style="animation-delay: 0.1s">
-              지금까지의 여정을 숫자로 표현해봤어요
-            </p>
-          </div>
-
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <StatCard
-              number="10+"
-              label="프로젝트"
-              icon="💻"
-              gradient="from-blue-500 to-cyan-500"
-              delay={0.2}
-            />
-            <StatCard
-              number="3"
-              label="수상 경력"
-              icon="🏆"
-              gradient="from-purple-500 to-pink-500"
-              delay={0.3}
-            />
-            <StatCard
-              number="50+"
-              label="커피챗"
-              icon="☕"
-              gradient="from-orange-500 to-red-500"
-              delay={0.4}
-            />
-            <StatCard
-              number="1000+"
-              label="커밋"
-              icon="🚀"
-              gradient="from-green-500 to-emerald-500"
-              delay={0.5}
-            />
-          </div>
-        </div>
-      </div>
-    </section>
-
     <!-- My Story Section -->
-    <section id="my-story" class="py-16 bg-white">
+    <section id="my-story" class="py-16 bg-gray-50">
       <div class="container mx-auto px-8">
         <div class="max-w-4xl mx-auto">
           <div class="text-center mb-12">
-            <h2 class="scroll-animate text-3xl font-bold text-gray-900 mb-4">
+            <h2 class="scroll-animate text-3xl font-bold text-text mb-4">
               📚 나는 어떻게 개발자가 되었을까?
             </h2>
-            <p class="scroll-animate text-lg text-gray-600" style="animation-delay: 0.1s">
+            <p class="scroll-animate text-lg text-text-light" style="animation-delay: 0.1s">
               수학도에서 AI 활용 개발자까지의 여정
             </p>
           </div>
@@ -150,9 +93,7 @@ import FAQItem from "@/shared/components/ui/FAQItem.astro";
           <!-- Timeline -->
           <div class="relative">
             <!-- Timeline Line -->
-            <div
-              class="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-blue-400 to-green-400"
-            >
+            <div class="absolute left-8 top-0 bottom-0 w-0.5 bg-linear-to-b from-primary to-accent">
             </div>
 
             <!-- Timeline Items -->
@@ -163,20 +104,20 @@ import FAQItem from "@/shared/components/ui/FAQItem.astro";
                 style="animation-delay: 0.2s"
               >
                 <div
-                  class="absolute left-6 w-4 h-4 bg-blue-500 rounded-full border-4 border-white shadow-lg group-hover:scale-150 transition-transform duration-300"
+                  class="absolute left-6 w-4 h-4 bg-primary rounded-full border-4 border-white shadow-lg group-hover:scale-150 transition-transform duration-300"
                 >
                 </div>
                 <div
-                  class="ml-16 bg-blue-50 rounded-2xl p-6 hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
+                  class="ml-16 bg-white rounded-2xl p-6 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 border border-gray-200"
                 >
                   <div class="flex items-center gap-2 mb-2">
-                    <span class="text-blue-600 font-semibold">2020년</span>
-                    <span class="px-2 py-1 bg-blue-100 text-blue-800 rounded text-xs">시작</span>
+                    <span class="text-primary font-semibold">2020년</span>
+                    <span class="px-2 py-1 bg-primary-lighter text-primary rounded text-xs"
+                      >시작</span
+                    >
                   </div>
-                  <h3 class="text-xl font-bold text-gray-900 mb-2">
-                    수학과 입학 - 논리적 사고의 기반
-                  </h3>
-                  <p class="text-gray-700">
+                  <h3 class="text-xl font-bold text-text mb-2">수학과 입학 - 논리적 사고의 기반</h3>
+                  <p class="text-text-light">
                     중앙대학교 수학과에 입학하면서 논리적 사고와 문제 해결 능력의 기초를 다졌습니다.
                     수학의 엄밀함과 체계적 접근법이 후에 개발자로서의 사고방식에 큰 영향을
                     미쳤습니다.
@@ -194,14 +135,14 @@ import FAQItem from "@/shared/components/ui/FAQItem.astro";
                 >
                 </div>
                 <div
-                  class="ml-16 bg-gray-50 rounded-2xl p-6 hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
+                  class="ml-16 bg-white rounded-2xl p-6 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 border border-gray-200"
                 >
                   <div class="flex items-center gap-2 mb-2">
                     <span class="text-gray-600 font-semibold">2022-2023년</span>
-                    <span class="px-2 py-1 bg-gray-100 text-gray-800 rounded text-xs">성장</span>
+                    <span class="px-2 py-1 bg-gray-50 text-gray-700 rounded text-xs">성장</span>
                   </div>
-                  <h3 class="text-xl font-bold text-gray-900 mb-2">군복무 - 인생의 방향성 고민</h3>
-                  <p class="text-gray-700">
+                  <h3 class="text-xl font-bold text-text mb-2">군복무 - 인생의 방향성 고민</h3>
+                  <p class="text-text-light">
                     18개월의 군복무 기간 동안 많은 생각을 했습니다. 단순히 수학만으로는 세상의
                     문제를 해결하기 어렵다는 것을 깨달았고, 기술을 통해 실질적인 가치를 만들고
                     싶다는 꿈을 키웠습니다.
@@ -215,22 +156,22 @@ import FAQItem from "@/shared/components/ui/FAQItem.astro";
                 style="animation-delay: 0.4s"
               >
                 <div
-                  class="absolute left-6 w-4 h-4 bg-purple-500 rounded-full border-4 border-white shadow-lg group-hover:scale-150 transition-transform duration-300"
+                  class="absolute left-6 w-4 h-4 bg-accent rounded-full border-4 border-white shadow-lg group-hover:scale-150 transition-transform duration-300"
                 >
                 </div>
                 <div
-                  class="ml-16 bg-purple-50 rounded-2xl p-6 hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
+                  class="ml-16 bg-white rounded-2xl p-6 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 border border-gray-200"
                 >
                   <div class="flex items-center gap-2 mb-2">
-                    <span class="text-purple-600 font-semibold">2023년 말</span>
-                    <span class="px-2 py-1 bg-purple-100 text-purple-800 rounded text-xs"
+                    <span class="text-accent font-semibold">2023년 말</span>
+                    <span class="px-2 py-1 bg-primary-lighter text-primary rounded text-xs"
                       >전환점</span
                     >
                   </div>
-                  <h3 class="text-xl font-bold text-gray-900 mb-2">
+                  <h3 class="text-xl font-bold text-text mb-2">
                     스마트메이커 7기 - AI와의 첫 만남 🏆
                   </h3>
-                  <p class="text-gray-700">
+                  <p class="text-text-light">
                     전역 후 바로 스마트메이커 프로그램에 참여했습니다. 여기서 처음으로 AI를 직접
                     다뤄보며 "이것이 내가 찾던 문제 해결의 도구구나!"라는 확신을 얻었습니다.
                     최우수상 수상은 덤이었죠.
@@ -244,21 +185,22 @@ import FAQItem from "@/shared/components/ui/FAQItem.astro";
                 style="animation-delay: 0.5s"
               >
                 <div
-                  class="absolute left-6 w-4 h-4 bg-red-500 rounded-full border-4 border-white shadow-lg group-hover:scale-150 transition-transform duration-300"
+                  class="absolute left-6 w-4 h-4 bg-gray-700 rounded-full border-4 border-white shadow-lg group-hover:scale-150 transition-transform duration-300"
                 >
                 </div>
                 <div
-                  class="ml-16 bg-red-50 rounded-2xl p-6 hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
+                  class="ml-16 bg-white rounded-2xl p-6 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 border border-gray-200"
                 >
                   <div class="flex items-center gap-2 mb-2">
-                    <span class="text-red-600 font-semibold">2025년 초</span>
-                    <span class="px-2 py-1 bg-red-100 text-red-800 rounded text-xs">도전</span>
+                    <span class="text-gray-700 font-semibold">2025년 초</span>
+                    <span class="px-2 py-1 bg-gray-50 text-gray-700 rounded text-xs">도전</span>
                   </div>
-                  <h3 class="text-xl font-bold text-gray-900 mb-2">창업 도전과 소중한 실패 경험</h3>
-                  <p class="text-gray-700">
+                  <h3 class="text-xl font-bold text-text mb-2">창업 도전과 소중한 실패 경험</h3>
+                  <p class="text-text-light">
                     시니어 플랫폼 창업에 도전했지만 시장에서 실패했습니다. 하지만 이 경험을 통해
-                    <strong>실제 사용자가 원하는 것을 만드는 것</strong>의 중요성을 뼈저리게
-                    느꼈습니다. PM, 프론트엔드, AI 연동을 모두 경험한 값진 시간이었어요.
+                    <strong class="text-text">실제 사용자가 원하는 것을 만드는 것</strong>의
+                    중요성을 뼈저리게 느꼈습니다. PM, 프론트엔드, AI 연동을 모두 경험한 값진
+                    시간이었어요.
                   </p>
                 </div>
               </div>
@@ -269,19 +211,20 @@ import FAQItem from "@/shared/components/ui/FAQItem.astro";
                 style="animation-delay: 0.6s"
               >
                 <div
-                  class="absolute left-6 w-4 h-4 bg-green-500 rounded-full border-4 border-white shadow-lg animate-pulse group-hover:scale-150 transition-transform duration-300"
+                  class="absolute left-6 w-4 h-4 bg-primary rounded-full border-4 border-white shadow-lg animate-pulse group-hover:scale-150 transition-transform duration-300"
                 >
                 </div>
                 <div
-                  class="ml-16 bg-green-50 rounded-2xl p-6 hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
+                  class="ml-16 bg-white rounded-2xl p-6 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 border border-gray-200"
                 >
                   <div class="flex items-center gap-2 mb-2">
-                    <span class="text-green-600 font-semibold">현재</span>
-                    <span class="px-2 py-1 bg-green-100 text-green-800 rounded text-xs">진행중</span
+                    <span class="text-primary font-semibold">현재</span>
+                    <span class="px-2 py-1 bg-primary-lighter text-primary rounded text-xs"
+                      >진행중</span
                     >
                   </div>
-                  <h3 class="text-xl font-bold text-gray-900 mb-2">풀스택 개발자로의 성장 중</h3>
-                  <p class="text-gray-700">
+                  <h3 class="text-xl font-bold text-text mb-2">풀스택 개발자로의 성장 중</h3>
+                  <p class="text-text-light">
                     프론트엔드 중심에서 백엔드까지 확장하며 풀스택 역량을 기르고 있습니다. UMC에서
                     팀 프로젝트를 리드하며 실전 경험을 쌓고, AI를 활용한 다양한 토이 프로젝트로
                     새로운 가능성을 탐구하고 있어요.
@@ -295,96 +238,94 @@ import FAQItem from "@/shared/components/ui/FAQItem.astro";
     </section>
 
     <!-- Values & Keywords Section -->
-    <section class="py-16 bg-gradient-to-br from-blue-50 to-green-50">
+    <section class="py-16 bg-white">
       <div class="container mx-auto px-8">
         <div class="max-w-4xl mx-auto text-center">
-          <h2 class="scroll-animate text-3xl font-bold text-gray-900 mb-4">
-            💎 나를 움직이는 가치들
-          </h2>
-          <p class="scroll-animate text-lg text-gray-600 mb-12" style="animation-delay: 0.1s">
+          <h2 class="scroll-animate text-3xl font-bold text-text mb-4">💎 나를 움직이는 가치들</h2>
+          <p class="scroll-animate text-lg text-text-light mb-12" style="animation-delay: 0.1s">
             일할 때 제가 가장 중요하게 생각하는 가치관들입니다
           </p>
 
           <!-- Values Grid -->
-          <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
             <div
-              class="group bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2"
+              class="group bg-linear-to-br from-primary-lighter to-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border border-primary/10"
             >
               <div class="text-4xl mb-3 group-hover:scale-110 transition-transform duration-300">
                 🚀
               </div>
-              <h3 class="text-lg font-bold text-gray-900 mb-2">학습 민첩성</h3>
-              <p class="text-sm text-gray-600">새로운 기술을 빠르게 학습하고 적용</p>
+              <h3 class="text-lg font-bold text-text mb-2">학습 민첩성</h3>
+              <p class="text-sm text-text-light">새로운 기술을 빠르게 학습하고 적용</p>
             </div>
 
             <div
-              class="group bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2"
+              class="group bg-linear-to-br from-primary-lighter to-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border border-primary/10"
             >
               <div class="text-4xl mb-3 group-hover:scale-110 transition-transform duration-300">
                 ⚡
               </div>
-              <h3 class="text-lg font-bold text-gray-900 mb-2">생산성</h3>
-              <p class="text-sm text-gray-600">효율적인 도구와 프로세스 추구</p>
+              <h3 class="text-lg font-bold text-text mb-2">생산성</h3>
+              <p class="text-sm text-text-light">효율적인 도구와 프로세스 추구</p>
             </div>
 
             <div
-              class="group bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2"
+              class="group bg-linear-to-br from-primary-lighter to-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border border-primary/10"
             >
               <div class="text-4xl mb-3 group-hover:scale-110 transition-transform duration-300">
                 🤖
               </div>
-              <h3 class="text-lg font-bold text-gray-900 mb-2">AI 전도사</h3>
-              <p class="text-sm text-gray-600">AI를 팀메이트로 활용하는 방법 전파</p>
+              <h3 class="text-lg font-bold text-text mb-2">AI 전도사</h3>
+              <p class="text-sm text-text-light">AI를 팀메이트로 활용하는 방법 전파</p>
             </div>
 
             <div
-              class="group bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2"
+              class="group bg-linear-to-br from-primary-lighter to-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border border-primary/10"
             >
               <div class="text-4xl mb-3 group-hover:scale-110 transition-transform duration-300">
                 🔥
               </div>
-              <h3 class="text-lg font-bold text-gray-900 mb-2">5인분</h3>
-              <p class="text-sm text-gray-600">한 명이 여러 역할을 해내는 효율성</p>
+              <h3 class="text-lg font-bold text-text mb-2">5인분</h3>
+              <p class="text-sm text-text-light">한 명이 여러 역할을 해내는 효율성</p>
             </div>
 
             <div
-              class="group bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2"
+              class="group bg-linear-to-br from-primary-lighter to-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border border-primary/10"
             >
               <div class="text-4xl mb-3 group-hover:scale-110 transition-transform duration-300">
                 🌟
               </div>
-              <h3 class="text-lg font-bold text-gray-900 mb-2">도전정신</h3>
-              <p class="text-sm text-gray-600">거부감 없이 새로운 것에 도전</p>
+              <h3 class="text-lg font-bold text-text mb-2">도전정신</h3>
+              <p class="text-sm text-text-light">거부감 없이 새로운 것에 도전</p>
             </div>
 
             <div
-              class="group bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2"
+              class="group bg-linear-to-br from-primary-lighter to-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border border-primary/10"
             >
               <div class="text-4xl mb-3 group-hover:scale-110 transition-transform duration-300">
                 😊
               </div>
-              <h3 class="text-lg font-bold text-gray-900 mb-2">해피바이러스</h3>
-              <p class="text-sm text-gray-600">팀 분위기를 밝게 만드는 에너지</p>
+              <h3 class="text-lg font-bold text-text mb-2">긍정적 에너지</h3>
+              <p class="text-sm text-text-light">팀 분위기를 밝게 만드는 에너지</p>
             </div>
 
             <div
-              class="group bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2"
+              class="group bg-linear-to-br from-primary-lighter to-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border border-primary/10"
             >
               <div class="text-4xl mb-3 group-hover:scale-110 transition-transform duration-300">
                 🤝
               </div>
-              <h3 class="text-lg font-bold text-gray-900 mb-2">소통</h3>
-              <p class="text-sm text-gray-600">투명하고 열린 커뮤니케이션</p>
+              <h3 class="text-lg font-bold text-text mb-2">소통</h3>
+              <p class="text-sm text-text-light">투명하고 열린 커뮤니케이션</p>
             </div>
 
             <div
-              class="group bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2"
+              class="group bg-linear-to-br from-primary-lighter to-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border border-primary/10"
             >
               <div class="text-4xl mb-3 group-hover:scale-110 transition-transform duration-300">
                 💫
               </div>
-              <h3 class="text-lg font-bold text-gray-900 mb-2">성장</h3>
-              <p class="text-sm text-gray-600">끊임없는 자기계발과 개선</p>
+              <h3 class="text-lg font-bold text-text mb-2">성장</h3>
+              <p class="text-sm text-text-light">끊임없는 자기계발과 개선</p>
             </div>
           </div>
         </div>
@@ -392,12 +333,12 @@ import FAQItem from "@/shared/components/ui/FAQItem.astro";
     </section>
 
     <!-- Tech Stack Section -->
-    <section class="py-16 bg-white">
+    <section class="py-16 bg-gray-50">
       <div class="container mx-auto px-8">
         <div class="max-w-5xl mx-auto">
           <div class="text-center mb-12">
-            <h2 class="scroll-animate text-3xl font-bold text-gray-900 mb-4">🛠️ 기술 스택</h2>
-            <p class="scroll-animate text-lg text-gray-600" style="animation-delay: 0.1s">
+            <h2 class="scroll-animate text-3xl font-bold text-text mb-4">🛠️ 기술 스택</h2>
+            <p class="scroll-animate text-lg text-text-light" style="animation-delay: 0.1s">
               현재 사용하고 있거나 학습 중인 기술들이에요
             </p>
           </div>
@@ -406,7 +347,7 @@ import FAQItem from "@/shared/components/ui/FAQItem.astro";
             <!-- Frontend -->
             <div>
               <h3
-                class="scroll-animate text-xl font-bold text-gray-900 mb-4 flex items-center gap-2"
+                class="scroll-animate text-xl font-bold text-text mb-4 flex items-center gap-2"
                 style="animation-delay: 0.2s"
               >
                 <span class="text-2xl">🎨</span> Frontend
@@ -424,7 +365,7 @@ import FAQItem from "@/shared/components/ui/FAQItem.astro";
             <!-- Backend -->
             <div>
               <h3
-                class="scroll-animate text-xl font-bold text-gray-900 mb-4 flex items-center gap-2"
+                class="scroll-animate text-xl font-bold text-text mb-4 flex items-center gap-2"
                 style="animation-delay: 0.3s"
               >
                 <span class="text-2xl">⚙️</span> Backend
@@ -441,7 +382,7 @@ import FAQItem from "@/shared/components/ui/FAQItem.astro";
             <!-- AI & ML -->
             <div>
               <h3
-                class="scroll-animate text-xl font-bold text-gray-900 mb-4 flex items-center gap-2"
+                class="scroll-animate text-xl font-bold text-text mb-4 flex items-center gap-2"
                 style="animation-delay: 0.4s"
               >
                 <span class="text-2xl">🤖</span> AI & Tools
@@ -457,7 +398,7 @@ import FAQItem from "@/shared/components/ui/FAQItem.astro";
             <!-- Tools & Others -->
             <div>
               <h3
-                class="scroll-animate text-xl font-bold text-gray-900 mb-4 flex items-center gap-2"
+                class="scroll-animate text-xl font-bold text-text mb-4 flex items-center gap-2"
                 style="animation-delay: 0.5s"
               >
                 <span class="text-2xl">🔧</span> Tools & Others
@@ -475,99 +416,13 @@ import FAQItem from "@/shared/components/ui/FAQItem.astro";
       </div>
     </section>
 
-    <!-- Personal Life Section -->
+    <!-- Achievements Section -->
     <section class="py-16 bg-white">
       <div class="container mx-auto px-8">
         <div class="max-w-4xl mx-auto">
           <div class="text-center mb-12">
-            <h2 class="scroll-animate text-3xl font-bold text-gray-900 mb-4">
-              🎭 개발자 김덕환의 일상
-            </h2>
-            <p class="scroll-animate text-lg text-gray-600" style="animation-delay: 0.1s">
-              코드를 떠난 일상에서의 모습들
-            </p>
-          </div>
-
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <!-- 농구 -->
-            <div class="bg-gradient-to-br from-orange-50 to-red-50 rounded-2xl p-8">
-              <div class="text-center">
-                <div class="text-6xl mb-4">🏀</div>
-                <h3 class="text-2xl font-bold text-gray-900 mb-4">농구 동아리 대표</h3>
-                <p class="text-gray-700 leading-relaxed mb-4">
-                  2024년 한 해 동안 중앙대 농구동아리 대표를 맡으며 팀 운영과 커뮤니케이션 스킬을
-                  기를 수 있었습니다. 코트에서 배운 팀워크와 리더십은 개발 프로젝트에서도 큰 도움이
-                  되고 있어요.
-                </p>
-                <div class="flex items-center justify-center gap-2 text-sm text-gray-600">
-                  <span class="font-semibold">핵심 스킬:</span>
-                  <span>팀 빌딩, 갈등 조정, 일정 관리</span>
-                </div>
-              </div>
-            </div>
-
-            <!-- 여행과 탐험 -->
-            <div class="bg-gradient-to-br from-blue-50 to-purple-50 rounded-2xl p-8">
-              <div class="text-center">
-                <div class="text-6xl mb-4">✈️</div>
-                <h3 class="text-2xl font-bold text-gray-900 mb-4">실리콘밸리 탐험가</h3>
-                <p class="text-gray-700 leading-relaxed mb-4">
-                  2025년 실리콘밸리 기업가정신 교육 프로그램에 참여하여 최우수상을 받았습니다.
-                  현지에서 만난 스타트업들과 개발자들의 문화는 제게 큰 영감을 주었어요.
-                </p>
-                <div class="flex items-center justify-center gap-2 text-sm text-gray-600">
-                  <span class="font-semibold">얻은 것:</span>
-                  <span>글로벌 마인드셋, MVP 사고방식</span>
-                </div>
-              </div>
-            </div>
-
-            <!-- 학습과 성장 -->
-            <div class="bg-gradient-to-br from-green-50 to-teal-50 rounded-2xl p-8">
-              <div class="text-center">
-                <div class="text-6xl mb-4">📚</div>
-                <h3 class="text-2xl font-bold text-gray-900 mb-4">끝없는 학습자</h3>
-                <p class="text-gray-700 leading-relaxed mb-4">
-                  새로운 기술이 나오면 일단 써보는 성격입니다. 최근에는 AI 도구들을 적극 활용하여
-                  개발 생산성을 높이는 방법을 연구하고 있어요. 배움에 대한 열정만큼은 누구에게도
-                  지지 않습니다!
-                </p>
-                <div class="flex items-center justify-center gap-2 text-sm text-gray-600">
-                  <span class="font-semibold">현재 학습 중:</span>
-                  <span>백엔드, DevOps, AI Engineering</span>
-                </div>
-              </div>
-            </div>
-
-            <!-- 사람과의 연결 -->
-            <div class="bg-gradient-to-br from-pink-50 to-yellow-50 rounded-2xl p-8">
-              <div class="text-center">
-                <div class="text-6xl mb-4">☕</div>
-                <h3 class="text-2xl font-bold text-gray-900 mb-4">커피챗 러버</h3>
-                <p class="text-gray-700 leading-relaxed mb-4">
-                  사람들과 이야기하는 것을 정말 좋아합니다. 특히 다른 개발자들과 기술 이야기나
-                  커리어 고민을 나누는 시간이 가장 즐거워요. 언제든지 커피챗 환영합니다!
-                </p>
-                <div class="flex items-center justify-center gap-2 text-sm text-gray-600">
-                  <span class="font-semibold">관심 주제:</span>
-                  <span>개발, 스타트업, 커리어, 성장</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Achievements Section -->
-    <section class="py-16 bg-gray-50">
-      <div class="container mx-auto px-8">
-        <div class="max-w-4xl mx-auto">
-          <div class="text-center mb-12">
-            <h2 class="scroll-animate text-3xl font-bold text-gray-900 mb-4">
-              🏆 주요 성과 및 이력
-            </h2>
-            <p class="scroll-animate text-lg text-gray-600" style="animation-delay: 0.1s">
+            <h2 class="scroll-animate text-3xl font-bold text-text mb-4">🏆 주요 성과 및 이력</h2>
+            <p class="scroll-animate text-lg text-text-light" style="animation-delay: 0.1s">
               지금까지의 여정에서 얻은 성과들
             </p>
           </div>
@@ -575,18 +430,22 @@ import FAQItem from "@/shared/components/ui/FAQItem.astro";
           <!-- Achievements Grid -->
           <div class="space-y-6">
             <!-- Education -->
-            <div class="bg-white rounded-2xl p-6 shadow-sm">
+            <div class="bg-gray-50 rounded-2xl p-6 shadow-sm border border-gray-200">
               <div class="flex items-start gap-4">
                 <div class="text-3xl">🎓</div>
                 <div class="flex-1">
-                  <h3 class="text-xl font-bold text-gray-900 mb-2">교육</h3>
-                  <div class="space-y-2 text-gray-700">
+                  <h3 class="text-xl font-bold text-text mb-2">교육</h3>
+                  <div class="space-y-2 text-text-light">
                     <div class="flex justify-between items-center">
-                      <span><strong>중앙대학교 수학과</strong> (2020.03 ~ 현재)</span>
+                      <span
+                        ><strong class="text-text">중앙대학교 수학과</strong> (2020.03 ~ 현재)</span
+                      >
                       <span class="text-sm text-gray-500">4학년 재학</span>
                     </div>
                     <div class="flex justify-between items-center">
-                      <span><strong>SW-인문융합 전공</strong> (2024.09 ~ 현재)</span>
+                      <span
+                        ><strong class="text-text">SW-인문융합 전공</strong> (2024.09 ~ 현재)</span
+                      >
                       <span class="text-sm text-gray-500">기술+인문학적 사고</span>
                     </div>
                   </div>
@@ -595,22 +454,25 @@ import FAQItem from "@/shared/components/ui/FAQItem.astro";
             </div>
 
             <!-- Awards -->
-            <div class="bg-white rounded-2xl p-6 shadow-sm">
+            <div class="bg-gray-50 rounded-2xl p-6 shadow-sm border border-gray-200">
               <div class="flex items-start gap-4">
                 <div class="text-3xl">🏅</div>
                 <div class="flex-1">
-                  <h3 class="text-xl font-bold text-gray-900 mb-2">수상 이력</h3>
-                  <div class="space-y-2 text-gray-700">
+                  <h3 class="text-xl font-bold text-text mb-2">수상 이력</h3>
+                  <div class="space-y-2 text-text-light">
                     <div class="flex justify-between items-center">
-                      <span><strong>AI 이참에 해보자 해커톤 우수상</strong></span>
+                      <span><strong class="text-text">AI 이참에 해보자 해커톤 우수상</strong></span>
                       <span class="text-sm text-gray-500">2025.05</span>
                     </div>
                     <div class="flex justify-between items-center">
-                      <span><strong>실리콘밸리 기업가정신 교육 최우수상</strong></span>
+                      <span
+                        ><strong class="text-text">실리콘밸리 기업가정신 교육 최우수상</strong
+                        ></span
+                      >
                       <span class="text-sm text-gray-500">2025.01</span>
                     </div>
                     <div class="flex justify-between items-center">
-                      <span><strong>스마트메이커 7기 최우수상</strong></span>
+                      <span><strong class="text-text">스마트메이커 7기 최우수상</strong></span>
                       <span class="text-sm text-gray-500">2023.11</span>
                     </div>
                   </div>
@@ -619,18 +481,18 @@ import FAQItem from "@/shared/components/ui/FAQItem.astro";
             </div>
 
             <!-- Current Activities -->
-            <div class="bg-white rounded-2xl p-6 shadow-sm">
+            <div class="bg-gray-50 rounded-2xl p-6 shadow-sm border border-gray-200">
               <div class="flex items-start gap-4">
                 <div class="text-3xl">💻</div>
                 <div class="flex-1">
-                  <h3 class="text-xl font-bold text-gray-900 mb-2">현재 활동</h3>
-                  <div class="space-y-2 text-gray-700">
+                  <h3 class="text-xl font-bold text-text mb-2">현재 활동</h3>
+                  <div class="space-y-2 text-text-light">
                     <div class="flex justify-between items-center">
-                      <span><strong>UMC 8기 Web 파트 챌린저</strong></span>
+                      <span><strong class="text-text">UMC 8기 Web 파트 챌린저</strong></span>
                       <span class="text-sm text-gray-500">2025.03 ~ 현재</span>
                     </div>
                     <div class="flex justify-between items-center">
-                      <span><strong>개인 프로젝트 다수 진행</strong></span>
+                      <span><strong class="text-text">개인 프로젝트 다수 진행</strong></span>
                       <span class="text-sm text-gray-500">AI 활용 서비스들</span>
                     </div>
                   </div>
@@ -643,12 +505,12 @@ import FAQItem from "@/shared/components/ui/FAQItem.astro";
     </section>
 
     <!-- Project Preview Section -->
-    <section class="py-16 bg-white">
+    <section class="py-16 bg-gray-50">
       <div class="container mx-auto px-8">
         <div class="max-w-5xl mx-auto">
           <div class="text-center mb-12">
-            <h2 class="scroll-animate text-3xl font-bold text-gray-900 mb-4">🚀 주요 프로젝트</h2>
-            <p class="scroll-animate text-lg text-gray-600" style="animation-delay: 0.1s">
+            <h2 class="scroll-animate text-3xl font-bold text-text mb-4">🚀 주요 프로젝트</h2>
+            <p class="scroll-animate text-lg text-text-light" style="animation-delay: 0.1s">
               대표적인 프로젝트 몇 가지를 소개합니다
             </p>
           </div>
@@ -658,7 +520,7 @@ import FAQItem from "@/shared/components/ui/FAQItem.astro";
               title="🧠 AI 기반 학습 도우미"
               description="Claude API와 LangChain을 활용하여 개인화된 학습 경험을 제공하는 웹 애플리케이션. 사용자의 학습 패턴을 분석하고 맞춤형 콘텐츠를 추천합니다."
               tags={["Next.js", "TypeScript", "Claude API", "TailwindCSS"]}
-              gradient="from-purple-500 to-pink-500"
+              gradient="from-primary to-accent"
               delay={0.2}
             />
             <ProjectPreviewCard
@@ -666,21 +528,21 @@ import FAQItem from "@/shared/components/ui/FAQItem.astro";
               description="Obsidian에서 작성한 마크다운 파일을 그대로 블로그로 발행할 수 있는 Astro 기반 블로그. 개발자 친화적인 글쓰기 경험을 제공합니다."
               tags={["Astro", "TailwindCSS", "MDX", "Obsidian"]}
               link="https://log8.kr"
-              gradient="from-blue-500 to-cyan-500"
+              gradient="from-primary to-accent"
               delay={0.3}
             />
             <ProjectPreviewCard
               title="🤖 스마트 챗봇 플랫폼"
               description="다양한 AI 모델을 통합하여 커스터마이징 가능한 챗봇을 제공하는 플랫폼. 비즈니스 자동화와 고객 서비스를 개선합니다."
               tags={["React", "Node.js", "OpenAI", "Express"]}
-              gradient="from-green-500 to-emerald-500"
+              gradient="from-primary to-accent"
               delay={0.4}
             />
             <ProjectPreviewCard
               title="⚡ 생산성 대시보드"
               description="개발자를 위한 올인원 생산성 대시보드. GitHub 연동, 작업 추적, AI 코드 리뷰 등 개발 워크플로우를 한 곳에서 관리합니다."
               tags={["Next.js", "Prisma", "PostgreSQL", "GitHub API"]}
-              gradient="from-orange-500 to-red-500"
+              gradient="from-primary to-accent"
               delay={0.5}
             />
           </div>
@@ -688,7 +550,7 @@ import FAQItem from "@/shared/components/ui/FAQItem.astro";
           <div class="text-center">
             <a
               href="/portfolio"
-              class="scroll-animate inline-flex items-center justify-center px-8 py-4 bg-gray-900 hover:bg-blue-600 text-white font-semibold rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+              class="scroll-animate inline-flex items-center justify-center px-8 py-4 bg-primary hover:bg-accent-vibrant text-white font-semibold rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
               style="animation-delay: 0.6s"
             >
               모든 프로젝트 보기
@@ -699,62 +561,19 @@ import FAQItem from "@/shared/components/ui/FAQItem.astro";
       </div>
     </section>
 
-    <!-- FAQ Section -->
-    <section class="py-16 bg-gray-50">
-      <div class="container mx-auto px-8">
-        <div class="max-w-3xl mx-auto">
-          <div class="text-center mb-12">
-            <h2 class="scroll-animate text-3xl font-bold text-gray-900 mb-4">💬 자주 묻는 질문</h2>
-            <p class="scroll-animate text-lg text-gray-600" style="animation-delay: 0.1s">
-              많이 궁금해하시는 것들을 모아봤어요
-            </p>
-          </div>
-
-          <div class="bg-white rounded-2xl shadow-lg p-8">
-            <FAQItem
-              question="어떤 개발자가 되고 싶으신가요?"
-              answer="단순히 코드를 작성하는 것을 넘어서, 사용자의 문제를 깊이 이해하고 AI를 적극 활용하여 효율적인 솔루션을 만드는 개발자가 되고 싶습니다. 특히 스타트업 환경에서 빠르게 MVP를 만들고 검증할 수 있는 풀스택 역량을 갖추는 것이 목표입니다."
-              delay={0.2}
-            />
-            <FAQItem
-              question="AI를 어떻게 활용하시나요?"
-              answer="AI를 단순한 코드 자동완성 도구가 아닌 '페어 프로그래밍 파트너'로 활용합니다. Claude, ChatGPT 등을 활용해 아키텍처 설계 논의, 코드 리뷰, 문제 해결 아이디어 브레인스토밍 등을 진행하며, 프로젝트에는 AI API를 적극 통합하여 사용자 경험을 개선합니다."
-              delay={0.3}
-            />
-            <FAQItem
-              question="왜 수학과에서 개발로 전향하셨나요?"
-              answer="수학을 공부하며 논리적 사고와 문제 해결 능력을 키웠지만, 더 실질적으로 사람들의 삶을 개선하고 싶었습니다. 개발은 아이디어를 빠르게 구현하고 실제 사용자에게 가치를 전달할 수 있다는 점에서 큰 매력을 느꼈고, 수학적 사고방식이 개발에도 큰 도움이 되고 있습니다."
-              delay={0.4}
-            />
-            <FAQItem
-              question="커리어 목표는 무엇인가요?"
-              answer="단기적으로는 풀스택 개발 역량을 탄탄히 다지고 UMC 프로젝트를 성공적으로 완수하는 것이 목표입니다. 장기적으로는 AI를 활용한 프로덕트를 만드는 스타트업에서 초기 멤버로 합류하거나, 직접 창업하여 사람들의 생산성을 획기적으로 높이는 서비스를 만들고 싶습니다."
-              delay={0.5}
-            />
-            <FAQItem
-              question="함께 일하고 싶은 팀은 어떤 팀인가요?"
-              answer="빠르게 시도하고 실패를 두려워하지 않는 문화, AI 등 새로운 기술을 적극적으로 도입하는 팀, 그리고 서로의 성장을 응원하고 투명하게 소통하는 팀과 함께 하고 싶습니다. 특히 사용자 문제 해결에 진심인 팀이라면 더욱 좋겠습니다!"
-              delay={0.6}
-            />
-          </div>
-        </div>
-      </div>
-    </section>
-
     <!-- Contact Section -->
-    <section id="contact" class="py-16 bg-gradient-to-r from-blue-600 to-green-600 text-white">
+    <section id="contact" class="py-16 bg-gradient-to-r from-primary to-accent text-white">
       <div class="container mx-auto px-8 text-center">
-        <h2 class="text-4xl font-bold mb-4">☕ 함께 이야기해요!</h2>
-        <p class="text-xl mb-8 max-w-2xl mx-auto">
-          개발 이야기, 커리어 고민, 재미있는 아이디어까지... 언제든지 편하게 연락주세요. 커피 한 잔
-          하면서 좋은 대화 나누고 싶습니다!
+        <h2 class="text-4xl font-bold mb-4">📬 연락하기</h2>
+        <p class="text-xl mb-8 max-w-2xl mx-auto opacity-90">
+          프로젝트 협업이나 기술 관련 이야기를 나누고 싶으시다면 언제든지 연락주세요!
         </p>
 
         <!-- Contact Links -->
-        <div class="flex flex-col sm:flex-row gap-6 justify-center items-center mb-8">
+        <div class="flex flex-col sm:flex-row gap-6 justify-center items-center">
           <a
             href="mailto:sachi009955@gmail.com"
-            class="flex items-center gap-3 px-6 py-3 bg-white text-blue-600 hover:bg-gray-100 rounded-lg font-medium transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+            class="flex items-center gap-3 px-6 py-3 bg-white text-primary hover:bg-gray-50 rounded-lg font-medium transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
           >
             <Mail class="w-5 h-5" />
             sachi009955@gmail.com
@@ -764,7 +583,7 @@ import FAQItem from "@/shared/components/ui/FAQItem.astro";
             href="https://github.com/IISweetHeartII"
             target="_blank"
             rel="noopener noreferrer"
-            class="flex items-center gap-3 px-6 py-3 bg-white text-blue-600 hover:bg-gray-100 rounded-lg font-medium transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+            class="flex items-center gap-3 px-6 py-3 bg-white text-primary hover:bg-gray-50 rounded-lg font-medium transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
           >
             <Github class="w-5 h-5" />
             GitHub
@@ -774,31 +593,11 @@ import FAQItem from "@/shared/components/ui/FAQItem.astro";
             href="https://log8.kr"
             target="_blank"
             rel="noopener noreferrer"
-            class="flex items-center gap-3 px-6 py-3 bg-white text-blue-600 hover:bg-gray-100 rounded-lg font-medium transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+            class="flex items-center gap-3 px-6 py-3 bg-white text-primary hover:bg-gray-50 rounded-lg font-medium transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
           >
             <Globe class="w-5 h-5" />
             Blog
           </a>
-        </div>
-
-        <!-- Fun CTA -->
-        <div class="bg-white bg-opacity-20 rounded-2xl p-6 max-w-2xl mx-auto">
-          <p class="text-lg mb-4">
-            <strong>특히 이런 분들과 대화하고 싶어요:</strong>
-          </p>
-          <div class="flex flex-wrap justify-center gap-3 text-sm">
-            <span class="px-3 py-1 bg-white bg-opacity-30 rounded-full"
-              >개발자 커리어를 고민하는 분</span
-            >
-            <span class="px-3 py-1 bg-white bg-opacity-30 rounded-full">AI 활용에 관심 있는 분</span
-            >
-            <span class="px-3 py-1 bg-white bg-opacity-30 rounded-full"
-              >스타트업 경험을 나누고 싶은 분</span
-            >
-            <span class="px-3 py-1 bg-white bg-opacity-30 rounded-full"
-              >함께 프로젝트를 하고 싶은 분</span
-            >
-          </div>
         </div>
       </div>
     </section>
@@ -806,10 +605,10 @@ import FAQItem from "@/shared/components/ui/FAQItem.astro";
     <!-- Navigation to Portfolio -->
     <section class="py-8 bg-white border-t border-gray-200">
       <div class="container mx-auto px-8 text-center">
-        <p class="text-gray-600 mb-4">제가 만든 프로젝트들이 궁금하시다면?</p>
+        <p class="text-text-light mb-4">제가 만든 프로젝트들이 궁금하시다면?</p>
         <a
           href="/portfolio"
-          class="inline-flex items-center justify-center px-8 py-4 bg-gray-900 hover:bg-blue-600 text-white font-semibold rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+          class="inline-flex items-center justify-center px-8 py-4 bg-text hover:bg-primary text-white font-semibold rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
         >
           🚀 프로젝트 포트폴리오 보기
           <ChevronRight class="ml-2 w-5 h-5" />
