@@ -1,6 +1,21 @@
 ---
 import Layout from "../layouts/Layout.astro";
 
+interface TimelineItem {
+  text: string;
+  highlight?: boolean;
+  link?: string;
+  linkText?: string;
+}
+
+interface TimelinePeriod {
+  month: string;
+  period: string;
+  badge: string;
+  badgeColor: string;
+  items: TimelineItem[];
+}
+
 const currentActivities = [
   {
     icon: "📝",
@@ -23,7 +38,7 @@ const currentActivities = [
   },
 ];
 
-const timeline = [
+const timeline: TimelinePeriod[] = [
   {
     month: "2025년 11월",
     period: "현재",
@@ -74,24 +89,26 @@ const goals = [
 ---
 
 <Layout title="Now | Log8">
-  <main class="max-w-7xl mx-auto px-8 py-16">
+  <main class="max-w-7xl mx-auto px-4 md:px-8 py-8 md:py-16">
     <!-- Page Header -->
-    <div class="text-center mb-16">
+    <div class="text-center mb-12 md:mb-16">
       <div class="flex items-center justify-center space-x-2 mb-4">
         <div class="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
         <span class="text-sm text-gray-500 font-medium">Live Updates</span>
       </div>
-      <h1 class="text-5xl font-bold text-text mb-4">
+      <h1 class="text-3xl md:text-5xl font-bold text-text mb-4">
         What I'm Doing <span class="text-primary">Now</span>
       </h1>
-      <p class="text-xl text-text-light max-w-2xl mx-auto">
+      <p class="text-lg md:text-xl text-text-light max-w-2xl mx-auto px-4">
         지금 이 순간 제가 집중하고 있는 것들과 성장하고 있는 분야들을 공유합니다
       </p>
     </div>
 
     <!-- Current Activities -->
-    <div class="mb-16">
-      <h2 class="text-2xl font-bold text-text mb-6">🚀 현재 진행 중인 프로젝트</h2>
+    <div class="mb-12 md:mb-16">
+      <h2 class="text-xl md:text-2xl font-bold text-text mb-4 md:mb-6">
+        🚀 현재 진행 중인 프로젝트
+      </h2>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {
           currentActivities.map((activity) => (
@@ -118,21 +135,21 @@ const goals = [
     </div>
 
     <!-- Timeline -->
-    <div class="mb-16">
-      <h2 class="text-2xl font-bold text-text mb-6">📅 타임라인</h2>
+    <div class="mb-12 md:mb-16">
+      <h2 class="text-xl md:text-2xl font-bold text-text mb-4 md:mb-6">📅 타임라인</h2>
       <div class="space-y-6">
         {
           timeline.map((period) => (
-            <div class="bg-background rounded-2xl shadow-lg p-8">
-              <div class="flex items-center justify-between mb-6">
-                <div class="flex items-center space-x-4">
+            <div class="bg-background rounded-2xl shadow-lg p-6 md:p-8">
+              <div class="flex items-center justify-between mb-4 md:mb-6">
+                <div class="flex items-center space-x-2 md:space-x-4">
                   <div>
-                    <h3 class="text-2xl font-bold text-text">{period.month}</h3>
-                    <p class="text-sm text-gray-500">{period.period}</p>
+                    <h3 class="text-lg md:text-2xl font-bold text-text">{period.month}</h3>
+                    <p class="text-xs md:text-sm text-gray-500">{period.period}</p>
                   </div>
                 </div>
                 <span
-                  class={`${period.badgeColor} text-white px-4 py-2 rounded-full text-sm font-semibold`}
+                  class={`${period.badgeColor} text-white px-3 py-1.5 md:px-4 md:py-2 rounded-full text-xs md:text-sm font-semibold`}
                 >
                   {period.badge}
                 </span>
@@ -148,7 +165,7 @@ const goals = [
                     <div class="flex-1">
                       <p class={`${item.highlight ? "text-text font-medium" : "text-gray-700"}`}>
                         {item.text}
-                        {item.link && (
+                        {item.link && item.linkText && (
                           <a
                             href={item.link}
                             target="_blank"
@@ -170,23 +187,25 @@ const goals = [
     </div>
 
     <!-- Next Goals -->
-    <div class="mb-16">
-      <h2 class="text-2xl font-bold text-text mb-6">🎯 다음 목표 (2025년 12월)</h2>
+    <div class="mb-12 md:mb-16">
+      <h2 class="text-xl md:text-2xl font-bold text-text mb-4 md:mb-6">
+        🎯 다음 목표 (2025년 12월)
+      </h2>
       <div class="grid grid-cols-1 gap-6">
         {
           goals.map((goal) => (
-            <div class="bg-linear-to-r from-primary to-accent-vibrant rounded-2xl p-8 text-white shadow-xl">
-              <div class="flex items-start space-x-4">
-                <div class="text-5xl">{goal.icon}</div>
+            <div class="bg-linear-to-r from-primary to-accent-vibrant rounded-2xl p-6 md:p-8 text-white shadow-xl">
+              <div class="flex flex-col md:flex-row items-center md:items-start space-y-4 md:space-y-0 md:space-x-4 text-center md:text-left">
+                <div class="text-4xl md:text-5xl">{goal.icon}</div>
                 <div class="flex-1">
-                  <h3 class="text-2xl font-bold mb-2">{goal.title}</h3>
-                  <p class="text-white/90 mb-4">{goal.description}</p>
+                  <h3 class="text-xl md:text-2xl font-bold mb-2">{goal.title}</h3>
+                  <p class="text-white/90 mb-4 text-sm md:text-base">{goal.description}</p>
                   {goal.link && (
                     <a
                       href={goal.link}
                       target="_blank"
                       rel="noopener noreferrer"
-                      class="inline-flex items-center px-6 py-3 bg-background text-primary rounded-lg hover:bg-background-light transition-all duration-300 font-semibold shadow-lg hover:shadow-xl"
+                      class="inline-flex items-center px-5 py-2.5 md:px-6 md:py-3 bg-background text-primary rounded-lg hover:bg-background-light transition-all duration-300 font-semibold shadow-lg hover:shadow-xl text-sm md:text-base"
                     >
                       채널 방문하기 →
                     </a>
@@ -201,9 +220,9 @@ const goals = [
 
     <!-- Fun Fact -->
     <div
-      class="bg-linear-to-br from-primary-lighter to-background-light rounded-2xl p-8 text-center"
+      class="bg-linear-to-br from-primary-lighter to-background-light rounded-2xl p-6 md:p-8 text-center"
     >
-      <p class="text-gray-700 text-lg">
+      <p class="text-gray-700 text-base md:text-lg">
         💡 <strong>Fun Fact:</strong> 중앙대학교 수학과를 졸업하는 개발자입니다! 수학적 사고와 개발을
         결합하여 문제를 해결하는 것을 좋아해요.
       </p>
