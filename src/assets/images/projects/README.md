@@ -25,7 +25,6 @@ testopi.png           - Testopi
 mathfigure.png        - Math Figure
 starterm.png          - Star Term
 safety-navigator.png  - Safety Navigator
-gemini-bot.png        - Gemini Duck Bot
 fortune-meme.png      - 밈 운세 생성기
 mockly.png            - Mockly
 planner.png           - Smart Planner

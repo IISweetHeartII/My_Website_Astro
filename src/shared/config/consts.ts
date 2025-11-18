@@ -12,7 +12,7 @@ export const AUTHOR_LINKEDIN =
   "https://www.linkedin.com/in/%EB%8D%95%ED%99%98-%EA%B9%80-1b4675156/";
 
 // Default Images
-export const DEFAULT_OG_IMAGE = "/images/design/ready.webp";
+export const DEFAULT_OG_IMAGE = "/images/design/ready.png";
 
 // Ad Integration
 export const ADSENSE_CLIENT_ID = "ca-pub-4653332352131854";

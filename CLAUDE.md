@@ -63,13 +63,10 @@ src/
 │   ├── blog/                   # Blog domain
 │   │   └── components/
 │   │       ├── BlogCard.astro
-│   │       └── TagFilter.astro
+│   │       └── CategoryFilter.astro
 │   ├── newsletter/             # Newsletter domain
 │   │   └── components/
 │   │       └── NewsletterForm.astro
-│   └── about/                  # About/intro domain
-│       └── components/
-│           └── IntroSection.astro
 │
 ├── shared/                      # Shared/common code
 │   ├── components/
