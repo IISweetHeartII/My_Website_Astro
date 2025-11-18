@@ -151,8 +151,8 @@ obsidian-blogger/
 ### Setup
 
 ```bash
-# Install production tools
-./install-dev-tools.sh
+# Install all dependencies (including development tools)
+pnpm install
 
 # Initialize Git hooks
 pnpm run prepare

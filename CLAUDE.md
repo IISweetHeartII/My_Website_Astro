@@ -136,10 +136,12 @@ tags:
 
 - **Framework**: Astro v5.15.8
 - **Styling**: TailwindCSS v4.1.17 with Vite plugin
-- **Package Manager**: pnpm
+- **Package Manager**: pnpm v10.22.0
 - **Content**: Astro Content Collections (native markdown parsing)
 - **Typography**: Pretendard font (Korean-optimized)
 - **Features**: MDX, Sitemap, RSS, Robots.txt, Expressive Code, Mermaid diagrams, View Transitions, Prefetch
+- **Email**: Resend API for newsletter subscriptions
+- **Code Quality**: ESLint (flat config), Prettier, TypeScript strict mode, Husky, lint-staged, commitlint
 
 ## Important Notes
 
@@ -149,6 +151,8 @@ tags:
 - Site is deployed to `https://log8.kr`
 - All paths use `@/` aliases for cleaner imports
 - TailwindCSS v4 is used (different from v3 syntax)
+- **Git Workflow**: `develop` is the main development branch; `main` is for production releases
+- **API Endpoints**: Newsletter subscription at `/api/newsletter/subscribe` (uses Resend)
 
 ## Obsidian Setup
 

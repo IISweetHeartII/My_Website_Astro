@@ -19,43 +19,32 @@
 
 ## 🔧 필수 패키지 설치
 
-### 1단계: 개발 도구 설치
+모든 개발 도구는 이미 `package.json`의 `devDependencies`에 포함되어 있습니다!
+
+### 1단계: 의존성 설치
 
 ```bash
-# 실행 권한 부여 (Git Bash/WSL에서)
-chmod +x install-dev-tools.sh
-
-# 스크립트 실행
-./install-dev-tools.sh
+# 모든 의존성 자동 설치 (개발 도구 포함)
+pnpm install
 ```
 
-**또는 수동 설치**:
+이 명령어 하나로 다음 패키지들이 자동 설치됩니다:
 
-```bash
-# ESLint
-pnpm add -D eslint @eslint/js \
-  @typescript-eslint/eslint-plugin @typescript-eslint/parser \
-  eslint-plugin-astro astro-eslint-parser
-
-# Husky (Git hooks)
-pnpm add -D husky
-
-# lint-staged
-pnpm add -D lint-staged
-
-# commitlint
-pnpm add -D @commitlint/cli @commitlint/config-conventional
-
-# 의존성 업데이트 도구
-pnpm add -D npm-check-updates
-```
+- **ESLint** + TypeScript/Astro 플러그인
+- **Prettier** + Astro 플러그인
+- **Husky** (Git hooks)
+- **lint-staged** (변경된 파일만 린트)
+- **commitlint** (커밋 메시지 규칙)
+- **npm-check-updates** (의존성 업데이트 도구)
 
 ### 2단계: Husky 초기화
 
 ```bash
-# Husky 설정 (최초 1회만)
+# Git hooks 설정 (최초 1회만)
 pnpm run prepare
 ```
+
+이 명령어로 `.husky/` 폴더의 Git hooks가 활성화됩니다.
 
 ---
 
@@ -233,9 +222,10 @@ pnpm run lint:fix
 
 ### 즉시 적용
 
-1. ✅ 패키지 설치: `./install-dev-tools.sh`
+1. ✅ 패키지 설치: `pnpm install`
 2. ✅ Husky 초기화: `pnpm run prepare`
-3. ✅ 첫 커밋 테스트: `git commit -m "ci: 실무급 개발 도구 추가"`
+3. ✅ 모든 검사 실행: `pnpm run check`
+4. ✅ 첫 커밋 테스트: `git commit -m "ci: 개발 도구 설정 업데이트"`
 
 ### 단계적 개선
 
