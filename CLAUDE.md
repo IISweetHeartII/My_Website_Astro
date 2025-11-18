@@ -8,14 +8,20 @@ This is **Obsidian Blogger** - an Astro-based blog optimized for writing in Obsi
 
 ## Development Commands
 
-| Command             | Purpose                          |
-| ------------------- | -------------------------------- |
-| `pnpm dev`          | Start development server         |
-| `pnpm build`        | Build for production             |
-| `pnpm preview`      | Preview production build locally |
-| `pnpm format`       | Auto-format code with Prettier   |
-| `pnpm format:check` | Check code formatting            |
-| `pnpm type-check`   | Run TypeScript type checking     |
+| Command             | Purpose                                  |
+| ------------------- | ---------------------------------------- |
+| `pnpm dev`          | Start development server                 |
+| `pnpm build`        | Build for production                     |
+| `pnpm preview`      | Preview production build locally         |
+| `pnpm format`       | Auto-format code with Prettier           |
+| `pnpm format:check` | Check code formatting                    |
+| `pnpm lint`         | Run ESLint                               |
+| `pnpm lint:fix`     | Auto-fix ESLint errors                   |
+| `pnpm type-check`   | Run TypeScript type checking             |
+| `pnpm check`        | Run all checks (format + lint + types)   |
+| `pnpm fix`          | Auto-fix all issues (format + lint)      |
+| `pnpm deps:check`   | Check for dependency updates (using ncu) |
+| `pnpm deps:update`  | Update dependencies and install          |
 
 ## CI/CD
 
