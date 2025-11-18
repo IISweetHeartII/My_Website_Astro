@@ -30,7 +30,7 @@
     "slugify": "^1.6.6"
   },
   "engines": {
-    "node": ">=18.20.8"
+    "node": ">=22.13.1"
   },
   "devDependencies": {
     "@astrojs/mdx": "^4.3.10",
