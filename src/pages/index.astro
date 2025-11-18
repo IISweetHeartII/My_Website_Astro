@@ -1,196 +1,319 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import IntroSection from "@/features/about/components/IntroSection.astro";
-import BlogCard from "@/features/blog/components/BlogCard.astro";
 import { getSortedPublishedPosts, getLatestPosts } from "@/shared/utils/blog";
+import { ArrowRight, Sparkles, Code2, Rocket, Brain, Briefcase } from "lucide-astro";
 import { Image } from "astro:assets";
-import readyImage from "@/assets/images/design/ready.png";
+import profileImage from "@/assets/images/design/DH_ID.jpg";
 
 const allPosts = await getSortedPublishedPosts();
 const latestBlogPosts = getLatestPosts(allPosts, 3);
+const latestPost = latestBlogPosts[0];
 ---
 
 <Layout title="Home | Log8">
-  <main>
-    <IntroSection />
-    <!-- Hero Section -->
-    <section class="bg-background-light text-primary py-20">
-      <div class="container mx-auto text-center">
-        <h1 class="text-5xl md:text-6xl font-bold mb-4">
-          AI를 팀메이트 삼아 문제를 해결하는 <span class="text-accent">개발자, 김덕환입니다.</span>
-        </h1>
-        <p class="text-xl md:text-2xl text-text">
-          AI 활용 기반의 문제 해결과 풀스택 역량 확장을 기록하고 공유합니다.
-        </p>
-        <a
-          href="/blog"
-          class="mt-8 inline-block bg-accent text-background py-3 px-8 rounded-lg text-lg font-semibold hover:bg-primary transition duration-300"
-          >블로그 살펴보기 &rarr;</a
+  <main class="min-h-screen bg-background">
+    <!-- Full-screen Hero Section -->
+    <section
+      class="relative min-h-screen flex items-center justify-center overflow-hidden bg-linear-to-br from-purple-50 via-white to-blue-50"
+    >
+      <!-- Animated Background Elements -->
+      <div class="absolute inset-0 overflow-hidden opacity-30" aria-hidden="true">
+        <div
+          class="absolute -top-40 -right-40 w-80 h-80 bg-purple-300 rounded-full mix-blend-multiply filter blur-xl animate-pulse"
         >
-      </div>
-    </section>
-
-    <!-- About/Intro Section (Who is 덕환 Preview) -->
-    <section class="py-16 bg-background-light">
-      <div class="container mx-auto text-center">
-        <h2 class="text-3xl font-bold text-primary mb-8">Who is 덕환?</h2>
-        <p class="text-lg text-text max-w-2xl mx-auto mb-8">
-          AI Researcher, Developer, and Content Creator sharing insights and experiences.
-        </p>
-        <a href="/who-is-dh" class="text-accent hover:underline font-medium text-lg"
-          >Learn More &rarr;</a
-        >
-      </div>
-    </section>
-
-    <!-- Content Preview Section (YouTube Preview) -->
-    <section class="py-16">
-      <div class="container mx-auto">
-        <h2 class="text-3xl font-bold text-primary text-center mb-8">Latest YouTube Videos</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <!-- Placeholder for latest YouTube video previews -->
-          <div class="bg-white p-6 rounded-lg shadow-md">
-            <h3 class="text-xl font-semibold text-primary mb-2">Lucky Dukky 최신 영상</h3>
-            <p class="text-text mb-4">Lucky Dukky 채널의 최신 콘텐츠를 확인해보세요.</p>
-            <a href="/youtube#lucky-dukky" class="text-accent hover:underline font-medium"
-              >Watch Now &rarr;</a
-            >
-          </div>
-          <div class="bg-white p-6 rounded-lg shadow-md">
-            <h3 class="text-xl font-semibold text-primary mb-2">Sponge Duk 최신 영상</h3>
-            <p class="text-text mb-4">개발과 일상을 기록하는 Sponge Duk의 최신 영상입니다.</p>
-            <a href="/youtube#sponge-duk" class="text-accent hover:underline font-medium"
-              >Watch Now &rarr;</a
-            >
-          </div>
         </div>
-        <div class="text-center mt-8">
-          <a href="/youtube" class="text-accent hover:underline font-medium text-lg"
-            >See All Videos &rarr;</a
-          >
+        <div
+          class="absolute -bottom-40 -left-40 w-80 h-80 bg-blue-300 rounded-full mix-blend-multiply filter blur-xl animate-pulse"
+          style="animation-delay: 1s"
+        >
+        </div>
+        <div
+          class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-pink-300 rounded-full mix-blend-multiply filter blur-xl animate-pulse"
+          style="animation-delay: 2s"
+        >
         </div>
       </div>
-    </section>
 
-    <!-- Blog Preview Section -->
-    <section class="py-16 bg-background-light">
-      <div class="container mx-auto">
-        <h2 class="text-3xl font-bold text-primary text-center mb-8">Latest Blog Posts</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {
-            latestBlogPosts.length > 0 ? (
-              latestBlogPosts.map((post) => (
-                <BlogCard
-                  title={post.data.title}
-                  description={post.data.description ?? undefined}
-                  date={post.data.created_date ?? undefined}
-                  slug={post.data.slug ?? post.id.replace(/\.[^/.]+$/, "")}
-                  dataTags={post.data.tags ? post.data.tags.join(",") : ""}
-                  dataTitle={post.data.title}
-                  dataDescription={post.data.description ?? ""}
+      <!-- Hero Content -->
+      <div class="relative z-10 container mx-auto px-4 md:px-8">
+        <div class="max-w-7xl mx-auto">
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <!-- Left: Text Content -->
+            <div class="space-y-8 text-center lg:text-left">
+              <!-- Badge -->
+              <div
+                class="inline-flex items-center gap-2 px-4 py-2 bg-white/80 backdrop-blur-sm border border-purple-200 rounded-full text-sm font-medium text-purple-600 shadow-lg"
+              >
+                <Sparkles class="w-4 h-4" />
+                기술로 세상과 소통하기
+              </div>
+
+              <!-- Main Heading -->
+              <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold text-gray-900 leading-tight">
+                감동과 사랑을 전하는<br />
+                <span
+                  class="bg-linear-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent"
+                >
+                  기술 번역가
+                </span>
+              </h1>
+
+              <!-- Subtitle -->
+              <p class="text-lg md:text-xl lg:text-2xl text-gray-600 leading-relaxed">
+                복잡한 기술을 누구나 이해할 수 있는 언어로 번역하는<br class="hidden md:block" />
+                <strong class="text-gray-900">김덕환</strong>입니다.
+              </p>
+
+              <!-- CTA Buttons -->
+              <div
+                class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start items-center pt-4"
+              >
+                <a
+                  href="/blog"
+                  class="group inline-flex items-center gap-2 px-8 py-4 bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded-xl transition-all duration-300 shadow-lg hover:shadow-2xl transform hover:-translate-y-1"
+                >
+                  블로그 보기
+                  <ArrowRight class="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                </a>
+                <a
+                  href="/showcase"
+                  class="group inline-flex items-center gap-2 px-8 py-4 bg-white hover:bg-gray-50 text-purple-600 font-semibold rounded-xl border-2 border-purple-600 transition-all duration-300 shadow-lg hover:shadow-xl"
+                >
+                  프로젝트 보기
+                  <Code2 class="w-5 h-5" />
+                </a>
+                <a
+                  href="/portfolio"
+                  class="group inline-flex items-center gap-2 px-8 py-4 bg-linear-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold rounded-xl transition-all duration-300 shadow-lg hover:shadow-2xl transform hover:-translate-y-1"
+                >
+                  포트폴리오 보기
+                  <Briefcase class="w-5 h-5" />
+                </a>
+              </div>
+            </div>
+
+            <!-- Right: Profile Image -->
+            <div class="flex justify-center lg:justify-end">
+              <div class="relative">
+                <Image
+                  src={profileImage}
+                  alt="김덕환 프로필 사진"
+                  class="w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 rounded-full object-cover shadow-2xl border-8 border-white"
+                  widths={[256, 320, 384]}
+                  sizes="(max-width: 768px) 256px, (max-width: 1024px) 320px, 384px"
                 />
-              ))
-            ) : (
-              <p class="col-span-full text-center text-text">아직 작성된 블로그 글이 없습니다.</p>
+                <!-- Decorative Elements -->
+                <div
+                  class="absolute -top-4 -right-4 w-24 h-24 bg-purple-300 rounded-full opacity-60 animate-pulse -z-10"
+                >
+                </div>
+                <div
+                  class="absolute -bottom-6 -left-6 w-32 h-32 bg-blue-300 rounded-full opacity-40 animate-pulse -z-10"
+                  style="animation-delay: 1s"
+                >
+                </div>
+                <div
+                  class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full h-full bg-pink-300 rounded-full opacity-20 animate-pulse -z-20"
+                  style="animation-delay: 2s"
+                >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Bento Grid Section -->
+    <section class="py-20 px-4 md:px-8">
+      <div class="max-w-7xl mx-auto">
+        <!-- Grid Layout -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <!-- Latest Blog Post - Large Card (2x2) -->
+          {
+            latestPost && (
+              <a
+                href={`/blog/${latestPost.data.slug ?? latestPost.id.replace(/\.[^/.]+$/, "")}`}
+                class="group lg:col-span-2 lg:row-span-2 bg-linear-to-br from-purple-50 to-pink-50 rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-purple-100"
+              >
+                <div class="h-full flex flex-col justify-between">
+                  <div>
+                    <div class="inline-flex items-center gap-2 px-3 py-1.5 bg-purple-100 text-purple-700 rounded-full text-sm font-medium mb-4">
+                      <Sparkles class="w-4 h-4" />
+                      최신 블로그
+                    </div>
+                    <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-4 group-hover:text-purple-600 transition-colors">
+                      {latestPost.data.title}
+                    </h2>
+                    <p class="text-gray-600 mb-6 line-clamp-3">
+                      {latestPost.data.description || "블로그 글을 읽어보세요!"}
+                    </p>
+                  </div>
+                  <div class="flex items-center justify-between">
+                    <span class="text-sm text-gray-500">
+                      {latestPost.data.created_date
+                        ? new Date(latestPost.data.created_date).toLocaleDateString("ko-KR")
+                        : ""}
+                    </span>
+                    <span class="inline-flex items-center gap-1 text-purple-600 font-medium group-hover:gap-2 transition-all">
+                      읽기
+                      <ArrowRight class="w-4 h-4" />
+                    </span>
+                  </div>
+                </div>
+              </a>
             )
           }
-        </div>
-        <div class="text-center mt-8">
-          <a href="/blog" class="text-accent hover:underline font-medium text-lg"
-            >Read All Posts &rarr;</a
-          >
-        </div>
-      </div>
-    </section>
 
-    <!-- Project Preview Section (Showcase Preview) -->
-    <section class="py-16">
-      <div class="container mx-auto">
-        <h2 class="text-3xl font-bold text-primary text-center mb-8">Featured Projects</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <!-- Placeholder for featured project previews -->
-          <div class="bg-white rounded-lg shadow-md overflow-hidden">
-            <Image
-              src={readyImage}
-              alt="AI Syllable Showdown project preview"
-              class="w-full h-48 object-cover"
-              widths={[400, 800]}
-              sizes="(max-width: 768px) 100vw, 33vw"
-            />
-            <div class="p-6">
-              <h3 class="text-xl font-semibold text-primary mb-2">AI Syllable Showdown</h3>
-              <p class="text-text mb-4">An example project showcasing AI capabilities.</p>
-              <a href="/showcase" class="text-accent hover:underline font-medium"
-                >View Project &rarr;</a
-              >
-            </div>
-          </div>
-          <div class="bg-white rounded-lg shadow-md overflow-hidden">
-            <Image
-              src={readyImage}
-              alt="Featured project preview"
-              class="w-full h-48 object-cover"
-              widths={[400, 800]}
-              sizes="(max-width: 768px) 100vw, 33vw"
-            />
-            <div class="p-6">
-              <h3 class="text-xl font-semibold text-primary mb-2">Another Project</h3>
-              <p class="text-text mb-4">Brief description of another project.</p>
-              <a href="/showcase" class="text-accent hover:underline font-medium"
-                >View Project &rarr;</a
-              >
-            </div>
-          </div>
-          <div class="bg-white rounded-lg shadow-md overflow-hidden">
-            <Image
-              src={readyImage}
-              alt="Project showcase preview"
-              class="w-full h-48 object-cover"
-              widths={[400, 800]}
-              sizes="(max-width: 768px) 100vw, 33vw"
-            />
-            <div class="p-6">
-              <h3 class="text-xl font-semibold text-primary mb-2">Third Project Idea</h3>
-              <p class="text-text mb-4">Brief description of a third project.</p>
-              <a href="/showcase" class="text-accent hover:underline font-medium"
-                >View Project &rarr;</a
-              >
-            </div>
-          </div>
-        </div>
-        <div class="text-center mt-8">
-          <a href="/showcase" class="text-accent hover:underline font-medium text-lg"
-            >See All Projects &rarr;</a
+          <!-- Current Projects Card -->
+          <a
+            href="/now"
+            class="group lg:col-span-1 bg-linear-to-br from-green-50 to-teal-50 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-green-100"
           >
-        </div>
-      </div>
-    </section>
+            <div class="h-full flex flex-col justify-between">
+              <div>
+                <Rocket class="w-10 h-10 text-green-600 mb-4" />
+                <h3
+                  class="text-xl font-bold text-gray-900 mb-2 group-hover:text-green-600 transition-colors"
+                >
+                  진행 중인 프로젝트
+                </h3>
+                <p class="text-gray-600 text-sm mb-4">지금 이 순간 집중하고 있는 것들</p>
+              </div>
+              <div class="flex items-center gap-2 text-green-600 font-medium text-sm">
+                <div class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                Live
+              </div>
+            </div>
+          </a>
 
-    <!-- Now... Preview Section -->
-    <section class="py-16">
-      <div class="container mx-auto">
-        <h2 class="text-3xl font-bold text-primary text-center mb-8">What's Happening Now</h2>
-        <div class="space-y-6 max-w-2xl mx-auto">
-          <!-- Placeholder for Now... items -->
-          <div class="bg-white p-6 rounded-lg shadow-md">
-            <h3 class="text-xl font-semibold text-primary mb-2">Building the Log8 Blog</h3>
-            <p class="text-text">Continuing development and refinement of this platform.</p>
-            <a href="/now" class="text-accent hover:underline font-medium text-sm"
-              >Read More &rarr;</a
-            >
-          </div>
-          <div class="bg-white p-6 rounded-lg shadow-md">
-            <h3 class="text-xl font-semibold text-primary mb-2">New Research Area</h3>
-            <p class="text-text">Exploring potential new research directions in AI.</p>
-            <a href="/now" class="text-accent hover:underline font-medium text-sm"
-              >Read More &rarr;</a
-            >
-          </div>
-        </div>
-        <div class="text-center mt-8">
-          <a href="/now" class="text-accent hover:underline font-medium text-lg"
-            >See All Updates &rarr;</a
+          <!-- Tech Stack Card -->
+          <div
+            class="lg:col-span-1 bg-linear-to-br from-blue-50 to-cyan-50 rounded-2xl p-6 shadow-lg border border-blue-100"
           >
+            <div class="h-full flex flex-col">
+              <Code2 class="w-10 h-10 text-blue-600 mb-4" />
+              <h3 class="text-xl font-bold text-gray-900 mb-3">Tech Stack</h3>
+              <div class="flex flex-wrap gap-2">
+                <span class="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-medium"
+                  >React</span
+                >
+                <span class="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-medium"
+                  >Next.js</span
+                >
+                <span class="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-medium"
+                  >TypeScript</span
+                >
+                <span class="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-medium"
+                  >Astro</span
+                >
+                <span class="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-medium"
+                  >Spring Boot</span
+                >
+                <span class="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-medium"
+                  >Cloudflare</span
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- About Me Card -->
+          <a
+            href="/portfolio"
+            class="group lg:col-span-2 bg-linear-to-br from-orange-50 to-yellow-50 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-orange-100"
+          >
+            <div class="h-full flex flex-col justify-between">
+              <div>
+                <Brain class="w-10 h-10 text-orange-600 mb-4" />
+                <h3
+                  class="text-xl font-bold text-gray-900 mb-2 group-hover:text-orange-600 transition-colors"
+                >
+                  Who is 덕환?
+                </h3>
+                <p class="text-gray-600 text-sm">수학도에서 AI 활용 개발자로 전환한 김덕환</p>
+              </div>
+              <span
+                class="inline-flex items-center gap-1 text-orange-600 font-medium text-sm mt-4 group-hover:gap-2 transition-all"
+              >
+                더 알아보기
+                <ArrowRight class="w-4 h-4" />
+              </span>
+            </div>
+          </a>
+
+          <!-- Achievement Badge 1 -->
+          <div
+            class="lg:col-span-1 bg-linear-to-br from-yellow-50 to-amber-50 rounded-2xl p-6 shadow-lg border border-yellow-100"
+          >
+            <div class="h-full flex flex-col justify-center items-center text-center">
+              <div class="text-5xl mb-3">🏆</div>
+              <h3 class="text-lg font-bold text-gray-900 mb-1">최우수상</h3>
+              <p class="text-gray-600 text-sm">2025 ICAN-LABS 대학원 창업프로그램</p>
+            </div>
+          </div>
+
+          <!-- Achievement Badge 2 -->
+          <div
+            class="lg:col-span-1 bg-linear-to-br from-indigo-50 to-purple-50 rounded-2xl p-6 shadow-lg border border-indigo-100"
+          >
+            <div class="h-full flex flex-col justify-center items-center text-center">
+              <div class="text-5xl mb-3">🎖️</div>
+              <h3 class="text-lg font-bold text-gray-900 mb-1">최우수상</h3>
+              <p class="text-gray-600 text-sm">2025 동계 근거기반 해외교육 프로그램</p>
+            </div>
+          </div>
+
+          <!-- Featured Project 1 -->
+          <a
+            href="https://mylunch.log8.kr"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="group lg:col-span-1 bg-linear-to-br from-green-50 to-yellow-50 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-green-100"
+          >
+            <div class="h-full flex flex-col justify-between">
+              <div>
+                <div class="text-5xl mb-3">🍽️</div>
+                <h3
+                  class="text-lg font-bold text-gray-900 mb-1 group-hover:text-green-600 transition-colors"
+                >
+                  오늘 점심 뭐먹지?
+                </h3>
+                <p class="text-gray-600 text-sm">점심 메뉴 추천 서비스</p>
+              </div>
+              <span
+                class="inline-flex items-center gap-1 text-green-600 font-medium text-sm mt-3 group-hover:gap-2 transition-all"
+              >
+                방문하기
+                <ArrowRight class="w-4 h-4" />
+              </span>
+            </div>
+          </a>
+
+          <!-- Featured Project 2 -->
+          <a
+            href="https://safety-navigator.log8.kr"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="group lg:col-span-1 bg-linear-to-br from-red-50 to-orange-50 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-red-100"
+          >
+            <div class="h-full flex flex-col justify-between">
+              <div>
+                <div class="text-5xl mb-3">🚒</div>
+                <h3
+                  class="text-lg font-bold text-gray-900 mb-1 group-hover:text-red-600 transition-colors"
+                >
+                  Safety Navigator
+                </h3>
+                <p class="text-gray-600 text-sm">안전 대피 경로 안내</p>
+              </div>
+              <span
+                class="inline-flex items-center gap-1 text-red-600 font-medium text-sm mt-3 group-hover:gap-2 transition-all"
+              >
+                방문하기
+                <ArrowRight class="w-4 h-4" />
+              </span>
+            </div>
+          </a>
         </div>
       </div>
     </section>

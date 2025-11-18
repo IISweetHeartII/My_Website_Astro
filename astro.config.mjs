@@ -51,7 +51,6 @@ export default defineConfig({
       // 더 자세한 sitemap 설정
       customPages: [
         "https://log8.kr/",
-        "https://log8.kr/who-is-dh",
         "https://log8.kr/portfolio",
         "https://log8.kr/contact",
         "https://log8.kr/privacy",
