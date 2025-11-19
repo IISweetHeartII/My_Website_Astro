@@ -88,13 +88,14 @@ import profileImage from "@/assets/images/design/DH_ID.jpg";
       </h2>
       <div class="bg-gray-50 p-6 rounded-md border-l-4 border-[#FF6F00]">
         <p class="text-base text-gray-800 leading-relaxed">
-          저는 '기술 번역가'로서 사용자의 감정과 니즈를 이해하고, 이를 기술로 번역하여 진정한 가치를
-          전달하는 것을 목표로 합니다. 단순히 기능을 구현하는 것을 넘어, 사용자에게 감동과 사랑을
-          전하는 서비스를 만들고 싶습니다.
+          저는 '신뢰할 수 있는 기술 번역가'로서 사용자의 감정과 니즈를 이해하고, 이를 기술로
+          번역하여 진정한 가치를 전달하는 것을 목표로 합니다. 단순히 기능을 구현하는 것을 넘어,
+          사용자에게 감동과 사랑을 전하는 서비스를 만들고 싶습니다.
         </p>
         <p class="text-base text-gray-800 leading-relaxed mt-4">
-          5년간의 성당 교사 경험을 통해 사람들의 니즈를 파악하고 소통하는 법을 배웠으며, 이를
-          바탕으로 사용자 중심의 제품을 만드는 데 집중하고 있습니다.
+          호기심으로 살아갑니다. 예전에는 궁금한 것을 해결하는 데 많은 시간과 노력이 들었지만,
+          지금은 AI 덕분에 레버리지를 활용하여 '내가 이렇게 많이 알아도 되나?'싶을 정도로 다양한
+          분야의 지식을 빠르게 습득하고 실험하고 있습니다.
         </p>
       </div>
     </section>
@@ -348,14 +349,14 @@ import profileImage from "@/assets/images/design/DH_ID.jpg";
         <div class="mb-5 pb-4 border-b-2 border-gray-200">
           <h3 class="text-xl font-bold text-gray-800 mb-2.5">오메추 - AI 기반 메뉴 추천 서비스</h3>
           <div class="flex gap-4 text-sm text-gray-600">
-            <span>2024.09 - 2024.11</span>
-            <span>Frontend Developer</span>
+            <span>2025.06 - 2025.08</span>
+            <span>Frontend Developer (인증 파트)</span>
           </div>
         </div>
 
         <p class="text-base text-gray-800 leading-relaxed mb-6">
           "오늘 메뉴 뭐 먹을까?" 고민을 해결하기 위한 AI 기반 맞춤형 메뉴 추천 서비스입니다.
-          사용자의 취향, 날씨, 위치 정보를 고려하여 최적의 메뉴를 추천합니다.
+          사용자의 취향, 위치 정보를 고려하여 최적의 메뉴를 추천합니다.
         </p>
 
         <div class="space-y-5">
@@ -365,7 +366,7 @@ import profileImage from "@/assets/images/design/DH_ID.jpg";
             >
             <ul class="list-disc list-inside text-sm text-gray-800 space-y-2 leading-relaxed">
               <li>AI 기반 개인화 메뉴 추천</li>
-              <li>날씨·위치 정보 연동</li>
+              <li>위치 정보 연동</li>
               <li>사용자 선호도 학습 시스템</li>
               <li>실시간 메뉴 공유 기능</li>
             </ul>
@@ -377,7 +378,7 @@ import profileImage from "@/assets/images/design/DH_ID.jpg";
             >
             <div class="flex flex-wrap gap-2">
               {
-                ["Next.js", "TypeScript", "Zustand", "TanStack Query", "Supabase", "Vercel"].map(
+                ["Next.js", "TypeScript", "Node.js", "Zustand", "TanStack Query", "Vercel"].map(
                   (tag) => (
                     <span class="px-3.5 py-1.5 bg-[#FF6F00] text-white text-xs font-semibold rounded-full">
                       {tag}
@@ -393,9 +394,12 @@ import profileImage from "@/assets/images/design/DH_ID.jpg";
               >주요 성과</span
             >
             <ul class="list-disc list-inside text-sm text-gray-800 space-y-2 leading-relaxed">
-              <li>UMC 8기 데모데이 우수상 수상</li>
-              <li>팀 프로젝트에서 Frontend 파트 리드</li>
-              <li>API 연동 및 상태 관리 구조 설계</li>
+              <li>UMC 8기 데모데이 장려상 수상</li>
+              <li>인증 파트 담당 (로그인, 회원가입, 온보딩)</li>
+              <li>
+                쿠키 세션 방식을 JWT 인증 방식으로 단일화하여 API 응답속도 420ms → 210ms로 50% 개선
+              </li>
+              <li>KPT 회고 방법론 도입을 통한 팀 협업 효율성 향상</li>
             </ul>
           </div>
 
@@ -404,22 +408,22 @@ import profileImage from "@/assets/images/design/DH_ID.jpg";
               >배운 점</span
             >
             <p class="text-sm text-gray-800 leading-relaxed">
-              팀 프로젝트에서 프론트엔드 개발을 주도하며 협업의 중요성을 깊이 깨달았습니다. 특히 API
-              설계 단계부터 백엔드 팀과 긴밀히 소통하여 효율적인 데이터 구조를 만들었고, TanStack
-              Query를 활용한 서버 상태 관리로 성능을 크게 개선했습니다.
+              쿠키 세션 기반 인증과 JWT 토큰 기반 인증의 차이를 실무에서 직접 경험하며, 각 방식의
+              장단점과 적용 시나리오를 명확히 이해하게 되었습니다. 특히 Stateless한 JWT의 특성을
+              활용하여 서버 부하를 줄이고 API 응답 속도를 개선할 수 있었던 경험이 인증 시스템 설계에
+              대한 깊은 통찰을 제공했습니다.
             </p>
           </div>
         </div>
 
         <div class="mt-5 pt-5 border-t-2 border-gray-200">
           <a
-            href="https://github.com/UMC-clutch"
+            href="https://omechu.log8.kr"
             target="_blank"
             rel="noopener noreferrer"
-            class="inline-flex items-center gap-2 px-4.5 py-2.5 bg-gray-800 text-white text-sm font-semibold rounded-md hover:bg-[#FF6F00] hover:-translate-y-0.5 hover:shadow-md transition-all"
+            class="inline-flex items-center gap-2 px-4.5 py-2.5 bg-[#FF6F00] text-white text-sm font-semibold rounded-md hover:bg-[#FF5500] hover:-translate-y-0.5 hover:shadow-md transition-all"
           >
-            <Github class="w-4 h-4" />
-            <span>GitHub</span>
+            <span>배포 사이트 보기</span>
           </a>
         </div>
       </div>
@@ -429,16 +433,19 @@ import profileImage from "@/assets/images/design/DH_ID.jpg";
         class="mb-7 p-7 bg-gray-50 rounded-lg border border-l-4 border-[#FF6F00] hover:shadow-md hover:-translate-y-1 transition-all md:border-l-0 md:border-t-4"
       >
         <div class="mb-5 pb-4 border-b-2 border-gray-200">
-          <h3 class="text-xl font-bold text-gray-800 mb-2.5">Starterm - 별점 기반 학기 관리 앱</h3>
+          <h3 class="text-xl font-bold text-gray-800 mb-2.5">
+            Starterm - 스타트업 학생을 위한 단어 학습 플랫폼
+          </h3>
           <div class="flex gap-4 text-sm text-gray-600">
-            <span>2024.07 - 2024.08</span>
+            <span>2025.08 - 2025.09</span>
             <span>Full-Stack Developer</span>
           </div>
         </div>
 
         <p class="text-base text-gray-800 leading-relaxed mb-6">
-          대학생들이 학기별 성과를 별점으로 관리하고, 목표를 설정하여 동기부여를 받을 수 있는
-          서비스입니다. 개인 프로젝트로 기획부터 배포까지 전 과정을 경험했습니다.
+          한양대학교 창업학 수업에서 예창패, MVP 등의 스타트업에 진입하려는 학생들을 위한 맞춤형
+          단어 학습 플랫폼입니다. 3명의 팀원과 함께 3주 만에 개발 및 배포하여 주간 활성 사용자
+          100명을 달성했습니다.
         </p>
 
         <div class="space-y-5">
@@ -447,10 +454,10 @@ import profileImage from "@/assets/images/design/DH_ID.jpg";
               >주요 기능</span
             >
             <ul class="list-disc list-inside text-sm text-gray-800 space-y-2 leading-relaxed">
-              <li>학기별 별점 시각화</li>
-              <li>목표 설정 및 달성률 추적</li>
-              <li>과목별 성적 관리</li>
-              <li>통계 대시보드</li>
+              <li>스타트업 관련 핵심 단어 학습 시스템</li>
+              <li>학습 진도 및 성취도 추적</li>
+              <li>반복 학습 알고리즘 기반 복습 기능</li>
+              <li>사용자별 맞춤형 학습 경로 제공</li>
             </ul>
           </div>
 
@@ -460,7 +467,7 @@ import profileImage from "@/assets/images/design/DH_ID.jpg";
             >
             <div class="flex flex-wrap gap-2">
               {
-                ["Next.js", "React", "Supabase", "TailwindCSS"].map((tag) => (
+                ["Next.js", "Supabase", "TailwindCSS", "Framer Motion", "Vercel"].map((tag) => (
                   <span class="px-3.5 py-1.5 bg-[#FF6F00] text-white text-xs font-semibold rounded-full">
                     {tag}
                   </span>
@@ -474,9 +481,10 @@ import profileImage from "@/assets/images/design/DH_ID.jpg";
               >주요 성과</span
             >
             <ul class="list-disc list-inside text-sm text-gray-800 space-y-2 leading-relaxed">
-              <li>Full-Stack 개발 전 과정 경험</li>
-              <li>Supabase를 활용한 백엔드 구축</li>
-              <li>사용자 인증 및 데이터 보안 구현</li>
+              <li>3주 만에 기획부터 배포까지 완료하는 빠른 개발 사이클 경험</li>
+              <li>주간 활성 사용자 100명 달성</li>
+              <li>3명 팀에서 Full-Stack 개발 (Next.js, Supabase) 담당</li>
+              <li>Framer Motion을 활용한 인터랙티브 UI/UX 구현</li>
             </ul>
           </div>
 
@@ -485,22 +493,23 @@ import profileImage from "@/assets/images/design/DH_ID.jpg";
               >배운 점</span
             >
             <p class="text-sm text-gray-800 leading-relaxed">
-              처음으로 기획부터 배포까지 모든 과정을 혼자 진행한 프로젝트입니다. Supabase를 활용하여
-              빠르게 백엔드를 구축하고, Row Level Security를 통해 데이터 보안을 강화했습니다. 개인
-              프로젝트를 통해 기술적 의사결정의 중요성과 책임감을 배웠습니다.
+              짧은 기간 내에 실제 사용자에게 가치를 전달하는 MVP 개발의 중요성을 체감했습니다.
+              3주라는 제한된 시간 안에 핵심 기능에 집중하고, Supabase로 빠르게 백엔드를 구축하며,
+              Framer Motion으로 사용자 경험을 향상시키는 과정에서 린 스타트업 방법론을 실천적으로
+              학습했습니다. 특히 주간 활성 사용자 100명을 달성하며 사용자 피드백을 기반으로 한 빠른
+              개선 사이클의 가치를 깨달았습니다.
             </p>
           </div>
         </div>
 
         <div class="mt-5 pt-5 border-t-2 border-gray-200">
           <a
-            href="https://github.com/IISweetHeartII/starterm"
+            href="https://starterm.co.kr"
             target="_blank"
             rel="noopener noreferrer"
-            class="inline-flex items-center gap-2 px-4.5 py-2.5 bg-gray-800 text-white text-sm font-semibold rounded-md hover:bg-[#FF6F00] hover:-translate-y-0.5 hover:shadow-md transition-all"
+            class="inline-flex items-center gap-2 px-4.5 py-2.5 bg-[#FF6F00] text-white text-sm font-semibold rounded-md hover:bg-[#FF5500] hover:-translate-y-0.5 hover:shadow-md transition-all"
           >
-            <Github class="w-4 h-4" />
-            <span>GitHub</span>
+            <span>배포 사이트 보기</span>
           </a>
         </div>
       </div>
@@ -510,27 +519,29 @@ import profileImage from "@/assets/images/design/DH_ID.jpg";
         class="mb-0 p-7 bg-gray-50 rounded-lg border border-l-4 border-[#FF6F00] hover:shadow-md hover:-translate-y-1 transition-all md:border-l-0 md:border-t-4"
       >
         <div class="mb-5 pb-4 border-b-2 border-gray-200">
-          <h3 class="text-xl font-bold text-gray-800 mb-2.5">윷놀이 게임 - 실패의 자산</h3>
+          <h3 class="text-xl font-bold text-gray-800 mb-2.5">윷놀이 게임 - MVC 아키텍처 학습</h3>
           <div class="flex gap-4 text-sm text-gray-600">
-            <span>2024.03 - 2024.04</span>
-            <span>Solo Developer</span>
+            <span>2025.03 - 2025.06</span>
+            <span>UI Developer (5명 팀)</span>
           </div>
         </div>
 
         <p class="text-base text-gray-800 leading-relaxed mb-6">
-          전통 놀이인 윷놀이를 웹 게임으로 구현한 프로젝트입니다. 완성하지 못했지만, 이 실패를 통해
-          프로젝트 설계와 범위 관리의 중요성을 배웠습니다.
+          중앙대학교 소프트웨어공학 수업에서 진행한 5명 팀 프로젝트입니다. Java Swing을 활용하여
+          전통 윷놀이 게임을 구현하며 MVC 아키텍처와 Observer 패턴을 실전에 적용했고, 팀
+          프로젝트에서 A0 성적을 받았습니다.
         </p>
 
         <div class="space-y-5">
           <div class="p-4 bg-white rounded-md">
             <span class="text-xs font-bold text-[#FF6F00] uppercase tracking-wide mb-2.5 block"
-              >시도한 기능</span
+              >주요 기능</span
             >
             <ul class="list-disc list-inside text-sm text-gray-800 space-y-2 leading-relaxed">
               <li>윷놀이 게임 로직 구현</li>
-              <li>멀티플레이어 시스템</li>
-              <li>실시간 게임 상태 동기화</li>
+              <li>Java Swing 기반 GUI 인터페이스</li>
+              <li>MVC 패턴을 활용한 구조 설계</li>
+              <li>Observer 패턴 기반 상태 변경 알림 시스템</li>
             </ul>
           </div>
 
@@ -540,7 +551,7 @@ import profileImage from "@/assets/images/design/DH_ID.jpg";
             >
             <div class="flex flex-wrap gap-2">
               {
-                ["React", "JavaScript"].map((tag) => (
+                ["Java", "Swing", "MVC", "Observer Pattern"].map((tag) => (
                   <span class="px-3.5 py-1.5 bg-[#FF6F00] text-white text-xs font-semibold rounded-full">
                     {tag}
                   </span>
@@ -550,19 +561,41 @@ import profileImage from "@/assets/images/design/DH_ID.jpg";
           </div>
 
           <div class="p-4 bg-white rounded-md">
-            <span class="text-xs font-bold text-[#FF6F00] uppercase tracking-wide mb-2.5 block">
-              실패 원인 및 교훈
-            </span>
-            <p class="text-sm text-gray-800 leading-relaxed mb-3">
-              프로젝트 초기에 기술 스택과 구현 범위를 명확히 정하지 않아 개발 중 많은 시행착오를
-              겪었습니다. 특히 멀티플레이어 기능을 구현하면서 실시간 통신의 복잡성을
-              과소평가했습니다.
-            </p>
+            <span class="text-xs font-bold text-[#FF6F00] uppercase tracking-wide mb-2.5 block"
+              >주요 성과</span
+            >
+            <ul class="list-disc list-inside text-sm text-gray-800 space-y-2 leading-relaxed">
+              <li>5명 팀에서 UI 부분 전담 개발</li>
+              <li>MVC 아키텍처를 활용한 구조적 코드 설계</li>
+              <li>Observer 패턴으로 게임 상태 변경 알림 구현</li>
+              <li>팀 프로젝트 A0 성적 달성</li>
+            </ul>
+          </div>
+
+          <div class="p-4 bg-white rounded-md">
+            <span class="text-xs font-bold text-[#FF6F00] uppercase tracking-wide mb-2.5 block"
+              >배운 점</span
+            >
             <p class="text-sm text-gray-800 leading-relaxed">
-              이 경험을 통해 프로젝트 시작 전 충분한 기술 검증과 MVP 정의의 중요성을 배웠습니다.
-              현재는 작은 단위로 기능을 나누고, 단계적으로 개발하는 방식을 채택하고 있습니다.
+              소프트웨어 설계 패턴의 중요성을 몸소 체험했습니다. MVC 아키텍처를 통해 Model, View,
+              Controller의 역할을 분리하며 코드의 유지보수성이 크게 향상되었고, Observer 패턴으로
+              객체 간 느슨한 결합을 구현하며 확장 가능한 코드 구조를 경험했습니다. 특히 UI 개발을
+              담당하며 사용자 인터페이스와 비즈니스 로직의 명확한 분리가 얼마나 중요한지
+              깨달았습니다.
             </p>
           </div>
+        </div>
+
+        <div class="mt-5 pt-5 border-t-2 border-gray-200">
+          <a
+            href="https://github.com/IISweetHeartII/CAU_Software_Engineering02_11"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-2 px-4.5 py-2.5 bg-gray-800 text-white text-sm font-semibold rounded-md hover:bg-[#FF6F00] hover:-translate-y-0.5 hover:shadow-md transition-all"
+          >
+            <Github class="w-4 h-4" />
+            <span>GitHub</span>
+          </a>
         </div>
       </div>
     </section>
@@ -579,23 +612,25 @@ import profileImage from "@/assets/images/design/DH_ID.jpg";
           class="p-5 pl-6 bg-gray-50 rounded-md border-l-4 border-[#FF6F00] hover:bg-white hover:translate-x-1 hover:shadow-sm transition-all"
         >
           <div class="flex justify-between items-baseline mb-2.5 flex-wrap gap-2">
-            <h3 class="text-lg font-bold text-gray-800">UMC 8기 Web Part</h3>
+            <h3 class="text-lg font-bold text-gray-800">UMC 8기/9기 Web Part</h3>
             <span
               class="text-xs font-semibold text-white bg-[#FF6F00] px-3 py-1 rounded-full whitespace-nowrap"
             >
-              2024.09 - 현재
+              2025.03 - 현재
             </span>
           </div>
-          <p class="text-sm font-semibold text-gray-600 mb-3">Frontend Developer</p>
+          <p class="text-sm font-semibold text-gray-600 mb-3">
+            9기 웹 파트장 | 9기 Spring Boot 챌린저
+          </p>
           <p class="text-sm text-gray-800 leading-relaxed mb-3.5">
             IT 연합 동아리 UMC에서 웹 개발을 학습하고, 팀 프로젝트를 진행하며 실무 경험을 쌓고
-            있습니다.
+            있습니다. 9기에서는 웹 파트장으로서 파트원들의 학습을 지원하고, Spring Boot 챌린저로
+            백엔드 개발 역량을 확장하고 있습니다.
           </p>
           <ul class="list-disc list-inside text-sm text-gray-800 space-y-2 leading-relaxed">
-            <li>주차별 과제를 통한 React, TypeScript 학습</li>
-            <li>팀 프로젝트 '오메추'에서 Frontend 파트 리드</li>
-            <li>코드 리뷰 및 협업 경험</li>
-            <li>데모데이 우수상 수상</li>
+            <li>8기: 팀 프로젝트 '오메추'에서 인증 파트 담당, 데모데이 장려상 수상</li>
+            <li>9기: 웹 파트장으로 파트원 학습 지원 및 코드 리뷰</li>
+            <li>9기: Spring Boot 챌린저로 백엔드 개발 학습 중</li>
           </ul>
         </div>
 
@@ -604,23 +639,17 @@ import profileImage from "@/assets/images/design/DH_ID.jpg";
           class="p-5 pl-6 bg-gray-50 rounded-md border-l-4 border-[#FF6F00] hover:bg-white hover:translate-x-1 hover:shadow-sm transition-all"
         >
           <div class="flex justify-between items-baseline mb-2.5 flex-wrap gap-2">
-            <h3 class="text-lg font-bold text-gray-800">대치2동 성당 초등부 교사</h3>
+            <h3 class="text-lg font-bold text-gray-800">반포4동 성당 중고등부 교사</h3>
             <span
               class="text-xs font-semibold text-white bg-[#FF6F00] px-3 py-1 rounded-full whitespace-nowrap"
             >
-              2020.03 - 2025.02
+              2019.09 - 2024.12
             </span>
           </div>
-          <p class="text-sm font-semibold text-gray-600 mb-3">초등부 교사 (5년)</p>
-          <p class="text-sm text-gray-800 leading-relaxed mb-3.5">
-            매주 초등학생 20-30명을 대상으로 종교 교육을 진행하며 소통과 공감 능력을 키웠습니다.
+          <p class="text-sm font-semibold text-gray-600 mb-3">중고등부 교사 (5년)</p>
+          <p class="text-sm text-gray-800 leading-relaxed">
+            중학생 30명을 대상으로 교리 프로그램을 진행하며 소통과 공감 능력을 키웠습니다.
           </p>
-          <ul class="list-disc list-inside text-sm text-gray-800 space-y-2 leading-relaxed">
-            <li>학생들의 눈높이에 맞춘 교육 콘텐츠 기획</li>
-            <li>학부모 및 동료 교사들과의 협업</li>
-            <li>문제 상황 발생 시 빠른 의사결정 및 대응</li>
-            <li>사용자(학생) 중심 사고방식 체득</li>
-          </ul>
         </div>
 
         <!-- AI 강연 -->
@@ -632,17 +661,18 @@ import profileImage from "@/assets/images/design/DH_ID.jpg";
             <span
               class="text-xs font-semibold text-white bg-[#FF6F00] px-3 py-1 rounded-full whitespace-nowrap"
             >
-              2024
+              2025.05, 07, 09
             </span>
           </div>
           <p class="text-sm font-semibold text-gray-600 mb-3">연사</p>
           <p class="text-sm text-gray-800 leading-relaxed mb-3.5">
-            개발자 도구로서의 AI 활용법을 주제로 2회의 강연을 진행했습니다.
+            시니어 소상공인을 위한 AI 활용법 강연을 총 3회 진행했습니다. (한국시니어교류협회 1회,
+            리피움 2회)
           </p>
           <ul class="list-disc list-inside text-sm text-gray-800 space-y-2 leading-relaxed">
-            <li>Claude Code, Cursor 등 AI 개발 도구 소개</li>
-            <li>실무에서의 AI 활용 사례 공유</li>
-            <li>생산성 향상을 위한 프롬프트 엔지니어링 팁</li>
+            <li>ChatGPT Custom Instructions, Gemini Gems, NotebookLM 활용법 소개</li>
+            <li>소상공인을 위한 실전 AI 도구 활용 사례</li>
+            <li>MCP(Model Context Protocol) 개념 및 활용법 (리피움)</li>
           </ul>
         </div>
       </div>
@@ -664,7 +694,8 @@ import profileImage from "@/assets/images/design/DH_ID.jpg";
               [
                 { name: "ICAN-LABS 대학원 창업프로그램 최우수상", date: "2025.10" },
                 { name: "관광AI 공모전 장려상", date: "2025.09" },
-                { name: "UMC 8기 데모데이 우수상", date: "2024.11" },
+                { name: "UMC 8기 데모데이 장려상", date: "2025.08" },
+                { name: "2025 동계 해외교육 프로그램 최우수상", date: "2025.02" },
               ].map((award) => (
                 <div class="flex justify-between items-baseline p-4 bg-gray-50 rounded-md hover:bg-white hover:translate-x-1 transition-all">
                   <span class="text-sm font-medium text-gray-800 flex-1">{award.name}</span>
@@ -712,13 +743,15 @@ import profileImage from "@/assets/images/design/DH_ID.jpg";
           <span
             class="text-xs font-semibold text-white bg-[#FF6F00] px-3 py-1 rounded-full whitespace-nowrap"
           >
-            2020.03 - 2025.02 (졸업예정)
+            2020.03 - 2026.02 (졸업예정)
           </span>
         </div>
         <p class="text-sm font-semibold text-gray-600 mb-3">수학과 (Mathematics)</p>
         <p class="text-sm text-gray-800 leading-relaxed">
-          수학적 사고력과 논리적 문제 해결 능력을 바탕으로 개발 분야에 도전하고 있습니다. 마지막
-          학기 16학점을 이수 중이며, 2025년 2월 졸업 예정입니다.
+          수학적 사고력과 논리적 문제 해결 능력을 바탕으로 개발 분야에 도전하고 있습니다.
+        </p>
+        <p class="text-sm text-gray-800 leading-relaxed mt-2">
+          마지막 학기 16학점을 이수 중이며, 2026년 2월 졸업 예정입니다.
         </p>
       </div>
     </section>
