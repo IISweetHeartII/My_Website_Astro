@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "@astrojs/rss": "^4.0.13",
+    "@bugshot/browser-sdk": "^1.0.3",
     "astro": "^5.15.8",
     "astro-robots-txt": "^1.0.0",
     "lucide": "^0.554.0",

@@ -1,0 +1,116 @@
+---
+import Layout from "@/layouts/Layout.astro";
+---
+
+<Layout title="BugShot 테스트 페이지" description="BugShot SDK 에러 테스트">
+  <div class="container mx-auto px-4 py-12 max-w-2xl">
+    <h1 class="text-3xl font-bold mb-8">🐛 BugShot 에러 테스트</h1>
+
+    <p class="text-gray-600 mb-8">
+      아래 버튼들을 클릭하면 각각 다른 종류의 에러가 발생합니다. BugShot이 정상적으로 설정되어
+      있다면 대시보드에서 에러를 확인할 수 있어요!
+    </p>
+
+    <div class="space-y-4">
+      <!-- 1. 일반 JavaScript 에러 -->
+      <div class="p-4 border rounded-lg">
+        <h3 class="font-semibold mb-2">1. JavaScript 런타임 에러</h3>
+        <p class="text-sm text-gray-500 mb-3">undefined 프로퍼티 접근 에러</p>
+        <button
+          id="btn-runtime-error"
+          class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
+        >
+          런타임 에러 발생
+        </button>
+      </div>
+
+      <!-- 2. Promise Rejection -->
+      <div class="p-4 border rounded-lg">
+        <h3 class="font-semibold mb-2">2. Promise Rejection</h3>
+        <p class="text-sm text-gray-500 mb-3">처리되지 않은 Promise 거부</p>
+        <button
+          id="btn-promise-error"
+          class="px-4 py-2 bg-orange-500 text-white rounded hover:bg-orange-600"
+        >
+          Promise 에러 발생
+        </button>
+      </div>
+
+      <!-- 3. 수동 에러 캡처 -->
+      <div class="p-4 border rounded-lg">
+        <h3 class="font-semibold mb-2">3. 수동 에러 캡처</h3>
+        <p class="text-sm text-gray-500 mb-3">BugShot.captureError() 직접 호출</p>
+        <button
+          id="btn-manual-error"
+          class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+        >
+          수동 에러 전송
+        </button>
+      </div>
+
+      <!-- 4. 커스텀 메시지 -->
+      <div class="p-4 border rounded-lg">
+        <h3 class="font-semibold mb-2">4. 커스텀 메시지 전송</h3>
+        <p class="text-sm text-gray-500 mb-3">BugShot.captureMessage() 호출</p>
+        <button
+          id="btn-message"
+          class="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600"
+        >
+          메시지 전송
+        </button>
+      </div>
+    </div>
+
+    <div class="mt-8 p-4 bg-gray-100 rounded-lg">
+      <h3 class="font-semibold mb-2">📋 콘솔 로그</h3>
+      <pre
+        id="log-output"
+        class="text-sm text-gray-700 whitespace-pre-wrap min-h-[100px]">버튼을 클릭하면 여기에 로그가 표시됩니다...</pre>
+    </div>
+  </div>
+
+  <script>
+    import BugShot from "@bugshot/browser-sdk";
+
+    const logOutput = document.getElementById("log-output");
+
+    function log(message: string) {
+      const time = new Date().toLocaleTimeString();
+      logOutput!.textContent += `\n[${time}] ${message}`;
+      console.log(message);
+    }
+
+    // 1. 런타임 에러
+    document.getElementById("btn-runtime-error")?.addEventListener("click", () => {
+      log("🔴 런타임 에러 발생시킴...");
+      // @ts-ignore - 의도적인 에러
+      const obj = undefined;
+      // @ts-ignore
+      obj.property.nested; // TypeError 발생
+    });
+
+    // 2. Promise Rejection
+    document.getElementById("btn-promise-error")?.addEventListener("click", () => {
+      log("🟠 Promise rejection 발생시킴...");
+      Promise.reject(new Error("테스트용 Promise Rejection 에러"));
+    });
+
+    // 3. 수동 에러 캡처
+    document.getElementById("btn-manual-error")?.addEventListener("click", () => {
+      log("🔵 수동 에러 캡처 호출...");
+      BugShot.captureError(new Error("수동으로 캡처한 테스트 에러"), {
+        extra: { testType: "manual", timestamp: Date.now() },
+      });
+      log("✅ 에러가 BugShot으로 전송되었습니다!");
+    });
+
+    // 4. 메시지 전송
+    document.getElementById("btn-message")?.addEventListener("click", () => {
+      log("🟢 메시지 전송 호출...");
+      BugShot.captureMessage("테스트 메시지입니다!", "warning");
+      log("✅ 메시지가 BugShot으로 전송되었습니다!");
+    });
+
+    log("✅ 테스트 페이지 로드 완료");
+  </script>
+</Layout>

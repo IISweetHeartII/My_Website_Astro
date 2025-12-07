@@ -10,6 +10,9 @@ importers:
       "@astrojs/rss":
         specifier: ^4.0.13
         version: 4.0.13
+      "@bugshot/browser-sdk":
+        specifier: ^1.0.3
+        version: 1.0.3
       astro:
         specifier: ^5.15.8
         version: 5.15.9(@types/node@24.10.1)(jiti@2.6.1)(lightningcss@1.30.2)(rollup@4.53.2)(typescript@5.9.3)(yaml@2.8.1)
@@ -196,6 +199,12 @@ packages:
     resolution:
       {
         integrity: sha512-i1L7noDNxtFyL5DmZafWy1wRVhGehQmzZaz1HiN5e7iylJMSZR7ekOV7NsIqa5qBldlLrsKv4HbgFUVlQrz8Mw==,
+      }
+
+  "@bugshot/browser-sdk@1.0.3":
+    resolution:
+      {
+        integrity: sha512-bRVafajFCCSE0w42rSN3F8VjJFB5C25zo+bWzG/yN9eS0hnv7eiqI26sck3R/orDDRPBH/OTHwbjDIOUHHU8SA==,
       }
 
   "@capsizecss/unpack@3.0.1":
@@ -5911,6 +5920,8 @@ snapshots:
       "@babel/helper-validator-identifier": 7.28.5
 
   "@braintree/sanitize-url@7.1.1": {}
+
+  "@bugshot/browser-sdk@1.0.3": {}
 
   "@capsizecss/unpack@3.0.1":
     dependencies:
