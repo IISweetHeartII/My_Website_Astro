@@ -1,6 +1,17 @@
 ---
 import { Image } from "astro:assets";
-import { ArrowRight, Brain, Briefcase, Code2, Rocket, Sparkles } from "lucide-astro";
+import {
+  ArrowRight,
+  Award,
+  Brain,
+  Briefcase,
+  Code2,
+  Medal,
+  Rocket,
+  ShieldCheck,
+  Sparkles,
+  UtensilsCrossed,
+} from "lucide-astro";
 import profileImage from "@/assets/images/design/DH_ID.jpg";
 import { getLatestPosts, getSortedPublishedPosts } from "@/shared/utils/blog";
 import Layout from "../layouts/Layout.astro";
@@ -12,27 +23,12 @@ const latestPost = latestBlogPosts[0];
 
 <Layout title="Home | Log8">
   <main class="min-h-screen bg-background">
-    <!-- Full-screen Hero Section -->
+    <!-- Full-screen Hero Section with Vanta.js -->
     <section
-      class="relative min-h-screen flex items-center justify-center overflow-hidden bg-linear-to-br from-purple-50 via-white to-blue-50"
+      id="hero-section"
+      class="relative min-h-screen flex items-center justify-center overflow-hidden"
     >
-      <!-- Animated Background Elements -->
-      <div class="absolute inset-0 overflow-hidden opacity-30" aria-hidden="true">
-        <div
-          class="absolute -top-40 -right-40 w-80 h-80 bg-purple-300 rounded-full mix-blend-multiply filter blur-xl animate-pulse"
-        >
-        </div>
-        <div
-          class="absolute -bottom-40 -left-40 w-80 h-80 bg-blue-300 rounded-full mix-blend-multiply filter blur-xl animate-pulse"
-          style="animation-delay: 1s"
-        >
-        </div>
-        <div
-          class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-pink-300 rounded-full mix-blend-multiply filter blur-xl animate-pulse"
-          style="animation-delay: 2s"
-        >
-        </div>
-      </div>
+      <!-- Vanta.js animated background will be injected here -->
 
       <!-- Hero Content -->
       <div class="relative z-10 container mx-auto px-4 md:px-8">
@@ -246,7 +242,11 @@ const latestPost = latestBlogPosts[0];
             class="lg:col-span-1 bg-linear-to-br from-yellow-50 to-amber-50 rounded-2xl p-6 shadow-lg border border-yellow-100"
           >
             <div class="h-full flex flex-col justify-center items-center text-center">
-              <div class="text-5xl mb-3">🏆</div>
+              <div
+                class="w-14 h-14 mb-3 rounded-full bg-yellow-100 flex items-center justify-center"
+              >
+                <Award class="w-8 h-8 text-yellow-600" />
+              </div>
               <h3 class="text-lg font-bold text-gray-900 mb-1">최우수상</h3>
               <p class="text-gray-600 text-sm">2025 ICAN-LABS 대학원 창업프로그램</p>
             </div>
@@ -257,7 +257,11 @@ const latestPost = latestBlogPosts[0];
             class="lg:col-span-1 bg-linear-to-br from-indigo-50 to-purple-50 rounded-2xl p-6 shadow-lg border border-indigo-100"
           >
             <div class="h-full flex flex-col justify-center items-center text-center">
-              <div class="text-5xl mb-3">🎖️</div>
+              <div
+                class="w-14 h-14 mb-3 rounded-full bg-indigo-100 flex items-center justify-center"
+              >
+                <Medal class="w-8 h-8 text-indigo-600" />
+              </div>
               <h3 class="text-lg font-bold text-gray-900 mb-1">최우수상</h3>
               <p class="text-gray-600 text-sm">2025 동계 근거기반 해외교육 프로그램</p>
             </div>
@@ -272,7 +276,11 @@ const latestPost = latestBlogPosts[0];
           >
             <div class="h-full flex flex-col justify-between">
               <div>
-                <div class="text-5xl mb-3">🍽️</div>
+                <div
+                  class="w-14 h-14 mb-3 rounded-full bg-green-100 flex items-center justify-center"
+                >
+                  <UtensilsCrossed class="w-8 h-8 text-green-600" />
+                </div>
                 <h3
                   class="text-lg font-bold text-gray-900 mb-1 group-hover:text-green-600 transition-colors"
                 >
@@ -298,7 +306,11 @@ const latestPost = latestBlogPosts[0];
           >
             <div class="h-full flex flex-col justify-between">
               <div>
-                <div class="text-5xl mb-3">🚒</div>
+                <div
+                  class="w-14 h-14 mb-3 rounded-full bg-red-100 flex items-center justify-center"
+                >
+                  <ShieldCheck class="w-8 h-8 text-red-600" />
+                </div>
                 <h3
                   class="text-lg font-bold text-gray-900 mb-1 group-hover:text-red-600 transition-colors"
                 >
@@ -321,9 +333,32 @@ const latestPost = latestBlogPosts[0];
 
   <script>
     import { setupScrollAnimations } from "@/shared/scripts/scroll-animation";
+    import * as THREE from "three";
+    import WAVES from "vanta/dist/vanta.waves.min";
 
     document.addEventListener("DOMContentLoaded", () => {
       setupScrollAnimations();
+
+      // Initialize Vanta.js WAVES effect on hero section
+      const heroSection = document.getElementById("hero-section");
+      if (heroSection) {
+        WAVES({
+          el: heroSection,
+          THREE: THREE,
+          mouseControls: true,
+          touchControls: true,
+          gyroControls: false,
+          minHeight: 200.0,
+          minWidth: 200.0,
+          scale: 1.0,
+          scaleMobile: 1.0,
+          color: 0x7c3aed, // Purple color matching your brand
+          shininess: 35.0,
+          waveHeight: 15.0,
+          waveSpeed: 0.75,
+          zoom: 0.85,
+        });
+      }
     });
   </script>
 </Layout>

@@ -36,29 +36,5 @@ const { title, description } = Astro.props;
     <script>
       import "@/shared/scripts/scroll-animation.ts";
     </script>
-
-    <!-- BugShot Error Monitoring -->
-    <script>
-      import BugShot from "@bugshot/browser-sdk";
-
-      const apiKey = import.meta.env["PUBLIC_BUGSHOT_API_KEY"];
-      const endpoint = import.meta.env["PUBLIC_BUGSHOT_ENDPOINT"] ?? "http://localhost:8081";
-
-      if (apiKey) {
-        BugShot.init({
-          apiKey,
-          endpoint,
-          environment: import.meta.env.PROD ? "production" : "development",
-          enableSessionReplay: true,
-          debug: import.meta.env.DEV,
-        });
-
-        if (import.meta.env.DEV) {
-          console.log("🐛 BugShot initialized in debug mode");
-        }
-      } else if (import.meta.env.DEV) {
-        console.warn("⚠️ BugShot API key not set. Add PUBLIC_BUGSHOT_API_KEY to .env");
-      }
-    </script>
   </body>
 </html>
