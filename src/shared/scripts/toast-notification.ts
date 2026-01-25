@@ -1,7 +1,7 @@
 /* global document, requestAnimationFrame, setTimeout */
-import { createElement } from "lucide";
-import { CheckCircle2, CircleX, AlertTriangle, Info, X } from "lucide";
+
 import type { LucideIcon } from "lucide";
+import { AlertTriangle, CheckCircle2, CircleX, createElement, Info, X } from "lucide";
 
 export interface ToastOptions {
   type?: "success" | "error" | "info" | "warning";
@@ -100,7 +100,6 @@ export class ToastManager {
         return "border-red-400 bg-red-50";
       case "warning":
         return "border-yellow-400 bg-yellow-50";
-      case "info":
       default:
         return "border-blue-400 bg-blue-50";
     }
@@ -123,7 +122,6 @@ export class ToastManager {
         return this.createIconString(CircleX, "h-5 w-5 text-red-400");
       case "warning":
         return this.createIconString(AlertTriangle, "h-5 w-5 text-yellow-400");
-      case "info":
       default:
         return this.createIconString(Info, "h-5 w-5 text-blue-400");
     }

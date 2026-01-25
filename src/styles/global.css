@@ -25,11 +25,10 @@ body {
   border: 0;
   padding: 0;
   margin: 0;
-  position: absolute !important;
+  position: absolute;
   height: 1px;
   width: 1px;
   overflow: hidden;
-  clip: rect(1px 1px 1px 1px);
   clip: rect(1px, 1px, 1px, 1px);
   clip-path: inset(50%);
   white-space: nowrap;
@@ -167,14 +166,16 @@ body {
   font-family: var(--font-mono);
   font-size: 0.9em;
   line-height: 1.7;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px 0 rgba(0, 0, 0, 0.03);
+  box-shadow:
+    0 1px 3px 0 rgba(0, 0, 0, 0.05),
+    0 1px 2px 0 rgba(0, 0, 0, 0.03);
 }
 
 .prose pre code {
-  background-color: transparent !important;
-  padding: 0 !important;
-  border-radius: 0 !important;
-  color: inherit !important;
+  background-color: transparent;
+  padding: 0;
+  border-radius: 0;
+  color: inherit;
   font-size: 0.9em;
   white-space: pre;
 }
@@ -242,7 +243,9 @@ body {
   height: auto;
   border-radius: 12px;
   margin: 2em 0;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+  box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.05),
+    0 2px 4px -1px rgba(0, 0, 0, 0.03);
 }
 
 .prose figure {

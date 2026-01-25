@@ -22,5 +22,7 @@ export function setupScrollAnimations(): void {
 
   // Observe all elements with the 'scroll-animate' class
   const elements: NodeListOf<Element> = document.querySelectorAll(".scroll-animate");
-  elements.forEach((el: Element) => observer.observe(el));
+  for (const el of elements) {
+    observer.observe(el);
+  }
 }

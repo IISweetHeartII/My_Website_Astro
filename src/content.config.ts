@@ -1,12 +1,12 @@
-import { glob } from "astro/loaders";
 import { defineCollection, z } from "astro:content";
+import { glob } from "astro/loaders";
 
 // Custom date schema that handles invalid dates gracefully
 const dateSchema = z.preprocess(
   (val) => {
     if (!val) return null;
     const date = new Date(val);
-    return isNaN(date.getTime()) ? null : date;
+    return Number.isNaN(date.getTime()) ? null : date;
   },
   z
     .date()

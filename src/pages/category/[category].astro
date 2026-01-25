@@ -1,13 +1,13 @@
 ---
-import Layout from "@/layouts/Layout.astro";
+import { type CollectionEntry, getCollection } from "astro:content";
+import { Archive, Files, FileText, Tag } from "lucide-astro";
 import BlogCard from "@/features/blog/components/BlogCard.astro";
-import { getCollection, type CollectionEntry } from "astro:content";
-import { FileText, Tag, Archive, Files } from "lucide-astro";
+import Layout from "@/layouts/Layout.astro";
 import {
-  categories,
-  reverseCategoryMap,
   type Category,
+  categories,
   categoryMap,
+  reverseCategoryMap,
 } from "@/shared/config/categories";
 import { sortPostsByDate, transformPostForCard } from "@/shared/utils/blog";
 

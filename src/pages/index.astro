@@ -1,9 +1,9 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import { getSortedPublishedPosts, getLatestPosts } from "@/shared/utils/blog";
-import { ArrowRight, Sparkles, Code2, Rocket, Brain, Briefcase } from "lucide-astro";
 import { Image } from "astro:assets";
+import { ArrowRight, Brain, Briefcase, Code2, Rocket, Sparkles } from "lucide-astro";
 import profileImage from "@/assets/images/design/DH_ID.jpg";
+import { getLatestPosts, getSortedPublishedPosts } from "@/shared/utils/blog";
+import Layout from "../layouts/Layout.astro";
 
 const allPosts = await getSortedPublishedPosts();
 const latestBlogPosts = getLatestPosts(allPosts, 3);

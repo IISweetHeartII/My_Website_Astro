@@ -1,19 +1,19 @@
 ---
 import type { CollectionEntry } from "astro:content";
-import Layout from "./Layout.astro";
-import FormattedDate from "@/shared/components/ui/FormattedDate.astro";
-import { getUrl } from "@/shared/utils/url";
-import GiscusComments from "@/shared/components/comments/GiscusComments.astro";
-import ResponsiveBlogImage from "@/shared/components/ui/ResponsiveBlogImage.astro";
 import NewsletterForm from "@/features/newsletter/components/NewsletterForm.astro";
+import GiscusComments from "@/shared/components/comments/GiscusComments.astro";
 import FAQSchema from "@/shared/components/seo/FAQSchema.astro";
+import FormattedDate from "@/shared/components/ui/FormattedDate.astro";
+import ResponsiveBlogImage from "@/shared/components/ui/ResponsiveBlogImage.astro";
 import {
-  SITE_AUTHOR,
   AUTHOR_GITHUB,
   AUTHOR_LINKEDIN,
+  SITE_AUTHOR,
   SITE_TITLE,
   SITE_URL,
 } from "@/shared/config/consts";
+import { getUrl } from "@/shared/utils/url";
+import Layout from "./Layout.astro";
 
 interface Props extends Pick<CollectionEntry<"blog">, "data"> {}
 

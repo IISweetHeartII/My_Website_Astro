@@ -1,7 +1,7 @@
 ---
-import Layout from "@/layouts/Layout.astro";
 import BlogCard from "@/features/blog/components/BlogCard.astro";
 import CategoryFilter from "@/features/blog/components/CategoryFilter.astro";
+import Layout from "@/layouts/Layout.astro";
 import { getSortedPublishedPosts, transformPostForCard } from "@/shared/utils/blog";
 
 const allPosts = await getSortedPublishedPosts();

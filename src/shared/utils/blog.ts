@@ -1,4 +1,4 @@
-import { getCollection, type CollectionEntry } from "astro:content";
+import { type CollectionEntry, getCollection } from "astro:content";
 import { categoryMap } from "@/shared/config/categories";
 
 /**
@@ -7,7 +7,7 @@ import { categoryMap } from "@/shared/config/categories";
 export function getValidTimestamp(date: Date | null | undefined): number {
   if (!date) return 0;
   const timestamp = date.getTime();
-  return isNaN(timestamp) ? 0 : timestamp;
+  return Number.isNaN(timestamp) ? 0 : timestamp;
 }
 
 /**

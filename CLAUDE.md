@@ -8,20 +8,17 @@ This is **Obsidian Blogger** - an Astro-based blog optimized for writing in Obsi
 
 ## Development Commands
 
-| Command             | Purpose                                  |
-| ------------------- | ---------------------------------------- |
-| `pnpm dev`          | Start development server                 |
-| `pnpm build`        | Build for production                     |
-| `pnpm preview`      | Preview production build locally         |
-| `pnpm format`       | Auto-format code with Prettier           |
-| `pnpm format:check` | Check code formatting                    |
-| `pnpm lint`         | Run ESLint                               |
-| `pnpm lint:fix`     | Auto-fix ESLint errors                   |
-| `pnpm type-check`   | Run TypeScript type checking             |
-| `pnpm check`        | Run all checks (format + lint + types)   |
-| `pnpm fix`          | Auto-fix all issues (format + lint)      |
-| `pnpm deps:check`   | Check for dependency updates (using ncu) |
-| `pnpm deps:update`  | Update dependencies and install          |
+| Command               | Purpose                                  |
+| --------------------- | ---------------------------------------- |
+| `bun dev`             | Start development server                 |
+| `bun run build`       | Build for production                     |
+| `bun run preview`     | Preview production build locally         |
+| `bun run lint`        | Run Biome linter                         |
+| `bun run format`      | Auto-format code with Biome              |
+| `bun run check`       | Run Biome check + TypeScript type check  |
+| `bun run type-check`  | Run TypeScript type checking only        |
+| `bun run deps:check`  | Check for dependency updates (using ncu) |
+| `bun run deps:update` | Update dependencies and install          |
 
 ## CI/CD
 
@@ -95,7 +92,7 @@ src/
 - `src/shared/config/consts.ts`: Site constants (title, description, author, keywords, URL)
 - `src/content.config.ts`: Content Collections schema
 - `tsconfig.json`: TypeScript paths configured for `@/` imports with modern bundler settings
-- `.prettierrc`: Code formatting with Astro plugin
+- `biome.json`: Code formatting and linting with Biome
 
 ### Path Aliases (tsconfig.json)
 
@@ -111,7 +108,7 @@ src/
 
 1. **Create**: Write Markdown files directly in `src/content/blog/` using Obsidian
 2. **Mark for Publishing**: Add `publish: true` to frontmatter
-3. **Develop**: Run `pnpm dev` to see changes instantly
+3. **Develop**: Run `bun dev` to see changes instantly
 4. **Deploy**: Commit and push to Git - Astro reads files directly at build time
 
 ### Required Frontmatter
@@ -131,14 +128,14 @@ tags:
 
 ## Technology Stack
 
-- **Framework**: Astro v5.15.8
-- **Styling**: TailwindCSS v4.1.17 with Vite plugin
-- **Package Manager**: pnpm v10.22.0
+- **Framework**: Astro v5.16.x
+- **Styling**: TailwindCSS v4.1.x with Vite plugin
+- **Package Manager**: Bun
 - **Content**: Astro Content Collections (native markdown parsing)
 - **Typography**: Pretendard font (Korean-optimized)
 - **Features**: MDX, Sitemap, RSS, Robots.txt, Expressive Code, Mermaid diagrams, View Transitions, Prefetch
 - **Email**: Resend API for newsletter subscriptions
-- **Code Quality**: ESLint (flat config), Prettier, TypeScript strict mode, Husky, lint-staged, commitlint
+- **Code Quality**: Biome (linter + formatter), TypeScript strict mode, Husky, commitlint
 
 ## Important Notes
 
