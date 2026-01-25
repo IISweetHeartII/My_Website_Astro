@@ -1,0 +1,315 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { SITE_TITLE } from "@/shared/config/consts";
+import { FileDown, ExternalLink } from "lucide-astro";
+import { getUrl } from "@/shared/utils/url";
+---
+
+<Layout
+  title={`Resume - ${SITE_TITLE}`}
+  description="김덕환의 이력서 - 기술로 감동과 사랑을 전하는 개발자"
+>
+  <main class="resume-container max-w-[210mm] mx-auto px-6 py-8 bg-white print:p-0 print:max-w-full">
+    <!-- Print Button (hidden on print) -->
+    <div class="print:hidden mb-6 flex justify-between items-center">
+      <a
+        href={getUrl("/portfolio")}
+        class="text-sm text-[#FF6F00] hover:text-[#FF5500] font-medium flex items-center gap-1"
+      >
+        <ExternalLink class="w-4 h-4" />
+        상세 포트폴리오 보기
+      </a>
+      <button
+        id="print-btn"
+        class="flex items-center gap-2 px-4 py-2 bg-[#FF6F00] text-white text-sm font-semibold rounded-md hover:bg-[#FF5500] transition-colors"
+      >
+        <FileDown class="w-4 h-4" />
+        PDF로 저장
+      </button>
+    </div>
+
+    <!-- A4 Paper Simulation -->
+    <div class="a4-page bg-white shadow-lg print:shadow-none border border-gray-200 print:border-0 p-8 print:p-6">
+      <!-- Header -->
+      <header class="flex justify-between items-start mb-6 pb-4 border-b-2 border-[#FF6F00]">
+        <div>
+          <h1 class="text-3xl font-bold text-gray-900 mb-1">김덕환</h1>
+          <p class="text-lg text-[#FF6F00] font-semibold">Frontend Developer</p>
+        </div>
+        <div class="text-right text-sm text-gray-600 space-y-0.5">
+          <p>sachi009955@gmail.com</p>
+          <p>github.com/IISweetHeartII</p>
+          <p>log8.kr</p>
+        </div>
+      </header>
+
+      <!-- Summary -->
+      <section class="mb-5">
+        <h2 class="text-lg font-bold text-gray-900 mb-2 border-b border-gray-300 pb-1">Summary</h2>
+        <ul class="text-sm text-gray-700 space-y-1 pl-4 list-disc">
+          <li>사용자의 감정과 니즈를 기술로 번역하여 진정한 가치를 전달하는 Frontend 개발자</li>
+          <li>JWT 인증 시스템 최적화로 API 응답속도 50% 개선 경험</li>
+          <li>3주 만에 MVP 개발 및 배포, 주간 활성 사용자 100명 달성 경험</li>
+        </ul>
+      </section>
+
+      <!-- Projects -->
+      <section class="mb-5">
+        <h2 class="text-lg font-bold text-gray-900 mb-3 border-b border-gray-300 pb-1">Projects</h2>
+
+        <!-- 오메추 -->
+        <div class="mb-4">
+          <div class="flex justify-between items-baseline mb-1">
+            <h3 class="font-bold text-gray-800">
+              <a href={getUrl("/portfolio#omechu")} class="hover:text-[#FF6F00]">
+                JWT 인증 단일화로 API 응답속도 50% 개선
+              </a>
+            </h3>
+            <span class="text-xs text-gray-500">2025.06 - 2025.08 | Frontend (인증 파트)</span>
+          </div>
+          <div class="grid grid-cols-2 gap-x-4 text-sm">
+            <div>
+              <p class="font-semibold text-gray-700 text-xs mb-1">문제 해결</p>
+              <ul class="text-gray-600 space-y-0.5 pl-3 list-disc text-xs">
+                <li>쿠키 세션과 JWT 혼용으로 인증 로직 복잡성 발생</li>
+                <li>JWT 단일 인증 체계로 통합하여 API 응답속도 420ms → 210ms로 50% 개선</li>
+                <li>KPT 회고 도입으로 팀 협업 프로세스 표준화</li>
+              </ul>
+            </div>
+            <div>
+              <p class="font-semibold text-gray-700 text-xs mb-1">구현</p>
+              <ul class="text-gray-600 space-y-0.5 pl-3 list-disc text-xs">
+                <li>Next.js, TypeScript 기반 인증 파트 개발</li>
+                <li>Zustand + TanStack Query 활용 상태 관리</li>
+                <li>UMC 8기 데모데이 장려상 수상</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Starterm -->
+        <div class="mb-4">
+          <div class="flex justify-between items-baseline mb-1">
+            <h3 class="font-bold text-gray-800">
+              <a href={getUrl("/portfolio#starterm")} class="hover:text-[#FF6F00]">
+                3주 만에 MVP 개발, 주간 활성 사용자 100명 달성
+              </a>
+            </h3>
+            <span class="text-xs text-gray-500">2025.08 - 2025.09 | Full-Stack Developer</span>
+          </div>
+          <div class="grid grid-cols-2 gap-x-4 text-sm">
+            <div>
+              <p class="font-semibold text-gray-700 text-xs mb-1">문제 해결</p>
+              <ul class="text-gray-600 space-y-0.5 pl-3 list-disc text-xs">
+                <li>스타트업 진입 학생들의 전문 용어 학습 장벽 해소</li>
+                <li>제한된 3주 기간 내 핵심 기능에 집중한 린 개발</li>
+                <li>사용자 피드백 기반 빠른 개선 사이클 구축</li>
+              </ul>
+            </div>
+            <div>
+              <p class="font-semibold text-gray-700 text-xs mb-1">구현</p>
+              <ul class="text-gray-600 space-y-0.5 pl-3 list-disc text-xs">
+                <li>Next.js + Supabase 기반 Full-Stack 개발</li>
+                <li>Framer Motion을 활용한 인터랙티브 UI/UX</li>
+                <li>주간 활성 사용자 100명 달성</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- 윷놀이 -->
+        <div class="mb-0">
+          <div class="flex justify-between items-baseline mb-1">
+            <h3 class="font-bold text-gray-800">
+              <a href={getUrl("/portfolio#yut")} class="hover:text-[#FF6F00]">
+                MVC/Observer 패턴으로 유지보수성 높은 UI 설계
+              </a>
+            </h3>
+            <span class="text-xs text-gray-500">2025.03 - 2025.06 | UI Developer (5명 팀)</span>
+          </div>
+          <div class="grid grid-cols-2 gap-x-4 text-sm">
+            <div>
+              <p class="font-semibold text-gray-700 text-xs mb-1">문제 해결</p>
+              <ul class="text-gray-600 space-y-0.5 pl-3 list-disc text-xs">
+                <li>게임 로직과 UI의 강한 결합으로 유지보수 어려움</li>
+                <li>MVC 패턴으로 Model, View, Controller 역할 분리</li>
+                <li>Observer 패턴으로 객체 간 느슨한 결합 구현</li>
+              </ul>
+            </div>
+            <div>
+              <p class="font-semibold text-gray-700 text-xs mb-1">구현</p>
+              <ul class="text-gray-600 space-y-0.5 pl-3 list-disc text-xs">
+                <li>Java Swing 기반 GUI 인터페이스 개발</li>
+                <li>Observer 패턴 기반 상태 변경 알림 시스템</li>
+                <li>팀 프로젝트 A0 성적 달성</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Tech Stack -->
+      <section class="mb-5">
+        <h2 class="text-lg font-bold text-gray-900 mb-2 border-b border-gray-300 pb-1">Tech Stack</h2>
+        <div class="grid grid-cols-2 gap-x-4 gap-y-1 text-sm">
+          <div class="flex">
+            <span class="font-semibold text-gray-700 w-24">Languages</span>
+            <span class="text-gray-600">Python, C++, Java, TypeScript</span>
+          </div>
+          <div class="flex">
+            <span class="font-semibold text-gray-700 w-24">Frontend</span>
+            <span class="text-gray-600">Next.js, Astro, React, TailwindCSS</span>
+          </div>
+          <div class="flex">
+            <span class="font-semibold text-gray-700 w-24">Backend</span>
+            <span class="text-gray-600">Node.js, Supabase, PostgreSQL</span>
+          </div>
+          <div class="flex">
+            <span class="font-semibold text-gray-700 w-24">DevOps</span>
+            <span class="text-gray-600">Vercel, Cloudflare, GitHub Actions</span>
+          </div>
+          <div class="flex">
+            <span class="font-semibold text-gray-700 w-24">Collaboration</span>
+            <span class="text-gray-600">GitHub, Notion, Figma</span>
+          </div>
+          <div class="flex">
+            <span class="font-semibold text-gray-700 w-24">AI Tools</span>
+            <span class="text-gray-600">Claude Code, ChatGPT, LangChain</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Experience -->
+      <section class="mb-5">
+        <h2 class="text-lg font-bold text-gray-900 mb-2 border-b border-gray-300 pb-1">Experience</h2>
+        <div class="space-y-2 text-sm">
+          <div class="flex justify-between">
+            <div>
+              <span class="font-semibold text-gray-800">UMC 8기/9기 Web Part</span>
+              <span class="text-gray-600"> - 9기 웹 파트장, Spring Boot 챌린저</span>
+            </div>
+            <span class="text-xs text-gray-500">2025.03 - 현재</span>
+          </div>
+          <div class="flex justify-between">
+            <div>
+              <span class="font-semibold text-gray-800">AI 활용 강연</span>
+              <span class="text-gray-600"> - 시니어 소상공인 대상 AI 활용법 강연 (3회)</span>
+            </div>
+            <span class="text-xs text-gray-500">2025.05, 07, 09</span>
+          </div>
+          <div class="flex justify-between">
+            <div>
+              <span class="font-semibold text-gray-800">성당 중고등부 교사</span>
+              <span class="text-gray-600"> - 중학생 30명 대상 교리 프로그램 진행</span>
+            </div>
+            <span class="text-xs text-gray-500">2019.09 - 2024.12</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Awards & Certifications -->
+      <section class="mb-5">
+        <h2 class="text-lg font-bold text-gray-900 mb-2 border-b border-gray-300 pb-1">Awards & Certifications</h2>
+        <div class="grid grid-cols-2 gap-x-4 text-sm">
+          <div>
+            <p class="font-semibold text-gray-700 text-xs mb-1">Awards</p>
+            <ul class="text-gray-600 space-y-0.5 pl-3 list-disc text-xs">
+              <li>ICAN-LABS 대학원 창업프로그램 최우수상 (2025.10)</li>
+              <li>관광AI 공모전 장려상 (2025.09)</li>
+              <li>UMC 8기 데모데이 장려상 (2025.08)</li>
+              <li>2025 동계 해외교육 프로그램 최우수상 (2025.02)</li>
+            </ul>
+          </div>
+          <div>
+            <p class="font-semibold text-gray-700 text-xs mb-1">Certifications</p>
+            <ul class="text-gray-600 space-y-0.5 pl-3 list-disc text-xs">
+              <li>정보처리기사 (2025.09)</li>
+              <li>SQLD - SQL 개발자 (2025.09)</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Education -->
+      <section>
+        <h2 class="text-lg font-bold text-gray-900 mb-2 border-b border-gray-300 pb-1">Education</h2>
+        <div class="flex justify-between text-sm">
+          <div>
+            <span class="font-semibold text-gray-800">중앙대학교</span>
+            <span class="text-gray-600"> - 수학과 (Mathematics)</span>
+          </div>
+          <span class="text-xs text-gray-500">2020.03 - 2026.02 (졸업예정)</span>
+        </div>
+      </section>
+    </div>
+
+    <!-- Page 2 hint (optional, for longer content) -->
+    <div class="print:hidden mt-4 text-center text-sm text-gray-500">
+      A4 1페이지 미리보기 | 인쇄 시 자동 최적화
+    </div>
+  </main>
+</Layout>
+
+<style>
+  /* A4 size simulation */
+  .a4-page {
+    min-height: 297mm;
+    max-height: 297mm;
+    overflow: hidden;
+  }
+
+  @media print {
+    /* Hide header and footer */
+    :global(header),
+    :global(footer) {
+      display: none !important;
+    }
+
+    .resume-container {
+      max-width: 100%;
+      padding: 0;
+      margin: 0;
+    }
+
+    .a4-page {
+      border: none;
+      box-shadow: none;
+      min-height: auto;
+      max-height: none;
+      padding: 10mm;
+    }
+
+    /* Ensure content fits on one page */
+    @page {
+      size: A4;
+      margin: 10mm;
+    }
+  }
+
+  /* Screen A4 preview */
+  @media screen {
+    .a4-page {
+      width: 210mm;
+      box-sizing: border-box;
+    }
+  }
+
+  /* Responsive adjustments */
+  @media screen and (max-width: 768px) {
+    .a4-page {
+      width: 100%;
+      min-height: auto;
+      max-height: none;
+    }
+
+    .resume-container {
+      padding: 1rem;
+    }
+  }
+</style>
+
+<script>
+  document.getElementById("print-btn")?.addEventListener("click", () => {
+    window.print();
+  });
+</script>

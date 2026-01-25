@@ -30,6 +30,7 @@ import { Menu, X, ArrowRight } from "lucide-astro";
       <HeaderLink href={getUrl("/showcase")}>Showcase</HeaderLink>
       <HeaderLink href={getUrl("/now")}>Now</HeaderLink>
       <HeaderLink href={getUrl("/portfolio")}>Portfolio</HeaderLink>
+      <HeaderLink href={getUrl("/resume")}>Resume</HeaderLink>
     </div>
 
     <div class="flex items-center space-x-4">
@@ -86,6 +87,11 @@ import { Menu, X, ArrowRight } from "lucide-astro";
         href={getUrl("/portfolio")}
         class="text-white hover:text-accent text-xl font-semibold transition-colors duration-200"
         >Portfolio</a
+      >
+      <a
+        href={getUrl("/resume")}
+        class="text-white hover:text-accent text-xl font-semibold transition-colors duration-200"
+        >Resume</a
       >
       <a
         href={getUrl("/contact")}

@@ -1,9 +1,10 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import { SITE_TITLE } from "@/shared/config/consts";
-import { Github } from "lucide-astro";
+import { Github, FileText } from "lucide-astro";
 import { Image } from "astro:assets";
 import profileImage from "@/assets/images/design/DH_ID.jpg";
+import { getUrl } from "@/shared/utils/url";
 ---
 
 <Layout
@@ -11,6 +12,18 @@ import profileImage from "@/assets/images/design/DH_ID.jpg";
   description="김덕환의 포트폴리오 - 기술로 감동과 사랑을 전하는 개발자"
 >
   <main class="max-w-4xl mx-auto px-6 py-16 bg-gray-50">
+    <!-- Resume Link Banner -->
+    <div class="mb-6 p-4 bg-[#FF6F00]/10 rounded-lg border border-[#FF6F00]/20 flex justify-between items-center">
+      <span class="text-sm text-gray-700">1-2페이지 압축 버전을 원하시나요?</span>
+      <a
+        href={getUrl("/resume")}
+        class="flex items-center gap-2 text-sm font-semibold text-[#FF6F00] hover:text-[#FF5500]"
+      >
+        <FileText class="w-4 h-4" />
+        Resume 보기 (PDF 저장 가능)
+      </a>
+    </div>
+
     <!-- Header -->
     <header class="mb-14 p-8 bg-white rounded-lg shadow-sm border-l-4 border-[#FF6F00]">
       <div class="flex justify-between items-center gap-8 flex-col md:flex-row">
@@ -344,10 +357,12 @@ import profileImage from "@/assets/images/design/DH_ID.jpg";
 
       <!-- 오메추 -->
       <div
-        class="mb-7 p-7 bg-gray-50 rounded-lg border border-l-4 border-[#FF6F00] hover:shadow-md hover:-translate-y-1 transition-all md:border-l-0 md:border-t-4"
+        id="omechu"
+        class="mb-7 p-7 bg-gray-50 rounded-lg border border-l-4 border-[#FF6F00] hover:shadow-md hover:-translate-y-1 transition-all md:border-l-0 md:border-t-4 scroll-mt-20"
       >
         <div class="mb-5 pb-4 border-b-2 border-gray-200">
-          <h3 class="text-xl font-bold text-gray-800 mb-2.5">오메추 - AI 기반 메뉴 추천 서비스</h3>
+          <h3 class="text-xl font-bold text-gray-800 mb-2.5">JWT 인증 단일화로 API 응답속도 50% 개선</h3>
+          <p class="text-sm text-gray-600 mb-2">오메추 - AI 기반 메뉴 추천 서비스</p>
           <div class="flex gap-4 text-sm text-gray-600">
             <span>2025.06 - 2025.08</span>
             <span>Frontend Developer (인증 파트)</span>
@@ -358,6 +373,52 @@ import profileImage from "@/assets/images/design/DH_ID.jpg";
           "오늘 메뉴 뭐 먹을까?" 고민을 해결하기 위한 AI 기반 맞춤형 메뉴 추천 서비스입니다.
           사용자의 취향, 위치 정보를 고려하여 최적의 메뉴를 추천합니다.
         </p>
+
+        <!-- 기술적 도전 섹션 -->
+        <div class="mb-6 p-5 bg-white rounded-md border-l-4 border-blue-500">
+          <h4 class="text-sm font-bold text-blue-600 uppercase tracking-wide mb-3">기술적 도전</h4>
+          <div class="space-y-3 text-sm">
+            <div>
+              <span class="font-semibold text-gray-700">문제:</span>
+              <span class="text-gray-600"> 쿠키 세션과 JWT가 혼용되어 인증 로직이 복잡하고 API 응답이 느림</span>
+            </div>
+            <div>
+              <span class="font-semibold text-gray-700">해결:</span>
+              <span class="text-gray-600"> JWT 단일 인증 체계로 통합, Access/Refresh 토큰 관리 구현</span>
+            </div>
+            <div>
+              <span class="font-semibold text-gray-700">결과:</span>
+              <span class="text-gray-600"> API 응답속도 420ms → 210ms로 50% 개선, 코드 유지보수성 향상</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mermaid 다이어그램: JWT 인증 시퀀스 -->
+        <div class="mb-6 p-4 bg-white rounded-md overflow-x-auto">
+          <h4 class="text-sm font-bold text-gray-600 uppercase tracking-wide mb-3">인증 플로우</h4>
+          <pre class="mermaid text-sm">
+sequenceDiagram
+    participant U as User
+    participant C as Client
+    participant S as Server
+    participant DB as Database
+
+    U->>C: 로그인 요청
+    C->>S: POST /auth/login
+    S->>DB: 사용자 검증
+    DB-->>S: 사용자 정보
+    S-->>C: Access Token + Refresh Token
+    C->>C: 토큰 저장 (메모리/쿠키)
+
+    Note over C,S: API 요청 시
+    C->>S: API 요청 + Access Token
+    S-->>C: 응답 데이터
+
+    Note over C,S: 토큰 만료 시
+    C->>S: Refresh Token으로 갱신
+    S-->>C: 새 Access Token
+          </pre>
+        </div>
 
         <div class="space-y-5">
           <div class="p-4 bg-white rounded-md">
@@ -430,12 +491,14 @@ import profileImage from "@/assets/images/design/DH_ID.jpg";
 
       <!-- Starterm -->
       <div
-        class="mb-7 p-7 bg-gray-50 rounded-lg border border-l-4 border-[#FF6F00] hover:shadow-md hover:-translate-y-1 transition-all md:border-l-0 md:border-t-4"
+        id="starterm"
+        class="mb-7 p-7 bg-gray-50 rounded-lg border border-l-4 border-[#FF6F00] hover:shadow-md hover:-translate-y-1 transition-all md:border-l-0 md:border-t-4 scroll-mt-20"
       >
         <div class="mb-5 pb-4 border-b-2 border-gray-200">
           <h3 class="text-xl font-bold text-gray-800 mb-2.5">
-            Starterm - 스타트업 학생을 위한 단어 학습 플랫폼
+            3주 만에 MVP 개발, 주간 활성 사용자 100명 달성
           </h3>
+          <p class="text-sm text-gray-600 mb-2">Starterm - 스타트업 학생을 위한 단어 학습 플랫폼</p>
           <div class="flex gap-4 text-sm text-gray-600">
             <span>2025.08 - 2025.09</span>
             <span>Full-Stack Developer</span>
@@ -447,6 +510,53 @@ import profileImage from "@/assets/images/design/DH_ID.jpg";
           단어 학습 플랫폼입니다. 3명의 팀원과 함께 3주 만에 개발 및 배포하여 주간 활성 사용자
           100명을 달성했습니다.
         </p>
+
+        <!-- 기술적 도전 섹션 -->
+        <div class="mb-6 p-5 bg-white rounded-md border-l-4 border-blue-500">
+          <h4 class="text-sm font-bold text-blue-600 uppercase tracking-wide mb-3">기술적 도전</h4>
+          <div class="space-y-3 text-sm">
+            <div>
+              <span class="font-semibold text-gray-700">문제:</span>
+              <span class="text-gray-600"> 제한된 3주 기간 내 MVP 개발 및 실사용자 확보 필요</span>
+            </div>
+            <div>
+              <span class="font-semibold text-gray-700">해결:</span>
+              <span class="text-gray-600"> Supabase로 백엔드 구축 시간 단축, 핵심 기능에 집중한 린 개발</span>
+            </div>
+            <div>
+              <span class="font-semibold text-gray-700">결과:</span>
+              <span class="text-gray-600"> 3주 만에 배포 완료, 주간 활성 사용자 100명 달성</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mermaid 다이어그램: 시스템 아키텍처 -->
+        <div class="mb-6 p-4 bg-white rounded-md overflow-x-auto">
+          <h4 class="text-sm font-bold text-gray-600 uppercase tracking-wide mb-3">시스템 아키텍처</h4>
+          <pre class="mermaid text-sm">
+flowchart TB
+    subgraph Client["클라이언트"]
+        A[Next.js App]
+        B[Framer Motion UI]
+    end
+
+    subgraph Backend["백엔드 (Supabase)"]
+        C[(PostgreSQL)]
+        D[Auth Service]
+        E[Real-time Subscriptions]
+    end
+
+    subgraph Deploy["배포"]
+        F[Vercel]
+    end
+
+    A --> D
+    A --> C
+    A --> E
+    B --> A
+    F --> A
+          </pre>
+        </div>
 
         <div class="space-y-5">
           <div class="p-4 bg-white rounded-md">
@@ -516,10 +626,12 @@ import profileImage from "@/assets/images/design/DH_ID.jpg";
 
       <!-- 윷놀이 게임 -->
       <div
-        class="mb-0 p-7 bg-gray-50 rounded-lg border border-l-4 border-[#FF6F00] hover:shadow-md hover:-translate-y-1 transition-all md:border-l-0 md:border-t-4"
+        id="yut"
+        class="mb-0 p-7 bg-gray-50 rounded-lg border border-l-4 border-[#FF6F00] hover:shadow-md hover:-translate-y-1 transition-all md:border-l-0 md:border-t-4 scroll-mt-20"
       >
         <div class="mb-5 pb-4 border-b-2 border-gray-200">
-          <h3 class="text-xl font-bold text-gray-800 mb-2.5">윷놀이 게임 - MVC 아키텍처 학습</h3>
+          <h3 class="text-xl font-bold text-gray-800 mb-2.5">MVC/Observer 패턴으로 유지보수성 높은 UI 설계</h3>
+          <p class="text-sm text-gray-600 mb-2">윷놀이 게임 - MVC 아키텍처 학습 프로젝트</p>
           <div class="flex gap-4 text-sm text-gray-600">
             <span>2025.03 - 2025.06</span>
             <span>UI Developer (5명 팀)</span>
@@ -531,6 +643,61 @@ import profileImage from "@/assets/images/design/DH_ID.jpg";
           전통 윷놀이 게임을 구현하며 MVC 아키텍처와 Observer 패턴을 실전에 적용했고, 팀
           프로젝트에서 A0 성적을 받았습니다.
         </p>
+
+        <!-- 기술적 도전 섹션 -->
+        <div class="mb-6 p-5 bg-white rounded-md border-l-4 border-blue-500">
+          <h4 class="text-sm font-bold text-blue-600 uppercase tracking-wide mb-3">기술적 도전</h4>
+          <div class="space-y-3 text-sm">
+            <div>
+              <span class="font-semibold text-gray-700">문제:</span>
+              <span class="text-gray-600"> 게임 로직과 UI가 강하게 결합되어 유지보수와 확장이 어려움</span>
+            </div>
+            <div>
+              <span class="font-semibold text-gray-700">해결:</span>
+              <span class="text-gray-600"> MVC 패턴으로 책임 분리, Observer 패턴으로 상태 변경 전파</span>
+            </div>
+            <div>
+              <span class="font-semibold text-gray-700">결과:</span>
+              <span class="text-gray-600"> 코드 유지보수성 향상, 팀 프로젝트 A0 성적 달성</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mermaid 다이어그램: MVC 패턴 -->
+        <div class="mb-6 p-4 bg-white rounded-md overflow-x-auto">
+          <h4 class="text-sm font-bold text-gray-600 uppercase tracking-wide mb-3">MVC 아키텍처</h4>
+          <pre class="mermaid text-sm">
+flowchart TB
+    subgraph View["View (UI)"]
+        V1[GameBoard Panel]
+        V2[Player Info Panel]
+        V3[Control Panel]
+    end
+
+    subgraph Controller["Controller"]
+        C1[GameController]
+        C2[TurnController]
+    end
+
+    subgraph Model["Model"]
+        M1[GameState]
+        M2[Player]
+        M3[Board]
+    end
+
+    subgraph Observer["Observer Pattern"]
+        O1[StateChangeListener]
+    end
+
+    V1 -->|User Action| C1
+    V3 -->|User Action| C2
+    C1 --> M1
+    C2 --> M1
+    M1 -->|Notify| O1
+    O1 -->|Update| V1
+    O1 -->|Update| V2
+          </pre>
+        </div>
 
         <div class="space-y-5">
           <div class="p-4 bg-white rounded-md">
@@ -759,7 +926,40 @@ import profileImage from "@/assets/images/design/DH_ID.jpg";
     <!-- Footer -->
     <div class="mt-12 p-6 bg-gray-50 rounded-lg text-center">
       <p class="text-sm text-gray-600 mb-2">이 포트폴리오는 웹에서 확인하실 수 있습니다.</p>
-      <p class="text-xs text-gray-500 font-medium">최종 업데이트: 2025년 11월 18일</p>
+      <p class="text-xs text-gray-500 font-medium">최종 업데이트: 2026년 1월 25일</p>
     </div>
   </main>
 </Layout>
+
+<!-- Mermaid Script -->
+<script>
+  import mermaid from "mermaid";
+
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: "base",
+    themeVariables: {
+      primaryColor: "#FF6F00",
+      primaryTextColor: "#333",
+      primaryBorderColor: "#FF6F00",
+      lineColor: "#666",
+      secondaryColor: "#FFF3E0",
+      tertiaryColor: "#F5F5F5",
+    },
+    flowchart: {
+      curve: "basis",
+      padding: 15,
+    },
+    sequence: {
+      diagramMarginX: 10,
+      diagramMarginY: 10,
+      actorMargin: 50,
+      width: 150,
+      height: 65,
+      boxMargin: 10,
+      boxTextMargin: 5,
+      noteMargin: 10,
+      messageMargin: 35,
+    },
+  });
+</script>
