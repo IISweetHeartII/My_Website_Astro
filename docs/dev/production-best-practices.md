@@ -21,14 +21,14 @@
 
 ### ✅ 현재 구현된 것
 
-#### ESLint (코드 품질)
+#### Biome (코드 품질)
 
 ```bash
 # 린트 체크
-pnpm run lint
+bun run lint
 
 # 자동 수정
-pnpm run lint:fix
+bun run lint:fix
 ```
 
 **검사 항목**:
@@ -38,14 +38,14 @@ pnpm run lint:fix
 - ❌ 안티패턴
 - ❌ 타입 안전성 위반
 
-#### Prettier (코드 포맷팅)
+#### Biome (코드 포맷팅)
 
 ```bash
 # 포맷팅 체크
-pnpm run format:check
+bun run format:check
 
 # 자동 포맷팅
-pnpm run format
+bun run format
 ```
 
 **적용 규칙**:
@@ -76,24 +76,24 @@ pnpm run format
 
 ```bash
 # 모든 검사 한 번에
-pnpm run check
+bun run check
 
 # 모든 문제 자동 수정
-pnpm run fix
+bun run fix
 ```
 
 ---
 
 ## 2. Git 워크플로우
 
-### 커밋 전 자동 검사 (Husky + lint-staged)
+### 커밋 전 자동 검사 (Husky + biome check --staged)
 
 **Pre-commit Hook** (커밋 전):
 
 ```bash
 # 자동으로 실행됨:
-1. ESLint 검사 & 자동 수정
-2. Prettier 포맷팅
+1. Biome 검사 & 자동 수정
+2. Biome 포맷팅
 3. 타입 체크
 ```
 
@@ -124,7 +124,7 @@ fix: 버그 수정 ✅
 | `feat` | 새 기능 | `feat: 블로그 검색 기능 추가` |
 | `fix` | 버그 수정 | `fix: 댓글 로딩 오류 수정` |
 | `docs` | 문서 변경 | `docs: README 업데이트` |
-| `style` | 코드 포맷팅 | `style: Prettier 적용` |
+| `style` | 코드 포맷팅 | `style: Biome 적용` |
 | `refactor` | 리팩토링 | `refactor: API 호출 로직 개선` |
 | `perf` | 성능 개선 | `perf: 이미지 lazy loading 추가` |
 | `test` | 테스트 | `test: BlogCard 컴포넌트 테스트` |
@@ -178,23 +178,23 @@ docs/update-readme
 
 ```bash
 # 업데이트 가능한 패키지 확인
-pnpm run deps:check
+bun run deps:check
 
 # 자동 업데이트
-pnpm run deps:update
+bun run deps:update
 ```
 
 ### 보안 취약점 스캔
 
 ```bash
 # 보안 감사
-pnpm audit
+bun audit
 
 # 중간 이상 심각도만
-pnpm audit --audit-level moderate
+bun audit --audit-level moderate
 
 # 자동 수정
-pnpm audit fix
+bun audit fix
 ```
 
 ### 추천: Dependabot 또는 Renovate
@@ -309,7 +309,7 @@ if (import.meta.env.SSR) {
 
 ```bash
 # Lighthouse CI (자동)
-pnpm run build
+bun run build
 npx lighthouse http://localhost:4321 --view
 ```
 
@@ -326,11 +326,11 @@ npx lighthouse http://localhost:4321 --view
 
 ```bash
 # 빌드 후 크기 확인
-pnpm run build
+bun run build
 du -sh dist/
 
 # 상세 분석 (권장: rollup-plugin-visualizer)
-pnpm add -D rollup-plugin-visualizer
+bun add -D rollup-plugin-visualizer
 ```
 
 ### 이미지 최적화 체크리스트
@@ -422,13 +422,13 @@ function sortPostsByDate(posts: BlogPost[], order: "asc" | "desc" = "desc"): Blo
 
 ```bash
 # Unit Tests
-pnpm add -D vitest @vitest/ui
+bun add -D vitest @vitest/ui
 
 # E2E Tests
-pnpm add -D playwright @playwright/test
+bun add -D playwright @playwright/test
 
 # Visual Regression
-pnpm add -D @storybook/testing-library
+bun add -D @storybook/testing-library
 ```
 
 ### 테스트 커버리지 목표
@@ -480,9 +480,9 @@ git push origin main
 
 ### 🔴 즉시 구현 (Critical)
 
-- [x] ESLint 설정
-- [x] Prettier 설정
-- [x] Husky + lint-staged
+- [x] Biome 설정
+- [x] Biome 설정
+- [x] Husky + biome check --staged
 - [x] Commitlint
 - [x] TypeScript strict mode
 - [ ] 테스트 프레임워크 (Vitest)

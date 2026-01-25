@@ -53,7 +53,7 @@ slug: your-custom-slug # 사용자 지정 URL 경로 (없으면 title로 자동 
 
 1. 터미널에서 개발 서버를 실행합니다:
    ```bash
-   pnpm dev
+   bun dev
    ```
 2. `http://localhost:4321`에서 블로그를 미리 봅니다.
 3. 파일을 저장하면 자동으로 새로고침됩니다 (Hot Module Replacement).
@@ -109,7 +109,7 @@ slug: your-custom-slug # 사용자 지정 URL 경로 (없으면 title로 자동 
 - [ ] `publish: true`로 설정되어 있습니까?
 - [ ] 파일이 `src/content/blog/` 폴더에 올바르게 위치해 있습니까?
 - [ ] 프론트매터에 YAML 구문 오류가 없습니까?
-- [ ] 개발 서버를 재시작했습니까? (`pnpm dev`)
+- [ ] 개발 서버를 재시작했습니까? (`bun dev`)
 
 ### 🐛 일반적인 문제들
 
@@ -140,17 +140,17 @@ publish: true  # ✅
 ```bash
 # 개발 서버 재시작
 # Ctrl+C로 중지 후
-pnpm dev
+bun dev
 ```
 
 **4. 빌드 오류**
 
 ```bash
 # 빌드 테스트
-pnpm build
+bun build
 
 # 빌드 결과 미리보기
-pnpm preview
+bun preview
 ```
 
 **5. Hot Reload가 작동하지 않음**
