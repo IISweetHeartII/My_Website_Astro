@@ -2,6 +2,7 @@
 import type { CollectionEntry } from "astro:content";
 import NewsletterForm from "@/features/newsletter/components/NewsletterForm.astro";
 import GiscusComments from "@/shared/components/comments/GiscusComments.astro";
+import FAQItem from "@/shared/components/ui/FAQItem.astro";
 import FAQSchema from "@/shared/components/seo/FAQSchema.astro";
 import FormattedDate from "@/shared/components/ui/FormattedDate.astro";
 import ResponsiveBlogImage from "@/shared/components/ui/ResponsiveBlogImage.astro";
@@ -223,6 +224,26 @@ const blogPostSchema = {
         <div class="prose prose-xl">
           <slot />
         </div>
+
+        <!-- FAQ Section (AEO - Answer Engine Optimization) -->
+        {
+          faq && faq.length > 0 && (
+            <section class="faq-section mt-12 pt-8 border-t border-background-lighter">
+              <h2 class="text-2xl font-bold text-text mb-6 text-center">
+                자주 묻는 질문
+              </h2>
+              <div class="max-w-3xl mx-auto bg-background-light rounded-xl p-6">
+                {faq.map((item: { question: string; answer: string }, index: number) => (
+                  <FAQItem
+                    question={item.question}
+                    answer={item.answer}
+                    delay={index * 0.1}
+                  />
+                ))}
+              </div>
+            </section>
+          )
+        }
 
         <!-- In-Article 광고 (본문 끝) -->
         <div class="ad-container my-8">

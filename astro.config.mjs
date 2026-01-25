@@ -34,7 +34,6 @@ export default defineConfig({
         output: {
           manualChunks: {
             vendor: ["astro"], // Astro 코어 별도 번들
-            utils: ["slugify"], // 유틸리티 라이브러리 분리
           },
         },
       },

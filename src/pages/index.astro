@@ -331,20 +331,16 @@ const latestPost = latestBlogPosts[0];
     </section>
   </main>
 
-  <script>
-    import { setupScrollAnimations } from "@/shared/scripts/scroll-animation";
-    import * as THREE from "three";
-    import WAVES from "vanta/dist/vanta.waves.min";
-
-    document.addEventListener("DOMContentLoaded", () => {
-      setupScrollAnimations();
-
+  <!-- Vanta.js requires THREE on window object - use CDN for reliable loading -->
+  <script is:inline src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+  <script is:inline src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.waves.min.js"></script>
+  <script is:inline>
+    document.addEventListener("DOMContentLoaded", function () {
       // Initialize Vanta.js WAVES effect on hero section
-      const heroSection = document.getElementById("hero-section");
-      if (heroSection) {
-        WAVES({
+      var heroSection = document.getElementById("hero-section");
+      if (heroSection && window.VANTA) {
+        window.VANTA.WAVES({
           el: heroSection,
-          THREE: THREE,
           mouseControls: true,
           touchControls: true,
           gyroControls: false,
@@ -352,13 +348,20 @@ const latestPost = latestBlogPosts[0];
           minWidth: 200.0,
           scale: 1.0,
           scaleMobile: 1.0,
-          color: 0x7c3aed, // Purple color matching your brand
+          color: 0x7c3aed,
           shininess: 35.0,
           waveHeight: 15.0,
           waveSpeed: 0.75,
           zoom: 0.85,
         });
       }
+    });
+  </script>
+
+  <script>
+    import { setupScrollAnimations } from "@/shared/scripts/scroll-animation";
+    document.addEventListener("DOMContentLoaded", () => {
+      setupScrollAnimations();
     });
   </script>
 </Layout>
