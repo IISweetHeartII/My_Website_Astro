@@ -15,45 +15,30 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
         with:
-          node-version: "20"
+          bun-version: latest
 
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v4
-
-      - name: Get pnpm store directory
-        id: pnpm-cache
-        shell: bash
-        run: |
-          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
-
-      - name: Setup pnpm cache
+      - name: Cache bun dependencies
         uses: actions/cache@v4
         with:
-          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
-          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          path: ~/.bun/install/cache
+          key: ${{ runner.os }}-bun-${{ hashFiles('**/bun.lock') }}
           restore-keys: |
-            ${{ runner.os }}-pnpm-store-
+            ${{ runner.os }}-bun-
 
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: bun install --frozen-lockfile
 
-      - name: Check formatting (Prettier)
-        run: pnpm run format:check
-        continue-on-error: true # 처음엔 경고만
-
-      - name: Run ESLint
-        run: pnpm run lint
-        continue-on-error: true # 처음엔 경고만
+      - name: Run Biome check
+        run: bun run biome check .
 
       - name: TypeScript type check
-        run: pnpm run type-check
-        continue-on-error: true # 처음엔 경고만
+        run: bun run type-check
 
       - name: Build project
-        run: pnpm run build
+        run: bun run build
         env:
           NODE_ENV: production
 
@@ -64,21 +49,6 @@ jobs:
           echo "Build files:"
           find dist/ -type f | wc -l
 
-  dependency-security:
-    name: Security Audit
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v4
-
-      - name: Security audit
-        run: pnpm audit --audit-level moderate
-        continue-on-error: true # 처음엔 경고만
-
   lighthouse:
     name: Lighthouse Performance
     runs-on: ubuntu-latest
@@ -88,19 +58,16 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
         with:
-          node-version: "20"
-
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v4
+          bun-version: latest
 
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: bun install --frozen-lockfile
 
       - name: Build
-        run: pnpm run build
+        run: bun run build
 
       - name: Run Lighthouse CI
         uses: treosh/lighthouse-ci-action@v11
@@ -109,4 +76,4 @@ jobs:
             http://localhost:4321
           uploadArtifacts: true
           temporaryPublicStorage: true
-        continue-on-error: true # 처음엔 경고만
+        continue-on-error: true
