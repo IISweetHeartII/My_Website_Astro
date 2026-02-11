@@ -1,77 +1,93 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 import { SITE_TITLE } from "@/shared/config/consts";
+
+const photos = [
+  {
+    src: "/images/demo/damaged-building.jpg",
+    filename: "Finders_Test_01_Building.jpg",
+    label: "건물 내부",
+  },
+  {
+    src: "/images/demo/damaged-sunflower.jpg",
+    filename: "Finders_Test_02_Sunflower.jpg",
+    label: "해바라기 밭",
+  },
+  {
+    src: "/images/demo/damaged-cherry-blossom.jpg",
+    filename: "Finders_Test_03_CherryBlossom.jpg",
+    label: "벚꽃 석양",
+  },
+  {
+    src: "/images/demo/damaged-railway.jpg",
+    filename: "Finders_Test_04_Railway.jpg",
+    label: "철도 건널목",
+  },
+];
 ---
 
 <Layout
   title={`Finders Demo - ${SITE_TITLE}`}
   description="파인더스 데모데이용 테스트 이미지 다운로드 페이지"
 >
-  <section class="max-w-md mx-auto px-4 py-12 flex flex-col items-center text-center min-h-[80vh] justify-center">
+  <section class="max-w-md mx-auto px-4 py-8 pb-16">
     <!-- Header -->
-    <div class="mb-6">
-      <div class="inline-flex items-center justify-center w-16 h-16 bg-primary-lighter rounded-full mb-4">
-        <span class="text-3xl">📸</span>
+    <div class="text-center mb-8">
+      <div class="inline-flex items-center justify-center w-14 h-14 bg-primary-lighter rounded-full mb-3">
+        <span class="text-2xl">📸</span>
       </div>
-      <h1 class="text-2xl font-bold text-text mb-2">테스트 사진 다운로드</h1>
+      <h1 class="text-xl font-bold text-text mb-1">Finders 테스트 사진</h1>
       <p class="text-text-light text-sm leading-relaxed">
-        아래 사진을 저장한 뒤,<br />파인더스에서 복원해보세요!
+        원하는 사진을 저장한 뒤, 파인더스에서 복원해보세요!
       </p>
     </div>
 
-    <!-- Image Preview -->
-    <div class="w-full mb-6">
-      <img
-        id="target-image"
-        src="/images/demo/finders-test-photo.jpg"
-        alt="복원 테스트용 손상된 필름 사진"
-        class="w-full max-w-[280px] mx-auto rounded-2xl shadow-lg object-cover aspect-[3/4]"
-        loading="eager"
-      />
+    <!-- Photo Cards -->
+    <div class="space-y-4 mb-8">
+      {photos.map((photo, i) => (
+        <div class="bg-white rounded-2xl shadow-md overflow-hidden">
+          <img
+            src={photo.src}
+            alt={`빛 바램 손상된 필름 사진 - ${photo.label}`}
+            class="w-full aspect-[4/3] object-cover"
+            loading={i === 0 ? "eager" : "lazy"}
+          />
+          <div class="flex items-center justify-between px-4 py-3">
+            <span class="text-sm text-text-light font-medium">{photo.label}</span>
+            <a
+              href={photo.src}
+              download={photo.filename}
+              class="inline-flex items-center gap-1.5 px-4 py-2 bg-primary hover:bg-accent-vibrant text-white text-sm font-semibold rounded-full transition-all duration-200 active:scale-95"
+            >
+              📲 저장
+            </a>
+          </div>
+        </div>
+      ))}
     </div>
 
-    <!-- Download Button -->
-    <a
-      href="/images/demo/finders-test-photo.jpg"
-      download="Finders_Test_Photo.jpg"
-      id="download-btn"
-      class="inline-flex items-center justify-center w-full max-w-[280px] px-6 py-4 bg-primary hover:bg-accent-vibrant text-white font-bold text-lg rounded-full transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 active:scale-95"
-    >
-      📲 내 핸드폰에 저장하기
-    </a>
-
     <!-- Helper Text -->
-    <div class="mt-6 space-y-2 text-xs text-gray-500">
-      <p>Android: 버튼 클릭 시 바로 저장됩니다</p>
+    <div class="text-center space-y-2 text-xs text-gray-500 mb-8">
+      <p>Android: 버튼 탭 시 바로 저장됩니다</p>
       <p>iPhone: 다운로드 확인 팝업이 나타날 수 있어요</p>
       <div class="pt-3 border-t border-gray-200 mt-3">
         <p class="text-gray-400">
-          💡 카카오톡/인앱 브라우저에서 안 될 경우<br />
-          <strong class="text-gray-500">이미지를 길게 눌러 → "사진 저장"</strong>을 해주세요
+          💡 카카오톡 등 인앱 브라우저에서 안 될 경우<br />
+          <strong class="text-gray-500">이미지를 길게 눌러 → "사진 저장"</strong>
         </p>
       </div>
     </div>
 
     <!-- Finders Link -->
-    <div class="mt-8 pt-6 border-t border-gray-200 w-full max-w-[280px]">
+    <div class="text-center pt-6 border-t border-gray-200">
       <p class="text-sm text-text-light mb-3">사진 저장 완료?</p>
       <a
         href="#"
         id="finders-link"
-        class="inline-flex items-center justify-center w-full px-5 py-3 border-2 border-primary text-primary font-semibold rounded-full hover:bg-primary hover:text-white transition-all duration-300"
+        class="inline-flex items-center justify-center w-full max-w-[280px] px-5 py-3.5 bg-primary hover:bg-accent-vibrant text-white font-semibold rounded-full transition-all duration-300 shadow-lg"
       >
         🔍 파인더스에서 복원하기 →
       </a>
     </div>
   </section>
 </Layout>
-
-<script is:inline>
-  // 페이지 로드 시 자동 다운로드 시도 (브라우저 정책에 따라 차단될 수 있음)
-  window.addEventListener("load", () => {
-    const btn = document.getElementById("download-btn");
-    if (btn) {
-      setTimeout(() => btn.click(), 500);
-    }
-  });
-</script>
