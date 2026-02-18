@@ -1,51 +1,40 @@
 ---
-import { Github, Instagram, Youtube } from "lucide-astro";
+import { Github, Linkedin, Mail } from "lucide-astro";
+import { AUTHOR_GITHUB, AUTHOR_LINKEDIN } from "@/shared/config/consts";
 
 const today = new Date();
 ---
 
 <footer class="bg-primary text-background body-font py-8">
   <div class="container mx-auto px-5 flex flex-col items-center">
-    <!-- Social Media Links -->
+    <!-- Social Links -->
     <div class="flex space-x-6 mb-6">
       <a
-        href="https://www.youtube.com/@Luckyducky-official"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="text-background hover:text-primary hover:bg-white hover:bg-opacity-20 rounded-full p-3 transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-lg"
-        title="YouTube"
-      >
-        <Youtube class="w-6 h-6" />
-      </a>
-
-      <a
-        href="https://blog.naver.com/lucky_ducky_"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="text-background hover:text-primary hover:bg-white hover:bg-opacity-20 rounded-full p-3 transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-lg"
-        title="Naver Blog"
-      >
-        <span class="text-xl font-bold">N</span>
-      </a>
-
-      <a
-        href="https://www.instagram.com/1ucky_ducky_/"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="text-background hover:text-primary hover:bg-white hover:bg-opacity-20 rounded-full p-3 transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-lg"
-        title="Instagram"
-      >
-        <Instagram class="w-6 h-6" />
-      </a>
-
-      <a
-        href="https://github.com/IISweetHeartII"
+        href={AUTHOR_GITHUB}
         target="_blank"
         rel="noopener noreferrer"
         class="text-background hover:text-primary hover:bg-white hover:bg-opacity-20 rounded-full p-3 transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-lg"
         title="GitHub"
       >
         <Github class="w-6 h-6" />
+      </a>
+
+      <a
+        href={AUTHOR_LINKEDIN}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-background hover:text-primary hover:bg-white hover:bg-opacity-20 rounded-full p-3 transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-lg"
+        title="LinkedIn"
+      >
+        <Linkedin class="w-6 h-6" />
+      </a>
+
+      <a
+        href="mailto:sachi009955@gmail.com"
+        class="text-background hover:text-primary hover:bg-white hover:bg-opacity-20 rounded-full p-3 transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-lg"
+        title="Email"
+      >
+        <Mail class="w-6 h-6" />
       </a>
     </div>
 
@@ -63,13 +52,6 @@ const today = new Date();
         class="text-white hover:text-purple-200 text-sm transition-colors duration-200 underline"
       >
         이용약관
-      </a>
-      <span class="text-white text-sm">•</span>
-      <a
-        href="/contact"
-        class="text-white hover:text-purple-200 text-sm transition-colors duration-200 underline"
-      >
-        문의하기
       </a>
     </div>
 

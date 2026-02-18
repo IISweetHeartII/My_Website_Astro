@@ -8,9 +8,9 @@ import {
   Code2,
   Medal,
   Rocket,
-  ShieldCheck,
+  Server,
   Sparkles,
-  UtensilsCrossed,
+  Users,
 } from "lucide-astro";
 import profileImage from "@/assets/images/design/DH_ID.jpg";
 import { getLatestPosts, getSortedPublishedPosts } from "@/shared/utils/blog";
@@ -161,9 +161,9 @@ const latestPost = latestBlogPosts[0];
             )
           }
 
-          <!-- Current Projects Card -->
+          <!-- Showcase Card -->
           <a
-            href="/now"
+            href="/showcase"
             class="group lg:col-span-1 bg-linear-to-br from-green-50 to-teal-50 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-green-100"
           >
             <div class="h-full flex flex-col justify-between">
@@ -172,14 +172,16 @@ const latestPost = latestBlogPosts[0];
                 <h3
                   class="text-xl font-bold text-gray-900 mb-2 group-hover:text-green-600 transition-colors"
                 >
-                  진행 중인 프로젝트
+                  Showcase
                 </h3>
-                <p class="text-gray-600 text-sm mb-4">지금 이 순간 집중하고 있는 것들</p>
+                <p class="text-gray-600 text-sm mb-4">직접 만든 프로젝트들을 확인해보세요</p>
               </div>
-              <div class="flex items-center gap-2 text-green-600 font-medium text-sm">
-                <div class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                Live
-              </div>
+              <span
+                class="inline-flex items-center gap-1 text-green-600 font-medium text-sm group-hover:gap-2 transition-all"
+              >
+                보러가기
+                <ArrowRight class="w-4 h-4" />
+              </span>
             </div>
           </a>
 
@@ -267,61 +269,61 @@ const latestPost = latestBlogPosts[0];
             </div>
           </div>
 
-          <!-- Featured Project 1 -->
+          <!-- Featured Project: agentgram -->
           <a
-            href="https://mylunch.log8.kr"
+            href="https://github.com/agentgram/agentgram"
             target="_blank"
             rel="noopener noreferrer"
-            class="group lg:col-span-1 bg-linear-to-br from-green-50 to-yellow-50 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-green-100"
+            class="group lg:col-span-1 bg-linear-to-br from-violet-50 to-purple-50 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-violet-100"
           >
             <div class="h-full flex flex-col justify-between">
               <div>
                 <div
-                  class="w-14 h-14 mb-3 rounded-full bg-green-100 flex items-center justify-center"
+                  class="w-14 h-14 mb-3 rounded-full bg-violet-100 flex items-center justify-center"
                 >
-                  <UtensilsCrossed class="w-8 h-8 text-green-600" />
+                  <Users class="w-8 h-8 text-violet-600" />
                 </div>
                 <h3
-                  class="text-lg font-bold text-gray-900 mb-1 group-hover:text-green-600 transition-colors"
+                  class="text-lg font-bold text-gray-900 mb-1 group-hover:text-violet-600 transition-colors"
                 >
-                  오늘 점심 뭐먹지?
+                  agentgram
                 </h3>
-                <p class="text-gray-600 text-sm">점심 메뉴 추천 서비스</p>
+                <p class="text-gray-600 text-sm">Open-Source AI Agent Network</p>
               </div>
               <span
-                class="inline-flex items-center gap-1 text-green-600 font-medium text-sm mt-3 group-hover:gap-2 transition-all"
+                class="inline-flex items-center gap-1 text-violet-600 font-medium text-sm mt-3 group-hover:gap-2 transition-all"
               >
-                방문하기
+                GitHub
                 <ArrowRight class="w-4 h-4" />
               </span>
             </div>
           </a>
 
-          <!-- Featured Project 2 -->
+          <!-- Featured Project: Finders -->
           <a
-            href="https://safety-navigator.log8.kr"
+            href="https://github.com/Finders-Official/BE"
             target="_blank"
             rel="noopener noreferrer"
-            class="group lg:col-span-1 bg-linear-to-br from-red-50 to-orange-50 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-red-100"
+            class="group lg:col-span-1 bg-linear-to-br from-blue-50 to-cyan-50 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-blue-100"
           >
             <div class="h-full flex flex-col justify-between">
               <div>
                 <div
-                  class="w-14 h-14 mb-3 rounded-full bg-red-100 flex items-center justify-center"
+                  class="w-14 h-14 mb-3 rounded-full bg-blue-100 flex items-center justify-center"
                 >
-                  <ShieldCheck class="w-8 h-8 text-red-600" />
+                  <Server class="w-8 h-8 text-blue-600" />
                 </div>
                 <h3
-                  class="text-lg font-bold text-gray-900 mb-1 group-hover:text-red-600 transition-colors"
+                  class="text-lg font-bold text-gray-900 mb-1 group-hover:text-blue-600 transition-colors"
                 >
-                  Safety Navigator
+                  Finders BE
                 </h3>
-                <p class="text-gray-600 text-sm">안전 대피 경로 안내</p>
+                <p class="text-gray-600 text-sm">Backend Lead, GCP Infra</p>
               </div>
               <span
-                class="inline-flex items-center gap-1 text-red-600 font-medium text-sm mt-3 group-hover:gap-2 transition-all"
+                class="inline-flex items-center gap-1 text-blue-600 font-medium text-sm mt-3 group-hover:gap-2 transition-all"
               >
-                방문하기
+                GitHub
                 <ArrowRight class="w-4 h-4" />
               </span>
             </div>

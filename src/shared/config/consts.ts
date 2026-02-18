@@ -7,9 +7,8 @@ export const SITE_KEYWORDS =
 export const SITE_URL = "https://log8.kr";
 
 // Author Information
-export const AUTHOR_GITHUB = "https://github.com/nodo1014";
-export const AUTHOR_LINKEDIN =
-  "https://www.linkedin.com/in/%EB%8D%95%ED%99%98-%EA%B9%80-1b4675156/";
+export const AUTHOR_GITHUB = "https://github.com/IISweetHeartII";
+export const AUTHOR_LINKEDIN = "https://www.linkedin.com/in/sweetheart2000/";
 
 // Default Images
 export const DEFAULT_OG_IMAGE = "/images/design/ready.png";

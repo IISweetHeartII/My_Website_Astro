@@ -1,6 +1,6 @@
 ---
-import { ArrowRight, Menu, X } from "lucide-astro";
-import { SITE_TITLE } from "@/shared/config/consts";
+import { Github, Linkedin, Mail, Menu, X } from "lucide-astro";
+import { AUTHOR_GITHUB, AUTHOR_LINKEDIN, SITE_TITLE } from "@/shared/config/consts";
 import { getUrl } from "@/shared/utils/url";
 import HeaderLink from "./HeaderLink.astro";
 ---
@@ -26,23 +26,37 @@ import HeaderLink from "./HeaderLink.astro";
 
     <div class="hidden md:flex items-center space-x-6">
       <HeaderLink href={getUrl("/blog")}>Blog</HeaderLink>
-      <HeaderLink href={getUrl("/youtube")}>YouTube</HeaderLink>
       <HeaderLink href={getUrl("/showcase")}>Showcase</HeaderLink>
-      <HeaderLink href={getUrl("/now")}>Now</HeaderLink>
       <HeaderLink href={getUrl("/portfolio")}>Portfolio</HeaderLink>
       <HeaderLink href={getUrl("/resume")}>Resume</HeaderLink>
     </div>
 
-    <div class="flex items-center space-x-4">
-      <!-- Contact 버튼 -->
+    <div class="flex items-center space-x-2">
+      <!-- Social Icons -->
       <a
-        href={getUrl("/contact")}
-        class="hidden md:inline-flex items-center bg-white/20 text-white border-0 py-2 px-5 focus:outline-none hover:bg-white hover:text-primary rounded-xl text-base font-semibold transition-all duration-300 ease-out hover:shadow-lg"
+        href={AUTHOR_GITHUB}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="hidden md:inline-flex items-center justify-center w-9 h-9 text-white/80 hover:text-white hover:bg-white/15 rounded-lg transition-all duration-200"
+        title="GitHub"
       >
-        Contact
-        <ArrowRight
-          class="w-4 h-4 ml-1.5 transition-transform duration-300 group-hover:translate-x-0.5"
-        />
+        <Github class="w-5 h-5" />
+      </a>
+      <a
+        href={AUTHOR_LINKEDIN}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="hidden md:inline-flex items-center justify-center w-9 h-9 text-white/80 hover:text-white hover:bg-white/15 rounded-lg transition-all duration-200"
+        title="LinkedIn"
+      >
+        <Linkedin class="w-5 h-5" />
+      </a>
+      <a
+        href="mailto:sachi009955@gmail.com"
+        class="hidden md:inline-flex items-center justify-center w-9 h-9 text-white/80 hover:text-white hover:bg-white/15 rounded-lg transition-all duration-200"
+        title="Email"
+      >
+        <Mail class="w-5 h-5" />
       </a>
 
       <!-- Mobile menu toggle button -->
@@ -69,19 +83,9 @@ import HeaderLink from "./HeaderLink.astro";
         >Blog</a
       >
       <a
-        href={getUrl("/youtube")}
-        class="text-white hover:text-accent text-xl font-semibold transition-colors duration-200"
-        >YouTube</a
-      >
-      <a
         href={getUrl("/showcase")}
         class="text-white hover:text-accent text-xl font-semibold transition-colors duration-200"
         >Showcase</a
-      >
-      <a
-        href={getUrl("/now")}
-        class="text-white hover:text-accent text-xl font-semibold transition-colors duration-200"
-        >Now</a
       >
       <a
         href={getUrl("/portfolio")}
@@ -93,11 +97,34 @@ import HeaderLink from "./HeaderLink.astro";
         class="text-white hover:text-accent text-xl font-semibold transition-colors duration-200"
         >Resume</a
       >
-      <a
-        href={getUrl("/contact")}
-        class="text-white hover:text-accent text-xl font-semibold transition-colors duration-200"
-        >Contact</a
-      >
+      <!-- Mobile social links -->
+      <div class="flex items-center space-x-4 pt-4 border-t border-white/20">
+        <a
+          href={AUTHOR_GITHUB}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-white/80 hover:text-white transition-colors"
+          title="GitHub"
+        >
+          <Github class="w-6 h-6" />
+        </a>
+        <a
+          href={AUTHOR_LINKEDIN}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-white/80 hover:text-white transition-colors"
+          title="LinkedIn"
+        >
+          <Linkedin class="w-6 h-6" />
+        </a>
+        <a
+          href="mailto:sachi009955@gmail.com"
+          class="text-white/80 hover:text-white transition-colors"
+          title="Email"
+        >
+          <Mail class="w-6 h-6" />
+        </a>
+      </div>
     </nav>
   </div>
 </header>

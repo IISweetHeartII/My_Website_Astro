@@ -34,4 +34,7 @@ pnpm-debug.log*
 # Temporary files
 .tmp/
 .temp/
-.cache/ 
+.cache/
+
+# Sisyphus (AI agent workspace)
+.sisyphus/
