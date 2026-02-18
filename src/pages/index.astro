@@ -38,26 +38,27 @@ const latestPost = latestBlogPosts[0];
             <div class="space-y-8 text-center lg:text-left">
               <!-- Badge -->
               <div
-                class="inline-flex items-center gap-2 px-4 py-2 bg-white/80 backdrop-blur-sm border border-purple-200 rounded-full text-sm font-medium text-purple-600 shadow-lg"
+                class="inline-flex items-center gap-2 px-4 py-2 bg-background/80 backdrop-blur-sm border border-background-lighter rounded-full text-sm font-medium text-primary shadow-lg"
               >
                 <Sparkles class="w-4 h-4" />
-                기술로 세상과 소통하기
+                사람 중심의 문제 해결
               </div>
 
               <!-- Main Heading -->
-              <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold text-gray-900 leading-tight">
-                감동과 사랑을 전하는<br />
+              <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold text-text leading-tight">
+                아끼지 않는<br />
                 <span
                   class="bg-linear-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent"
                 >
-                  기술 번역가
+                  문제해결사
                 </span>
               </h1>
 
               <!-- Subtitle -->
-              <p class="text-lg md:text-xl lg:text-2xl text-gray-600 leading-relaxed">
-                복잡한 기술을 누구나 이해할 수 있는 언어로 번역하는<br class="hidden md:block" />
-                <strong class="text-gray-900">김덕환</strong>입니다.
+              <p class="text-lg md:text-xl lg:text-2xl text-text-light leading-relaxed">
+                사람 중심의 AI 제품을 설계하고 구현해,<br class="hidden md:block" />
+                고객과 비즈니스의 실제 문제를 해결합니다.
+                <strong class="text-text"> 김덕환</strong>입니다.
               </p>
 
               <!-- CTA Buttons -->
@@ -66,14 +67,14 @@ const latestPost = latestBlogPosts[0];
               >
                 <a
                   href="/blog"
-                  class="group inline-flex items-center gap-2 px-8 py-4 bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded-xl transition-all duration-300 shadow-lg hover:shadow-2xl transform hover:-translate-y-1"
+                  class="group inline-flex items-center gap-2 px-8 py-4 bg-primary hover:bg-accent text-on-primary font-semibold rounded-xl transition-all duration-300 shadow-lg hover:shadow-2xl transform hover:-translate-y-1"
                 >
                   블로그 보기
                   <ArrowRight class="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </a>
                 <a
                   href="/showcase"
-                  class="group inline-flex items-center gap-2 px-8 py-4 bg-white hover:bg-gray-50 text-purple-600 font-semibold rounded-xl border-2 border-purple-600 transition-all duration-300 shadow-lg hover:shadow-xl"
+                  class="group inline-flex items-center gap-2 px-8 py-4 bg-background hover:bg-background-light text-primary font-semibold rounded-xl border-2 border-primary transition-all duration-300 shadow-lg hover:shadow-xl"
                 >
                   프로젝트 보기
                   <Code2 class="w-5 h-5" />
@@ -170,11 +171,11 @@ const latestPost = latestBlogPosts[0];
               <div>
                 <Rocket class="w-10 h-10 text-green-600 mb-4" />
                 <h3
-                  class="text-xl font-bold text-gray-900 mb-2 group-hover:text-green-600 transition-colors"
+                  class="text-xl font-bold text-text mb-2 group-hover:text-green-600 transition-colors"
                 >
                   Showcase
                 </h3>
-                <p class="text-gray-600 text-sm mb-4">직접 만든 프로젝트들을 확인해보세요</p>
+                  <p class="text-text-light text-sm mb-4">직접 만든 프로젝트들을 확인해보세요</p>
               </div>
               <span
                 class="inline-flex items-center gap-1 text-green-600 font-medium text-sm group-hover:gap-2 transition-all"
@@ -249,8 +250,8 @@ const latestPost = latestBlogPosts[0];
               >
                 <Award class="w-8 h-8 text-yellow-600" />
               </div>
-              <h3 class="text-lg font-bold text-gray-900 mb-1">최우수상</h3>
-              <p class="text-gray-600 text-sm">2025 ICAN-LABS 대학원 창업프로그램</p>
+              <h3 class="text-lg font-bold text-text mb-1">최우수상</h3>
+              <p class="text-text-light text-sm">2025 ICAN-LABS 대학원 창업프로그램</p>
             </div>
           </div>
 
@@ -264,8 +265,8 @@ const latestPost = latestBlogPosts[0];
               >
                 <Medal class="w-8 h-8 text-indigo-600" />
               </div>
-              <h3 class="text-lg font-bold text-gray-900 mb-1">최우수상</h3>
-              <p class="text-gray-600 text-sm">2025 동계 근거기반 해외교육 프로그램</p>
+              <h3 class="text-lg font-bold text-text mb-1">최우수상</h3>
+              <p class="text-text-light text-sm">2025 동계 근거기반 해외교육 프로그램</p>
             </div>
           </div>
 
@@ -284,11 +285,11 @@ const latestPost = latestBlogPosts[0];
                   <Users class="w-8 h-8 text-violet-600" />
                 </div>
                 <h3
-                  class="text-lg font-bold text-gray-900 mb-1 group-hover:text-violet-600 transition-colors"
+              class="text-lg font-bold text-text mb-1 group-hover:text-violet-600 transition-colors"
                 >
                   agentgram
                 </h3>
-                <p class="text-gray-600 text-sm">Open-Source AI Agent Network</p>
+            <p class="text-text-light text-sm">Open-Source AI Agent Network</p>
               </div>
               <span
                 class="inline-flex items-center gap-1 text-violet-600 font-medium text-sm mt-3 group-hover:gap-2 transition-all"
@@ -314,11 +315,11 @@ const latestPost = latestBlogPosts[0];
                   <Server class="w-8 h-8 text-blue-600" />
                 </div>
                 <h3
-                  class="text-lg font-bold text-gray-900 mb-1 group-hover:text-blue-600 transition-colors"
+              class="text-lg font-bold text-text mb-1 group-hover:text-blue-600 transition-colors"
                 >
                   Finders BE
                 </h3>
-                <p class="text-gray-600 text-sm">Backend Lead, GCP Infra</p>
+            <p class="text-text-light text-sm">Backend Lead, GCP Infra</p>
               </div>
               <span
                 class="inline-flex items-center gap-1 text-blue-600 font-medium text-sm mt-3 group-hover:gap-2 transition-all"

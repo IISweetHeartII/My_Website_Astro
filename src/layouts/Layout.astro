@@ -15,26 +15,45 @@ const { title, description } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="ko">
+<html lang="ko" data-theme="light">
   <head>
     <GoogleAnalytics />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
+    <script is:inline>
+      (() => {
+        const stored = localStorage.getItem("theme");
+        const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        const theme = stored ?? (prefersDark ? "dark" : "light");
+        document.documentElement.dataset.theme = theme;
+      })();
+    </script>
     <title>{title}</title>
     <BaseHead title={title} description={description ?? undefined} />
     <slot name="head" />
   </head>
-  <body class="bg-white text-gray-900 font-sans flex flex-col min-h-screen">
+  <body class="bg-background text-text flex flex-col min-h-screen">
     <ProgressIndicator />
+    <a href="#main-content" class="skip-link">본문으로 바로가기</a>
     <Header />
-    <main class="grow">
+    <main id="main-content" class="grow" tabindex="-1">
       <slot />
     </main>
     <Footer />
 
-    <!-- Scroll Animation Script -->
     <script>
-      import "@/shared/scripts/scroll-animation.ts";
+      import { setupScrollAnimations } from "@/shared/scripts/scroll-animation";
+
+      function runScrollAnimations() {
+        setupScrollAnimations();
+      }
+
+      document.addEventListener("astro:page-load", runScrollAnimations);
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", runScrollAnimations);
+      } else {
+        runScrollAnimations();
+      }
     </script>
   </body>
 </html>

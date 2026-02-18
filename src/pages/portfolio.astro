@@ -380,24 +380,24 @@ import Layout from "../layouts/Layout.astro";
           <h4 class="text-sm font-bold text-blue-600 uppercase tracking-wide mb-3">기술적 도전</h4>
           <div class="space-y-3 text-sm">
             <div>
-              <span class="font-semibold text-gray-700">문제:</span>
-              <span class="text-gray-600"> 5명 BE 개발자의 코드 품질 불일치, AWS 대비 예산 제약</span>
+              <span class="font-semibold text-text">문제:</span>
+              <span class="text-text-light"> 5명 BE 개발자의 코드 품질 불일치, AWS 대비 예산 제약</span>
             </div>
             <div>
-              <span class="font-semibold text-gray-700">해결:</span>
-              <span class="text-gray-600"> GCP $300 크레딧 활용, CODE_STYLE.md 문서화, PR마다 꼼꼼한 코드 리뷰</span>
+              <span class="font-semibold text-text">해결:</span>
+              <span class="text-text-light"> GCP $300 크레딧 활용, CODE_STYLE.md 문서화, PR마다 꼼꼼한 코드 리뷰</span>
             </div>
             <div>
-              <span class="font-semibold text-gray-700">결과:</span>
-              <span class="text-gray-600"> v0.4.2 릴리즈 달성 (555 commits), 일관된 코드 품질 유지</span>
+              <span class="font-semibold text-text">결과:</span>
+              <span class="text-text-light"> v0.4.2 릴리즈 달성 (555 commits), 일관된 코드 품질 유지</span>
             </div>
           </div>
         </div>
 
 <!-- AI 활용 섹션 -->
-        <div class="mb-6 p-5 bg-white rounded-md border-l-4 border-emerald-500">
+        <div class="mb-6 p-5 bg-background-light rounded-md border-l-4 border-emerald-500">
           <h4 class="text-sm font-bold text-emerald-600 uppercase tracking-wide mb-3">AI 활용</h4>
-          <ul class="list-disc list-inside text-sm text-gray-800 space-y-2">
+          <ul class="list-disc list-inside text-sm text-text space-y-2">
             <li>Stable Diffusion Inpainting API 연동 - 필름 빛번짐(Light Leak) 복원 기능</li>
             <li>GCP VPC 네트워크 설계, IAP SSH 터널링으로 보안 DB 접속 환경 구축</li>
             <li>포트원(PortOne) 결제 시스템 연동 - 예약 → 결제 → 확정 플로우 설계</li>
@@ -406,8 +406,8 @@ import Layout from "../layouts/Layout.astro";
         </div>
 
         <!-- Mermaid 다이어그램: GCP 인프라 아키텍처 -->
-        <div class="mb-6 p-4 bg-white rounded-md overflow-x-auto">
-          <h4 class="text-sm font-bold text-gray-600 uppercase tracking-wide mb-3">GCP 인프라 아키텍처</h4>
+        <div class="mb-6 p-4 bg-background-light rounded-md overflow-x-auto">
+          <h4 class="text-sm font-bold text-text-light uppercase tracking-wide mb-3">GCP 인프라 아키텍처</h4>
           <pre class="mermaid text-sm">
 flowchart TB
     subgraph Client["클라이언트"]

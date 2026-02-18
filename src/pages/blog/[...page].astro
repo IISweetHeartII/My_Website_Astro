@@ -1,0 +1,115 @@
+---
+import type { GetStaticPaths } from "astro";
+import BlogCard from "@/features/blog/components/BlogCard.astro";
+import Layout from "@/layouts/Layout.astro";
+import { categories } from "@/shared/config/categories";
+import { getSortedPublishedPosts, transformPostForCard } from "@/shared/utils/blog";
+
+export const getStaticPaths = (async ({ paginate }) => {
+  const allPosts = await getSortedPublishedPosts();
+  const postsData = allPosts.map((post) => transformPostForCard(post));
+  return paginate(postsData, { pageSize: 12 });
+}) satisfies GetStaticPaths;
+
+const { page } = Astro.props;
+
+const pageTitle = page.currentPage === 1 ? "Blog" : `Blog (Page ${page.currentPage})`;
+const pageDescription = "아끼지 않는 문제해결사로서, 문제를 정의하고 해결한 기록을 남깁니다.";
+---
+
+<Layout title={pageTitle} description={pageDescription}>
+  <Fragment slot="head">
+    {page.url.prev && <link rel="prev" href={page.url.prev} />}
+    {page.url.next && <link rel="next" href={page.url.next} />}
+  </Fragment>
+
+  <div class="w-full max-w-5xl mx-auto p-6 md:p-8 flex flex-col">
+    <header class="mb-8">
+      <h1 class="text-3xl md:text-4xl font-extrabold text-text mb-3">Blog</h1>
+      <p class="text-text-light leading-relaxed">{pageDescription}</p>
+
+      <div class="mt-5 flex flex-wrap gap-2">
+        <a
+          href="/blog/"
+          class="px-4 py-2 rounded-full bg-background-muted text-text-muted border border-background-lighter hover:bg-primary hover:text-on-primary transition-colors duration-200 text-sm font-medium"
+        >
+          전체
+        </a>
+        {
+          categories.map((category) => (
+            <a
+              href={`/category/${category.id}/`}
+              class="px-4 py-2 rounded-full bg-background-muted text-text-muted border border-background-lighter hover:bg-primary hover:text-on-primary transition-colors duration-200 text-sm font-medium"
+            >
+              <span class="mr-1">{category.icon}</span>
+              <span>{category.name}</span>
+            </a>
+          ))
+        }
+      </div>
+    </header>
+
+    {
+      page.data.length > 0 ? (
+        <section class="grid grid-cols-1 sm:grid-cols-2 gap-6 flex-1">
+          {page.data.map((post) => (
+            <BlogCard
+              title={post.title}
+              description={post.description}
+              date={post.date}
+              slug={post.slug}
+              dataTags={post.dataTags}
+              dataTitle={post.dataTitle}
+              dataDescription={post.dataDescription}
+              dataCategory={post.dataCategory}
+            />
+          ))}
+        </section>
+      ) : (
+        <div class="text-center p-16 text-text text-lg flex-1 md:p-12 md:text-base">
+          No posts found. Check back soon!
+        </div>
+      )
+    }
+
+    <nav aria-label="Pagination" class="mt-10 flex items-center justify-between gap-4">
+      <div class="text-sm text-text-muted">
+        {page.total > 0 && (
+          <span>
+            {page.start + 1}–{page.end + 1} / {page.total}
+          </span>
+        )}
+      </div>
+
+      <div class="flex items-center gap-2">
+        <a
+          href={page.url.prev ?? "#"}
+          aria-disabled={!page.url.prev}
+          class:list={[
+            "px-3 py-2 rounded-lg border text-sm font-medium transition-colors duration-200",
+            page.url.prev
+              ? "bg-background hover:bg-background-light border-background-lighter text-text"
+              : "bg-background-muted border-background-lighter text-text-muted pointer-events-none opacity-60",
+          ]}
+        >
+          이전
+        </a>
+        <div class="text-sm text-text-muted px-2">
+          {page.currentPage} / {page.lastPage}
+        </div>
+        <a
+          href={page.url.next ?? "#"}
+          aria-disabled={!page.url.next}
+          class:list={[
+            "px-3 py-2 rounded-lg border text-sm font-medium transition-colors duration-200",
+            page.url.next
+              ? "bg-background hover:bg-background-light border-background-lighter text-text"
+              : "bg-background-muted border-background-lighter text-text-muted pointer-events-none opacity-60",
+          ]}
+        >
+          다음
+        </a>
+      </div>
+    </nav>
+  </div>
+</Layout>

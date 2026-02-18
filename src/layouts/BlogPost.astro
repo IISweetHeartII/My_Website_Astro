@@ -1,9 +1,8 @@
 ---
 import type { CollectionEntry } from "astro:content";
-import NewsletterForm from "@/features/newsletter/components/NewsletterForm.astro";
 import GiscusComments from "@/shared/components/comments/GiscusComments.astro";
-import FAQItem from "@/shared/components/ui/FAQItem.astro";
 import FAQSchema from "@/shared/components/seo/FAQSchema.astro";
+import FAQItem from "@/shared/components/ui/FAQItem.astro";
 import FormattedDate from "@/shared/components/ui/FormattedDate.astro";
 import ResponsiveBlogImage from "@/shared/components/ui/ResponsiveBlogImage.astro";
 import {
@@ -139,42 +138,13 @@ const blogPostSchema = {
         max-width: none !important;
         width: 100%;
       }
-
-      /* AdSense 광고 스타일 */
-      .ad-container {
-        min-height: 250px;
-        background: var(--color-background-light);
-        border: 1px dashed var(--color-background-lighter);
-        border-radius: 8px;
-        padding: 16px;
-        margin-bottom: 20px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        position: relative;
-      }
-      .ad-container::before {
-        content: "광고";
-        position: absolute;
-        top: 8px;
-        left: 12px;
-        font-size: 11px;
-        color: var(--color-text);
-        background: var(--color-background);
-        padding: 2px 6px;
-        border-radius: 3px;
-      }
-      .adsbygoogle {
-        min-height: 250px;
-        width: 100%;
-      }
     </style>
   </Fragment>
 
   <!-- BlogPost 본문 콘텐츠 -->
   <div class="w-full p-4">
     <div class="flex flex-col md:flex-row max-w-7xl mx-auto gap-4">
-      <article class="md:w-3/4">
+      <article class="w-full">
         <!-- 제목, 날짜, 태그, 이미지 섹션 (prose 밖) -->
         <div class="title mb-4 py-4 text-center leading-none">
           {
@@ -197,9 +167,9 @@ const blogPostSchema = {
               <div class="tags flex flex-wrap gap-2 my-4 justify-center">
                 {safeTags.map((tag: string) => (
                   <a
-                    href={getUrl(`/tag/${tag}/`)}
-                    class="tag bg-background-light text-text px-3 py-0.5 rounded-full text-sm no-underline transition-all duration-200 hover:bg-primary hover:text-background hover:-translate-y-px"
-                  >
+                     href={getUrl(`/tag/${tag}/`)}
+                     class="tag bg-background-light text-text px-3 py-0.5 rounded-full text-sm no-underline transition-all duration-200 hover:bg-primary hover:text-on-primary hover:-translate-y-px"
+                   >
                     #{tag}
                   </a>
                 ))}
@@ -245,59 +215,12 @@ const blogPostSchema = {
           )
         }
 
-        <!-- In-Article 광고 (본문 끝) -->
-        <div class="ad-container my-8">
-          <ins
-            class="adsbygoogle"
-            style="display:block; text-align:center;"
-            data-ad-layout="in-article"
-            data-ad-format="fluid"
-            data-ad-client="ca-pub-4653332352131854"
-            data-ad-slot="1234567890"></ins>
-          <script is:inline>
-            (window.adsbygoogle = window.adsbygoogle || []).push({});
-          </script>
-        </div>
-
-        <!-- 뉴스레터 구독 폼 (prose 밖) -->
-        <NewsletterForm />
-
-        <!-- 댓글 위 광고 -->
-        <div class="ad-container my-8">
-          <ins
-            class="adsbygoogle"
-            style="display:block"
-            data-ad-format="autorelaxed"
-            data-ad-client="ca-pub-4653332352131854"
-            data-ad-slot="9876543210"></ins>
-          <script is:inline>
-            (window.adsbygoogle = window.adsbygoogle || []).push({});
-          </script>
-        </div>
-
         <!-- 댓글 섹션 (prose 밖) -->
         <div class="comments-section mt-12 pt-8 border-t border-background-lighter">
           <h3 class="text-2xl font-bold text-text mb-6 text-center">💬 댓글</h3>
           <GiscusComments />
         </div>
       </article>
-      <div class="md:w-1/4">
-        <div class="sticky top-4">
-          <!-- Responsive AdSense Ad Unit -->
-          <div class="ad-container">
-            <ins
-              class="adsbygoogle"
-              style="display:block"
-              data-ad-client="ca-pub-4653332352131854"
-              data-ad-slot="2433987375"
-              data-ad-format="auto"
-              data-full-width-responsive="true"></ins>
-            <script is:inline>
-              (window.adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
 

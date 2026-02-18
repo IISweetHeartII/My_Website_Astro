@@ -22,7 +22,7 @@ const pageTitle = Astro.url.pathname.replace("/blog/", "").replace("/", "") || "
   <!-- Giscus가 여기에 로드됩니다 -->
 </div>
 
-<script define:vars={{ REPO, REPO_ID, CATEGORY, CATEGORY_ID, currentUrl, pageTitle }}>
+<script is:inline define:vars={{ REPO, REPO_ID, CATEGORY, CATEGORY_ID, currentUrl, pageTitle }}>
   function loadGiscus() {
     // 이미 로드된 경우 중복 방지
     if (document.querySelector("iframe.giscus-frame")) {
@@ -45,7 +45,8 @@ const pageTitle = Astro.url.pathname.replace("/blog/", "").replace("/", "") || "
     script.setAttribute("data-reactions-enabled", "1");
     script.setAttribute("data-emit-metadata", "1");
     script.setAttribute("data-input-position", "bottom");
-    script.setAttribute("data-theme", "preferred_color_scheme");
+    const currentTheme = document.documentElement.dataset["theme"] === "dark" ? "dark_dimmed" : "light";
+    script.setAttribute("data-theme", currentTheme);
     script.setAttribute("data-lang", "ko");
     script.setAttribute("data-loading", "lazy");
 
@@ -81,6 +82,12 @@ const pageTitle = Astro.url.pathname.replace("/blog/", "").replace("/", "") || "
 
   // Astro 페이지 로드 이벤트에서 초기화
   document.addEventListener("astro:page-load", initGiscusObserver);
+
+  window.addEventListener("theme-change", (event) => {
+    const theme = event.detail?.theme === "dark" ? "dark_dimmed" : "light";
+    const frame = document.querySelector("iframe.giscus-frame");
+    frame?.contentWindow?.postMessage({ giscus: { setConfig: { theme } } }, "https://giscus.app");
+  });
 
   // 첫 로드 시에도 실행
   if (document.readyState === "loading") {

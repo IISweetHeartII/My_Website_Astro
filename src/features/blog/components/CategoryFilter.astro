@@ -8,14 +8,14 @@ import { categories } from "@/shared/config/categories";
   <div class="categories-section mb-6">
     <div class="flex items-center gap-2 mb-4">
       <Tag class="w-5 h-5 text-primary" />
-      <h3 class="text-lg font-semibold text-gray-800">카테고리</h3>
+      <h3 class="text-lg font-semibold text-text">카테고리</h3>
     </div>
 
     <div class="flex flex-wrap gap-3" id="category-filter-container">
       <!-- 전체글 버튼 -->
       <button
         data-category="all"
-        class="category-item px-5 py-2.5 rounded-full transition-all duration-200 font-medium text-sm hover:scale-105 hover:shadow-lg current-category bg-primary text-background shadow-md flex items-center gap-2"
+        class="category-item px-5 py-2.5 rounded-full transition-all duration-200 font-medium text-sm hover:scale-105 hover:shadow-lg current-category bg-primary text-on-primary shadow-md flex items-center gap-2"
       >
         <Layers class="w-4 h-4" />
         <span>전체</span>
@@ -26,7 +26,7 @@ import { categories } from "@/shared/config/categories";
         categories.map((category) => (
           <button
             data-category={category.id}
-            class="category-item px-4 py-2.5 rounded-full transition-all duration-200 text-sm font-medium hover:scale-105 hover:shadow-lg bg-background-muted text-text-muted hover:bg-primary hover:text-background flex items-center gap-2"
+            class="category-item px-4 py-2.5 rounded-full transition-all duration-200 text-sm font-medium hover:scale-105 hover:shadow-lg bg-background-muted text-text-muted hover:bg-primary hover:text-on-primary flex items-center gap-2"
           >
             <span class="text-base">{category.icon}</span>
             <span>{category.name}</span>
@@ -52,7 +52,7 @@ import { categories } from "@/shared/config/categories";
   </div>
 
   <!-- 결과 표시 -->
-  <div class="results-info mt-4 text-sm text-gray-600" id="results-info">
+      <div class="results-info mt-4 text-sm text-text-light" id="results-info">
     <!-- 검색 결과가 여기에 표시됩니다 -->
   </div>
 </div>

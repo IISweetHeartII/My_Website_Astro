@@ -1,5 +1,5 @@
 ---
-import { Github, Linkedin, Mail, Menu, X } from "lucide-astro";
+import { Github, Linkedin, Mail, Menu, Moon, Sun, X } from "lucide-astro";
 import { AUTHOR_GITHUB, AUTHOR_LINKEDIN, SITE_TITLE } from "@/shared/config/consts";
 import { getUrl } from "@/shared/utils/url";
 import HeaderLink from "./HeaderLink.astro";
@@ -32,6 +32,17 @@ import HeaderLink from "./HeaderLink.astro";
     </div>
 
     <div class="flex items-center space-x-2">
+      <button
+        id="theme-toggle"
+        type="button"
+        class="inline-flex items-center justify-center w-9 h-9 text-white/80 hover:text-white hover:bg-white/15 rounded-lg transition-all duration-200"
+        aria-label="테마 전환"
+        aria-pressed="false"
+      >
+        <Sun data-icon="sun" class="w-5 h-5 hidden" />
+        <Moon data-icon="moon" class="w-5 h-5" />
+      </button>
+
       <!-- Social Icons -->
       <a
         href={AUTHOR_GITHUB}
@@ -131,9 +142,11 @@ import HeaderLink from "./HeaderLink.astro";
 
 <script>
   import { setupMobileMenu } from "@/shared/scripts/mobile-menu";
+  import { setupThemeToggle } from "@/shared/scripts/theme-toggle";
 
   document.addEventListener("DOMContentLoaded", () => {
     setupMobileMenu();
+    setupThemeToggle();
 
     // Header scroll effect
     const header = document.getElementById("main-header");

@@ -84,8 +84,7 @@ const projects: Project[] = [
     title: "119-ai",
     role: "Founder / Owner",
     highlight: "Personal Product + Patent Prep",
-    description:
-      "개인 제품으로 전환 중이며, 특허 출원을 준비하고 있습니다. 코드는 비공개입니다.",
+    description: "개인 제품으로 전환 중이며, 특허 출원을 준비하고 있습니다. 코드는 비공개입니다.",
     tags: ["AI", "Product", "Patent"],
     links: [
       {
@@ -169,7 +168,7 @@ const iconMap = {
                 </div>
 
                 {/* Description */}
-                <p class="text-gray-700 leading-relaxed mb-5">
+                <p class="text-text-light leading-relaxed mb-5">
                   {project.description}
                 </p>
 
@@ -177,7 +176,7 @@ const iconMap = {
                 <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                   <div class="flex flex-wrap gap-2">
                     {project.tags.map((tag) => (
-                      <span class="px-3 py-1 bg-gray-100 text-gray-700 text-xs font-medium rounded-full">
+                      <span class="px-3 py-1 bg-background-muted text-text-muted text-xs font-medium rounded-full">
                         {tag}
                       </span>
                     ))}
@@ -191,7 +190,7 @@ const iconMap = {
                           href={link.url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          class="inline-flex items-center gap-1.5 px-4 py-2 bg-gray-900 hover:bg-primary text-white text-sm font-medium rounded-lg transition-all duration-200 hover:-translate-y-0.5"
+                          class="inline-flex items-center gap-1.5 px-4 py-2 bg-primary hover:bg-accent text-on-primary text-sm font-medium rounded-lg transition-all duration-200 hover:-translate-y-0.5"
                         >
                           <Icon class="w-4 h-4" />
                           {link.label}
@@ -208,18 +207,18 @@ const iconMap = {
     </div>
 
     <!-- GitHub CTA -->
-    <section class="mt-16 text-center">
-      <div
-        class="inline-flex flex-col items-center gap-4 p-8 bg-gray-50 rounded-2xl border border-gray-200"
-      >
-        <p class="text-gray-600">
-          더 많은 프로젝트와 기여 내역은 GitHub에서 확인하세요
-        </p>
+      <section class="mt-16 text-center">
+        <div
+          class="inline-flex flex-col items-center gap-4 p-8 bg-background-light rounded-2xl border border-background-lighter"
+        >
+          <p class="text-text-light">
+            더 많은 프로젝트와 기여 내역은 GitHub에서 확인하세요
+          </p>
         <a
           href={AUTHOR_GITHUB}
           target="_blank"
           rel="noopener noreferrer"
-          class="inline-flex items-center gap-2 px-6 py-3 bg-gray-900 hover:bg-primary text-white font-semibold rounded-xl transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg"
+          class="inline-flex items-center gap-2 px-6 py-3 bg-primary hover:bg-accent text-on-primary font-semibold rounded-xl transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg"
         >
           <Github class="w-5 h-5" />
           GitHub Profile

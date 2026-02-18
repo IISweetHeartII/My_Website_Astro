@@ -27,7 +27,7 @@ const {
 ---
 
 <article
-  class="scroll-animate group relative rounded-2xl bg-white border border-gray-100 shadow-sm transition-all duration-300 ease-out overflow-hidden hover:-translate-y-1 hover:shadow-xl hover:border-primary/30"
+  class="scroll-animate group relative rounded-2xl bg-background border border-background-lighter shadow-sm transition-all duration-300 ease-out overflow-hidden hover:-translate-y-1 hover:shadow-xl hover:border-primary/30"
   data-title={dataTitle}
   data-tags={dataTags}
   data-description={dataDescription}
@@ -47,23 +47,23 @@ const {
 
       <div class="flex-1 flex flex-col gap-3 pl-4">
         <h2
-          class="text-xl md:text-2xl font-bold leading-tight text-gray-900 transition-colors duration-300 group-hover:text-primary"
+          class="text-xl md:text-2xl font-bold leading-tight text-text transition-colors duration-300 group-hover:text-primary"
         >
           {title}
         </h2>
         {
           description && (
-            <p class="text-gray-600 leading-relaxed line-clamp-2 text-sm md:text-base">
+            <p class="text-text-light leading-relaxed line-clamp-2 text-sm md:text-base">
               {description}
             </p>
           )
         }
       </div>
 
-      <div class="flex justify-between items-center mt-auto pt-5 border-t border-gray-100 pl-4">
+      <div class="flex justify-between items-center mt-auto pt-5 border-t border-background-lighter pl-4">
         {
           date && (
-            <time class="text-sm text-gray-500 font-medium">
+            <time class="text-sm text-text-muted font-medium">
               <FormattedDate date={date} />
             </time>
           )

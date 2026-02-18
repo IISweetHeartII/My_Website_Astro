@@ -1,5 +1,6 @@
 ---
 import { type CollectionEntry, getCollection } from "astro:content";
+import type { GetStaticPaths } from "astro";
 import { Archive, Files, FileText, Tag } from "lucide-astro";
 import BlogCard from "@/features/blog/components/BlogCard.astro";
 import Layout from "@/layouts/Layout.astro";
@@ -12,50 +13,63 @@ import {
 import { sortPostsByDate, transformPostForCard } from "@/shared/utils/blog";
 
 type Props = {
+  page: {
+    data: ReturnType<typeof transformPostForCard>[];
+    start: number;
+    end: number;
+    size: number;
+    total: number;
+    currentPage: number;
+    lastPage: number;
+    url: {
+      current: string;
+      prev?: string;
+      next?: string;
+    };
+  };
   category: Category;
-  posts: CollectionEntry<"blog">[];
   allCategories: Category[];
-  categoryMap: Record<string, string>;
 };
 
-export async function getStaticPaths() {
+export const getStaticPaths = (async ({ paginate }) => {
   const posts = await getCollection("blog", ({ data }: CollectionEntry<"blog">) => {
     return data.publish !== false;
   });
 
-  return categories.map((category: Category) => {
+  return categories.flatMap((category: Category) => {
     const filteredPosts = posts.filter((post: CollectionEntry<"blog">) => {
       const postCategoryId = categoryMap[post.data.category] || "daily";
       return postCategoryId === category.id;
     });
 
-    return {
+    const sortedPosts = sortPostsByDate(filteredPosts);
+    const postsData = sortedPosts.map((post) => transformPostForCard(post));
+
+    return paginate(postsData, {
+      pageSize: 12,
       params: { category: category.id },
       props: {
-        posts: filteredPosts,
         category: { ...category, name: reverseCategoryMap[category.id] || "일상" },
         allCategories: categories,
-        categoryMap: categoryMap,
       },
-    };
+    });
   });
-}
+}) satisfies GetStaticPaths;
 
-const { category, posts, allCategories } = Astro.props as Props;
-
-// Sort posts by date
-const sortedPosts = sortPostsByDate(posts);
-
-// Prepare post data for rendering
-const postsData = sortedPosts.map((post) => transformPostForCard(post));
+const { category, allCategories, page } = Astro.props as Props;
 
 const title = `${category.icon} ${category.name}`;
 const description = category.description;
+const pageTitle = page.currentPage === 1 ? title : `${title} (Page ${page.currentPage})`;
 ---
 
-<Layout title={title} description={description}>
+<Layout title={pageTitle} description={description}>
+  <Fragment slot="head">
+    {page.url.prev && <link rel="prev" href={page.url.prev} />}
+    {page.url.next && <link rel="next" href={page.url.next} />}
+  </Fragment>
+
   <div class="w-full max-w-7xl mx-auto p-8 flex flex-col">
-    <!-- 헤더 섹션 -->
     <section
       class="text-center mb-12 p-16 bg-linear-to-br from-primary/10 to-accent/10 rounded-3xl border-2 border-primary/20 md:p-12 md:mb-8"
     >
@@ -68,11 +82,12 @@ const description = category.description;
       </p>
       <div class="mt-6 flex items-center justify-center gap-2 text-sm text-text-muted">
         <FileText class="w-5 h-5" />
-        <span><strong>{postsData.length}개</strong>의 글</span>
+        <span>
+          <strong>{page.total}개</strong>의 글
+        </span>
       </div>
     </section>
 
-    <!-- 카테고리 네비게이션 -->
     <section class="mb-8">
       <div class="bg-background-light rounded-2xl p-6 border border-background-lighter">
         <h3 class="text-sm font-semibold text-text-muted mb-4 flex items-center gap-2">
@@ -86,7 +101,7 @@ const description = category.description;
               .map((cat) => (
                 <a
                   href={`/category/${cat.id}/`}
-                  class="px-4 py-2 rounded-lg bg-background hover:bg-primary hover:text-background transition-all duration-200 font-medium text-sm flex items-center gap-2 border border-background-lighter hover:border-primary"
+                  class="px-4 py-2 rounded-lg bg-background hover:bg-primary hover:text-on-primary transition-all duration-200 font-medium text-sm flex items-center gap-2 border border-background-lighter hover:border-primary"
                 >
                   <span>{cat.icon}</span>
                   <span>{cat.name}</span>
@@ -95,7 +110,7 @@ const description = category.description;
           }
           <a
             href="/blog/"
-            class="px-4 py-2 rounded-lg bg-background hover:bg-accent hover:text-background transition-all duration-200 font-medium text-sm flex items-center gap-2 border border-background-lighter hover:border-accent"
+            class="px-4 py-2 rounded-lg bg-background hover:bg-accent hover:text-on-primary transition-all duration-200 font-medium text-sm flex items-center gap-2 border border-background-lighter hover:border-accent"
           >
             <Archive class="w-4 h-4" />
             <span>전체 글</span>
@@ -104,12 +119,11 @@ const description = category.description;
       </div>
     </section>
 
-    <!-- 포스트 목록 -->
     {
-      postsData.length > 0 ? (
+      page.data.length > 0 ? (
         <section class="flex-1">
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {postsData.map((postData) => (
+            {page.data.map((postData) => (
               <BlogCard
                 title={postData.title}
                 description={postData.description}
@@ -134,12 +148,52 @@ const description = category.description;
           <p class="text-text-muted">곧 멋진 글을 작성할 예정이니 기대해주세요!</p>
           <a
             href="/blog/"
-            class="inline-block mt-6 px-6 py-3 bg-primary text-background rounded-lg font-medium hover:bg-accent transition-colors"
+            class="inline-block mt-6 px-6 py-3 bg-primary text-on-primary rounded-lg font-medium hover:bg-accent transition-colors"
           >
             전체 글 보기
           </a>
         </section>
       )
     }
+
+    <nav aria-label="Pagination" class="mt-10 flex items-center justify-between gap-4">
+      <div class="text-sm text-text-muted">
+        {page.total > 0 && (
+          <span>
+            {page.start + 1}–{page.end + 1} / {page.total}
+          </span>
+        )}
+      </div>
+
+      <div class="flex items-center gap-2">
+        <a
+          href={page.url.prev ?? "#"}
+          aria-disabled={!page.url.prev}
+          class:list={[
+            "px-3 py-2 rounded-lg border text-sm font-medium transition-colors duration-200",
+            page.url.prev
+              ? "bg-background hover:bg-background-light border-background-lighter text-text"
+              : "bg-background-muted border-background-lighter text-text-muted pointer-events-none opacity-60",
+          ]}
+        >
+          이전
+        </a>
+        <div class="text-sm text-text-muted px-2">
+          {page.currentPage} / {page.lastPage}
+        </div>
+        <a
+          href={page.url.next ?? "#"}
+          aria-disabled={!page.url.next}
+          class:list={[
+            "px-3 py-2 rounded-lg border text-sm font-medium transition-colors duration-200",
+            page.url.next
+              ? "bg-background hover:bg-background-light border-background-lighter text-text"
+              : "bg-background-muted border-background-lighter text-text-muted pointer-events-none opacity-60",
+          ]}
+        >
+          다음
+        </a>
+      </div>
+    </nav>
   </div>
 </Layout>

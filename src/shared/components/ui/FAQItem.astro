@@ -12,23 +12,23 @@ const id = `faq-${Math.random().toString(36).substring(7)}`;
 ---
 
 <div
-  class="scroll-animate border-b border-gray-200 last:border-0"
+  class="scroll-animate border-b border-background-lighter last:border-0"
   style={`animation-delay: ${delay}s`}
 >
   <button
     type="button"
-    class="faq-question w-full text-left py-6 flex items-center justify-between gap-4 hover:text-blue-600 transition-colors duration-300 group"
+    class="faq-question w-full text-left py-6 flex items-center justify-between gap-4 hover:text-accent transition-colors duration-300 group"
     aria-expanded="false"
     aria-controls={id}
   >
     <span
-      class="text-lg font-semibold text-gray-900 group-hover:text-blue-600 transition-colors duration-300"
+      class="text-lg font-semibold text-text group-hover:text-accent transition-colors duration-300"
     >
       {question}
     </span>
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      class="faq-icon w-6 h-6 text-gray-400 group-hover:text-blue-600 transition-all duration-300 transform"
+      class="faq-icon w-6 h-6 text-text-muted group-hover:text-accent transition-all duration-300 transform"
       fill="none"
       viewBox="0 0 24 24"
       stroke="currentColor"
@@ -39,7 +39,7 @@ const id = `faq-${Math.random().toString(36).substring(7)}`;
   </button>
 
   <div id={id} class="faq-answer overflow-hidden transition-all duration-300 ease-in-out max-h-0">
-    <div class="pb-6 text-gray-600 leading-relaxed">
+    <div class="pb-6 text-text-light leading-relaxed">
       {answer}
     </div>
   </div>

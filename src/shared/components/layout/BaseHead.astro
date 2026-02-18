@@ -122,12 +122,6 @@ const absoluteTwitterImage = getAbsoluteImageUrl(finalTwitterImage);
 <meta property="twitter:image" content={absoluteTwitterImage} />
 {featured_image_alt && <meta property="twitter:image:alt" content={featured_image_alt} />}
 
-<!-- PWA Support -->
-<link rel="manifest" href={getUrl("/manifest.json")} />
-<link rel="apple-touch-icon" href={getUrl("/images/design/icon.png")} />
-
-<!-- Google AdSense -->
-<script
-  async
-  src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4653332352131854"
-  crossorigin="anonymous"></script>
+  <!-- PWA Support -->
+  <link rel="manifest" href={getUrl("/manifest.json")} />
+  <link rel="apple-touch-icon" href={getUrl("/images/design/icon.png")} />

@@ -34,6 +34,29 @@ body {
   white-space: nowrap;
 }
 
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: 0.75rem;
+  z-index: 1000;
+  transform: translateY(-200%);
+  background: var(--color-background);
+  color: var(--color-text);
+  border: 1px solid var(--color-background-lighter);
+  border-radius: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  text-decoration: none;
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent-vibrant);
+  outline-offset: 3px;
+}
+
 /* ============================================
    3. Markdown Content (.prose)
    블로그 포스트의 markdown 콘텐츠에만 적용

@@ -5,8 +5,17 @@ import { glob } from "astro/loaders";
 const dateSchema = z.preprocess(
   (val) => {
     if (!val) return null;
-    const date = new Date(val);
-    return Number.isNaN(date.getTime()) ? null : date;
+
+    if (val instanceof Date) {
+      return Number.isNaN(val.getTime()) ? null : val;
+    }
+
+    if (typeof val === "string" || typeof val === "number") {
+      const date = new Date(val);
+      return Number.isNaN(date.getTime()) ? null : date;
+    }
+
+    return null;
   },
   z
     .date()

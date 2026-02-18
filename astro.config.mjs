@@ -48,14 +48,13 @@ export default defineConfig({
     }),
     mdx(),
     sitemap({
-      // 더 자세한 sitemap 설정
       customPages: [
         "https://log8.kr/",
         "https://log8.kr/portfolio",
-        "https://log8.kr/contact",
+        "https://log8.kr/showcase",
+        "https://log8.kr/resume",
         "https://log8.kr/privacy",
         "https://log8.kr/terms",
-        "https://log8.kr/tag/all",
       ],
     }),
     robotsTxt({

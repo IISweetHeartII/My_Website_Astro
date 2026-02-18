@@ -5,6 +5,7 @@
      Primary Colors (보라색 시스템)
      ============================================ */
   --color-primary: #8b5cf6; /* 메인 보라 */
+  --color-primary-light: #a78bfa;
   --color-primary-lighter: #f5f3ff; /* 매우 연한 보라 배경 */
 
   /* ============================================
@@ -13,18 +14,22 @@
   --color-accent: #c084fc; /* 생동감 있는 보라 */
   --accent-vibrant: #7c3aed; /* 링크 및 강조 (접근성 개선, 콘트라스트 4.54:1) */
 
+  --color-on-primary: #ffffff;
+
   /* ============================================
      Background Colors
      ============================================ */
   --color-background: #ffffff;
   --color-background-light: #f9fafb;
   --color-background-lighter: #faf5ff; /* 연한 보라 톤 */
+  --color-background-muted: #f3f4f6;
 
   /* ============================================
      Text Colors
      ============================================ */
   --color-text: #1a1a2e; /* 다크 네이비 (메인 텍스트) */
   --color-text-light: #4a5568; /* 중간 회색 (보조 텍스트) */
+  --color-text-muted: #6b7280;
 
   /* ============================================
      Grayscale (필요한 것만)
@@ -35,9 +40,46 @@
   --color-gray-500: #6b7280;
   --color-gray-700: #374151;
 
+  --color-info: #2563eb;
+  --color-info-light: #60a5fa;
+
   /* ============================================
      Typography
      ============================================ */
   --font-body: "Pretendard", sans-serif;
   --font-mono: "Consolas", "Monaco", "Courier New", monospace;
+}
+
+:root {
+  color-scheme: light;
+}
+
+html[data-theme="dark"] {
+  color-scheme: dark;
+
+  --color-primary: #7c3aed;
+  --color-primary-light: #8b5cf6;
+  --color-primary-lighter: #241a3d;
+
+  --color-accent: #c084fc;
+  --accent-vibrant: #c4b5fd;
+  --color-on-primary: #ffffff;
+
+  --color-background: #0b0d12;
+  --color-background-light: #111827;
+  --color-background-lighter: #1f2937;
+  --color-background-muted: #0f172a;
+
+  --color-text: #e5e7eb;
+  --color-text-light: #a1a1aa;
+  --color-text-muted: #94a3b8;
+
+  --color-gray-50: #0f172a;
+  --color-gray-200: #1f2937;
+  --color-gray-300: #334155;
+  --color-gray-500: #94a3b8;
+  --color-gray-700: #cbd5e1;
+
+  --color-info: #60a5fa;
+  --color-info-light: #93c5fd;
 }

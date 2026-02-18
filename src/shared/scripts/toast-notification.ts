@@ -1,7 +1,8 @@
 /* global document, requestAnimationFrame, setTimeout */
 
-import type { LucideIcon } from "lucide";
 import { AlertTriangle, CheckCircle2, CircleX, createElement, Info, X } from "lucide";
+
+type LucideIconType = Parameters<typeof createElement>[0];
 
 export interface ToastOptions {
   type?: "success" | "error" | "info" | "warning";
@@ -41,7 +42,7 @@ export class ToastManager {
     toast.className = `
       pointer-events-auto transform transition-all duration-300 ease-in-out
       translate-x-full opacity-0 max-w-sm w-full
-      bg-white rounded-lg shadow-lg border-l-4 p-4 mb-2
+      bg-background rounded-lg shadow-lg border-l-4 p-4 mb-2
       ${this.getTypeStyles(type)}
     `.trim();
 
@@ -52,10 +53,10 @@ export class ToastManager {
           ${this.getIcon(type)}
         </div>
         <div class="ml-3">
-          <p class="text-sm font-medium text-gray-900">${message}</p>
+          <p class="text-sm font-medium text-text">${message}</p>
         </div>
         <div class="ml-auto pl-3">
-          <button class="toast-close inline-flex text-gray-400 hover:text-gray-600 focus:outline-none">
+          <button class="toast-close inline-flex text-text-muted hover:text-text focus:outline-none">
             ${this.createIconString(X, "h-5 w-5")}
           </button>
         </div>
@@ -108,7 +109,7 @@ export class ToastManager {
   /**
    * Lucide 아이콘을 SVG 문자열로 변환
    */
-  private createIconString(Icon: LucideIcon, className: string): string {
+  private createIconString(Icon: LucideIconType, className: string): string {
     const iconElement = createElement(Icon);
     iconElement.setAttribute("class", className);
     return iconElement.outerHTML;

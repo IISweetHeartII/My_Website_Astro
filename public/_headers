@@ -4,8 +4,8 @@
   Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
 
   # Content Security Policy (XSS 방어)
-  # Google 서비스 (GTM, GA4, AdSense) + Giscus + Vanta.js + Cloudflare
-  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://*.googlesyndication.com https://giscus.app https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://*.googlesyndication.com https://*.doubleclick.net https://*.google.com https://giscus.app; frame-src https://giscus.app https://www.youtube.com https://*.doubleclick.net https://*.googlesyndication.com https://www.google.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests
+  # Google 서비스 (GTM, GA4) + Giscus + Vanta.js + Cloudflare
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://giscus.app https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://*.google.com https://giscus.app; frame-src https://giscus.app https://www.youtube.com https://www.google.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests
 
   # 클릭재킹 방어
   X-Frame-Options: DENY
