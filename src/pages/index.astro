@@ -6,10 +6,11 @@ import {
   Brain,
   Briefcase,
   Code2,
+  FileText,
   Medal,
   Rocket,
   Server,
-  Sparkles,
+  Target,
   Users,
 } from "lucide-astro";
 import profileImage from "@/assets/images/design/DH_ID.jpg";
@@ -40,8 +41,8 @@ const latestPost = latestBlogPosts[0];
               <div
                 class="inline-flex items-center gap-2 px-4 py-2 bg-background/80 backdrop-blur-sm border border-background-lighter rounded-full text-sm font-medium text-primary shadow-lg"
               >
-                <Sparkles class="w-4 h-4" />
-                사람 중심의 문제 해결
+                <Target class="w-4 h-4" />
+                실전 중심의 문제 해결
               </div>
 
               <!-- Main Heading -->
@@ -50,7 +51,7 @@ const latestPost = latestBlogPosts[0];
                 <span
                   class="bg-linear-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent"
                 >
-                  문제해결사
+                  문제 해결사
                 </span>
               </h1>
 
@@ -136,8 +137,8 @@ const latestPost = latestBlogPosts[0];
                 <div class="h-full flex flex-col justify-between">
                   <div>
                     <div class="inline-flex items-center gap-2 px-3 py-1.5 bg-purple-100 text-purple-700 rounded-full text-sm font-medium mb-4">
-                      <Sparkles class="w-4 h-4" />
-                      최신 블로그
+                      <FileText class="w-4 h-4" />
+                      Recent Post
                     </div>
                     <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-4 group-hover:text-purple-600 transition-colors">
                       {latestPost.data.title}
@@ -227,7 +228,7 @@ const latestPost = latestBlogPosts[0];
                 <h3
                   class="text-xl font-bold text-gray-900 mb-2 group-hover:text-orange-600 transition-colors"
                 >
-                  Who is 덕환?
+                  About 덕환
                 </h3>
                 <p class="text-gray-600 text-sm">수학도에서 AI 활용 개발자로 전환한 김덕환</p>
               </div>
@@ -250,8 +251,8 @@ const latestPost = latestBlogPosts[0];
               >
                 <Award class="w-8 h-8 text-yellow-600" />
               </div>
-              <h3 class="text-lg font-bold text-text mb-1">최우수상</h3>
-              <p class="text-text-light text-sm">2025 ICAN-LABS 대학원 창업프로그램</p>
+               <h3 class="text-lg font-bold text-text mb-1">청룡톤 2026</h3>
+               <p class="text-text-light text-sm">119-ai 트랙 대상</p>
             </div>
           </div>
 
@@ -265,8 +266,8 @@ const latestPost = latestBlogPosts[0];
               >
                 <Medal class="w-8 h-8 text-indigo-600" />
               </div>
-              <h3 class="text-lg font-bold text-text mb-1">최우수상</h3>
-              <p class="text-text-light text-sm">2025 동계 근거기반 해외교육 프로그램</p>
+               <h3 class="text-lg font-bold text-text mb-1">UMC 9기 해커톤</h3>
+               <p class="text-text-light text-sm">2026 대상 수상</p>
             </div>
           </div>
 

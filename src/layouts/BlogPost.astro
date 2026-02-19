@@ -127,7 +127,8 @@ const blogPostSchema = {
     <style>
       /* Mermaid 다이어그램 스타일 */
       :global(.mermaid) {
-        background: rgb(248, 250, 252);
+        background: var(--color-background-light);
+        border: 1px solid var(--color-background-lighter);
         padding: 1.5rem;
         border-radius: 0.5rem;
         margin: 1rem 0;
@@ -243,9 +244,12 @@ const blogPostSchema = {
       });
 
       // Mermaid 초기화 및 렌더링
+      const themeKey = "theme";
+      const isDark = document.documentElement.dataset[themeKey] === "dark";
+
       mermaid.initialize({
         startOnLoad: true,
-        theme: "default",
+        theme: isDark ? "dark" : "default",
       });
       mermaid.run();
     });

@@ -19,7 +19,6 @@
     "@astrojs/rss": "^4.0.15",
     "astro": "^5.16.15",
     "astro-robots-txt": "^1.0.0",
-    "lucide": "^0.554.0",
     "lucide-astro": "^0.553.0",
     "mermaid": "^11.12.2",
     "sharp": "^0.34.5"

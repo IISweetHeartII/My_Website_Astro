@@ -45,7 +45,7 @@ const pageTitle = Astro.url.pathname.replace("/blog/", "").replace("/", "") || "
     script.setAttribute("data-reactions-enabled", "1");
     script.setAttribute("data-emit-metadata", "1");
     script.setAttribute("data-input-position", "bottom");
-    const currentTheme = document.documentElement.dataset["theme"] === "dark" ? "dark_dimmed" : "light";
+    const currentTheme = document.documentElement.dataset.theme === "dark" ? "dark_dimmed" : "light";
     script.setAttribute("data-theme", currentTheme);
     script.setAttribute("data-lang", "ko");
     script.setAttribute("data-loading", "lazy");
@@ -123,11 +123,11 @@ const pageTitle = Astro.url.pathname.replace("/blog/", "").replace("/", "") || "
     display: block;
     text-align: center;
     padding: 2rem;
-    color: var(--color-text-light, #6b7280);
+    color: var(--color-text-light);
     font-size: 0.875rem;
-    border: 1px dashed var(--color-background-lighter, #e5e7eb);
+    border: 1px dashed var(--color-background-lighter);
     border-radius: 0.5rem;
-    background: var(--color-background-light, #f9fafb);
+    background: var(--color-background-light);
   }
 
   /* 반응형 디자인 */
@@ -147,8 +147,8 @@ const pageTitle = Astro.url.pathname.replace("/blog/", "").replace("/", "") || "
     background: linear-gradient(
       to right,
       transparent,
-      var(--color-background-lighter, #e5e7eb) 20%,
-      var(--color-background-lighter, #e5e7eb) 80%,
+      var(--color-background-lighter) 20%,
+      var(--color-background-lighter) 80%,
       transparent
     );
     margin-bottom: 1rem;

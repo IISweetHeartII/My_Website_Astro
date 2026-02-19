@@ -1,20 +1,31 @@
 ---
 import type { GetStaticPaths } from "astro";
 import BlogCard from "@/features/blog/components/BlogCard.astro";
+import CategoryFilter from "@/features/blog/components/CategoryFilter.astro";
 import Layout from "@/layouts/Layout.astro";
 import { categories } from "@/shared/config/categories";
 import { getSortedPublishedPosts, transformPostForCard } from "@/shared/utils/blog";
 
+type PostCardData = ReturnType<typeof transformPostForCard>;
+
 export const getStaticPaths = (async ({ paginate }) => {
   const allPosts = await getSortedPublishedPosts();
   const postsData = allPosts.map((post) => transformPostForCard(post));
-  return paginate(postsData, { pageSize: 12 });
+
+  return paginate(postsData, {
+    pageSize: 12,
+    props: {
+      allPostsData: postsData,
+    },
+  });
 }) satisfies GetStaticPaths;
 
 const { page } = Astro.props;
+const allPostsData = (Astro.props.allPostsData as PostCardData[]) ?? page.data;
+const pageVisibleSlugs = new Set<string>(page.data.map((post: PostCardData) => post.slug));
 
 const pageTitle = page.currentPage === 1 ? "Blog" : `Blog (Page ${page.currentPage})`;
-const pageDescription = "아끼지 않는 문제해결사로서, 문제를 정의하고 해결한 기록을 남깁니다.";
+const pageDescription = "아끼지 않는 문제 해결사로서, 문제를 정의하고 해결한 기록을 남깁니다.";
 ---
 
 <Layout title={pageTitle} description={pageDescription}>
@@ -28,18 +39,22 @@ const pageDescription = "아끼지 않는 문제해결사로서, 문제를 정�
       <h1 class="text-3xl md:text-4xl font-extrabold text-text mb-3">Blog</h1>
       <p class="text-text-light leading-relaxed">{pageDescription}</p>
 
-      <div class="mt-5 flex flex-wrap gap-2">
+      <div class="mt-5">
+        <CategoryFilter />
+      </div>
+
+      <div class="mt-4 flex flex-wrap gap-2">
         <a
           href="/blog/"
-          class="px-4 py-2 rounded-full bg-background-muted text-text-muted border border-background-lighter hover:bg-primary hover:text-on-primary transition-colors duration-200 text-sm font-medium"
+          class="px-3 py-1.5 rounded-lg bg-background-muted text-text-muted border border-background-lighter hover:bg-primary hover:text-on-primary transition-colors duration-200 text-xs font-medium"
         >
-          전체
+          전체 글 페이지
         </a>
         {
           categories.map((category) => (
             <a
               href={`/category/${category.id}/`}
-              class="px-4 py-2 rounded-full bg-background-muted text-text-muted border border-background-lighter hover:bg-primary hover:text-on-primary transition-colors duration-200 text-sm font-medium"
+              class="px-3 py-1.5 rounded-lg bg-background-muted text-text-muted border border-background-lighter hover:bg-primary hover:text-on-primary transition-colors duration-200 text-xs font-medium"
             >
               <span class="mr-1">{category.icon}</span>
               <span>{category.name}</span>
@@ -50,9 +65,9 @@ const pageDescription = "아끼지 않는 문제해결사로서, 문제를 정�
     </header>
 
     {
-      page.data.length > 0 ? (
-        <section class="grid grid-cols-1 sm:grid-cols-2 gap-6 flex-1">
-          {page.data.map((post) => (
+      allPostsData.length > 0 ? (
+        <section id="blog-post-grid" class="grid grid-cols-1 sm:grid-cols-2 gap-6 flex-1">
+          {allPostsData.map((post) => (
             <BlogCard
               title={post.title}
               description={post.description}
@@ -62,9 +77,16 @@ const pageDescription = "아끼지 않는 문제해결사로서, 문제를 정�
               dataTitle={post.dataTitle}
               dataDescription={post.dataDescription}
               dataCategory={post.dataCategory}
+              pageVisible={pageVisibleSlugs.has(post.slug)}
             />
           ))}
         </section>
+        <div
+          id="blog-filter-empty-state"
+          class="hidden text-center p-16 text-text-light text-lg flex-1 md:p-12 md:text-base"
+        >
+          조건에 맞는 글이 없습니다. 검색어나 카테고리를 변경해보세요.
+        </div>
       ) : (
         <div class="text-center p-16 text-text text-lg flex-1 md:p-12 md:text-base">
           No posts found. Check back soon!
@@ -72,7 +94,7 @@ const pageDescription = "아끼지 않는 문제해결사로서, 문제를 정�
       )
     }
 
-    <nav aria-label="Pagination" class="mt-10 flex items-center justify-between gap-4">
+    <nav id="blog-pagination-nav" aria-label="Pagination" class="mt-10 flex items-center justify-between gap-4">
       <div class="text-sm text-text-muted">
         {page.total > 0 && (
           <span>
@@ -112,4 +134,15 @@ const pageDescription = "아끼지 않는 문제해결사로서, 문제를 정�
       </div>
     </nav>
   </div>
+
+  <script>
+    import { setupBlogFilter } from "../../shared/scripts/blog-filter.ts";
+
+    document.addEventListener("astro:page-load", setupBlogFilter);
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", setupBlogFilter);
+    } else {
+      setupBlogFilter();
+    }
+  </script>
 </Layout>

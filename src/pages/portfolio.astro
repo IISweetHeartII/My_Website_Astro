@@ -11,7 +11,7 @@ import Layout from "../layouts/Layout.astro";
   title={`Portfolio - ${SITE_TITLE}`}
   description="김덕환의 포트폴리오 - 기술로 감동과 사랑을 전하는 개발자"
 >
-  <main class="max-w-4xl mx-auto px-6 py-16 bg-gray-50">
+  <main class="portfolio-root max-w-4xl mx-auto px-6 py-16 bg-gray-50" data-view-mode="browse">
     <!-- Resume Link Banner -->
     <div class="mb-6 p-4 bg-[#7c3aed]/10 rounded-lg border border-[#7c3aed]/20 flex justify-between items-center">
       <span class="text-sm text-gray-700">1-2페이지 압축 버전을 원하시나요?</span>
@@ -23,6 +23,51 @@ import Layout from "../layouts/Layout.astro";
         Resume 보기 (PDF 저장 가능)
       </a>
     </div>
+
+    <section class="portfolio-controls mb-6 p-4 bg-white rounded-lg border border-gray-200 print:hidden">
+      <div class="flex flex-wrap items-center gap-2 justify-between">
+        <div class="flex flex-wrap items-center gap-2">
+          <span class="text-sm font-semibold text-gray-700">View Mode</span>
+          <button
+            type="button"
+            data-mode-btn="browse"
+            class="rounded-md border border-[#7c3aed] bg-[#7c3aed] px-3 py-1.5 text-sm font-semibold text-white"
+          >
+            Browse
+          </button>
+          <button
+            type="button"
+            data-mode-btn="print"
+            class="rounded-md border border-gray-300 bg-white px-3 py-1.5 text-sm font-semibold text-gray-700"
+          >
+            Print Layout
+          </button>
+        </div>
+        <div class="flex flex-wrap items-center gap-2">
+          <button
+            type="button"
+            id="expand-all-projects"
+            class="rounded-md border border-gray-300 bg-white px-3 py-1.5 text-sm font-medium text-gray-700"
+          >
+            모두 열기
+          </button>
+          <button
+            type="button"
+            id="collapse-all-projects"
+            class="rounded-md border border-gray-300 bg-white px-3 py-1.5 text-sm font-medium text-gray-700"
+          >
+            모두 접기
+          </button>
+          <button
+            type="button"
+            id="print-portfolio-btn"
+            class="rounded-md border border-[#7c3aed] bg-[#7c3aed] px-3 py-1.5 text-sm font-semibold text-white"
+          >
+            PDF 출력
+          </button>
+        </div>
+      </div>
+    </section>
 
     <!-- Header -->
     <header class="mb-14 p-8 bg-white rounded-lg shadow-sm border-l-4 border-[#7c3aed]">
@@ -49,7 +94,7 @@ import Layout from "../layouts/Layout.astro";
     </header>
 
     <!-- Contact -->
-    <section class="mb-14 p-8 bg-white rounded-lg shadow-sm">
+    <section class="mb-14 p-8 bg-white rounded-lg shadow-sm portfolio-projects-section">
       <h2 class="text-2xl md:text-3xl font-bold mb-6 pb-3 border-b-2 border-gray-100 text-gray-800">
         Contact
       </h2>
@@ -358,7 +403,7 @@ import Layout from "../layouts/Layout.astro";
       <!-- Finders -->
       <div
         id="finders"
-        class="mb-7 p-7 bg-gray-50 rounded-lg border border-l-4 border-[#7c3aed] hover:shadow-md hover:-translate-y-1 transition-all md:border-l-0 md:border-t-4 scroll-mt-20"
+        class="mb-7 p-7 bg-gray-50 rounded-lg border border-l-4 border-[#7c3aed] hover:shadow-md hover:-translate-y-1 transition-all md:border-l-0 md:border-t-4 scroll-mt-20 portfolio-project-card"
       >
         <div class="mb-5 pb-4 border-b-2 border-gray-200">
           <h3 class="text-xl font-bold text-gray-800 mb-2.5">BE Lead로 GCP 인프라 구축 및 팀 코드 리뷰 문화 정착</h3>
@@ -510,7 +555,7 @@ flowchart TB
       <!-- 덕친소 -->
       <div
         id="duckchinso"
-        class="mb-7 p-7 bg-gray-50 rounded-lg border border-l-4 border-[#7c3aed] hover:shadow-md hover:-translate-y-1 transition-all md:border-l-0 md:border-t-4 scroll-mt-20"
+        class="mb-7 p-7 bg-gray-50 rounded-lg border border-l-4 border-[#7c3aed] hover:shadow-md hover:-translate-y-1 transition-all md:border-l-0 md:border-t-4 scroll-mt-20 portfolio-project-card"
       >
         <div class="mb-5 pb-4 border-b-2 border-gray-200">
           <h3 class="text-xl font-bold text-gray-800 mb-2.5">AI 벡터 매칭으로 1인 풀스택 소개팅 서비스 구축</h3>
@@ -646,7 +691,7 @@ flowchart TB
       <!-- MathFigure -->
       <div
         id="mathfigure"
-        class="mb-7 p-7 bg-gray-50 rounded-lg border border-l-4 border-[#7c3aed] hover:shadow-md hover:-translate-y-1 transition-all md:border-l-0 md:border-t-4 scroll-mt-20"
+        class="mb-7 p-7 bg-gray-50 rounded-lg border border-l-4 border-[#7c3aed] hover:shadow-md hover:-translate-y-1 transition-all md:border-l-0 md:border-t-4 scroll-mt-20 portfolio-project-card"
       >
         <div class="mb-5 pb-4 border-b-2 border-gray-200">
           <h3 class="text-xl font-bold text-gray-800 mb-2.5">40명 인터뷰로 검증, 창업 프로그램 최우수상 수상</h3>
@@ -778,7 +823,7 @@ flowchart LR
       <!-- 오메추 -->
       <div
         id="omechu"
-        class="mb-7 p-7 bg-gray-50 rounded-lg border border-l-4 border-[#7c3aed] hover:shadow-md hover:-translate-y-1 transition-all md:border-l-0 md:border-t-4 scroll-mt-20"
+        class="mb-7 p-7 bg-gray-50 rounded-lg border border-l-4 border-[#7c3aed] hover:shadow-md hover:-translate-y-1 transition-all md:border-l-0 md:border-t-4 scroll-mt-20 portfolio-project-card"
       >
         <div class="mb-5 pb-4 border-b-2 border-gray-200">
           <h3 class="text-xl font-bold text-gray-800 mb-2.5">JWT 인증 단일화로 API 응답속도 50% 개선</h3>
@@ -923,7 +968,7 @@ sequenceDiagram
       <!-- Starterm -->
       <div
         id="starterm"
-        class="mb-7 p-7 bg-gray-50 rounded-lg border border-l-4 border-[#7c3aed] hover:shadow-md hover:-translate-y-1 transition-all md:border-l-0 md:border-t-4 scroll-mt-20"
+        class="mb-7 p-7 bg-gray-50 rounded-lg border border-l-4 border-[#7c3aed] hover:shadow-md hover:-translate-y-1 transition-all md:border-l-0 md:border-t-4 scroll-mt-20 portfolio-project-card"
       >
         <div class="mb-5 pb-4 border-b-2 border-gray-200">
           <h3 class="text-xl font-bold text-gray-800 mb-2.5">
@@ -1068,7 +1113,7 @@ flowchart TB
       <!-- log8 -->
       <div
         id="log8"
-        class="mb-0 p-7 bg-gray-50 rounded-lg border border-l-4 border-[#7c3aed] hover:shadow-md hover:-translate-y-1 transition-all md:border-l-0 md:border-t-4 scroll-mt-20"
+        class="mb-0 p-7 bg-gray-50 rounded-lg border border-l-4 border-[#7c3aed] hover:shadow-md hover:-translate-y-1 transition-all md:border-l-0 md:border-t-4 scroll-mt-20 portfolio-project-card"
       >
         <div class="mb-5 pb-4 border-b-2 border-gray-200">
           <h3 class="text-xl font-bold text-gray-800 mb-2.5">AI와 페어 프로그래밍으로 Feature-First 아키텍처 구축</h3>
@@ -1390,6 +1435,54 @@ flowchart LR
   </main>
 </Layout>
 
+<style>
+  .portfolio-root[data-view-mode="browse"] .portfolio-project-card.is-collapsed > :not(:first-child) {
+    display: none;
+  }
+
+  .portfolio-project-toggle {
+    margin-top: 0.75rem;
+    border: 1px solid #d1d5db;
+    border-radius: 0.375rem;
+    background: white;
+    color: #374151;
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.35rem 0.6rem;
+    cursor: pointer;
+  }
+
+  .portfolio-project-toggle:hover {
+    border-color: #7c3aed;
+    color: #7c3aed;
+  }
+
+  .portfolio-root[data-view-mode="print"] .portfolio-project-card {
+    box-shadow: none;
+    border-color: #d1d5db;
+    background: white;
+  }
+
+  .portfolio-root[data-view-mode="print"] .portfolio-project-card > :not(:first-child) {
+    display: block;
+  }
+
+  @media print {
+    .portfolio-root[data-view-mode="print"] .portfolio-project-card {
+      break-after: page;
+      page-break-after: always;
+      break-inside: avoid;
+      page-break-inside: avoid;
+      margin-bottom: 0;
+    }
+
+    .portfolio-root[data-view-mode="print"] .portfolio-project-card:last-child {
+      break-after: auto;
+      page-break-after: auto;
+    }
+  }
+</style>
+
 <!-- Mermaid Script -->
 <script>
   import mermaid from "mermaid";
@@ -1420,5 +1513,87 @@ flowchart LR
       noteMargin: 10,
       messageMargin: 35,
     },
+  });
+
+  type ViewMode = "browse" | "print";
+
+  const portfolioRoot = document.querySelector<HTMLElement>(".portfolio-root");
+  const projectCards = Array.from(document.querySelectorAll<HTMLElement>(".portfolio-project-card"));
+  const modeButtons = Array.from(document.querySelectorAll<HTMLButtonElement>("[data-mode-btn]"));
+  const expandAllButton = document.getElementById("expand-all-projects");
+  const collapseAllButton = document.getElementById("collapse-all-projects");
+  const printButton = document.getElementById("print-portfolio-btn");
+
+  const setCardCollapsed = (card: HTMLElement, collapsed: boolean): void => {
+    card.classList.toggle("is-collapsed", collapsed);
+    const toggle = card.querySelector(".portfolio-project-toggle");
+    if (toggle) {
+      toggle.textContent = collapsed ? "열어보기" : "접기";
+      toggle.setAttribute("aria-expanded", String(!collapsed));
+    }
+  };
+
+  const ensureToggleButton = (card: HTMLElement): void => {
+    const header = card.querySelector<HTMLElement>(":scope > .mb-5.pb-4.border-b-2.border-gray-200");
+    if (!header || header.querySelector(".portfolio-project-toggle")) return;
+
+    const toggle = document.createElement("button");
+    toggle.type = "button";
+    toggle.className = "portfolio-project-toggle";
+    toggle.textContent = "열어보기";
+    toggle.setAttribute("aria-expanded", "false");
+    toggle.addEventListener("click", () => {
+      const collapsed = card.classList.contains("is-collapsed");
+      setCardCollapsed(card, !collapsed);
+    });
+    header.appendChild(toggle);
+  };
+
+  const setMode = (mode: ViewMode): void => {
+    if (!portfolioRoot) return;
+    portfolioRoot.setAttribute("data-view-mode", mode);
+
+    for (const button of modeButtons) {
+      const isActive = button.getAttribute("data-mode-btn") === mode;
+      button.setAttribute("aria-pressed", String(isActive));
+      button.classList.toggle("bg-[#7c3aed]", isActive);
+      button.classList.toggle("text-white", isActive);
+      button.classList.toggle("border-[#7c3aed]", isActive);
+      button.classList.toggle("bg-white", !isActive);
+      button.classList.toggle("text-gray-700", !isActive);
+      button.classList.toggle("border-gray-300", !isActive);
+    }
+
+    if (mode === "print") {
+      for (const card of projectCards) setCardCollapsed(card, false);
+    }
+  };
+
+  for (const card of projectCards) {
+    ensureToggleButton(card);
+    setCardCollapsed(card, true);
+  }
+  if (projectCards[0]) setCardCollapsed(projectCards[0], false);
+
+  for (const button of modeButtons) {
+    button.addEventListener("click", () => {
+      const mode = button.getAttribute("data-mode-btn");
+      if (mode === "browse" || mode === "print") setMode(mode);
+    });
+  }
+
+  expandAllButton?.addEventListener("click", () => {
+    setMode("browse");
+    for (const card of projectCards) setCardCollapsed(card, false);
+  });
+
+  collapseAllButton?.addEventListener("click", () => {
+    setMode("browse");
+    for (const card of projectCards) setCardCollapsed(card, true);
+  });
+
+  printButton?.addEventListener("click", () => {
+    setMode("print");
+    window.print();
   });
 </script>

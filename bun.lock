@@ -8,7 +8,6 @@
         "@astrojs/rss": "^4.0.15",
         "astro": "^5.16.15",
         "astro-robots-txt": "^1.0.0",
-        "lucide": "^0.554.0",
         "lucide-astro": "^0.553.0",
         "mermaid": "^11.12.2",
         "sharp": "^0.34.5",
@@ -958,8 +957,6 @@
     "longest-streak": ["longest-streak@3.1.0", "", {}, "sha512-9Ri+o0JYgehTaVBBDoMqIl8GXtbWg711O3srftcHhZ0dqnETqLaoIK0x17fUw9rFSlK/0NlsKe0Ahhyl5pXE2g=="],
 
     "lru-cache": ["lru-cache@11.2.4", "", {}, "sha512-B5Y16Jr9LB9dHVkh6ZevG+vAbOsNOYCX+sXvFWFu7B3Iz5mijW3zdbMyhsh8ANd2mSWBYdJgnqi+mL7/LrOPYg=="],
-
-    "lucide": ["lucide@0.554.0", "", {}, "sha512-heltqxp+r6FbXs5FKMwARbE9aiDLLz9rlAlOU48NYHU4nWi2oVkQIz+Uv7LHZNsFVfgtgLBv7VOjM7QUvT6F3A=="],
 
     "lucide-astro": ["lucide-astro@0.553.0", "", { "peerDependencies": { "astro": ">=2.7.1" } }, "sha512-aFQtl5mfjU78S2QRFWaUOIrlYDLifkB2Bk0l3PWL5eN2lBgVMpNEqRaug6pqqPfwvSa6AksM/WSe8wqbbilj9w=="],
 

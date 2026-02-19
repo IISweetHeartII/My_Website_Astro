@@ -108,14 +108,12 @@ const modernFormats = ["avif", "webp"];
   }
 
   /* 다크모드 지원 */
-  @media (prefers-color-scheme: dark) {
-    .blog-image {
-      filter: brightness(0.95);
-    }
+  html[data-theme="dark"] .blog-image {
+    filter: brightness(0.95);
+  }
 
-    .image-caption {
-      color: var(--color-text-light);
-    }
+  html[data-theme="dark"] .image-caption {
+    color: var(--color-text-light);
   }
 
   /* 모션 감소 설정 */
@@ -138,7 +136,7 @@ const modernFormats = ["avif", "webp"];
 
     .blog-image {
       box-shadow: none;
-      border: 1px solid #ddd;
+      border: 1px solid var(--color-gray-300);
     }
   }
 </style>

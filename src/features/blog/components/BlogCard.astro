@@ -12,6 +12,7 @@ interface Props {
   dataTags: string;
   dataDescription: string;
   dataCategory?: string;
+  pageVisible?: boolean;
 }
 
 const {
@@ -23,15 +24,20 @@ const {
   dataTags,
   dataDescription,
   dataCategory = "daily",
+  pageVisible = true,
 } = Astro.props;
 ---
 
 <article
-  class="scroll-animate group relative rounded-2xl bg-background border border-background-lighter shadow-sm transition-all duration-300 ease-out overflow-hidden hover:-translate-y-1 hover:shadow-xl hover:border-primary/30"
+  class:list={[
+    "scroll-animate group relative rounded-2xl bg-background border border-background-lighter shadow-sm transition-all duration-300 ease-out overflow-hidden hover:-translate-y-1 hover:shadow-xl hover:border-primary/30",
+    { hidden: !pageVisible },
+  ]}
   data-title={dataTitle}
   data-tags={dataTags}
   data-description={dataDescription}
   data-category={dataCategory}
+  data-page-visible={pageVisible ? "true" : "false"}
 >
   <a
     href={getUrl(`/blog/${slug}/`)}
@@ -47,13 +53,17 @@ const {
 
       <div class="flex-1 flex flex-col gap-3 pl-4">
         <h2
+          data-highlight="title"
           class="text-xl md:text-2xl font-bold leading-tight text-text transition-colors duration-300 group-hover:text-primary"
         >
           {title}
         </h2>
         {
           description && (
-            <p class="text-text-light leading-relaxed line-clamp-2 text-sm md:text-base">
+            <p
+              data-highlight="description"
+              class="text-text-light leading-relaxed line-clamp-2 text-sm md:text-base"
+            >
               {description}
             </p>
           )

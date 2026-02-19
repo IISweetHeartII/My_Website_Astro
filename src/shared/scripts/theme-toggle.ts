@@ -1,4 +1,5 @@
 type Theme = "light" | "dark";
+const THEME_DATASET_KEY = "theme";
 
 function getStoredTheme(): Theme | null {
   const value = localStorage.getItem("theme");
@@ -13,12 +14,13 @@ function getPreferredTheme(): Theme {
 }
 
 function applyTheme(theme: Theme): void {
-  document.documentElement.dataset["theme"] = theme;
+  document.documentElement.dataset[THEME_DATASET_KEY] = theme;
   window.dispatchEvent(new CustomEvent("theme-change", { detail: { theme } }));
 }
 
 function updateToggleUI(toggle: HTMLButtonElement): void {
-  const current = (document.documentElement.dataset["theme"] as Theme | undefined) ?? "light";
+  const current =
+    (document.documentElement.dataset[THEME_DATASET_KEY] as Theme | undefined) ?? "light";
   const isDark = current === "dark";
 
   toggle.setAttribute("aria-pressed", String(isDark));
@@ -39,7 +41,8 @@ export function setupThemeToggle(): void {
   updateToggleUI(toggle);
 
   toggle.addEventListener("click", () => {
-    const current = (document.documentElement.dataset["theme"] as Theme | undefined) ?? "light";
+    const current =
+      (document.documentElement.dataset[THEME_DATASET_KEY] as Theme | undefined) ?? "light";
     const next: Theme = current === "dark" ? "light" : "dark";
     localStorage.setItem("theme", next);
     applyTheme(next);

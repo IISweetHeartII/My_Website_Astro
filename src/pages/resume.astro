@@ -7,12 +7,12 @@ import Layout from "../layouts/Layout.astro";
 
 <Layout
   title={`Resume - ${SITE_TITLE}`}
-  description="김덕환의 이력서 - 아끼지 않는 문제해결사"
+  description="김덕환의 이력서 - 아끼지 않는 문제 해결사"
 >
   <div class="resume-wrapper max-w-4xl mx-auto px-6 py-16 bg-background print:max-w-full print:p-0 print:m-0 print:bg-white">
     <!-- A4 Paper Simulation -->
     <div
-      class="a4-page bg-white shadow-lg border border-gray-200 py-8 px-12
+      class="a4-page bg-background-light shadow-lg border border-background-lighter py-8 px-12
              min-h-[297mm] w-[210mm] mx-auto box-border
              max-md:w-full max-md:min-h-auto
              print:shadow-none print:border-0 print:min-h-auto print:w-full print:m-0
@@ -22,26 +22,26 @@ import Layout from "../layouts/Layout.astro";
       <div class="print:hidden mb-6 flex justify-between items-center">
         <a
           href={getUrl("/portfolio")}
-          class="text-sm text-[#7c3aed] hover:text-[#8b5cf6] font-medium flex items-center gap-1"
+          class="text-sm text-primary hover:text-primary-light font-medium flex items-center gap-1"
         >
           <ExternalLink class="w-4 h-4" />
           상세 포트폴리오 보기
         </a>
         <button
           id="print-btn"
-          class="flex items-center gap-2 px-4 py-2 bg-[#7c3aed] text-white text-sm font-semibold rounded-md hover:bg-[#8b5cf6] transition-colors"
+          class="flex items-center gap-2 px-4 py-2 bg-primary text-on-primary text-sm font-semibold rounded-md hover:bg-primary-light transition-colors"
         >
           <FileDown class="w-4 h-4" />
           PDF로 저장
         </button>
       </div>
       <!-- Header -->
-      <div class="flex justify-between items-start mb-4 pb-4 border-b-2 border-[#8b5cf6] pl-4 border-l-4 border-l-[#7c3aed]">
+      <div class="flex justify-between items-start mb-4 pb-4 border-b-2 border-primary-light pl-4 border-l-4 border-l-primary">
         <div>
-          <h1 class="text-3xl font-bold text-gray-900 mb-1">김덕환</h1>
-          <p class="text-lg text-[#7c3aed] font-semibold">아끼지 않는 문제해결사</p>
+          <h1 class="text-3xl font-bold text-text mb-1">김덕환</h1>
+          <p class="text-lg text-primary font-semibold">아끼지 않는 문제 해결사</p>
         </div>
-        <div class="text-right text-sm text-gray-700 space-y-0.5">
+        <div class="text-right text-sm text-text-light space-y-0.5">
           <p>sachi009955@gmail.com</p>
           <p>github.com/IISweetHeartII</p>
           <p>log8.kr</p>
@@ -50,133 +50,138 @@ import Layout from "../layouts/Layout.astro";
 
       <!-- Summary -->
       <section class="mb-4">
-        <h2 class="text-lg font-bold text-[#7c3aed] mb-2 border-b border-[#e5e7eb] pb-1">Summary</h2>
-        <ul class="text-sm text-gray-600 space-y-1 pl-4 list-disc">
-          <li><strong class="font-semibold text-gray-800">아끼지 않는 문제해결사</strong> - 고객/비즈니스의 실제 문제를 정의하고 해결하는 데 집중합니다.</li>
-          <li>사람 중심의 AI 제품을 설계하고 구현해, 제품 채택과 임팩트를 만드는 것을 지향합니다.</li>
-          <li>신기술(AI 포함) 검증과 지식 공유에 시간과 비용을 아끼지 않습니다.</li>
-        </ul>
+        <h2 class="text-lg font-bold text-primary mb-2 border-b border-gray-300 pb-1">Summary</h2>
+        <div class="text-sm text-text-light space-y-1">
+          <p><strong class="font-semibold text-text">아끼지 않는 문제 해결사 김덕환</strong>입니다. 사람 중심 AI 제품으로 고객과 비즈니스의 실제 문제를 해결합니다.</p>
+          <p class="text-text"><strong class="font-semibold">핵심 지표</strong>: 코드리뷰 400%↑, 복구 56h→5h, 학습 3x·개발 7x</p>
+          <p class="text-text font-semibold">"아끼지 않는 문제 해결사"의 기준</p>
+          <ul class="pl-4 list-disc space-y-0.5">
+            <li>신기술 검증에 시간과 비용을 아끼지 않습니다.</li>
+            <li>최신 지식과 실무 노하우를 적극 공유합니다.</li>
+            <li>고객 가치, 비즈니스 임팩트, 제품 채택을 우선합니다.</li>
+          </ul>
+        </div>
       </section>
 
       <!-- Projects -->
       <section class="mb-4">
-        <h2 class="text-lg font-bold text-[#7c3aed] mb-3 border-b border-[#e5e7eb] pb-1">Projects</h2>
+        <h2 class="text-lg font-bold text-primary mb-3 border-b border-gray-300 pb-1">Projects</h2>
 
         <!-- Project 1: Finders -->
-        <div class="mb-5">
+        <div class="mb-5 project-card">
           <div class="mb-1.5">
-            <h3 class="font-bold text-[#8b5cf6] text-base">
-              <a href={getUrl("/portfolio#finders")} class="hover:text-[#7c3aed]">
+            <h3 class="font-bold text-primary-light text-base">
+              <a href={getUrl("/portfolio#finders")} class="hover:text-primary">
                 BE Lead로 GCP 인프라 구축 및 팀 코드 리뷰 문화 정착
               </a>
             </h3>
-            <span class="text-sm text-gray-500">2025.12 - 현재 | Backend Lead (5명 BE팀)</span>
+            <span class="text-sm text-text-muted">2025.12 - 현재 | Backend Lead (5명 BE팀)</span>
           </div>
-          <div class="grid grid-cols-2 gap-x-6 text-sm">
+          <div class="grid grid-cols-2 gap-x-6 text-sm project-grid">
             <div>
-              <p class="font-semibold text-gray-700 mb-1">문제 해결</p>
-              <ul class="text-gray-600 space-y-0.5 pl-4 list-disc">
-                <li>GCP 인프라 구축으로 초기 비용 <strong class="font-semibold text-gray-800">$300 절감</strong></li>
-                <li>코드 컨벤션 문서화 + <strong class="font-semibold text-gray-800">코드 리뷰 문화</strong> 정착</li>
-                <li>GCS Presigned URL로 대량 이미지 업로드 최적화</li>
+              <p class="font-semibold text-text-light mb-1">문제 해결</p>
+              <ul class="text-text-light space-y-0.5 pl-4 list-disc">
+                <li>코드 리뷰 빈도 <strong class="font-semibold text-text">400% 증가(약 5배)</strong>로 품질 게이트 상향</li>
+                <li>Terraform IaC로 복구 시간 <strong class="font-semibold text-text">56h → 5h</strong> 단축</li>
+                <li>재구축 절차 스크립트화로 차기 리드타임 <strong class="font-semibold text-text">약 2h</strong> 예상</li>
               </ul>
             </div>
             <div>
-              <p class="font-semibold text-gray-700 mb-1">구현</p>
-              <ul class="text-gray-600 space-y-0.5 pl-4 list-disc">
-                <li><strong class="font-semibold text-gray-800">Java 21, Spring Boot 3.4</strong>, MySQL, QueryDSL</li>
-                <li><strong class="font-semibold text-gray-800">CI/CD + VPC</strong>, dev/prod DB 분리 운영</li>
-                <li>GCE 2개로 main/develop 브랜치 분리 배포</li>
+              <p class="font-semibold text-text-light mb-1">구현</p>
+              <ul class="text-text-light space-y-0.5 pl-4 list-disc">
+                <li><strong class="font-semibold text-text">Java 21, Spring Boot 3.4</strong>, MySQL, QueryDSL</li>
+                <li><strong class="font-semibold text-text">Terraform + GCP</strong> 서버/네트워크 코드화</li>
+                <li><strong class="font-semibold text-text">CI/CD + VPC</strong>, dev/prod DB 분리, 롤백 배포</li>
               </ul>
             </div>
           </div>
         </div>
 
-        <!-- Project 2: 덕친소 -->
-        <div class="mb-5">
+        <!-- Project 2: agentgram -->
+        <div class="mb-5 project-card">
           <div class="mb-1.5">
-            <h3 class="font-bold text-[#8b5cf6] text-base">
-              <a href={getUrl("/portfolio#duckchinso")} class="hover:text-[#7c3aed]">
-                AI 기반 소개팅 매칭 서비스 풀스택 개발
+            <h3 class="font-bold text-primary-light text-base">
+              <a href="https://github.com/agentgram/agentgram" class="hover:text-primary">
+                agentgram 오픈소스 코어 기여 및 멀티 레포 생태계 확장
               </a>
             </h3>
-            <span class="text-sm text-gray-500">2025.11 - 현재 | Full-Stack 1인 개발</span>
+            <span class="text-sm text-text-muted">현재 진행 | Core Contributor (Open Source)</span>
           </div>
-          <div class="grid grid-cols-2 gap-x-6 text-sm">
+          <div class="grid grid-cols-2 gap-x-6 text-sm project-grid">
             <div>
-              <p class="font-semibold text-gray-700 mb-1">문제 해결</p>
-              <ul class="text-gray-600 space-y-0.5 pl-4 list-disc">
-                <li>수동 매칭 → <strong class="font-semibold text-gray-800">벡터 DB + AI 추천</strong>으로 자동화</li>
-                <li>Mac Mini를 <strong class="font-semibold text-gray-800">Cloudflare Tunnel</strong>로 배포</li>
-                <li><strong class="font-semibold text-gray-800">포트원 결제</strong> 연동으로 수익화 모델 구축</li>
+              <p class="font-semibold text-text-light mb-1">문제 해결</p>
+              <ul class="text-text-light space-y-0.5 pl-4 list-disc">
+                <li>Vercel <strong class="font-semibold text-text">DAU 40</strong>, 활성 Agent <strong class="font-semibold text-text">70</strong> 운영</li>
+                <li><strong class="font-semibold text-text">297+ 커밋</strong>, 코어/SDK/MCP/AX <strong class="font-semibold text-text">4레포</strong> 기여</li>
+                <li>피드·팔로우·스토리·알림 등 <strong class="font-semibold text-text">16개+ 핵심 기능</strong> 고도화</li>
               </ul>
             </div>
             <div>
-              <p class="font-semibold text-gray-700 mb-1">구현</p>
-              <ul class="text-gray-600 space-y-0.5 pl-4 list-disc">
-                <li><strong class="font-semibold text-gray-800">Next.js, Spring Boot</strong>, PostgreSQL, Docker</li>
-                <li><strong class="font-semibold text-gray-800">pgvector</strong> 활용 AI 벡터 유사도 매칭</li>
-                <li>Solapi SMS 알림 시스템 구축</li>
+              <p class="font-semibold text-text-light mb-1">구현</p>
+              <ul class="text-text-light space-y-0.5 pl-4 list-disc">
+                <li><strong class="font-semibold text-text">Next.js 16</strong>, TailwindCSS v4</li>
+                <li><strong class="font-semibold text-text">Supabase(PostgreSQL + RLS)</strong> API-first 구조</li>
+                <li>Self-hosting + Docker + REST API/OpenAPI 운영</li>
               </ul>
             </div>
           </div>
         </div>
 
         <!-- Project 3: MathFigure -->
-        <div class="mb-5">
+        <div class="mb-5 project-card">
           <div class="mb-1.5">
-            <h3 class="font-bold text-[#8b5cf6] text-base">
-              <a href={getUrl("/portfolio#mathfigure")} class="hover:text-[#7c3aed]">
+            <h3 class="font-bold text-primary-light text-base">
+              <a href={getUrl("/portfolio#mathfigure")} class="hover:text-primary">
                 ICAN-LABs 최우수상 수상, 40명 고객 인터뷰 기반 MVP
               </a>
             </h3>
-            <span class="text-sm text-gray-500">2025.09 - 현재 | 풀스택 1인 개발</span>
+            <span class="text-sm text-text-muted">2025.09 - 2025.12 | FE 중심 풀스택 1인 개발</span>
           </div>
-          <div class="grid grid-cols-2 gap-x-6 text-sm">
+          <div class="grid grid-cols-2 gap-x-6 text-sm project-grid">
             <div>
-              <p class="font-semibold text-gray-700 mb-1">문제 해결</p>
-              <ul class="text-gray-600 space-y-0.5 pl-4 list-disc">
-                <li>고3 수능 콘텐츠 제작 시간 <strong class="font-semibold text-gray-800">1/10로 단축</strong></li>
-                <li><strong class="font-semibold text-gray-800">40명</strong> 인터뷰로 "도구 복잡성" Pain Point 발견</li>
-                <li>직관적 UX로 진입 장벽 해소</li>
+              <p class="font-semibold text-text-light mb-1">문제 해결</p>
+              <ul class="text-text-light space-y-0.5 pl-4 list-disc">
+                <li>고3 수능 콘텐츠 제작 시간 <strong class="font-semibold text-text">1/10로 단축</strong></li>
+                <li><strong class="font-semibold text-text">40명</strong> 인터뷰로 "도구 복잡성" 핵심 Pain Point 도출</li>
+                <li>I-Corps(미국 창업 검증) 기반 <strong class="font-semibold text-text">5주 압축 고객검증</strong>으로 MVP 방향성 확정</li>
               </ul>
             </div>
             <div>
-              <p class="font-semibold text-gray-700 mb-1">구현</p>
-              <ul class="text-gray-600 space-y-0.5 pl-4 list-disc">
-                <li><strong class="font-semibold text-gray-800">Next.js, MathJson</strong>, Fabric.js, JSXGraph</li>
+              <p class="font-semibold text-text-light mb-1">구현</p>
+              <ul class="text-text-light space-y-0.5 pl-4 list-disc">
+                <li><strong class="font-semibold text-text">Next.js, MathJson</strong>, Fabric.js, JSXGraph</li>
                 <li>수학 수식 파싱 + 도형 시각화 엔진</li>
-                <li>중앙대 창업 프로그램 <strong class="font-semibold text-gray-800">최우수상</strong> 수상</li>
+                <li>FE 중심 MVP 프로토타입 구현 및 사용자 테스트 진행</li>
               </ul>
             </div>
           </div>
         </div>
 
-        <!-- Project 4: 오메추 -->
-        <div class="mb-4">
+        <!-- Project 4: 119-ai -->
+        <div class="mb-4 project-card">
           <div class="mb-1.5">
-            <h3 class="font-bold text-[#8b5cf6] text-base">
-              <span class="hover:text-[#7c3aed]">
-                JWT 인증 단일화로 API 응답속도 50% 개선
-              </span>
+            <h3 class="font-bold text-primary-light text-base">
+              <a href="https://log8.kr" class="hover:text-primary">
+                119-ai: Twilio AI 기반 병렬 전화로 응급 병원 매칭 시간 단축
+              </a>
             </h3>
-            <span class="text-sm text-gray-500">2025.06 - 2025.08 | Frontend (인증 파트)</span>
+            <span class="text-sm text-text-muted">2026 | Founder / Owner</span>
           </div>
-          <div class="grid grid-cols-2 gap-x-6 text-sm">
+          <div class="grid grid-cols-2 gap-x-6 text-sm project-grid">
             <div>
-              <p class="font-semibold text-gray-700 mb-1">문제 해결</p>
-              <ul class="text-gray-600 space-y-0.5 pl-4 list-disc">
-                <li>쿠키 세션 + JWT 혼용으로 인증 복잡성 발생</li>
-                <li>JWT 단일화로 API 응답 <strong class="font-semibold text-gray-800">420ms → 210ms (50%↑)</strong></li>
-                <li><strong class="font-semibold text-gray-800">KPT 회고</strong> 도입으로 팀 협업 프로세스 표준화</li>
+              <p class="font-semibold text-text-light mb-1">문제 해결</p>
+              <ul class="text-text-light space-y-0.5 pl-4 list-disc">
+                <li>응급 이송 병목 해소를 위해 <strong class="font-semibold text-text">AI 병렬 발신</strong> 구조 설계</li>
+                <li>환자 정보 1회 입력으로 인근 <strong class="font-semibold text-text">5+ 병원 동시 발신</strong> 자동화</li>
+                <li>순차 전화(평균 5분+)를 병렬 처리(<strong class="font-semibold text-text">30초 이내</strong>)로 단축</li>
               </ul>
             </div>
             <div>
-              <p class="font-semibold text-gray-700 mb-1">구현</p>
-              <ul class="text-gray-600 space-y-0.5 pl-4 list-disc">
-                <li><strong class="font-semibold text-gray-800">Next.js, TypeScript</strong> 기반 인증 파트 개발</li>
-                <li><strong class="font-semibold text-gray-800">Zustand + TanStack Query</strong> 활용 상태 관리</li>
-                <li>UMC 8기 데모데이 <strong class="font-semibold text-gray-800">장려상, 현장 투표 1위</strong></li>
+              <p class="font-semibold text-text-light mb-1">구현</p>
+              <ul class="text-text-light space-y-0.5 pl-4 list-disc">
+                <li><strong class="font-semibold text-text">Twilio + Gemini Live API</strong> 기반 음성 대화 자동화</li>
+                <li><strong class="font-semibold text-text">NestJS + Python</strong>으로 AI 통화 파이프라인 구성</li>
+                <li>건당 <strong class="font-semibold text-text">100~200원</strong> 수준의 비용 모델로 운영 가능성 검증</li>
               </ul>
             </div>
           </div>
@@ -188,77 +193,85 @@ import Layout from "../layouts/Layout.astro";
 
       <!-- Tech Stack -->
       <section class="mb-4 print:pt-[15mm]">
-        <h2 class="text-lg font-bold text-[#7c3aed] mb-2 border-b border-[#e5e7eb] pb-1">Tech Stack</h2>
+        <h2 class="text-lg font-bold text-primary mb-2 border-b border-gray-300 pb-1">Tech Stack</h2>
         <div class="grid grid-cols-2 gap-x-4 gap-y-1 text-sm">
           <div class="flex">
-            <span class="font-semibold text-gray-800 w-20">Languages</span>
-            <span class="text-gray-600">TypeScript, Java, Python, C++</span>
+            <span class="font-semibold text-text w-20">Languages</span>
+            <span class="text-text-light">TypeScript, Java, Python, C++</span>
           </div>
           <div class="flex">
-            <span class="font-semibold text-gray-800 w-20">Frontend</span>
-            <span class="text-gray-600">Next.js, Astro, React, TailwindCSS</span>
+            <span class="font-semibold text-text w-20">Frontend</span>
+            <span class="text-text-light">Next.js, Astro, React, TailwindCSS</span>
           </div>
           <div class="flex">
-            <span class="font-semibold text-gray-800 w-20">Backend</span>
-            <span class="text-gray-600">Spring Boot, NestJS, Supabase</span>
+            <span class="font-semibold text-text w-20">Backend</span>
+            <span class="text-text-light">Spring Boot, NestJS, Supabase</span>
           </div>
           <div class="flex">
-            <span class="font-semibold text-gray-800 w-20">Database</span>
-            <span class="text-gray-600">PostgreSQL, MySQL, pgvector</span>
+            <span class="font-semibold text-text w-20">Database</span>
+            <span class="text-text-light">PostgreSQL, MySQL, pgvector</span>
           </div>
-          <div class="flex">
-            <span class="font-semibold text-gray-800 w-20">DevOps</span>
-            <span class="text-gray-600">GCP (GCS, Cloud SQL), Docker, GitHub Actions, Sentry</span>
-          </div>
-          <div class="flex">
-            <span class="font-semibold text-gray-800 w-20">AI Tools</span>
-            <span class="text-gray-600">Claude Code, OpenCode, Antigravity</span>
+          <div class="flex col-span-2">
+            <span class="font-semibold text-text w-20">DevOps</span>
+            <span class="text-text-light">GCP (GCS, Cloud SQL, GCE), Docker, Cloudflare Tunnel, GitHub Actions, Sentry, tmux</span>
           </div>
         </div>
       </section>
 
+      <!-- AI Orchestration -->
+      <section class="mb-4">
+        <h2 class="text-lg font-bold text-primary mb-2 border-b border-gray-300 pb-1">AI Orchestration Lab</h2>
+        <ul class="text-sm text-text-light space-y-1 pl-4 list-disc">
+          <li><strong class="font-semibold text-text">Antigravity + Claude Code Team(tmux) + OMO</strong> 멀티 에이전트 오케스트레이션 운영</li>
+          <li>워크플로우 전환 후 <strong class="font-semibold text-text">학습량 3x</strong>, <strong class="font-semibold text-text">개발 속도 7x</strong> 향상</li>
+          <li><strong class="font-semibold text-text">Rosie(OpenClaw)</strong>: Mac mini 24/7, heartbeat/cron, SNS·E2E·Google Workspace 자동화</li>
+          <li><strong class="font-semibold text-text">Dave(OpenClaw)</strong>: 데스크탑 부팅 연동, E2E + 기능 사업성/수익성 검토</li>
+        </ul>
+      </section>
+
       <!-- Experience -->
       <section class="mb-4">
-        <h2 class="text-lg font-bold text-[#7c3aed] mb-2 border-b border-[#e5e7eb] pb-1">Experience</h2>
+        <h2 class="text-lg font-bold text-primary mb-2 border-b border-gray-300 pb-1">Experience</h2>
         <div class="space-y-1.5 text-sm">
           <div class="flex justify-between">
             <div>
-              <span class="font-semibold text-gray-800">UMC 9기</span>
-              <span class="text-gray-600"> - <strong class="font-semibold text-gray-800">Web 파트장</strong> (강의 및 멘토링), Spring Boot 챌린저</span>
+              <span class="font-semibold text-text">UMC 9기</span>
+              <span class="text-text-light"> - <strong class="font-semibold text-text">Web 파트장</strong> (강의 및 멘토링), Spring Boot 챌린저</span>
             </div>
-            <span class="text-gray-500">2025.09 - 현재</span>
+            <span class="text-text-muted">2025.09 - 현재</span>
           </div>
           <div class="flex justify-between">
             <div>
-              <span class="font-semibold text-gray-800">UMC 8기</span>
-              <span class="text-gray-600"> - Web 챌린저 (React, Next.js 학습)</span>
+              <span class="font-semibold text-text">UMC 8기</span>
+              <span class="text-text-light"> - Web 챌린저 (React, Next.js 학습)</span>
             </div>
-            <span class="text-gray-500">2025.03 - 2025.08</span>
+            <span class="text-text-muted">2025.03 - 2025.08</span>
           </div>
           <div class="flex justify-between">
             <div>
-              <span class="font-semibold text-gray-800">AI 활용 강연</span>
-              <span class="text-gray-600"> - 시니어 소상공인 대상 (ChatGPT, Gemini Gems, NotebookLM)</span>
+              <span class="font-semibold text-text">AI 활용 강연</span>
+              <span class="text-text-light"> - 시니어 소상공인 대상 (ChatGPT, Gemini Gems, NotebookLM)</span>
             </div>
-            <span class="text-gray-500">2025.05, 07</span>
+            <span class="text-text-muted">2025.05, 07</span>
           </div>
           <div class="flex justify-between">
             <div>
-              <span class="font-semibold text-gray-800">AI 활용 강연</span>
-              <span class="text-gray-600"> - 리피움 창업가모임 (<strong class="font-semibold text-gray-800">MCP, Agent AI</strong>)</span>
+              <span class="font-semibold text-text">AI 활용 강연</span>
+              <span class="text-text-light"> - 리피움 창업가모임 (<strong class="font-semibold text-text">MCP, Agent AI</strong>)</span>
             </div>
-            <span class="text-gray-500">2025.09</span>
+            <span class="text-text-muted">2025.09</span>
           </div>
         </div>
       </section>
 
       <!-- Awards & Certifications -->
       <section class="mb-4">
-        <h2 class="text-lg font-bold text-[#7c3aed] mb-2 border-b border-[#e5e7eb] pb-1">Awards & Certifications</h2>
+        <h2 class="text-lg font-bold text-primary mb-2 border-b border-gray-300 pb-1">Awards & Certifications</h2>
         <div class="grid grid-cols-2 gap-x-4 text-sm">
           <div>
-            <p class="font-semibold text-gray-700 mb-1">Awards</p>
-            <ul class="text-gray-600 space-y-0.5 pl-4 list-disc">
+            <p class="font-semibold text-text-light mb-1">Awards</p>
+            <ul class="text-text-light space-y-0.5 pl-4 list-disc">
+              <li>2026 청룡톤(119-ai) 대상 (2026.02)</li>
               <li>UMC 9기 해커톤 대상 (2026.01)</li>
               <li>ICAN-LABs 창업 탐색 프로그램 최우수상 (2025.11)</li>
               <li>UMC 8기 데모데이 장려상 (2025.08)</li>
@@ -266,8 +279,8 @@ import Layout from "../layouts/Layout.astro";
             </ul>
           </div>
           <div>
-            <p class="font-semibold text-gray-700 mb-1">Certifications</p>
-            <ul class="text-gray-600 space-y-0.5 pl-4 list-disc">
+            <p class="font-semibold text-text-light mb-1">Certifications</p>
+            <ul class="text-text-light space-y-0.5 pl-4 list-disc">
               <li>정보처리기사 (2025.09)</li>
               <li>SQLD (2025.09)</li>
               <li>OPIc IH (2024.12)</li>
@@ -278,13 +291,13 @@ import Layout from "../layouts/Layout.astro";
 
       <!-- Education -->
       <section>
-        <h2 class="text-lg font-bold text-[#7c3aed] mb-2 border-b border-[#e5e7eb] pb-1">Education</h2>
+        <h2 class="text-lg font-bold text-primary mb-2 border-b border-gray-300 pb-1">Education</h2>
         <div class="text-sm">
           <div class="flex justify-between mb-1">
-            <span class="font-semibold text-gray-800">중앙대학교</span>
-            <span class="text-gray-500">2020.03 - 2026.02 (졸업예정)</span>
+            <span class="font-semibold text-text">중앙대학교</span>
+            <span class="text-text-muted">2020.03 - 2026.02 (졸업예정)</span>
           </div>
-          <ul class="text-gray-600 space-y-0.5 pl-4 list-disc">
+          <ul class="text-text-light space-y-0.5 pl-4 list-disc">
             <li>수학과 (주전공) / 소프트웨어인문 융합전공 (복수전공)</li>
             <li>교직이수 완료 (중등학교 정교사 2급 자격증 취득 예정)</li>
             <li>총 162학점 이수, 평균 학점 3.86/4.5</li>
@@ -294,7 +307,7 @@ import Layout from "../layouts/Layout.astro";
     </div>
 
     <!-- Page 2 hint (optional, for longer content) -->
-    <div class="print:hidden mt-4 text-center text-sm text-gray-500">
+    <div class="print:hidden mt-4 text-center text-sm text-text-muted">
       A4 1페이지 미리보기 | 인쇄 시 자동 최적화
     </div>
   </div>
@@ -337,6 +350,12 @@ import Layout from "../layouts/Layout.astro";
       -webkit-print-color-adjust: exact !important;
       print-color-adjust: exact !important;
     }
+
+    .a4-page {
+      word-break: keep-all;
+      line-break: strict;
+    }
+
   }
 </style>
 
