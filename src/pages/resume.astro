@@ -3,6 +3,63 @@ import { ExternalLink, FileDown } from "lucide-astro";
 import { SITE_TITLE } from "@/shared/config/consts";
 import { getUrl } from "@/shared/utils/url";
 import Layout from "../layouts/Layout.astro";
+
+interface ProofItem {
+  id: string;
+  label: string;
+  date: string;
+  image: string;
+}
+
+const awards: ProofItem[] = [
+  {
+    id: "finders-demoday",
+    label: "UMC 9기 데모데이(Finders) 최우수상",
+    date: "2026.02",
+    image: "/images/awards/finders-demoday.png",
+  },
+  {
+    id: "cheongryong-hackathon",
+    label: "2026 청룡톤(119-ai) 대상",
+    date: "2026.02",
+    image: "/images/awards/cheongryong-hackathon.png",
+  },
+  {
+    id: "umc9-hackathon",
+    label: "UMC 9기 해커톤(행복일기) 대상",
+    date: "2026.01",
+    image: "/images/awards/umc9-hackathon.png",
+  },
+  {
+    id: "ican-labs",
+    label: "ICAN-LABs 창업 탐색 프로그램 최우수상",
+    date: "2025.11",
+    image: "/images/awards/ican-labs.png",
+  },
+  {
+    id: "umc8-demoday",
+    label: "UMC 8기 데모데이(오메추) 장려상",
+    date: "2025.08",
+    image: "/images/awards/umc8-demoday.png",
+  },
+  {
+    id: "overseas-education",
+    label: "기업가정신 해외교육 프로그램 최우수상",
+    date: "2025.02",
+    image: "/images/awards/overseas-education.png",
+  },
+];
+
+const certifications: ProofItem[] = [
+  {
+    id: "engineer-info",
+    label: "정보처리기사",
+    date: "2025.09",
+    image: "/images/awards/engineer-info.png",
+  },
+  { id: "sqld", label: "SQLD", date: "2025.09", image: "/images/awards/sqld.png" },
+  { id: "opic-ih", label: "OPIc IH", date: "2024.12", image: "/images/awards/opic-ih.png" },
+];
 ---
 
 <Layout
@@ -267,23 +324,37 @@ import Layout from "../layouts/Layout.astro";
       <!-- Awards & Certifications -->
       <section class="mb-4">
         <h2 class="text-lg font-bold text-primary mb-2 border-b border-gray-300 pb-1">Awards & Certifications</h2>
-        <div class="grid grid-cols-2 gap-x-4 text-sm">
+        <div class="grid grid-cols-[3fr_2fr] gap-x-4 text-sm">
           <div>
             <p class="font-semibold text-text-light mb-1">Awards</p>
             <ul class="text-text-light space-y-0.5 pl-4 list-disc">
-              <li>2026 청룡톤(119-ai) 대상 (2026.02)</li>
-              <li>UMC 9기 해커톤 대상 (2026.01)</li>
-              <li>ICAN-LABs 창업 탐색 프로그램 최우수상 (2025.11)</li>
-              <li>UMC 8기 데모데이 장려상 (2025.08)</li>
-              <li>기업가정신 해외교육 프로그램 최우수상 (2025.02)</li>
+              {awards.map((award) => (
+                <li
+                  data-proof-id={award.id}
+                  data-proof-image={award.image}
+                  data-proof-title={award.label}
+                  data-proof-date={award.date}
+                  class="proof-item cursor-pointer rounded px-1 -mx-1 py-0.5 transition-colors hover:text-primary hover:bg-primary/5"
+                >
+                  {award.label} ({award.date})
+                </li>
+              ))}
             </ul>
           </div>
           <div>
             <p class="font-semibold text-text-light mb-1">Certifications</p>
             <ul class="text-text-light space-y-0.5 pl-4 list-disc">
-              <li>정보처리기사 (2025.09)</li>
-              <li>SQLD (2025.09)</li>
-              <li>OPIc IH (2024.12)</li>
+              {certifications.map((cert) => (
+                <li
+                  data-proof-id={cert.id}
+                  data-proof-image={cert.image}
+                  data-proof-title={cert.label}
+                  data-proof-date={cert.date}
+                  class="proof-item cursor-pointer rounded px-1 -mx-1 py-0.5 transition-colors hover:text-primary hover:bg-primary/5"
+                >
+                  {cert.label} ({cert.date})
+                </li>
+              ))}
             </ul>
           </div>
         </div>
@@ -311,9 +382,99 @@ import Layout from "../layouts/Layout.astro";
       A4 1페이지 미리보기 | 인쇄 시 자동 최적화
     </div>
   </div>
+
+  <!-- Proof Panel Backdrop (narrow screens) -->
+  <div
+    id="proof-panel-backdrop"
+    class="fixed inset-0 bg-black/30 z-30 opacity-0 pointer-events-none transition-opacity duration-300 print:hidden"
+  ></div>
+
+  <!-- Proof Panel -->
+  <aside
+    id="proof-panel"
+    class="fixed right-0 top-0 h-screen w-[420px] max-w-[90vw] bg-background-light border-l border-background-lighter
+           shadow-2xl z-40 translate-x-full transition-transform duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]
+           overflow-y-auto print:hidden"
+    aria-hidden="true"
+    role="dialog"
+    aria-label="증빙 자료 보기"
+  >
+    <!-- Panel Header -->
+    <div class="sticky top-0 bg-background-light/95 backdrop-blur-sm border-b border-background-lighter px-6 py-4 flex items-center justify-between z-10">
+      <h3 id="proof-panel-title" class="text-base font-bold text-text truncate pr-4"></h3>
+      <button
+        id="proof-panel-close"
+        class="shrink-0 w-9 h-9 flex items-center justify-center rounded-lg hover:bg-background-lighter transition-colors text-text-light hover:text-text"
+        aria-label="패널 닫기"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Panel Body -->
+    <div class="px-6 py-6">
+      <!-- Image Container -->
+      <div class="rounded-lg overflow-hidden border border-background-lighter bg-white mb-4 min-h-[200px] flex items-center justify-center">
+        <img
+          id="proof-panel-image"
+          src=""
+          alt=""
+          class="w-full h-auto object-contain hidden"
+        />
+        <!-- Loading placeholder -->
+        <div id="proof-panel-loading" class="text-text-muted text-sm py-12">
+          이미지 로딩 중...
+        </div>
+      </div>
+
+      <!-- Date -->
+      <p id="proof-panel-date" class="text-sm text-text-muted mb-4"></p>
+
+      <!-- Download Button -->
+      <a
+        id="proof-panel-download"
+        href=""
+        download
+        class="inline-flex items-center gap-2 px-4 py-2.5 bg-primary text-on-primary text-sm font-semibold rounded-md hover:bg-primary-light transition-colors w-full justify-center"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+          <polyline points="7 10 12 15 17 10"></polyline>
+          <line x1="12" y1="15" x2="12" y2="3"></line>
+        </svg>
+        증빙 자료 다운로드
+      </a>
+    </div>
+  </aside>
 </Layout>
 
 <style>
+  /* Resume shift when panel is open */
+  .resume-wrapper {
+    transition: margin-right 500ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .resume-wrapper[data-panel="open"] {
+    margin-right: calc(420px + 1.5rem);
+  }
+
+  /* On narrow screens, panel overlays instead of pushing */
+  @media (max-width: 1200px) {
+    .resume-wrapper[data-panel="open"] {
+      margin-right: auto;
+    }
+  }
+
+  /* Active proof item highlight */
+  .proof-item-active {
+    color: var(--color-primary) !important;
+    background-color: color-mix(in srgb, var(--color-primary) 10%, transparent) !important;
+    font-weight: 600;
+  }
+
   /* 인쇄 전용 스타일 - TailwindCSS로 대체 불가능한 부분만 유지 */
   @media print {
     /* 전역 요소 숨김 - :global() 필수 */
@@ -359,13 +520,142 @@ import Layout from "../layouts/Layout.astro";
 
     .resume-wrapper {
       background: white !important;
+      margin-right: auto !important;
     }
 
+    /* 인쇄 시 클릭 힌트 숨김 */
+    .proof-item {
+      cursor: default !important;
+    }
   }
 </style>
 
 <script>
+  function setupProofPanel(): void {
+    const panel = document.getElementById("proof-panel");
+    const panelTitle = document.getElementById("proof-panel-title");
+    const panelImage = document.getElementById("proof-panel-image") as HTMLImageElement | null;
+    const panelLoading = document.getElementById("proof-panel-loading");
+    const panelDate = document.getElementById("proof-panel-date");
+    const panelDownload = document.getElementById("proof-panel-download") as HTMLAnchorElement | null;
+    const panelClose = document.getElementById("proof-panel-close");
+    const backdrop = document.getElementById("proof-panel-backdrop");
+    const resumeWrapper = document.querySelector(".resume-wrapper") as HTMLElement | null;
+    const proofItems = document.querySelectorAll<HTMLElement>("[data-proof-id]");
+
+    if (!panel || !panelTitle || !panelImage || !panelClose || !resumeWrapper) return;
+
+    let activeItemId: string | null = null;
+
+    function openPanel(item: HTMLElement): void {
+      const id = item.dataset["proofId"] ?? "";
+      const image = item.dataset["proofImage"] ?? "";
+      const title = item.dataset["proofTitle"] ?? "";
+      const date = item.dataset["proofDate"] ?? "";
+
+      // Toggle: clicking same item closes
+      if (activeItemId === id) {
+        closePanel();
+        return;
+      }
+
+      // Show loading, hide image
+      panelImage!.classList.add("hidden");
+      if (panelLoading) panelLoading.classList.remove("hidden");
+
+      // Populate
+      panelTitle!.textContent = title;
+      panelImage!.src = image;
+      panelImage!.alt = `${title} 증빙 자료`;
+      if (panelDate) panelDate.textContent = date;
+      if (panelDownload) {
+        panelDownload.href = image;
+        panelDownload.download = `${title}.png`;
+      }
+
+      // Image load handler
+      panelImage!.onload = () => {
+        panelImage!.classList.remove("hidden");
+        if (panelLoading) panelLoading.classList.add("hidden");
+      };
+      panelImage!.onerror = () => {
+        if (panelLoading) {
+          panelLoading.textContent = "이미지를 찾을 수 없습니다";
+          panelLoading.classList.remove("hidden");
+        }
+        panelImage!.classList.add("hidden");
+      };
+
+      // Slide in
+      panel!.classList.remove("translate-x-full");
+      panel!.classList.add("translate-x-0");
+      panel!.setAttribute("aria-hidden", "false");
+
+      // Shift resume left
+      resumeWrapper!.setAttribute("data-panel", "open");
+
+      // Show backdrop on narrow screens
+      if (backdrop) {
+        backdrop.classList.remove("opacity-0", "pointer-events-none");
+        backdrop.classList.add("opacity-100", "pointer-events-auto");
+      }
+
+      // Highlight active item
+      for (const el of proofItems) {
+        el.classList.toggle("proof-item-active", el.dataset["proofId"] === id);
+      }
+
+      activeItemId = id;
+    }
+
+    function closePanel(): void {
+      panel!.classList.add("translate-x-full");
+      panel!.classList.remove("translate-x-0");
+      panel!.setAttribute("aria-hidden", "true");
+
+      resumeWrapper!.removeAttribute("data-panel");
+
+      if (backdrop) {
+        backdrop.classList.add("opacity-0", "pointer-events-none");
+        backdrop.classList.remove("opacity-100", "pointer-events-auto");
+      }
+
+      for (const el of proofItems) {
+        el.classList.remove("proof-item-active");
+      }
+
+      activeItemId = null;
+    }
+
+    // Click handlers
+    for (const item of proofItems) {
+      item.addEventListener("click", () => openPanel(item));
+    }
+
+    // Close button
+    panelClose.addEventListener("click", closePanel);
+
+    // Backdrop click
+    backdrop?.addEventListener("click", closePanel);
+
+    // ESC key
+    document.addEventListener("keydown", (e: KeyboardEvent) => {
+      if (e.key === "Escape" && activeItemId !== null) {
+        closePanel();
+      }
+    });
+  }
+
+  // Print button
   document.getElementById("print-btn")?.addEventListener("click", () => {
     window.print();
   });
+
+  // Support Astro View Transitions
+  document.addEventListener("astro:page-load", setupProofPanel);
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", setupProofPanel);
+  } else {
+    setupProofPanel();
+  }
 </script>
