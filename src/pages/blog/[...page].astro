@@ -3,6 +3,7 @@ import type { GetStaticPaths } from "astro";
 import BlogCard from "@/features/blog/components/BlogCard.astro";
 import CategoryFilter from "@/features/blog/components/CategoryFilter.astro";
 import Layout from "@/layouts/Layout.astro";
+import BreadcrumbSchema from "@/shared/components/seo/BreadcrumbSchema.astro";
 import { categories } from "@/shared/config/categories";
 import { getSortedPublishedPosts, transformPostForCard } from "@/shared/utils/blog";
 
@@ -32,6 +33,10 @@ const pageDescription = "아끼지 않는 문제 해결사로서, 문제를 정�
   <Fragment slot="head">
     {page.url.prev && <link rel="prev" href={page.url.prev} />}
     {page.url.next && <link rel="next" href={page.url.next} />}
+    <BreadcrumbSchema items={[
+      { name: "홈", url: "/" },
+      { name: "블로그", url: "/blog/" },
+    ]} />
   </Fragment>
 
   <div class="w-full max-w-5xl mx-auto p-6 md:p-8 flex flex-col">

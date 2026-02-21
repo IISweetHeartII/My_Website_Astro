@@ -14,15 +14,51 @@ import {
   Users,
 } from "lucide-astro";
 import profileImage from "@/assets/images/design/DH_ID.jpg";
+import BreadcrumbSchema from "@/shared/components/seo/BreadcrumbSchema.astro";
+import {
+  AUTHOR_GITHUB,
+  AUTHOR_LINKEDIN,
+  SITE_AUTHOR,
+  SITE_DESCRIPTION,
+  SITE_URL,
+} from "@/shared/config/consts";
 import { getLatestPosts, getSortedPublishedPosts } from "@/shared/utils/blog";
 import Layout from "../layouts/Layout.astro";
 
 const allPosts = await getSortedPublishedPosts();
 const latestBlogPosts = getLatestPosts(allPosts, 3);
 const latestPost = latestBlogPosts[0];
+
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": `${SITE_URL}/#website`,
+  name: "김덕환의 WebSite",
+  url: SITE_URL,
+  description: SITE_DESCRIPTION,
+  inLanguage: "ko-KR",
+  publisher: { "@id": `${SITE_URL}/#author` },
+};
+
+const personSchema = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "@id": `${SITE_URL}/#author`,
+  name: SITE_AUTHOR,
+  url: `${SITE_URL}/portfolio`,
+  image: `${SITE_URL}/images/design/DH_ID.jpg`,
+  jobTitle: "Product Engineer",
+  description: SITE_DESCRIPTION,
+  sameAs: [AUTHOR_GITHUB, AUTHOR_LINKEDIN],
+};
 ---
 
 <Layout title="Home | Log8">
+  <Fragment slot="head">
+    <script type="application/ld+json" is:inline set:text={JSON.stringify(websiteSchema)} />
+    <script type="application/ld+json" is:inline set:text={JSON.stringify(personSchema)} />
+    <BreadcrumbSchema items={[{ name: "홈", url: "/" }]} />
+  </Fragment>
   <main class="min-h-screen bg-background">
     <!-- Full-screen Hero Section with Vanta.js -->
     <section
