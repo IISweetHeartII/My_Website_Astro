@@ -53,7 +53,7 @@ const personSchema = {
 };
 ---
 
-<Layout title="Home | Log8">
+<Layout title="Home | Log8" description={SITE_DESCRIPTION}>
   <Fragment slot="head">
     <script type="application/ld+json" is:inline set:text={JSON.stringify(websiteSchema)} />
     <script type="application/ld+json" is:inline set:text={JSON.stringify(personSchema)} />
