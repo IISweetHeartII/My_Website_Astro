@@ -65,6 +65,16 @@ export default defineConfig({
           disallow: ["/admin", "/private", "/.obsidian", "/.trash"],
           crawlDelay: 1,
         },
+        {
+          userAgent: "Yeti",
+          allow: "/",
+          crawlDelay: 1,
+        },
+        {
+          userAgent: "Googlebot",
+          allow: "/",
+          crawlDelay: 1,
+        },
         // AI 봇들을 위한 특별 설정
         {
           userAgent: "GPTBot",
