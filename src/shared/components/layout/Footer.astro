@@ -5,7 +5,7 @@ import { AUTHOR_GITHUB, AUTHOR_LINKEDIN } from "@/shared/config/consts";
 const today = new Date();
 ---
 
-<footer class="bg-primary text-on-primary body-font py-8">
+<footer class="bg-nav text-nav-text body-font py-8 border-t border-nav-border">
   <div class="container mx-auto px-5 flex flex-col items-center">
     <!-- Social Links -->
     <div class="flex space-x-6 mb-6">
@@ -13,7 +13,7 @@ const today = new Date();
         href={AUTHOR_GITHUB}
         target="_blank"
         rel="noopener noreferrer"
-        class="text-on-primary hover:text-primary hover:bg-on-primary/20 rounded-full p-3 transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-lg"
+        class="text-nav-text hover:text-accent hover:bg-nav-hover/20 rounded-full p-3 transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-lg"
         title="GitHub"
       >
         <Github class="w-6 h-6" />
@@ -23,7 +23,7 @@ const today = new Date();
         href={AUTHOR_LINKEDIN}
         target="_blank"
         rel="noopener noreferrer"
-        class="text-on-primary hover:text-primary hover:bg-on-primary/20 rounded-full p-3 transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-lg"
+        class="text-nav-text hover:text-accent hover:bg-nav-hover/20 rounded-full p-3 transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-lg"
         title="LinkedIn"
       >
         <Linkedin class="w-6 h-6" />
@@ -31,7 +31,7 @@ const today = new Date();
 
       <a
         href="mailto:sachi009955@gmail.com"
-        class="text-on-primary hover:text-primary hover:bg-on-primary/20 rounded-full p-3 transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-lg"
+        class="text-nav-text hover:text-accent hover:bg-nav-hover/20 rounded-full p-3 transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-lg"
         title="Email"
       >
         <Mail class="w-6 h-6" />
@@ -39,19 +39,12 @@ const today = new Date();
     </div>
 
     <!-- Policy Links -->
-    <div class="text-on-primary flex flex-wrap justify-center gap-4 mb-4">
+    <div class="text-nav-text flex flex-wrap justify-center gap-4 mb-4">
       <a
         href="/privacy"
-        class="text-on-primary hover:text-accent text-sm transition-colors duration-200 underline"
+        class="text-nav-text hover:text-accent text-sm transition-colors duration-200 underline"
       >
-        개인정보처리방침
-      </a>
-      <span class="text-on-primary text-sm">•</span>
-      <a
-        href="/terms"
-        class="text-on-primary hover:text-accent text-sm transition-colors duration-200 underline"
-      >
-        이용약관
+        Privacy
       </a>
     </div>
 

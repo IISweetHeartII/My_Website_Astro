@@ -1,0 +1,4 @@
+zone_name              = "log8.kr"
+pages_project_hostname = "my-website-astro.pages.dev"
+create_root_record     = true
+create_www_record      = true

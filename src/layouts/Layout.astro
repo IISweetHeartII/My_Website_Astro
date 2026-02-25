@@ -55,5 +55,32 @@ const { title, description } = Astro.props;
         runScrollAnimations();
       }
     </script>
+
+    <script is:inline>
+      (() => {
+        if (window.__ctaTrackerBound) {
+          return;
+        }
+
+        const onClick = (event) => {
+          const target = event.target instanceof Element ? event.target.closest("[data-cta-track]") : null;
+          if (!(target instanceof HTMLAnchorElement)) {
+            return;
+          }
+
+          window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push({
+            event: "cta_click",
+            cta_name: target.dataset.ctaName || "unknown",
+            cta_section: target.dataset.ctaSection || "unknown",
+            cta_destination: target.getAttribute("href") || "",
+            cta_page_path: window.location.pathname,
+          });
+        };
+
+        document.addEventListener("click", onClick);
+        window.__ctaTrackerBound = true;
+      })();
+    </script>
   </body>
 </html>

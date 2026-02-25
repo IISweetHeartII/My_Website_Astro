@@ -4,6 +4,7 @@ import BlogCard from "@/features/blog/components/BlogCard.astro";
 import CategoryFilter from "@/features/blog/components/CategoryFilter.astro";
 import Layout from "@/layouts/Layout.astro";
 import BreadcrumbSchema from "@/shared/components/seo/BreadcrumbSchema.astro";
+import CategoryIcon from "@/shared/components/ui/CategoryIcon.astro";
 import { categories } from "@/shared/config/categories";
 import { getSortedPublishedPosts, transformPostForCard } from "@/shared/utils/blog";
 
@@ -61,7 +62,7 @@ const pageDescription = "아끼지 않는 문제 해결사로서, 문제를 정�
               href={`/category/${category.id}/`}
               class="px-3 py-1.5 rounded-lg bg-background-muted text-text-muted border border-background-lighter hover:bg-primary hover:text-on-primary transition-colors duration-200 text-xs font-medium"
             >
-              <span class="mr-1">{category.icon}</span>
+              <CategoryIcon categoryId={category.id} class="w-3.5 h-3.5" />
               <span>{category.name}</span>
             </a>
           ))

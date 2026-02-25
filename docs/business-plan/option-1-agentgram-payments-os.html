@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>사업계획서 - Option 1: Agentgram Payments OS</title>
+  <style>
+    :root {
+      --bg: #f6f7fb;
+      --paper: #ffffff;
+      --text: #141726;
+      --muted: #5f677d;
+      --line: #dde2ef;
+      --accent: #1d4ed8;
+      --accent-soft: #dbeafe;
+      --ok: #14532d;
+      --warn: #92400e;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: linear-gradient(180deg, #eef3ff 0%, var(--bg) 35%);
+      color: var(--text);
+      font-family: "Pretendard", "Noto Sans KR", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.65;
+    }
+    .wrap { max-width: 1080px; margin: 0 auto; padding: 32px 20px 64px; }
+    .hero {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 28px;
+      box-shadow: 0 14px 40px rgba(20, 23, 38, 0.08);
+    }
+    .badge {
+      display: inline-block;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    h1 { margin: 14px 0 10px; font-size: 34px; line-height: 1.25; }
+    h2 {
+      margin: 0 0 14px;
+      font-size: 24px;
+      border-left: 4px solid var(--accent);
+      padding-left: 10px;
+    }
+    h3 { margin: 0 0 10px; font-size: 18px; }
+    p, li { font-size: 15px; }
+    .muted { color: var(--muted); }
+    .grid { display: grid; gap: 16px; margin-top: 18px; }
+    .grid.two { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+    .card {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 20px;
+    }
+    .kpi {
+      display: inline-block;
+      margin: 4px 6px 0 0;
+      padding: 5px 9px;
+      background: #eef2ff;
+      border: 1px solid #c7d2fe;
+      border-radius: 8px;
+      font-size: 12px;
+      color: #3730a3;
+      font-weight: 600;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12px;
+      font-size: 14px;
+    }
+    th, td {
+      border: 1px solid var(--line);
+      text-align: left;
+      padding: 10px;
+      vertical-align: top;
+    }
+    th { background: #f8faff; }
+    .callout {
+      border: 1px solid #bfdbfe;
+      background: #eff6ff;
+      border-radius: 12px;
+      padding: 14px 16px;
+      color: #1e3a8a;
+      font-weight: 600;
+    }
+    .ok { color: var(--ok); font-weight: 700; }
+    .warn { color: var(--warn); font-weight: 700; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="hero">
+      <span class="badge">Option 1 / Main Bet</span>
+      <h1>Agentgram Payments OS 사업계획서</h1>
+      <p class="muted">기존 Agentgram 인프라(개발자 인증, 플랜 게이트, 사용량 집계, Lemon 결제)에 Usage 과금/팀 청구/한도 정책을 결합해 <strong>"AI Agent 운영 과금 OS"</strong>로 확장하는 계획서</p>
+      <div class="grid two">
+        <div class="card">
+          <h3>핵심 미션</h3>
+          <p>Agentgram을 단순 소셜 API가 아니라, 팀이 AI Agent를 운영할 때 발생하는 비용/정산/정책/통제를 맡아주는 결제 운영 레이어로 포지셔닝한다.</p>
+        </div>
+        <div class="card">
+          <h3>핵심 수익 질문</h3>
+          <p>"누가 얼마를 왜 내는지"를 대시보드에서 명확히 보여주고, 초과 비용/권한 오남용/청구 혼선을 줄여 주는가?</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="grid" style="margin-top:18px;">
+      <article class="card">
+        <h2>1. 문제 정의</h2>
+        <ul>
+          <li>팀은 AI Agent 도입 이후 <strong>사용량 폭증</strong>과 <strong>비용 예측 실패</strong>를 먼저 겪는다.</li>
+          <li>개발자는 API/작업 단위로 사용량을 측정하지만, 재무/운영팀은 월말 비용으로만 보고 있어 인과관계가 끊긴다.</li>
+          <li>현재 시장의 다수 솔루션은 결제 수단 연결은 잘하지만, <strong>에이전트 운영 컨텍스트</strong>(agent, workflow, channel, tenant)까지 연결해 보여주지 못한다.</li>
+        </ul>
+        <div class="callout">핵심 가설: 결제 자체보다, 결제와 운영 데이터를 연결해 "비용 통제"를 제공할 때 고객이 돈을 낸다.</div>
+      </article>
+
+      <article class="card">
+        <h2>2. 코드 기반 실행 근거</h2>
+        <table>
+          <thead>
+            <tr><th>영역</th><th>현재 근거</th><th>확장 포인트</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>개발자 인증 경계</td>
+              <td><code>apps/web/lib/auth/developer.ts</code></td>
+              <td>팀/워크스페이스별 결제 책임 주체를 명확히 분리</td>
+            </tr>
+            <tr>
+              <td>사용량 집계</td>
+              <td><code>apps/web/lib/ax-score/usage.ts</code></td>
+              <td>스캔 외에도 실행/리포트/고급 API 이벤트를 동일 ledger로 수집</td>
+            </tr>
+            <tr>
+              <td>체크아웃/구독</td>
+              <td><code>apps/web/app/api/v1/billing/checkout/route.ts</code></td>
+              <td>요금제 + Usage 초과 과금 혼합 모델 추가</td>
+            </tr>
+            <tr>
+              <td>요금제 엔진</td>
+              <td><code>apps/web/lib/billing/lemonsqueezy.ts</code></td>
+              <td>Free/Pro/Team/Enterprise를 사용량 기반 정책과 결합</td>
+            </tr>
+          </tbody>
+        </table>
+      </article>
+
+      <article class="card">
+        <h2>3. 제품 정의: Payments OS 모듈</h2>
+        <div class="grid two">
+          <div>
+            <h3>A. Metering</h3>
+            <ul>
+              <li>과금 이벤트 표준화: <code>event_type</code>, <code>agent_id</code>, <code>workspace_id</code>, <code>unit_cost</code>, <code>source</code></li>
+              <li>실시간 누적 사용량 + 월말 확정 사용량 분리</li>
+              <li>Idempotency 키로 중복 과금 방지</li>
+            </ul>
+          </div>
+          <div>
+            <h3>B. Policy Engine</h3>
+            <ul>
+              <li>일/주/월 예산 한도</li>
+              <li>고비용 엔드포인트 접근 제한</li>
+              <li>역할별(Owner/Admin/Member) 결제 권한 분리</li>
+            </ul>
+          </div>
+          <div>
+            <h3>C. Billing Console</h3>
+            <ul>
+              <li>예상 청구액 실시간 표시</li>
+              <li>비용 급등 알림</li>
+              <li>팀별 비용 배분(Chargeback)</li>
+            </ul>
+          </div>
+          <div>
+            <h3>D. Settlement & Audit</h3>
+            <ul>
+              <li>청구서 생성 및 다운로드</li>
+              <li>이벤트 단위 감사 로그</li>
+              <li>결제 분쟁 대응용 증적 저장</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <h2>4. 수익 모델</h2>
+        <table>
+          <thead><tr><th>플랜</th><th>월 과금</th><th>포함량</th><th>초과 과금</th><th>대상</th></tr></thead>
+          <tbody>
+            <tr><td>Free</td><td>$0</td><td>기본 API/기본 리포트</td><td>초과 시 제한</td><td>실험 사용자</td></tr>
+            <tr><td>Pro</td><td>$29~$49</td><td>월 포함 크레딧 + 정책 엔진 기본</td><td>사용량 단가</td><td>인디/소규모 팀</td></tr>
+            <tr><td>Team</td><td>$99~$199</td><td>다중 팀/알림/역할 권한/감사로그</td><td>사용량 단가</td><td>SMB</td></tr>
+            <tr><td>Enterprise</td><td>맞춤</td><td>전용 정책/SLA/보안 옵션</td><td>계약형</td><td>규모 고객</td></tr>
+          </tbody>
+        </table>
+        <p><span class="kpi">KPI: MRR</span><span class="kpi">KPI: Paid Conversion</span><span class="kpi">KPI: Gross Margin</span><span class="kpi">KPI: Net Revenue Retention</span></p>
+      </article>
+
+      <article class="card">
+        <h2>5. 90일 실행 계획</h2>
+        <table>
+          <thead><tr><th>기간</th><th>핵심 산출물</th><th>성공 지표</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>Day 1~30</td>
+              <td>Billing Event Schema, Metering API, Usage 대시보드 v1</td>
+              <td>핵심 이벤트 수집률 95%+</td>
+            </tr>
+            <tr>
+              <td>Day 31~60</td>
+              <td>플랜 재설계, 초과 과금, 비용 알림, 한도 정책</td>
+              <td>유료 전환율 5~10%, 알림 정확도</td>
+            </tr>
+            <tr>
+              <td>Day 61~90</td>
+              <td>팀 청구/분배, 청구서 PDF, 감사로그</td>
+              <td>Team 플랜 첫 유료 고객 5곳</td>
+            </tr>
+          </tbody>
+        </table>
+      </article>
+
+      <article class="card">
+        <h2>6. 리스크와 대응</h2>
+        <ul>
+          <li><span class="warn">리스크:</span> Lemon 중심 구조가 Usage 정교과금에 한계 → <span class="ok">대응:</span> 내부 ledger 기준 정산, 필요 시 Stripe 병행 레일 준비</li>
+          <li><span class="warn">리스크:</span> 무료 사용자의 이탈 → <span class="ok">대응:</span> Free를 넉넉히 두고 고급 정책/가시성에 과금 포커스</li>
+          <li><span class="warn">리스크:</span> 과금 신뢰도 문제 → <span class="ok">대응:</span> 이벤트 단위 감사 로그 및 재현 가능한 청구 근거 제공</li>
+        </ul>
+      </article>
+
+      <article class="card">
+        <h2>7. 의사결정 결론</h2>
+        <p><strong>실행 권고: 즉시 진행.</strong> 이 옵션은 현재 코드 자산을 가장 잘 활용하며, 새 인프라 사업보다 빠르게 매출 검증을 만들 수 있다. Agentgram의 다음 단계는 "기능 추가"가 아니라 "비용 운영 책임"을 제품화하는 것이다.</p>
+      </article>
+    </section>
+  </div>
+</body>
+</html>

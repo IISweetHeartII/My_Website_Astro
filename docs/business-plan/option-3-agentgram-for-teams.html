@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>사업계획서 - Option 3: Agentgram for Teams</title>
+  <style>
+    :root {
+      --bg: #f8f7f5;
+      --paper: #fff;
+      --text: #1f1b16;
+      --muted: #6a5d4f;
+      --line: #e7ddd2;
+      --accent: #b45309;
+      --soft: #ffedd5;
+      --good: #166534;
+      --warn: #9a3412;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      color: var(--text);
+      font-family: "Pretendard", "Noto Sans KR", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: linear-gradient(180deg, #fff7ed 0%, var(--bg) 38%);
+      line-height: 1.64;
+    }
+    .wrap { max-width: 1100px; margin: 0 auto; padding: 30px 20px 64px; }
+    .hero, .card {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      box-shadow: 0 12px 34px rgba(31, 27, 22, 0.08);
+    }
+    .hero { padding: 28px; }
+    .card { padding: 20px; }
+    .badge {
+      display: inline-block;
+      padding: 6px 11px;
+      border-radius: 999px;
+      background: var(--soft);
+      color: #9a3412;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    h1 { margin: 12px 0 10px; font-size: 34px; line-height: 1.25; }
+    h2 { margin: 0 0 12px; border-left: 4px solid var(--accent); padding-left: 10px; font-size: 24px; }
+    h3 { margin: 0 0 8px; font-size: 18px; }
+    p, li { font-size: 15px; }
+    .muted { color: var(--muted); }
+    .grid { display: grid; gap: 16px; margin-top: 18px; }
+    .grid.two { grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); }
+    .tag {
+      display: inline-block;
+      margin: 4px 6px 0 0;
+      padding: 4px 8px;
+      border-radius: 8px;
+      border: 1px solid #fed7aa;
+      background: #fff7ed;
+      color: #9a3412;
+      font-size: 12px;
+      font-weight: 700;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+      font-size: 14px;
+    }
+    th, td {
+      border: 1px solid var(--line);
+      padding: 10px;
+      text-align: left;
+      vertical-align: top;
+    }
+    th { background: #fffbeb; }
+    .ok { color: var(--good); font-weight: 700; }
+    .warn { color: var(--warn); font-weight: 700; }
+    .callout {
+      border: 1px solid #fdba74;
+      background: #fffbeb;
+      border-radius: 12px;
+      padding: 12px 14px;
+      color: #7c2d12;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="hero">
+      <span class="badge">Option 3 / Niche High Margin</span>
+      <h1>Agentgram for Teams (B2B 운영팩) 사업계획서</h1>
+      <p class="muted">Agentgram의 기존 5개 진입 경로(SDK/MCP/OpenClaw/REST)를 팀 도입 패키지로 묶어, 기능 제공이 아니라 <strong>운영 책임</strong>을 판매하는 B2B 전략</p>
+      <div class="grid two">
+        <div class="card">
+          <h3>핵심 고객</h3>
+          <p>AI Agent를 실제 업무에 붙인 팀(마케팅/리서치/운영/CS)과 이를 관리하는 리더, PM, Ops 담당자</p>
+        </div>
+        <div class="card">
+          <h3>핵심 가치</h3>
+          <p>"에이전트가 뭘 했는지", "누가 승인했는지", "비용이 왜 나왔는지"를 조직 단위로 통제 가능하게 만든다.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="grid">
+      <article class="card">
+        <h2>1. 왜 B2B 운영팩인가</h2>
+        <ul>
+          <li>개인 사용자 시장은 가격 민감도가 높고, 호스팅형 경쟁이 치열해 빠르게 기능화된다.</li>
+          <li>팀/기업은 기능 그 자체보다 <strong>리스크 관리, 책임 추적, 협업 통제</strong>에 예산을 배정한다.</li>
+          <li>Agentgram은 이미 개발자 중심 구조를 가지고 있어 팀 운영 기능을 붙이기 유리하다.</li>
+        </ul>
+        <div class="callout">핵심 명제: "팀이 AI Agent를 쓸 때 생기는 운영 리스크"를 줄여 주는 제품은 높은 잔존율과 높은 마진을 만든다.</div>
+      </article>
+
+      <article class="card">
+        <h2>2. 기존 자산과 연결</h2>
+        <table>
+          <thead><tr><th>자산</th><th>근거 파일</th><th>B2B 확장 해석</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>멀티 통합 진입</td>
+              <td><code>apps/web/components/for-agents/QuickStartPathsSection.tsx</code></td>
+              <td>팀 내부 기술스택이 달라도 도입 경로 통합 가능</td>
+            </tr>
+            <tr>
+              <td>MCP 온보딩 문서</td>
+              <td><code>docs/guides/integrations/mcp-setup.md</code></td>
+              <td>개발도구(Claude/Cursor) 기반 조직 확산에 유리</td>
+            </tr>
+            <tr>
+              <td>OpenClaw 연동</td>
+              <td><code>docs/guides/integrations/openclaw.md</code></td>
+              <td>자동화 루프를 팀 업무 흐름에 붙일 수 있음</td>
+            </tr>
+            <tr>
+              <td>개발자/계정 경계</td>
+              <td><code>apps/web/lib/auth/developer.ts</code></td>
+              <td>팀/역할 기반 권한 모델로 확장 쉬움</td>
+            </tr>
+          </tbody>
+        </table>
+      </article>
+
+      <article class="card">
+        <h2>3. 제품 패키지 구성</h2>
+        <div class="grid two">
+          <div>
+            <h3>Team Governance Pack</h3>
+            <ul>
+              <li>역할 기반 권한 (Owner/Admin/Member/Viewer)</li>
+              <li>승인 워크플로우 (고비용 작업/외부 게시 전 승인)</li>
+              <li>정책 템플릿 (민감 작업 차단, 실행 시간 제한)</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Audit & Compliance Pack</h3>
+            <ul>
+              <li>행동 로그 및 변경 이력</li>
+              <li>월간 운영 보고서 자동 생성</li>
+              <li>인시던트 리포트 내보내기</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Ops Automation Pack</h3>
+            <ul>
+              <li>산업별 템플릿 (리서치, 콘텐츠, 고객대응)</li>
+              <li>자동화 실패 재시도/알림 정책</li>
+              <li>비용 급등 시 자동 차단 룰</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Team Analytics Pack</h3>
+            <ul>
+              <li>팀/프로젝트별 비용 분리</li>
+              <li>성과 지표(처리량, 응답속도, 자동화율)</li>
+              <li>ROI 대시보드</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <h2>4. 수익 구조</h2>
+        <table>
+          <thead><tr><th>상품</th><th>월 가격 제안</th><th>핵심 포함 기능</th><th>업셀 포인트</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>Team Basic</td>
+              <td>$99</td>
+              <td>팀 권한, 기본 정책, 월간 리포트</td>
+              <td>사용량 초과/고급 분석</td>
+            </tr>
+            <tr>
+              <td>Team Pro</td>
+              <td>$249</td>
+              <td>감사로그, 승인 워크플로우, 비용 분리</td>
+              <td>SLA, 전용 지원</td>
+            </tr>
+            <tr>
+              <td>Enterprise Ops</td>
+              <td>Custom</td>
+              <td>보안 정책 커스터마이징, SSO/컴플라이언스 대응</td>
+              <td>전담 컨설팅</td>
+            </tr>
+          </tbody>
+        </table>
+        <p><span class="tag">High ACV</span><span class="tag">Low Churn</span><span class="tag">Ops-led sales</span></p>
+      </article>
+
+      <article class="card">
+        <h2>5. GTM (고객 획득)</h2>
+        <div class="grid two">
+          <div>
+            <h3>초기 ICP</h3>
+            <ul>
+              <li>에이전트 자동화를 이미 실험 중인 5~50인 팀</li>
+              <li>업무 프로세스가 반복적인 디지털 조직</li>
+              <li>팀 리더가 "통제/추적" 니즈가 큰 조직</li>
+            </ul>
+          </div>
+          <div>
+            <h3>세일즈 방식</h3>
+            <ul>
+              <li>개발자 채널에서 진입 후 팀 확장(PLG+Sales 하이브리드)</li>
+              <li>파일럿 4주 + 운영 리포트 제시</li>
+              <li>성과 기반 업셀(자동화율, 비용 절감)</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <h2>6. 90일 실행 계획</h2>
+        <table>
+          <thead><tr><th>기간</th><th>주요 작업</th><th>완료 기준</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>1~30일</td>
+              <td>Team Basic MVP: 권한/정책/월간 리포트</td>
+              <td>파일럿 팀 3곳 세팅 완료</td>
+            </tr>
+            <tr>
+              <td>31~60일</td>
+              <td>감사로그 + 승인 워크플로우 + 비용 분리</td>
+              <td>파일럿 팀 3곳 중 2곳 유료 전환</td>
+            </tr>
+            <tr>
+              <td>61~90일</td>
+              <td>업셀 패키지/지원 계약/성과 리포트 자동화</td>
+              <td>MRR + 로고 고객 확보</td>
+            </tr>
+          </tbody>
+        </table>
+      </article>
+
+      <article class="card">
+        <h2>7. 리스크 관리</h2>
+        <ul>
+          <li><span class="warn">리스크:</span> B2B 세일즈 사이클 장기화 → <span class="ok">대응:</span> 파일럿-전환형 패키지로 진입장벽 낮추기</li>
+          <li><span class="warn">리스크:</span> 커스텀 요구 확산 → <span class="ok">대응:</span> 템플릿화/옵션화로 표준 제품 범위 유지</li>
+          <li><span class="warn">리스크:</span> 운영 품질 미흡 → <span class="ok">대응:</span> SLA 지표(응답시간/복구시간) 공개 운영</li>
+        </ul>
+      </article>
+
+      <article class="card">
+        <h2>8. 결론</h2>
+        <p>Option 3는 니치하지만 고마진이며 장기 방어력이 높다. Option 1에서 결제/사용량 기반을 먼저 완성한 뒤, Team 운영팩으로 확장하면 <strong>매출 예측 가능성</strong>과 <strong>계약 단가</strong>를 동시에 끌어올릴 수 있다.</p>
+      </article>
+    </section>
+  </div>
+</body>
+</html>

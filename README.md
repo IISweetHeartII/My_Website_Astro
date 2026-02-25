@@ -162,20 +162,22 @@ bun run check
 
 ## CI/CD
 
-This project uses **GitHub Actions** (CI) + **Cloudflare Pages** (CD).
+This project uses **GitHub Actions** (CI/CD) + **Cloudflare Pages**.
 
-### GitHub Actions (Automated Quality Checks)
+### GitHub Actions
 
 - Biome lint and format check
 - TypeScript type check
 - Project build verification
-- Lighthouse performance (PR only)
+- Cloudflare Pages deployment on `main`
 
 ### Cloudflare Pages (Automated Deployment)
 
 - **Production**: `main` → https://log8.kr
-- **Preview**: `develop` → https://\*.pages.dev
-- **PR Previews**: Auto-generated
+
+For CLI/IaC-only operation, see:
+
+- `docs/dev/cloudflare-cli-iac-runbook.md`
 
 See `.github/workflows/` for workflow files.
 

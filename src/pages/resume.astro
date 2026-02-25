@@ -66,15 +66,17 @@ const certifications: ProofItem[] = [
   title={`Resume - ${SITE_TITLE}`}
   description="김덕환의 이력서 - 아끼지 않는 문제 해결사"
 >
-  <div class="resume-wrapper max-w-4xl mx-auto px-6 py-16 bg-background print:max-w-full print:p-0 print:m-0 print:bg-white">
-    <!-- A4 Paper Simulation -->
-    <div
-      class="a4-page bg-background-light shadow-lg border border-background-lighter py-8 px-12
+  <div class="resume-wrapper max-w-[1600px] mx-auto px-6 py-16 bg-background print:max-w-full print:p-0 print:m-0 print:bg-white">
+    <div class="resume-shell">
+      <div class="resume-main">
+        <!-- A4 Paper Simulation -->
+        <div
+          class="a4-page bg-background-light shadow-lg border border-background-lighter py-8 px-12
              min-h-[297mm] w-[210mm] mx-auto box-border
              max-md:w-full max-md:min-h-auto
              print:shadow-none print:border-0 print:min-h-auto print:w-full print:m-0
              print:pt-[15mm] print:pr-[15mm] print:pb-[12mm] print:pl-[15mm]"
-    >
+        >
       <!-- Print Button (hidden on print) -->
       <div class="print:hidden mb-6 flex justify-between items-center">
         <a
@@ -107,7 +109,7 @@ const certifications: ProofItem[] = [
 
       <!-- Summary -->
       <section class="mb-4">
-        <h2 class="text-lg font-bold text-primary mb-2 border-b border-gray-300 pb-1">Summary</h2>
+        <h2 class="text-lg font-bold text-primary mb-2 border-b border-background-lighter pb-1">Summary</h2>
         <div class="text-sm text-text-light space-y-1">
           <p><strong class="font-semibold text-text">아끼지 않는 문제 해결사 김덕환</strong>입니다. 사람 중심 AI 제품으로 고객과 비즈니스의 실제 문제를 해결합니다.</p>
           <p class="text-text"><strong class="font-semibold">핵심 지표</strong>: 코드리뷰 400%↑, 복구 56h→5h, 학습 3x·개발 7x</p>
@@ -122,13 +124,13 @@ const certifications: ProofItem[] = [
 
       <!-- Projects -->
       <section class="mb-4">
-        <h2 class="text-lg font-bold text-primary mb-3 border-b border-gray-300 pb-1">Projects</h2>
+        <h2 class="text-lg font-bold text-primary mb-3 border-b border-background-lighter pb-1">Projects</h2>
 
         <!-- Project 1: Finders -->
         <div class="mb-5 project-card">
           <div class="mb-1.5">
             <h3 class="font-bold text-primary-light text-base">
-              <a href={getUrl("/portfolio#finders")} class="hover:text-primary">
+              <a href="https://finders.it.kr" target="_blank" rel="noopener noreferrer" class="hover:text-primary">
                 BE Lead로 GCP 인프라 구축 및 팀 코드 리뷰 문화 정착
               </a>
             </h3>
@@ -158,7 +160,7 @@ const certifications: ProofItem[] = [
         <div class="mb-5 project-card">
           <div class="mb-1.5">
             <h3 class="font-bold text-primary-light text-base">
-              <a href="https://github.com/agentgram/agentgram" class="hover:text-primary">
+              <a href="https://github.com/agentgram/agentgram" target="_blank" rel="noopener noreferrer" class="hover:text-primary">
                 agentgram 오픈소스 코어 기여 및 멀티 레포 생태계 확장
               </a>
             </h3>
@@ -168,8 +170,8 @@ const certifications: ProofItem[] = [
             <div>
               <p class="font-semibold text-text-light mb-1">문제 해결</p>
               <ul class="text-text-light space-y-0.5 pl-4 list-disc">
-                <li>Vercel <strong class="font-semibold text-text">DAU 40</strong>, 활성 Agent <strong class="font-semibold text-text">70</strong> 운영</li>
-                <li><strong class="font-semibold text-text">297+ 커밋</strong>, 코어/SDK/MCP/AX <strong class="font-semibold text-text">4레포</strong> 기여</li>
+              <li>Vercel <strong class="font-semibold text-text">DAU 40</strong>, 활성 Agent <strong class="font-semibold text-text">100+</strong> 운영</li>
+              <li><strong class="font-semibold text-text">380+ 커밋</strong>, 코어/JS/Python/MCP/OpenClaw/AX <strong class="font-semibold text-text">6레포</strong> 기여</li>
                 <li>피드·팔로우·스토리·알림 등 <strong class="font-semibold text-text">16개+ 핵심 기능</strong> 고도화</li>
               </ul>
             </div>
@@ -188,7 +190,7 @@ const certifications: ProofItem[] = [
         <div class="mb-5 project-card">
           <div class="mb-1.5">
             <h3 class="font-bold text-primary-light text-base">
-              <a href={getUrl("/portfolio#mathfigure")} class="hover:text-primary">
+              <a href="https://mathfigure.log8.kr" target="_blank" rel="noopener noreferrer" class="hover:text-primary">
                 ICAN-LABs 최우수상 수상, 40명 고객 인터뷰 기반 MVP
               </a>
             </h3>
@@ -218,7 +220,7 @@ const certifications: ProofItem[] = [
         <div class="mb-4 project-card">
           <div class="mb-1.5">
             <h3 class="font-bold text-primary-light text-base">
-              <a href="https://log8.kr" class="hover:text-primary">
+              <a href="https://emergency-ai-call.log8.kr" target="_blank" rel="noopener noreferrer" class="hover:text-primary">
                 119-ai: Twilio AI 기반 병렬 전화로 응급 병원 매칭 시간 단축
               </a>
             </h3>
@@ -250,7 +252,7 @@ const certifications: ProofItem[] = [
 
       <!-- Tech Stack -->
       <section class="mb-4 print:pt-[15mm]">
-        <h2 class="text-lg font-bold text-primary mb-2 border-b border-gray-300 pb-1">Tech Stack</h2>
+        <h2 class="text-lg font-bold text-primary mb-2 border-b border-background-lighter pb-1">Tech Stack</h2>
         <div class="grid grid-cols-2 gap-x-4 gap-y-1 text-sm">
           <div class="flex">
             <span class="font-semibold text-text w-20">Languages</span>
@@ -277,7 +279,7 @@ const certifications: ProofItem[] = [
 
       <!-- AI Orchestration -->
       <section class="mb-4">
-        <h2 class="text-lg font-bold text-primary mb-2 border-b border-gray-300 pb-1">AI Orchestration Lab</h2>
+        <h2 class="text-lg font-bold text-primary mb-2 border-b border-background-lighter pb-1">AI Orchestration Lab</h2>
         <ul class="text-sm text-text-light space-y-1 pl-4 list-disc">
           <li><strong class="font-semibold text-text">Antigravity + Claude Code Team(tmux) + OMO</strong> 멀티 에이전트 오케스트레이션 운영</li>
           <li>워크플로우 전환 후 <strong class="font-semibold text-text">학습량 3x</strong>, <strong class="font-semibold text-text">개발 속도 7x</strong> 향상</li>
@@ -288,7 +290,7 @@ const certifications: ProofItem[] = [
 
       <!-- Experience -->
       <section class="mb-4">
-        <h2 class="text-lg font-bold text-primary mb-2 border-b border-gray-300 pb-1">Experience</h2>
+        <h2 class="text-lg font-bold text-primary mb-2 border-b border-background-lighter pb-1">Experience</h2>
         <div class="space-y-1.5 text-sm">
           <div class="flex justify-between">
             <div>
@@ -323,20 +325,25 @@ const certifications: ProofItem[] = [
 
       <!-- Awards & Certifications -->
       <section class="mb-4">
-        <h2 class="text-lg font-bold text-primary mb-2 border-b border-gray-300 pb-1">Awards & Certifications</h2>
+        <h2 class="text-lg font-bold text-primary mb-2 border-b border-background-lighter pb-1">Awards & Certifications</h2>
         <div class="grid grid-cols-[3fr_2fr] gap-x-4 text-sm">
           <div>
             <p class="font-semibold text-text-light mb-1">Awards</p>
             <ul class="text-text-light space-y-0.5 pl-4 list-disc">
               {awards.map((award) => (
-                <li
-                  data-proof-id={award.id}
-                  data-proof-image={award.image}
-                  data-proof-title={award.label}
-                  data-proof-date={award.date}
-                  class="proof-item cursor-pointer rounded px-1 -mx-1 py-0.5 transition-colors hover:text-primary hover:bg-primary/5"
-                >
-                  {award.label} ({award.date})
+                <li>
+                  <button
+                    type="button"
+                    data-proof-id={award.id}
+                    data-proof-image={award.image}
+                    data-proof-title={award.label}
+                    data-proof-date={award.date}
+                    aria-controls="proof-panel"
+                    aria-expanded="false"
+                    class="proof-item cursor-pointer rounded px-1 -mx-1 py-0.5 transition-colors hover:text-primary hover:bg-primary/5 text-left w-full"
+                  >
+                    {award.label} ({award.date})
+                  </button>
                 </li>
               ))}
             </ul>
@@ -345,14 +352,19 @@ const certifications: ProofItem[] = [
             <p class="font-semibold text-text-light mb-1">Certifications</p>
             <ul class="text-text-light space-y-0.5 pl-4 list-disc">
               {certifications.map((cert) => (
-                <li
-                  data-proof-id={cert.id}
-                  data-proof-image={cert.image}
-                  data-proof-title={cert.label}
-                  data-proof-date={cert.date}
-                  class="proof-item cursor-pointer rounded px-1 -mx-1 py-0.5 transition-colors hover:text-primary hover:bg-primary/5"
-                >
-                  {cert.label} ({cert.date})
+                <li>
+                  <button
+                    type="button"
+                    data-proof-id={cert.id}
+                    data-proof-image={cert.image}
+                    data-proof-title={cert.label}
+                    data-proof-date={cert.date}
+                    aria-controls="proof-panel"
+                    aria-expanded="false"
+                    class="proof-item cursor-pointer rounded px-1 -mx-1 py-0.5 transition-colors hover:text-primary hover:bg-primary/5 text-left w-full"
+                  >
+                    {cert.label} ({cert.date})
+                  </button>
                 </li>
               ))}
             </ul>
@@ -362,7 +374,7 @@ const certifications: ProofItem[] = [
 
       <!-- Education -->
       <section>
-        <h2 class="text-lg font-bold text-primary mb-2 border-b border-gray-300 pb-1">Education</h2>
+        <h2 class="text-lg font-bold text-primary mb-2 border-b border-background-lighter pb-1">Education</h2>
         <div class="text-sm">
           <div class="flex justify-between mb-1">
             <span class="font-semibold text-text">중앙대학교</span>
@@ -375,102 +387,164 @@ const certifications: ProofItem[] = [
           </ul>
         </div>
       </section>
-    </div>
+        </div>
 
-    <!-- Page 2 hint (optional, for longer content) -->
-    <div class="print:hidden mt-4 text-center text-sm text-text-muted">
-      A4 1페이지 미리보기 | 인쇄 시 자동 최적화
-    </div>
-  </div>
-
-  <!-- Proof Panel Backdrop (narrow screens) -->
-  <div
-    id="proof-panel-backdrop"
-    class="fixed inset-0 bg-black/30 z-30 opacity-0 pointer-events-none transition-opacity duration-300 print:hidden"
-  ></div>
-
-  <!-- Proof Panel -->
-  <aside
-    id="proof-panel"
-    class="fixed right-0 top-0 h-screen w-[420px] max-w-[90vw] bg-background-light border-l border-background-lighter
-           shadow-2xl z-40 translate-x-full transition-transform duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]
-           overflow-y-auto print:hidden"
-    aria-hidden="true"
-    role="dialog"
-    aria-label="증빙 자료 보기"
-  >
-    <!-- Panel Header -->
-    <div class="sticky top-0 bg-background-light/95 backdrop-blur-sm border-b border-background-lighter px-6 py-4 flex items-center justify-between z-10">
-      <h3 id="proof-panel-title" class="text-base font-bold text-text truncate pr-4"></h3>
-      <button
-        id="proof-panel-close"
-        class="shrink-0 w-9 h-9 flex items-center justify-center rounded-lg hover:bg-background-lighter transition-colors text-text-light hover:text-text"
-        aria-label="패널 닫기"
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <line x1="18" y1="6" x2="6" y2="18"></line>
-          <line x1="6" y1="6" x2="18" y2="18"></line>
-        </svg>
-      </button>
-    </div>
-
-    <!-- Panel Body -->
-    <div class="px-6 py-6">
-      <!-- Image Container -->
-      <div class="rounded-lg overflow-hidden border border-background-lighter bg-background-light mb-4 min-h-[200px] flex items-center justify-center">
-        <img
-          id="proof-panel-image"
-          src=""
-          alt=""
-          class="w-full h-auto object-contain hidden"
-        />
-        <iframe
-          id="proof-panel-document"
-          src=""
-          title="증빙 문서"
-          class="w-full h-[560px] bg-white hidden"
-        ></iframe>
-        <!-- Loading placeholder -->
-        <div id="proof-panel-loading" class="text-text-muted text-sm py-12">
-          이미지 로딩 중...
+        <!-- Page 2 hint (optional, for longer content) -->
+        <div class="print:hidden mt-4 text-center text-sm text-text-muted">
+          A4 2페이지 미리보기 | 인쇄 시 자동 최적화
         </div>
       </div>
 
-      <!-- Date -->
-      <p id="proof-panel-date" class="text-sm text-text-muted mb-4"></p>
+      <!-- Proof Panel -->
+      <div id="proof-panel-slot" class="proof-panel-slot print:hidden" aria-hidden="true">
+        <aside
+          id="proof-panel"
+          class="proof-panel"
+          aria-hidden="true"
+          role="dialog"
+          aria-label="증빙 자료 보기"
+        >
+        <!-- Panel Header -->
+        <div class="sticky top-0 bg-background-light border-b border-background-lighter px-6 py-4 flex items-center justify-between z-10">
+          <h3 id="proof-panel-title" class="text-base font-bold text-text truncate pr-4"></h3>
+          <button
+            id="proof-panel-close"
+            class="shrink-0 w-9 h-9 flex items-center justify-center rounded-lg hover:bg-background-lighter transition-colors text-text-light hover:text-text"
+            aria-label="패널 닫기"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
 
-      <!-- Download Button -->
-      <a
-        id="proof-panel-download"
-        href=""
-        download
-        class="inline-flex items-center gap-2 px-4 py-2.5 bg-primary text-on-primary text-sm font-semibold rounded-md hover:bg-primary-light transition-colors w-full justify-center"
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-          <polyline points="7 10 12 15 17 10"></polyline>
-          <line x1="12" y1="15" x2="12" y2="3"></line>
-        </svg>
-        증빙 자료 다운로드
-      </a>
+        <!-- Panel Body -->
+        <div class="px-6 py-6">
+          <!-- Image Container -->
+          <div class="rounded-lg overflow-hidden border border-background-lighter bg-background-light mb-4 min-h-[280px] flex items-center justify-center">
+            <img
+              id="proof-panel-image"
+              src=""
+              alt=""
+              class="w-full h-auto max-h-[58vh] object-contain hidden"
+            />
+            <iframe
+              id="proof-panel-document"
+              src=""
+              title="증빙 문서"
+              class="w-full h-[480px] bg-white hidden"
+            ></iframe>
+            <!-- Loading placeholder -->
+            <div id="proof-panel-loading" class="text-text-muted text-sm py-12">
+              이미지 로딩 중...
+            </div>
+          </div>
+
+          <!-- Date -->
+          <p id="proof-panel-date" class="text-sm text-text-muted mb-4"></p>
+
+          <!-- Download Button -->
+          <a
+            id="proof-panel-download"
+            href=""
+            download
+            class="inline-flex items-center gap-2 px-4 py-2.5 bg-primary text-on-primary text-sm font-semibold rounded-md hover:bg-primary-light transition-colors w-full justify-center"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+            증빙 자료 다운로드
+          </a>
+        </div>
+        </aside>
+      </div>
     </div>
-  </aside>
+  </div>
 </Layout>
 
 <style>
-  /* Resume shift when panel is open */
-  .resume-wrapper {
-    transition: margin-right 500ms cubic-bezier(0.4, 0, 0.2, 1);
+  .resume-shell {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 1.5rem;
   }
 
-  .resume-wrapper[data-panel="open"] {
-    margin-right: calc(420px + 1.5rem);
+  .resume-main {
+    flex: 0 0 auto;
   }
 
-  /* On narrow screens, panel overlays instead of pushing */
+  .proof-panel-slot {
+    width: 0;
+    flex: 0 0 auto;
+    overflow: hidden;
+    margin-top: var(--proof-panel-offset, 0);
+    transition: width 420ms cubic-bezier(0.22, 1, 0.36, 1), margin-top 320ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .proof-panel-slot.is-open {
+    width: 620px;
+  }
+
+  .proof-panel {
+    width: 620px;
+    max-width: 620px;
+    position: relative;
+    overflow: visible;
+    background: var(--color-background-light);
+    border: 1px solid var(--color-background-lighter);
+    box-shadow: 0 20px 32px -18px rgb(0 0 0 / 0.35);
+    border-radius: 0.75rem;
+    opacity: 0;
+    transform: translateX(32px) scale(0.985);
+    transition: opacity 280ms ease, transform 420ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .proof-panel-slot.is-open .proof-panel {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+
+  .proof-panel[aria-hidden="true"] {
+    pointer-events: none;
+  }
+
+  .resume-main h2[class*="border-b"] {
+    border-bottom-color: color-mix(in srgb, var(--color-text) 20%, transparent);
+  }
+
+  html[data-theme="dark"] .resume-main h2[class*="border-b"] {
+    border-bottom-color: color-mix(in srgb, var(--color-text) 38%, transparent);
+  }
+
   @media (max-width: 1200px) {
-    .resume-wrapper[data-panel="open"] {
-      margin-right: auto;
+    .resume-shell {
+      display: block;
+    }
+
+    .proof-panel-slot,
+    .proof-panel-slot.is-open {
+      width: 100%;
+      margin-top: 0;
+    }
+
+    .proof-panel {
+      position: static;
+      width: 100%;
+      max-width: 100%;
+      margin-top: 1rem;
+      transform: translateY(8px);
+    }
+
+    .proof-panel-slot:not(.is-open) {
+      display: none;
+    }
+
+    .proof-panel-slot.is-open .proof-panel {
+      transform: translateY(0);
     }
   }
 
@@ -479,6 +553,12 @@ const certifications: ProofItem[] = [
     color: var(--color-primary) !important;
     background-color: color-mix(in srgb, var(--color-primary) 10%, transparent) !important;
     font-weight: 600;
+  }
+
+  .proof-item {
+    border: 0;
+    background: transparent;
+    font: inherit;
   }
 
   /* 인쇄 전용 스타일 - TailwindCSS로 대체 불가능한 부분만 유지 */
@@ -524,9 +604,31 @@ const certifications: ProofItem[] = [
       line-break: strict;
     }
 
+    .a4-page h2[class*="border-b"] {
+      border-bottom-color: #475569 !important;
+      border-bottom-width: 1.5px !important;
+    }
+
+    .a4-page .border-background-lighter {
+      border-color: #64748b !important;
+    }
+
     .resume-wrapper {
       background: white !important;
-      margin-right: auto !important;
+    }
+
+    .resume-shell {
+      display: block !important;
+    }
+
+    .proof-panel-slot,
+    .proof-panel-slot.is-open {
+      width: 0 !important;
+      margin-top: 0 !important;
+    }
+
+    .proof-panel {
+      display: none !important;
     }
 
     /* 인쇄 시 클릭 힌트 숨김 */
@@ -537,8 +639,11 @@ const certifications: ProofItem[] = [
 </style>
 
 <script>
+  import { setupLightModePrintButton } from "@/shared/scripts/light-mode-print";
+
   function setupProofPanel(): void {
     const panel = document.getElementById("proof-panel");
+    const panelSlot = document.getElementById("proof-panel-slot");
     const panelTitle = document.getElementById("proof-panel-title");
     const panelImage = document.getElementById("proof-panel-image") as HTMLImageElement | null;
     const panelDocument = document.getElementById("proof-panel-document") as HTMLIFrameElement | null;
@@ -546,11 +651,41 @@ const certifications: ProofItem[] = [
     const panelDate = document.getElementById("proof-panel-date");
     const panelDownload = document.getElementById("proof-panel-download") as HTMLAnchorElement | null;
     const panelClose = document.getElementById("proof-panel-close");
-    const backdrop = document.getElementById("proof-panel-backdrop");
-    const resumeWrapper = document.querySelector(".resume-wrapper") as HTMLElement | null;
+    const resumeShell = document.querySelector(".resume-shell") as HTMLElement | null;
     const proofItems = document.querySelectorAll<HTMLElement>("[data-proof-id]");
 
-    if (!panel || !panelTitle || !panelImage || !panelDocument || !panelClose || !resumeWrapper) return;
+    if (!panel || !panelSlot || !panelTitle || !panelImage || !panelDocument || !panelClose || !resumeShell) return;
+
+    const panelEl = panel;
+    const panelSlotEl = panelSlot;
+    const resumeShellEl = resumeShell;
+    const resumePaperEl = resumeShellEl.querySelector(".a4-page") as HTMLElement | null;
+    let activeItemEl: HTMLElement | null = null;
+
+    function updatePanelOffset(anchorEl: HTMLElement): void {
+      if (window.matchMedia("(max-width: 1200px)").matches) {
+        panelSlotEl.style.removeProperty("--proof-panel-offset");
+        return;
+      }
+
+      const shellRect = resumeShellEl.getBoundingClientRect();
+      const anchorRect = anchorEl.getBoundingClientRect();
+      const headerEl = document.querySelector("header");
+      const headerBottom = headerEl?.getBoundingClientRect().bottom ?? 0;
+      const minViewportTop = Math.max(24, headerBottom + 12);
+      const panelHeight = Math.max(420, panelEl.getBoundingClientRect().height || panelEl.scrollHeight || 0);
+      const maxViewportTop = Math.max(minViewportTop, window.innerHeight - panelHeight - 20);
+      const preferredViewportTop = anchorRect.top - 18;
+      const targetViewportTop = Math.min(maxViewportTop, Math.max(minViewportTop, preferredViewportTop));
+      const shellDocTop = shellRect.top + window.scrollY;
+      const paperBottomDoc = (resumePaperEl?.getBoundingClientRect().bottom ?? shellRect.bottom) + window.scrollY;
+      const maxDocTopByPaper = Math.max(shellDocTop, paperBottomDoc - panelHeight - 12);
+      const preferredDocTop = window.scrollY + targetViewportTop;
+      const clampedDocTop = Math.min(maxDocTopByPaper, Math.max(shellDocTop, preferredDocTop));
+      const offset = Math.max(0, clampedDocTop - shellDocTop);
+
+      panelSlotEl.style.setProperty("--proof-panel-offset", `${Math.round(offset)}px`);
+    }
 
     let activeItemId: string | null = null;
 
@@ -600,6 +735,7 @@ const certifications: ProofItem[] = [
         panelImage!.onload = () => {
           panelImage!.classList.remove("hidden");
           if (panelLoading) panelLoading.classList.add("hidden");
+          updatePanelOffset(item);
         };
         panelImage!.onerror = () => {
           if (panelLoading) {
@@ -611,45 +747,35 @@ const certifications: ProofItem[] = [
         panelImage!.src = image;
       }
 
-      // Slide in
-      panel!.classList.remove("translate-x-full");
-      panel!.classList.add("translate-x-0");
-      panel!.setAttribute("aria-hidden", "false");
-
-      // Shift resume left
-      resumeWrapper!.setAttribute("data-panel", "open");
-
-      // Show backdrop on narrow screens
-      if (backdrop) {
-        backdrop.classList.remove("opacity-0", "pointer-events-none");
-        backdrop.classList.add("opacity-100", "pointer-events-auto");
-      }
+      panelSlotEl.classList.add("is-open");
+      panelSlotEl.setAttribute("aria-hidden", "false");
+      panelEl.setAttribute("aria-hidden", "false");
+      activeItemEl = item;
+      updatePanelOffset(item);
+      requestAnimationFrame(() => updatePanelOffset(item));
 
       // Highlight active item
       for (const el of proofItems) {
-        el.classList.toggle("proof-item-active", el.dataset["proofId"] === id);
+        const isActive = el.dataset["proofId"] === id;
+        el.classList.toggle("proof-item-active", isActive);
+        el.setAttribute("aria-expanded", isActive ? "true" : "false");
       }
 
       activeItemId = id;
     }
 
     function closePanel(): void {
-      panel!.classList.add("translate-x-full");
-      panel!.classList.remove("translate-x-0");
-      panel!.setAttribute("aria-hidden", "true");
-
-      resumeWrapper!.removeAttribute("data-panel");
-
-      if (backdrop) {
-        backdrop.classList.add("opacity-0", "pointer-events-none");
-        backdrop.classList.remove("opacity-100", "pointer-events-auto");
-      }
+      panelSlotEl.classList.remove("is-open");
+      panelSlotEl.setAttribute("aria-hidden", "true");
+      panelEl.setAttribute("aria-hidden", "true");
 
       for (const el of proofItems) {
         el.classList.remove("proof-item-active");
+        el.setAttribute("aria-expanded", "false");
       }
 
       activeItemId = null;
+      activeItemEl = null;
     }
 
     // Click handlers
@@ -660,8 +786,6 @@ const certifications: ProofItem[] = [
     // Close controls
     panelClose.addEventListener("click", closePanel);
     panelClose.addEventListener("pointerup", closePanel);
-    backdrop?.addEventListener("click", closePanel);
-    backdrop?.addEventListener("pointerup", closePanel);
 
     // ESC key
     document.addEventListener("keydown", (e: KeyboardEvent) => {
@@ -675,16 +799,27 @@ const certifications: ProofItem[] = [
       if (activeItemId === null) return;
       const target = e.target as Element | null;
       if (!target) return;
-      if (panel.contains(target)) return;
+      if (panelEl.contains(target)) return;
       if (target.closest("[data-proof-id]")) return;
       closePanel();
     });
+
+    window.addEventListener("resize", () => {
+      if (!activeItemEl) return;
+      updatePanelOffset(activeItemEl);
+    });
+
+    window.addEventListener(
+      "scroll",
+      () => {
+        if (!activeItemEl) return;
+        updatePanelOffset(activeItemEl);
+      },
+      { passive: true },
+    );
   }
 
-  // Print button
-  document.getElementById("print-btn")?.addEventListener("click", () => {
-    window.print();
-  });
+  setupLightModePrintButton(document.getElementById("print-btn") as HTMLButtonElement | null);
 
   // Support Astro View Transitions
   document.addEventListener("astro:page-load", setupProofPanel);

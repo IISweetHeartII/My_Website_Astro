@@ -1,5 +1,6 @@
 ---
 import { Layers, Search, Tag } from "lucide-astro";
+import CategoryIcon from "@/shared/components/ui/CategoryIcon.astro";
 import { categories } from "@/shared/config/categories";
 ---
 
@@ -28,7 +29,7 @@ import { categories } from "@/shared/config/categories";
             data-category={category.id}
             class="category-item px-4 py-2.5 rounded-full transition-all duration-200 text-sm font-medium hover:scale-105 hover:shadow-lg bg-background-muted text-text-muted hover:bg-primary hover:text-on-primary flex items-center gap-2"
           >
-            <span class="text-base">{category.icon}</span>
+            <CategoryIcon categoryId={category.id} class="w-4 h-4" />
             <span>{category.name}</span>
           </button>
         ))

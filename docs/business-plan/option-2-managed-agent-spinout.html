@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>사업계획서 - Option 2: Managed Agent Spinout</title>
+  <style>
+    :root {
+      --bg: #f4f7f8;
+      --paper: #ffffff;
+      --text: #14211f;
+      --muted: #556764;
+      --line: #d7e2df;
+      --accent: #0f766e;
+      --accent-soft: #ccfbf1;
+      --risk: #9a3412;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: radial-gradient(circle at top right, #d9f99d 0%, #f4f7f8 34%);
+      color: var(--text);
+      font-family: "Pretendard", "Noto Sans KR", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.65;
+    }
+    .wrap { max-width: 1080px; margin: 0 auto; padding: 30px 20px 60px; }
+    .hero, .card {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      box-shadow: 0 12px 36px rgba(20, 33, 31, 0.08);
+    }
+    .hero { padding: 28px; }
+    .card { padding: 20px; }
+    .badge {
+      display: inline-block;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    h1 { margin: 14px 0 10px; font-size: 34px; line-height: 1.25; }
+    h2 { margin: 0 0 12px; font-size: 24px; border-left: 4px solid var(--accent); padding-left: 10px; }
+    h3 { margin: 0 0 8px; font-size: 18px; }
+    p, li { font-size: 15px; }
+    .muted { color: var(--muted); }
+    .grid { display: grid; gap: 16px; margin-top: 18px; }
+    .grid.two { grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); }
+    table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 14px; }
+    th, td { border: 1px solid var(--line); padding: 10px; text-align: left; vertical-align: top; }
+    th { background: #f0fdfa; }
+    .pill {
+      display: inline-block;
+      margin: 4px 6px 0 0;
+      padding: 4px 9px;
+      border-radius: 8px;
+      border: 1px solid #99f6e4;
+      background: #f0fdfa;
+      color: #115e59;
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .risk {
+      border: 1px solid #fed7aa;
+      background: #fff7ed;
+      border-radius: 12px;
+      padding: 12px 14px;
+      color: var(--risk);
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="hero">
+      <span class="badge">Option 2 / Secondary Bet</span>
+      <h1>SkyBot형 스핀아웃: Managed Agent 서비스</h1>
+      <p class="muted">OpenClaw 기반 에이전트 운영을 "설치 없이" 제공하는 별도 브랜드 사업. 핵심은 원클릭 배포가 아니라 <strong>운영 책임(SLA, 정책, 감사, 지원)</strong>을 파는 것</p>
+      <div class="grid two">
+        <div class="card">
+          <h3>시장 신호</h3>
+          <p>관리형 포지션은 이미 가격대가 형성되어 있음. 사용자들은 셀프호스트 가능해도 편의/안정성/지원에 비용을 지불한다.</p>
+          <p><span class="pill">$29~$399</span><span class="pill">$39~$149</span><span class="pill">Cloud convenience demand</span></p>
+        </div>
+        <div class="card">
+          <h3>포지셔닝 원칙</h3>
+          <p>"우리는 호스팅 회사"가 아니라 "에이전트 운영 파트너"라는 메시지로 시장에 진입한다. 설치 자동화만으로는 방어력이 약하다.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="grid">
+      <article class="card">
+        <h2>1. 해결할 고객 문제</h2>
+        <ul>
+          <li>셀프호스트는 초반엔 쉬워 보이지만, 장기적으로는 업데이트/장애/보안/권한/백업에서 운영 부담이 누적된다.</li>
+          <li>팀 단위 사용 시 누가 어떤 자동화를 실행했고 어떤 비용이 발생했는지 추적하기 어렵다.</li>
+          <li>메신저 연동(WhatsApp/Telegram/Discord/Slack)과 모델 키 관리, 재시도/모니터링은 비개발 조직이 직접 처리하기 어렵다.</li>
+        </ul>
+      </article>
+
+      <article class="card">
+        <h2>2. 제품 구성</h2>
+        <table>
+          <thead><tr><th>모듈</th><th>기능</th><th>유료 가치</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>Provisioning</td>
+              <td>워크스페이스 생성, 채널 연결, 기본 템플릿 자동 배포</td>
+              <td>초기 설치 시간 절감(분 단위 온보딩)</td>
+            </tr>
+            <tr>
+              <td>Operations</td>
+              <td>상태 모니터링, 재시작, 알림, 장애 대응</td>
+              <td>운영 공수 감소 + 안정성</td>
+            </tr>
+            <tr>
+              <td>Policy & Security</td>
+              <td>권한 분리, 작업 허용 목록, 민감 작업 차단</td>
+              <td>조직 리스크 감소</td>
+            </tr>
+            <tr>
+              <td>Audit</td>
+              <td>행동 로그, 변경 이력, 비용 추적</td>
+              <td>관리자 보고/감사 대응</td>
+            </tr>
+            <tr>
+              <td>Support</td>
+              <td>SLA, 온보딩 세션, 운영 컨설팅</td>
+              <td>비기술 고객의 구매 결정 포인트</td>
+            </tr>
+          </tbody>
+        </table>
+      </article>
+
+      <article class="card">
+        <h2>3. 수익 모델 및 가격 전략</h2>
+        <div class="grid two">
+          <div>
+            <h3>기본 가격 구조</h3>
+            <ul>
+              <li>Starter: 월 $49~$79 (소규모 개인/팀)</li>
+              <li>Growth: 월 $149~$299 (채널/워크스페이스 확장)</li>
+              <li>Business: 월 $499+ (SLA, 계정 담당자, 감사 기능)</li>
+            </ul>
+          </div>
+          <div>
+            <h3>추가 과금 구조</h3>
+            <ul>
+              <li>추가 채널/좌석/자동화 실행량</li>
+              <li>고급 보안 정책/감사 리포트</li>
+              <li>전문 온보딩/마이그레이션 서비스</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <h2>4. 경쟁과 차별화</h2>
+        <table>
+          <thead><tr><th>경쟁축</th><th>단순 호스팅</th><th>제안 서비스</th></tr></thead>
+          <tbody>
+            <tr><td>배포</td><td>원클릭 제공</td><td>원클릭 + 조직 정책 포함</td></tr>
+            <tr><td>운영</td><td>기본 모니터링</td><td>실패 복구/장애 대응 룰</td></tr>
+            <tr><td>보안</td><td>기본 키 입력</td><td>역할/권한/감사 체계</td></tr>
+            <tr><td>구매 주체</td><td>개인 개발자 중심</td><td>팀 운영 책임자(Ops, PM, 리더)</td></tr>
+            <tr><td>방어력</td><td>낮음(기능 복제 쉬움)</td><td>높음(운영 노하우 + 데이터 축적)</td></tr>
+          </tbody>
+        </table>
+      </article>
+
+      <article class="card">
+        <h2>5. 90일 실행 계획</h2>
+        <table>
+          <thead><tr><th>단계</th><th>액션</th><th>검증 지표</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>1~30일</td>
+              <td>Landing + Waitlist + 인터뷰 20건, 유료 의향 검증</td>
+              <td>대기자 200명, 유료 의향 20%+</td>
+            </tr>
+            <tr>
+              <td>31~60일</td>
+              <td>Closed Beta 10팀, 운영 대시보드 MVP</td>
+              <td>주간 활성팀 60%+, 장애 대응 SLA 준수</td>
+            </tr>
+            <tr>
+              <td>61~90일</td>
+              <td>유료 전환 시작, 서포트 패키지 판매</td>
+              <td>유료 고객 5~10팀, 초기 MRR 확보</td>
+            </tr>
+          </tbody>
+        </table>
+      </article>
+
+      <article class="card">
+        <h2>6. 핵심 리스크</h2>
+        <div class="risk">
+          원클릭 배포는 빠르게 기능화된다. 따라서 이 옵션의 성공은 "배포 속도"가 아니라 "운영 품질(안정성, 정책, 로그, 지원)"을 얼마나 제품화하느냐에 달린다.
+        </div>
+        <ul>
+          <li>인프라 비용 압박: 세션/메모리/모델 비용이 마진을 잠식할 수 있음</li>
+          <li>서포트 부하: 고객 수가 늘면 운영팀 부담 급증</li>
+          <li>보안 사고: 신뢰 훼손 시 회복 비용 큼</li>
+        </ul>
+      </article>
+
+      <article class="card">
+        <h2>7. 결론</h2>
+        <p>이 옵션은 <strong>보조 축(Secondary Bet)</strong>으로 유효하다. 다만 즉시 대규모 투자보다, 90일 수요 검증 후 Agentgram Payments OS에서 발생한 고객을 기반으로 확장해야 성공 확률이 높다.</p>
+      </article>
+    </section>
+  </div>
+</body>
+</html>

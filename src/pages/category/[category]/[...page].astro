@@ -4,6 +4,7 @@ import type { GetStaticPaths } from "astro";
 import { Archive, Files, FileText, Tag } from "lucide-astro";
 import BlogCard from "@/features/blog/components/BlogCard.astro";
 import Layout from "@/layouts/Layout.astro";
+import CategoryIcon from "@/shared/components/ui/CategoryIcon.astro";
 import {
   type Category,
   categories,
@@ -58,7 +59,7 @@ export const getStaticPaths = (async ({ paginate }) => {
 
 const { category, allCategories, page } = Astro.props as Props;
 
-const title = `${category.icon} ${category.name}`;
+const title = category.name;
 const description = category.description;
 const pageTitle = page.currentPage === 1 ? title : `${title} (Page ${page.currentPage})`;
 ---
@@ -73,7 +74,9 @@ const pageTitle = page.currentPage === 1 ? title : `${title} (Page ${page.curren
     <section
       class="text-center mb-12 p-16 bg-linear-to-br from-primary/10 to-accent/10 rounded-3xl border-2 border-primary/20 md:p-12 md:mb-8"
     >
-      <div class="text-6xl mb-4">{category.icon}</div>
+      <div class="mb-4 inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-background border border-background-lighter">
+        <CategoryIcon categoryId={category.id} class="w-8 h-8 text-primary" />
+      </div>
       <h1 class="text-4xl md:text-5xl font-extrabold text-text mb-4 leading-tight">
         {category.name}
       </h1>
@@ -103,7 +106,7 @@ const pageTitle = page.currentPage === 1 ? title : `${title} (Page ${page.curren
                   href={`/category/${cat.id}/`}
                   class="px-4 py-2 rounded-lg bg-background hover:bg-primary hover:text-on-primary transition-all duration-200 font-medium text-sm flex items-center gap-2 border border-background-lighter hover:border-primary"
                 >
-                  <span>{cat.icon}</span>
+                  <CategoryIcon categoryId={cat.id} class="w-4 h-4" />
                   <span>{cat.name}</span>
                 </a>
               ))

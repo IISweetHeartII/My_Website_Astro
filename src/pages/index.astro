@@ -7,6 +7,8 @@ import {
   Briefcase,
   Code2,
   FileText,
+  Linkedin,
+  Mail,
   Medal,
   Rocket,
   Server,
@@ -28,6 +30,8 @@ import Layout from "../layouts/Layout.astro";
 const allPosts = await getSortedPublishedPosts();
 const latestBlogPosts = getLatestPosts(allPosts, 3);
 const latestPost = latestBlogPosts[0];
+const CONTACT_EMAIL = "sachi009955@gmail.com";
+const CONTACT_MAILTO = `mailto:${CONTACT_EMAIL}`;
 
 const websiteSchema = {
   "@context": "https://schema.org",
@@ -60,12 +64,13 @@ const personSchema = {
     <BreadcrumbSchema items={[{ name: "홈", url: "/" }]} />
   </Fragment>
   <main class="min-h-screen bg-background">
-    <!-- Full-screen Hero Section with Vanta.js -->
+    <!-- Full-screen Hero Section -->
     <section
       id="hero-section"
-      class="relative min-h-screen flex items-center justify-center overflow-hidden"
+      class="relative isolate min-h-screen flex items-center justify-center overflow-hidden bg-background"
     >
-      <!-- Vanta.js animated background will be injected here -->
+      <canvas id="hero-particles" class="absolute inset-0 h-full w-full pointer-events-none" aria-hidden="true"></canvas>
+      <div class="absolute inset-0 bg-linear-to-br from-primary/10 via-background to-info-light/12"></div>
 
       <!-- Hero Content -->
       <div class="relative z-10 container mx-auto px-4 md:px-8">
@@ -75,7 +80,7 @@ const personSchema = {
             <div class="space-y-8 text-center lg:text-left">
               <!-- Badge -->
               <div
-                class="inline-flex items-center gap-2 px-4 py-2 bg-background/80 backdrop-blur-sm border border-background-lighter rounded-full text-sm font-medium text-primary shadow-lg"
+                class="inline-flex items-center gap-2 px-4 py-2 bg-background/95 backdrop-blur-sm border border-background-lighter rounded-full text-sm font-medium text-primary shadow-md"
               >
                 <Target class="w-4 h-4" />
                 실전 중심의 문제 해결
@@ -85,7 +90,7 @@ const personSchema = {
               <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold text-text leading-tight">
                 아끼지 않는<br />
                 <span
-                  class="bg-linear-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent"
+                  class="bg-linear-to-r from-primary to-accent bg-clip-text text-transparent"
                 >
                   문제 해결사
                 </span>
@@ -104,21 +109,30 @@ const personSchema = {
               >
                 <a
                   href="/blog"
-                  class="group inline-flex items-center gap-2 px-8 py-4 bg-primary hover:bg-accent text-on-primary font-semibold rounded-xl transition-all duration-300 shadow-lg hover:shadow-2xl transform hover:-translate-y-1"
+                  data-cta-track
+                  data-cta-name="hero_blog"
+                  data-cta-section="hero"
+                  class="group inline-flex items-center gap-2 px-8 py-4 bg-primary hover:bg-primary-light text-on-primary font-semibold rounded-xl transition-all duration-300 shadow-lg hover:shadow-2xl transform hover:-translate-y-1"
                 >
                   블로그 보기
                   <ArrowRight class="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </a>
                 <a
                   href="/showcase"
-                  class="group inline-flex items-center gap-2 px-8 py-4 bg-background hover:bg-background-light text-primary font-semibold rounded-xl border-2 border-primary transition-all duration-300 shadow-lg hover:shadow-xl"
+                  data-cta-track
+                  data-cta-name="hero_showcase"
+                  data-cta-section="hero"
+                  class="group inline-flex items-center gap-2 px-8 py-4 bg-background-light hover:bg-background-lighter text-primary font-semibold rounded-xl border-2 border-primary-light transition-all duration-300 shadow-lg hover:shadow-xl"
                 >
                   프로젝트 보기
                   <Code2 class="w-5 h-5" />
                 </a>
                 <a
                   href="/portfolio"
-                  class="group inline-flex items-center gap-2 px-8 py-4 bg-linear-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold rounded-xl transition-all duration-300 shadow-lg hover:shadow-2xl transform hover:-translate-y-1"
+                  data-cta-track
+                  data-cta-name="hero_portfolio"
+                  data-cta-section="hero"
+                  class="group inline-flex items-center gap-2 px-8 py-4 bg-linear-to-r from-info to-primary hover:from-info-light hover:to-primary-light text-on-primary font-semibold rounded-xl transition-all duration-300 shadow-lg hover:shadow-2xl transform hover:-translate-y-1"
                 >
                   포트폴리오 보기
                   <Briefcase class="w-5 h-5" />
@@ -132,22 +146,22 @@ const personSchema = {
                 <Image
                   src={profileImage}
                   alt="김덕환 프로필 사진"
-                  class="w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 rounded-full object-cover shadow-2xl border-8 border-white"
+                  class="w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 rounded-full object-cover shadow-2xl border-8 border-background"
                   widths={[256, 320, 384]}
                   sizes="(max-width: 768px) 256px, (max-width: 1024px) 320px, 384px"
                 />
                 <!-- Decorative Elements -->
                 <div
-                  class="absolute -top-4 -right-4 w-24 h-24 bg-purple-300 rounded-full opacity-60 animate-pulse -z-10"
+                  class="absolute -top-4 -right-4 w-24 h-24 bg-primary-light rounded-full opacity-30 animate-pulse -z-10"
                 >
                 </div>
                 <div
-                  class="absolute -bottom-6 -left-6 w-32 h-32 bg-blue-300 rounded-full opacity-40 animate-pulse -z-10"
+                  class="absolute -bottom-6 -left-6 w-32 h-32 bg-info-light rounded-full opacity-26 animate-pulse -z-10"
                   style="animation-delay: 1s"
                 >
                 </div>
                 <div
-                  class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full h-full bg-pink-300 rounded-full opacity-20 animate-pulse -z-20"
+                  class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full h-full bg-primary-lighter rounded-full opacity-22 animate-pulse -z-20"
                   style="animation-delay: 2s"
                 >
                 </div>
@@ -161,6 +175,32 @@ const personSchema = {
     <!-- Bento Grid Section -->
     <section class="py-20 px-4 md:px-8">
       <div class="max-w-7xl mx-auto">
+        <div class="mb-8 md:mb-10 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+          <div>
+            <p class="text-sm font-semibold tracking-wide text-primary mb-2">Start Here</p>
+            <h2 class="text-2xl md:text-3xl font-bold text-text">어디부터 볼지 고민되면, 여기서 시작하세요</h2>
+            <p class="mt-2 text-text-light">
+              블로그는 인사이트, 쇼케이스는 결과물 중심입니다. 목적에 맞게 바로 이동할 수 있게 구성했습니다.
+            </p>
+          </div>
+          <a
+            href="/showcase"
+            data-cta-track
+            data-cta-name="start_showcase_primary"
+            data-cta-section="start_here"
+            class="inline-flex items-center gap-2 px-5 py-3 rounded-xl border border-primary/20 bg-primary/10 text-primary font-semibold hover:bg-primary/15 transition-colors"
+          >
+            대표 프로젝트 먼저 보기
+            <ArrowRight class="w-4 h-4" />
+          </a>
+        </div>
+
+        <div class="mb-6 flex flex-wrap items-center gap-2">
+          <span class="px-3 py-1.5 rounded-full text-xs font-medium bg-background-light border border-background-lighter text-text-light">읽기 중심: 블로그</span>
+          <span class="px-3 py-1.5 rounded-full text-xs font-medium bg-background-light border border-background-lighter text-text-light">결과 중심: 쇼케이스</span>
+          <span class="px-3 py-1.5 rounded-full text-xs font-medium bg-background-light border border-background-lighter text-text-light">검증 중심: 포트폴리오</span>
+        </div>
+
         <!-- Grid Layout -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           <!-- Latest Blog Post - Large Card (2x2) -->
@@ -168,28 +208,28 @@ const personSchema = {
             latestPost && (
               <a
                 href={`/blog/${latestPost.data.slug ?? latestPost.id.replace(/\.[^/.]+$/, "")}`}
-                class="group lg:col-span-2 lg:row-span-2 bg-linear-to-br from-purple-50 to-pink-50 rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-purple-100"
+                class="group lg:col-span-2 lg:row-span-2 bg-background-light rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-background-lighter"
               >
                 <div class="h-full flex flex-col justify-between">
                   <div>
-                    <div class="inline-flex items-center gap-2 px-3 py-1.5 bg-purple-100 text-purple-700 rounded-full text-sm font-medium mb-4">
+                    <div class="inline-flex items-center gap-2 px-3 py-1.5 bg-primary/15 text-primary rounded-full text-sm font-medium mb-4">
                       <FileText class="w-4 h-4" />
                       Recent Post
                     </div>
-                    <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-4 group-hover:text-purple-600 transition-colors">
+                    <h2 class="text-2xl md:text-3xl font-bold text-text mb-4 group-hover:text-primary transition-colors">
                       {latestPost.data.title}
                     </h2>
-                    <p class="text-gray-600 mb-6 line-clamp-3">
+                    <p class="text-text-light mb-6 line-clamp-3">
                       {latestPost.data.description || "블로그 글을 읽어보세요!"}
                     </p>
                   </div>
                   <div class="flex items-center justify-between">
-                    <span class="text-sm text-gray-500">
+                    <span class="text-sm text-text-muted">
                       {latestPost.data.created_date
                         ? new Date(latestPost.data.created_date).toLocaleDateString("ko-KR")
                         : ""}
                     </span>
-                    <span class="inline-flex items-center gap-1 text-purple-600 font-medium group-hover:gap-2 transition-all">
+                    <span class="inline-flex items-center gap-1 text-primary font-medium group-hover:gap-2 transition-all">
                       읽기
                       <ArrowRight class="w-4 h-4" />
                     </span>
@@ -202,20 +242,24 @@ const personSchema = {
           <!-- Showcase Card -->
           <a
             href="/showcase"
-            class="group lg:col-span-1 bg-linear-to-br from-green-50 to-teal-50 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-green-100"
+            data-cta-track
+            data-cta-name="bento_showcase_card"
+            data-cta-section="bento_grid"
+            class="group lg:col-span-1 bg-background-light rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-background-lighter"
           >
             <div class="h-full flex flex-col justify-between">
               <div>
-                <Rocket class="w-10 h-10 text-green-600 mb-4" />
+                <Rocket class="w-10 h-10 text-primary mb-4" />
                 <h3
-                  class="text-xl font-bold text-text mb-2 group-hover:text-green-600 transition-colors"
+                  class="text-xl font-bold text-text mb-2 group-hover:text-primary transition-colors"
                 >
                   Showcase
                 </h3>
-                  <p class="text-text-light text-sm mb-4">직접 만든 프로젝트들을 확인해보세요</p>
+                <p class="text-text-light text-sm mb-2">직접 만든 프로젝트들을 확인해보세요</p>
+                <p class="text-xs text-text-muted">대표 프로젝트 6개 · 실서비스 링크 포함</p>
               </div>
               <span
-                class="inline-flex items-center gap-1 text-green-600 font-medium text-sm group-hover:gap-2 transition-all"
+                class="inline-flex items-center gap-1 text-primary font-medium text-sm group-hover:gap-2 transition-all"
               >
                 보러가기
                 <ArrowRight class="w-4 h-4" />
@@ -224,52 +268,63 @@ const personSchema = {
           </a>
 
           <!-- Tech Stack Card -->
-          <div
-            class="lg:col-span-1 bg-linear-to-br from-blue-50 to-cyan-50 rounded-2xl p-6 shadow-lg border border-blue-100"
+          <a
+            href="/portfolio#tech-stack"
+            data-cta-track
+            data-cta-name="bento_tech_stack"
+            data-cta-section="bento_grid"
+            class="lg:col-span-1 bg-background-light rounded-2xl p-6 shadow-lg border border-background-lighter"
           >
             <div class="h-full flex flex-col">
-              <Code2 class="w-10 h-10 text-blue-600 mb-4" />
-              <h3 class="text-xl font-bold text-gray-900 mb-3">Tech Stack</h3>
+              <Code2 class="w-10 h-10 text-info mb-4" />
+              <h3 class="text-xl font-bold text-text mb-3">Tech Stack</h3>
               <div class="flex flex-wrap gap-2">
-                <span class="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-medium"
+                <span class="px-3 py-1 bg-background-lighter text-primary rounded-full text-xs font-medium"
                   >React</span
                 >
-                <span class="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-medium"
+                <span class="px-3 py-1 bg-background-lighter text-primary rounded-full text-xs font-medium"
                   >Next.js</span
                 >
-                <span class="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-medium"
+                <span class="px-3 py-1 bg-background-lighter text-primary rounded-full text-xs font-medium"
                   >TypeScript</span
                 >
-                <span class="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-medium"
+                <span class="px-3 py-1 bg-background-lighter text-primary rounded-full text-xs font-medium"
                   >Astro</span
                 >
-                <span class="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-medium"
+                <span class="px-3 py-1 bg-background-lighter text-primary rounded-full text-xs font-medium"
                   >Spring Boot</span
                 >
-                <span class="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-medium"
+                <span class="px-3 py-1 bg-background-lighter text-primary rounded-full text-xs font-medium"
                   >Cloudflare</span
                 >
               </div>
+              <span class="inline-flex items-center gap-1 text-primary font-medium text-sm mt-4">
+                스택 상세 보기
+                <ArrowRight class="w-4 h-4" />
+              </span>
             </div>
-          </div>
+          </a>
 
           <!-- About Me Card -->
           <a
             href="/portfolio"
-            class="group lg:col-span-2 bg-linear-to-br from-orange-50 to-yellow-50 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-orange-100"
+            data-cta-track
+            data-cta-name="bento_about"
+            data-cta-section="bento_grid"
+            class="group lg:col-span-2 bg-background-light rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-background-lighter"
           >
             <div class="h-full flex flex-col justify-between">
               <div>
-                <Brain class="w-10 h-10 text-orange-600 mb-4" />
+                <Brain class="w-10 h-10 text-primary mb-4" />
                 <h3
-                  class="text-xl font-bold text-gray-900 mb-2 group-hover:text-orange-600 transition-colors"
+                  class="text-xl font-bold text-text mb-2 group-hover:text-primary transition-colors"
                 >
                   About 덕환
                 </h3>
-                <p class="text-gray-600 text-sm">수학도에서 AI 활용 개발자로 전환한 김덕환</p>
+                <p class="text-text-light text-sm">수학도에서 AI 활용 개발자로 전환한 김덕환</p>
               </div>
               <span
-                class="inline-flex items-center gap-1 text-orange-600 font-medium text-sm mt-4 group-hover:gap-2 transition-all"
+                class="inline-flex items-center gap-1 text-primary font-medium text-sm mt-4 group-hover:gap-2 transition-all"
               >
                 더 알아보기
                 <ArrowRight class="w-4 h-4" />
@@ -278,58 +333,74 @@ const personSchema = {
           </a>
 
           <!-- Achievement Badge 1 -->
-          <div
-            class="lg:col-span-1 bg-linear-to-br from-yellow-50 to-amber-50 rounded-2xl p-6 shadow-lg border border-yellow-100"
+          <a
+            href="/showcase"
+            data-cta-track
+            data-cta-name="bento_award_1"
+            data-cta-section="bento_grid"
+            class="lg:col-span-1 bg-background-light rounded-2xl p-6 shadow-lg border border-background-lighter"
           >
             <div class="h-full flex flex-col justify-center items-center text-center">
               <div
-                class="w-14 h-14 mb-3 rounded-full bg-yellow-100 flex items-center justify-center"
+                class="w-14 h-14 mb-3 rounded-full bg-background-lighter flex items-center justify-center"
               >
-                <Award class="w-8 h-8 text-yellow-600" />
+                <Award class="w-8 h-8 text-accent" />
               </div>
                <h3 class="text-lg font-bold text-text mb-1">청룡톤 2026</h3>
                <p class="text-text-light text-sm">119-ai 트랙 대상</p>
+               <span class="inline-flex items-center gap-1 text-primary font-medium text-xs mt-3">
+                프로젝트 맥락 보기
+                <ArrowRight class="w-3.5 h-3.5" />
+               </span>
             </div>
-          </div>
+          </a>
 
           <!-- Achievement Badge 2 -->
-          <div
-            class="lg:col-span-1 bg-linear-to-br from-indigo-50 to-purple-50 rounded-2xl p-6 shadow-lg border border-indigo-100"
+          <a
+            href="/showcase"
+            data-cta-track
+            data-cta-name="bento_award_2"
+            data-cta-section="bento_grid"
+            class="lg:col-span-1 bg-background-light rounded-2xl p-6 shadow-lg border border-background-lighter"
           >
             <div class="h-full flex flex-col justify-center items-center text-center">
               <div
-                class="w-14 h-14 mb-3 rounded-full bg-indigo-100 flex items-center justify-center"
+                class="w-14 h-14 mb-3 rounded-full bg-background-lighter flex items-center justify-center"
               >
-                <Medal class="w-8 h-8 text-indigo-600" />
+                <Medal class="w-8 h-8 text-primary" />
               </div>
                <h3 class="text-lg font-bold text-text mb-1">UMC 9기 해커톤</h3>
                <p class="text-text-light text-sm">2026 대상 수상</p>
+               <span class="inline-flex items-center gap-1 text-primary font-medium text-xs mt-3">
+                관련 프로젝트 보기
+                <ArrowRight class="w-3.5 h-3.5" />
+               </span>
             </div>
-          </div>
+          </a>
 
           <!-- Featured Project: agentgram -->
           <a
             href="https://agentgram.co"
             target="_blank"
             rel="noopener noreferrer"
-            class="group lg:col-span-1 bg-linear-to-br from-violet-50 to-purple-50 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-violet-100"
+            class="group lg:col-span-1 bg-background-light rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-background-lighter"
           >
             <div class="h-full flex flex-col justify-between">
               <div>
                 <div
-                  class="w-14 h-14 mb-3 rounded-full bg-violet-100 flex items-center justify-center"
+                  class="w-14 h-14 mb-3 rounded-full bg-background-lighter flex items-center justify-center"
                 >
-                  <Users class="w-8 h-8 text-violet-600" />
+                  <Users class="w-8 h-8 text-primary" />
                 </div>
                 <h3
-              class="text-lg font-bold text-text mb-1 group-hover:text-violet-600 transition-colors"
+              class="text-lg font-bold text-text mb-1 group-hover:text-primary transition-colors"
                 >
                   agentgram
                 </h3>
             <p class="text-text-light text-sm">Open-Source AI Agent Network</p>
               </div>
               <span
-                class="inline-flex items-center gap-1 text-violet-600 font-medium text-sm mt-3 group-hover:gap-2 transition-all"
+                class="inline-flex items-center gap-1 text-primary font-medium text-sm mt-3 group-hover:gap-2 transition-all"
               >
                 agentgram.co
                 <ArrowRight class="w-4 h-4" />
@@ -342,24 +413,24 @@ const personSchema = {
             href="https://finders.it.kr"
             target="_blank"
             rel="noopener noreferrer"
-            class="group lg:col-span-1 bg-linear-to-br from-blue-50 to-cyan-50 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-blue-100"
+            class="group lg:col-span-1 bg-background-light rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-background-lighter"
           >
             <div class="h-full flex flex-col justify-between">
               <div>
                 <div
-                  class="w-14 h-14 mb-3 rounded-full bg-blue-100 flex items-center justify-center"
+                  class="w-14 h-14 mb-3 rounded-full bg-background-lighter flex items-center justify-center"
                 >
-                  <Server class="w-8 h-8 text-blue-600" />
+                  <Server class="w-8 h-8 text-info" />
                 </div>
                 <h3
-              class="text-lg font-bold text-text mb-1 group-hover:text-blue-600 transition-colors"
+              class="text-lg font-bold text-text mb-1 group-hover:text-primary transition-colors"
                 >
                   Finders
                 </h3>
             <p class="text-text-light text-sm">Backend Lead, GCP Infra</p>
               </div>
               <span
-                class="inline-flex items-center gap-1 text-blue-600 font-medium text-sm mt-3 group-hover:gap-2 transition-all"
+                class="inline-flex items-center gap-1 text-primary font-medium text-sm mt-3 group-hover:gap-2 transition-all"
               >
                 finders.it.kr
                 <ArrowRight class="w-4 h-4" />
@@ -367,35 +438,372 @@ const personSchema = {
             </div>
           </a>
         </div>
+
+        <div class="mt-8 rounded-2xl border border-background-lighter bg-background-light p-5 md:p-6 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+          <div>
+            <p class="text-sm font-semibold text-text">협업/의뢰 문의는 여기로 보내주세요</p>
+            <p class="text-sm text-text-light mt-1">빠른 답장은 LinkedIn DM, 상세 논의는 이메일이 가장 효율적입니다.</p>
+          </div>
+          <div class="flex flex-wrap items-center gap-2">
+            <a
+              href={AUTHOR_LINKEDIN}
+              target="_blank"
+              rel="noopener noreferrer"
+              data-cta-track
+              data-cta-name="contact_linkedin"
+              data-cta-section="bento_bottom"
+              class="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl border border-background-lighter bg-background hover:border-primary text-text hover:text-primary font-semibold transition-colors"
+            >
+              <Linkedin class="w-4 h-4" />
+              LinkedIn DM
+            </a>
+            <a
+              href={CONTACT_MAILTO}
+              data-cta-track
+              data-cta-name="contact_email"
+              data-cta-section="bento_bottom"
+              class="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-primary text-on-primary font-semibold hover:bg-primary-light transition-colors"
+            >
+              <Mail class="w-4 h-4" />
+              이메일 문의
+            </a>
+          </div>
+        </div>
       </div>
     </section>
   </main>
 
-  <!-- Vanta.js requires THREE on window object - use CDN for reliable loading -->
-  <script is:inline src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
-  <script is:inline src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.waves.min.js"></script>
   <script is:inline>
-    document.addEventListener("DOMContentLoaded", function () {
-      // Initialize Vanta.js WAVES effect on hero section
-      var heroSection = document.getElementById("hero-section");
-      if (heroSection && window.VANTA) {
-        window.VANTA.WAVES({
-          el: heroSection,
-          mouseControls: true,
-          touchControls: true,
-          gyroControls: false,
-          minHeight: 200.0,
-          minWidth: 200.0,
-          scale: 1.0,
-          scaleMobile: 1.0,
-          color: 0x7c3aed,
-          shininess: 35.0,
-          waveHeight: 15.0,
-          waveSpeed: 0.75,
-          zoom: 0.85,
-        });
+    (() => {
+      const globalState = window.__heroParticlesState ?? {};
+      window.__heroParticlesState = globalState;
+
+      if (typeof globalState.teardown === "function") {
+        globalState.teardown();
       }
-    });
+
+      if (typeof globalState.handlePageLoad === "function") {
+        document.removeEventListener("astro:page-load", globalState.handlePageLoad);
+      }
+
+      if (typeof globalState.handleBeforePreparation === "function") {
+        document.removeEventListener("astro:before-preparation", globalState.handleBeforePreparation);
+      }
+
+      const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
+      const smoothstep = (edge0, edge1, value) => {
+        const t = clamp((value - edge0) / (edge1 - edge0), 0, 1);
+        return t * t * (3 - 2 * t);
+      };
+
+      const fract = (value) => value - Math.floor(value);
+      const hash2 = (x, y) => fract(Math.sin(x * 127.1 + y * 311.7) * 43758.5453123);
+
+      const noise2 = (x, y) => {
+        const ix = Math.floor(x);
+        const iy = Math.floor(y);
+        const fx = x - ix;
+        const fy = y - iy;
+
+        const a = hash2(ix, iy);
+        const b = hash2(ix + 1, iy);
+        const c = hash2(ix, iy + 1);
+        const d = hash2(ix + 1, iy + 1);
+
+        const ux = fx * fx * (3 - 2 * fx);
+        const uy = fy * fy * (3 - 2 * fy);
+
+        return a + (b - a) * ux + (c - a) * uy * (1 - ux) + (d - b) * ux * uy;
+      };
+
+      let teardown = () => {};
+
+      const createParticles = () => {
+        teardown();
+
+        const section = document.getElementById("hero-section");
+        const canvas = document.getElementById("hero-particles");
+        if (!(section instanceof HTMLElement) || !(canvas instanceof HTMLCanvasElement)) {
+          teardown = () => {};
+          globalState.teardown = teardown;
+          return;
+        }
+
+        const context = canvas.getContext("2d");
+        if (!context) {
+          teardown = () => {};
+          globalState.teardown = teardown;
+          return;
+        }
+
+        const isReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        const goldenAngle = Math.PI * (3 - Math.sqrt(5));
+
+        let frameId = 0;
+        let width = 0;
+        let height = 0;
+        let centerX = 0;
+        let centerY = 0;
+        let cloudRadius = 0;
+        let ringRadius = 0;
+        let ringWidth = 0;
+        let lastTime = 0;
+        let particles = [];
+
+        const pointerTarget = { x: 0, y: 0, active: false };
+        const pointer = { x: 0, y: 0, active: false };
+        const ring = { x: 0, y: 0 };
+
+        const isDark = () => document.documentElement.dataset.theme === "dark";
+
+        const buildParticles = () => {
+          const area = width * height;
+          const targetCount = isReducedMotion
+            ? 240
+            : clamp(Math.floor(area / 2200), 380, 900);
+
+          particles = Array.from({ length: targetCount }, (_, index) => {
+            const ratio = (index + 0.5) / targetCount;
+            const angle = index * goldenAngle;
+            const radius = Math.sqrt(ratio) * cloudRadius * (0.52 + Math.random() * 0.56);
+            const baseX = centerX + Math.cos(angle) * radius;
+            const baseY = centerY + Math.sin(angle) * radius * 0.82;
+
+            return {
+              baseX,
+              baseY,
+              x: baseX,
+              y: baseY,
+              vx: 0,
+              vy: 0,
+              seed: Math.random() * 1000,
+              phase: Math.random() * Math.PI * 2,
+              hue: 198 + ratio * 90,
+              size: 0.7 + Math.random() * 1.6,
+            };
+          });
+        };
+
+        const resize = () => {
+          const rect = section.getBoundingClientRect();
+          const dpr = Math.min(window.devicePixelRatio || 1, 2);
+          width = Math.max(1, Math.floor(rect.width));
+          height = Math.max(1, Math.floor(rect.height));
+
+          canvas.width = Math.floor(width * dpr);
+          canvas.height = Math.floor(height * dpr);
+          canvas.style.width = `${width}px`;
+          canvas.style.height = `${height}px`;
+
+          context.setTransform(1, 0, 0, 1, 0, 0);
+          context.scale(dpr, dpr);
+
+          centerX = width * 0.5;
+          centerY = height * 0.49;
+          cloudRadius = Math.min(width, height) * 0.43;
+          ringRadius = cloudRadius * 0.28;
+          ringWidth = Math.max(14, cloudRadius * 0.12);
+
+          if (!pointerTarget.active) {
+            pointerTarget.x = centerX;
+            pointerTarget.y = centerY;
+          }
+
+          pointer.x = pointerTarget.x;
+          pointer.y = pointerTarget.y;
+          ring.x = pointerTarget.x;
+          ring.y = pointerTarget.y;
+
+          buildParticles();
+        };
+
+        const onPointerMove = (event) => {
+          const rect = section.getBoundingClientRect();
+          pointerTarget.x = event.clientX - rect.left;
+          pointerTarget.y = event.clientY - rect.top;
+          pointerTarget.active = true;
+          pointer.active = true;
+
+          if (isReducedMotion) {
+            draw(performance.now());
+          }
+        };
+
+        const onPointerLeave = () => {
+          pointerTarget.active = false;
+
+          if (isReducedMotion) {
+            draw(performance.now());
+          }
+        };
+
+        const drawGlow = (x, y, t, activeStrength) => {
+          const pulse = 1 + Math.sin(t * 1.8) * 0.06;
+          const outerRadius = (140 + ringRadius * 0.35) * pulse;
+          const innerRadius = 8 + ringRadius * 0.03;
+
+          const glow = context.createRadialGradient(x, y, innerRadius, x, y, outerRadius);
+          if (isDark()) {
+            glow.addColorStop(0, `rgba(74, 222, 255, ${0.26 * activeStrength})`);
+            glow.addColorStop(0.42, `rgba(99, 102, 241, ${0.2 * activeStrength})`);
+            glow.addColorStop(1, "rgba(99, 102, 241, 0)");
+          } else {
+            glow.addColorStop(0, `rgba(37, 99, 235, ${0.24 * activeStrength})`);
+            glow.addColorStop(0.45, `rgba(79, 70, 229, ${0.18 * activeStrength})`);
+            glow.addColorStop(1, "rgba(30, 64, 175, 0)");
+          }
+
+          context.globalCompositeOperation = isDark() ? "screen" : "multiply";
+          context.fillStyle = glow;
+          context.beginPath();
+          context.arc(x, y, outerRadius, 0, Math.PI * 2);
+          context.fill();
+        };
+
+        const draw = (now) => {
+          const time = now * 0.001;
+          const dt = clamp(lastTime ? (now - lastTime) * 0.001 : 1 / 60, 1 / 120, 1 / 24);
+          lastTime = now;
+
+          const targetX = pointerTarget.active ? pointerTarget.x : centerX;
+          const targetY = pointerTarget.active ? pointerTarget.y : centerY;
+          pointer.x += (targetX - pointer.x) * (pointerTarget.active ? 0.2 : 0.05);
+          pointer.y += (targetY - pointer.y) * (pointerTarget.active ? 0.2 : 0.05);
+          ring.x += (pointer.x - ring.x) * (pointerTarget.active ? 0.1 : 0.035);
+          ring.y += (pointer.y - ring.y) * (pointerTarget.active ? 0.1 : 0.035);
+
+          const darkTheme = isDark();
+          const dimAlpha = darkTheme ? 0.22 : 0.08;
+          context.globalCompositeOperation = "source-over";
+          context.fillStyle = darkTheme
+            ? `rgba(2, 6, 23, ${dimAlpha})`
+            : `rgba(226, 236, 255, ${dimAlpha})`;
+          context.fillRect(0, 0, width, height);
+
+          const ringPulse = ringRadius + Math.sin(time * 2.2) * 8 + Math.cos(time * 3.7) * 5;
+          const activeStrength = pointerTarget.active ? 1 : 0.45;
+
+          context.globalCompositeOperation = darkTheme ? "lighter" : "multiply";
+          context.lineCap = "round";
+
+          for (const particle of particles) {
+            const nx = (particle.baseX - centerX) / (cloudRadius + 1);
+            const ny = (particle.baseY - centerY) / (cloudRadius + 1);
+
+            const n0 = noise2(nx * 3.8 + time * 0.42 + particle.seed, ny * 3.2 - time * 0.3);
+            const n1 = noise2(nx * 4.1 - time * 0.36, ny * 4.4 + time * 0.26 + particle.seed * 0.5);
+            const fieldAngle = (n0 - 0.5) * Math.PI * 3.6;
+            const fieldForce = 32 + n1 * 56;
+
+            const dxBase = particle.baseX - particle.x;
+            const dyBase = particle.baseY - particle.y;
+
+            const dxPointer = ring.x - particle.x;
+            const dyPointer = ring.y - particle.y;
+            const distance = Math.hypot(dxPointer, dyPointer) + 0.0001;
+
+            const attract = 1 - smoothstep(70, 390, distance);
+            const ringBand = 1 - smoothstep(0, ringWidth, Math.abs(distance - ringPulse));
+            const drift = Math.sin(time * 1.7 + particle.phase) * 0.25;
+
+            particle.vx +=
+              dxBase * 1.25 * dt +
+              Math.cos(fieldAngle + drift) * fieldForce * dt * 0.18 +
+              dxPointer * attract * dt * 0.65 +
+              (dxPointer / distance) * ringBand * dt * 128 * activeStrength;
+            particle.vy +=
+              dyBase * 1.25 * dt +
+              Math.sin(fieldAngle + drift) * fieldForce * dt * 0.18 +
+              dyPointer * attract * dt * 0.65 +
+              (dyPointer / distance) * ringBand * dt * 128 * activeStrength;
+
+            particle.vx *= 0.91;
+            particle.vy *= 0.91;
+
+            particle.x += particle.vx;
+            particle.y += particle.vy;
+
+            const speed = Math.hypot(particle.vx, particle.vy);
+            const lineLength = particle.size + clamp(speed * 0.22, 0.6, 11);
+            const angle = Math.atan2(particle.vy, particle.vx || 0.0001);
+            const x1 = particle.x - Math.cos(angle) * lineLength;
+            const y1 = particle.y - Math.sin(angle) * lineLength;
+            const x2 = particle.x + Math.cos(angle) * lineLength;
+            const y2 = particle.y + Math.sin(angle) * lineLength;
+
+            const baseAlpha = 0.18 + speed * 0.028 + attract * 0.27 + ringBand * 0.34;
+            const alpha = darkTheme
+              ? clamp(baseAlpha, 0.12, 0.9)
+              : clamp(baseAlpha * 1.3, 0.2, 0.96);
+            const saturation = darkTheme ? 78 + ringBand * 18 : 86 + ringBand * 10;
+            const lightness = darkTheme ? 62 + attract * 10 : 34 + attract * 8;
+            const hue = darkTheme
+              ? particle.hue + (n0 - 0.5) * 20 + ringBand * 8
+              : 218 + (n0 - 0.5) * 12 + ringBand * 6;
+
+            context.strokeStyle = `hsla(${hue}, ${saturation}%, ${lightness}%, ${alpha})`;
+            context.lineWidth = particle.size + ringBand * (darkTheme ? 0.85 : 1.05);
+            context.beginPath();
+            context.moveTo(x1, y1);
+            context.lineTo(x2, y2);
+            context.stroke();
+          }
+
+          drawGlow(ring.x, ring.y, time, activeStrength);
+        };
+
+        const animate = (time) => {
+          draw(time);
+          frameId = window.requestAnimationFrame(animate);
+        };
+
+        resize();
+        draw(performance.now());
+
+        section.addEventListener("pointermove", onPointerMove, { passive: true });
+        section.addEventListener("pointerleave", onPointerLeave);
+        window.addEventListener("resize", resize);
+
+        if (!isReducedMotion) {
+          frameId = window.requestAnimationFrame(animate);
+        }
+
+        teardown = () => {
+          if (frameId) {
+            window.cancelAnimationFrame(frameId);
+            frameId = 0;
+          }
+
+          section.removeEventListener("pointermove", onPointerMove);
+          section.removeEventListener("pointerleave", onPointerLeave);
+          window.removeEventListener("resize", resize);
+          context.clearRect(0, 0, width, height);
+        };
+
+        globalState.teardown = teardown;
+      };
+
+      const handlePageLoad = () => {
+        createParticles();
+      };
+
+      const handleBeforePreparation = () => {
+        teardown();
+      };
+
+      document.addEventListener("astro:page-load", handlePageLoad);
+      document.addEventListener("astro:before-preparation", handleBeforePreparation);
+
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", createParticles, { once: true });
+      } else {
+        createParticles();
+      }
+
+      globalState.teardown = teardown;
+      globalState.handlePageLoad = handlePageLoad;
+      globalState.handleBeforePreparation = handleBeforePreparation;
+    })();
   </script>
 
   <script>

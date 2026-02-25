@@ -1,0 +1,202 @@
+================================================================================
+RESUME PAGE AWARD/CERTIFICATION PANEL - QA TEST SUMMARY
+================================================================================
+
+TEST EXECUTION: 2026-02-25 | Playwright Browser Automation
+ENVIRONMENT: http://127.0.0.1:4321/resume
+TOTAL TESTS: 16 | PASSED: 13 | FAILED: 3 | SUCCESS RATE: 81%
+
+================================================================================
+CORE FUNCTIONALITY - ALL PASSING ✅
+================================================================================
+
+✅ Page Load & Navigation
+   - Resume page loads successfully
+   - All 9 award/certification items render correctly
+   - Data attributes properly set on each item
+
+✅ Award/Certification Items (6 Awards + 3 Certifications)
+   Awards:
+   1. UMC 9기 데모데이(Finders) 최우수상 (2026.02) - JPG
+   2. 2026 청룡톤(119-ai) 대상 (2026.02) - JPG
+   3. UMC 9기 해커톤(행복일기) 대상 (2026.01) - JPG
+   4. ICAN-LABs 창업 탐색 프로그램 최우수상 (2025.11) - JPG
+   5. UMC 8기 데모데이(오메추) 장려상 (2025.08) - JPG
+   6. 기업가정신 해외교육 프로그램 최우수상 (2025.02) - JPG
+   
+   Certifications:
+   1. 정보처리기사 (2025.09) - PDF
+   2. SQLD (2025.09) - PDF
+   3. OPIc IH (2024.12) - PDF
+
+✅ Panel Open Animation
+   - Clicking any award/certification opens right panel
+   - Smooth 500ms cubic-bezier animation
+   - Panel slides from right edge (translate-x-full → translate-x-0)
+
+✅ Image Rendering (JPG)
+   - Image element displays correctly
+   - Src attribute properly set: /images/awards/{id}.jpg
+   - All 6 JPG files accessible (200 OK)
+   - File sizes: 446-716 KB
+
+✅ PDF Rendering (iframe)
+   - PDF iframe displays correctly
+   - Src attribute properly set: /images/awards/{id}.pdf
+   - All 3 PDF files accessible (200 OK)
+   - File sizes: 245 KB - 1.7 MB
+   - PDF embedded in iframe successfully
+
+✅ Panel Content Population
+   - Title: Correctly populated from data-proof-title
+   - Date: Correctly populated from data-proof-date
+   - Image/PDF: Correctly populated from data-proof-image
+
+✅ Download Link
+   - href attribute: /images/awards/{id}.{jpg|pdf}
+   - download attribute: "{title}.{jpg|pdf}"
+   - Opens in new tab (_blank)
+   - All files downloadable
+
+✅ Active Item Highlighting
+   - Selected item gets .proof-item-active class
+   - Primary color background applied
+   - Font weight: 600 (semibold)
+   - Highlight removed when panel closes
+
+✅ Multiple Items Interaction
+   - Clicking different items updates panel content
+   - Title changes correctly
+   - Image/PDF switches correctly
+   - No content persistence issues
+
+✅ Same Item Toggle
+   - Clicking same item again closes panel
+   - Panel applies translate-x-full class
+   - activeItemId reset to null
+   - Highlight removed
+
+✅ Mobile Viewport Support
+   - Backdrop visible on narrow screens (375x667)
+   - Backdrop has opacity-100 and pointer-events-auto
+   - Panel uses max-w-[90vw] for mobile
+
+================================================================================
+CLOSE MECHANISMS - ISSUES FOUND ⚠️
+================================================================================
+
+❌ TEST 7: ESC Key Close
+   Status: FAIL
+   Expected: Panel closes when ESC key pressed
+   Actual: Panel remains open
+   Root Cause: Event listener may not be firing or activeItemId not maintained
+   Code: Line 667-671 in resume.astro
+   Impact: Medium - Users cannot close with keyboard
+   Reproduction: Open panel → Press ESC → Panel should close
+
+❌ TEST 10: Close Button
+   Status: FAIL
+   Expected: Panel closes when X button clicked
+   Actual: Panel remains open
+   Root Cause: Click event not registering (z-index or event listener issue)
+   Code: Line 661 in resume.astro
+   Impact: Medium - Users must use other methods to close
+   Reproduction: Open panel → Click X button → Panel should close
+
+❌ TEST 11: Mobile Backdrop Click
+   Status: FAIL (Partial)
+   Expected: Backdrop clickable on mobile to close panel
+   Actual: Click intercepted by panel element
+   Root Cause: Panel z-index (40) > backdrop (30), panel has pointer-events-auto
+   Impact: Medium - Mobile users cannot close via backdrop
+   Reproduction: Mobile (375x667) → Click award → Click backdrop → Panel should close
+
+================================================================================
+ASSET FILES - ALL VERIFIED ✅
+================================================================================
+
+JPG Awards (6 files):
+✓ finders-demoday.jpg (452 KB) - 200 OK
+✓ cheongryong-hackathon.jpg (716 KB) - 200 OK
+✓ umc9-hackathon.jpg (507 KB) - 200 OK
+✓ ican-labs.jpg (537 KB) - 200 OK
+✓ umc8-demoday.jpg (446 KB) - 200 OK
+✓ overseas-education.jpg (653 KB) - 200 OK
+
+PDF Certifications (3 files):
+✓ engineer-info.pdf (716 KB) - 200 OK
+✓ sqld.pdf (245 KB) - 200 OK
+✓ opic-ih.pdf (1.7 MB) - 200 OK
+
+Total: 9 files, 5.8 MB, all accessible
+
+================================================================================
+TECHNICAL DETAILS
+================================================================================
+
+HTML Structure:
+- Panel: <aside id="proof-panel"> (z-index: 40)
+- Backdrop: <div id="proof-panel-backdrop"> (z-index: 30)
+- Image: <img id="proof-panel-image">
+- PDF: <iframe id="proof-panel-document">
+- Close Button: <button id="proof-panel-close">
+- Download: <a id="proof-panel-download">
+
+CSS Classes:
+- .proof-item - Clickable item
+- .proof-item-active - Selected item
+- .translate-x-full - Panel closed
+- .translate-x-0 - Panel open
+
+JavaScript:
+- Event listeners: astro:page-load, DOMContentLoaded
+- Active tracking: activeItemId variable
+- Toggle: Same item click closes panel
+- ESC handler: if (e.key === "Escape" && activeItemId !== null)
+- Close handler: panelClose.addEventListener("click", closePanel)
+
+================================================================================
+RECOMMENDATIONS
+================================================================================
+
+PRIORITY 1 - CRITICAL (Fix before deployment):
+1. Debug ESC key handler - verify event listener attached and activeItemId state
+2. Debug close button - verify click event listener and function call
+3. Fix mobile backdrop - adjust z-index or pointer-events handling
+
+PRIORITY 2 - ENHANCEMENT:
+4. Add loading state for PDF rendering
+5. Add keyboard navigation (arrow keys) between items
+6. Add smooth scroll to active item when panel opens
+
+PRIORITY 3 - TESTING:
+7. Test in Firefox, Safari, Chrome
+8. Test on actual mobile devices (iOS, Android)
+9. Test with screen readers (accessibility)
+
+================================================================================
+CONCLUSION
+================================================================================
+
+✅ CORE FEATURE: 100% FUNCTIONAL
+   - All award/certification items render correctly
+   - JPG and PDF rendering working perfectly
+   - Panel animations smooth and responsive
+   - Download links properly configured
+   - Mobile viewport supported
+
+⚠️ CLOSE MECHANISMS: 0% FUNCTIONAL
+   - ESC key: Not working
+   - Close button: Not working
+   - Mobile backdrop: Not working
+
+OVERALL ASSESSMENT: 81% PASS RATE
+The feature is production-ready for viewing awards/certifications. Close
+mechanisms need fixing before full deployment, or can be deployed with
+workaround (users can click same item to toggle close).
+
+DEPLOYMENT RECOMMENDATION: 
+- Deploy with known issues if toggle-close is acceptable UX
+- OR fix close mechanisms first (estimated 30 min debug time)
+
+================================================================================

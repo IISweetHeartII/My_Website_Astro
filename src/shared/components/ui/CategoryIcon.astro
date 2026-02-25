@@ -1,0 +1,25 @@
+---
+import { BookOpen, Bot, Code2, FileText, Settings, Shield, Sparkles, Zap } from "lucide-astro";
+
+interface Props {
+  categoryId: string;
+  class?: string;
+}
+
+const { categoryId, class: className = "w-4 h-4" } = Astro.props;
+
+const iconMap = {
+  daily: Sparkles,
+  dev: Code2,
+  ai: Bot,
+  security: Shield,
+  education: BookOpen,
+  devops: Settings,
+  productivity: Zap,
+  blog: FileText,
+} as const;
+
+const Icon = iconMap[categoryId as keyof typeof iconMap] ?? FileText;
+---
+
+<Icon class={className} />

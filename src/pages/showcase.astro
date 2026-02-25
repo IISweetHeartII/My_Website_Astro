@@ -41,8 +41,8 @@ const projects: Project[] = [
         icon: "external",
       },
     ],
-    gradient: "from-violet-500 to-purple-600",
-    borderColor: "border-violet-200",
+    gradient: "from-indigo-500 to-blue-500",
+    borderColor: "border-indigo-200",
     featured: true,
   },
   {
@@ -64,8 +64,8 @@ const projects: Project[] = [
         icon: "external",
       },
     ],
-    gradient: "from-blue-500 to-cyan-600",
-    borderColor: "border-blue-200",
+    gradient: "from-sky-500 to-cyan-600",
+    borderColor: "border-sky-200",
     featured: true,
   },
   {
@@ -141,10 +141,22 @@ const projects: Project[] = [
         icon: "external",
       },
     ],
-    gradient: "from-pink-500 to-rose-600",
-    borderColor: "border-pink-200",
+    gradient: "from-indigo-500 to-sky-600",
+    borderColor: "border-indigo-200",
   },
 ];
+
+const featuredProjects = projects.filter((project) => project.featured);
+
+function getOrderedLinks(links: ProjectLink[]): ProjectLink[] {
+  const priority = {
+    external: 0,
+    github: 1,
+    lock: 2,
+  } as const;
+
+  return [...links].sort((a, b) => priority[a.icon] - priority[b.icon]);
+}
 
 const iconMap = {
   github: Github,
@@ -161,19 +173,76 @@ const iconMap = {
       <p class="text-lg text-text-light max-w-2xl mx-auto">
         실제 문제를 해결하기 위해 만든 프로젝트들
       </p>
+      <div class="mt-6 flex flex-wrap justify-center gap-3">
+        <a
+          href="#featured-projects"
+          data-cta-track
+          data-cta-name="showcase_featured_jump"
+          data-cta-section="showcase_header"
+          class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-primary text-on-primary text-sm font-semibold hover:bg-accent transition-colors"
+        >
+          대표 프로젝트 먼저 보기
+        </a>
+        <a
+          href="#all-projects"
+          data-cta-track
+          data-cta-name="showcase_all_jump"
+          data-cta-section="showcase_header"
+          class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border border-background-lighter bg-background-light text-text text-sm font-semibold hover:border-primary/30 hover:bg-background transition-colors"
+        >
+          전체 프로젝트 둘러보기
+        </a>
+      </div>
     </div>
 
+    <section id="featured-projects" class="mb-10">
+      <div class="mb-4 flex items-center justify-between">
+        <h2 class="text-xl md:text-2xl font-bold text-text">대표 프로젝트</h2>
+        <span class="text-sm text-text-light">빠르게 핵심만 확인</span>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {
+          featuredProjects.map((project) => (
+            <article class={`rounded-2xl border ${project.borderColor} bg-background-light p-5`}>
+              <p class="text-sm font-semibold text-primary mb-2">{project.role}</p>
+              <h3 class="text-xl font-bold text-text mb-2">{project.title}</h3>
+              <p class="text-sm text-text-light mb-4">{project.highlight}</p>
+              <div class="flex items-center gap-2 flex-wrap">
+                {getOrderedLinks(project.links).map((link) => {
+                  const Icon = iconMap[link.icon];
+                  return (
+                    <a
+                      href={link.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      data-cta-track
+                      data-cta-name={`featured_${project.title}_${link.label}`}
+                      data-cta-section="showcase_featured"
+                      class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-primary text-on-primary text-xs font-semibold hover:bg-accent transition-colors"
+                    >
+                      <Icon class="w-3.5 h-3.5" />
+                      {link.label}
+                    </a>
+                  );
+                })}
+              </div>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+
     <!-- Projects -->
-    <div class="space-y-6">
+    <div id="all-projects" class="space-y-6">
       {
         projects.map((project) => (
           <article
-            class={`group bg-background rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border ${project.borderColor}`}
+            class={`group bg-background rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border dark:border-background-lighter ${project.borderColor}`}
           >
             <div class="flex flex-col md:flex-row">
               {/* Color accent bar */}
               <div
-                class={`md:w-2 w-full h-2 md:h-auto bg-linear-to-b ${project.gradient} shrink-0`}
+                class={`md:w-2 w-full h-2 md:h-auto bg-linear-to-b ${project.gradient} dark:opacity-75 shrink-0`}
               />
 
               <div class="flex-1 p-6 md:p-8">
@@ -186,7 +255,7 @@ const iconMap = {
                     <p class="text-sm text-text-light mt-1">{project.role}</p>
                   </div>
                   <span
-                    class={`inline-flex items-center gap-1.5 px-3 py-1.5 bg-linear-to-r ${project.gradient} text-on-primary text-xs font-semibold rounded-full whitespace-nowrap self-start`}
+                    class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-background-light border border-background-lighter text-text-light text-xs font-semibold rounded-full whitespace-nowrap self-start"
                   >
                     {project.featured && <Award class="w-3.5 h-3.5" />}
                     {project.highlight}
@@ -209,14 +278,17 @@ const iconMap = {
                   </div>
 
                   <div class="flex items-center gap-3 shrink-0">
-                    {project.links.map((link) => {
+                    {getOrderedLinks(project.links).map((link) => {
                       const Icon = iconMap[link.icon];
                       return (
                         <a
                           href={link.url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          class="inline-flex items-center gap-1.5 px-4 py-2 bg-primary hover:bg-accent text-on-primary text-sm font-medium rounded-lg transition-all duration-200 hover:-translate-y-0.5"
+                          data-cta-track
+                          data-cta-name={`project_${project.title}_${link.label}`}
+                          data-cta-section="showcase_projects"
+                          class="inline-flex items-center gap-1.5 px-4 py-2 bg-background-light border border-background-lighter hover:border-primary text-text hover:text-primary text-sm font-medium rounded-lg transition-all duration-200 hover:-translate-y-0.5"
                         >
                           <Icon class="w-4 h-4" />
                           {link.label}
@@ -244,7 +316,10 @@ const iconMap = {
           href={AUTHOR_GITHUB}
           target="_blank"
           rel="noopener noreferrer"
-          class="inline-flex items-center gap-2 px-6 py-3 bg-primary hover:bg-accent text-on-primary font-semibold rounded-xl transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg"
+          data-cta-track
+          data-cta-name="showcase_github_profile"
+          data-cta-section="showcase_footer"
+          class="inline-flex items-center gap-2 px-6 py-3 bg-background-light border border-background-lighter hover:border-primary text-text hover:text-primary font-semibold rounded-xl transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg"
         >
           <Github class="w-5 h-5" />
           GitHub Profile

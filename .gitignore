@@ -38,3 +38,10 @@ pnpm-debug.log*
 
 # Sisyphus (AI agent workspace)
 .sisyphus/
+
+# Terraform
+**/.terraform/
+*.tfstate
+*.tfstate.*
+*.tfvars
+*.tfplan

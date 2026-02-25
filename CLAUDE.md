@@ -24,14 +24,14 @@ This is **Obsidian Blogger** - an Astro-based blog optimized for writing in Obsi
 
 ### GitHub Actions (Continuous Integration)
 
-- **자동 실행**: `main`, `develop` 브랜치 push 및 PR 생성 시
+- **자동 실행**: `main` 브랜치 push 및 PR 생성 시
 - **검사 항목**: 코드 포맷팅, TypeScript 타입 체크, 빌드, 보안 감사, Lighthouse 성능
-- **워크플로우 파일**: `.github/workflows/ci.yml`, `.github/workflows/pr-preview.yml`
+- **워크플로우 파일**: `.github/workflows/ci.yml`, `.github/workflows/deploy-cloudflare.yml`
 
 ### Cloudflare Pages (Continuous Deployment)
 
 - **Production**: `main` 브랜치 → https://log8.kr (자동 배포)
-- **Preview**: `develop` 브랜치 및 PR → `*.pages.dev` (자동 프리뷰)
+- **Preview**: PR → `*.pages.dev` (자동 프리뷰)
 - **설정 위치**: Cloudflare Dashboard (https://dash.cloudflare.com)
 
 자세한 내용은 `.github/workflows/` 폴더의 워크플로우 파일을 참조하세요.
@@ -148,7 +148,7 @@ tags:
   - **CRITICAL**: Use `bg-linear-to-*` (NOT `bg-gradient-to-*`) for gradients in TailwindCSS v4
   - ✅ Correct: `bg-linear-to-br`, `bg-linear-to-r`, `bg-linear-to-t`
   - ❌ Wrong: `bg-gradient-to-br`, `bg-gradient-to-r`, `bg-gradient-to-t`
-- **Git Workflow**: `develop` is the main development branch; `main` is for production releases
+- **Git Workflow**: `main` is the primary development and production branch
 - **API Endpoints**: Newsletter subscription at `/api/newsletter/subscribe` (uses Resend)
 
 ## Obsidian Setup
