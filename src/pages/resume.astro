@@ -55,9 +55,9 @@ const certifications: ProofItem[] = [
     id: "engineer-info",
     label: "정보처리기사",
     date: "2025.09",
-    image: "/images/awards/engineer-info.pdf",
+    image: "/images/awards/engineer-info.png",
   },
-  { id: "sqld", label: "SQLD", date: "2025.09", image: "/images/awards/sqld.pdf" },
+  { id: "sqld", label: "SQLD", date: "2025.09", image: "/images/awards/sqld.png" },
   { id: "opic-ih", label: "OPIc IH", date: "2024.12", image: "/images/awards/opic-ih.pdf" },
 ];
 ---
@@ -417,7 +417,7 @@ const certifications: ProofItem[] = [
     <!-- Panel Body -->
     <div class="px-6 py-6">
       <!-- Image Container -->
-      <div class="rounded-lg overflow-hidden border border-background-lighter bg-white mb-4 min-h-[200px] flex items-center justify-center">
+      <div class="rounded-lg overflow-hidden border border-background-lighter bg-background-light mb-4 min-h-[200px] flex items-center justify-center">
         <img
           id="proof-panel-image"
           src=""
@@ -428,7 +428,7 @@ const certifications: ProofItem[] = [
           id="proof-panel-document"
           src=""
           title="증빙 문서"
-          class="w-full h-[560px] hidden"
+          class="w-full h-[560px] bg-white hidden"
         ></iframe>
         <!-- Loading placeholder -->
         <div id="proof-panel-loading" class="text-text-muted text-sm py-12">
