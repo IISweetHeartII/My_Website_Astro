@@ -16,37 +16,37 @@ const awards: ProofItem[] = [
     id: "finders-demoday",
     label: "UMC 9기 데모데이(Finders) 최우수상",
     date: "2026.02",
-    image: "/images/awards/finders-demoday.png",
+    image: "/images/awards/finders-demoday.jpg",
   },
   {
     id: "cheongryong-hackathon",
     label: "2026 청룡톤(119-ai) 대상",
     date: "2026.02",
-    image: "/images/awards/cheongryong-hackathon.png",
+    image: "/images/awards/cheongryong-hackathon.jpg",
   },
   {
     id: "umc9-hackathon",
     label: "UMC 9기 해커톤(행복일기) 대상",
     date: "2026.01",
-    image: "/images/awards/umc9-hackathon.png",
+    image: "/images/awards/umc9-hackathon.jpg",
   },
   {
     id: "ican-labs",
     label: "ICAN-LABs 창업 탐색 프로그램 최우수상",
     date: "2025.11",
-    image: "/images/awards/ican-labs.png",
+    image: "/images/awards/ican-labs.jpg",
   },
   {
     id: "umc8-demoday",
     label: "UMC 8기 데모데이(오메추) 장려상",
     date: "2025.08",
-    image: "/images/awards/umc8-demoday.png",
+    image: "/images/awards/umc8-demoday.jpg",
   },
   {
     id: "overseas-education",
     label: "기업가정신 해외교육 프로그램 최우수상",
     date: "2025.02",
-    image: "/images/awards/overseas-education.png",
+    image: "/images/awards/overseas-education.jpg",
   },
 ];
 
@@ -55,10 +55,10 @@ const certifications: ProofItem[] = [
     id: "engineer-info",
     label: "정보처리기사",
     date: "2025.09",
-    image: "/images/awards/engineer-info.png",
+    image: "/images/awards/engineer-info.pdf",
   },
-  { id: "sqld", label: "SQLD", date: "2025.09", image: "/images/awards/sqld.png" },
-  { id: "opic-ih", label: "OPIc IH", date: "2024.12", image: "/images/awards/opic-ih.png" },
+  { id: "sqld", label: "SQLD", date: "2025.09", image: "/images/awards/sqld.pdf" },
+  { id: "opic-ih", label: "OPIc IH", date: "2024.12", image: "/images/awards/opic-ih.pdf" },
 ];
 ---
 
@@ -424,6 +424,12 @@ const certifications: ProofItem[] = [
           alt=""
           class="w-full h-auto object-contain hidden"
         />
+        <iframe
+          id="proof-panel-document"
+          src=""
+          title="증빙 문서"
+          class="w-full h-[560px] hidden"
+        ></iframe>
         <!-- Loading placeholder -->
         <div id="proof-panel-loading" class="text-text-muted text-sm py-12">
           이미지 로딩 중...
@@ -535,6 +541,7 @@ const certifications: ProofItem[] = [
     const panel = document.getElementById("proof-panel");
     const panelTitle = document.getElementById("proof-panel-title");
     const panelImage = document.getElementById("proof-panel-image") as HTMLImageElement | null;
+    const panelDocument = document.getElementById("proof-panel-document") as HTMLIFrameElement | null;
     const panelLoading = document.getElementById("proof-panel-loading");
     const panelDate = document.getElementById("proof-panel-date");
     const panelDownload = document.getElementById("proof-panel-download") as HTMLAnchorElement | null;
@@ -543,7 +550,7 @@ const certifications: ProofItem[] = [
     const resumeWrapper = document.querySelector(".resume-wrapper") as HTMLElement | null;
     const proofItems = document.querySelectorAll<HTMLElement>("[data-proof-id]");
 
-    if (!panel || !panelTitle || !panelImage || !panelClose || !resumeWrapper) return;
+    if (!panel || !panelTitle || !panelImage || !panelDocument || !panelClose || !resumeWrapper) return;
 
     let activeItemId: string | null = null;
 
@@ -559,32 +566,50 @@ const certifications: ProofItem[] = [
         return;
       }
 
-      // Show loading, hide image
+      const isPdf = image.toLowerCase().endsWith(".pdf");
+      const ext = (image.split("?")[0]?.split("#")[0]?.split(".").pop() ?? "file").toLowerCase();
+
+      // Show loading, hide media
       panelImage!.classList.add("hidden");
+      panelDocument!.classList.add("hidden");
+      panelDocument!.src = "";
       if (panelLoading) panelLoading.classList.remove("hidden");
 
       // Populate
       panelTitle!.textContent = title;
-      panelImage!.src = image;
       panelImage!.alt = `${title} 증빙 자료`;
       if (panelDate) panelDate.textContent = date;
       if (panelDownload) {
         panelDownload.href = image;
-        panelDownload.download = `${title}.png`;
+        panelDownload.download = `${title}.${ext}`;
       }
 
-      // Image load handler
-      panelImage!.onload = () => {
-        panelImage!.classList.remove("hidden");
-        if (panelLoading) panelLoading.classList.add("hidden");
-      };
-      panelImage!.onerror = () => {
+      if (isPdf) {
         if (panelLoading) {
-          panelLoading.textContent = "이미지를 찾을 수 없습니다";
-          panelLoading.classList.remove("hidden");
+          panelLoading.textContent = "문서 로딩 중...";
+          panelLoading.classList.add("hidden");
         }
-        panelImage!.classList.add("hidden");
-      };
+        panelDocument!.src = image;
+        panelDocument!.classList.remove("hidden");
+      } else {
+        if (panelLoading) {
+          panelLoading.textContent = "이미지 로딩 중...";
+        }
+
+        // Image load handler
+        panelImage!.onload = () => {
+          panelImage!.classList.remove("hidden");
+          if (panelLoading) panelLoading.classList.add("hidden");
+        };
+        panelImage!.onerror = () => {
+          if (panelLoading) {
+            panelLoading.textContent = "이미지를 찾을 수 없습니다";
+            panelLoading.classList.remove("hidden");
+          }
+          panelImage!.classList.add("hidden");
+        };
+        panelImage!.src = image;
+      }
 
       // Slide in
       panel!.classList.remove("translate-x-full");
@@ -632,17 +657,27 @@ const certifications: ProofItem[] = [
       item.addEventListener("click", () => openPanel(item));
     }
 
-    // Close button
+    // Close controls
     panelClose.addEventListener("click", closePanel);
-
-    // Backdrop click
+    panelClose.addEventListener("pointerup", closePanel);
     backdrop?.addEventListener("click", closePanel);
+    backdrop?.addEventListener("pointerup", closePanel);
 
     // ESC key
     document.addEventListener("keydown", (e: KeyboardEvent) => {
       if (e.key === "Escape" && activeItemId !== null) {
         closePanel();
       }
+    });
+
+    // Click outside panel closes it (additional safety for narrow viewports)
+    document.addEventListener("click", (e: MouseEvent) => {
+      if (activeItemId === null) return;
+      const target = e.target as Element | null;
+      if (!target) return;
+      if (panel.contains(target)) return;
+      if (target.closest("[data-proof-id]")) return;
+      closePanel();
     });
   }
 
