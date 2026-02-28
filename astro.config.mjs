@@ -54,7 +54,6 @@ export default defineConfig({
         "https://log8.kr/showcase",
         "https://log8.kr/resume",
         "https://log8.kr/privacy",
-        "https://log8.kr/terms",
       ],
     }),
     robotsTxt({

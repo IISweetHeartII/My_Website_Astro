@@ -18,6 +18,7 @@ import {
 import profileImage from "@/assets/images/design/DH_ID.jpg";
 import BreadcrumbSchema from "@/shared/components/seo/BreadcrumbSchema.astro";
 import {
+  AUTHOR_EMAIL,
   AUTHOR_GITHUB,
   AUTHOR_LINKEDIN,
   SITE_AUTHOR,
@@ -30,8 +31,7 @@ import Layout from "../layouts/Layout.astro";
 const allPosts = await getSortedPublishedPosts();
 const latestBlogPosts = getLatestPosts(allPosts, 3);
 const latestPost = latestBlogPosts[0];
-const CONTACT_EMAIL = "sachi009955@gmail.com";
-const CONTACT_MAILTO = `mailto:${CONTACT_EMAIL}`;
+const CONTACT_MAILTO = `mailto:${AUTHOR_EMAIL}`;
 
 const websiteSchema = {
   "@context": "https://schema.org",
@@ -806,10 +806,4 @@ const personSchema = {
     })();
   </script>
 
-  <script>
-    import { setupScrollAnimations } from "@/shared/scripts/scroll-animation";
-    document.addEventListener("DOMContentLoaded", () => {
-      setupScrollAnimations();
-    });
-  </script>
 </Layout>
