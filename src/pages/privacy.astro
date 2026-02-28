@@ -1,5 +1,8 @@
 ---
+import { AUTHOR_EMAIL } from "@/shared/config/consts";
 import Layout from "../layouts/Layout.astro";
+
+const CONTACT_MAILTO = `mailto:${AUTHOR_EMAIL}`;
 ---
 
 <Layout title="Privacy | Log8" description="Log8 블로그의 개인정보처리방침입니다. 수집하는 개인정보의 항목, 처리 목적, 보유 기간 등을 안내합니다.">
@@ -140,7 +143,7 @@ import Layout from "../layouts/Layout.astro";
         <div class="bg-background-light p-4 rounded mb-4">
           <p class="mb-2"><strong>개인정보 보호책임자:</strong> 김덕환</p>
           <p class="mb-2"><strong>연락처:</strong> 이메일로 연락</p>
-          <p class="mb-2"><strong>이메일:</strong> sachi009955@gmail.com</p>
+          <p class="mb-2"><strong>이메일:</strong> {AUTHOR_EMAIL}</p>
         </div>
         <p class="mb-4">
           정보주체는 개인정보보호와 관련한 문의, 불만처리, 피해구제 등에 관한 사항을 개인정보
@@ -159,7 +162,7 @@ import Layout from "../layouts/Layout.astro";
       <div class="bg-background-light border-l-4 border-primary p-4 mt-8">
         <p class="text-sm">
           <strong>문의사항이 있으시면</strong>
-          <a href="mailto:sachi009955@gmail.com" class="text-primary hover:text-primary-light underline">이메일(sachi009955@gmail.com)</a>로
+          <a href={CONTACT_MAILTO} class="text-primary hover:text-primary-light underline">이메일({AUTHOR_EMAIL})</a>로
           언제든지 연락주세요.
         </p>
       </div>

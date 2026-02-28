@@ -9,6 +9,7 @@ export const SITE_URL = "https://log8.kr";
 // Author Information
 export const AUTHOR_GITHUB = "https://github.com/IISweetHeartII";
 export const AUTHOR_LINKEDIN = "https://www.linkedin.com/in/sweetheart2000/";
+export const AUTHOR_EMAIL = "sachi009955@gmail.com";
 
 // Default Images
 export const DEFAULT_OG_IMAGE = "/images/design/ready.png";

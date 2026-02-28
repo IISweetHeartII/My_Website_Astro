@@ -1,10 +1,11 @@
 ---
 import { ArrowRight, FileQuestion } from "lucide-astro";
 import Layout from "@/layouts/Layout.astro";
-import { SITE_TITLE } from "@/shared/config/consts";
+import { AUTHOR_EMAIL, SITE_TITLE } from "@/shared/config/consts";
 
 const title = `404 Not Found - ${SITE_TITLE}`;
 const description = "잘못 들어온 것 같아요! 만약 버그가 있다면 메일로 알려주세요.";
+const CONTACT_MAILTO = `mailto:${AUTHOR_EMAIL}`;
 ---
 
 <Layout title={title} description={description}>
@@ -33,7 +34,7 @@ const description = "잘못 들어온 것 같아요! 만약 버그가 있다면 
           <ArrowRight class="w-5 h-5 transition-transform duration-200 group-hover:translate-x-1" />
         </a>
         <a
-          href="mailto:sachi009955@gmail.com"
+          href={CONTACT_MAILTO}
           class="inline-flex items-center gap-2 px-6 py-3 bg-primary/30 text-text rounded-xl no-underline font-semibold transition-all duration-200 hover:bg-primary/40 hover:-translate-y-px"
         >
           Email
@@ -41,7 +42,7 @@ const description = "잘못 들어온 것 같아요! 만약 버그가 있다면 
       </div>
       <p class="help-text text-sm text-primary m-0 md:text-xs">
         급한 일이 있다면 <a
-          href="mailto:sachi009955@gmail.com"
+          href={CONTACT_MAILTO}
           class="contact-link text-accent no-underline font-medium transition-all duration-200 border-b border-transparent hover:border-accent"
           >메일로 알려주세요</a
         >

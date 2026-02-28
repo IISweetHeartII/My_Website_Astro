@@ -1,6 +1,6 @@
 ---
 import { Github, Linkedin, Mail } from "lucide-astro";
-import { AUTHOR_GITHUB, AUTHOR_LINKEDIN } from "@/shared/config/consts";
+import { AUTHOR_EMAIL, AUTHOR_GITHUB, AUTHOR_LINKEDIN } from "@/shared/config/consts";
 
 const today = new Date();
 ---
@@ -30,7 +30,7 @@ const today = new Date();
       </a>
 
       <a
-        href="mailto:sachi009955@gmail.com"
+        href={`mailto:${AUTHOR_EMAIL}`}
         class="text-nav-text hover:text-accent hover:bg-nav-hover/20 rounded-full p-3 transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-lg"
         title="Email"
       >

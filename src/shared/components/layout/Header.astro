@@ -1,6 +1,6 @@
 ---
 import { Github, Linkedin, Mail, Menu, Moon, Sun, X } from "lucide-astro";
-import { AUTHOR_GITHUB, AUTHOR_LINKEDIN, SITE_TITLE } from "@/shared/config/consts";
+import { AUTHOR_EMAIL, AUTHOR_GITHUB, AUTHOR_LINKEDIN, SITE_TITLE } from "@/shared/config/consts";
 import { getUrl } from "@/shared/utils/url";
 import HeaderLink from "./HeaderLink.astro";
 ---
@@ -63,7 +63,7 @@ import HeaderLink from "./HeaderLink.astro";
         <Linkedin class="w-5 h-5" />
       </a>
       <a
-        href="mailto:sachi009955@gmail.com"
+        href={`mailto:${AUTHOR_EMAIL}`}
         class="hidden md:inline-flex items-center justify-center w-9 h-9 text-nav-text/80 hover:text-nav-text hover:bg-nav-hover/20 rounded-lg transition-all duration-200"
         title="Email"
       >
@@ -129,7 +129,7 @@ import HeaderLink from "./HeaderLink.astro";
           <Linkedin class="w-6 h-6" />
         </a>
         <a
-          href="mailto:sachi009955@gmail.com"
+          href={`mailto:${AUTHOR_EMAIL}`}
           class="text-nav-text/80 hover:text-nav-text transition-colors"
           title="Email"
         >
