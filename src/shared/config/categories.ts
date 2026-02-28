@@ -100,32 +100,3 @@ export const reverseCategoryMap: Record<string, string> = {
   productivity: "생산성",
   blog: "블로그운영",
 };
-
-/**
- * 카테고리 영문 ID -> 전체 이름 매핑 (검색 결과 표시용)
- */
-export const categoryNames: Record<string, string> = {
-  all: "전체",
-  daily: "일상",
-  dev: "개발",
-  ai: "AI",
-  security: "보안",
-  education: "교육",
-  devops: "DevOps",
-  productivity: "생산성",
-  blog: "블로그운영",
-};
-
-/**
- * ID로 카테고리 객체 찾기
- */
-export function getCategoryById(id: string): Category | undefined {
-  return categories.find((cat) => cat.id === id);
-}
-
-/**
- * 한글 이름으로 카테고리 ID 찾기
- */
-export function getCategoryIdByName(name: string): string {
-  return categoryMap[name] || "daily";
-}

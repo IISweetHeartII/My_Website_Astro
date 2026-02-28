@@ -42,7 +42,7 @@ This is **Obsidian Blogger** - an Astro-based blog optimized for writing in Obsi
 
 This project uses **Feature-First Architecture** (domain-driven organization):
 
-- **features/**: Domain-specific features (blog, newsletter, about) with collocated components
+- **features/**: Domain-specific features (blog) with collocated components
 - **shared/**: Reusable components, utilities, and configuration used across domains
 - **Benefits**: Better scalability, clear boundaries, easier maintenance as project grows
 
@@ -61,9 +61,6 @@ src/
 │   │   └── components/
 │   │       ├── BlogCard.astro
 │   │       └── CategoryFilter.astro
-│   ├── newsletter/             # Newsletter domain
-│   │   └── components/
-│   │       └── NewsletterForm.astro
 │
 ├── shared/                      # Shared/common code
 │   ├── components/
@@ -78,9 +75,7 @@ src/
 ├── content/
 │   └── blog/                   # Blog posts - write here with Obsidian!
 ├── layouts/                    # Astro layouts (Layout, BlogPost)
-├── pages/                      # Route files + API endpoints
-│   ├── api/newsletter/         # Newsletter API endpoints
-│   └── ...
+├── pages/                      # Route files
 ├── styles/                     # Global CSS
 ├── assets/                     # Static assets (images)
 └── content.config.ts           # Content Collections schema
@@ -134,7 +129,6 @@ tags:
 - **Content**: Astro Content Collections (native markdown parsing)
 - **Typography**: Pretendard font (Korean-optimized)
 - **Features**: MDX, Sitemap, RSS, Robots.txt, Expressive Code, Mermaid diagrams, View Transitions, Prefetch
-- **Email**: Resend API for newsletter subscriptions
 - **Code Quality**: Biome (linter + formatter), TypeScript strict mode, Husky, commitlint
 
 ## Important Notes
@@ -145,11 +139,10 @@ tags:
 - Site is deployed to `https://log8.kr`
 - All paths use `@/` aliases for cleaner imports
 - TailwindCSS v4 is used (different from v3 syntax)
-  - **CRITICAL**: Use `bg-linear-to-*` (NOT `bg-gradient-to-*`) for gradients in TailwindCSS v4
+- **CRITICAL**: Use `bg-linear-to-*` (NOT `bg-gradient-to-*`) for gradients in TailwindCSS v4
   - ✅ Correct: `bg-linear-to-br`, `bg-linear-to-r`, `bg-linear-to-t`
   - ❌ Wrong: `bg-gradient-to-br`, `bg-gradient-to-r`, `bg-gradient-to-t`
 - **Git Workflow**: `main` is the primary development and production branch
-- **API Endpoints**: Newsletter subscription at `/api/newsletter/subscribe` (uses Resend)
 
 ## Obsidian Setup
 

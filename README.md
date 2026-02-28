@@ -99,19 +99,17 @@ Update `src/shared/config/consts.ts` to modify:
 
 ## Deployment
 
-See [DEPLOYMENT.md](DEPLOYMENT.md) for detailed deployment instructions for:
+See deployment workflows and runbook:
 
-- GitHub Pages
-- Netlify
-- Vercel
-- Custom domains
+- `docs/dev/cloudflare-cli-iac-runbook.md`
+- `.github/workflows/deploy-cloudflare.yml`
 
 ## Project Structure
 
 ```
 obsidian-blogger/
 ├── src/
-│   ├── features/      # Domain-specific features (blog, newsletter)
+│   ├── features/      # Domain-specific features (blog)
 │   ├── shared/        # Shared components, utils, config
 │   ├── content/       # Blog posts and content
 │   ├── layouts/       # Page layouts
@@ -214,7 +212,7 @@ If you find this project helpful, please consider:
 
 ### Deployment
 
-- [Deployment Guide](DEPLOYMENT.md) - Multi-platform deployment guide
+- [Cloudflare CLI/IaC Runbook](docs/dev/cloudflare-cli-iac-runbook.md) - Deployment operations guide
 - [Environment Setup](astro.config.mjs) - Astro configuration
 
 ## Links
