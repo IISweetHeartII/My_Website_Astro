@@ -1,5 +1,5 @@
-type Theme = "light" | "dark";
-const THEME_DATASET_KEY = "theme";
+import { applyTheme, getCurrentTheme } from "@/shared/scripts/theme-utils";
+
 const PRINT_BOUND_DATASET_KEY = "lightModePrintBound";
 
 type VoidCallback = () => void;
@@ -8,15 +8,6 @@ type PrintOptions = {
   beforePrint?: VoidCallback;
   afterPrint?: VoidCallback;
 };
-
-function getCurrentTheme(): Theme {
-  return (document.documentElement.dataset[THEME_DATASET_KEY] as Theme | undefined) ?? "light";
-}
-
-function applyTheme(theme: Theme): void {
-  document.documentElement.dataset[THEME_DATASET_KEY] = theme;
-  window.dispatchEvent(new CustomEvent("theme-change", { detail: { theme } }));
-}
 
 export function printWithForcedLightMode(options: PrintOptions = {}): void {
   const mediaQuery = window.matchMedia("print");
