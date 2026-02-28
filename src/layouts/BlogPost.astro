@@ -1,5 +1,11 @@
 ---
 import type { CollectionEntry } from "astro:content";
+import type { MarkdownHeading } from "astro";
+import { BookOpen } from "lucide-astro";
+import RelatedPosts from "@/features/blog/components/RelatedPosts.astro";
+import SeriesNavigation from "@/features/blog/components/SeriesNavigation.astro";
+import SocialShare from "@/features/blog/components/SocialShare.astro";
+import TableOfContents from "@/features/blog/components/TableOfContents.astro";
 import GiscusComments from "@/shared/components/comments/GiscusComments.astro";
 import BreadcrumbSchema from "@/shared/components/seo/BreadcrumbSchema.astro";
 import FAQSchema from "@/shared/components/seo/FAQSchema.astro";
@@ -16,7 +22,13 @@ import {
 import { getUrl } from "@/shared/utils/url";
 import Layout from "./Layout.astro";
 
-interface Props extends Pick<CollectionEntry<"blog">, "data"> {}
+interface Props extends Pick<CollectionEntry<"blog">, "data"> {
+  readingTime?: number;
+  headings?: MarkdownHeading[];
+  relatedPosts?: CollectionEntry<"blog">[];
+  currentPost?: CollectionEntry<"blog">;
+  seriesPosts?: CollectionEntry<"blog">[];
+}
 
 const {
   data: {
@@ -44,6 +56,11 @@ const {
     no_index,
     faq,
   },
+  readingTime,
+  headings = [],
+  relatedPosts = [],
+  currentPost,
+  seriesPosts = [],
 } = Astro.props;
 
 const safeTags = tags ?? [];
@@ -51,8 +68,13 @@ const safeTags = tags ?? [];
 // 포스트 slug 추출 (URL 경로에서)
 const postSlug = Astro.url.pathname.replace("/blog/", "").replace("/", "") || "unknown";
 
-// JSON-LD Schema 생성 (Entity-first with stable @id)
+// OG image fallback: if no explicit og_image, default to /og/{slug}.png
+const resolvedOgImage = og_image || `/og/${postSlug}.png`;
+
+// Full post URL for sharing
 const postUrl = `${SITE_URL}/blog/${postSlug}`;
+
+// JSON-LD Schema 생성 (Entity-first with stable @id)
 const blogPostSchema = {
   "@context": "https://schema.org",
   "@type": "BlogPosting",
@@ -104,7 +126,7 @@ const blogPostSchema = {
     {author && <meta property="article:author" content={author} />}
     {safeTags.map((tag: string) => <meta property="article:tag" content={tag} />)}
 
-    {featured_image && <meta property="og:image" content={featured_image} />}
+    <meta property="og:image" content={resolvedOgImage} />
     {featured_image_alt && <meta property="og:image:alt" content={featured_image_alt} />}
 
     {meta_title && <meta name="title" content={meta_title} />}
@@ -113,7 +135,6 @@ const blogPostSchema = {
 
     {og_title && <meta property="og:title" content={og_title} />}
     {og_description && <meta property="og:description" content={og_description} />}
-    {og_image && <meta property="og:image" content={og_image} />}
 
     {twitter_title && <meta name="twitter:title" content={twitter_title} />}
     {twitter_description && <meta name="twitter:description" content={twitter_description} />}
@@ -157,18 +178,23 @@ const blogPostSchema = {
 
   <!-- BlogPost 본문 콘텐츠 -->
   <div class="w-full p-4">
-    <div class="flex flex-col md:flex-row max-w-7xl mx-auto gap-4">
-      <article class="w-full">
-        <!-- 제목, 날짜, 태그, 이미지 섹션 (prose 밖) -->
+    <div class="flex flex-col lg:flex-row max-w-7xl mx-auto gap-8">
+      <article class="flex-1 min-w-0" data-pagefind-body>
+        <!-- 제목, 날짜, 읽기 시간, 태그, 이미지 섹션 (prose 밖) -->
         <div class="title mb-4 py-4 text-center leading-none">
           {
             created_date && (
-              <div class="date mb-2 text-text">
+              <div class="date mb-2 text-text flex items-center justify-center gap-2 flex-wrap">
                 <FormattedDate date={created_date} />
                 {updated_date && updated_date > created_date && (
                   <span>
-                    {" "}
                     (Updated: <FormattedDate date={updated_date} />)
+                  </span>
+                )}
+                {readingTime && (
+                  <span class="inline-flex items-center gap-1 text-text/70">
+                    <BookOpen class="w-4 h-4" />
+                    {readingTime}분 읽기
                   </span>
                 )}
               </div>
@@ -204,10 +230,21 @@ const blogPostSchema = {
           }
         </div>
 
+        <!-- Series Navigation (before prose content) -->
+        {currentPost && seriesPosts.length > 1 && (
+          <SeriesNavigation currentPost={currentPost} seriesPosts={seriesPosts} />
+        )}
+
+        <!-- Mobile TOC (before prose content) -->
+        <TableOfContents headings={headings} />
+
         <!-- 실제 블로그 콘텐츠만 prose로 감싸기 -->
         <div class="prose prose-xl">
           <slot />
         </div>
+
+        <!-- Social Share -->
+        <SocialShare title={title ?? ""} url={postUrl} description={description ?? ""} />
 
         <!-- FAQ Section (AEO - Answer Engine Optimization) -->
         {
@@ -229,12 +266,18 @@ const blogPostSchema = {
           )
         }
 
+        <!-- Related Posts -->
+        <RelatedPosts posts={relatedPosts} />
+
         <!-- 댓글 섹션 (prose 밖) -->
         <div class="comments-section mt-12 pt-8 border-t border-background-lighter">
-          <h3 class="text-2xl font-bold text-text mb-6 text-center">💬 댓글</h3>
+          <h3 class="text-2xl font-bold text-text mb-6 text-center">댓글</h3>
           <GiscusComments />
         </div>
       </article>
+
+      <!-- Desktop TOC sidebar -->
+      <TableOfContents headings={headings} />
     </div>
   </div>
 

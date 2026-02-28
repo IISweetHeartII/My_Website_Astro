@@ -1,0 +1,117 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { BookText, ChevronLeft, ChevronRight } from "lucide-astro";
+import { getUrl } from "@/shared/utils/url";
+
+interface Props {
+  currentPost: CollectionEntry<"blog">;
+  seriesPosts: CollectionEntry<"blog">[];
+}
+
+const { currentPost, seriesPosts } = Astro.props;
+
+const seriesName = currentPost.data.series;
+const currentSlug = currentPost.data.slug || currentPost.id.replace(/\.[^/.]+$/, "");
+const currentIndex = seriesPosts.findIndex((p) => {
+  const slug = p.data.slug || p.id.replace(/\.[^/.]+$/, "");
+  return slug === currentSlug;
+});
+
+const prevPost = currentIndex > 0 ? seriesPosts[currentIndex - 1] : null;
+const nextPost = currentIndex < seriesPosts.length - 1 ? seriesPosts[currentIndex + 1] : null;
+
+function getPostSlug(post: CollectionEntry<"blog">) {
+  return post.data.slug || post.id.replace(/\.[^/.]+$/, "");
+}
+---
+
+{seriesName && seriesPosts.length > 1 && (
+  <div class="series-nav mb-8 rounded-xl border border-background-lighter bg-background-light overflow-hidden">
+    {/* Header */}
+    <button
+      type="button"
+      class="series-toggle w-full flex items-center gap-2 px-4 py-3 text-left"
+      aria-expanded="true"
+    >
+      <BookText class="w-4 h-4 text-primary shrink-0" />
+      <span class="text-sm font-semibold text-text truncate">
+        시리즈: {seriesName}
+      </span>
+      <span class="ml-auto text-xs text-text/50 shrink-0">
+        {currentIndex + 1} / {seriesPosts.length}
+      </span>
+      <svg class="series-chevron w-4 h-4 text-text/50 transition-transform duration-200 rotate-180 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+      </svg>
+    </button>
+
+    {/* Post list */}
+    <ul class="series-list px-4 pb-3 space-y-1 text-sm">
+      {seriesPosts.map((post, index) => {
+        const slug = getPostSlug(post);
+        const isCurrent = slug === currentSlug;
+        return (
+          <li>
+            <a
+              href={isCurrent ? undefined : getUrl(`/blog/${slug}/`)}
+              class:list={[
+                "flex items-center gap-2 px-3 py-2 rounded-lg transition-colors no-underline",
+                isCurrent
+                  ? "bg-primary/10 text-primary font-medium"
+                  : "text-text/70 hover:text-text hover:bg-background-lighter",
+              ]}
+              aria-current={isCurrent ? "page" : undefined}
+            >
+              <span class="text-xs text-text/40 w-5 text-center shrink-0">{index + 1}</span>
+              <span class="truncate">{post.data.title}</span>
+            </a>
+          </li>
+        );
+      })}
+    </ul>
+
+    {/* Prev/Next navigation */}
+    {(prevPost || nextPost) && (
+      <div class="flex border-t border-background-lighter">
+        {prevPost ? (
+          <a
+            href={getUrl(`/blog/${getPostSlug(prevPost)}/`)}
+            class="flex-1 flex items-center gap-1 px-4 py-3 text-sm text-text/70 hover:text-primary hover:bg-background-lighter transition-colors no-underline"
+          >
+            <ChevronLeft class="w-4 h-4 shrink-0" />
+            <span class="truncate">{prevPost.data.title}</span>
+          </a>
+        ) : (
+          <div class="flex-1" />
+        )}
+        {nextPost ? (
+          <a
+            href={getUrl(`/blog/${getPostSlug(nextPost)}/`)}
+            class="flex-1 flex items-center justify-end gap-1 px-4 py-3 text-sm text-text/70 hover:text-primary hover:bg-background-lighter transition-colors no-underline border-l border-background-lighter"
+          >
+            <span class="truncate">{nextPost.data.title}</span>
+            <ChevronRight class="w-4 h-4 shrink-0" />
+          </a>
+        ) : (
+          <div class="flex-1" />
+        )}
+      </div>
+    )}
+  </div>
+)}
+
+<script>
+  document.addEventListener("astro:page-load", () => {
+    const toggle = document.querySelector<HTMLButtonElement>(".series-toggle");
+    const list = document.querySelector<HTMLElement>(".series-list");
+    const chevron = document.querySelector<HTMLElement>(".series-chevron");
+    if (!toggle || !list) return;
+
+    toggle.addEventListener("click", () => {
+      const expanded = toggle.getAttribute("aria-expanded") === "true";
+      toggle.setAttribute("aria-expanded", String(!expanded));
+      list.classList.toggle("hidden");
+      chevron?.style.setProperty("transform", expanded ? "" : "rotate(180deg)");
+    });
+  });
+</script>

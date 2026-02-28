@@ -1,91 +1,331 @@
 ---
-import { ArrowRight, FileQuestion } from "lucide-astro";
 import Layout from "@/layouts/Layout.astro";
-import { AUTHOR_EMAIL, SITE_TITLE } from "@/shared/config/consts";
+import { SITE_TITLE } from "@/shared/config/consts";
 
 const title = `404 Not Found - ${SITE_TITLE}`;
-const description = "잘못 들어온 것 같아요! 만약 버그가 있다면 메일로 알려주세요.";
-const CONTACT_MAILTO = `mailto:${AUTHOR_EMAIL}`;
+const description = "요청하신 페이지를 찾을 수 없습니다.";
 ---
 
 <Layout title={title} description={description}>
-  <div class="min-h-[calc(100vh-16rem)] flex items-center justify-center p-8">
-    <div
-      class="text-center max-w-xl mx-auto py-12 px-8 bg-primary/20 rounded-2xl shadow relative overflow-hidden md:py-8 md:px-6"
-    >
-      <div
-        class="inline-block px-4 py-2 bg-accent/10 text-accent rounded-full text-sm font-medium mb-6"
-      >
-        404 Error
+  <div class="terminal-wrapper">
+    <div class="terminal">
+      <!-- Title bar -->
+      <div class="terminal-header">
+        <div class="terminal-dots">
+          <span class="dot dot-red"></span>
+          <span class="dot dot-yellow"></span>
+          <span class="dot dot-green"></span>
+        </div>
+        <span class="terminal-title">Terminal — log8.kr</span>
       </div>
-      <h1 class="text-3xl md:text-4xl mb-4 text-text font-bold tracking-tight">Page Not Found</h1>
-      <p class="text-lg text-primary mb-8 leading-relaxed md:text-base">
-        잘못 들어온 것 같아요! 만약 버그가 있다면 메일로 알려주세요.
-      </p>
-      <div class="relative w-32 h-32 mx-auto mb-8 md:w-24 md:h-24">
-        <FileQuestion class="lost-file text-primary w-full h-full" />
+
+      <!-- Terminal body -->
+      <div class="terminal-body">
+        <pre class="ascii-art" aria-hidden="true">
+{`  _  _    ___  _  _
+ | || |  / _ \\| || |
+ | || |_| | | | || |_
+ |__   _| | | |__   _|
+    | | | |_| |  | |
+    |_|  \\___/   |_|`}
+        </pre>
+
+        <div class="terminal-line line-1">
+          <span class="prompt">$</span> curl https://log8.kr<span class="path">/your-page</span>
+        </div>
+
+        <div class="terminal-line line-2">
+          <span class="status-code">HTTP/1.1 404 Not Found</span>
+        </div>
+
+        <div class="terminal-line line-3">&nbsp;</div>
+
+        <div class="terminal-line line-4">
+          <span class="chevron">&gt;</span> 이 페이지는 존재하지 않습니다.
+        </div>
+
+        <div class="terminal-line line-5">
+          <span class="chevron">&gt;</span> 어디로 갈까요?
+        </div>
+
+        <div class="terminal-line line-6">&nbsp;</div>
+
+        <div class="terminal-line line-7">
+          <a href="/" class="nav-link" aria-label="홈 페이지로 이동">
+            <span class="nav-key">[1]</span> 홈으로 가기
+          </a>
+        </div>
+
+        <div class="terminal-line line-8">
+          <a href="/blog" class="nav-link" aria-label="블로그 목록으로 이동">
+            <span class="nav-key">[2]</span> 블로그 보기
+          </a>
+        </div>
+
+        <div class="terminal-line line-9">
+          <a href="/showcase" class="nav-link" aria-label="프로젝트 쇼케이스로 이동">
+            <span class="nav-key">[3]</span> 프로젝트 보기
+          </a>
+        </div>
+
+        <div class="terminal-line line-10">&nbsp;</div>
+
+        <div class="terminal-line line-11">
+          <span class="prompt">$</span> <span class="cursor">▊</span>
+        </div>
       </div>
-      <div class="action-buttons mb-6 flex flex-wrap gap-3 justify-center">
-        <a
-          href="/"
-          class="inline-flex items-center gap-2 px-6 py-3 bg-accent text-text rounded-xl no-underline font-semibold transition-all duration-200 hover:bg-accent-mint hover:-translate-y-px"
-        >
-          홈으로 가기
-          <ArrowRight class="w-5 h-5 transition-transform duration-200 group-hover:translate-x-1" />
-        </a>
-        <a
-          href={CONTACT_MAILTO}
-          class="inline-flex items-center gap-2 px-6 py-3 bg-primary/30 text-text rounded-xl no-underline font-semibold transition-all duration-200 hover:bg-primary/40 hover:-translate-y-px"
-        >
-          Email
-        </a>
-      </div>
-      <p class="help-text text-sm text-primary m-0 md:text-xs">
-        급한 일이 있다면 <a
-          href={CONTACT_MAILTO}
-          class="contact-link text-accent no-underline font-medium transition-all duration-200 border-b border-transparent hover:border-accent"
-          >메일로 알려주세요</a
-        >
-      </p>
     </div>
+
+    <p class="terminal-hint">
+      <!-- 미소한 이스터에그 -->
+      <span class="hint-text">segfault 아닙니다. 그냥 길을 잃었을 뿐.</span>
+    </p>
   </div>
 </Layout>
 
 <style>
-  /* Keep keyframe animations */
-  @keyframes float {
-    0%,
-    100% {
+  /* Terminal wrapper - always dark regardless of site theme */
+  .terminal-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: calc(100vh - 16rem);
+    padding: 2rem 1rem;
+  }
+
+  .terminal {
+    width: 100%;
+    max-width: 700px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow:
+      0 25px 50px -12px rgba(0, 0, 0, 0.5),
+      0 0 0 1px rgba(255, 255, 255, 0.05);
+    font-family: "Consolas", "Monaco", "Courier New", monospace;
+    background: #1e1e2e;
+  }
+
+  /* Title bar */
+  .terminal-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    background: #181825;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  .terminal-dots {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+  }
+
+  .dot-red {
+    background: #f38ba8;
+  }
+  .dot-yellow {
+    background: #f9e2af;
+  }
+  .dot-green {
+    background: #a6e3a1;
+  }
+
+  .terminal-title {
+    color: #6c7086;
+    font-size: 0.8rem;
+    letter-spacing: 0.02em;
+  }
+
+  /* Terminal body */
+  .terminal-body {
+    padding: 1.5rem;
+    color: #cdd6f4;
+    font-size: 0.95rem;
+    line-height: 1.8;
+  }
+
+  @media (min-width: 640px) {
+    .terminal-body {
+      padding: 2rem 2.5rem;
+    }
+  }
+
+  /* ASCII art */
+  .ascii-art {
+    color: #f38ba8;
+    font-size: 0.7rem;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeIn 0.4s ease forwards;
+    overflow: hidden;
+  }
+
+  @media (min-width: 640px) {
+    .ascii-art {
+      font-size: 0.85rem;
+    }
+  }
+
+  /* Terminal lines */
+  .terminal-line {
+    white-space: pre-wrap;
+    overflow: hidden;
+    opacity: 0;
+  }
+
+  .prompt {
+    color: #a6e3a1;
+    font-weight: bold;
+    margin-right: 0.5rem;
+  }
+
+  .path {
+    color: #f9e2af;
+  }
+
+  .status-code {
+    color: #f38ba8;
+    font-weight: bold;
+  }
+
+  .chevron {
+    color: #89b4fa;
+    margin-right: 0.25rem;
+  }
+
+  /* Navigation links */
+  .nav-link {
+    color: #cdd6f4;
+    text-decoration: none;
+    display: inline-block;
+    padding: 0.15rem 0.5rem;
+    margin-left: -0.5rem;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+  }
+
+  .nav-link:hover,
+  .nav-link:focus-visible {
+    background: rgba(139, 92, 246, 0.2);
+    color: #cba6f7;
+  }
+
+  .nav-link:focus-visible {
+    outline: 2px solid #cba6f7;
+    outline-offset: 2px;
+  }
+
+  .nav-key {
+    color: #cba6f7;
+    font-weight: bold;
+    margin-right: 0.5rem;
+  }
+
+  /* Blinking cursor */
+  .cursor {
+    color: #a6e3a1;
+    animation: blink 1s step-end infinite;
+  }
+
+  /* Hint text below terminal */
+  .terminal-hint {
+    margin-top: 1.5rem;
+    text-align: center;
+  }
+
+  .hint-text {
+    color: var(--color-text-muted, #6c7086);
+    font-size: 0.8rem;
+    font-family: "Consolas", "Monaco", "Courier New", monospace;
+    opacity: 0;
+    animation: fadeIn 0.5s ease 4s forwards;
+  }
+
+  /* Animations */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(4px);
+    }
+    to {
+      opacity: 1;
       transform: translateY(0);
     }
-    50% {
-      transform: translateY(-20px);
+  }
+
+  @keyframes typing {
+    from {
+      max-width: 0;
+    }
+    to {
+      max-width: 100%;
     }
   }
 
   @keyframes blink {
     0%,
     100% {
-      transform: scale(1);
+      opacity: 1;
     }
-    95% {
-      transform: scaleY(0.1);
+    50% {
+      opacity: 0;
     }
   }
 
-  /* Apply animation to the SVG */
-  .lost-file {
-    animation: float 6s ease-in-out infinite;
+  /* Staggered line appearance */
+  .line-1 {
+    animation: fadeIn 0.3s ease 0.3s forwards;
+  }
+  .line-2 {
+    animation: fadeIn 0.3s ease 0.8s forwards;
+  }
+  .line-3 {
+    animation: fadeIn 0.1s ease 1.1s forwards;
+  }
+  .line-4 {
+    animation: fadeIn 0.3s ease 1.4s forwards;
+  }
+  .line-5 {
+    animation: fadeIn 0.3s ease 1.8s forwards;
+  }
+  .line-6 {
+    animation: fadeIn 0.1s ease 2.1s forwards;
+  }
+  .line-7 {
+    animation: fadeIn 0.3s ease 2.4s forwards;
+  }
+  .line-8 {
+    animation: fadeIn 0.3s ease 2.7s forwards;
+  }
+  .line-9 {
+    animation: fadeIn 0.3s ease 3.0s forwards;
+  }
+  .line-10 {
+    animation: fadeIn 0.1s ease 3.3s forwards;
+  }
+  .line-11 {
+    animation: fadeIn 0.3s ease 3.5s forwards;
   }
 
-  /* Style for the eyes dots */
-  .eyes::before,
-  .eyes::after {
-    content: "";
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: var(--color-text);
-    animation: blink 3s ease-in-out infinite;
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .ascii-art,
+    .terminal-line,
+    .hint-text {
+      opacity: 1;
+      animation: none;
+    }
+    .cursor {
+      animation: none;
+      opacity: 1;
+    }
   }
 </style>

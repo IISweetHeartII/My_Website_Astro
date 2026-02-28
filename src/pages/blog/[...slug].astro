@@ -1,33 +1,52 @@
 ---
 import { type CollectionEntry, getCollection, render } from "astro:content";
+import { getRelatedPosts } from "@/shared/utils/blog";
+import { calculateReadingTime } from "@/shared/utils/reading-time";
 import BlogPost from "../../layouts/BlogPost.astro";
 
 export async function getStaticPaths() {
   const posts = await getCollection("blog");
   return posts.map((post) => {
-    // Use explicit slug if provided, otherwise generate from the file path
     const slug = post.data.slug || post.id.replace(/\.[^/.]+$/, "");
     return {
       params: { slug },
-      props: { post }, // Pass the whole post object
+      props: { post },
     };
   });
 }
 
-// This page component's props type
-// Astro automatically provides the Content component alongside the props from getStaticPaths.
 type Props = {
   post: CollectionEntry<"blog">;
-  // Content는 render(post) 호출로 얻습니다.
 };
 
-// Destructure only 'post' from Astro.props
 const { post } = Astro.props;
 
-// Use the render helper to get the Content component
-const { Content } = await render(post);
+// Render content and get headings
+const { Content, headings } = await render(post);
+
+// Reading time
+const readingTime = calculateReadingTime(post.body ?? "");
+
+// Related posts
+const allPosts = (await getCollection("blog")).filter((p) => p.data.publish);
+const relatedPosts = getRelatedPosts(post, allPosts);
+
+// Series posts
+let seriesPosts: CollectionEntry<"blog">[] = [];
+if (post.data.series) {
+  seriesPosts = allPosts
+    .filter((p) => p.data.series === post.data.series)
+    .sort((a, b) => (a.data.series_order ?? 0) - (b.data.series_order ?? 0));
+}
 ---
 
-<BlogPost data={post.data}>
+<BlogPost
+  data={post.data}
+  readingTime={readingTime}
+  headings={headings}
+  relatedPosts={relatedPosts}
+  currentPost={post}
+  seriesPosts={seriesPosts}
+>
   <Content />
 </BlogPost>

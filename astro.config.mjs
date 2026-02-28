@@ -5,6 +5,7 @@ import sitemap from "@astrojs/sitemap";
 import tailwindcss from "@tailwindcss/vite";
 import { defineConfig } from "astro/config";
 import expressiveCode from "astro-expressive-code";
+import pagefind from "astro-pagefind";
 import robotsTxt from "astro-robots-txt";
 
 // https://astro.build/config
@@ -47,6 +48,7 @@ export default defineConfig({
       },
     }),
     mdx(),
+    pagefind(),
     sitemap({
       customPages: [
         "https://log8.kr/",

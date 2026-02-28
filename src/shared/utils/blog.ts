@@ -50,6 +50,38 @@ export async function getSortedPublishedPosts(): Promise<CollectionEntry<"blog">
 /**
  * Transform a blog post for card/list display
  */
+/**
+ * Get related posts based on tag overlap and category match
+ */
+export function getRelatedPosts(
+  currentPost: CollectionEntry<"blog">,
+  allPosts: CollectionEntry<"blog">[],
+  count = 3
+): CollectionEntry<"blog">[] {
+  const currentSlug = currentPost.data.slug || currentPost.id.replace(/\.[^/.]+$/, "");
+  const currentTags = currentPost.data.tags ?? [];
+  const currentCategory = currentPost.data.category;
+
+  const scored = allPosts
+    .filter((post) => {
+      const slug = post.data.slug || post.id.replace(/\.[^/.]+$/, "");
+      return slug !== currentSlug;
+    })
+    .map((post) => {
+      const postTags = post.data.tags ?? [];
+      const tagOverlap = postTags.filter((t: string) => currentTags.includes(t)).length;
+      const categoryMatch = post.data.category === currentCategory ? 2 : 0;
+      return { post, score: tagOverlap + categoryMatch };
+    })
+    .filter((item) => item.score > 0)
+    .sort((a, b) => b.score - a.score);
+
+  return scored.slice(0, count).map((item) => item.post);
+}
+
+/**
+ * Transform a blog post for card/list display
+ */
 export function transformPostForCard(post: CollectionEntry<"blog">) {
   return {
     title: post.data.title,

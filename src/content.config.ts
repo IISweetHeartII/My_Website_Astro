@@ -56,6 +56,8 @@ const blog = defineCollection({
     keywords: z.array(z.string()).default([]).nullable(),
     author: z.string().optional().nullable(),
     reading_time: z.number().optional().nullable(),
+    series: z.string().optional().nullable(),
+    series_order: z.number().optional().nullable(),
     no_index: z.boolean().default(false),
     // AEO: FAQ Schema (Answer Engine Optimization)
     faq: z

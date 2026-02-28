@@ -66,6 +66,11 @@ body {
   color: var(--color-text);
 }
 
+/* Heading scroll offset for TOC */
+.prose :is(h2, h3, h4) {
+  scroll-margin-top: 5rem;
+}
+
 /* Headings */
 .prose h1,
 .prose h2,

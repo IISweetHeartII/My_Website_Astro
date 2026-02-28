@@ -1,0 +1,124 @@
+---
+import type { MarkdownHeading } from "astro";
+import { List } from "lucide-astro";
+
+interface Props {
+  headings: MarkdownHeading[];
+}
+
+const { headings } = Astro.props;
+
+// Filter to h2, h3, h4 only
+const tocHeadings = headings.filter((h) => h.depth >= 2 && h.depth <= 4);
+---
+
+{tocHeadings.length > 0 && (
+  <>
+    {/* Mobile: collapsible dropdown */}
+    <nav class="toc-mobile lg:hidden mb-8 rounded-xl border border-background-lighter bg-background-light">
+      <button
+        class="toc-toggle w-full flex items-center gap-2 px-4 py-3 text-sm font-semibold text-text"
+        type="button"
+        aria-expanded="false"
+      >
+        <List class="w-4 h-4" />
+        <span>목차</span>
+        <svg class="toc-chevron ml-auto w-4 h-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+        </svg>
+      </button>
+      <ul class="toc-list hidden px-4 pb-4 space-y-1 text-sm">
+        {tocHeadings.map((heading) => (
+          <li style={`padding-left: ${(heading.depth - 2) * 0.75}rem`}>
+            <a
+              href={`#${heading.slug}`}
+              class="toc-link block py-1 text-text/70 hover:text-primary transition-colors duration-200 no-underline"
+              data-slug={heading.slug}
+            >
+              {heading.text}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    {/* Desktop: sticky sidebar */}
+    <aside class="toc-desktop hidden lg:block w-56 shrink-0">
+      <nav class="sticky top-24">
+        <p class="flex items-center gap-2 text-sm font-semibold text-text mb-3">
+          <List class="w-4 h-4" />
+          목차
+        </p>
+        <ul class="space-y-1 text-sm border-l-2 border-background-lighter pl-3">
+          {tocHeadings.map((heading) => (
+            <li style={`padding-left: ${(heading.depth - 2) * 0.75}rem`}>
+              <a
+                href={`#${heading.slug}`}
+                class="toc-link block py-1 text-text/60 hover:text-primary transition-colors duration-200 no-underline"
+                data-slug={heading.slug}
+              >
+                {heading.text}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    </aside>
+  </>
+)}
+
+<script>
+  document.addEventListener("astro:page-load", () => {
+    // Mobile toggle
+    const toggles = document.querySelectorAll<HTMLButtonElement>(".toc-toggle");
+    for (const toggle of toggles) {
+      toggle.addEventListener("click", () => {
+        const list = toggle.nextElementSibling as HTMLElement;
+        const chevron = toggle.querySelector(".toc-chevron") as HTMLElement;
+        const expanded = toggle.getAttribute("aria-expanded") === "true";
+        toggle.setAttribute("aria-expanded", String(!expanded));
+        list?.classList.toggle("hidden");
+        chevron?.style.setProperty("transform", expanded ? "" : "rotate(180deg)");
+      });
+    }
+
+    // IntersectionObserver for active heading
+    const links = document.querySelectorAll<HTMLAnchorElement>(".toc-link");
+    if (links.length === 0) return;
+
+    const slugs = Array.from(links).map((l) => l.dataset["slug"]!);
+    const headingElements = slugs
+      .map((slug) => document.getElementById(slug))
+      .filter(Boolean) as HTMLElement[];
+
+    if (headingElements.length === 0) return;
+
+    const setActive = (slug: string) => {
+      for (const link of links) {
+        if (link.dataset["slug"] === slug) {
+          link.classList.add("text-primary", "font-medium");
+          link.classList.remove("text-text/60", "text-text/70");
+        } else {
+          link.classList.remove("text-primary", "font-medium");
+          // Restore appropriate opacity class based on parent
+          const isDesktop = link.closest(".toc-desktop");
+          link.classList.add(isDesktop ? "text-text/60" : "text-text/70");
+        }
+      }
+    };
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            setActive(entry.target.id);
+            break;
+          }
+        }
+      },
+      { rootMargin: "-80px 0px -70% 0px", threshold: 0 }
+    );
+
+    for (const el of headingElements) observer.observe(el);
+  });
+</script>
