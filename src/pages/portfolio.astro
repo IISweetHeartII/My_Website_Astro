@@ -11,7 +11,7 @@ import Layout from "../layouts/Layout.astro";
   title={`Portfolio - ${SITE_TITLE}`}
   description="김덕환의 포트폴리오 - 기술로 감동과 사랑을 전하는 개발자"
 >
-  <main class="portfolio-root max-w-[1600px] mx-auto px-6 py-16 bg-background-light" data-view-mode="deck" data-orientation="portrait">
+  <main class="portfolio-root max-w-[1600px] mx-auto px-6 py-16 bg-background-light">
     <!-- Resume Link Banner -->
     <div class="mb-6 p-4 bg-primary/10 rounded-lg border border-primary/20 flex justify-between items-center">
       <span class="text-sm text-text-light">1-2페이지 압축 버전을 원하시나요?</span>
@@ -26,86 +26,31 @@ import Layout from "../layouts/Layout.astro";
 
     <section class="portfolio-controls mb-6 p-4 bg-background rounded-lg border border-background-lighter print:hidden">
       <div class="flex flex-wrap items-center gap-2 justify-between">
-        <div class="flex flex-wrap items-center gap-2">
-          <span class="text-sm font-semibold text-text-light">View Mode</span>
+        <div class="flex items-center gap-2">
+          <span class="text-sm font-semibold text-text-light">Project Page</span>
           <button
             type="button"
-            data-mode-btn="flow"
-            class="rounded-md border border-background-lighter bg-background px-3 py-1.5 text-sm font-semibold text-text-light"
-          >
-            Flow
-          </button>
-          <button
-            type="button"
-            data-mode-btn="deck"
-            class="rounded-md border border-primary bg-primary px-3 py-1.5 text-sm font-semibold text-on-primary"
-          >
-            Deck
-          </button>
-          <button
-            type="button"
-            data-mode-btn="print"
-            class="rounded-md border border-background-lighter bg-background px-3 py-1.5 text-sm font-semibold text-text-light"
-          >
-            Print Layout
-          </button>
-          <div class="mx-1 h-6 w-px bg-background-lighter"></div>
-          <span class="text-sm font-semibold text-text-light">Orientation</span>
-          <button
-            type="button"
-            data-orientation-btn="portrait"
-            class="rounded-md border border-primary bg-primary px-3 py-1.5 text-sm font-semibold text-on-primary"
-          >
-            Portrait
-          </button>
-          <button
-            type="button"
-            data-orientation-btn="landscape"
-            class="rounded-md border border-background-lighter bg-background px-3 py-1.5 text-sm font-semibold text-text-light"
-          >
-            Landscape
-          </button>
-        </div>
-        <div class="flex flex-wrap items-center gap-2">
-          <div id="deck-page-controls" class="flex items-center gap-2 mr-2">
-            <button
-              type="button"
-              id="prev-page-btn"
-              class="rounded-md border border-background-lighter bg-background px-3 py-1.5 text-sm font-medium text-text-light"
-            >
-              이전 페이지
-            </button>
-            <span id="deck-page-indicator" class="text-xs font-semibold text-text-light min-w-[72px] text-center">1 / 1</span>
-            <button
-              type="button"
-              id="next-page-btn"
-              class="rounded-md border border-background-lighter bg-background px-3 py-1.5 text-sm font-medium text-text-light"
-            >
-              다음 페이지
-            </button>
-          </div>
-          <button
-            type="button"
-            id="expand-all-projects"
+            id="prev-project-btn"
             class="rounded-md border border-background-lighter bg-background px-3 py-1.5 text-sm font-medium text-text-light"
           >
-            모두 열기
+            이전 프로젝트
           </button>
+          <span id="project-page-indicator" class="text-xs font-semibold text-text-light min-w-[72px] text-center">1 / 1</span>
           <button
             type="button"
-            id="collapse-all-projects"
+            id="next-project-btn"
             class="rounded-md border border-background-lighter bg-background px-3 py-1.5 text-sm font-medium text-text-light"
           >
-            모두 접기
-          </button>
-          <button
-            type="button"
-            id="print-portfolio-btn"
-            class="rounded-md border border-primary bg-primary px-3 py-1.5 text-sm font-semibold text-on-primary"
-          >
-            PDF 출력
+            다음 프로젝트
           </button>
         </div>
+        <button
+          type="button"
+          id="print-portfolio-btn"
+          class="rounded-md border border-primary bg-primary px-3 py-1.5 text-sm font-semibold text-on-primary"
+        >
+          PDF 출력
+        </button>
       </div>
     </section>
 
@@ -1476,42 +1421,32 @@ flowchart LR
 </Layout>
 
 <style>
-  .portfolio-root[data-view-mode="flow"] .portfolio-project-card.is-collapsed > :not(:first-child) {
+  .portfolio-root > :not(.portfolio-controls):not(#portfolio-projects-section) {
     display: none;
   }
 
-  .portfolio-project-toggle {
-    margin-top: 0.75rem;
-    border: 1px solid var(--color-background-lighter);
-    border-radius: 0.375rem;
+  .portfolio-project-card {
+    display: none;
+    margin: 0 auto;
+    width: min(100%, 210mm);
+    min-height: 297mm;
+    height: 297mm;
+    overflow-y: auto;
     background: var(--color-background);
-    color: var(--color-text-light);
-    font-size: 0.75rem;
-    font-weight: 600;
-    padding: 0.35rem 0.6rem;
-    cursor: pointer;
+    border: 1px solid var(--color-background-lighter);
+    border-top-width: 4px;
+    border-top-color: var(--color-primary);
+    border-radius: 0.875rem;
+    box-shadow: 0 22px 38px -28px rgb(15 23 42 / 0.42);
+    font-size: 0.875rem;
+    line-height: 1.45;
   }
 
-  .portfolio-project-toggle:hover {
-    border-color: var(--color-primary);
-    color: var(--color-primary);
+  .portfolio-project-card.is-active {
+    display: block;
   }
 
-  #deck-page-controls {
-    display: none;
-  }
-
-  .portfolio-root[data-view-mode="deck"] #deck-page-controls {
-    display: inline-flex;
-  }
-
-  .portfolio-root[data-view-mode="deck"] > :not(.portfolio-controls):not(#portfolio-projects-section),
-  .portfolio-root[data-view-mode="print"] > :not(.portfolio-controls):not(#portfolio-projects-section) {
-    display: none;
-  }
-
-  .portfolio-root[data-view-mode="deck"] #portfolio-projects-section,
-  .portfolio-root[data-view-mode="print"] #portfolio-projects-section {
+  #portfolio-projects-section {
     padding: 0;
     background: transparent;
     border: 0;
@@ -1519,73 +1454,69 @@ flowchart LR
     margin-bottom: 0;
   }
 
-  .portfolio-root[data-view-mode="deck"] .portfolio-project-toggle,
-  .portfolio-root[data-view-mode="print"] .portfolio-project-toggle {
+  #portfolio-projects-section > h2 {
     display: none;
   }
 
-  .portfolio-root[data-view-mode="deck"] .portfolio-project-card {
-    display: none;
-    margin: 0 auto;
-    width: min(100%, 210mm);
-    min-height: 297mm;
-    background: var(--color-background);
-    border: 1px solid var(--color-background-lighter);
-    border-top: 4px solid var(--color-primary);
-    border-left: 1px solid var(--color-background-lighter);
-    border-radius: 0.875rem;
-    box-shadow: 0 22px 38px -28px rgb(15 23 42 / 0.42);
-    animation: deck-page-enter 320ms cubic-bezier(0.22, 1, 0.36, 1);
+  .portfolio-project-card h3 {
+    font-size: 1.05rem !important;
+    line-height: 1.35 !important;
   }
 
-  .portfolio-root[data-view-mode="deck"] .portfolio-project-card.is-active {
-    display: block;
+  .portfolio-project-card h4 {
+    font-size: 0.8rem !important;
+    line-height: 1.35 !important;
   }
 
-  .portfolio-root[data-view-mode="deck"][data-orientation="landscape"] .portfolio-project-card {
-    width: min(100%, 297mm);
-    min-height: 210mm;
+  .portfolio-project-card p,
+  .portfolio-project-card li,
+  .portfolio-project-card span {
+    font-size: 0.82rem !important;
+    line-height: 1.45 !important;
   }
 
-  .portfolio-root[data-view-mode="print"] .portfolio-project-card {
-    box-shadow: none;
-    border-color: var(--color-background-lighter);
-    border-top-color: var(--color-primary);
-    border-left-color: var(--color-background-lighter);
-    border-left-width: 1px;
-    background: var(--color-background);
-    width: 100%;
-    min-height: auto;
+  html[data-theme="dark"] .portfolio-project-card [class*="bg-white"] {
+    background: var(--color-background) !important;
   }
 
-  .portfolio-root[data-view-mode="print"] .portfolio-project-card > :not(:first-child) {
-    display: block;
+  html[data-theme="dark"] .portfolio-project-card [class*="bg-gray-50"] {
+    background: var(--color-background-light) !important;
   }
 
-  @keyframes deck-page-enter {
-    from {
-      opacity: 0;
-      transform: translateX(18px) scale(0.985);
-    }
-
-    to {
-      opacity: 1;
-      transform: translateX(0) scale(1);
-    }
+  html[data-theme="dark"] .portfolio-project-card [class*="text-gray-800"] {
+    color: var(--color-text) !important;
   }
 
-  @media (prefers-reduced-motion: reduce) {
-    .portfolio-root[data-view-mode="deck"] .portfolio-project-card {
-      animation: none;
-    }
+  html[data-theme="dark"] .portfolio-project-card [class*="text-gray-700"],
+  html[data-theme="dark"] .portfolio-project-card [class*="text-gray-600"] {
+    color: var(--color-text-light) !important;
+  }
+
+  html[data-theme="dark"] .portfolio-project-card [class*="text-gray-500"] {
+    color: var(--color-text-muted) !important;
+  }
+
+  html[data-theme="dark"] .portfolio-project-card [class*="border-gray-"],
+  html[data-theme="dark"] .portfolio-project-card [class*="border-gray"] {
+    border-color: var(--color-background-lighter) !important;
   }
 
   @media (max-width: 1024px) {
-    .portfolio-root[data-view-mode="deck"] .portfolio-project-card,
-    .portfolio-root[data-view-mode="deck"][data-orientation="landscape"] .portfolio-project-card {
+    .portfolio-root > :not(.portfolio-controls):not(#portfolio-projects-section) {
+      display: none;
+    }
+
+    .portfolio-project-card {
       width: 100%;
       min-height: auto;
+      height: auto;
+      overflow: visible;
     }
+  }
+
+  @page {
+    size: A4 portrait;
+    margin: 12mm;
   }
 
   @media print {
@@ -1611,7 +1542,12 @@ flowchart LR
       box-shadow: none !important;
     }
 
-    .portfolio-root[data-view-mode="print"] .portfolio-project-card {
+    .portfolio-project-card {
+      display: block !important;
+      width: 100%;
+      min-height: auto;
+      height: auto;
+      overflow: visible;
       break-after: page;
       page-break-after: always;
       break-inside: avoid;
@@ -1622,7 +1558,7 @@ flowchart LR
       box-shadow: none;
     }
 
-    .portfolio-root[data-view-mode="print"] .portfolio-project-card:last-child {
+    .portfolio-project-card:last-child {
       break-after: auto;
       page-break-after: auto;
     }
@@ -1634,347 +1570,123 @@ flowchart LR
   import { setupLightModePrintButton } from "@/shared/scripts/light-mode-print";
   import mermaid from "mermaid";
 
-  const cssTokens = getComputedStyle(document.documentElement);
   const token = (name: string, fallback: string): string => {
-    const value = cssTokens.getPropertyValue(name).trim();
+    const value = getComputedStyle(document.documentElement).getPropertyValue(name).trim();
     return value || fallback;
   };
 
-  try {
-    mermaid.initialize({
-      startOnLoad: true,
-      theme: "base",
-      themeVariables: {
-        primaryColor: token("--color-primary", "#8b5cf6"),
-        primaryTextColor: token("--color-text", "#1a1a2e"),
-        primaryBorderColor: token("--accent-vibrant", "#7c3aed"),
-        lineColor: token("--color-text-light", "#4a5568"),
-        secondaryColor: token("--color-background-lighter", "#f5f3ff"),
-        tertiaryColor: token("--color-background-light", "#f9fafb"),
-      },
-      flowchart: {
-        curve: "basis",
-        padding: 15,
-      },
-      sequence: {
-        diagramMarginX: 10,
-        diagramMarginY: 10,
-        actorMargin: 50,
-        width: 150,
-        height: 65,
-        boxMargin: 10,
-        boxTextMargin: 5,
-        noteMargin: 10,
-        messageMargin: 35,
-      },
-    });
-  } catch (error) {
-    console.error("Mermaid initialization failed in portfolio page", error);
-  }
-
-  type ViewMode = "flow" | "deck" | "print";
-  type OrientationMode = "portrait" | "landscape";
-
-  const portfolioRoot = document.querySelector<HTMLElement>(".portfolio-root");
-  const projectCards = Array.from(document.querySelectorAll<HTMLElement>(".portfolio-project-card"));
-  const modeButtons = Array.from(document.querySelectorAll<HTMLButtonElement>("[data-mode-btn]"));
-  const orientationButtons = Array.from(document.querySelectorAll<HTMLButtonElement>("[data-orientation-btn]"));
-  const expandAllButton = document.getElementById("expand-all-projects") as HTMLButtonElement | null;
-  const collapseAllButton = document.getElementById("collapse-all-projects") as HTMLButtonElement | null;
-  const printButton = document.getElementById("print-portfolio-btn") as HTMLButtonElement | null;
-  const prevPageButton = document.getElementById("prev-page-btn") as HTMLButtonElement | null;
-  const nextPageButton = document.getElementById("next-page-btn") as HTMLButtonElement | null;
-  const pageIndicator = document.getElementById("deck-page-indicator");
-
-  const MODE_STORAGE_KEY = "portfolio:view-mode";
-  const ORIENTATION_STORAGE_KEY = "portfolio:orientation";
-  const PAGE_STORAGE_KEY = "portfolio:deck-page";
-  const PRINT_PAGE_STYLE_ID = "portfolio-print-page-style";
-
-  const urlParams = new URLSearchParams(window.location.search);
-  const modeFromQuery = urlParams.get("mode");
-  const orientationFromQuery = urlParams.get("ori");
-  const pageFromQuery = Number(urlParams.get("p") ?? "1");
-
-  let currentMode: ViewMode = "deck";
-  let currentOrientation: OrientationMode = "portrait";
-  let currentDeckIndex = 0;
-  let restoreModeAfterPrint: ViewMode | null = null;
-
-  const applyActiveButtonStyle = (button: HTMLButtonElement, active: boolean): void => {
-    button.setAttribute("aria-pressed", String(active));
-    button.classList.toggle("bg-primary", active);
-    button.classList.toggle("text-on-primary", active);
-    button.classList.toggle("border-primary", active);
-    button.classList.toggle("bg-background", !active);
-    button.classList.toggle("text-text-light", !active);
-    button.classList.toggle("border-background-lighter", !active);
-  };
-
-  const setCardCollapsed = (card: HTMLElement, collapsed: boolean): void => {
-    card.classList.toggle("is-collapsed", collapsed);
-    const toggle = card.querySelector(".portfolio-project-toggle");
-    if (toggle) {
-      toggle.textContent = collapsed ? "열어보기" : "접기";
-      toggle.setAttribute("aria-expanded", String(!collapsed));
-    }
-  };
-
-  const ensureToggleButton = (card: HTMLElement): void => {
-    const header = card.querySelector<HTMLElement>(":scope > .mb-5.pb-4.border-b-2");
-    if (!header || header.querySelector(".portfolio-project-toggle")) return;
-
-    const toggle = document.createElement("button");
-    toggle.type = "button";
-    toggle.className = "portfolio-project-toggle";
-    toggle.textContent = "열어보기";
-    toggle.setAttribute("aria-expanded", "false");
-    toggle.addEventListener("click", () => {
-      const collapsed = card.classList.contains("is-collapsed");
-      setCardCollapsed(card, !collapsed);
-    });
-    header.appendChild(toggle);
-  };
-
-  const syncUrl = (): void => {
-    const params = new URLSearchParams(window.location.search);
-    params.set("mode", currentMode === "print" ? "deck" : currentMode);
-    params.set("ori", currentOrientation);
-    params.set("p", String(currentDeckIndex + 1));
-    const next = `${window.location.pathname}?${params.toString()}`;
-    window.history.replaceState({}, "", next);
-  };
-
-  const updateDeckIndicator = (): void => {
-    const total = projectCards.length;
-    if (pageIndicator) pageIndicator.textContent = `${currentDeckIndex + 1} / ${total}`;
-    if (prevPageButton) prevPageButton.disabled = currentDeckIndex <= 0;
-    if (nextPageButton) nextPageButton.disabled = currentDeckIndex >= total - 1;
-  };
-
-  const setDeckVisibility = (): void => {
-    const isDeckMode = currentMode === "deck";
-
-    for (const [index, card] of projectCards.entries()) {
-      const isActive = isDeckMode ? index === currentDeckIndex : true;
-      card.classList.toggle("is-active", isActive);
-
-      if (isDeckMode) {
-        card.hidden = !isActive;
-        card.setAttribute("aria-hidden", String(!isActive));
-        if (!isActive) {
-          card.setAttribute("inert", "");
-        } else {
-          card.removeAttribute("inert");
-        }
-      } else {
-        card.hidden = false;
-        card.setAttribute("aria-hidden", "false");
-        card.removeAttribute("inert");
-      }
-    }
-
-    updateDeckIndicator();
-  };
-
-  const setDeckIndex = (index: number, sync = true): void => {
-    const maxIndex = Math.max(0, projectCards.length - 1);
-    currentDeckIndex = Math.min(maxIndex, Math.max(0, index));
-    if (sync) {
-      try {
-        localStorage.setItem(PAGE_STORAGE_KEY, String(currentDeckIndex));
-      } catch {}
-      syncUrl();
-    }
-    setDeckVisibility();
-  };
-
-  const setOrientation = (orientation: OrientationMode, sync = true): void => {
-    if (!portfolioRoot) return;
-    currentOrientation = orientation;
-    portfolioRoot.setAttribute("data-orientation", orientation);
-
-    for (const button of orientationButtons) {
-      const active = button.getAttribute("data-orientation-btn") === orientation;
-      applyActiveButtonStyle(button, active);
-    }
-
-    if (sync) {
-      try {
-        localStorage.setItem(ORIENTATION_STORAGE_KEY, orientation);
-      } catch {}
-      syncUrl();
-    }
-  };
-
-  const setMode = (mode: ViewMode, sync = true): void => {
-    if (!portfolioRoot) return;
-    currentMode = mode;
-    portfolioRoot.setAttribute("data-view-mode", mode);
-
-    for (const button of modeButtons) {
-      const active = button.getAttribute("data-mode-btn") === mode;
-      applyActiveButtonStyle(button, active);
-    }
-
-    const allowCollapseControls = mode === "flow";
-    expandAllButton?.toggleAttribute("disabled", !allowCollapseControls);
-    collapseAllButton?.toggleAttribute("disabled", !allowCollapseControls);
-
-    if (mode !== "flow") {
-      for (const card of projectCards) setCardCollapsed(card, false);
-    }
-
-    if (mode === "flow") {
-      for (const card of projectCards) {
-        card.hidden = false;
-        card.setAttribute("aria-hidden", "false");
-        card.removeAttribute("inert");
-        card.classList.remove("is-active");
-      }
-    } else {
-      setDeckVisibility();
-    }
-
-    if (sync && mode !== "print") {
-      try {
-        localStorage.setItem(MODE_STORAGE_KEY, mode);
-      } catch {}
-      syncUrl();
-    }
-  };
-
-  const upsertPrintPageStyle = (orientation: OrientationMode): void => {
-    let styleEl = document.getElementById(PRINT_PAGE_STYLE_ID) as HTMLStyleElement | null;
-    if (!styleEl) {
-      styleEl = document.createElement("style");
-      styleEl.id = PRINT_PAGE_STYLE_ID;
-      document.head.appendChild(styleEl);
-    }
-
-    const printSize = orientation === "landscape" ? "A4 landscape" : "A4 portrait";
-    styleEl.textContent = `@page { size: ${printSize}; margin: 12mm; }`;
-  };
-
-  const handleBeforePrint = (): void => {
-    restoreModeAfterPrint = currentMode;
-    setMode("print", false);
-    upsertPrintPageStyle(currentOrientation);
-  };
-
-  const handleAfterPrint = (): void => {
-    const modeToRestore = restoreModeAfterPrint ?? "deck";
-    setMode(modeToRestore, false);
-    setDeckVisibility();
-    restoreModeAfterPrint = null;
-  };
-
-  for (const card of projectCards) {
-    ensureToggleButton(card);
-    setCardCollapsed(card, true);
-  }
-  if (projectCards[0]) setCardCollapsed(projectCards[0], false);
-
-  const modeFromStorage = (() => {
+  const initializeMermaid = (): void => {
     try {
-      return localStorage.getItem(MODE_STORAGE_KEY);
-    } catch {
-      return null;
+      mermaid.initialize({
+        startOnLoad: true,
+        theme: "base",
+        themeVariables: {
+          primaryColor: token("--color-primary", "#8b5cf6"),
+          primaryTextColor: token("--color-text", "#1a1a2e"),
+          primaryBorderColor: token("--color-primary", "#7c3aed"),
+          lineColor: token("--color-text-light", "#4a5568"),
+          secondaryColor: token("--color-background-lighter", "#f5f3ff"),
+          tertiaryColor: token("--color-background-light", "#f9fafb"),
+        },
+      });
+    } catch (error) {
+      console.error("Mermaid initialization failed in portfolio page", error);
     }
-  })();
+  };
 
-  const orientationFromStorage = (() => {
+  const readStoredPageIndex = (): number => {
     try {
-      return localStorage.getItem(ORIENTATION_STORAGE_KEY);
-    } catch {
-      return null;
-    }
-  })();
-
-  const pageFromStorage = (() => {
-    try {
-      return Number(localStorage.getItem(PAGE_STORAGE_KEY) ?? "0");
-    } catch {
+      const raw = localStorage.getItem("portfolio:project-page");
+      const parsed = Number(raw ?? "0");
+      return Number.isFinite(parsed) && parsed >= 0 ? parsed : 0;
+    } catch (error) {
+      console.warn("Failed to read project page index from storage", error);
       return 0;
     }
-  })();
+  };
 
-  if (modeFromQuery === "flow" || modeFromQuery === "deck") {
-    currentMode = modeFromQuery;
-  } else if (modeFromStorage === "flow" || modeFromStorage === "deck") {
-    currentMode = modeFromStorage;
-  }
+  const saveStoredPageIndex = (index: number): void => {
+    try {
+      localStorage.setItem("portfolio:project-page", String(index));
+    } catch (error) {
+      console.warn("Failed to save project page index to storage", error);
+    }
+  };
 
-  if (orientationFromQuery === "portrait" || orientationFromQuery === "landscape") {
-    currentOrientation = orientationFromQuery;
-  } else if (orientationFromStorage === "portrait" || orientationFromStorage === "landscape") {
-    currentOrientation = orientationFromStorage;
-  }
+  const initPortfolioPagination = (): void => {
+    const root = document.querySelector<HTMLElement>(".portfolio-root");
+    if (!root || root.dataset["paginationInit"] === "true") return;
+    root.dataset["paginationInit"] = "true";
 
-  if (Number.isFinite(pageFromQuery) && pageFromQuery > 0) {
-    currentDeckIndex = pageFromQuery - 1;
-  } else if (Number.isFinite(pageFromStorage) && pageFromStorage >= 0) {
-    currentDeckIndex = pageFromStorage;
-  }
+    const projectCards = Array.from(root.querySelectorAll<HTMLElement>(".portfolio-project-card"));
+    const pageIndicator = document.getElementById("project-page-indicator");
+    const prevButton = document.getElementById("prev-project-btn") as HTMLButtonElement | null;
+    const nextButton = document.getElementById("next-project-btn") as HTMLButtonElement | null;
+    const printButton = document.getElementById("print-portfolio-btn") as HTMLButtonElement | null;
 
-  setOrientation(currentOrientation, false);
-  setMode(currentMode, false);
-  setDeckIndex(currentDeckIndex, false);
-  syncUrl();
+    if (projectCards.length === 0) return;
 
-  for (const button of modeButtons) {
-    button.addEventListener("click", () => {
-      const mode = button.getAttribute("data-mode-btn");
-      if (mode === "flow" || mode === "deck" || mode === "print") {
-        setMode(mode);
+    const params = new URLSearchParams(window.location.search);
+    const queryPage = Number(params.get("p") ?? "1") - 1;
+    const initialPage = Number.isFinite(queryPage) && queryPage >= 0 ? queryPage : readStoredPageIndex();
+    let currentPage = Math.min(projectCards.length - 1, Math.max(0, initialPage));
+
+    const updatePage = (): void => {
+      for (const [index, card] of projectCards.entries()) {
+        const active = index === currentPage;
+        card.classList.toggle("is-active", active);
+        card.hidden = !active;
+        card.setAttribute("aria-hidden", String(!active));
+      }
+
+      if (pageIndicator) pageIndicator.textContent = `${currentPage + 1} / ${projectCards.length}`;
+      if (prevButton) prevButton.disabled = currentPage <= 0;
+      if (nextButton) nextButton.disabled = currentPage >= projectCards.length - 1;
+
+      saveStoredPageIndex(currentPage);
+      const nextParams = new URLSearchParams(window.location.search);
+      nextParams.set("p", String(currentPage + 1));
+      window.history.replaceState({}, "", `${window.location.pathname}?${nextParams.toString()}`);
+    };
+
+    prevButton?.addEventListener("click", () => {
+      currentPage = Math.max(0, currentPage - 1);
+      updatePage();
+    });
+
+    nextButton?.addEventListener("click", () => {
+      currentPage = Math.min(projectCards.length - 1, currentPage + 1);
+      updatePage();
+    });
+
+    document.addEventListener("keydown", (event: KeyboardEvent) => {
+      if (event.key === "ArrowLeft") {
+        event.preventDefault();
+        currentPage = Math.max(0, currentPage - 1);
+        updatePage();
+      }
+
+      if (event.key === "ArrowRight") {
+        event.preventDefault();
+        currentPage = Math.min(projectCards.length - 1, currentPage + 1);
+        updatePage();
       }
     });
+
+    setupLightModePrintButton(printButton);
+    updatePage();
+  };
+
+  const setupPortfolioPage = (): void => {
+    initializeMermaid();
+    initPortfolioPagination();
+  };
+
+  document.addEventListener("astro:page-load", setupPortfolioPage);
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", setupPortfolioPage);
+  } else {
+    setupPortfolioPage();
   }
-
-  for (const button of orientationButtons) {
-    button.addEventListener("click", () => {
-      const orientation = button.getAttribute("data-orientation-btn");
-      if (orientation === "portrait" || orientation === "landscape") {
-        setOrientation(orientation);
-      }
-    });
-  }
-
-  prevPageButton?.addEventListener("click", () => {
-    setMode("deck");
-    setDeckIndex(currentDeckIndex - 1);
-  });
-
-  nextPageButton?.addEventListener("click", () => {
-    setMode("deck");
-    setDeckIndex(currentDeckIndex + 1);
-  });
-
-  document.addEventListener("keydown", (event: KeyboardEvent) => {
-    if (currentMode !== "deck") return;
-    if (event.key === "ArrowLeft") {
-      event.preventDefault();
-      setDeckIndex(currentDeckIndex - 1);
-    }
-    if (event.key === "ArrowRight") {
-      event.preventDefault();
-      setDeckIndex(currentDeckIndex + 1);
-    }
-  });
-
-  expandAllButton?.addEventListener("click", () => {
-    setMode("flow");
-    for (const card of projectCards) setCardCollapsed(card, false);
-  });
-
-  collapseAllButton?.addEventListener("click", () => {
-    setMode("flow");
-    for (const card of projectCards) setCardCollapsed(card, true);
-  });
-
-  setupLightModePrintButton(printButton, {
-    beforePrint: handleBeforePrint,
-    afterPrint: handleAfterPrint,
-  });
 
 </script>
