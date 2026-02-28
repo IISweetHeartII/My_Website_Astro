@@ -5,6 +5,7 @@ import { Archive, Files, FileText, Tag } from "lucide-astro";
 import BlogCard from "@/features/blog/components/BlogCard.astro";
 import Layout from "@/layouts/Layout.astro";
 import CategoryIcon from "@/shared/components/ui/CategoryIcon.astro";
+import PaginationNav from "@/shared/components/ui/PaginationNav.astro";
 import {
   type Category,
   categories,
@@ -159,44 +160,14 @@ const pageTitle = page.currentPage === 1 ? title : `${title} (Page ${page.curren
       )
     }
 
-    <nav aria-label="Pagination" class="mt-10 flex items-center justify-between gap-4">
-      <div class="text-sm text-text-muted">
-        {page.total > 0 && (
-          <span>
-            {page.start + 1}–{page.end + 1} / {page.total}
-          </span>
-        )}
-      </div>
-
-      <div class="flex items-center gap-2">
-        <a
-          href={page.url.prev ?? "#"}
-          aria-disabled={!page.url.prev}
-          class:list={[
-            "px-3 py-2 rounded-lg border text-sm font-medium transition-colors duration-200",
-            page.url.prev
-              ? "bg-background hover:bg-background-light border-background-lighter text-text"
-              : "bg-background-muted border-background-lighter text-text-muted pointer-events-none opacity-60",
-          ]}
-        >
-          이전
-        </a>
-        <div class="text-sm text-text-muted px-2">
-          {page.currentPage} / {page.lastPage}
-        </div>
-        <a
-          href={page.url.next ?? "#"}
-          aria-disabled={!page.url.next}
-          class:list={[
-            "px-3 py-2 rounded-lg border text-sm font-medium transition-colors duration-200",
-            page.url.next
-              ? "bg-background hover:bg-background-light border-background-lighter text-text"
-              : "bg-background-muted border-background-lighter text-text-muted pointer-events-none opacity-60",
-          ]}
-        >
-          다음
-        </a>
-      </div>
-    </nav>
+    <PaginationNav
+      start={page.start}
+      end={page.end}
+      total={page.total}
+      currentPage={page.currentPage}
+      lastPage={page.lastPage}
+      prevUrl={page.url.prev}
+      nextUrl={page.url.next}
+    />
   </div>
 </Layout>

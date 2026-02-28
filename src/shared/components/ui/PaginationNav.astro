@@ -1,0 +1,54 @@
+---
+interface Props {
+  start: number;
+  end: number;
+  total: number;
+  currentPage: number;
+  lastPage: number;
+  prevUrl?: string;
+  nextUrl?: string;
+  id?: string;
+}
+
+const { start, end, total, currentPage, lastPage, prevUrl, nextUrl, id } = Astro.props as Props;
+---
+
+<nav id={id} aria-label="Pagination" class="mt-10 flex items-center justify-between gap-4">
+  <div class="text-sm text-text-muted">
+    {total > 0 && (
+      <span>
+        {start + 1}–{end + 1} / {total}
+      </span>
+    )}
+  </div>
+
+  <div class="flex items-center gap-2">
+    <a
+      href={prevUrl ?? "#"}
+      aria-disabled={!prevUrl}
+      class:list={[
+        "px-3 py-2 rounded-lg border text-sm font-medium transition-colors duration-200",
+        prevUrl
+          ? "bg-background hover:bg-background-light border-background-lighter text-text"
+          : "bg-background-muted border-background-lighter text-text-muted pointer-events-none opacity-60",
+      ]}
+    >
+      이전
+    </a>
+    <div class="text-sm text-text-muted px-2">
+      {currentPage} / {lastPage}
+    </div>
+    <a
+      href={nextUrl ?? "#"}
+      aria-disabled={!nextUrl}
+      class:list={[
+        "px-3 py-2 rounded-lg border text-sm font-medium transition-colors duration-200",
+        nextUrl
+          ? "bg-background hover:bg-background-light border-background-lighter text-text"
+          : "bg-background-muted border-background-lighter text-text-muted pointer-events-none opacity-60",
+      ]}
+    >
+      다음
+    </a>
+  </div>
+</nav>
