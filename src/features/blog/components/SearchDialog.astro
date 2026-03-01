@@ -121,43 +121,131 @@
 <link href="/pagefind/pagefind-ui.css" rel="stylesheet" />
 
 <script is:inline>
+  function getSearchDialogState() {
+    var key = "__searchDialogState";
+    var existing = window[key];
+
+    if (existing) return existing;
+
+    var state = {
+      pagefindLoaded: false,
+      pagefindLoading: false,
+      loadError: false,
+      pendingKey: "",
+      keydownHandler: null,
+    };
+
+    window[key] = state;
+    return state;
+  }
+
+  function renderSearchUnavailableMessage() {
+    var container = document.getElementById("pagefind-search");
+    if (!container) return;
+
+    container.innerHTML =
+      '<div class="search-unavailable">검색 인덱스를 불러오지 못했습니다. `bun run build` 후 `bun run preview`로 확인해주세요.</div>';
+  }
+
+  function focusSearchInput() {
+    var input = document.querySelector(".pagefind-ui__search-input");
+    if (!(input instanceof HTMLInputElement)) return null;
+
+    if (input.hasAttribute("disabled")) {
+      input.removeAttribute("disabled");
+    }
+
+    if (input.hasAttribute("readonly")) {
+      input.removeAttribute("readonly");
+    }
+
+    input.focus();
+    return input;
+  }
+
+  function applyPendingKey(state) {
+    if (!state.pendingKey) return;
+
+    var input = focusSearchInput();
+    if (!input) return;
+
+    var start = input.selectionStart ?? input.value.length;
+    var end = input.selectionEnd ?? input.value.length;
+    input.setRangeText(state.pendingKey, start, end, "end");
+    input.dispatchEvent(new Event("input", { bubbles: true }));
+    state.pendingKey = "";
+  }
+
+  async function canLoadPagefindIndex() {
+    try {
+      var response = await fetch("/pagefind/pagefind-entry.json", {
+        method: "HEAD",
+        cache: "no-store",
+      });
+
+      return response.ok;
+    } catch (error) {
+      console.warn("Failed to check Pagefind index:", error);
+      return false;
+    }
+  }
+
   function initSearchDialog() {
+    const state = getSearchDialogState();
     var dialog = document.getElementById("search-dialog");
     const backdrop = document.getElementById("search-backdrop");
     const closeBtn = document.getElementById("search-close");
     const openBtns = document.querySelectorAll("[data-search-trigger]");
 
-    let pagefindLoaded = false;
+    if (!dialog) return;
 
     async function loadPagefind() {
-      if (pagefindLoaded) return;
+      if (state.pagefindLoaded || state.pagefindLoading || state.loadError) return;
+
+      state.pagefindLoading = true;
+
       try {
+        var hasIndex = await canLoadPagefindIndex();
+        if (!hasIndex) {
+          state.loadError = true;
+          renderSearchUnavailableMessage();
+          console.warn("Pagefind index not found. Run `bun run build` and use preview mode.");
+          return;
+        }
+
         var PagefindUI = (await import("/pagefind/pagefind-ui.js")).PagefindUI;
         new PagefindUI({
           element: "#pagefind-search",
           showSubResults: true,
           showImages: false,
         });
-        pagefindLoaded = true;
+        state.pagefindLoaded = true;
 
         // Focus input after loading
         setTimeout(function() {
-          var input = document.querySelector(".pagefind-ui__search-input");
-          if (input) input.focus();
+          focusSearchInput();
+          applyPendingKey(state);
         }, 100);
-      } catch {
-        console.warn("Pagefind not available — run a build first to generate the index.");
+      } catch (error) {
+        state.loadError = true;
+        renderSearchUnavailableMessage();
+        console.warn("Pagefind failed to initialize:", error);
+      } finally {
+        state.pagefindLoading = false;
       }
     }
 
     function openSearch() {
+      if (dialog.open) return;
+
       dialog?.showModal();
       loadPagefind();
+
       // Focus existing input if already loaded
-      if (pagefindLoaded) {
+      if (state.pagefindLoaded) {
         setTimeout(function() {
-          var input = document.querySelector(".pagefind-ui__search-input");
-          if (input) input.focus();
+          focusSearchInput();
+          applyPendingKey(state);
         }, 50);
       }
     }
@@ -176,7 +264,11 @@
     backdrop?.addEventListener("click", closeSearch);
 
     // Keyboard shortcuts
-    document.addEventListener("keydown", function(e) {
+    if (state.keydownHandler) {
+      document.removeEventListener("keydown", state.keydownHandler);
+    }
+
+    state.keydownHandler = function(e) {
       // Ctrl+K or Cmd+K to open
       if ((e.ctrlKey || e.metaKey) && e.key === "k") {
         e.preventDefault();
@@ -190,10 +282,33 @@
       if (e.key === "Escape" && dialog?.open) {
         closeSearch();
       }
+
+      if (!dialog?.open || e.ctrlKey || e.metaKey || e.altKey) return;
+
+      var isPrintableKey = e.key.length === 1;
+      if (!isPrintableKey) return;
+
+      var input = document.querySelector(".pagefind-ui__search-input");
+
+      if (input instanceof HTMLInputElement && document.activeElement !== input) {
+        state.pendingKey = e.key;
+        applyPendingKey(state);
+        e.preventDefault();
+      }
+    };
+
+    document.addEventListener("keydown", state.keydownHandler);
+
+    dialog.addEventListener("click", function() {
+      if (!state.pagefindLoaded) return;
+
+      setTimeout(function() {
+        focusSearchInput();
+      }, 0);
     });
   }
 
-  // Init on DOMContentLoaded and after View Transitions
+  // View Transitions-safe lifecycle
   document.addEventListener("DOMContentLoaded", initSearchDialog);
-  document.addEventListener("astro:after-swap", initSearchDialog);
+  document.addEventListener("astro:page-load", initSearchDialog);
 </script>
