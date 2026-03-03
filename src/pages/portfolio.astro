@@ -11,7 +11,7 @@ import Layout from "../layouts/Layout.astro";
   title={`Portfolio - ${SITE_TITLE}`}
   description="김덕환의 포트폴리오 - 기술로 감동과 사랑을 전하는 개발자"
 >
-  <main class="portfolio-root max-w-[1600px] mx-auto px-6 py-16 bg-background-light">
+  <main class="portfolio-root max-w-[1600px] mx-auto px-6 py-16 bg-background print:max-w-full print:p-0 print:m-0 print:bg-white">
     <!-- Resume Link Banner -->
     <div class="mb-6 p-4 bg-primary/10 rounded-lg border border-primary/20 flex justify-between items-center">
       <span class="text-sm text-text-light">1-2페이지 압축 버전을 원하시나요?</span>
@@ -251,7 +251,7 @@ import Layout from "../layouts/Layout.astro";
 
       <!-- Deployment -->
       <div class="mb-8">
-        <h3 class="text-lg font-bold text-gray-800 mb-4 pl-3 border-l-3 border-[#7c3aed]">
+        <h3 class="text-lg font-bold text-text mb-4 pl-3 border-l-3 border-primary">
           Deployment
         </h3>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-2.5">
@@ -260,19 +260,19 @@ import Layout from "../layouts/Layout.astro";
               { name: "Vercel", stars: 4, level: "Advanced" },
               { name: "Cloudflare", stars: 3, level: "Intermediate" },
             ].map((tech) => (
-              <div class="flex justify-between items-center px-4 py-3.5 bg-gray-50 rounded-md border border-gray-200 hover:bg-white hover:border-[#7c3aed] hover:translate-x-1 transition-all">
-                <span class="text-base font-semibold text-gray-800">{tech.name}</span>
+              <div class="flex justify-between items-center px-4 py-3.5 bg-background-light rounded-md border border-background-lighter hover:bg-background hover:border-primary hover:translate-x-1 transition-all">
+                <span class="text-base font-semibold text-text">{tech.name}</span>
                 <div class="flex items-center gap-4">
                   <div class="flex gap-0.5">
                     {Array.from({ length: 5 }, (_, i) => (
                       <span
-                        class={`text-base ${i < tech.stars ? "text-[#a78bfa]" : "text-gray-300"}`}
+                        class={`text-base ${i < tech.stars ? "text-primary-light" : "text-background-lighter"}`}
                       >
                         ★
                       </span>
                     ))}
                   </div>
-                  <span class="text-xs font-semibold text-white bg-[#7c3aed] px-2.5 py-1 rounded-full min-w-[85px] text-center">
+                  <span class="text-xs font-semibold text-on-primary bg-primary px-2.5 py-1 rounded-full min-w-[85px] text-center">
                     {tech.level}
                   </span>
                 </div>
@@ -284,7 +284,7 @@ import Layout from "../layouts/Layout.astro";
 
       <!-- CI/CD & DevOps -->
       <div class="mb-8">
-        <h3 class="text-lg font-bold text-gray-800 mb-4 pl-3 border-l-3 border-[#7c3aed]">
+        <h3 class="text-lg font-bold text-text mb-4 pl-3 border-l-3 border-primary">
           CI/CD & DevOps
         </h3>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-2.5">
@@ -293,19 +293,19 @@ import Layout from "../layouts/Layout.astro";
               { name: "CI/CD 구축", stars: 4, level: "Advanced" },
               { name: "Docker", stars: 2, level: "Beginner" },
             ].map((tech) => (
-              <div class="flex justify-between items-center px-4 py-3.5 bg-gray-50 rounded-md border border-gray-200 hover:bg-white hover:border-[#7c3aed] hover:translate-x-1 transition-all">
-                <span class="text-base font-semibold text-gray-800">{tech.name}</span>
+              <div class="flex justify-between items-center px-4 py-3.5 bg-background-light rounded-md border border-background-lighter hover:bg-background hover:border-primary hover:translate-x-1 transition-all">
+                <span class="text-base font-semibold text-text">{tech.name}</span>
                 <div class="flex items-center gap-4">
                   <div class="flex gap-0.5">
                     {Array.from({ length: 5 }, (_, i) => (
                       <span
-                        class={`text-base ${i < tech.stars ? "text-[#a78bfa]" : "text-gray-300"}`}
+                        class={`text-base ${i < tech.stars ? "text-primary-light" : "text-background-lighter"}`}
                       >
                         ★
                       </span>
                     ))}
                   </div>
-                  <span class="text-xs font-semibold text-white bg-[#7c3aed] px-2.5 py-1 rounded-full min-w-[85px] text-center">
+                  <span class="text-xs font-semibold text-on-primary bg-primary px-2.5 py-1 rounded-full min-w-[85px] text-center">
                     {tech.level}
                   </span>
                 </div>
@@ -317,25 +317,25 @@ import Layout from "../layouts/Layout.astro";
 
       <!-- Collaboration -->
       <div class="mb-8">
-        <h3 class="text-lg font-bold text-gray-800 mb-4 pl-3 border-l-3 border-[#7c3aed]">
+        <h3 class="text-lg font-bold text-text mb-4 pl-3 border-l-3 border-primary">
           Collaboration
         </h3>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-2.5">
           {
             [{ name: "GitHub", stars: 5, level: "Expert" }].map((tech) => (
-              <div class="flex justify-between items-center px-4 py-3.5 bg-gray-50 rounded-md border border-gray-200 hover:bg-white hover:border-[#7c3aed] hover:translate-x-1 transition-all">
-                <span class="text-base font-semibold text-gray-800">{tech.name}</span>
+              <div class="flex justify-between items-center px-4 py-3.5 bg-background-light rounded-md border border-background-lighter hover:bg-background hover:border-primary hover:translate-x-1 transition-all">
+                <span class="text-base font-semibold text-text">{tech.name}</span>
                 <div class="flex items-center gap-4">
                   <div class="flex gap-0.5">
                     {Array.from({ length: 5 }, (_, i) => (
                       <span
-                        class={`text-base ${i < tech.stars ? "text-[#a78bfa]" : "text-gray-300"}`}
+                        class={`text-base ${i < tech.stars ? "text-primary-light" : "text-background-lighter"}`}
                       >
                         ★
                       </span>
                     ))}
                   </div>
-                  <span class="text-xs font-semibold text-white bg-[#7c3aed] px-2.5 py-1 rounded-full min-w-[85px] text-center">
+                  <span class="text-xs font-semibold text-on-primary bg-primary px-2.5 py-1 rounded-full min-w-[85px] text-center">
                     {tech.level}
                   </span>
                 </div>
@@ -347,7 +347,7 @@ import Layout from "../layouts/Layout.astro";
 
       <!-- AI Tools -->
       <div class="mb-0">
-        <h3 class="text-lg font-bold text-gray-800 mb-4 pl-3 border-l-3 border-[#7c3aed]">
+        <h3 class="text-lg font-bold text-text mb-4 pl-3 border-l-3 border-primary">
           AI Tools
         </h3>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-2.5">
@@ -356,19 +356,19 @@ import Layout from "../layouts/Layout.astro";
               { name: "Claude Code", stars: 5, level: "Expert" },
               { name: "LangChain", stars: 2, level: "Beginner" },
             ].map((tech) => (
-              <div class="flex justify-between items-center px-4 py-3.5 bg-gray-50 rounded-md border border-gray-200 hover:bg-white hover:border-[#7c3aed] hover:translate-x-1 transition-all">
-                <span class="text-base font-semibold text-gray-800">{tech.name}</span>
+              <div class="flex justify-between items-center px-4 py-3.5 bg-background-light rounded-md border border-background-lighter hover:bg-background hover:border-primary hover:translate-x-1 transition-all">
+                <span class="text-base font-semibold text-text">{tech.name}</span>
                 <div class="flex items-center gap-4">
                   <div class="flex gap-0.5">
                     {Array.from({ length: 5 }, (_, i) => (
                       <span
-                        class={`text-base ${i < tech.stars ? "text-[#a78bfa]" : "text-gray-300"}`}
+                        class={`text-base ${i < tech.stars ? "text-primary-light" : "text-background-lighter"}`}
                       >
                         ★
                       </span>
                     ))}
                   </div>
-                  <span class="text-xs font-semibold text-white bg-[#7c3aed] px-2.5 py-1 rounded-full min-w-[85px] text-center">
+                  <span class="text-xs font-semibold text-on-primary bg-primary px-2.5 py-1 rounded-full min-w-[85px] text-center">
                     {tech.level}
                   </span>
                 </div>
@@ -380,33 +380,31 @@ import Layout from "../layouts/Layout.astro";
     </section>
 
     <!-- Projects -->
-    <section id="portfolio-projects-section" class="mb-14 p-8 bg-white rounded-lg shadow-sm portfolio-projects-section">
-      <h2 class="text-2xl md:text-3xl font-bold mb-6 pb-3 border-b-2 border-gray-100 text-gray-800">
+    <section id="portfolio-projects-section" class="mb-14 p-8 bg-background rounded-lg shadow-sm portfolio-projects-section">
+      <h2 class="text-2xl md:text-3xl font-bold mb-6 pb-3 border-b-2 border-background-lighter text-text">
         Projects
       </h2>
 
-      <!-- Finders -->
+      <!-- 1. Finders -->
       <div
         id="finders"
         class="mb-7 p-7 bg-background-light rounded-lg border border-l-4 border-primary hover:shadow-md hover:-translate-y-1 transition-all md:border-l-0 md:border-t-4 scroll-mt-20 portfolio-project-card is-active"
       >
-        <div class="mb-5 pb-4 border-b-2 border-gray-200">
-          <h3 class="text-xl font-bold text-gray-800 mb-2.5">BE Lead로 GCP 인프라 구축 및 팀 코드 리뷰 문화 정착</h3>
-          <p class="text-sm text-gray-600 mb-2">Finders - 필름 현상소 연결 플랫폼</p>
-          <div class="flex gap-4 text-sm text-gray-600">
+        <div class="mb-5 pb-4 border-b-2 border-background-lighter">
+          <h3 class="text-xl font-bold text-text mb-2.5">BE Lead로 GCP 인프라 구축 및 팀 코드 리뷰 문화 정착</h3>
+          <p class="text-sm text-text-light mb-2">Finders - 필름 현상소 연결 플랫폼</p>
+          <div class="flex gap-4 text-sm text-text-light">
             <span>2025.12 - 현재</span>
             <span>Backend Lead (11명 팀, BE 5명)</span>
           </div>
         </div>
 
-        <p class="text-base text-gray-800 leading-relaxed mb-6">
-          "뷰파인더 너머, 취향을 찾다" - 필름 카메라 사용자들이 현상소를 찾고, 예약하고,
-          사진을 공유할 수 있는 플랫폼입니다. UMC 9기에서 11명의 팀원(BE 5, FE 4, PM 1, 디자인 1)과
-          함께 진행하며, BE Lead로서 아키텍처 설계와 코드 리뷰 문화를 정착시키고 있습니다.
+        <p class="text-base text-text leading-relaxed mb-6">
+          필름 카메라 사용자를 위한 현상소 검색·예약·사진 공유 플랫폼.
+          UMC 9기 프로젝트로 BE Lead를 맡아 아키텍처 설계, 코드 리뷰 문화 정착, GCP 인프라 구축을 담당.
         </p>
 
-        <!-- 기술적 도전 섹션 -->
-        <div class="mb-6 p-5 bg-white rounded-md border-l-4 border-blue-500">
+        <div class="mb-6 p-5 bg-background rounded-md border-l-4 border-blue-500">
           <h4 class="text-sm font-bold text-blue-600 uppercase tracking-wide mb-3">기술적 도전</h4>
           <div class="space-y-3 text-sm">
             <div>
@@ -415,28 +413,40 @@ import Layout from "../layouts/Layout.astro";
             </div>
             <div>
               <span class="font-semibold text-text">해결:</span>
-              <span class="text-text-light"> GCP $300 크레딧 활용, CODE_STYLE.md 문서화, PR마다 꼼꼼한 코드 리뷰</span>
+              <span class="text-text-light"> GCP $300 크레딧 활용, CODE_STYLE.md 문서화, PR마다 코드 리뷰 의무화</span>
             </div>
             <div>
               <span class="font-semibold text-text">결과:</span>
-              <span class="text-text-light"> v0.4.2 릴리즈 달성 (555 commits), 일관된 코드 품질 유지</span>
+              <span class="text-text-light"> 코드 리뷰 빈도 400% 증가(약 5배), Terraform IaC로 복구 시간 56h → 5h 단축</span>
             </div>
           </div>
         </div>
 
-<!-- AI 활용 섹션 -->
         <div class="mb-6 p-5 bg-background-light rounded-md border-l-4 border-emerald-500">
           <h4 class="text-sm font-bold text-emerald-600 uppercase tracking-wide mb-3">AI 활용</h4>
           <ul class="list-disc list-inside text-sm text-text space-y-2">
             <li>Stable Diffusion Inpainting API 연동 - 필름 빛번짐(Light Leak) 복원 기능</li>
+            <li>Claude Code로 기존 ThreadPool 코드를 Java 21 Virtual Threads로 마이그레이션</li>
             <li>GCP VPC 네트워크 설계, IAP SSH 터널링으로 보안 DB 접속 환경 구축</li>
             <li>포트원(PortOne) 결제 시스템 연동 - 예약 → 결제 → 확정 플로우 설계</li>
-            <li>Claude Code로 기존 ThreadPool 코드를 Java 21 Virtual Threads로 마이그레이션</li>
           </ul>
         </div>
 
-        <!-- Mermaid 다이어그램: GCP 인프라 아키텍처 -->
-        <div class="mb-6 p-4 bg-background-light rounded-md overflow-x-auto">
+        <div class="mb-6">
+          <div class="flex flex-wrap gap-2">
+            {
+              ["Java 21", "Spring Boot 3.4", "MySQL", "QueryDSL", "GCP", "Terraform", "Docker"].map(
+                (tag) => (
+                  <span class="px-3.5 py-1.5 bg-primary text-on-primary text-xs font-semibold rounded-full">
+                    {tag}
+                  </span>
+                )
+              )
+            }
+          </div>
+        </div>
+
+        <div class="p-4 bg-background-light rounded-md overflow-x-auto">
           <h4 class="text-sm font-bold text-text-light uppercase tracking-wide mb-3">GCP 인프라 아키텍처</h4>
           <pre class="mermaid text-sm">
 flowchart TB
@@ -470,66 +480,12 @@ flowchart TB
           </pre>
         </div>
 
-        <div class="space-y-5">
-          <div class="p-4 bg-white rounded-md">
-            <span class="text-xs font-bold text-[#7c3aed] uppercase tracking-wide mb-2.5 block"
-              >주요 기능</span
-            >
-            <ul class="list-disc list-inside text-sm text-gray-800 space-y-2 leading-relaxed">
-              <li>필름 현상소 검색 및 예약 시스템</li>
-              <li>AI 기반 필름 빛번짐 복원 기능</li>
-              <li>포트원 결제 API 연동</li>
-              <li>사용자 갤러리 및 커뮤니티</li>
-            </ul>
-          </div>
-
-          <div class="p-4 bg-white rounded-md">
-            <span class="text-xs font-bold text-[#7c3aed] uppercase tracking-wide mb-2.5 block"
-              >기술 스택</span
-            >
-            <div class="flex flex-wrap gap-2">
-              {
-                ["Java 21", "Spring Boot 3.4", "MySQL", "QueryDSL", "GCP", "Docker"].map(
-                  (tag) => (
-                    <span class="px-3.5 py-1.5 bg-[#7c3aed] text-white text-xs font-semibold rounded-full">
-                      {tag}
-                    </span>
-                  )
-                )
-              }
-            </div>
-          </div>
-
-          <div class="p-4 bg-white rounded-md">
-            <span class="text-xs font-bold text-[#7c3aed] uppercase tracking-wide mb-2.5 block"
-              >주요 성과</span
-            >
-            <ul class="list-disc list-inside text-sm text-gray-800 space-y-2 leading-relaxed">
-              <li>BE Lead로서 전체 백엔드 아키텍처 설계 및 코드 리뷰 주도</li>
-              <li>GCP 인프라 구축 (Compute Engine, Cloud SQL, Cloud Storage)</li>
-              <li>CODE_STYLE.md, CONVENTIONS.md 문서화로 일관된 코드 품질 유지</li>
-              <li>v0.4.2 릴리즈 달성 (555 commits)</li>
-            </ul>
-          </div>
-
-          <div class="p-4 bg-white rounded-md">
-            <span class="text-xs font-bold text-[#7c3aed] uppercase tracking-wide mb-2.5 block"
-              >배운 점</span
-            >
-            <p class="text-sm text-gray-800 leading-relaxed">
-              BE Lead로서 단순히 코드를 작성하는 것을 넘어, 팀의 코드 품질을 관리하고 협업 문화를
-              만들어가는 경험을 했습니다. 특히 5명의 백엔드 개발자가 일관된 코드 스타일을 유지하도록
-              문서화와 코드 리뷰를 통해 가이드하며, 기술적 리더십의 중요성을 깨달았습니다.
-            </p>
-          </div>
-        </div>
-
-        <div class="mt-5 pt-5 border-t-2 border-gray-200">
+        <div class="mt-5 pt-5 border-t-2 border-background-lighter">
           <a
             href="https://github.com/Finders-Official/BE"
             target="_blank"
             rel="noopener noreferrer"
-            class="inline-flex items-center gap-2 px-4.5 py-2.5 bg-gray-800 text-white text-sm font-semibold rounded-md hover:bg-[#7c3aed] hover:-translate-y-0.5 hover:shadow-md transition-all"
+            class="inline-flex items-center gap-2 px-4.5 py-2.5 bg-text text-on-primary text-sm font-semibold rounded-md hover:bg-primary hover:-translate-y-0.5 hover:shadow-md transition-all"
           >
             <Github class="w-4 h-4" />
             <span>GitHub</span>
@@ -537,58 +493,351 @@ flowchart TB
         </div>
       </div>
 
-      <!-- 덕친소 -->
+      <!-- 2. agentgram -->
+      <div
+        id="agentgram"
+        class="mb-7 p-7 bg-background-light rounded-lg border border-l-4 border-primary hover:shadow-md hover:-translate-y-1 transition-all md:border-l-0 md:border-t-4 scroll-mt-20 portfolio-project-card"
+      >
+        <div class="mb-5 pb-4 border-b-2 border-background-lighter">
+          <h3 class="text-xl font-bold text-text mb-2.5">오픈소스 코어 기여로 DAU 40, 활성 Agent 100+ 운영</h3>
+          <p class="text-sm text-text-light mb-2">agentgram - AI Agent SNS 플랫폼</p>
+          <div class="flex gap-4 text-sm text-text-light">
+            <span>현재 진행</span>
+            <span>Core Contributor (Open Source)</span>
+          </div>
+        </div>
+
+        <p class="text-base text-text leading-relaxed mb-6">
+          AI Agent들이 자율적으로 소통하는 SNS 플랫폼.
+          코어부터 SDK, MCP 서버까지 6개 레포에 380+ 커밋을 기여하며 멀티 레포 생태계를 확장.
+        </p>
+
+        <div class="mb-6 p-5 bg-background rounded-md border-l-4 border-blue-500">
+          <h4 class="text-sm font-bold text-blue-600 uppercase tracking-wide mb-3">기술적 도전</h4>
+          <div class="space-y-3 text-sm">
+            <div>
+              <span class="font-semibold text-text">문제:</span>
+              <span class="text-text-light"> 단일 레포 구조로는 코어·SDK·MCP 등 다양한 클라이언트 요구 대응 불가</span>
+            </div>
+            <div>
+              <span class="font-semibold text-text">해결:</span>
+              <span class="text-text-light"> 멀티 레포(Core/JS/Python/MCP/OpenClaw/AX) 분리 및 API-first 아키텍처 설계</span>
+            </div>
+            <div>
+              <span class="font-semibold text-text">결과:</span>
+              <span class="text-text-light"> Vercel DAU 40, 활성 Agent 100+, 380+ 커밋, 16개+ 핵심 기능 고도화</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="mb-6 p-5 bg-background-light rounded-md border-l-4 border-emerald-500">
+          <h4 class="text-sm font-bold text-emerald-600 uppercase tracking-wide mb-3">AI 활용</h4>
+          <ul class="list-disc list-inside text-sm text-text space-y-2">
+            <li>피드·팔로우·스토리·알림 등 핵심 기능 설계에 Claude Code 활용</li>
+            <li>Supabase RLS 정책 설계 및 PostgreSQL 쿼리 최적화</li>
+            <li>REST API/OpenAPI 스펙 자동 생성 파이프라인 구축</li>
+          </ul>
+        </div>
+
+        <div class="mb-6">
+          <div class="flex flex-wrap gap-2">
+            {
+              ["Next.js 16", "TailwindCSS v4", "Supabase", "PostgreSQL", "Docker", "REST API", "OpenAPI"].map(
+                (tag) => (
+                  <span class="px-3.5 py-1.5 bg-primary text-on-primary text-xs font-semibold rounded-full">
+                    {tag}
+                  </span>
+                )
+              )
+            }
+          </div>
+        </div>
+
+        <div class="p-4 bg-background-light rounded-md overflow-x-auto">
+          <h4 class="text-sm font-bold text-text-light uppercase tracking-wide mb-3">멀티 레포 생태계</h4>
+          <pre class="mermaid text-sm">
+flowchart TB
+    subgraph Client["클라이언트"]
+        A[Next.js 16 App - Vercel]
+    end
+
+    subgraph Backend["백엔드"]
+        B[Supabase - PostgreSQL + RLS]
+        C[REST API / OpenAPI]
+    end
+
+    subgraph Repos["멀티 레포 생태계"]
+        D[Core]
+        E[JS SDK]
+        F[Python SDK]
+        G[MCP Server]
+        H[OpenClaw]
+        I[AX]
+    end
+
+    subgraph Infra["인프라"]
+        J[Self-hosting + Docker]
+    end
+
+    A --> B
+    A --> C
+    D --> E
+    D --> F
+    D --> G
+    J --> B
+          </pre>
+        </div>
+
+        <div class="mt-5 pt-5 border-t-2 border-background-lighter">
+          <a
+            href="https://github.com/agentgram/agentgram"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-2 px-4.5 py-2.5 bg-text text-on-primary text-sm font-semibold rounded-md hover:bg-primary hover:-translate-y-0.5 hover:shadow-md transition-all"
+          >
+            <Github class="w-4 h-4" />
+            <span>GitHub</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- 3. MathFigure -->
+      <div
+        id="mathfigure"
+        class="mb-7 p-7 bg-background-light rounded-lg border border-l-4 border-primary hover:shadow-md hover:-translate-y-1 transition-all md:border-l-0 md:border-t-4 scroll-mt-20 portfolio-project-card"
+      >
+        <div class="mb-5 pb-4 border-b-2 border-background-lighter">
+          <h3 class="text-xl font-bold text-text mb-2.5">40명 인터뷰로 검증, 창업 프로그램 최우수상 수상</h3>
+          <p class="text-sm text-text-light mb-2">MathFigure - 수학 콘텐츠 제작 SaaS</p>
+          <div class="flex gap-4 text-sm text-text-light">
+            <span>2025.09 - 2025.12</span>
+            <span>FE 중심 풀스택 1인 개발</span>
+          </div>
+        </div>
+
+        <p class="text-base text-text leading-relaxed mb-6">
+          고3 수능 콘텐츠를 제작하는 선생님들의 "도구 복잡성" Pain Point를 40명 인터뷰로 발견.
+          I-Corps 기반 5주 고객검증 후 직관적 UX로 제작 시간을 1/10로 단축하는 MVP 개발.
+        </p>
+
+        <div class="mb-6 p-5 bg-background rounded-md border-l-4 border-blue-500">
+          <h4 class="text-sm font-bold text-blue-600 uppercase tracking-wide mb-3">기술적 도전</h4>
+          <div class="space-y-3 text-sm">
+            <div>
+              <span class="font-semibold text-text">문제:</span>
+              <span class="text-text-light"> 수학 수식 파싱과 도형/그래프 시각화를 동시에 처리해야 함</span>
+            </div>
+            <div>
+              <span class="font-semibold text-text">해결:</span>
+              <span class="text-text-light"> MathJson + Compute-engine으로 수식 파싱, Konva + JSXGraph로 시각화</span>
+            </div>
+            <div>
+              <span class="font-semibold text-text">결과:</span>
+              <span class="text-text-light"> 기존 도구 대비 제작 시간 1/10 단축, ICAN-LABs 창업 프로그램 최우수상</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="mb-6 p-5 bg-background-light rounded-md border-l-4 border-emerald-500">
+          <h4 class="text-sm font-bold text-emerald-600 uppercase tracking-wide mb-3">AI 활용</h4>
+          <ul class="list-disc list-inside text-sm text-text space-y-2">
+            <li>MathJson 스펙 학습 및 수식 파싱 로직 개발</li>
+            <li>JSXGraph API 탐색 및 그래프 렌더링 최적화</li>
+            <li>40명 인터뷰 결과 분석 및 Pain Point 도출</li>
+          </ul>
+        </div>
+
+        <div class="mb-6">
+          <div class="flex flex-wrap gap-2">
+            {
+              ["Next.js", "MathJson", "Compute-engine", "Konva", "JSXGraph", "Vercel"].map(
+                (tag) => (
+                  <span class="px-3.5 py-1.5 bg-primary text-on-primary text-xs font-semibold rounded-full">
+                    {tag}
+                  </span>
+                )
+              )
+            }
+          </div>
+        </div>
+
+        <div class="p-4 bg-background-light rounded-md overflow-x-auto">
+          <h4 class="text-sm font-bold text-text-light uppercase tracking-wide mb-3">수식 처리 파이프라인</h4>
+          <pre class="mermaid text-sm">
+flowchart LR
+    A[LaTeX 입력] --> B[MathJson 파싱]
+    B --> C[Compute-engine 계산]
+    C --> D[시각화 타입]
+    D -->|수식| E[MathLive 렌더링]
+    D -->|도형| F[Konva 캔버스]
+    D -->|그래프| G[JSXGraph]
+    E --> H[PNG/SVG 내보내기]
+    F --> H
+    G --> H
+          </pre>
+        </div>
+
+        <div class="mt-5 pt-5 border-t-2 border-background-lighter">
+          <a
+            href="https://mathfigure.log8.kr"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-2 px-4.5 py-2.5 bg-primary text-on-primary text-sm font-semibold rounded-md hover:bg-primary-light hover:-translate-y-0.5 hover:shadow-md transition-all"
+          >
+            <span>배포 사이트 보기</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- 4. 119-ai -->
+      <div
+        id="119-ai"
+        class="mb-7 p-7 bg-background-light rounded-lg border border-l-4 border-primary hover:shadow-md hover:-translate-y-1 transition-all md:border-l-0 md:border-t-4 scroll-mt-20 portfolio-project-card"
+      >
+        <div class="mb-5 pb-4 border-b-2 border-background-lighter">
+          <h3 class="text-xl font-bold text-text mb-2.5">AI 병렬 발신으로 응급 병원 매칭 시간 5분 → 30초 단축</h3>
+          <p class="text-sm text-text-light mb-2">119-ai - AI 기반 응급 병원 매칭 시스템</p>
+          <div class="flex gap-4 text-sm text-text-light">
+            <span>2026</span>
+            <span>Founder / Owner</span>
+          </div>
+        </div>
+
+        <p class="text-base text-text leading-relaxed mb-6">
+          응급 이송 시 순차 전화로 발생하는 병목을 AI 병렬 발신으로 해결.
+          환자 정보 1회 입력으로 5+개 병원에 동시 발신하여 매칭 시간을 대폭 단축.
+          2026 청룡톤 대상 수상.
+        </p>
+
+        <div class="mb-6 p-5 bg-background rounded-md border-l-4 border-blue-500">
+          <h4 class="text-sm font-bold text-blue-600 uppercase tracking-wide mb-3">기술적 도전</h4>
+          <div class="space-y-3 text-sm">
+            <div>
+              <span class="font-semibold text-text">문제:</span>
+              <span class="text-text-light"> 응급 환자 이송 시 병원 순차 전화로 평균 5분+ 소요</span>
+            </div>
+            <div>
+              <span class="font-semibold text-text">해결:</span>
+              <span class="text-text-light"> Twilio + Gemini Live API로 AI 음성 대화 자동화, 병렬 발신 구조 설계</span>
+            </div>
+            <div>
+              <span class="font-semibold text-text">결과:</span>
+              <span class="text-text-light"> 5+ 병원 동시 발신으로 매칭 30초 이내, 건당 100~200원 비용 모델 검증</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="mb-6 p-5 bg-background-light rounded-md border-l-4 border-emerald-500">
+          <h4 class="text-sm font-bold text-emerald-600 uppercase tracking-wide mb-3">AI 활용</h4>
+          <ul class="list-disc list-inside text-sm text-text space-y-2">
+            <li>Gemini Live API 기반 실시간 음성 대화 자동화</li>
+            <li>NestJS + Python AI 통화 파이프라인 설계</li>
+            <li>Twilio 병렬 발신 아키텍처 구현</li>
+          </ul>
+        </div>
+
+        <div class="mb-6">
+          <div class="flex flex-wrap gap-2">
+            {
+              ["NestJS", "Python", "Twilio", "Gemini Live API"].map(
+                (tag) => (
+                  <span class="px-3.5 py-1.5 bg-primary text-on-primary text-xs font-semibold rounded-full">
+                    {tag}
+                  </span>
+                )
+              )
+            }
+          </div>
+        </div>
+
+        <div class="p-4 bg-background-light rounded-md overflow-x-auto">
+          <h4 class="text-sm font-bold text-text-light uppercase tracking-wide mb-3">병렬 발신 아키텍처</h4>
+          <pre class="mermaid text-sm">
+flowchart TB
+    A[환자 정보 입력] --> B[NestJS API Server]
+    B --> C[Python AI Pipeline]
+    C --> D[Gemini Live API]
+    D --> E[Twilio 병렬 발신]
+    E --> F[병원 1]
+    E --> G[병원 2]
+    E --> H[병원 3+]
+          </pre>
+        </div>
+
+        <div class="mt-5 pt-5 border-t-2 border-background-lighter">
+          <a
+            href="https://emergency-ai-call.log8.kr"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-2 px-4.5 py-2.5 bg-primary text-on-primary text-sm font-semibold rounded-md hover:bg-primary-light hover:-translate-y-0.5 hover:shadow-md transition-all"
+          >
+            <span>배포 사이트 보기</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- 5. 덕친소 -->
       <div
         id="duckchinso"
         class="mb-7 p-7 bg-background-light rounded-lg border border-l-4 border-primary hover:shadow-md hover:-translate-y-1 transition-all md:border-l-0 md:border-t-4 scroll-mt-20 portfolio-project-card"
       >
-        <div class="mb-5 pb-4 border-b-2 border-gray-200">
-          <h3 class="text-xl font-bold text-gray-800 mb-2.5">AI 벡터 매칭으로 1인 풀스택 소개팅 서비스 구축</h3>
-          <p class="text-sm text-gray-600 mb-2">덕친소 - 김덕환 친구 소개팅 서비스</p>
-          <div class="flex gap-4 text-sm text-gray-600">
+        <div class="mb-5 pb-4 border-b-2 border-background-lighter">
+          <h3 class="text-xl font-bold text-text mb-2.5">AI 벡터 매칭으로 1인 풀스택 소개팅 서비스 구축</h3>
+          <p class="text-sm text-text-light mb-2">덕친소 - 김덕환 친구 소개팅 서비스</p>
+          <div class="flex gap-4 text-sm text-text-light">
             <span>2025.11 - 현재</span>
             <span>풀스택 1인 개발</span>
           </div>
         </div>
 
-        <p class="text-base text-gray-800 leading-relaxed mb-6">
-          "김덕환 친구 소개" - 주변 친구들의 소개팅 요청이 늘어나면서, 수동 매칭의 한계를 느끼고
-          AI 기반 자동 추천 시스템으로 발전시켰습니다. 벡터 DB를 활용한 유사도 기반 매칭과
-          AI가 "왜 이 사람을 추천했는지" 설명까지 생성하는 서비스입니다.
+        <p class="text-base text-text leading-relaxed mb-6">
+          주변 친구들의 소개팅 요청이 늘면서 수동 매칭의 한계를 느끼고,
+          pgvector 기반 유사도 매칭과 AI 추천 사유 생성 기능을 갖춘 서비스를 개발. 실제 운영 중.
         </p>
 
-        <!-- 기술적 도전 섹션 -->
-        <div class="mb-6 p-5 bg-white rounded-md border-l-4 border-blue-500">
+        <div class="mb-6 p-5 bg-background rounded-md border-l-4 border-blue-500">
           <h4 class="text-sm font-bold text-blue-600 uppercase tracking-wide mb-3">기술적 도전</h4>
           <div class="space-y-3 text-sm">
             <div>
-              <span class="font-semibold text-gray-700">문제:</span>
-              <span class="text-gray-600"> 개인 서버(Mac Mini) 배포 복잡성, 카카오 알림톡 사업자 등록 필요</span>
+              <span class="font-semibold text-text">문제:</span>
+              <span class="text-text-light"> 개인 서버(Mac Mini) 배포 복잡성, 카카오 알림톡 사업자 등록 필요</span>
             </div>
             <div>
-              <span class="font-semibold text-gray-700">해결:</span>
-              <span class="text-gray-600"> Cloudflare Tunnel(Zero Trust)로 안전한 배포, Solapi SMS로 알림 대체</span>
+              <span class="font-semibold text-text">해결:</span>
+              <span class="text-text-light"> Cloudflare Tunnel(Zero Trust)로 안전한 배포, Solapi SMS로 알림 대체</span>
             </div>
             <div>
-              <span class="font-semibold text-gray-700">결과:</span>
-              <span class="text-gray-600"> 실제 서비스 운영 중, 포트원 결제 연동 완료</span>
+              <span class="font-semibold text-text">결과:</span>
+              <span class="text-text-light"> 실제 서비스 운영 중, 포트원 결제 연동 완료</span>
             </div>
           </div>
         </div>
 
-        <!-- AI 활용 섹션 -->
-        <div class="mb-6 p-5 bg-white rounded-md border-l-4 border-emerald-500">
+        <div class="mb-6 p-5 bg-background-light rounded-md border-l-4 border-emerald-500">
           <h4 class="text-sm font-bold text-emerald-600 uppercase tracking-wide mb-3">AI 활용</h4>
-          <ul class="list-disc list-inside text-sm text-gray-800 space-y-2">
-            <li>pgvector를 활용한 이상형 데이터 벡터화 및 유사도 기반 매칭</li>
+          <ul class="list-disc list-inside text-sm text-text space-y-2">
+            <li>pgvector를 활용한 이상형 데이터 벡터화 및 유사도 매칭</li>
             <li>AI가 "왜 이 사람을 추천했는지" 설명 생성</li>
-            <li>Claude Code로 Cloudflare Tunnel 설정, Docker Compose 구성, SSL 자동 갱신 구현</li>
+            <li>Claude Code로 Cloudflare Tunnel, Docker Compose, SSL 자동 갱신 구현</li>
           </ul>
         </div>
 
-        <!-- Mermaid 다이어그램: 시스템 아키텍처 -->
-        <div class="mb-6 p-4 bg-white rounded-md overflow-x-auto">
-          <h4 class="text-sm font-bold text-gray-600 uppercase tracking-wide mb-3">시스템 아키텍처</h4>
+        <div class="mb-6">
+          <div class="flex flex-wrap gap-2">
+            {
+              ["Next.js", "Spring Boot", "PostgreSQL", "pgvector", "Docker", "Cloudflare Tunnel", "PortOne"].map(
+                (tag) => (
+                  <span class="px-3.5 py-1.5 bg-primary text-on-primary text-xs font-semibold rounded-full">
+                    {tag}
+                  </span>
+                )
+              )
+            }
+          </div>
+        </div>
+
+        <div class="p-4 bg-background-light rounded-md overflow-x-auto">
+          <h4 class="text-sm font-bold text-text-light uppercase tracking-wide mb-3">시스템 아키텍처</h4>
           <pre class="mermaid text-sm">
 flowchart TB
     subgraph Client["클라이언트"]
@@ -616,246 +865,70 @@ flowchart TB
     B --> G
           </pre>
         </div>
-
-        <div class="space-y-5">
-          <div class="p-4 bg-white rounded-md">
-            <span class="text-xs font-bold text-[#7c3aed] uppercase tracking-wide mb-2.5 block"
-              >주요 기능</span
-            >
-            <ul class="list-disc list-inside text-sm text-gray-800 space-y-2 leading-relaxed">
-              <li>AI 기반 이상형 매칭 추천 시스템</li>
-              <li>벡터 유사도 기반 자동 매칭</li>
-              <li>매칭 성사 시 SMS 알림</li>
-              <li>포트원 결제 시스템 연동</li>
-            </ul>
-          </div>
-
-          <div class="p-4 bg-white rounded-md">
-            <span class="text-xs font-bold text-[#7c3aed] uppercase tracking-wide mb-2.5 block"
-              >기술 스택</span
-            >
-            <div class="flex flex-wrap gap-2">
-              {
-                ["Next.js", "Spring Boot", "PostgreSQL", "pgvector", "Docker", "Cloudflare Tunnel", "PortOne"].map(
-                  (tag) => (
-                    <span class="px-3.5 py-1.5 bg-[#7c3aed] text-white text-xs font-semibold rounded-full">
-                      {tag}
-                    </span>
-                  )
-                )
-              }
-            </div>
-          </div>
-
-          <div class="p-4 bg-white rounded-md">
-            <span class="text-xs font-bold text-[#7c3aed] uppercase tracking-wide mb-2.5 block"
-              >주요 성과</span
-            >
-            <ul class="list-disc list-inside text-sm text-gray-800 space-y-2 leading-relaxed">
-              <li>1인 풀스택으로 기획부터 배포, 운영까지 전 과정 담당</li>
-              <li>Mac Mini M2를 Cloudflare Tunnel로 서버화하여 비용 절감</li>
-              <li>벡터 DB 기반 "설명 가능한 매칭"의 가능성 검증</li>
-              <li>실제 서비스 운영 중, 지인 대상 매칭 진행</li>
-            </ul>
-          </div>
-
-          <div class="p-4 bg-white rounded-md">
-            <span class="text-xs font-bold text-[#7c3aed] uppercase tracking-wide mb-2.5 block"
-              >배운 점</span
-            >
-            <p class="text-sm text-gray-800 leading-relaxed">
-              혼자서 프론트엔드, 백엔드, 인프라, 결제 시스템까지 모든 영역을 담당하며
-              풀스택 개발의 전체적인 흐름을 경험했습니다. 특히 AI와의 협업으로
-              복잡한 서버 배포 과정을 빠르게 해결할 수 있었고, "혼자서는 며칠 걸렸을 작업을
-              몇 시간 만에 완료"하는 AI 활용의 레버리지를 체감했습니다.
-            </p>
-          </div>
-        </div>
       </div>
 
-      <!-- MathFigure -->
-      <div
-        id="mathfigure"
-        class="mb-7 p-7 bg-background-light rounded-lg border border-l-4 border-primary hover:shadow-md hover:-translate-y-1 transition-all md:border-l-0 md:border-t-4 scroll-mt-20 portfolio-project-card"
-      >
-        <div class="mb-5 pb-4 border-b-2 border-gray-200">
-          <h3 class="text-xl font-bold text-gray-800 mb-2.5">40명 인터뷰로 검증, 창업 프로그램 최우수상 수상</h3>
-          <p class="text-sm text-gray-600 mb-2">MathFigure - 수학 콘텐츠 제작 SaaS</p>
-          <div class="flex gap-4 text-sm text-gray-600">
-            <span>2025.09 - 현재</span>
-            <span>풀스택 1인 개발</span>
-          </div>
-        </div>
-
-        <p class="text-base text-gray-800 leading-relaxed mb-6">
-          고3 수능 콘텐츠를 제작하는 선생님들이 기존 도구의 복잡성 때문에 어려움을 겪고 있었습니다.
-          40명의 타겟 유저 심층 인터뷰를 통해 "도구의 복잡성"이라는 핵심 Pain Point를 발견하고,
-          직관적인 UX로 제작 시간을 1/10로 단축하는 서비스를 개발했습니다.
-        </p>
-
-        <!-- 기술적 도전 섹션 -->
-        <div class="mb-6 p-5 bg-white rounded-md border-l-4 border-blue-500">
-          <h4 class="text-sm font-bold text-blue-600 uppercase tracking-wide mb-3">기술적 도전</h4>
-          <div class="space-y-3 text-sm">
-            <div>
-              <span class="font-semibold text-gray-700">문제:</span>
-              <span class="text-gray-600"> 수학 수식 파싱과 도형/그래프 시각화를 동시에 처리해야 함</span>
-            </div>
-            <div>
-              <span class="font-semibold text-gray-700">해결:</span>
-              <span class="text-gray-600"> MathJson + Compute-engine으로 수식 파싱, Konva + JSXGraph로 시각화</span>
-            </div>
-            <div>
-              <span class="font-semibold text-gray-700">결과:</span>
-              <span class="text-gray-600"> 기존 도구 대비 제작 시간 1/10로 단축, 창업 프로그램 최우수상</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- AI 활용 섹션 -->
-        <div class="mb-6 p-5 bg-white rounded-md border-l-4 border-emerald-500">
-          <h4 class="text-sm font-bold text-emerald-600 uppercase tracking-wide mb-3">AI 활용</h4>
-          <ul class="list-disc list-inside text-sm text-gray-800 space-y-2">
-            <li>MathJson 스펙 학습 및 수식 파싱 로직 개발에 AI 활용</li>
-            <li>JSXGraph API 탐색 및 최적화된 그래프 렌더링 구현</li>
-            <li>40명 인터뷰 결과 분석 및 Pain Point 도출에 AI 활용</li>
-          </ul>
-        </div>
-
-        <!-- Mermaid 다이어그램: 수식 처리 파이프라인 -->
-        <div class="mb-6 p-4 bg-white rounded-md overflow-x-auto">
-          <h4 class="text-sm font-bold text-gray-600 uppercase tracking-wide mb-3">수식 처리 파이프라인</h4>
-          <pre class="mermaid text-sm">
-flowchart LR
-    A[LaTeX 입력] --> B[MathJson 파싱]
-    B --> C[Compute-engine 계산]
-    C --> D[시각화 타입]
-    D -->|수식| E[MathLive 렌더링]
-    D -->|도형| F[Konva 캔버스]
-    D -->|그래프| G[JSXGraph]
-    E --> H[PNG/SVG 내보내기]
-    F --> H
-    G --> H
-          </pre>
-        </div>
-
-        <div class="space-y-5">
-          <div class="p-4 bg-white rounded-md">
-            <span class="text-xs font-bold text-[#7c3aed] uppercase tracking-wide mb-2.5 block"
-              >주요 기능</span
-            >
-            <ul class="list-disc list-inside text-sm text-gray-800 space-y-2 leading-relaxed">
-              <li>LaTeX 수식 입력 및 실시간 미리보기</li>
-              <li>수학 도형 드래그앤드롭 편집</li>
-              <li>함수 그래프 자동 생성</li>
-              <li>PNG/SVG 내보내기</li>
-            </ul>
-          </div>
-
-          <div class="p-4 bg-white rounded-md">
-            <span class="text-xs font-bold text-[#7c3aed] uppercase tracking-wide mb-2.5 block"
-              >기술 스택</span
-            >
-            <div class="flex flex-wrap gap-2">
-              {
-                ["Next.js", "MathJson", "Compute-engine", "Konva", "JSXGraph", "Vercel"].map(
-                  (tag) => (
-                    <span class="px-3.5 py-1.5 bg-[#7c3aed] text-white text-xs font-semibold rounded-full">
-                      {tag}
-                    </span>
-                  )
-                )
-              }
-            </div>
-          </div>
-
-          <div class="p-4 bg-white rounded-md">
-            <span class="text-xs font-bold text-[#7c3aed] uppercase tracking-wide mb-2.5 block"
-              >주요 성과</span
-            >
-            <ul class="list-disc list-inside text-sm text-gray-800 space-y-2 leading-relaxed">
-              <li>중앙대 ICAN-LABs 창업 탐색 프로그램 최우수상 수상</li>
-              <li>40명 이상의 타겟 유저 심층 인터뷰 진행</li>
-              <li>기존 도구 대비 제작 시간 1/10로 단축</li>
-              <li>현재 서비스 배포 및 운영 중</li>
-            </ul>
-          </div>
-
-          <div class="p-4 bg-white rounded-md">
-            <span class="text-xs font-bold text-[#7c3aed] uppercase tracking-wide mb-2.5 block"
-              >배운 점</span
-            >
-            <p class="text-sm text-gray-800 leading-relaxed">
-              "막연한 추측이 아닌 데이터로 개발합니다." 40명의 인터뷰를 통해 개발자의 직관이 아닌
-              사용자가 느끼는 '진짜 불편함'을 발견하는 경험을 했습니다. 기술적으로 완벽한 제품보다
-              시장이 원하는 제품을 만들기 위해 발로 뛰는 것의 중요성을 체득했습니다.
-            </p>
-          </div>
-        </div>
-
-        <div class="mt-5 pt-5 border-t-2 border-gray-200">
-          <a
-            href="https://mathfigure.log8.kr"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="inline-flex items-center gap-2 px-4.5 py-2.5 bg-[#7c3aed] text-white text-sm font-semibold rounded-md hover:bg-[#8b5cf6] hover:-translate-y-0.5 hover:shadow-md transition-all"
-          >
-            <span>배포 사이트 보기</span>
-          </a>
-        </div>
-      </div>
-
-      <!-- 오메추 -->
+      <!-- 6. 오메추 -->
       <div
         id="omechu"
         class="mb-7 p-7 bg-background-light rounded-lg border border-l-4 border-primary hover:shadow-md hover:-translate-y-1 transition-all md:border-l-0 md:border-t-4 scroll-mt-20 portfolio-project-card"
       >
-        <div class="mb-5 pb-4 border-b-2 border-gray-200">
-          <h3 class="text-xl font-bold text-gray-800 mb-2.5">JWT 인증 단일화로 API 응답속도 50% 개선</h3>
-          <p class="text-sm text-gray-600 mb-2">오메추 - AI 기반 메뉴 추천 서비스</p>
-          <div class="flex gap-4 text-sm text-gray-600">
+        <div class="mb-5 pb-4 border-b-2 border-background-lighter">
+          <h3 class="text-xl font-bold text-text mb-2.5">JWT 인증 단일화로 API 응답속도 50% 개선</h3>
+          <p class="text-sm text-text-light mb-2">오메추 - AI 기반 메뉴 추천 서비스</p>
+          <div class="flex gap-4 text-sm text-text-light">
             <span>2025.06 - 2025.08</span>
             <span>Frontend Developer (인증 파트)</span>
           </div>
         </div>
 
-        <p class="text-base text-gray-800 leading-relaxed mb-6">
-          "오늘 메뉴 뭐 먹을까?" 고민을 해결하기 위한 AI 기반 맞춤형 메뉴 추천 서비스입니다.
-          사용자의 취향, 위치 정보를 고려하여 최적의 메뉴를 추천합니다.
+        <p class="text-base text-text leading-relaxed mb-6">
+          UMC 8기 팀 프로젝트. 쿠키 세션과 JWT 혼용으로 인증 오류가 발생해 팀 전체 개발이 2주간 중단.
+          프론트 담당이었지만 직접 백엔드 로그를 분석하여 JWT 기반 통합 인증 방식을 제안·구현.
         </p>
 
-        <!-- 기술적 도전 섹션 -->
-        <div class="mb-6 p-5 bg-white rounded-md border-l-4 border-blue-500">
+        <div class="mb-6 p-5 bg-background rounded-md border-l-4 border-blue-500">
           <h4 class="text-sm font-bold text-blue-600 uppercase tracking-wide mb-3">기술적 도전</h4>
           <div class="space-y-3 text-sm">
             <div>
-              <span class="font-semibold text-gray-700">문제:</span>
-              <span class="text-gray-600"> 쿠키 세션과 JWT가 혼용되어 인증 로직이 복잡하고 API 응답이 느림</span>
+              <span class="font-semibold text-text">문제:</span>
+              <span class="text-text-light"> 쿠키 세션과 JWT 혼용으로 인증 로직 복잡, API 응답 느림</span>
             </div>
             <div>
-              <span class="font-semibold text-gray-700">해결:</span>
-              <span class="text-gray-600"> JWT 단일 인증 체계로 통합, Access/Refresh 토큰 관리 구현</span>
+              <span class="font-semibold text-text">해결:</span>
+              <span class="text-text-light"> JWT 단일 인증 체계로 통합, Access/Refresh 토큰 관리 구현</span>
             </div>
             <div>
-              <span class="font-semibold text-gray-700">결과:</span>
-              <span class="text-gray-600"> API 응답속도 420ms → 210ms로 50% 개선, 코드 유지보수성 향상</span>
+              <span class="font-semibold text-text">결과:</span>
+              <span class="text-text-light"> API 응답속도 420ms → 210ms (50% 개선), UMC 8기 데모데이 장려상</span>
             </div>
           </div>
         </div>
 
-        <!-- AI 활용 섹션 -->
-        <div class="mb-6 p-5 bg-white rounded-md border-l-4 border-emerald-500">
+        <div class="mb-6 p-5 bg-background-light rounded-md border-l-4 border-emerald-500">
           <h4 class="text-sm font-bold text-emerald-600 uppercase tracking-wide mb-3">AI 활용</h4>
-          <ul class="list-disc list-inside text-sm text-gray-800 space-y-2">
-            <li>Claude에게 "JWT와 세션 방식의 차이점, 각각의 장단점" 학습</li>
+          <ul class="list-disc list-inside text-sm text-text space-y-2">
+            <li>JWT vs 세션 방식의 차이점·장단점 학습</li>
             <li>Access/Refresh 토큰 관리 best practice 탐색</li>
             <li>카카오 소셜 로그인 + JWT 통합 아키텍처 설계</li>
           </ul>
         </div>
 
-        <!-- Mermaid 다이어그램: JWT 인증 시퀀스 -->
-        <div class="mb-6 p-4 bg-white rounded-md overflow-x-auto">
-          <h4 class="text-sm font-bold text-gray-600 uppercase tracking-wide mb-3">인증 플로우</h4>
+        <div class="mb-6">
+          <div class="flex flex-wrap gap-2">
+            {
+              ["Next.js", "TypeScript", "Node.js", "Zustand", "TanStack Query", "Vercel"].map(
+                (tag) => (
+                  <span class="px-3.5 py-1.5 bg-primary text-on-primary text-xs font-semibold rounded-full">
+                    {tag}
+                  </span>
+                )
+              )
+            }
+          </div>
+        </div>
+
+        <div class="p-4 bg-background-light rounded-md overflow-x-auto">
+          <h4 class="text-sm font-bold text-text-light uppercase tracking-wide mb-3">인증 플로우</h4>
           <pre class="mermaid text-sm">
 sequenceDiagram
     participant U as User
@@ -880,275 +953,80 @@ sequenceDiagram
           </pre>
         </div>
 
-        <div class="space-y-5">
-          <div class="p-4 bg-white rounded-md">
-            <span class="text-xs font-bold text-[#7c3aed] uppercase tracking-wide mb-2.5 block"
-              >주요 기능</span
-            >
-            <ul class="list-disc list-inside text-sm text-gray-800 space-y-2 leading-relaxed">
-              <li>AI 기반 개인화 메뉴 추천</li>
-              <li>위치 정보 연동</li>
-              <li>사용자 선호도 학습 시스템</li>
-              <li>실시간 메뉴 공유 기능</li>
-            </ul>
-          </div>
-
-          <div class="p-4 bg-white rounded-md">
-            <span class="text-xs font-bold text-[#7c3aed] uppercase tracking-wide mb-2.5 block"
-              >기술 스택</span
-            >
-            <div class="flex flex-wrap gap-2">
-              {
-                ["Next.js", "TypeScript", "Node.js", "Zustand", "TanStack Query", "Vercel"].map(
-                  (tag) => (
-                    <span class="px-3.5 py-1.5 bg-[#7c3aed] text-white text-xs font-semibold rounded-full">
-                      {tag}
-                    </span>
-                  )
-                )
-              }
-            </div>
-          </div>
-
-          <div class="p-4 bg-white rounded-md">
-            <span class="text-xs font-bold text-[#7c3aed] uppercase tracking-wide mb-2.5 block"
-              >주요 성과</span
-            >
-            <ul class="list-disc list-inside text-sm text-gray-800 space-y-2 leading-relaxed">
-              <li>UMC 8기 데모데이 장려상 수상</li>
-              <li>현장 투표 1위 달성</li>
-              <li>인증 파트 담당 (로그인, 회원가입, 온보딩)</li>
-              <li>
-                쿠키 세션 방식을 JWT 인증 방식으로 단일화하여 API 응답속도 420ms → 210ms로 50% 개선
-              </li>
-              <li>KPT 회고 방법론 도입을 통한 팀 협업 효율성 향상</li>
-            </ul>
-          </div>
-
-          <div class="p-4 bg-white rounded-md">
-            <span class="text-xs font-bold text-[#7c3aed] uppercase tracking-wide mb-2.5 block"
-              >배운 점</span
-            >
-            <p class="text-sm text-gray-800 leading-relaxed">
-              프론트엔드 담당이었지만, 팀 전체의 성공을 위해 백엔드 영역까지 파고들었습니다.
-              원인 불명의 인증 오류로 팀 전체 개발이 2주간 중단되었을 때, "내 업무가 아니다"라고
-              선을 긋지 않고 직접 백엔드 로그를 분석하여 문제를 해결했습니다.
-              쿠키 세션과 JWT가 혼재된 구조를 발견하고, JWT 기반 통합 인증 방식을 제안하여 팀을 설득했습니다.
-            </p>
-          </div>
-        </div>
-
-        <div class="mt-5 pt-5 border-t-2 border-gray-200">
+        <div class="mt-5 pt-5 border-t-2 border-background-lighter">
           <a
             href="https://omechu.log8.kr"
             target="_blank"
             rel="noopener noreferrer"
-            class="inline-flex items-center gap-2 px-4.5 py-2.5 bg-[#7c3aed] text-white text-sm font-semibold rounded-md hover:bg-[#8b5cf6] hover:-translate-y-0.5 hover:shadow-md transition-all"
+            class="inline-flex items-center gap-2 px-4.5 py-2.5 bg-primary text-on-primary text-sm font-semibold rounded-md hover:bg-primary-light hover:-translate-y-0.5 hover:shadow-md transition-all"
           >
             <span>배포 사이트 보기</span>
           </a>
         </div>
       </div>
 
-      <!-- Starterm -->
-      <div
-        id="starterm"
-        class="mb-7 p-7 bg-background-light rounded-lg border border-l-4 border-primary hover:shadow-md hover:-translate-y-1 transition-all md:border-l-0 md:border-t-4 scroll-mt-20 portfolio-project-card"
-      >
-        <div class="mb-5 pb-4 border-b-2 border-gray-200">
-          <h3 class="text-xl font-bold text-gray-800 mb-2.5">
-            3주 만에 MVP 개발, 주간 활성 사용자 100명 달성
-          </h3>
-          <p class="text-sm text-gray-600 mb-2">Starterm - 스타트업 학생을 위한 단어 학습 플랫폼</p>
-          <div class="flex gap-4 text-sm text-gray-600">
-            <span>2025.08 - 2025.09</span>
-            <span>Full-Stack Developer</span>
-          </div>
-        </div>
-
-        <p class="text-base text-gray-800 leading-relaxed mb-6">
-          한양대학교 창업학 수업에서 예창패, MVP 등의 스타트업에 진입하려는 학생들을 위한 맞춤형
-          단어 학습 플랫폼입니다. 3명의 팀원과 함께 3주 만에 개발 및 배포하여 주간 활성 사용자
-          100명을 달성했습니다.
-        </p>
-
-        <!-- 기술적 도전 섹션 -->
-        <div class="mb-6 p-5 bg-white rounded-md border-l-4 border-blue-500">
-          <h4 class="text-sm font-bold text-blue-600 uppercase tracking-wide mb-3">기술적 도전</h4>
-          <div class="space-y-3 text-sm">
-            <div>
-              <span class="font-semibold text-gray-700">문제:</span>
-              <span class="text-gray-600"> 제한된 3주 기간 내 MVP 개발 및 실사용자 확보 필요</span>
-            </div>
-            <div>
-              <span class="font-semibold text-gray-700">해결:</span>
-              <span class="text-gray-600"> Supabase로 백엔드 구축 시간 단축, 핵심 기능에 집중한 린 개발</span>
-            </div>
-            <div>
-              <span class="font-semibold text-gray-700">결과:</span>
-              <span class="text-gray-600"> 3주 만에 배포 완료, 주간 활성 사용자 100명 달성</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- AI 활용 섹션 -->
-        <div class="mb-6 p-5 bg-white rounded-md border-l-4 border-emerald-500">
-          <h4 class="text-sm font-bold text-emerald-600 uppercase tracking-wide mb-3">AI 활용</h4>
-          <ul class="list-disc list-inside text-sm text-gray-800 space-y-2">
-            <li>Claude에게 "Supabase로 인증 + 실시간 기능을 빠르게 구현하는 방법" 학습</li>
-            <li>Framer Motion 공식 문서 기반 최적화된 애니메이션 코드 제안</li>
-            <li>3주 내 MVP 개발을 위한 핵심 기능 우선순위 결정</li>
-          </ul>
-        </div>
-
-        <!-- Mermaid 다이어그램: 시스템 아키텍처 -->
-        <div class="mb-6 p-4 bg-white rounded-md overflow-x-auto">
-          <h4 class="text-sm font-bold text-gray-600 uppercase tracking-wide mb-3">시스템 아키텍처</h4>
-          <pre class="mermaid text-sm">
-flowchart TB
-    subgraph Client["클라이언트"]
-        A[Next.js App]
-        B[Framer Motion UI]
-    end
-
-    subgraph Backend["백엔드 (Supabase)"]
-        C[(PostgreSQL)]
-        D[Auth Service]
-        E[Real-time Subscriptions]
-    end
-
-    subgraph Deploy["배포"]
-        F[Vercel]
-    end
-
-    A --> D
-    A --> C
-    A --> E
-    B --> A
-    F --> A
-          </pre>
-        </div>
-
-        <div class="space-y-5">
-          <div class="p-4 bg-white rounded-md">
-            <span class="text-xs font-bold text-[#7c3aed] uppercase tracking-wide mb-2.5 block"
-              >주요 기능</span
-            >
-            <ul class="list-disc list-inside text-sm text-gray-800 space-y-2 leading-relaxed">
-              <li>스타트업 관련 핵심 단어 학습 시스템</li>
-              <li>학습 진도 및 성취도 추적</li>
-              <li>반복 학습 알고리즘 기반 복습 기능</li>
-              <li>사용자별 맞춤형 학습 경로 제공</li>
-            </ul>
-          </div>
-
-          <div class="p-4 bg-white rounded-md">
-            <span class="text-xs font-bold text-[#7c3aed] uppercase tracking-wide mb-2.5 block"
-              >기술 스택</span
-            >
-            <div class="flex flex-wrap gap-2">
-              {
-                ["Next.js", "Supabase", "TailwindCSS", "Framer Motion", "Vercel"].map((tag) => (
-                  <span class="px-3.5 py-1.5 bg-[#7c3aed] text-white text-xs font-semibold rounded-full">
-                    {tag}
-                  </span>
-                ))
-              }
-            </div>
-          </div>
-
-          <div class="p-4 bg-white rounded-md">
-            <span class="text-xs font-bold text-[#7c3aed] uppercase tracking-wide mb-2.5 block"
-              >주요 성과</span
-            >
-            <ul class="list-disc list-inside text-sm text-gray-800 space-y-2 leading-relaxed">
-              <li>3주 만에 기획부터 배포까지 완료하는 빠른 개발 사이클 경험</li>
-              <li>주간 활성 사용자 100명 달성</li>
-              <li>3명 팀에서 Full-Stack 개발 (Next.js, Supabase) 담당</li>
-              <li>Framer Motion을 활용한 인터랙티브 UI/UX 구현</li>
-            </ul>
-          </div>
-
-          <div class="p-4 bg-white rounded-md">
-            <span class="text-xs font-bold text-[#7c3aed] uppercase tracking-wide mb-2.5 block"
-              >배운 점</span
-            >
-            <p class="text-sm text-gray-800 leading-relaxed">
-              짧은 기간 내에 실제 사용자에게 가치를 전달하는 MVP 개발의 중요성을 체감했습니다.
-              3주라는 제한된 시간 안에 핵심 기능에 집중하고, Supabase로 빠르게 백엔드를 구축하며,
-              Framer Motion으로 사용자 경험을 향상시키는 과정에서 린 스타트업 방법론을 실천적으로
-              학습했습니다. 특히 주간 활성 사용자 100명을 달성하며 사용자 피드백을 기반으로 한 빠른
-              개선 사이클의 가치를 깨달았습니다.
-            </p>
-          </div>
-        </div>
-
-        <div class="mt-5 pt-5 border-t-2 border-gray-200">
-          <a
-            href="https://starterm.co.kr"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="inline-flex items-center gap-2 px-4.5 py-2.5 bg-[#7c3aed] text-white text-sm font-semibold rounded-md hover:bg-[#8b5cf6] hover:-translate-y-0.5 hover:shadow-md transition-all"
-          >
-            <span>배포 사이트 보기</span>
-          </a>
-        </div>
-      </div>
-
-      <!-- log8 -->
+      <!-- 7. log8 -->
       <div
         id="log8"
-        class="mb-0 p-7 bg-background-light rounded-lg border border-l-4 border-primary hover:shadow-md hover:-translate-y-1 transition-all md:border-l-0 md:border-t-4 scroll-mt-20 portfolio-project-card"
+        class="mb-7 p-7 bg-background-light rounded-lg border border-l-4 border-primary hover:shadow-md hover:-translate-y-1 transition-all md:border-l-0 md:border-t-4 scroll-mt-20 portfolio-project-card"
       >
-        <div class="mb-5 pb-4 border-b-2 border-gray-200">
-          <h3 class="text-xl font-bold text-gray-800 mb-2.5">AI와 페어 프로그래밍으로 Feature-First 아키텍처 구축</h3>
-          <p class="text-sm text-gray-600 mb-2">log8 - 이 블로그 자체, AI와 함께 운영하는 개인 기술 블로그</p>
-          <div class="flex gap-4 text-sm text-gray-600">
+        <div class="mb-5 pb-4 border-b-2 border-background-lighter">
+          <h3 class="text-xl font-bold text-text mb-2.5">AI와 페어 프로그래밍으로 Feature-First 아키텍처 구축</h3>
+          <p class="text-sm text-text-light mb-2">log8 - AI와 함께 운영하는 개인 기술 블로그</p>
+          <div class="flex gap-4 text-sm text-text-light">
             <span>2024.12 - 현재</span>
             <span>1인 개발 및 운영</span>
           </div>
         </div>
 
-        <p class="text-base text-gray-800 leading-relaxed mb-6">
-          "개발자에게 글쓰기가 왜 중요한가?"라는 질문에서 시작된 프로젝트입니다.
-          학습한 내용을 정리하고, 문제 해결 과정을 기록하며, 이를 다른 개발자들과 공유하기 위해
-          Obsidian과 연동되는 개인 기술 블로그를 구축했습니다.
-          지금 보고 계신 이 사이트가 바로 log8입니다.
+        <p class="text-base text-text leading-relaxed mb-6">
+          학습 기록과 문제 해결 과정을 정리·공유하기 위한 기술 블로그.
+          Obsidian에서 글을 작성하면 Astro Content Collections로 자동 빌드·배포되는 구조.
         </p>
 
-        <!-- 기술적 도전 섹션 -->
-        <div class="mb-6 p-5 bg-white rounded-md border-l-4 border-blue-500">
+        <div class="mb-6 p-5 bg-background rounded-md border-l-4 border-blue-500">
           <h4 class="text-sm font-bold text-blue-600 uppercase tracking-wide mb-3">기술적 도전</h4>
           <div class="space-y-3 text-sm">
             <div>
-              <span class="font-semibold text-gray-700">문제:</span>
-              <span class="text-gray-600"> Obsidian 연동, TailwindCSS v3→v4 마이그레이션, SEO/AEO 최적화</span>
+              <span class="font-semibold text-text">문제:</span>
+              <span class="text-text-light"> Obsidian 연동, TailwindCSS v3→v4 마이그레이션, SEO/AEO 최적화</span>
             </div>
             <div>
-              <span class="font-semibold text-gray-700">해결:</span>
-              <span class="text-gray-600"> Content Collections API, AI 일괄 마이그레이션, AI 크롤러 허용 robots.txt</span>
+              <span class="font-semibold text-text">해결:</span>
+              <span class="text-text-light"> Content Collections API, AST-grep 기반 AI 일괄 마이그레이션, AI 크롤러 허용 robots.txt</span>
             </div>
             <div>
-              <span class="font-semibold text-gray-700">결과:</span>
-              <span class="text-gray-600"> Lighthouse 90+ 달성, Google AdSense 승인, 40+ 기술 포스트 작성</span>
+              <span class="font-semibold text-text">결과:</span>
+              <span class="text-text-light"> Lighthouse 90+ 달성, Google AdSense 승인, 40+ 기술 포스트</span>
             </div>
           </div>
         </div>
 
-        <!-- AI 활용 섹션 -->
-        <div class="mb-6 p-5 bg-white rounded-md border-l-4 border-emerald-500">
+        <div class="mb-6 p-5 bg-background-light rounded-md border-l-4 border-emerald-500">
           <h4 class="text-sm font-bold text-emerald-600 uppercase tracking-wide mb-3">AI 활용</h4>
-          <ul class="list-disc list-inside text-sm text-gray-800 space-y-2">
-            <li>Claude Code로 Feature-First Architecture 리팩토링 설계 및 구현</li>
+          <ul class="list-disc list-inside text-sm text-text space-y-2">
+            <li>Claude Code로 Feature-First Architecture 리팩토링 설계·구현</li>
             <li>AST-grep 활용 TailwindCSS v4 일괄 마이그레이션 (bg-gradient → bg-linear 등)</li>
-            <li>Oh My OpenCode 오케스트레이션 에이전트로 복잡한 작업 자동화</li>
             <li>SEO/AEO 최적화 - GPTBot, ClaudeBot 등 AI 크롤러 명시적 허용</li>
           </ul>
         </div>
 
-        <!-- Mermaid 다이어그램: 워크플로우 -->
-        <div class="mb-6 p-4 bg-white rounded-md overflow-x-auto">
-          <h4 class="text-sm font-bold text-gray-600 uppercase tracking-wide mb-3">블로그 워크플로우</h4>
+        <div class="mb-6">
+          <div class="flex flex-wrap gap-2">
+            {
+              ["Astro v5", "TailwindCSS v4", "TypeScript", "Cloudflare Pages", "Bun", "MDX"].map(
+                (tag) => (
+                  <span class="px-3.5 py-1.5 bg-primary text-on-primary text-xs font-semibold rounded-full">
+                    {tag}
+                  </span>
+                )
+              )
+            }
+          </div>
+        </div>
+
+        <div class="p-4 bg-background-light rounded-md overflow-x-auto">
+          <h4 class="text-sm font-bold text-text-light uppercase tracking-wide mb-3">블로그 워크플로우</h4>
           <pre class="mermaid text-sm">
 flowchart LR
     subgraph Writing["글쓰기"]
@@ -1179,67 +1057,12 @@ flowchart LR
           </pre>
         </div>
 
-        <div class="space-y-5">
-          <div class="p-4 bg-white rounded-md">
-            <span class="text-xs font-bold text-[#7c3aed] uppercase tracking-wide mb-2.5 block"
-              >주요 기능</span
-            >
-            <ul class="list-disc list-inside text-sm text-gray-800 space-y-2 leading-relaxed">
-              <li>Obsidian 직접 연동 - vault에서 바로 블로그 발행</li>
-              <li>Feature-First Architecture 적용</li>
-              <li>다크 모드, 반응형 디자인</li>
-              <li>Mermaid 다이어그램, Expressive Code 지원</li>
-            </ul>
-          </div>
-
-          <div class="p-4 bg-white rounded-md">
-            <span class="text-xs font-bold text-[#7c3aed] uppercase tracking-wide mb-2.5 block"
-              >기술 스택</span
-            >
-            <div class="flex flex-wrap gap-2">
-              {
-                ["Astro v5", "TailwindCSS v4", "TypeScript", "Cloudflare Pages", "Bun", "MDX"].map(
-                  (tag) => (
-                    <span class="px-3.5 py-1.5 bg-[#7c3aed] text-white text-xs font-semibold rounded-full">
-                      {tag}
-                    </span>
-                  )
-                )
-              }
-            </div>
-          </div>
-
-          <div class="p-4 bg-white rounded-md">
-            <span class="text-xs font-bold text-[#7c3aed] uppercase tracking-wide mb-2.5 block"
-              >주요 성과</span
-            >
-            <ul class="list-disc list-inside text-sm text-gray-800 space-y-2 leading-relaxed">
-              <li>40개 이상의 기술 포스트 작성 및 운영</li>
-              <li>Lighthouse 성능 90+ 달성</li>
-              <li>Google AdSense 승인 획득</li>
-              <li>AI와의 협업으로 Feature-First Architecture 리팩토링 완료</li>
-            </ul>
-          </div>
-
-          <div class="p-4 bg-white rounded-md">
-            <span class="text-xs font-bold text-[#7c3aed] uppercase tracking-wide mb-2.5 block"
-              >배운 점</span
-            >
-            <p class="text-sm text-gray-800 leading-relaxed">
-              이 프로젝트에서 가장 특별한 점은 AI를 "도구"가 아닌 "페어 프로그래밍 파트너"로 활용했다는 것입니다.
-              복잡한 리팩토링, 아키텍처 설계, 마이그레이션 과정에서 AI와 대화하며 더 나은 구조를 찾아갔습니다.
-              "완벽한 코드"보다 "실행과 개선"의 사이클이 중요하다는 것을 체득했고,
-              혼자서는 생각하지 못했을 아키텍처 개선 아이디어를 AI와의 협업에서 얻을 수 있었습니다.
-            </p>
-          </div>
-        </div>
-
-        <div class="mt-5 pt-5 border-t-2 border-gray-200 flex gap-3">
+        <div class="mt-5 pt-5 border-t-2 border-background-lighter flex gap-3">
           <a
             href="https://log8.kr"
             target="_blank"
             rel="noopener noreferrer"
-            class="inline-flex items-center gap-2 px-4.5 py-2.5 bg-[#7c3aed] text-white text-sm font-semibold rounded-md hover:bg-[#8b5cf6] hover:-translate-y-0.5 hover:shadow-md transition-all"
+            class="inline-flex items-center gap-2 px-4.5 py-2.5 bg-primary text-on-primary text-sm font-semibold rounded-md hover:bg-primary-light hover:-translate-y-0.5 hover:shadow-md transition-all"
           >
             <span>블로그 방문</span>
           </a>
@@ -1247,43 +1070,141 @@ flowchart LR
             href="https://github.com/IISweetHeartII/My_Website_Astro"
             target="_blank"
             rel="noopener noreferrer"
-            class="inline-flex items-center gap-2 px-4.5 py-2.5 bg-gray-800 text-white text-sm font-semibold rounded-md hover:bg-[#7c3aed] hover:-translate-y-0.5 hover:shadow-md transition-all"
+            class="inline-flex items-center gap-2 px-4.5 py-2.5 bg-text text-on-primary text-sm font-semibold rounded-md hover:bg-primary hover:-translate-y-0.5 hover:shadow-md transition-all"
           >
             <Github class="w-4 h-4" />
             <span>GitHub</span>
           </a>
         </div>
       </div>
+
+      <!-- 8. Starterm -->
+      <div
+        id="starterm"
+        class="mb-0 p-7 bg-background-light rounded-lg border border-l-4 border-primary hover:shadow-md hover:-translate-y-1 transition-all md:border-l-0 md:border-t-4 scroll-mt-20 portfolio-project-card"
+      >
+        <div class="mb-5 pb-4 border-b-2 border-background-lighter">
+          <h3 class="text-xl font-bold text-text mb-2.5">3주 만에 MVP 개발부터 배포까지, 주간 활성 사용자 100명</h3>
+          <p class="text-sm text-text-light mb-2">Starterm - 스타트업 용어 학습 플랫폼</p>
+          <div class="flex gap-4 text-sm text-text-light">
+            <span>2025.08 - 2025.09</span>
+            <span>Full-Stack Developer (3명 팀)</span>
+          </div>
+        </div>
+
+        <p class="text-base text-text leading-relaxed mb-6">
+          한양대학교 창업학 수업에서 예창패·MVP 등의 스타트업 진입을 준비하는 학생들을 위한
+          맞춤형 용어 학습 플랫폼. 3명 팀에서 3주 만에 개발·배포.
+        </p>
+
+        <div class="mb-6 p-5 bg-background rounded-md border-l-4 border-blue-500">
+          <h4 class="text-sm font-bold text-blue-600 uppercase tracking-wide mb-3">기술적 도전</h4>
+          <div class="space-y-3 text-sm">
+            <div>
+              <span class="font-semibold text-text">문제:</span>
+              <span class="text-text-light"> 3주 내 MVP 개발부터 실사용자 확보까지 전 과정 진행 필요</span>
+            </div>
+            <div>
+              <span class="font-semibold text-text">해결:</span>
+              <span class="text-text-light"> Supabase로 백엔드 구축 시간 단축, 핵심 기능에 집중한 린 개발</span>
+            </div>
+            <div>
+              <span class="font-semibold text-text">결과:</span>
+              <span class="text-text-light"> 3주 만에 배포 완료, 주간 활성 사용자 100명 달성</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="mb-6 p-5 bg-background-light rounded-md border-l-4 border-emerald-500">
+          <h4 class="text-sm font-bold text-emerald-600 uppercase tracking-wide mb-3">AI 활용</h4>
+          <ul class="list-disc list-inside text-sm text-text space-y-2">
+            <li>Supabase 인증 + 실시간 기능 빠른 구현 학습</li>
+            <li>Framer Motion 공식 문서 기반 애니메이션 최적화</li>
+            <li>핵심 기능 우선순위 결정</li>
+          </ul>
+        </div>
+
+        <div class="mb-6">
+          <div class="flex flex-wrap gap-2">
+            {
+              ["Next.js", "Supabase", "TailwindCSS", "Framer Motion", "Vercel"].map((tag) => (
+                <span class="px-3.5 py-1.5 bg-primary text-on-primary text-xs font-semibold rounded-full">
+                  {tag}
+                </span>
+              ))
+            }
+          </div>
+        </div>
+
+        <div class="p-4 bg-background-light rounded-md overflow-x-auto">
+          <h4 class="text-sm font-bold text-text-light uppercase tracking-wide mb-3">시스템 아키텍처</h4>
+          <pre class="mermaid text-sm">
+flowchart TB
+    subgraph Client["클라이언트"]
+        A[Next.js App]
+        B[Framer Motion UI]
+    end
+
+    subgraph Backend["백엔드 (Supabase)"]
+        C[(PostgreSQL)]
+        D[Auth Service]
+        E[Real-time Subscriptions]
+    end
+
+    subgraph Deploy["배포"]
+        F[Vercel]
+    end
+
+    A --> D
+    A --> C
+    A --> E
+    B --> A
+    F --> A
+          </pre>
+        </div>
+
+        <div class="mt-5 pt-5 border-t-2 border-background-lighter">
+          <a
+            href="https://starterm.co.kr"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-2 px-4.5 py-2.5 bg-primary text-on-primary text-sm font-semibold rounded-md hover:bg-primary-light hover:-translate-y-0.5 hover:shadow-md transition-all"
+          >
+            <span>배포 사이트 보기</span>
+          </a>
+        </div>
+      </div>
     </section>
 
+
     <!-- Experience -->
-    <section class="mb-14 p-8 bg-white rounded-lg shadow-sm">
-      <h2 class="text-2xl md:text-3xl font-bold mb-6 pb-3 border-b-2 border-gray-100 text-gray-800">
+    <section class="mb-14 p-8 bg-background rounded-lg shadow-sm">
+      <h2 class="text-2xl md:text-3xl font-bold mb-6 pb-3 border-b-2 border-background-lighter text-text">
         Experience
       </h2>
 
       <div class="space-y-5">
         <!-- UMC -->
         <div
-          class="p-5 pl-6 bg-gray-50 rounded-md border-l-4 border-[#7c3aed] hover:bg-white hover:translate-x-1 hover:shadow-sm transition-all"
+          class="p-5 pl-6 bg-background-light rounded-md border-l-4 border-primary hover:bg-background hover:translate-x-1 hover:shadow-sm transition-all"
         >
           <div class="flex justify-between items-baseline mb-2.5 flex-wrap gap-2">
-            <h3 class="text-lg font-bold text-gray-800">UMC 8기/9기 Web Part</h3>
+            <h3 class="text-lg font-bold text-text">UMC 8기/9기 Web Part</h3>
             <span
-              class="text-xs font-semibold text-white bg-[#7c3aed] px-3 py-1 rounded-full whitespace-nowrap"
+              class="text-xs font-semibold text-on-primary bg-primary px-3 py-1 rounded-full whitespace-nowrap"
             >
               2025.03 - 현재
             </span>
           </div>
-          <p class="text-sm font-semibold text-gray-600 mb-3">
+          <p class="text-sm font-semibold text-text-light mb-3">
             9기 웹 파트장 | 9기 Spring Boot 챌린저
           </p>
-          <p class="text-sm text-gray-800 leading-relaxed mb-3.5">
+          <p class="text-sm text-text leading-relaxed mb-3.5">
             IT 연합 동아리 UMC에서 웹 개발을 학습하고, 팀 프로젝트를 진행하며 실무 경험을 쌓고
             있습니다. 9기에서는 웹 파트장으로서 파트원들의 학습을 지원하고, Spring Boot 챌린저로
             백엔드 개발 역량을 확장하고 있습니다.
           </p>
-          <ul class="list-disc list-inside text-sm text-gray-800 space-y-2 leading-relaxed">
+          <ul class="list-disc list-inside text-sm text-text space-y-2 leading-relaxed">
             <li>8기: 팀 프로젝트 '오메추'에서 인증 파트 담당, 데모데이 장려상 수상</li>
             <li>9기: 웹 파트장으로 파트원 학습 지원 및 코드 리뷰</li>
             <li>9기: Spring Boot 챌린저로 백엔드 개발 학습 중</li>
@@ -1292,40 +1213,40 @@ flowchart LR
 
         <!-- 성당 교사 -->
         <div
-          class="p-5 pl-6 bg-gray-50 rounded-md border-l-4 border-[#7c3aed] hover:bg-white hover:translate-x-1 hover:shadow-sm transition-all"
+          class="p-5 pl-6 bg-background-light rounded-md border-l-4 border-primary hover:bg-background hover:translate-x-1 hover:shadow-sm transition-all"
         >
           <div class="flex justify-between items-baseline mb-2.5 flex-wrap gap-2">
-            <h3 class="text-lg font-bold text-gray-800">반포4동 성당 중고등부 교사</h3>
+            <h3 class="text-lg font-bold text-text">반포4동 성당 중고등부 교사</h3>
             <span
-              class="text-xs font-semibold text-white bg-[#7c3aed] px-3 py-1 rounded-full whitespace-nowrap"
+              class="text-xs font-semibold text-on-primary bg-primary px-3 py-1 rounded-full whitespace-nowrap"
             >
               2019.09 - 2024.12
             </span>
           </div>
-          <p class="text-sm font-semibold text-gray-600 mb-3">중고등부 교사 (5년)</p>
-          <p class="text-sm text-gray-800 leading-relaxed">
+          <p class="text-sm font-semibold text-text-light mb-3">중고등부 교사 (5년)</p>
+          <p class="text-sm text-text leading-relaxed">
             중학생 30명을 대상으로 교리 프로그램을 진행하며 소통과 공감 능력을 키웠습니다.
           </p>
         </div>
 
         <!-- AI 강연 -->
         <div
-          class="p-5 pl-6 bg-gray-50 rounded-md border-l-4 border-[#7c3aed] hover:bg-white hover:translate-x-1 hover:shadow-sm transition-all"
+          class="p-5 pl-6 bg-background-light rounded-md border-l-4 border-primary hover:bg-background hover:translate-x-1 hover:shadow-sm transition-all"
         >
           <div class="flex justify-between items-baseline mb-2.5 flex-wrap gap-2">
-            <h3 class="text-lg font-bold text-gray-800">AI 활용 강연</h3>
+            <h3 class="text-lg font-bold text-text">AI 활용 강연</h3>
             <span
-              class="text-xs font-semibold text-white bg-[#7c3aed] px-3 py-1 rounded-full whitespace-nowrap"
+              class="text-xs font-semibold text-on-primary bg-primary px-3 py-1 rounded-full whitespace-nowrap"
             >
               2025.05, 07, 09
             </span>
           </div>
-          <p class="text-sm font-semibold text-gray-600 mb-3">연사</p>
-          <p class="text-sm text-gray-800 leading-relaxed mb-3.5">
+          <p class="text-sm font-semibold text-text-light mb-3">연사</p>
+          <p class="text-sm text-text leading-relaxed mb-3.5">
             시니어 소상공인을 위한 AI 활용법 강연을 총 3회 진행했습니다. (한국시니어교류협회 1회,
             리피움 2회)
           </p>
-          <ul class="list-disc list-inside text-sm text-gray-800 space-y-2 leading-relaxed">
+          <ul class="list-disc list-inside text-sm text-text space-y-2 leading-relaxed">
             <li>ChatGPT Custom Instructions, Gemini Gems, NotebookLM 활용법 소개</li>
             <li>소상공인을 위한 실전 AI 도구 활용 사례</li>
             <li>MCP(Model Context Protocol) 개념 및 활용법 (리피움)</li>
@@ -1335,14 +1256,14 @@ flowchart LR
     </section>
 
     <!-- Awards & Certifications -->
-    <section class="mb-14 p-8 bg-white rounded-lg shadow-sm">
-      <h2 class="text-2xl md:text-3xl font-bold mb-6 pb-3 border-b-2 border-gray-100 text-gray-800">
+    <section class="mb-14 p-8 bg-background rounded-lg shadow-sm">
+      <h2 class="text-2xl md:text-3xl font-bold mb-6 pb-3 border-b-2 border-background-lighter text-text">
         Awards & Certifications
       </h2>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
-          <h3 class="text-lg font-bold text-gray-800 mb-4 pl-3 border-l-3 border-[#7c3aed]">
+          <h3 class="text-lg font-bold text-text mb-4 pl-3 border-l-3 border-primary">
             Awards
           </h3>
           <div class="space-y-2.5">
@@ -1353,9 +1274,9 @@ flowchart LR
                 { name: "UMC 8기 데모데이 장려상", date: "2025.08" },
                 { name: "2025 동계 해외교육 프로그램 최우수상", date: "2025.02" },
               ].map((award) => (
-                <div class="flex justify-between items-baseline p-4 bg-gray-50 rounded-md hover:bg-white hover:translate-x-1 transition-all">
-                  <span class="text-sm font-medium text-gray-800 flex-1">{award.name}</span>
-                  <span class="text-xs font-semibold text-white bg-[#7c3aed] px-2.5 py-1 rounded-full ml-4 whitespace-nowrap">
+                <div class="flex justify-between items-baseline p-4 bg-background-light rounded-md hover:bg-background hover:translate-x-1 transition-all">
+                  <span class="text-sm font-medium text-text flex-1">{award.name}</span>
+                  <span class="text-xs font-semibold text-on-primary bg-primary px-2.5 py-1 rounded-full ml-4 whitespace-nowrap">
                     {award.date}
                   </span>
                 </div>
@@ -1365,7 +1286,7 @@ flowchart LR
         </div>
 
         <div>
-          <h3 class="text-lg font-bold text-gray-800 mb-4 pl-3 border-l-3 border-[#7c3aed]">
+          <h3 class="text-lg font-bold text-text mb-4 pl-3 border-l-3 border-primary">
             Certifications
           </h3>
           <div class="space-y-2.5">
@@ -1374,9 +1295,9 @@ flowchart LR
                 { name: "정보처리기사", date: "2025.09" },
                 { name: "SQLD (SQL 개발자)", date: "2025.09" },
               ].map((cert) => (
-                <div class="flex justify-between items-baseline p-4 bg-gray-50 rounded-md hover:bg-white hover:translate-x-1 transition-all">
-                  <span class="text-sm font-medium text-gray-800 flex-1">{cert.name}</span>
-                  <span class="text-xs font-semibold text-white bg-[#7c3aed] px-2.5 py-1 rounded-full ml-4 whitespace-nowrap">
+                <div class="flex justify-between items-baseline p-4 bg-background-light rounded-md hover:bg-background hover:translate-x-1 transition-all">
+                  <span class="text-sm font-medium text-text flex-1">{cert.name}</span>
+                  <span class="text-xs font-semibold text-on-primary bg-primary px-2.5 py-1 rounded-full ml-4 whitespace-nowrap">
                     {cert.date}
                   </span>
                 </div>
@@ -1388,39 +1309,40 @@ flowchart LR
     </section>
 
     <!-- Education -->
-    <section class="mb-14 p-8 bg-white rounded-lg shadow-sm">
-      <h2 class="text-2xl md:text-3xl font-bold mb-6 pb-3 border-b-2 border-gray-100 text-gray-800">
+    <section class="mb-14 p-8 bg-background rounded-lg shadow-sm">
+      <h2 class="text-2xl md:text-3xl font-bold mb-6 pb-3 border-b-2 border-background-lighter text-text">
         Education
       </h2>
 
-      <div class="p-6 bg-gray-50 rounded-md border-l-4 border-[#7c3aed]">
+      <div class="p-6 bg-background-light rounded-md border-l-4 border-primary">
         <div class="flex justify-between items-baseline mb-3 flex-wrap gap-2">
-          <h3 class="text-lg font-bold text-gray-800">중앙대학교</h3>
+          <h3 class="text-lg font-bold text-text">중앙대학교</h3>
           <span
-            class="text-xs font-semibold text-white bg-[#7c3aed] px-3 py-1 rounded-full whitespace-nowrap"
+            class="text-xs font-semibold text-on-primary bg-primary px-3 py-1 rounded-full whitespace-nowrap"
           >
             2020.03 - 2026.02 (졸업예정)
           </span>
         </div>
-        <p class="text-sm font-semibold text-gray-600 mb-3">수학과 (Mathematics)</p>
-        <p class="text-sm text-gray-800 leading-relaxed">
+        <p class="text-sm font-semibold text-text-light mb-3">수학과 (Mathematics)</p>
+        <p class="text-sm text-text leading-relaxed">
           수학적 사고력과 논리적 문제 해결 능력을 바탕으로 개발 분야에 도전하고 있습니다.
         </p>
-        <p class="text-sm text-gray-800 leading-relaxed mt-2">
+        <p class="text-sm text-text leading-relaxed mt-2">
           마지막 학기 16학점을 이수 중이며, 2026년 2월 졸업 예정입니다.
         </p>
       </div>
     </section>
 
     <!-- Footer -->
-    <div class="mt-12 p-6 bg-gray-50 rounded-lg text-center">
-      <p class="text-sm text-gray-600 mb-2">이 포트폴리오는 웹에서 확인하실 수 있습니다.</p>
-      <p class="text-xs text-gray-500 font-medium">최종 업데이트: 2026년 1월 25일</p>
+    <div class="mt-12 p-6 bg-background-light rounded-lg text-center">
+      <p class="text-sm text-text-light mb-2">이 포트폴리오는 웹에서 확인하실 수 있습니다.</p>
+      <p class="text-xs text-text-muted font-medium">최종 업데이트: 2026년 1월 25일</p>
     </div>
   </main>
 </Layout>
 
 <style>
+  /* === Screen: Desktop A4 simulation === */
   .portfolio-root > :not(.portfolio-controls):not(#portfolio-projects-section) {
     display: none;
   }
@@ -1458,49 +1380,25 @@ flowchart LR
     display: none;
   }
 
+  /* Resume 기준 타이포그래피: h3=text-base(1rem), body=text-sm(0.875rem) */
   .portfolio-project-card h3 {
-    font-size: 1.05rem !important;
-    line-height: 1.35 !important;
+    font-size: 1rem !important;
+    line-height: 1.5 !important;
   }
 
   .portfolio-project-card h4 {
     font-size: 0.8rem !important;
-    line-height: 1.35 !important;
+    line-height: 1.4 !important;
   }
 
   .portfolio-project-card p,
   .portfolio-project-card li,
   .portfolio-project-card span {
-    font-size: 0.82rem !important;
-    line-height: 1.45 !important;
+    font-size: 0.875rem !important;
+    line-height: 1.5 !important;
   }
 
-  html[data-theme="dark"] .portfolio-project-card [class*="bg-white"] {
-    background: var(--color-background) !important;
-  }
-
-  html[data-theme="dark"] .portfolio-project-card [class*="bg-gray-50"] {
-    background: var(--color-background-light) !important;
-  }
-
-  html[data-theme="dark"] .portfolio-project-card [class*="text-gray-800"] {
-    color: var(--color-text) !important;
-  }
-
-  html[data-theme="dark"] .portfolio-project-card [class*="text-gray-700"],
-  html[data-theme="dark"] .portfolio-project-card [class*="text-gray-600"] {
-    color: var(--color-text-light) !important;
-  }
-
-  html[data-theme="dark"] .portfolio-project-card [class*="text-gray-500"] {
-    color: var(--color-text-muted) !important;
-  }
-
-  html[data-theme="dark"] .portfolio-project-card [class*="border-gray-"],
-  html[data-theme="dark"] .portfolio-project-card [class*="border-gray"] {
-    border-color: var(--color-background-lighter) !important;
-  }
-
+  /* === Screen: Mobile/Tablet === */
   @media (max-width: 1024px) {
     .portfolio-root > :not(.portfolio-controls):not(#portfolio-projects-section) {
       display: none;
@@ -1514,12 +1412,43 @@ flowchart LR
     }
   }
 
-  @page {
-    size: A4 portrait;
-    margin: 12mm;
-  }
-
+  /* === Print: Resume 패턴 통일 === */
   @media print {
+    @page {
+      size: A4;
+      margin: 0;
+    }
+
+    /* 전역 요소 숨김 */
+    :global(header),
+    :global(footer),
+    :global(nav),
+    :global([class*="ProgressIndicator"]),
+    :global([class*="progress"]) {
+      display: none !important;
+    }
+
+    /* body/html 초기화 */
+    :global(html),
+    :global(body) {
+      margin: 0 !important;
+      padding: 0 !important;
+      background: white !important;
+    }
+
+    :global(body > main),
+    :global(main.grow) {
+      padding: 0 !important;
+      margin: 0 !important;
+    }
+
+    /* 색상 보존 */
+    html {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+
+    /* 컨트롤/비프로젝트 섹션 숨김 */
     .portfolio-controls {
       display: none !important;
     }
@@ -1527,6 +1456,7 @@ flowchart LR
     .portfolio-root {
       max-width: 100% !important;
       padding: 0 !important;
+      margin: 0 !important;
       background: white !important;
     }
 
@@ -1534,6 +1464,7 @@ flowchart LR
       display: none !important;
     }
 
+    /* 프로젝트 섹션 래퍼 */
     #portfolio-projects-section {
       padding: 0 !important;
       margin: 0 !important;
@@ -1542,25 +1473,119 @@ flowchart LR
       box-shadow: none !important;
     }
 
+    #portfolio-projects-section > h2 {
+      display: none !important;
+    }
+
+    /* 핵심: 카드 1개 = A4 1장 */
     .portfolio-project-card {
       display: block !important;
-      width: 100%;
-      min-height: auto;
-      height: auto;
-      overflow: visible;
+      width: 100% !important;
+      height: 297mm !important;
+      box-sizing: border-box !important;
+      overflow: hidden !important;
       break-after: page;
       page-break-after: always;
       break-inside: avoid;
       page-break-inside: avoid;
-      margin-bottom: 0;
-      border-radius: 0;
-      border: 0;
-      box-shadow: none;
+      margin: 0 !important;
+      padding: 15mm 15mm 12mm 15mm !important;
+      border: 0 !important;
+      border-radius: 0 !important;
+      box-shadow: none !important;
+      background: white !important;
+      word-break: keep-all;
+      line-break: strict;
     }
 
     .portfolio-project-card:last-child {
       break-after: auto;
       page-break-after: auto;
+    }
+
+    /* Mermaid 다이어그램 숨김 */
+    .portfolio-project-card div:has(> pre.mermaid) {
+      display: none !important;
+    }
+
+    /* 타이포그래피 - Resume 기준 통일 (text-sm = 0.875rem) */
+    .portfolio-project-card h3 {
+      font-size: 1rem !important;
+      line-height: 1.5 !important;
+      margin-bottom: 0.25rem !important;
+    }
+
+    .portfolio-project-card h4 {
+      font-size: 0.8rem !important;
+      line-height: 1.4 !important;
+      margin-bottom: 0.2rem !important;
+    }
+
+    .portfolio-project-card p,
+    .portfolio-project-card li,
+    .portfolio-project-card span {
+      font-size: 0.8rem !important;
+      line-height: 1.45 !important;
+    }
+
+    /* 간격 압축 (A4 1장 맞춤) */
+    .portfolio-project-card .mb-6 {
+      margin-bottom: 0.4rem !important;
+    }
+
+    .portfolio-project-card .mb-5 {
+      margin-bottom: 0.35rem !important;
+    }
+
+    .portfolio-project-card .space-y-5 > * + * {
+      margin-top: 0.3rem !important;
+    }
+
+    .portfolio-project-card .space-y-3 > * + * {
+      margin-top: 0.15rem !important;
+    }
+
+    .portfolio-project-card .space-y-2 > * + * {
+      margin-top: 0.1rem !important;
+    }
+
+    .portfolio-project-card .p-7 {
+      padding: 0 !important;
+    }
+
+    .portfolio-project-card .p-5 {
+      padding: 0.35rem !important;
+    }
+
+    .portfolio-project-card .p-4 {
+      padding: 0.35rem !important;
+    }
+
+    /* 링크 푸터 숨김 (공간 절약) */
+    .portfolio-project-card > .mt-5.pt-5 {
+      display: none !important;
+    }
+
+    /* 섹션 보더 색상 보존 */
+    .portfolio-project-card .border-b-2 {
+      border-bottom-color: #475569 !important;
+      border-bottom-width: 1px !important;
+    }
+
+    .portfolio-project-card .border-blue-500 {
+      border-left-color: #3b82f6 !important;
+    }
+
+    .portfolio-project-card .border-emerald-500 {
+      border-left-color: #10b981 !important;
+    }
+
+    /* 기술 스택 배지 색상 보존 */
+    .portfolio-project-card .rounded-full {
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+      background-color: #8b5cf6 !important;
+      color: white !important;
     }
   }
 </style>
@@ -1673,7 +1698,18 @@ flowchart LR
       }
     });
 
-    setupLightModePrintButton(printButton);
+    setupLightModePrintButton(printButton, {
+      beforePrint: () => {
+        for (const card of projectCards) {
+          card.hidden = false;
+          card.classList.add("is-active");
+          card.setAttribute("aria-hidden", "false");
+        }
+      },
+      afterPrint: () => {
+        updatePage();
+      },
+    });
     updatePage();
   };
 
