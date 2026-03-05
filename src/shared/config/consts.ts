@@ -13,3 +13,5 @@ export const AUTHOR_EMAIL = "sachi009955@gmail.com";
 
 // Default Images
 export const DEFAULT_OG_IMAGE = "/og/default.png";
+const { PUBLIC_OG_IMAGE_VERSION } = import.meta.env;
+export const OG_IMAGE_VERSION = PUBLIC_OG_IMAGE_VERSION || "20260305";

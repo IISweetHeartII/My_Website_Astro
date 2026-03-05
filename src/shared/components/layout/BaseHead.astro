@@ -1,7 +1,7 @@
 ---
 import "@/styles/global.css";
 import Fonts from "@/shared/components/seo/Fonts.astro";
-import { DEFAULT_OG_IMAGE } from "@/shared/config/consts";
+import { DEFAULT_OG_IMAGE, OG_IMAGE_VERSION } from "@/shared/config/consts";
 import { getUrl } from "@/shared/utils/url";
 
 interface Props {
@@ -61,6 +61,7 @@ const finalOgImage = og_image || featured_image;
 const finalTwitterTitle = twitter_title || finalOgTitle;
 const finalTwitterDescription = twitter_description || finalOgDescription;
 const finalTwitterImage = twitter_image || finalOgImage;
+const finalImageAlt = featured_image_alt || finalOgTitle;
 
 // Ensure all image URLs are absolute
 const getAbsoluteImageUrl = (imageUrl: string) => {
@@ -71,8 +72,39 @@ const getAbsoluteImageUrl = (imageUrl: string) => {
   }
 };
 
-const absoluteOgImage = getAbsoluteImageUrl(finalOgImage);
-const absoluteTwitterImage = getAbsoluteImageUrl(finalTwitterImage);
+const OG_IMAGE_WIDTH = "1200";
+const OG_IMAGE_HEIGHT = "630";
+
+const withOgCacheVersion = (imageUrl: string) => {
+  try {
+    const url = new globalThis.URL(imageUrl);
+    if (!url.pathname.startsWith("/og/")) {
+      return imageUrl;
+    }
+
+    url.searchParams.set("v", OG_IMAGE_VERSION);
+    return url.toString();
+  } catch {
+    return imageUrl;
+  }
+};
+
+const getImageType = (imageUrl: string) => {
+  const cleanUrl = imageUrl.split("?")[0]?.toLowerCase() ?? "";
+
+  if (cleanUrl.endsWith(".png")) return "image/png";
+  if (cleanUrl.endsWith(".webp")) return "image/webp";
+  if (cleanUrl.endsWith(".gif")) return "image/gif";
+  if (cleanUrl.endsWith(".svg")) return "image/svg+xml";
+  if (cleanUrl.endsWith(".jpg") || cleanUrl.endsWith(".jpeg")) return "image/jpeg";
+
+  return "image/png";
+};
+
+const absoluteOgImage = withOgCacheVersion(getAbsoluteImageUrl(finalOgImage));
+const absoluteTwitterImage = withOgCacheVersion(getAbsoluteImageUrl(finalTwitterImage));
+const ogImageType = getImageType(absoluteOgImage);
+const twitterImageType = getImageType(absoluteTwitterImage);
 ---
 
 <!-- Global Metadata -->
@@ -111,15 +143,20 @@ const absoluteTwitterImage = getAbsoluteImageUrl(finalTwitterImage);
 <meta property="og:title" content={finalOgTitle} />
 <meta property="og:description" content={finalOgDescription} />
 <meta property="og:image" content={absoluteOgImage} />
-{featured_image_alt && <meta property="og:image:alt" content={featured_image_alt} />}
+<meta property="og:image:secure_url" content={absoluteOgImage} />
+<meta property="og:image:type" content={ogImageType} />
+<meta property="og:image:width" content={OG_IMAGE_WIDTH} />
+<meta property="og:image:height" content={OG_IMAGE_HEIGHT} />
+<meta property="og:image:alt" content={finalImageAlt} />
 
 <!-- Twitter -->
-<meta property="twitter:card" content={twitter_card} />
-<meta property="twitter:url" content={Astro.url} />
-<meta property="twitter:title" content={finalTwitterTitle} />
-<meta property="twitter:description" content={finalTwitterDescription} />
-<meta property="twitter:image" content={absoluteTwitterImage} />
-{featured_image_alt && <meta property="twitter:image:alt" content={featured_image_alt} />}
+<meta name="twitter:card" content={twitter_card} />
+<meta name="twitter:url" content={Astro.url} />
+<meta name="twitter:title" content={finalTwitterTitle} />
+<meta name="twitter:description" content={finalTwitterDescription} />
+<meta name="twitter:image" content={absoluteTwitterImage} />
+<meta name="twitter:image:alt" content={finalImageAlt} />
+<meta name="twitter:image:type" content={twitterImageType} />
 
   <!-- PWA Support -->
   <link rel="manifest" href={getUrl("/manifest.json")} />

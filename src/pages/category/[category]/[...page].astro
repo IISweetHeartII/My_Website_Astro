@@ -65,7 +65,14 @@ const description = category.description;
 const pageTitle = page.currentPage === 1 ? title : `${title} (Page ${page.currentPage})`;
 ---
 
-<Layout title={pageTitle} description={description}>
+<Layout
+  title={pageTitle}
+  description={description}
+  og_image="/og/page/category.png"
+  twitter_image="/og/page/category.png"
+  featured_image_alt={`${category.name} 카테고리 대표 이미지`}
+  og_type="website"
+>
   <Fragment slot="head">
     {page.url.prev && <link rel="prev" href={page.url.prev} />}
     {page.url.next && <link rel="next" href={page.url.next} />}

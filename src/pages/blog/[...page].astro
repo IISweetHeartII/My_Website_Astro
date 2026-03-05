@@ -31,7 +31,14 @@ const pageTitle = page.currentPage === 1 ? "Blog" : `Blog (Page ${page.currentPa
 const pageDescription = "아끼지 않는 문제 해결사로서, 문제를 정의하고 해결한 기록을 남깁니다.";
 ---
 
-<Layout title={pageTitle} description={pageDescription}>
+<Layout
+  title={pageTitle}
+  description={pageDescription}
+  og_image="/og/page/blog.png"
+  twitter_image="/og/page/blog.png"
+  featured_image_alt="Log8 블로그 아카이브 대표 이미지"
+  og_type="website"
+>
   <Fragment slot="head">
     {page.url.prev && <link rel="prev" href={page.url.prev} />}
     {page.url.next && <link rel="next" href={page.url.next} />}

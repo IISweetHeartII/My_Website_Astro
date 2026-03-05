@@ -57,7 +57,14 @@ const personSchema = {
 };
 ---
 
-<Layout title="Home | Log8" description={SITE_DESCRIPTION}>
+<Layout
+  title="Home | Log8"
+  description={SITE_DESCRIPTION}
+  og_image="/og/page/home.png"
+  twitter_image="/og/page/home.png"
+  featured_image_alt="김덕환의 WebSite 홈 대표 이미지"
+  og_type="website"
+>
   <Fragment slot="head">
     <script type="application/ld+json" is:inline set:text={JSON.stringify(websiteSchema)} />
     <script type="application/ld+json" is:inline set:text={JSON.stringify(personSchema)} />

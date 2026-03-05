@@ -6,7 +6,15 @@ const title = `404 Not Found - ${SITE_TITLE}`;
 const description = "요청하신 페이지를 찾을 수 없습니다.";
 ---
 
-<Layout title={title} description={description}>
+<Layout
+  title={title}
+  description={description}
+  og_image="/og/page/notfound.png"
+  twitter_image="/og/page/notfound.png"
+  featured_image_alt="Log8 404 페이지 대표 이미지"
+  og_type="website"
+  no_index={true}
+>
   <div class="terminal-wrapper">
     <div class="terminal">
       <!-- Title bar -->
