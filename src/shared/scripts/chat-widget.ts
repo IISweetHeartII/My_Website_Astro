@@ -25,9 +25,11 @@ export function setupChatWidget(): void {
     const isOpen = !win.classList.contains("chat-hidden");
     if (isOpen) {
       win.classList.add("chat-hidden");
+      fab.classList.remove("chat-fab-hidden");
       fab.setAttribute("aria-expanded", "false");
     } else {
       win.classList.remove("chat-hidden");
+      fab.classList.add("chat-fab-hidden");
       fab.setAttribute("aria-expanded", "true");
       input.focus();
       scrollToBottom(msgContainer);
@@ -93,6 +95,10 @@ function appendMessage(
   const wrapper = document.createElement("div");
   wrapper.className = `chat-msg chat-msg-${role}`;
 
+  const avatar = document.createElement("div");
+  avatar.className = "chat-msg-avatar";
+  avatar.textContent = role === "assistant" ? "AI" : "You";
+
   const bubble = document.createElement("div");
   bubble.className = "chat-bubble";
 
@@ -102,6 +108,7 @@ function appendMessage(
     bubble.textContent = content;
   }
 
+  wrapper.appendChild(avatar);
   wrapper.appendChild(bubble);
   container.appendChild(wrapper);
   scrollToBottom(container);

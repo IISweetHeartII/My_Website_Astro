@@ -1,16 +1,18 @@
 ---
-const gaId = import.meta.env.PUBLIC_GA_ID;
+// @ts-expect-error - PUBLIC_GA_ID is defined in .env
+const gaId: string = import.meta.env.PUBLIC_GA_ID ?? "";
 ---
 
-{gaId && (
-  <Fragment>
-    <!-- Google Analytics 4 (gtag.js) -->
-    <script is:inline define:vars={{ gaId }}>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() { dataLayer.push(arguments); }
-      gtag("js", new Date());
-      gtag("config", gaId);
-    </script>
-    <script async src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}></script>
-  </Fragment>
-)}
+<script is:inline define:vars={{ gaId }}>
+  if (gaId) {
+    var s = document.createElement("script");
+    s.async = true;
+    s.src = "https://www.googletagmanager.com/gtag/js?id=" + gaId;
+    document.head.appendChild(s);
+
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag("js", new Date());
+    gtag("config", gaId);
+  }
+</script>

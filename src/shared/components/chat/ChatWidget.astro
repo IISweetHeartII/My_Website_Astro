@@ -8,25 +8,28 @@
   aria-expanded="false"
   aria-controls="chat-window"
 >
-  <!-- Chat icon -->
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
     <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
   </svg>
 </button>
 
-<!-- Chat Window -->
+<!-- Chat Panel -->
 <div id="chat-window" class="chat-hidden" role="dialog" aria-label="김덕환에게 물어보세요">
   <!-- Header -->
   <div class="chat-header">
     <div class="chat-header-info">
-      <div class="chat-avatar">DK</div>
+      <div class="chat-avatar">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+        </svg>
+      </div>
       <div>
         <div class="chat-header-title">김덕환에게 물어보세요</div>
         <div class="chat-header-subtitle">AI가 답변해드려요</div>
       </div>
     </div>
     <button id="chat-close" aria-label="채팅 닫기">
-      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <line x1="18" y1="6" x2="6" y2="18"></line>
         <line x1="6" y1="6" x2="18" y2="18"></line>
       </svg>
@@ -36,10 +39,11 @@
   <!-- Messages -->
   <div id="chat-messages" class="chat-messages">
     <div class="chat-msg chat-msg-assistant">
+      <div class="chat-msg-avatar">AI</div>
       <div class="chat-bubble">
         안녕하세요! 김덕환에 대해 궁금한 것이 있으시면 편하게 물어보세요.
         <br><br>
-        예를 들어 프로젝트, 기술 스택, 경력 등 무엇이든 질문해주세요!
+        프로젝트, 기술 스택, 경력 등 무엇이든 질문해주세요!
       </div>
     </div>
   </div>
@@ -62,7 +66,7 @@
 </div>
 
 <style>
-  /* FAB Button */
+  /* ===== FAB Button ===== */
   #chat-fab {
     position: fixed;
     bottom: 24px;
@@ -79,7 +83,7 @@
     align-items: center;
     justify-content: center;
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.18), 0 1px 4px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
   }
 
   #chat-fab:hover {
@@ -91,36 +95,40 @@
     transform: scale(0.96);
   }
 
-  /* Chat Window */
+  #chat-fab.chat-fab-hidden {
+    opacity: 0;
+    pointer-events: none;
+    transform: scale(0.5);
+  }
+
+  /* ===== Chat Panel (사이드 패널) ===== */
   #chat-window {
     position: fixed;
-    bottom: 92px;
-    right: 24px;
-    width: 380px;
-    height: 520px;
+    top: 64px; /* 헤더 h-16 아래 */
+    right: 0;
+    width: 440px;
+    bottom: 0;
     background: var(--color-background, #fff);
-    border-radius: 16px;
-    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.18), 0 2px 8px rgba(0, 0, 0, 0.08);
+    border-left: 1px solid var(--color-chat-border, #e5e7eb);
     z-index: 9998;
     display: flex;
     flex-direction: column;
-    overflow: hidden;
-    transform-origin: bottom right;
-    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.25s ease;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.2s ease;
+    box-shadow: -4px 0 24px rgba(0, 0, 0, 0.08);
   }
 
   #chat-window.chat-hidden {
-    transform: scale(0.7) translateY(30px);
+    transform: translateX(100%);
     opacity: 0;
     pointer-events: none;
   }
 
-  /* Header */
+  /* ===== Header ===== */
   .chat-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 16px;
+    padding: 16px 20px;
     background: var(--color-primary, #8b5cf6);
     color: #fff;
     flex-shrink: 0;
@@ -146,12 +154,13 @@
 
   .chat-header-title {
     font-weight: 700;
-    font-size: 15px;
+    font-size: 16px;
   }
 
   .chat-header-subtitle {
     font-size: 12px;
     opacity: 0.8;
+    margin-top: 1px;
   }
 
   #chat-close {
@@ -159,32 +168,40 @@
     border: none;
     color: #fff;
     cursor: pointer;
-    padding: 4px;
-    border-radius: 4px;
+    padding: 6px;
+    border-radius: 6px;
     display: flex;
     align-items: center;
     justify-content: center;
     opacity: 0.8;
-    transition: opacity 0.15s;
+    transition: opacity 0.15s, background 0.15s;
   }
 
   #chat-close:hover {
     opacity: 1;
+    background: rgba(255, 255, 255, 0.15);
   }
 
-  /* Messages */
+  /* ===== Messages ===== */
   .chat-messages {
     flex: 1;
     overflow-y: auto;
-    padding: 16px;
+    padding: 20px;
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 16px;
   }
 
   .chat-msg {
     display: flex;
-    max-width: 85%;
+    gap: 10px;
+    max-width: 90%;
+    animation: chatFadeIn 0.3s ease;
+  }
+
+  @keyframes chatFadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
   }
 
   .chat-msg-assistant {
@@ -193,28 +210,54 @@
 
   .chat-msg-user {
     align-self: flex-end;
+    flex-direction: row-reverse;
   }
 
+  /* 메시지 아바타 */
+  .chat-msg-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .chat-msg-assistant .chat-msg-avatar {
+    background: var(--color-primary, #8b5cf6);
+    color: #fff;
+  }
+
+  .chat-msg-user .chat-msg-avatar {
+    background: var(--color-chat-user-avatar, #6366f1);
+    color: #fff;
+  }
+
+  /* 말풍선 */
   .chat-bubble {
-    padding: 10px 14px;
-    border-radius: 16px;
+    padding: 12px 16px;
     font-size: 14px;
-    line-height: 1.5;
+    line-height: 1.6;
     word-break: break-word;
   }
 
   .chat-msg-assistant .chat-bubble {
-    background: var(--color-chat-ai-bg, #f0f2f5);
+    background: var(--color-chat-ai-bg, #f3f4f6);
     color: var(--color-text, #1a1a2e);
-    border-bottom-left-radius: 4px;
+    border-radius: 4px 18px 18px 18px;
   }
 
   .chat-msg-user .chat-bubble {
     background: var(--color-primary, #8b5cf6);
     color: #fff;
-    border-bottom-right-radius: 4px;
+    border-radius: 18px 4px 18px 18px;
   }
 
+  /* 말풍선 내부 요소 */
   .chat-bubble :global(a) {
     color: var(--color-primary, #8b5cf6);
     text-decoration: underline;
@@ -222,67 +265,69 @@
   }
 
   .chat-msg-user .chat-bubble :global(a) {
-    color: #fff;
+    color: #e0e0ff;
   }
 
   .chat-bubble :global(code) {
     background: rgba(0, 0, 0, 0.06);
-    padding: 1px 4px;
-    border-radius: 3px;
+    padding: 2px 6px;
+    border-radius: 4px;
     font-size: 13px;
+    font-family: monospace;
   }
 
   .chat-bubble :global(strong) {
     font-weight: 600;
   }
 
-  /* Typing indicator */
   .chat-bubble :global(.chat-typing) {
     color: var(--color-text-secondary, #888);
     font-style: italic;
   }
 
   .chat-bubble :global(.chat-error) {
-    color: #e53e3e;
+    color: #ef4444;
   }
 
-  /* Input Area */
+  /* ===== Input Area ===== */
   .chat-input-area {
     display: flex;
     align-items: flex-end;
-    gap: 8px;
-    padding: 12px 16px;
-    border-top: 1px solid var(--color-chat-border, #e8e8e8);
+    gap: 10px;
+    padding: 16px 20px;
+    border-top: 1px solid var(--color-chat-border, #e5e7eb);
     flex-shrink: 0;
+    background: var(--color-background, #fff);
   }
 
   #chat-input {
     flex: 1;
-    border: 1px solid var(--color-chat-border, #e8e8e8);
+    border: 1px solid var(--color-chat-border, #e5e7eb);
     border-radius: 12px;
-    padding: 8px 12px;
+    padding: 10px 14px;
     font-size: 14px;
-    line-height: 1.4;
+    line-height: 1.5;
     resize: none;
     outline: none;
     background: var(--color-background, #fff);
     color: var(--color-text, #1a1a2e);
     font-family: inherit;
-    max-height: 100px;
-    transition: border-color 0.15s;
+    max-height: 120px;
+    transition: border-color 0.15s, box-shadow 0.15s;
   }
 
   #chat-input:focus {
     border-color: var(--color-primary, #8b5cf6);
+    box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1);
   }
 
   #chat-input::placeholder {
-    color: var(--color-text-secondary, #999);
+    color: var(--color-text-secondary, #9ca3af);
   }
 
   #chat-send {
-    width: 36px;
-    height: 36px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     border: none;
     background: var(--color-primary, #8b5cf6);
@@ -301,11 +346,16 @@
   }
 
   #chat-send:global(.chat-send-disabled) {
-    opacity: 0.5;
+    opacity: 0.4;
     pointer-events: none;
   }
 
-  /* Dark mode overrides */
+  /* ===== Dark Mode ===== */
+  :global(html[data-theme="dark"]) #chat-window {
+    border-left-color: #313244;
+    box-shadow: -4px 0 24px rgba(0, 0, 0, 0.3);
+  }
+
   :global(html[data-theme="dark"]) .chat-msg-assistant .chat-bubble {
     background: #313244;
   }
@@ -315,19 +365,19 @@
   }
 
   :global(html[data-theme="dark"]) .chat-input-area {
-    border-top-color: #45475a;
+    border-top-color: #313244;
   }
 
   :global(html[data-theme="dark"]) #chat-input {
     border-color: #45475a;
   }
 
-  :global(html[data-theme="dark"]) #chat-window {
-    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.4), 0 2px 8px rgba(0, 0, 0, 0.3);
+  :global(html[data-theme="dark"]) #chat-input:focus {
+    box-shadow: 0 0 0 3px rgba(203, 166, 247, 0.15);
   }
 
-  /* Mobile responsive */
-  @media (max-width: 480px) {
+  /* ===== Mobile ===== */
+  @media (max-width: 640px) {
     #chat-fab {
       bottom: 16px;
       right: 16px;
@@ -336,21 +386,22 @@
     }
 
     #chat-window {
-      bottom: 0;
-      right: 0;
+      top: 0;
       width: 100vw;
-      height: 100dvh;
-      border-radius: 0;
-    }
-
-    #chat-window.chat-hidden {
-      transform: translateY(100%);
+      border-left: none;
     }
   }
 
-  /* Scrollbar */
+  /* ===== Tablet ===== */
+  @media (min-width: 641px) and (max-width: 900px) {
+    #chat-window {
+      width: 360px;
+    }
+  }
+
+  /* ===== Scrollbar ===== */
   .chat-messages::-webkit-scrollbar {
-    width: 4px;
+    width: 5px;
   }
 
   .chat-messages::-webkit-scrollbar-track {
@@ -358,12 +409,12 @@
   }
 
   .chat-messages::-webkit-scrollbar-thumb {
-    background: rgba(0, 0, 0, 0.15);
-    border-radius: 2px;
+    background: rgba(0, 0, 0, 0.12);
+    border-radius: 3px;
   }
 
   :global(html[data-theme="dark"]) .chat-messages::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.12);
   }
 </style>
 
