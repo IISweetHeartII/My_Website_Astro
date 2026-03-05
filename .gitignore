@@ -41,4 +41,5 @@ pnpm-debug.log*
 
 # Cloudflare Pages Functions
 .dev.vars
+.wrangler/
 
