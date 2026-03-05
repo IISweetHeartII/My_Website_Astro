@@ -31,7 +31,7 @@ export async function generateOgImage(title: string, category?: string): Promise
           flexDirection: "column",
           justifyContent: "center",
           alignItems: "center",
-          background: "linear-gradient(135deg, #8b5cf6 0%, #6366f1 100%)",
+          background: "linear-gradient(135deg, #0f172a 0%, #1d4ed8 45%, #0ea5e9 100%)",
           padding: "60px",
           fontFamily: "Noto Sans KR",
         },
@@ -45,8 +45,8 @@ export async function generateOgImage(title: string, category?: string): Promise
                     style: {
                       display: "flex",
                       fontSize: "20px",
-                      color: "rgba(255,255,255,0.85)",
-                      background: "rgba(255,255,255,0.15)",
+                      color: "rgba(255,255,255,0.92)",
+                      background: "rgba(15,23,42,0.32)",
                       padding: "8px 24px",
                       borderRadius: "9999px",
                       marginBottom: "24px",
@@ -82,7 +82,7 @@ export async function generateOgImage(title: string, category?: string): Promise
                 display: "flex",
                 width: "80px",
                 height: "4px",
-                background: "rgba(255,255,255,0.4)",
+                background: "rgba(255,255,255,0.55)",
                 borderRadius: "2px",
                 marginTop: "40px",
                 marginBottom: "32px",
@@ -112,14 +112,14 @@ export async function generateOgImage(title: string, category?: string): Promise
                 {
                   type: "span",
                   props: {
-                    style: { color: "rgba(255,255,255,0.4)" },
+                    style: { color: "rgba(255,255,255,0.5)" },
                     children: "·",
                   },
                 },
                 {
                   type: "span",
                   props: {
-                    children: "김덕환",
+                    children: "AI Product Engineer",
                   },
                 },
               ],

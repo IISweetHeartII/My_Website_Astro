@@ -38,7 +38,7 @@ const {
   og_title,
   og_description,
   og_image,
-  og_type = "article",
+  og_type = "website",
   twitter_title,
   twitter_description,
   twitter_image,
@@ -112,7 +112,6 @@ const absoluteTwitterImage = getAbsoluteImageUrl(finalTwitterImage);
 <meta property="og:description" content={finalOgDescription} />
 <meta property="og:image" content={absoluteOgImage} />
 {featured_image_alt && <meta property="og:image:alt" content={featured_image_alt} />}
-{author && <meta property="article:author" content={author} />}
 
 <!-- Twitter -->
 <meta property="twitter:card" content={twitter_card} />

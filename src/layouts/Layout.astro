@@ -10,9 +10,44 @@ import "@/styles/theme.css";
 interface Props {
   title: string;
   description?: string;
+  featured_image?: string;
+  featured_image_alt?: string;
+  meta_title?: string;
+  meta_description?: string;
+  canonical_url?: string;
+  og_title?: string;
+  og_description?: string;
+  og_image?: string;
+  og_type?: string;
+  twitter_title?: string;
+  twitter_description?: string;
+  twitter_image?: string;
+  twitter_card?: string;
+  keywords?: string[];
+  author?: string;
+  no_index?: boolean;
 }
 
-const { title, description } = Astro.props;
+const {
+  title,
+  description,
+  featured_image,
+  featured_image_alt,
+  meta_title,
+  meta_description,
+  canonical_url,
+  og_title,
+  og_description,
+  og_image,
+  og_type,
+  twitter_title,
+  twitter_description,
+  twitter_image,
+  twitter_card,
+  keywords,
+  author,
+  no_index,
+} = Astro.props;
 ---
 
 <!doctype html>
@@ -29,8 +64,26 @@ const { title, description } = Astro.props;
         document.documentElement.dataset.theme = theme;
       })();
     </script>
-    <title>{title}</title>
-    <BaseHead title={title} description={description ?? undefined} />
+    <BaseHead
+      title={title}
+      description={description ?? undefined}
+      featured_image={featured_image}
+      featured_image_alt={featured_image_alt}
+      meta_title={meta_title}
+      meta_description={meta_description}
+      canonical_url={canonical_url}
+      og_title={og_title}
+      og_description={og_description}
+      og_image={og_image}
+      og_type={og_type}
+      twitter_title={twitter_title}
+      twitter_description={twitter_description}
+      twitter_image={twitter_image}
+      twitter_card={twitter_card}
+      keywords={keywords}
+      author={author}
+      no_index={no_index}
+    />
     <slot name="head" />
   </head>
   <body class="bg-background text-text flex flex-col min-h-screen">

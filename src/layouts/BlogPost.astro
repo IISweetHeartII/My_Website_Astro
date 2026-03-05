@@ -73,6 +73,9 @@ const resolvedOgImage = og_image || `/og/${postSlug}.png`;
 
 // Full post URL for sharing
 const postUrl = `${SITE_URL}/blog/${postSlug}`;
+const schemaImage = featured_image
+  ? [new globalThis.URL(featured_image, SITE_URL).toString()]
+  : undefined;
 
 // JSON-LD Schema 생성 (Entity-first with stable @id)
 const blogPostSchema = {
@@ -81,7 +84,7 @@ const blogPostSchema = {
   "@id": `${postUrl}/#article`,
   headline: title,
   description: description,
-  image: featured_image ? [featured_image] : undefined,
+  image: schemaImage,
   author: {
     "@type": "Person",
     "@id": `${SITE_URL}/#author`,
@@ -117,32 +120,31 @@ const blogPostSchema = {
 };
 ---
 
-<Layout title={title ?? ""} description={description ?? ""}>
+<Layout
+  title={title ?? ""}
+  description={description ?? ""}
+  featured_image={featured_image ?? undefined}
+  featured_image_alt={featured_image_alt ?? undefined}
+  meta_title={meta_title ?? undefined}
+  meta_description={meta_description ?? undefined}
+  canonical_url={canonical_url ?? undefined}
+  og_title={og_title ?? undefined}
+  og_description={og_description ?? undefined}
+  og_image={resolvedOgImage}
+  og_type={og_type ?? "article"}
+  twitter_title={twitter_title ?? undefined}
+  twitter_description={twitter_description ?? undefined}
+  twitter_image={twitter_image ?? resolvedOgImage}
+  twitter_card={twitter_card ?? "summary_large_image"}
+  keywords={keywords ?? []}
+  author={author ?? SITE_AUTHOR}
+  no_index={no_index ?? false}
+>
   <Fragment slot="head">
-    <!-- BlogPost 전용 SEO 메타태그 -->
-    <meta property="og:type" content={og_type || "article"} />
     <meta property="article:published_time" content={created_date?.toISOString()} />
     {updated_date && <meta property="article:modified_time" content={updated_date.toISOString()} />}
-    {author && <meta property="article:author" content={author} />}
+    <meta property="article:author" content={author || SITE_AUTHOR} />
     {safeTags.map((tag: string) => <meta property="article:tag" content={tag} />)}
-
-    <meta property="og:image" content={resolvedOgImage} />
-    {featured_image_alt && <meta property="og:image:alt" content={featured_image_alt} />}
-
-    {meta_title && <meta name="title" content={meta_title} />}
-    {meta_description && <meta name="description" content={meta_description} />}
-    {canonical_url && <link rel="canonical" href={canonical_url} />}
-
-    {og_title && <meta property="og:title" content={og_title} />}
-    {og_description && <meta property="og:description" content={og_description} />}
-
-    {twitter_title && <meta name="twitter:title" content={twitter_title} />}
-    {twitter_description && <meta name="twitter:description" content={twitter_description} />}
-    {twitter_image && <meta name="twitter:image" content={twitter_image} />}
-    {twitter_card && <meta name="twitter:card" content={twitter_card} />}
-
-    {keywords && keywords.map((keyword: string) => <meta name="keywords" content={keyword} />)}
-    {no_index && <meta name="robots" content="noindex, nofollow" />}
 
     <!-- SEO Structured Data (JSON-LD) - AEO Optimized -->
     <script type="application/ld+json" is:inline set:text={JSON.stringify(blogPostSchema)} />
@@ -169,8 +171,8 @@ const blogPostSchema = {
       }
 
       /* BlogPost 레이아웃: prose를 전체 너비로 확장 */
-      .prose {
-        max-width: none !important;
+      .prose-full {
+        max-width: none;
         width: 100%;
       }
     </style>
@@ -236,10 +238,10 @@ const blogPostSchema = {
         )}
 
         <!-- Mobile TOC (before prose content) -->
-        <TableOfContents headings={headings} />
+        <TableOfContents headings={headings} variant="mobile" />
 
         <!-- 실제 블로그 콘텐츠만 prose로 감싸기 -->
-        <div class="prose prose-xl">
+        <div class="prose prose-full prose-xl">
           <slot />
         </div>
 
@@ -277,7 +279,7 @@ const blogPostSchema = {
       </article>
 
       <!-- Desktop TOC sidebar -->
-      <TableOfContents headings={headings} />
+      <TableOfContents headings={headings} variant="desktop" />
     </div>
   </div>
 

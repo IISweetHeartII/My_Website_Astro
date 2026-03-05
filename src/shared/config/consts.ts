@@ -12,4 +12,4 @@ export const AUTHOR_LINKEDIN = "https://www.linkedin.com/in/sweetheart2000/";
 export const AUTHOR_EMAIL = "sachi009955@gmail.com";
 
 // Default Images
-export const DEFAULT_OG_IMAGE = "/images/design/ready.png";
+export const DEFAULT_OG_IMAGE = "/og/default.png";
