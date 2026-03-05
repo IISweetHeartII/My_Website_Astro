@@ -4,9 +4,10 @@ import { List } from "lucide-astro";
 
 interface Props {
   headings: MarkdownHeading[];
+  variant?: "mobile" | "desktop";
 }
 
-const { headings } = Astro.props;
+const { headings, variant } = Astro.props;
 
 // Filter to h2, h3, h4 only
 const tocHeadings = headings.filter((h) => h.depth >= 2 && h.depth <= 4);
@@ -15,7 +16,7 @@ const tocHeadings = headings.filter((h) => h.depth >= 2 && h.depth <= 4);
 {tocHeadings.length > 0 && (
   <>
     {/* Mobile: collapsible dropdown */}
-    <nav class="toc-mobile lg:hidden mb-8 rounded-xl border border-background-lighter bg-background-light">
+    {variant !== "desktop" && <nav class="toc-mobile lg:hidden mb-8 rounded-xl border border-background-lighter bg-background-light">
       <button
         class="toc-toggle w-full flex items-center gap-2 px-4 py-3 text-sm font-semibold text-text"
         type="button"
@@ -40,10 +41,10 @@ const tocHeadings = headings.filter((h) => h.depth >= 2 && h.depth <= 4);
           </li>
         ))}
       </ul>
-    </nav>
+    </nav>}
 
     {/* Desktop: sticky sidebar */}
-    <aside class="toc-desktop hidden lg:block w-56 shrink-0">
+    {variant !== "mobile" && <aside class="toc-desktop hidden lg:block w-56 shrink-0">
       <nav class="sticky top-24">
         <p class="flex items-center gap-2 text-sm font-semibold text-text mb-3">
           <List class="w-4 h-4" />
@@ -63,7 +64,7 @@ const tocHeadings = headings.filter((h) => h.depth >= 2 && h.depth <= 4);
           ))}
         </ul>
       </nav>
-    </aside>
+    </aside>}
   </>
 )}
 

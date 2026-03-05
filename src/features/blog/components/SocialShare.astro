@@ -7,10 +7,11 @@ interface Props {
   description: string;
 }
 
-const { title, url } = Astro.props;
+const { title, url, description } = Astro.props;
 
 const encodedTitle = encodeURIComponent(title);
 const encodedUrl = encodeURIComponent(url);
+const encodedText = encodeURIComponent(`${title}\n${description}`);
 
 const shareLinks = [
   {
@@ -20,16 +21,10 @@ const shareLinks = [
     icon: "x",
   },
   {
-    name: "LinkedIn",
-    href: `https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}`,
-    label: "LinkedIn에 공유",
-    icon: "linkedin",
-  },
-  {
-    name: "카카오스토리",
-    href: `https://story.kakao.com/share?url=${encodedUrl}`,
-    label: "카카오스토리에 공유",
-    icon: "kakao",
+    name: "Threads",
+    href: `https://www.threads.net/intent/post?text=${encodedText}%0A${encodedUrl}`,
+    label: "Threads에 공유",
+    icon: "threads",
   },
 ];
 ---
@@ -53,14 +48,9 @@ const shareLinks = [
             <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
           </svg>
         )}
-        {link.icon === "linkedin" && (
+        {link.icon === "threads" && (
           <svg class="w-4 h-4 text-text group-hover:text-primary" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-          </svg>
-        )}
-        {link.icon === "kakao" && (
-          <svg class="w-4 h-4 text-text group-hover:text-primary" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M12 3c5.799 0 10.5 3.664 10.5 8.185 0 4.52-4.701 8.184-10.5 8.184a13.5 13.5 0 01-1.727-.11l-4.408 2.883c-.501.265-.678.236-.472-.413l.892-3.678c-2.88-1.46-4.785-3.99-4.785-6.866C1.5 6.664 6.201 3 12 3z" />
+            <path d="M12.186 24h-.007c-3.581-.024-6.334-1.205-8.184-3.509C2.35 18.44 1.5 15.586 1.472 12.01v-.017c.03-3.579.879-6.43 2.525-8.482C5.845 1.205 8.6.024 12.18 0h.014c2.746.02 5.043.725 6.826 2.098 1.677 1.29 2.858 3.13 3.509 5.467l-2.04.569c-1.104-3.96-3.898-5.984-8.304-6.015-2.91.022-5.11.936-6.54 2.717C4.307 6.504 3.616 8.914 3.589 12c.027 3.086.718 5.496 2.057 7.164 1.43 1.783 3.631 2.698 6.54 2.717 2.623-.02 4.358-.631 5.8-2.045 1.647-1.613 1.618-3.593 1.09-4.798-.31-.71-.873-1.3-1.634-1.75-.192 1.352-.622 2.446-1.284 3.272-.886 1.102-2.14 1.704-3.73 1.79-1.202.065-2.361-.218-3.259-.801-1.063-.689-1.685-1.74-1.752-2.96-.065-1.17.408-2.243 1.33-3.023.88-.744 2.084-1.168 3.59-1.264 1.07-.069 2.063.02 2.958.266.09-.702.11-1.354.024-1.922-.2-1.306-.874-1.97-2.002-1.97h-.075c-.764.026-1.39.265-1.86.71-.455.432-.717 1.014-.78 1.73l-2.07-.211c.1-1.15.568-2.096 1.395-2.81.858-.738 1.967-1.126 3.205-1.155h.12c1.945 0 3.299 1.063 3.654 2.837.148.739.163 1.62.042 2.612l.074.037c.94.465 1.7 1.105 2.245 1.9.827 1.208 1.118 2.694.843 4.305-.384 2.244-1.474 3.95-3.238 5.073C17.56 23.28 15.07 23.978 12.186 24z" />
           </svg>
         )}
         <span class="absolute -top-9 left-1/2 -translate-x-1/2 px-2 py-1 text-xs rounded bg-text text-background opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
@@ -74,44 +64,66 @@ const shareLinks = [
       title="링크 복사"
       data-url={url}
     >
-      <svg class="w-4 h-4 text-text group-hover:text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+      <svg class="copy-icon w-4 h-4 text-text group-hover:text-primary transition-all duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
         <path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
+      </svg>
+      <svg class="check-icon hidden w-4 h-4 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
       </svg>
       <span class="absolute -top-9 left-1/2 -translate-x-1/2 px-2 py-1 text-xs rounded bg-text text-background opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
         링크 복사
       </span>
     </button>
   </div>
-  {/* Toast notification */}
-  <div class="copy-toast fixed bottom-6 left-1/2 -translate-x-1/2 px-4 py-2 rounded-lg bg-primary text-on-primary text-sm font-medium shadow-lg opacity-0 transition-opacity duration-300 pointer-events-none z-50">
-    링크가 복사되었습니다!
-  </div>
 </section>
+
+<!-- Toast notification -->
+<div id="copy-toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 px-5 py-2.5 rounded-full bg-text text-background text-sm font-medium shadow-lg opacity-0 -translate-y-2 transition-all duration-300 pointer-events-none z-50">
+  링크가 복사되었습니다
+</div>
 
 <script>
   document.addEventListener("astro:page-load", () => {
-    const btn = document.querySelector<HTMLButtonElement>(".copy-url-btn");
-    const toast = document.querySelector<HTMLElement>(".copy-toast");
-    if (!btn || !toast) return;
+    const buttons = document.querySelectorAll<HTMLButtonElement>(".copy-url-btn");
 
-    btn.addEventListener("click", async () => {
-      const url = btn.dataset["url"];
-      if (!url) return;
-      try {
-        await navigator.clipboard.writeText(url);
-        toast.style.opacity = "1";
-        setTimeout(() => { toast.style.opacity = "0"; }, 2000);
-      } catch {
-        // Fallback for older browsers
-        const input = document.createElement("input");
-        input.value = url;
-        document.body.appendChild(input);
-        input.select();
-        document.execCommand("copy");
-        document.body.removeChild(input);
-        toast.style.opacity = "1";
-        setTimeout(() => { toast.style.opacity = "0"; }, 2000);
-      }
-    });
+    for (const btn of buttons) {
+      btn.addEventListener("click", async () => {
+        const url = btn.dataset["url"];
+        if (!url) return;
+
+        try {
+          await navigator.clipboard.writeText(url);
+        } catch {
+          // Fallback
+          const textarea = document.createElement("textarea");
+          textarea.value = url;
+          textarea.style.position = "fixed";
+          textarea.style.opacity = "0";
+          document.body.appendChild(textarea);
+          textarea.select();
+          document.execCommand("copy");
+          document.body.removeChild(textarea);
+        }
+
+        // Visual feedback: swap icon
+        const copyIcon = btn.querySelector(".copy-icon");
+        const checkIcon = btn.querySelector(".check-icon");
+        copyIcon?.classList.add("hidden");
+        checkIcon?.classList.remove("hidden");
+
+        // Show toast
+        const toast = document.getElementById("copy-toast");
+        if (toast) {
+          toast.style.opacity = "1";
+          toast.style.transform = "translate(-50%, 0)";
+          setTimeout(() => {
+            toast.style.opacity = "0";
+            toast.style.transform = "translate(-50%, -0.5rem)";
+            copyIcon?.classList.remove("hidden");
+            checkIcon?.classList.add("hidden");
+          }, 2000);
+        }
+      });
+    }
   });
 </script>

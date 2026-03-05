@@ -21,8 +21,13 @@ export function setupScrollAnimations(): void {
   }, observerOptions);
 
   // Observe all elements with the 'scroll-animate' class
-  const elements: NodeListOf<Element> = document.querySelectorAll(".scroll-animate");
+  const elements: NodeListOf<HTMLElement> = document.querySelectorAll(".scroll-animate");
   for (const el of elements) {
+    // 형제 요소 중 인덱스 계산 → stagger delay 설정 (최대 0.6s)
+    const siblings = el.parentElement?.querySelectorAll(":scope > .scroll-animate");
+    const index = siblings ? Array.from(siblings).indexOf(el) : 0;
+    const delay = Math.min(index * 0.1, 0.6);
+    el.style.setProperty("--stagger-delay", `${delay}s`);
     observer.observe(el);
   }
 }
