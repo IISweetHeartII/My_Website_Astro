@@ -3,14 +3,39 @@ interface Message {
   content: string;
 }
 
-const MAX_HISTORY = 10;
+const MAX_HISTORY = 20;
+const STORAGE_KEY = "chat-messages";
 let messages: Message[] = [];
 let isStreaming = false;
+
+function saveMessages() {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(messages));
+  } catch {
+    // Storage full or unavailable
+  }
+}
+
+function loadMessages(): Message[] {
+  try {
+    const stored = localStorage.getItem(STORAGE_KEY);
+    if (stored) return JSON.parse(stored) as Message[];
+  } catch {
+    // Corrupted data
+  }
+  return [];
+}
+
+function clearMessages() {
+  messages = [];
+  localStorage.removeItem(STORAGE_KEY);
+}
 
 export function setupChatWidget(): void {
   const fab = document.getElementById("chat-fab");
   const win = document.getElementById("chat-window");
   const closeBtn = document.getElementById("chat-close");
+  const newChatBtn = document.getElementById("chat-new");
   const input = document.getElementById("chat-input") as HTMLTextAreaElement;
   const sendBtn = document.getElementById("chat-send");
   const msgContainer = document.getElementById("chat-messages");
@@ -20,6 +45,12 @@ export function setupChatWidget(): void {
   // Prevent re-initialization
   if (fab.dataset["initialized"] === "true") return;
   fab.dataset["initialized"] = "true";
+
+  // Restore saved messages
+  messages = loadMessages();
+  if (messages.length > 0) {
+    restoreMessages(msgContainer, messages);
+  }
 
   const toggle = () => {
     const isOpen = !win.classList.contains("chat-hidden");
@@ -39,6 +70,17 @@ export function setupChatWidget(): void {
   fab.addEventListener("click", toggle);
   closeBtn.addEventListener("click", toggle);
 
+  // New chat
+  newChatBtn?.addEventListener("click", () => {
+    if (isStreaming) return;
+    clearMessages();
+    // Keep only the welcome message
+    const welcome = msgContainer.querySelector(".chat-welcome");
+    msgContainer.innerHTML = "";
+    if (welcome) msgContainer.appendChild(welcome);
+    else renderWelcome(msgContainer);
+  });
+
   // Close on Escape
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape" && !win.classList.contains("chat-hidden")) {
@@ -56,10 +98,10 @@ export function setupChatWidget(): void {
     appendMessage(msgContainer, "user", text);
     messages.push({ role: "user", content: text });
 
-    // Keep history bounded
     if (messages.length > MAX_HISTORY) {
       messages = messages.slice(-MAX_HISTORY);
     }
+    saveMessages();
 
     streamResponse(msgContainer);
   };
@@ -72,8 +114,31 @@ export function setupChatWidget(): void {
     }
   });
 
-  // Auto-resize textarea
   input.addEventListener("input", () => autoResize(input));
+}
+
+function renderWelcome(container: HTMLElement) {
+  const wrapper = document.createElement("div");
+  wrapper.className = "chat-msg chat-msg-assistant chat-welcome";
+
+  const avatar = document.createElement("div");
+  avatar.className = "chat-msg-avatar";
+  avatar.textContent = "AI";
+
+  const bubble = document.createElement("div");
+  bubble.className = "chat-bubble";
+  bubble.innerHTML =
+    "안녕하세요! 김덕환에 대해 궁금한 것이 있으시면 편하게 물어보세요.<br><br>프로젝트, 기술 스택, 경력 등 무엇이든 질문해주세요!";
+
+  wrapper.appendChild(avatar);
+  wrapper.appendChild(bubble);
+  container.appendChild(wrapper);
+}
+
+function restoreMessages(container: HTMLElement, saved: Message[]) {
+  for (const msg of saved) {
+    appendMessage(container, msg.role, msg.content);
+  }
 }
 
 function autoResize(textarea: HTMLTextAreaElement) {
@@ -120,7 +185,6 @@ async function streamResponse(container: HTMLElement) {
   const sendBtn = document.getElementById("chat-send");
   if (sendBtn) sendBtn.classList.add("chat-send-disabled");
 
-  // Add loading bubble
   const bubble = appendMessage(container, "assistant", "");
   bubble.innerHTML = '<span class="chat-typing">생각하는 중...</span>';
 
@@ -179,6 +243,7 @@ async function streamResponse(container: HTMLElement) {
       if (messages.length > MAX_HISTORY) {
         messages = messages.slice(-MAX_HISTORY);
       }
+      saveMessages();
     } else if (!bubble.innerHTML) {
       bubble.innerHTML =
         '<span class="chat-error">답변을 생성하지 못했어요. 질문을 다시 해주세요.</span>';
@@ -200,18 +265,12 @@ function escapeHtml(text: string): string {
 
 function renderMarkdown(text: string): string {
   const escaped = escapeHtml(text);
-  return (
-    escaped
-      // Bold
-      .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
-      // Inline code
-      .replace(/`([^`]+)`/g, "<code>$1</code>")
-      // Links
-      .replace(
-        /\[([^\]]+)\]\((https?:\/\/[^)]+)\)/g,
-        '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>'
-      )
-      // Line breaks
-      .replace(/\n/g, "<br>")
-  );
+  return escaped
+    .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
+    .replace(/`([^`]+)`/g, "<code>$1</code>")
+    .replace(
+      /\[([^\]]+)\]\((https?:\/\/[^)]+)\)/g,
+      '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>'
+    )
+    .replace(/\n/g, "<br>");
 }
