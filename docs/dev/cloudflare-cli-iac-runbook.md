@@ -1,75 +1,51 @@
-# Cloudflare CLI + IaC Runbook
+# Cloudflare 배포 가이드
 
-This project can be operated without using the Cloudflare dashboard for day-to-day changes.
+## 배포 방식
 
-## Required Secrets
+- **자동 배포**: `main` 브랜치 push → Cloudflare Pages 자동 빌드 & 배포
+- **수동 배포**: CLI로 직접 배포 (아래 참고)
 
-Set these in GitHub repository secrets:
+## 환경변수 설정
 
-- `CLOUDFLARE_API_TOKEN`
-- `CLOUDFLARE_ACCOUNT_ID`
-- `CLOUDFLARE_PAGES_PROJECT_NAME`
+Cloudflare Dashboard → Pages → Settings → Environment variables:
 
-## Token Scope (Minimum)
+| 변수 | 용도 | 타입 |
+|------|------|------|
+| `NODE_VERSION` | Node.js 빌드 버전 (`22`) | 빌드 |
+| `PUBLIC_GA_ID` | Google Analytics 4 측정 ID | 빌드 |
+| `GEMINI_API_KEY` | AI 챗봇 메인 모델 | 런타임 |
+| `OPENAI_API_KEY` | AI 챗봇 fallback | 런타임 |
+| `ADMIN_SECRET` | 챗봇 관리 API 인증 | 런타임 |
 
-- Account: `Cloudflare Pages:Edit`
-- Zone: `DNS:Edit`
-- Zone: `Zone:Read`
+## KV Namespace 바인딩
 
-If the same token is used for more resources later, expand scopes then.
+Pages → Settings → Functions → KV namespace bindings:
 
-## Local Auth
+- Variable name: `CHAT_KV`
+- Namespace: 생성한 KV namespace 선택
 
-Use environment variables locally:
+## DNS
+
+Cloudflare Dashboard에서 직접 관리:
+
+- `@` → CNAME → Pages 프로젝트 호스트명
+- `www` → CNAME → Pages 프로젝트 호스트명
+
+## CLI 수동 배포
 
 ```bash
-export CLOUDFLARE_API_TOKEN="<token>"
-export CLOUDFLARE_ACCOUNT_ID="<account_id>"
-```
-
-Verify:
-
-```bash
+# 인증 확인
 bunx wrangler whoami
-```
 
-## Pages Deploy via CLI
-
-```bash
+# 빌드 & 배포
 bun run build
 bunx wrangler pages deploy dist --project-name "<project_name>" --branch main
 ```
 
-Production deployments are automated in `.github/workflows/deploy-cloudflare.yml`.
+## GitHub Actions 시크릿
 
-## DNS via Terraform
+자동 배포에 필요한 시크릿:
 
-Directory: `infra/cloudflare`
-
-```bash
-cd infra/cloudflare
-cp terraform.tfvars.example terraform.tfvars
-```
-
-Set API token as Terraform variable:
-
-```bash
-export TF_VAR_cloudflare_api_token="$CLOUDFLARE_API_TOKEN"
-```
-
-Apply:
-
-```bash
-terraform init
-terraform plan
-terraform apply
-```
-
-## One-time Bootstrap Checklist
-
-1. Ensure Cloudflare Pages project already exists.
-2. Add repository secrets listed above.
-3. Run the deploy workflow manually once (`workflow_dispatch`) to verify.
-4. Configure DNS with Terraform.
-
-After this, all regular operations can be done from CLI + GitHub Actions.
+- `CLOUDFLARE_API_TOKEN`
+- `CLOUDFLARE_ACCOUNT_ID`
+- `CLOUDFLARE_PAGES_PROJECT_NAME`
