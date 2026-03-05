@@ -54,55 +54,6 @@ const SYSTEM_PROMPT_BASE = `당신은 김덕환의 AI 어시스턴트예요. 방
 - 한국어로 답변해주세요
 - 답변은 간결하면서도 충분한 정보를 담아주세요
 
-## 김덕환 정보
-- 이름: 김덕환 (Kim Deokhwan)
-- 소개: "아끼지 않는 문제 해결사" - 사람 중심의 AI 제품을 설계하고 구현해, 고객과 비즈니스의 실제 문제를 해결합니다
-- 학력: 중앙대학교 수학과(주전공) + SW&문화 융합전공(복수전공), 2026.02 졸업 예정, GPA 3.86/4.5
-- 교직이수: 중등학교 정교사 2급 자격 취득
-- 포지션: Product Engineer
-- 이메일: sachi009955@gmail.com
-- GitHub: https://github.com/IISweetHeartII
-- LinkedIn: https://www.linkedin.com/in/sweetheart2000/
-
-## 주요 프로젝트
-1. **119-ai** (2026) - 창업자/Owner. Twilio + Gemini Live API, NestJS + Python. 청룡톤 2026 대상 수상. 120초 내 응급 병원 매칭.
-2. **Finders** (2025.12~) - 백엔드 리드 (5인팀). Java 21, Spring Boot 3.4, MySQL, QueryDSL, Terraform + GCP.
-3. **agentgram** - 핵심 기여자 (오픈소스). Next.js 16, TailwindCSS v4, Supabase/PostgreSQL. DAU 40, 100+ 활성 에이전트.
-4. **MathFigure / ICAN-LABs** (2025.09~12) - 솔로 풀스택. Next.js, MathJson, Fabric.js. ICAN-LABs 최우수상.
-5. **log8** - 이 블로그 사이트. Astro, TailwindCSS v4, Cloudflare.
-
-## 수상 (6회)
-- UMC 9기 데모데이(Finders) 최우수상 (2026.02)
-- 2026 청룡톤(119-ai) 대상 (2026.02)
-- UMC 9기 해커톤(행복일기) 대상 (2026.01)
-- ICAN-LABs 창업 탐색 프로그램 최우수상 (2025.11)
-- UMC 8기 데모데이(오메추) 장려상 (2025.08)
-- 기업가정신 해외교육 프로그램 최우수상 (2025.02)
-
-## 자격증
-- 정보처리기사 (2025.09)
-- SQLD (2025.09)
-- OPIc IH (2024.12)
-
-## 기술 스택
-- Languages: TypeScript, Java, Python, C++
-- Frontend: Next.js, Astro, React, TailwindCSS
-- Backend: Spring Boot, NestJS, Supabase
-- Database: PostgreSQL, MySQL, pgvector
-- DevOps: GCP, Docker, Cloudflare Tunnel, GitHub Actions, Sentry
-- AI: 멀티에이전트 오케스트레이션 전문
-
-## 활동
-- UMC 9기 Web 파트장 (강의 및 멘토링)
-- AI 워크숍 진행 (ChatGPT, Gemini Gems, NotebookLM, MCP/Agent AI)
-
-## 사이트 페이지
-- 메인: https://log8.kr/
-- 블로그: https://log8.kr/blog
-- 포트폴리오: https://log8.kr/portfolio
-- 쇼케이스: https://log8.kr/showcase
-- 이력서: https://log8.kr/resume
-
 `;
 
 const corsHeaders = {
@@ -135,14 +86,16 @@ export async function onRequestPost(context: PagesContext) {
       waitUntil(logQuestion(env.CHAT_KV, lastUserMsg.content));
     }
 
-    // Build system prompt with blog index + curated FAQ
-    const [blogIndexText, faqText] = await Promise.all([
+    // Build system prompt: base + context.md + FAQ + blog index
+    const [contextText, blogIndexText, faqText] = await Promise.all([
+      fetchChatContext(env, request.url),
       fetchBlogIndex(env, request.url),
       fetchCuratedFAQ(env),
     ]);
 
     const systemPrompt =
       SYSTEM_PROMPT_BASE +
+      (contextText ? `${contextText}\n\n` : "") +
       (faqText ? `## 자주 묻는 질문\n${faqText}\n\n` : "") +
       `## 블로그 글 목록 (관련 글을 찾아 링크해주세요)\n${blogIndexText}`;
 
@@ -195,6 +148,19 @@ async function fetchCuratedFAQ(env: Env): Promise<string> {
     if (!raw) return "";
     const faq: QAPair[] = JSON.parse(raw);
     return faq.map((f) => `Q: ${f.q}\nA: ${f.a}`).join("\n\n");
+  } catch {
+    return "";
+  }
+}
+
+// ===== Chat Context (from chat-context.md) =====
+
+async function fetchChatContext(env: Env, requestUrl: string): Promise<string> {
+  try {
+    const res = await env.ASSETS.fetch(new URL("/chat-context.json", requestUrl).toString());
+    if (!res.ok) return "";
+    const { content } = (await res.json()) as { content: string };
+    return content;
   } catch {
     return "";
   }
