@@ -1,4 +1,5 @@
 ---
+import ChatWidget from "@/shared/components/chat/ChatWidget.astro";
 import BaseHead from "@/shared/components/layout/BaseHead.astro";
 import Footer from "@/shared/components/layout/Footer.astro";
 import Header from "@/shared/components/layout/Header.astro";
@@ -40,6 +41,7 @@ const { title, description } = Astro.props;
       <slot />
     </main>
     <Footer />
+    <ChatWidget />
 
     <script>
       import { setupScrollAnimations } from "@/shared/scripts/scroll-animation";

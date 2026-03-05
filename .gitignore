@@ -39,6 +39,9 @@ pnpm-debug.log*
 # Sisyphus (AI agent workspace)
 .sisyphus/
 
+# Cloudflare Pages Functions
+.dev.vars
+
 # Terraform
 **/.terraform/
 *.tfstate
