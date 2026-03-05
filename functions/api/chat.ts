@@ -1,6 +1,12 @@
+interface KVNamespace {
+  get: (key: string, options?: { type?: string }) => Promise<string | null>;
+  put: (key: string, value: string) => Promise<void>;
+}
+
 interface Env {
   GEMINI_API_KEY: string;
   OPENAI_API_KEY: string;
+  CHAT_KV?: KVNamespace;
   ASSETS: { fetch: (input: Request | string) => Promise<Response> };
 }
 
@@ -27,8 +33,17 @@ interface RequestBody {
   messages: ChatMessage[];
 }
 
+interface QAPair {
+  q: string;
+  a: string;
+  count: number;
+}
+
 const GEMINI_MODEL = "gemini-2.5-flash-lite";
 const OPENAI_MODEL = "gpt-4.1-nano";
+const FAQ_KEY = "curated-faq";
+const LOG_KEY = "question-log";
+const MAX_LOG_ENTRIES = 200;
 
 const SYSTEM_PROMPT_BASE = `당신은 김덕환의 AI 어시스턴트예요. 방문자가 김덕환에 대해 궁금한 것을 물어보면 아래 정보를 바탕으로 친절하고 전문적으로 답변해주세요.
 
@@ -88,7 +103,6 @@ const SYSTEM_PROMPT_BASE = `당신은 김덕환의 AI 어시스턴트예요. 방
 - 쇼케이스: https://log8.kr/showcase
 - 이력서: https://log8.kr/resume
 
-## 블로그 글 목록 (관련 글을 찾아 링크해주세요)
 `;
 
 const corsHeaders = {
@@ -115,26 +129,22 @@ export async function onRequestPost(context: PagesContext) {
       });
     }
 
-    // Fetch blog index from static assets
-    let blogIndexText = "";
-    try {
-      const blogIndexRes = await env.ASSETS.fetch(
-        new URL("/blog-index.json", request.url).toString()
-      );
-      if (blogIndexRes.ok) {
-        const { posts } = (await blogIndexRes.json()) as { posts: BlogPost[] };
-        blogIndexText = posts
-          .map(
-            (p) =>
-              `- [${p.title}](https://log8.kr/blog/${p.slug}) [${p.category}] ${p.tags.join(", ")}${p.description ? `: ${p.description}` : ""}`
-          )
-          .join("\n");
-      }
-    } catch {
-      // Continue without blog index
+    // Log the latest user question to KV (non-blocking)
+    const lastUserMsg = messages.findLast((m) => m.role === "user");
+    if (lastUserMsg && env.CHAT_KV) {
+      waitUntil(logQuestion(env.CHAT_KV, lastUserMsg.content));
     }
 
-    const systemPrompt = SYSTEM_PROMPT_BASE + blogIndexText;
+    // Build system prompt with blog index + curated FAQ
+    const [blogIndexText, faqText] = await Promise.all([
+      fetchBlogIndex(env, request.url),
+      fetchCuratedFAQ(env),
+    ]);
+
+    const systemPrompt =
+      SYSTEM_PROMPT_BASE +
+      (faqText ? `## 자주 묻는 질문\n${faqText}\n\n` : "") +
+      `## 블로그 글 목록 (관련 글을 찾아 링크해주세요)\n${blogIndexText}`;
 
     // Try Gemini first, fallback to OpenAI
     try {
@@ -158,6 +168,57 @@ export async function onRequestPost(context: PagesContext) {
     });
   }
 }
+
+// ===== KV: Question Logging (2단계) =====
+
+async function logQuestion(kv: KVNamespace, question: string) {
+  try {
+    const raw = await kv.get(LOG_KEY);
+    const log: Array<{ q: string; ts: number }> = raw ? JSON.parse(raw) : [];
+
+    log.push({ q: question.slice(0, 200), ts: Date.now() });
+
+    // Keep only recent entries
+    const trimmed = log.slice(-MAX_LOG_ENTRIES);
+    await kv.put(LOG_KEY, JSON.stringify(trimmed));
+  } catch {
+    // Non-critical, silently fail
+  }
+}
+
+// ===== KV: Curated FAQ (3단계) =====
+
+async function fetchCuratedFAQ(env: Env): Promise<string> {
+  if (!env.CHAT_KV) return "";
+  try {
+    const raw = await env.CHAT_KV.get(FAQ_KEY);
+    if (!raw) return "";
+    const faq: QAPair[] = JSON.parse(raw);
+    return faq.map((f) => `Q: ${f.q}\nA: ${f.a}`).join("\n\n");
+  } catch {
+    return "";
+  }
+}
+
+// ===== Blog Index =====
+
+async function fetchBlogIndex(env: Env, requestUrl: string): Promise<string> {
+  try {
+    const res = await env.ASSETS.fetch(new URL("/blog-index.json", requestUrl).toString());
+    if (!res.ok) return "";
+    const { posts } = (await res.json()) as { posts: BlogPost[] };
+    return posts
+      .map(
+        (p) =>
+          `- [${p.title}](https://log8.kr/blog/${p.slug}) [${p.category}] ${p.tags.join(", ")}${p.description ? `: ${p.description}` : ""}`
+      )
+      .join("\n");
+  } catch {
+    return "";
+  }
+}
+
+// ===== Gemini Streaming =====
 
 async function streamGemini(
   apiKey: string,
@@ -192,6 +253,8 @@ async function streamGemini(
   return createSSEResponse(res, "gemini", waitUntil);
 }
 
+// ===== OpenAI Streaming =====
+
 async function streamOpenAI(
   apiKey: string,
   systemPrompt: string,
@@ -224,6 +287,8 @@ async function streamOpenAI(
 
   return createSSEResponse(res, "openai", waitUntil);
 }
+
+// ===== SSE Transform =====
 
 function createSSEResponse(
   upstream: Response,
@@ -264,7 +329,6 @@ function createSSEResponse(
 
               if (provider === "gemini") {
                 content = json?.candidates?.[0]?.content?.parts?.[0]?.text ?? "";
-                // Emit [DONE] when Gemini signals finish
                 if (json?.candidates?.[0]?.finishReason === "STOP") {
                   if (content) {
                     await writer.write(encoder.encode(`data: ${JSON.stringify({ content })}\n\n`));
