@@ -65,7 +65,7 @@
   </div>
 </div>
 
-<style>
+<style is:global>
   /* ===== FAB Button ===== */
   #chat-fab {
     position: fixed;
@@ -258,17 +258,17 @@
   }
 
   /* 말풍선 내부 요소 */
-  .chat-bubble :global(a) {
+  .chat-bubble a {
     color: var(--color-primary, #8b5cf6);
     text-decoration: underline;
     text-underline-offset: 2px;
   }
 
-  .chat-msg-user .chat-bubble :global(a) {
+  .chat-msg-user .chat-bubble a {
     color: #e0e0ff;
   }
 
-  .chat-bubble :global(code) {
+  .chat-bubble code {
     background: rgba(0, 0, 0, 0.06);
     padding: 2px 6px;
     border-radius: 4px;
@@ -276,16 +276,16 @@
     font-family: monospace;
   }
 
-  .chat-bubble :global(strong) {
+  .chat-bubble strong {
     font-weight: 600;
   }
 
-  .chat-bubble :global(.chat-typing) {
+  .chat-bubble .chat-typing {
     color: var(--color-text-secondary, #888);
     font-style: italic;
   }
 
-  .chat-bubble :global(.chat-error) {
+  .chat-bubble .chat-error {
     color: #ef4444;
   }
 
@@ -345,34 +345,34 @@
     transform: scale(1.05);
   }
 
-  #chat-send:global(.chat-send-disabled) {
+  #chat-send.chat-send-disabled {
     opacity: 0.4;
     pointer-events: none;
   }
 
   /* ===== Dark Mode ===== */
-  :global(html[data-theme="dark"]) #chat-window {
+  html[data-theme="dark"] #chat-window {
     border-left-color: #313244;
     box-shadow: -4px 0 24px rgba(0, 0, 0, 0.3);
   }
 
-  :global(html[data-theme="dark"]) .chat-msg-assistant .chat-bubble {
+  html[data-theme="dark"] .chat-msg-assistant .chat-bubble {
     background: #313244;
   }
 
-  :global(html[data-theme="dark"]) .chat-bubble :global(code) {
+  html[data-theme="dark"] .chat-bubble code {
     background: rgba(255, 255, 255, 0.1);
   }
 
-  :global(html[data-theme="dark"]) .chat-input-area {
+  html[data-theme="dark"] .chat-input-area {
     border-top-color: #313244;
   }
 
-  :global(html[data-theme="dark"]) #chat-input {
+  html[data-theme="dark"] #chat-input {
     border-color: #45475a;
   }
 
-  :global(html[data-theme="dark"]) #chat-input:focus {
+  html[data-theme="dark"] #chat-input:focus {
     box-shadow: 0 0 0 3px rgba(203, 166, 247, 0.15);
   }
 
@@ -413,7 +413,7 @@
     border-radius: 3px;
   }
 
-  :global(html[data-theme="dark"]) .chat-messages::-webkit-scrollbar-thumb {
+  html[data-theme="dark"] .chat-messages::-webkit-scrollbar-thumb {
     background: rgba(255, 255, 255, 0.12);
   }
 </style>
