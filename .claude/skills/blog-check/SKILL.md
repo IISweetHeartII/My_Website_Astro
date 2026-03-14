@@ -43,9 +43,9 @@ argument-hint: "[파일경로 (생략 시 최신 파일 자동 선택)]"
 
 | 항목 | 조건 |
 |------|------|
-| `featured_image` | 경로가 `/images/blogs/`로 시작 |
+| `featured_image` | `/images/blogs/[번호]/[번호]_00_thumbnail.png` 형식 권장 |
 | `featured_image_alt` | 존재, 비어있지 않음 |
-| 본문 이미지 | `![...](/images/blogs/...)` 형식 사용 여부 확인 |
+| 본문 이미지 | `![...](/images/blogs/[번호]/[번호]_[순번]_[설명].png)` 형식 사용 여부 확인 |
 | 미완성 이미지 | 프롬프트 주석(`<!-- 📸 이미지 프롬프트 -->`)이 아직 남아있으면 경고 |
 
 ### 글 품질

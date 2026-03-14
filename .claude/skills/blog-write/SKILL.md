@@ -43,7 +43,7 @@ twitter_card: summary_large_image
 created_date: YYYY-MM-DD
 updated_date: YYYY-MM-DD
 category: "카테고리"  # 개발 | 회고 | 교육 | 생산성 | 일상
-featured_image: /images/blogs/[번호]-thumbnail.jpg
+featured_image: /images/blogs/[번호]/[번호]_00_thumbnail.png
 featured_image_alt: "이미지 설명"
 slug: 영문-slug-형식
 tags:
@@ -73,23 +73,49 @@ tags:
 - 과도한 이모지 나열
 - `bg-gradient-to-*` 사용 (TailwindCSS v4에서는 `bg-linear-to-*` 사용)
 
-## 이미지 프롬프트 규칙
+## 이미지 컨벤션
+
+### 경로 규칙
+
+```
+public/images/blogs/[번호]/[번호]_[순번]_[영문-설명].png
+```
+
+| 종류 | 예시 경로 |
+|------|----------|
+| 썸네일 | `public/images/blogs/050/050_00_thumbnail.png` |
+| 본문 1번 | `public/images/blogs/050/050_01_problem-description.png` |
+| 본문 2번 | `public/images/blogs/050/050_02_solution.png` |
+
+- 순번은 2자리 (`01`, `02`, ...), 썸네일은 `00`
+- 설명은 영문 소문자 + 하이픈 (`business-fail`, `coding-start`)
+- 확장자는 항상 `.png`
+- 글 번호별로 서브폴더 분리
+
+### 이미지 프롬프트 주석 형식
 
 글 안에 이미지가 필요한 위치마다 아래 형식으로 삽입한다:
 
 ```markdown
-![이미지 설명](/images/blogs/[번호]-[순번]-[설명].jpg)
+![이미지 설명](/images/blogs/[번호]/[번호]_[순번]_[영문-설명].png)
 
 <!--
   📸 이미지 프롬프트:
-  "영문 이미지 생성 프롬프트,
-  flat illustration, consistent style, same character"
-
-  생성 후 → public/images/blogs/[번호]-[순번]-[설명].jpg 에 저장
+  prompt: "영문 이미지 생성 프롬프트, flat illustration, consistent style, same character"
+  aspect_ratio: "16:9"
+  session_id: "blog-[번호]"
+  save_as: "[번호]_[순번]_[영문-설명].png"
 -->
 ```
 
-이미지는 글 당 4-7개가 적당하다. 섹션 시작이나 감정의 전환점에 배치한다.
+- **`session_id`**: 같은 글의 이미지들은 동일한 `blog-[번호]`로 스타일 일관성 유지
+- **`aspect_ratio`**: 썸네일 `"4:3"`, 본문 `"16:9"` 권장
+- **`save_as`**: OpenCode `/blog-images` 커맨드가 이 값으로 파일명 결정
+- 이미지는 글 당 4-7개가 적당하다. 섹션 시작이나 감정의 전환점에 배치한다.
+
+### 성능
+
+PNG 원본을 저장해도 Cloudflare Polish(Lossless) 설정 시 방문자에게 자동 WebP 변환 제공.
 
 ## 카테고리 기준
 

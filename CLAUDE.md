@@ -143,7 +143,7 @@ twitter_card: summary_large_image
 created_date: YYYY-MM-DD
 updated_date: YYYY-MM-DD
 category: "카테고리"  # 개발 | 회고 | 교육 | 생산성 | 일상
-featured_image: /images/blogs/[번호]-thumbnail.jpg
+featured_image: /images/blogs/[번호]/[번호]_00_thumbnail.png
 featured_image_alt: "이미지 설명"
 slug: 영문-slug-형식
 tags:
@@ -151,6 +151,43 @@ tags:
   - 태그2
 ---
 ```
+
+### 이미지 컨벤션
+
+블로그 이미지는 **글 번호별 서브폴더 + 언더바 네이밍**으로 관리합니다.
+
+**경로 구조:**
+```
+public/images/blogs/
+└── [번호]/
+    ├── [번호]_00_thumbnail.png   ← featured_image (썸네일)
+    ├── [번호]_01_[영문-설명].png  ← 본문 첫 번째 이미지
+    ├── [번호]_02_[영문-설명].png
+    └── ...
+```
+
+**예시 (050번 글):**
+```
+public/images/blogs/050/
+├── 050_00_thumbnail.png
+├── 050_01_problem-description.png
+├── 050_02_solution.png
+└── 050_03_result.png
+```
+
+**규칙 요약:**
+- 번호: 3자리 (`050`)
+- 순번: 2자리 (`01`, `02`...), 썸네일은 `00`
+- 설명: 영문 소문자 + 하이픈 (`coding-start`, `business-fail`)
+- 확장자: `.png` 고정
+- slug: 영문 소문자 + 하이픈 (`how-i-got-hired-with-ai`)
+
+**성능:**
+PNG 원본을 저장해도 Cloudflare Polish(Lossless) 활성화 시 방문자에게 자동 WebP로 변환·제공됩니다.
+→ Cloudflare Dashboard → Speed → Optimization → Polish → `Lossless`
+
+**이미지 생성:**
+OpenCode에서 `/blog-images [파일경로]`로 블로그 글의 이미지 프롬프트 주석을 자동 파싱해 이미지를 생성할 수 있습니다. (`~/.config/opencode/command/blog-images.md`)
 
 > **주의**: 초안은 `publish: false`로 저장한다. 검토 후 직접 `true`로 바꾼다.
 
