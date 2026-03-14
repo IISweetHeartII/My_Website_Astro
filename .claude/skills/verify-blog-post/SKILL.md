@@ -133,18 +133,23 @@ created_date: post.data.created_date?.toISOString().split("T")[0] ?? null,
 
 **파일:** `.claude/skills/blog-write/SKILL.md`
 
-**검사:** blog-write 스킬의 "(현재 최신: NNN)" 숫자가 실제 최신 포스트 번호와 일치하는지 확인합니다.
+**검사:** blog-write 스킬의 "현재 최신: NNN" 숫자가 실제 최신 포스트 번호와 일치하는지 확인합니다.
+파일명 패턴은 `[번호]_[제목].md` 이어야 합니다.
 
 ```bash
-# 실제 최신 번호
+# 실제 최신 번호 (새 패턴: [번호]_[제목].md)
 ls src/content/blog/ | grep "^[0-9]" | sort -n | tail -1 | grep -oE "^[0-9]+"
+
+# 구 패턴(". ") 잔여 확인
+ls src/content/blog/ | grep "\. " && echo "구 패턴 파일 있음" || echo "OK - 모두 언더바 패턴"
 
 # blog-write 스킬의 현재 번호
 grep "현재 최신" .claude/skills/blog-write/SKILL.md
 ```
 
-**PASS:** 두 값이 일치
+**PASS:** 두 값이 일치, 구 패턴 파일 없음
 **FAIL:** 불일치 — `.claude/skills/blog-write/SKILL.md`의 실행 순서 Step 1에서 번호를 업데이트해야 함
+**FAIL (구 패턴):** `[번호]. [제목].md` 형식 파일이 남아있음 — `[번호]_[제목].md` 로 rename 필요
 
 ## Output Format
 
