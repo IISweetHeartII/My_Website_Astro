@@ -16,6 +16,7 @@ export const GET: APIRoute = async () => {
       slug: post.data.slug ?? post.id,
       category: post.data.category,
       tags: post.data.tags ?? [],
+      created_date: post.data.created_date?.toISOString().split("T")[0] ?? null,
     }));
 
   return new Response(JSON.stringify({ posts: index }), {

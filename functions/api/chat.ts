@@ -27,6 +27,7 @@ interface BlogPost {
   category: string;
   tags: string[];
   description: string;
+  created_date: string | null;
 }
 
 interface RequestBody {
@@ -45,29 +46,53 @@ const FAQ_KEY = "curated-faq";
 const LOG_KEY = "question-log";
 const MAX_LOG_ENTRIES = 200;
 
-const SYSTEM_PROMPT_BASE = `당신은 김덕환의 AI 어시스턴트예요. 방문자가 김덕환에 대해 궁금한 것을 물어보면 아래 정보를 바탕으로 친절하고 전문적으로 답변해주세요.
+function buildSystemPromptBase(): string {
+  const today = new Date().toISOString().split("T")[0];
+  return `당신은 김덕환의 AI 어시스턴트예요. 방문자가 김덕환에 대해 궁금한 것을 물어보면 아래 정보를 바탕으로 친절하고 전문적으로 답변해주세요.
+
+오늘 날짜: ${today}
 
 ## 톤 & 스타일
 - ~해요 체를 사용해주세요 (전문적이면서 친근하게)
 - 관련된 블로그 글이 있으면 자연스럽게 링크를 포함해주세요 (마크다운 링크 형식)
-- 모르는 내용은 솔직하게 모른다고 말해주세요
 - 한국어로 답변해주세요
 - 답변은 간결하면서도 충분한 정보를 담아주세요
 
+## 중요: 정확성 원칙
+- 아래 제공된 정보에 없는 내용은 절대 추측하거나 지어내지 마세요
+- 날짜, 수치, 세부 사항을 모를 때는 반드시 "정확한 정보가 없어요"라고 솔직하게 말해주세요
+- 블로그 글 목록에 있는 글만 추천하고, 없는 글을 만들어내지 마세요
+
 `;
-
-const corsHeaders = {
-  "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Methods": "POST, OPTIONS",
-  "Access-Control-Allow-Headers": "Content-Type",
-};
-
-export async function onRequestOptions() {
-  return new Response(null, { headers: corsHeaders });
 }
+
+const ALLOWED_ORIGINS = ["https://log8.kr", "https://www.log8.kr"];
+
+function getCorsHeaders(origin: string | null): Record<string, string> {
+  const isAllowed =
+    origin &&
+    (ALLOWED_ORIGINS.includes(origin) ||
+      origin.includes(".pages.dev") ||
+      origin.includes("localhost") ||
+      origin.includes("127.0.0.1"));
+  return {
+    "Access-Control-Allow-Origin": isAllowed ? origin! : "https://log8.kr",
+    "Access-Control-Allow-Methods": "POST, OPTIONS",
+    "Access-Control-Allow-Headers": "Content-Type",
+  };
+}
+
+export async function onRequestOptions(context: PagesContext) {
+  const origin = context.request.headers.get("Origin");
+  return new Response(null, { headers: getCorsHeaders(origin) });
+}
+
+const MAX_MESSAGE_LENGTH = 1000;
 
 export async function onRequestPost(context: PagesContext) {
   const { request, env, waitUntil } = context;
+  const origin = request.headers.get("Origin");
+  const cors = getCorsHeaders(origin);
 
   try {
     const body: RequestBody = await request.json();
@@ -76,12 +101,20 @@ export async function onRequestPost(context: PagesContext) {
     if (!messages?.length) {
       return new Response(JSON.stringify({ error: "messages is required" }), {
         status: 400,
-        headers: { ...corsHeaders, "Content-Type": "application/json" },
+        headers: { ...cors, "Content-Type": "application/json" },
       });
     }
 
-    // Log the latest user question to KV (non-blocking)
+    // Validate last user message length
     const lastUserMsg = messages.findLast((m) => m.role === "user");
+    if (lastUserMsg && lastUserMsg.content.length > MAX_MESSAGE_LENGTH) {
+      return new Response(
+        JSON.stringify({ error: `메시지는 ${MAX_MESSAGE_LENGTH}자 이하로 입력해주세요.` }),
+        { status: 400, headers: { ...cors, "Content-Type": "application/json" } }
+      );
+    }
+
+    // Log the latest user question to KV (non-blocking)
     if (lastUserMsg && env.CHAT_KV) {
       waitUntil(logQuestion(env.CHAT_KV, lastUserMsg.content));
     }
@@ -94,18 +127,18 @@ export async function onRequestPost(context: PagesContext) {
     ]);
 
     const systemPrompt =
-      SYSTEM_PROMPT_BASE +
+      buildSystemPromptBase() +
       (contextText ? `${contextText}\n\n` : "") +
       (faqText ? `## 자주 묻는 질문\n${faqText}\n\n` : "") +
-      `## 블로그 글 목록 (관련 글을 찾아 링크해주세요)\n${blogIndexText}`;
+      `## 블로그 글 목록 (관련 글을 찾아 링크해주세요. 목록에 없는 글은 절대 추천하지 마세요)\n${blogIndexText}`;
 
     // Try Gemini first, fallback to OpenAI
     try {
-      return await streamGemini(env.GEMINI_API_KEY, systemPrompt, messages, waitUntil);
+      return await streamGemini(env.GEMINI_API_KEY, systemPrompt, messages, cors, waitUntil);
     } catch (error: unknown) {
       const status = (error as { status?: number }).status;
       if (status === 429 && env.OPENAI_API_KEY) {
-        return await streamOpenAI(env.OPENAI_API_KEY, systemPrompt, messages, waitUntil);
+        return await streamOpenAI(env.OPENAI_API_KEY, systemPrompt, messages, cors, waitUntil);
       }
       throw error;
     }
@@ -117,7 +150,7 @@ export async function onRequestPost(context: PagesContext) {
         : "일시적인 문제가 발생했어요. 잠시 후 다시 시도해주세요.";
     return new Response(JSON.stringify({ error: message }), {
       status,
-      headers: { ...corsHeaders, "Content-Type": "application/json" },
+      headers: { ...getCorsHeaders(null), "Content-Type": "application/json" },
     });
   }
 }
@@ -153,14 +186,21 @@ async function fetchCuratedFAQ(env: Env): Promise<string> {
   }
 }
 
+// ===== In-memory cache (lives for the Worker instance lifetime) =====
+
+let cachedContext: string | null = null;
+let cachedBlogIndex: string | null = null;
+
 // ===== Chat Context (from chat-context.md) =====
 
 async function fetchChatContext(env: Env, requestUrl: string): Promise<string> {
+  if (cachedContext !== null) return cachedContext;
   try {
     const res = await env.ASSETS.fetch(new URL("/chat-context.json", requestUrl).toString());
     if (!res.ok) return "";
     const { content } = (await res.json()) as { content: string };
-    return content;
+    cachedContext = content;
+    return cachedContext;
   } catch {
     return "";
   }
@@ -169,16 +209,19 @@ async function fetchChatContext(env: Env, requestUrl: string): Promise<string> {
 // ===== Blog Index =====
 
 async function fetchBlogIndex(env: Env, requestUrl: string): Promise<string> {
+  if (cachedBlogIndex !== null) return cachedBlogIndex;
   try {
     const res = await env.ASSETS.fetch(new URL("/blog-index.json", requestUrl).toString());
     if (!res.ok) return "";
     const { posts } = (await res.json()) as { posts: BlogPost[] };
-    return posts
-      .map(
-        (p) =>
-          `- [${p.title}](https://log8.kr/blog/${p.slug}) [${p.category}] ${p.tags.join(", ")}${p.description ? `: ${p.description}` : ""}`
-      )
+    cachedBlogIndex = posts
+      .map((p) => {
+        const date = p.created_date ? ` (${p.created_date})` : "";
+        const tags = p.tags.length ? ` [${p.tags.join(", ")}]` : "";
+        return `- [${p.title}](https://log8.kr/blog/${p.slug})${date} [${p.category}]${tags}${p.description ? `: ${p.description}` : ""}`;
+      })
       .join("\n");
+    return cachedBlogIndex;
   } catch {
     return "";
   }
@@ -190,6 +233,7 @@ async function streamGemini(
   apiKey: string,
   systemPrompt: string,
   messages: ChatMessage[],
+  cors: Record<string, string>,
   waitUntil: (promise: Promise<unknown>) => void
 ): Promise<Response> {
   const contents = messages.map((m) => ({
@@ -205,7 +249,7 @@ async function streamGemini(
       body: JSON.stringify({
         contents,
         systemInstruction: { parts: [{ text: systemPrompt }] },
-        generationConfig: { temperature: 0.7, maxOutputTokens: 1024 },
+        generationConfig: { temperature: 0.4, maxOutputTokens: 1024 },
       }),
     }
   );
@@ -216,7 +260,7 @@ async function streamGemini(
     throw err;
   }
 
-  return createSSEResponse(res, "gemini", waitUntil);
+  return createSSEResponse(res, "gemini", cors, waitUntil);
 }
 
 // ===== OpenAI Streaming =====
@@ -225,6 +269,7 @@ async function streamOpenAI(
   apiKey: string,
   systemPrompt: string,
   messages: ChatMessage[],
+  cors: Record<string, string>,
   waitUntil: (promise: Promise<unknown>) => void
 ): Promise<Response> {
   const res = await fetch("https://api.openai.com/v1/chat/completions", {
@@ -240,7 +285,7 @@ async function streamOpenAI(
         { role: "system", content: systemPrompt },
         ...messages.map((m) => ({ role: m.role, content: m.content })),
       ],
-      temperature: 0.7,
+      temperature: 0.4,
       max_tokens: 1024,
     }),
   });
@@ -251,7 +296,7 @@ async function streamOpenAI(
     throw err;
   }
 
-  return createSSEResponse(res, "openai", waitUntil);
+  return createSSEResponse(res, "openai", cors, waitUntil);
 }
 
 // ===== SSE Transform =====
@@ -259,6 +304,7 @@ async function streamOpenAI(
 function createSSEResponse(
   upstream: Response,
   provider: "gemini" | "openai",
+  cors: Record<string, string>,
   waitUntil: (promise: Promise<unknown>) => void
 ): Response {
   const { readable, writable } = new TransformStream();
@@ -322,7 +368,7 @@ function createSSEResponse(
 
   return new Response(readable, {
     headers: {
-      ...corsHeaders,
+      ...cors,
       "Content-Type": "text/event-stream",
       "Cache-Control": "no-cache, no-transform",
       Connection: "keep-alive",

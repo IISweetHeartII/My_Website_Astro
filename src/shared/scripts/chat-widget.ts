@@ -43,8 +43,8 @@ export function setupChatWidget(): void {
   if (!fab || !win || !closeBtn || !input || !sendBtn || !msgContainer) return;
 
   // Prevent re-initialization
-  if (fab.dataset["initialized"] === "true") return;
-  fab.dataset["initialized"] = "true";
+  if (fab.dataset.initialized === "true") return;
+  fab.dataset.initialized = "true";
 
   // Restore saved messages
   messages = loadMessages();
@@ -115,6 +115,17 @@ export function setupChatWidget(): void {
   });
 
   input.addEventListener("input", () => autoResize(input));
+
+  // Suggestion chips
+  const suggestions = document.getElementById("chat-suggestions");
+  suggestions?.querySelectorAll<HTMLButtonElement>(".chat-suggestion-btn").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      if (isStreaming) return;
+      input.value = btn.textContent?.trim() ?? "";
+      suggestions.style.display = "none";
+      send();
+    });
+  });
 }
 
 function renderWelcome(container: HTMLElement) {
@@ -264,13 +275,63 @@ function escapeHtml(text: string): string {
 }
 
 function renderMarkdown(text: string): string {
-  const escaped = escapeHtml(text);
-  return escaped
+  // Handle fenced code blocks (```) before escaping
+  const codeBlocks: string[] = [];
+  const placeholder = "CHATCODEBLOCK";
+  const withCodeBlocks = text.replace(/```(?:\w*\n)?([\s\S]*?)```/g, (_, code: string) => {
+    const escaped = escapeHtml(code.replace(/\n$/, ""));
+    codeBlocks.push(`<pre><code>${escaped}</code></pre>`);
+    return `${placeholder}${codeBlocks.length - 1}END`;
+  });
+
+  const escaped = escapeHtml(withCodeBlocks);
+
+  // Split into lines to handle block-level elements
+  const lines = escaped.split("\n");
+  const result: string[] = [];
+  let inList = false;
+
+  for (const line of lines) {
+    const listMatch = line.match(/^[-*]\s+(.+)$/);
+    if (listMatch) {
+      if (!inList) {
+        result.push("<ul>");
+        inList = true;
+      }
+      result.push(`<li>${inlineMarkdown(listMatch[1] ?? "")}</li>`);
+    } else {
+      if (inList) {
+        result.push("</ul>");
+        inList = false;
+      }
+      result.push(line === "" ? "" : inlineMarkdown(line));
+    }
+  }
+  if (inList) result.push("</ul>");
+
+  // Join non-list lines with <br>, but don't add <br> around <ul> blocks
+  let html = result
+    .join("\n")
+    .replace(/([^\n])\n(<ul>)/g, "$1<br>$2")
+    .replace(/(<\/ul>)\n([^\n])/g, "$1<br>$2")
+    .replace(/([^>])\n([^<])/g, "$1<br>$2")
+    .replace(/\n/g, "");
+
+  // Restore code blocks (un-escaped placeholders)
+  html = html.replace(
+    /CHATCODEBLOCK(\d+)END/g,
+    (_, i: string) => codeBlocks[parseInt(i, 10)] ?? ""
+  );
+
+  return html;
+}
+
+function inlineMarkdown(text: string): string {
+  return text
     .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
     .replace(/`([^`]+)`/g, "<code>$1</code>")
     .replace(
       /\[([^\]]+)\]\((https?:\/\/[^)]+)\)/g,
       '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>'
-    )
-    .replace(/\n/g, "<br>");
+    );
 }

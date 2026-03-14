@@ -56,6 +56,12 @@
         프로젝트, 기술 스택, 경력 등 무엇이든 질문해주세요!
       </div>
     </div>
+    <div class="chat-suggestions" id="chat-suggestions">
+      <button class="chat-suggestion-btn">최근 프로젝트가 뭔가요?</button>
+      <button class="chat-suggestion-btn">기술 스택을 알려주세요</button>
+      <button class="chat-suggestion-btn">수상 경력이 있나요?</button>
+      <button class="chat-suggestion-btn">연락처가 어떻게 돼요?</button>
+    </div>
   </div>
 
   <!-- Input -->
@@ -64,6 +70,7 @@
       id="chat-input"
       placeholder="메시지를 입력하세요..."
       rows="1"
+      maxlength="1000"
       aria-label="메시지 입력"
     ></textarea>
     <button id="chat-send" aria-label="전송">
@@ -305,6 +312,64 @@
 
   .chat-bubble .chat-error {
     color: #ef4444;
+  }
+
+  /* ===== Suggestion Chips ===== */
+  .chat-suggestions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 0 0 4px 42px;
+  }
+
+  .chat-suggestion-btn {
+    background: none;
+    border: 1px solid var(--color-primary, #8b5cf6);
+    color: var(--color-primary, #8b5cf6);
+    border-radius: 20px;
+    padding: 5px 12px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+    font-family: inherit;
+    white-space: nowrap;
+  }
+
+  .chat-suggestion-btn:hover {
+    background: var(--color-primary, #8b5cf6);
+    color: #fff;
+  }
+
+  html[data-theme="dark"] .chat-suggestion-btn {
+    border-color: #cba6f7;
+    color: #cba6f7;
+  }
+
+  html[data-theme="dark"] .chat-suggestion-btn:hover {
+    background: #cba6f7;
+    color: #1e1e2e;
+  }
+
+  /* ===== Code blocks ===== */
+  .chat-bubble pre {
+    background: rgba(0, 0, 0, 0.06);
+    border-radius: 6px;
+    padding: 10px 12px;
+    overflow-x: auto;
+    margin: 6px 0;
+    font-size: 12px;
+    font-family: monospace;
+    line-height: 1.5;
+  }
+
+  html[data-theme="dark"] .chat-bubble pre {
+    background: rgba(255, 255, 255, 0.08);
+  }
+
+  .chat-bubble pre code {
+    background: none;
+    padding: 0;
+    font-size: inherit;
   }
 
   /* ===== Input Area ===== */
