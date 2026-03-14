@@ -29,7 +29,7 @@ twitter_card: summary_large_image
 created_date: 2025-04-23
 updated_date: 2025-04-23
 category: 블로그운영
-featured_image: /images/blogs/shared/placeholder.png
+featured_image: /images/blogs/011/011_00_thumbnail.png
 featured_image_alt: "수익 성장 그래프와 동전, 그리고 노트북이 있는 이미지"
 slug: blog-platform-change-monetization-plan
 tags:
@@ -42,6 +42,8 @@ tags:
 
 # 개발자 블로그 이전 및 수익화 실행 계획: 네이버에서 Astro까지
 
+<!-- 📸 이미지 프롬프트: prompt: "A developer's desk with a laptop showing a blog dashboard, coins and a growth chart on the screen, warm natural lighting, modern minimalist workspace, professional photography style", aspect_ratio: "16:9", session_id: "blog-011", save_as: "011_00_thumbnail.png" -->
+
 안녕하세요. 오늘은 저의 오랜 숙원 사업이었던 '나만의 개발자 블로그 구축 및 수익화' 프로젝트의 구체적인 실행 계획을 공유하고자 합니다. 네이버 블로그를 떠나, 개발자로서의 정체성을 담은 새로운 공간을 만들고 구글 애드센스를 통해 지속 가능한 운영 기반을 마련하는 것이 이 프로젝트의 핵심 목표입니다.
 
 ## 1. 왜 플랫폼을 변경하는가?
@@ -50,6 +52,8 @@ tags:
 
 - **성장**: 개발자로서 직접 웹사이트를 기획하고, 만들고, 배포하는 전 과정을 경험하는 것은 그 자체로 훌륭한 포트폴리오이자 실력 향상의 기회입니다.
 - **수익화**: 네이버 블로그의 광고 정책은 제약이 많습니다. 구글 애드센스를 통해 콘텐츠의 가치를 직접 시장에서 평가받고, 이를 통해 얻는 수익으로 더 양질의 콘텐츠를 생산하는 선순환 구조를 만들고 싶습니다.
+
+<!-- 📸 이미지 프롬프트: prompt: "A comparison diagram showing blog platform migration from a traditional platform to a modern Astro framework setup, clean infographic style, blue and white color theme, technical illustration", aspect_ratio: "16:9", session_id: "blog-011", save_as: "011_01_platform-comparison.png" -->
 
 ## 2. 기술 스택 및 인프라 구축 계획
 
@@ -66,6 +70,8 @@ tags:
 - **양질의 콘텐츠 발행**: 애드센스 승인의 가장 기본적이면서도 중요한 요건입니다. 저의 지식과 경험을 담은 전문성 있는 글을 꾸준히 발행할 계획입니다.
 - **콘텐츠 이전 및 리디렉션**: 기존 네이버 블로그의 글들을 새로운 웹사이트로 이전하고, 검색 엔진에 이미 노출된 기존 포스트에 새 블로그의 링크를 연결하여 초기 트래픽을 유도합니다.
 - **SEO 최적화**: Astro의 SEO 친화적인 기능을 적극 활용하고, 메타 태그, 시맨틱 HTML 등을 충실히 작성하여 검색 노출을 극대화합니다.
+
+<!-- 📸 이미지 프롬프트: prompt: "A visual roadmap showing Google AdSense approval process steps, clean timeline design with checkmarks, green and white color scheme, flat design illustration", aspect_ratio: "16:9", session_id: "blog-011", save_as: "011_02_adsense-roadmap.png" -->
 
 ## 4. 구체적인 실행 로드맵
 

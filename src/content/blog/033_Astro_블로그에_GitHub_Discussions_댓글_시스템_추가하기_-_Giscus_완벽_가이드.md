@@ -13,6 +13,8 @@ tags:
   - 댓글시스템
   - 블로그
 slug: astro-giscus-comments-implementation-guide
+featured_image: /images/blogs/033/033_00_thumbnail.png
+featured_image_alt: "Astro 블로그에 Giscus 댓글 시스템 추가하기"
 meta_title: "Astro Giscus 댓글 시스템 | GitHub Discussions 연동"
 meta_description: "Astro 블로그에 무료 댓글 시스템 Giscus 추가하기! GitHub Discussions 기반으로 광고 없이 깔끔한 댓글 기능을 구현하세요."
 keywords:
@@ -42,6 +44,8 @@ faq:
 ---
 
 # Astro 블로그에 GitHub Discussions 댓글 추가하기 - Giscus 완벽 가이드
+
+<!-- 📸 이미지 프롬프트: prompt: "A clean illustration showing Astro blog post page with Giscus comment system integrated at the bottom, GitHub Discussions logo connected to blog comments UI, showing readers interacting with comments, modern flat design with Astro and GitHub brand colors", aspect_ratio: "16:9", session_id: "blog-033", save_as: "033_00_thumbnail.png" -->
 
 > GitHub Discussions 기반 무료 댓글 시스템 Giscus로 독자와 소통하기
 
@@ -110,6 +114,8 @@ const CATEGORY_ID = "DIC_kwDONWYVrM4CkkXa"; // ⚠️ 실제 값 필요
 2. `GiscusComments.astro` 파일 수정
 3. 또는 환경변수로 분리 (`astro.config.mjs`에서 관리)
 
+<!-- 📸 이미지 프롬프트: prompt: "Step-by-step setup guide diagram showing GitHub repository settings with Discussions enabled, Giscus configuration panel at giscus.app, and the resulting comment widget embedded in a blog post, three-panel infographic", aspect_ratio: "16:9", session_id: "blog-033", save_as: "033_01_giscus-setup-steps.png" -->
+
 ## 🎨 **디자인 특징**
 
 ### **Pretendard 폰트 적용**
@@ -160,6 +166,8 @@ const CATEGORY_ID = "DIC_kwDONWYVrM4CkkXa"; // ⚠️ 실제 값 필요
 - [ ] 댓글 작성/읽기 기능 정상 동작
 - [ ] 한국어 인터페이스 확인
 - [ ] GitHub 로그인 플로우 테스트
+
+<!-- 📸 이미지 프롬프트: prompt: "Comparison table visual showing Giscus vs Utterances vs Disqus features side by side, highlighting Giscus advantages like free, no ads, GitHub Discussions support, reactions, and nested comments, clean comparison infographic", aspect_ratio: "16:9", session_id: "blog-033", save_as: "033_02_giscus-vs-others.png" -->
 
 ## 🚀 **배포 후 작업**
 

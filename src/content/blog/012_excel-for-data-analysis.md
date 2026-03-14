@@ -20,7 +20,7 @@ twitter_card: summary_large_image
 created_date: 2025-04-25
 updated_date: 2025-04-25
 category: 생산성
-featured_image: /images/blogs/shared/placeholder.png
+featured_image: /images/blogs/012/012_00_thumbnail.png
 featured_image_alt: "엑셀 데이터 분석 그래프가 떠 있는 컴퓨터 화면"
 slug: excel-for-data-analysis-and-visualization
 tags:
@@ -32,6 +32,8 @@ tags:
 ---
 
 # 업무 시간을 반으로 줄이는 엑셀 데이터 분석 & 시각화 비법
+
+<!-- 📸 이미지 프롬프트: prompt: "A computer screen displaying colorful Excel spreadsheets with charts, graphs and pivot tables, data visualization dashboard with bar charts and pie charts, professional office environment, clean modern design", aspect_ratio: "16:9", session_id: "blog-012", save_as: "012_00_thumbnail.png" -->
 
 많은 직장인에게 엑셀은 익숙하면서도 어려운 도구입니다. 대부분의 경우, 엑셀은 단순한 계산기나 표를 만드는 용도로만 사용됩니다. 하지만 엑셀의 진짜 힘은 방대한 데이터를 '분석'하고 '시각화'하여 의미 있는 정보로 바꿔내는 데 있습니다.
 
@@ -55,12 +57,16 @@ tags:
 
 - **`IF` / `IFS`**: 논리적인 조건에 따라 다른 결과를 보여줘야 할 때 사용합니다. "실적이 100점 이상이면 'A등급', 80점 이상이면 'B등급', 그 외에는 'C등급'을 부여하라" 와 같은 복잡한 규칙을 손쉽게 자동화할 수 있습니다.
 
+<!-- 📸 이미지 프롬프트: prompt: "Excel spreadsheet showing SUMIFS and XLOOKUP formula examples with highlighted cells and formula bar, educational screenshot style, clean data table layout, professional business spreadsheet", aspect_ratio: "16:9", session_id: "blog-012", save_as: "012_01_excel-functions.png" -->
+
 ## 2. 피벗 테이블: 데이터 분석의 '치트키'
 
 피벗 테이블은 엑셀 데이터 분석의 꽃입니다. 수만 줄의 원본 데이터를 마우스 클릭 몇 번만으로 원하는 관점에 따라 요약하고 재구성할 수 있습니다.
 
 - **사용 시나리오**: 월별, 제품별, 지역별 매출 현황을 한눈에 보고 싶을 때, 피벗 테이블의 행(Row)에 '월', 열(Column)에 '제품', 값(Value)에 '매출액'을 끌어다 놓기만 하면 몇 초 만에 복잡한 보고서가 완성됩니다.
 - **핵심 기능**: 단순히 합계만 구하는 것을 넘어, 평균, 개수, 최댓값 등 다양한 계산을 수행할 수 있으며, '슬라이서'나 '시간 표시 막대' 기능을 추가하면 보고서를 더욱 인터랙티브하게 만들 수 있습니다.
+
+<!-- 📸 이미지 프롬프트: prompt: "Excel pivot table interface showing sales data summarized by month and product category, with slicer filters on the side, clean professional spreadsheet design", aspect_ratio: "16:9", session_id: "blog-012", save_as: "012_02_pivot-table.png" -->
 
 ## 3. 데이터 시각화: 한눈에 들어오는 설득력
 

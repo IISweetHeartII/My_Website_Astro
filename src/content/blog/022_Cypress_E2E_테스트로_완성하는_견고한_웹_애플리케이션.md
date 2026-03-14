@@ -36,7 +36,7 @@ twitter_card: summary_large_image
 created_date: 2025-05-15
 category: 개발
 updated_date: 2025-05-15
-featured_image: /images/blogs/shared/placeholder.png
+featured_image: /images/blogs/022/022_00_thumbnail.png
 featured_image_alt: "테스트 자동화와 품질 보증을 나타내는 코드 검증 과정"
 slug: cypress-e2e-testing-robust-web-applications
 tags:
@@ -48,6 +48,8 @@ tags:
 ---
 
 # Cypress E2E 테스트로 완성하는 견고한 웹 애플리케이션 🧪
+
+<!-- 📸 이미지 프롬프트: prompt: "Cypress E2E test runner dashboard showing green passing tests in a browser window, automated testing visualization, clean developer environment", aspect_ratio: "16:9", session_id: "blog-022", save_as: "022_00_thumbnail.png" -->
 
 안녕하세요! 오늘은 **Cypress를 활용한 E2E 테스트**에 대해 이야기해보려고 합니다.
 
@@ -169,6 +171,8 @@ module.exports = defineConfig({
   },
 });
 ```
+
+<!-- 📸 이미지 프롬프트: prompt: "Test pyramid diagram with E2E at top, integration in middle, unit tests at base, with Cypress logo, modern flat design illustration", aspect_ratio: "16:9", session_id: "blog-022", save_as: "022_01_test-pyramid.png" -->
 
 ## 🧪 실제 테스트 케이스 구현
 
@@ -642,6 +646,8 @@ describe("터치 인터랙션 테스트", () => {
   });
 });
 ```
+
+<!-- 📸 이미지 프롬프트: prompt: "GitHub Actions CI/CD pipeline flow diagram with Cypress test stages, green checkmarks showing passing tests across Chrome, Firefox, Edge browsers", aspect_ratio: "16:9", session_id: "blog-022", save_as: "022_02_cicd-pipeline.png" -->
 
 ## 🚀 CICD 파이프라인 통합
 

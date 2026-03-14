@@ -5,6 +5,8 @@ publish: true
 created_date: 2025-08-11
 category: DevOps
 slug: vercel-organization-repo-free-deployment-guide
+featured_image: /images/blogs/038/038_00_thumbnail.png
+featured_image_alt: "Vercel CLI + GitHub Actions로 조직 저장소 무료 배포하기"
 tags:
   - Vercel
   - GitHub-Actions
@@ -23,6 +25,8 @@ faq:
   - question: "403 Forbidden 오류가 발생하는 이유는 무엇인가요?"
     answer: "VERCEL_ORG_ID와 프로젝트 소유 주체가 일치하지 않거나, PROJECT_ID가 잘못되었거나, 토큰이 해당 팀/프로젝트 권한을 포함하지 않을 때 발생합니다."
 ---
+
+<!-- 📸 이미지 프롬프트: prompt: "Architecture diagram showing GitHub Organization repository bypassing Vercel Git integration restriction using Vercel CLI and GitHub Actions with three secrets (ORG_ID, PROJECT_ID, TOKEN), arrows showing automatic deployment flow to preview and production environments, clean technical diagram with Vercel and GitHub logos", aspect_ratio: "16:9", session_id: "blog-038", save_as: "038_00_thumbnail.png" -->
 
 GitHub 조직(Organization) 저장소를 운영하다 보면 Vercel의 Git 연동을 사용하기 어려운 상황에 자주 직면합니다. 조직 정책, 권한 문제, 무료 플랜 제약 등 다양한 이유로 인해 일반적인 배포 방법이 막히는 경우가 많습니다.
 
@@ -91,6 +95,8 @@ graph TD
 4. GitHub Secrets에 3개 값 등록
 5. GitHub Actions 워크플로우 설정
 6. 자동 배포 완성!
+
+<!-- 📸 이미지 프롬프트: prompt: "Three GitHub Secrets configuration cards showing VERCEL_ORG_ID, VERCEL_PROJECT_ID, and VERCEL_TOKEN with masked values, next to Vercel Dashboard settings panels where these values are found, step-by-step visual with numbered callouts", aspect_ratio: "16:9", session_id: "blog-038", save_as: "038_01_github-secrets-setup.png" -->
 
 ## 🔧 1단계: Vercel 프로젝트 설정
 
@@ -402,6 +408,8 @@ pnpm dlx vercel build
 # 3. 배포
 pnpm dlx vercel deploy --prebuilt --prod
 ```
+
+<!-- 📸 이미지 프롬프트: prompt: "GitHub Actions workflow run showing Vercel CLI deployment steps: vercel pull, vercel build, and vercel deploy prebuilt commands executing successfully with green check marks, terminal output style log with deployment URL result", aspect_ratio: "16:9", session_id: "blog-038", save_as: "038_02_vercel-cli-deployment-flow.png" -->
 
 ## 🛠️ 트러블슈팅 가이드
 

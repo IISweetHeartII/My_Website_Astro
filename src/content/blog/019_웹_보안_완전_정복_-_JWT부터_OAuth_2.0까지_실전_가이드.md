@@ -34,7 +34,7 @@ twitter_card: summary_large_image
 created_date: 2025-05-09
 updated_date: 2025-05-09
 category: 보안
-featured_image: /images/blogs/shared/placeholder.png
+featured_image: /images/blogs/019/019_00_thumbnail.png
 featured_image_alt: "사이버 보안과 웹 애플리케이션 보호를 상징하는 이미지"
 slug: web-security-complete-guide-jwt-oauth
 tags:
@@ -46,6 +46,8 @@ tags:
 ---
 
 # 웹 보안 완전 정복: JWT부터 OAuth 2.0까지 실전 가이드 🔐
+
+<!-- 📸 이미지 프롬프트: prompt: "A glowing shield protecting a web browser icon, surrounded by security icons like padlocks, key tokens, and shield symbols, dark cybersecurity themed background with blue neon accents, digital art style", aspect_ratio: "16:9", session_id: "blog-019", save_as: "019_00_thumbnail.png" -->
 
 안녕하세요! 오늘은 **웹 보안의 핵심 기술들**을 스터디하면서 배운 내용을 정리해서 공유하려고 합니다.
 
@@ -140,6 +142,8 @@ function authMiddleware(req, res, next) {
   }
 }
 ```
+
+<!-- 📸 이미지 프롬프트: prompt: "A technical diagram showing JWT token creation and verification flow between client browser and Node.js server, with code snippets and arrows, developer documentation style, dark background with syntax highlighting", aspect_ratio: "16:9", session_id: "blog-019", save_as: "019_01_jwt-verification-flow.png" -->
 
 ## 🍪 2. Cookie 보안 설정 완벽 가이드
 
@@ -382,6 +386,8 @@ app.delete("/api/users/:id", requireAuth, requireRole("admin"), (req, res) => {
   // 관리자만 접근 가능
 });
 ```
+
+<!-- 📸 이미지 프롬프트: prompt: "A sequence diagram showing Access Token and Refresh Token authentication flow, with client, API server and token server interactions, timeline arrows showing token expiry and renewal process, clean white background technical diagram", aspect_ratio: "16:9", session_id: "blog-019", save_as: "019_02_token-refresh-flow.png" -->
 
 ## 🔐 5. OAuth 2.0 구현
 

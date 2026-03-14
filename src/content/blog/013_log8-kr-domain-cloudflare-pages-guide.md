@@ -31,7 +31,7 @@ twitter_card: summary_large_image
 created_date: 2025-04-27
 updated_date: 2025-04-27
 category: DevOps
-featured_image: /images/blogs/shared/placeholder.png
+featured_image: /images/blogs/013/013_00_thumbnail.png
 featured_image_alt: "서버실의 네트워크 케이블과 장비들이 연결된 모습"
 slug: connect-kr-domain-to-cloudflare-pages
 tags:
@@ -43,6 +43,8 @@ tags:
 ---
 
 # .kr 도메인 Cloudflare Pages에 완벽 연결 가이드 (가비아 예시)
+
+<!-- 📸 이미지 프롬프트: prompt: "A digital illustration showing DNS connection flow from a Korean domain registrar to Cloudflare network servers, with arrows indicating nameserver delegation, clean technical diagram style, blue and orange color theme", aspect_ratio: "16:9", session_id: "blog-013", save_as: "013_00_thumbnail.png" -->
 
 Cloudflare Pages는 정적 웹사이트를 무료로, 그리고 매우 빠르게 호스팅할 수 있는 훌륭한 서비스입니다. 하지만 가비아(Gabia)와 같은 국내 업체에서 구매한 `.kr` 도메인을 연결하는 과정은 처음 해보는 분들께 다소 헷갈릴 수 있습니다.
 
@@ -64,6 +66,8 @@ Cloudflare Pages는 정적 웹사이트를 무료로, 그리고 매우 빠르게
 4.  Cloudflare가 기존 DNS 레코드를 스캔할 텐데, 일단 무시하고 **'Continue'**를 누릅니다.
 
 이 단계를 마치면, Cloudflare는 여러분에게 2개의 **'Cloudflare Nameservers'** 주소를 알려줄 것입니다. (예: `dina.ns.cloudflare.com`, `pablo.ns.cloudflare.com`) 이 주소들을 잘 복사해두세요. 다음 단계에서 사용됩니다.
+
+<!-- 📸 이미지 프롬프트: prompt: "Cloudflare dashboard showing domain nameserver setup interface with two nameserver addresses highlighted, clean web UI screenshot style, dark sidebar navigation visible", aspect_ratio: "16:9", session_id: "blog-013", save_as: "013_01_cloudflare-nameserver.png" -->
 
 ## 2단계: 가비아에서 네임서버 변경하기
 
@@ -91,6 +95,8 @@ Cloudflare Pages는 정적 웹사이트를 무료로, 그리고 매우 빠르게
 6.  **'Set up a domain'** 버튼을 누르고, 연결할 `.kr` 도메인 주소를 입력합니다.
 
 이 과정을 마치면, Cloudflare Pages는 자동으로 해당 도메인에 대한 **CNAME 레코드**를 여러분의 Cloudflare DNS 설정에 추가해줍니다. (예: `example.co.kr`은 `xxxx.pages.dev`를 가리킴)
+
+<!-- 📸 이미지 프롬프트: prompt: "Cloudflare Pages custom domain settings page showing CNAME record configuration with green active status indicator, web dashboard UI style, clean and professional", aspect_ratio: "16:9", session_id: "blog-013", save_as: "013_02_custom-domain-setup.png" -->
 
 ## 흔히 겪는 문제와 해결 (Troubleshooting)
 

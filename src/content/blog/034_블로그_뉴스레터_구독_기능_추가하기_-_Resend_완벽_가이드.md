@@ -13,6 +13,8 @@ tags:
   - Astro
   - 블로그
 slug: newsletter-resend-implementation-guide
+featured_image: /images/blogs/034/034_00_thumbnail.png
+featured_image_alt: "Resend로 블로그 뉴스레터 구독 기능 추가하기"
 meta_title: "블로그 뉴스레터 | Resend 무료 이메일 구독"
 meta_description: "Resend로 블로그에 뉴스레터 구독 기능 추가하기! 5분이면 완성되는 무료 이메일 수집 시스템 완벽 가이드"
 keywords:
@@ -43,6 +45,8 @@ faq:
 
 # 블로그 뉴스레터 구독 기능 추가하기 - Resend 완벽 가이드
 
+<!-- 📸 이미지 프롬프트: prompt: "A modern email newsletter subscription flow diagram showing blog subscribe form, Resend API processing, and email delivery to subscribers, with free plan badge showing 3000 emails per month, clean flat design with email icons and upward growth arrows", aspect_ratio: "16:9", session_id: "blog-034", save_as: "034_00_thumbnail.png" -->
+
 **5분이면 완료!** 블로그에 이메일 구독 기능을 추가하세요.
 
 ---
@@ -68,6 +72,8 @@ faq:
 **결론**: Resend가 **가장 개발자 친화적**이고 **무료 한도도 넉넉**합니다!
 
 ---
+
+<!-- 📸 이미지 프롬프트: prompt: "Service comparison table visualization showing Resend vs Mailchimp vs SendGrid with free tier limits highlighted, Resend winning with 3000 emails per month, developer experience stars rating, React Email support badge, modern infographic style", aspect_ratio: "16:9", session_id: "blog-034", save_as: "034_01_resend-vs-others.png" -->
 
 ## 🚀 5분 빠른 시작
 
@@ -147,6 +153,8 @@ FROM_EMAIL=onboarding@resend.dev
 4. Resend Dashboard → Audiences에서 구독자 확인!
 
 ---
+
+<!-- 📸 이미지 프롬프트: prompt: "Five-step quick start guide visual for Resend newsletter setup: account creation, API key generation, Audience creation, environment variables configuration, and subscription form test, numbered steps with icons on a clean light background", aspect_ratio: "16:9", session_id: "blog-034", save_as: "034_02_resend-quickstart-steps.png" -->
 
 ## 📧 뉴스레터 실제로 발송하기
 

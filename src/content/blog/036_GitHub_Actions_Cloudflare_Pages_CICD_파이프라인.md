@@ -5,6 +5,8 @@ publish: true
 created_date: 2025-07-28
 category: DevOps
 slug: github-actions-cloudflare-pages-cicd-guide
+featured_image: /images/blogs/036/036_00_thumbnail.png
+featured_image_alt: "GitHub Actions + Cloudflare Pages CI/CD 파이프라인 구성도"
 tags:
   - DevOps
   - CICD
@@ -23,6 +25,8 @@ faq:
   - question: "배포가 너무 오래 걸릴 때 최적화 방법은 무엇인가요?"
     answer: "package.json에 engines 필드를 명시하고, GitHub Actions에서 pnpm 캐싱을 활성화하면 의존성 설치 시간이 크게 단축됩니다."
 ---
+
+<!-- 📸 이미지 프롬프트: prompt: "Modern CI/CD pipeline architecture diagram showing GitHub repository connected to GitHub Actions workflows, then automatically deploying to Cloudflare Pages with production and preview environments, with free tier badges for both services, clean tech diagram style with GitHub and Cloudflare brand colors", aspect_ratio: "16:9", session_id: "blog-036", save_as: "036_00_thumbnail.png" -->
 
 현대 웹 개발에서 CICD(지속적 통합/지속적 배포)는 선택이 아닌 필수입니다. 이 글에서는 **GitHub Actions**를 활용한 자동화된 품질 검사와 **Cloudflare Pages**를 통한 무료 배포 환경을 구축하는 방법을 실무 관점에서 상세히 다룹니다.
 
@@ -114,6 +118,8 @@ on:
 ```
 
 **의미**: `main` 또는 `develop` 브랜치에 푸시하거나 PR을 생성할 때마다 자동으로 CI 파이프라인이 실행됩니다.
+
+<!-- 📸 이미지 프롬프트: prompt: "GitHub Actions workflow YAML configuration visual showing automated quality checks: code formatting, TypeScript type check, build, security audit, and Lighthouse performance test running in sequence with green pass indicators, developer console aesthetic", aspect_ratio: "16:9", session_id: "blog-036", save_as: "036_01_github-actions-ci-steps.png" -->
 
 ## ☁️ Cloudflare Pages 설정: 자동 배포 환경 구축
 
@@ -230,6 +236,8 @@ git push origin develop
 - **Web Analytics**: 페이지 뷰, 방문자 수, 이탈률
 - **Performance**: Core Web Vitals, 로딩 시간
 - **Error Rate**: 4xx, 5xx 에러 발생 빈도
+
+<!-- 📸 이미지 프롬프트: prompt: "Branch deployment strategy diagram showing main branch deploying to production log8.kr, develop branch to preview environment, and feature branches to PR-specific preview URLs, with automatic deployment arrows and environment labels, clean flowchart with color-coded branches", aspect_ratio: "16:9", session_id: "blog-036", save_as: "036_02_branch-deployment-strategy.png" -->
 
 ## 🔧 트러블슈팅 가이드
 

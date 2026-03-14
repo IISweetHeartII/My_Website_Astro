@@ -5,6 +5,8 @@ publish: false
 created_date: 2025-08-04
 category: 생산성
 slug: obsidian-cursor-ai-productivity-boost
+featured_image: /images/blogs/037/037_00_thumbnail.png
+featured_image_alt: "Obsidian과 Cursor AI로 생산성 200% 향상하기"
 tags:
   - learning
   - obsidian
@@ -12,6 +14,8 @@ tags:
   - productivity
   - AI
 ---
+
+<!-- 📸 이미지 프롬프트: prompt: "Split-screen illustration showing Obsidian knowledge graph on the left with interconnected notes forming a brain-like network, and Cursor AI code editor on the right with AI chat panel suggesting code completions, representing a developer's enhanced productivity workflow, modern flat design", aspect_ratio: "16:9", session_id: "blog-037", save_as: "037_00_thumbnail.png" -->
 
 최근 저의 학습 및 개발 워크플로우에 혁신을 가져온 두 가지 도구를 소개하고자 합니다. 바로 노트 앱 **옵시디언(Obsidian)**과 AI 기반 코드 에디터 **커서(Cursor)**입니다. 이 두 가지를 조합하여 사용하면서, 저는 단순히 정보를 기록하는 것을 넘어 지식을 연결하고 창조하는 새로운 차원의 생산성을 경험하고 있습니다.
 
@@ -31,6 +35,8 @@ tags:
 모든 노트는 로컬에 마크다운(.md) 파일로 저장됩니다. 이는 특정 플랫폼에 종속되지 않고, 데이터에 대한 완전한 소유권을 가질 수 있음을 의미합니다.
 
 저는 옵시디언을 활용해 학습한 내용을 단편적으로 기록하는 것을 넘어, 개념을 정의하고, 특징을 정리하며, 다른 개념과의 관계를 연결하는 방식으로 저만의 '디지털 두뇌'를 만들어가고 있습니다.
+
+<!-- 📸 이미지 프롬프트: prompt: "Obsidian app screenshot showing bidirectional links and graph view with interconnected notes, highlighting the knowledge network feature with glowing node connections representing concepts like programming, projects, and learning topics, dark theme interface", aspect_ratio: "16:9", session_id: "blog-037", save_as: "037_01_obsidian-graph-view.png" -->
 
 ## 2. AI 페어 프로그래머, Cursor로 코딩 효율 극대화하기 💻
 

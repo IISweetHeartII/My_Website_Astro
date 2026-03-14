@@ -22,7 +22,7 @@ twitter_card: summary_large_image
 created_date: 2025-05-07
 updated_date: 2025-05-07
 category: 생산성
-featured_image: /images/blogs/shared/placeholder.png
+featured_image: /images/blogs/018/018_00_thumbnail.png
 featured_image_alt: "체계적으로 정리된 노트와 지식 관리 시스템의 모습"
 slug: obsidian-git-knowledge-management-system
 tags:
@@ -34,6 +34,8 @@ tags:
 ---
 
 # Obsidian과 Git 연동으로 완성하는 개발자의 지식 관리 시스템 🧠⚡
+
+<!-- 📸 이미지 프롬프트: prompt: "A developer's workspace with two monitors, one showing Obsidian knowledge management with interconnected notes and the other showing a Git terminal with commit history, organized desk setup, professional photography", aspect_ratio: "16:9", session_id: "blog-018", save_as: "018_00_thumbnail.png" -->
 
 안녕하세요! 오늘은 개발자라면 반드시 알아야 할 **Obsidian과 Git 연동 방법**을 공유하려고 합니다.
 
@@ -108,6 +110,8 @@ Thumbs.db
 *.temp
 ```
 
+<!-- 📸 이미지 프롬프트: prompt: "Terminal window showing git init, git add, git commit and git push commands with successful output messages for setting up an Obsidian vault repository, dark terminal theme, command line interface screenshot", aspect_ratio: "16:9", session_id: "blog-018", save_as: "018_01_git-setup-commands.png" -->
+
 ## 🔄 데스크탑-노트북 동기화 워크플로우
 
 ### 📱 작업 시작 시 (Pull)
@@ -142,6 +146,8 @@ git add .
 git commit -m "resolve: merge conflict in daily notes"
 git push origin main
 ```
+
+<!-- 📸 이미지 프롬프트: prompt: "Diagram showing synchronization workflow between desktop and laptop computers via GitHub cloud, with arrows indicating push and pull operations, clean technical illustration, blue color scheme", aspect_ratio: "16:9", session_id: "blog-018", save_as: "018_02_sync-workflow.png" -->
 
 ## 🎨 효율적인 Git 명령어 자동화
 

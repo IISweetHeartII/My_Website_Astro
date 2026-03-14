@@ -4,6 +4,8 @@ description: "ShareX에서 Win+Shift+S 단축키가 등록되지 않거나 Windo
 publish: true
 created_date: 2026-02-25
 category: DevOps
+featured_image: /images/blogs/048/048_00_thumbnail.png
+featured_image_alt: "ShareX Win+Shift+S 단축키 충돌 해결 가이드"
 slug: sharex-win-shift-s-troubleshooting
 tags:
   - ShareX
@@ -21,6 +23,8 @@ faq:
 ---
 
 # ShareX Win+Shift+S, 왜 내 PC에서는 안 될까?
+
+<!-- 📸 이미지 프롬프트: prompt: "Split screen showing desktop PC with ShareX working correctly on left, laptop with Windows Snipping Tool popping up instead of ShareX on right, confused user expression, Win+Shift+S keyboard shortcut highlighted, flat illustration style", aspect_ratio: "16:9", session_id: "blog-048", save_as: "048_00_thumbnail.png" -->
 
 `PrtSc`는 잘 되는데 `Win+Shift+S`만 Windows 캡처가 먼저 뜨는 경우가 있습니다.
 저도 데스크탑/노트북을 동일하게 맞추는 과정에서 같은 문제를 겪었고, 원인을 끝까지 추적해서 해결했습니다.
@@ -44,6 +48,8 @@ faq:
 클래식 버전으로 재설치한 뒤 해결이 가능해졌습니다.
 
 ---
+
+<!-- 📸 이미지 프롬프트: prompt: "Windows Registry Editor showing DisabledHotkeys value with S highlighted, PowerShell terminal with the fix command running, clean technical screenshot illustration, dark theme terminal, flat design style", aspect_ratio: "16:9", session_id: "blog-048", save_as: "048_01_registry-fix.png" -->
 
 ## 2) 핵심 설정: Windows 단축키 선점 해제
 

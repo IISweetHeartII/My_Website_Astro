@@ -4,6 +4,8 @@ description: "SSH 타임아웃의 벽을 넘어, 맥미니에서 직접 돌아�
 publish: true
 created_date: 2025-09-22
 category: DevOps
+featured_image: /images/blogs/044/044_00_thumbnail.png
+featured_image_alt: "git push 한 번으로 자동 배포되는 CI/CD 파이프라인"
 slug: github-actions-cicd
 tags:
   - GitHub Actions
@@ -26,6 +28,8 @@ faq:
 ---
 
 # git push만으로 자동 배포 - Self-Hosted Runner로 CI/CD 완성하기 🚀
+
+<!-- 📸 이미지 프롬프트: prompt: "A developer pressing git push on keyboard, then an automated pipeline diagram showing GitHub Actions arrow to Mac Mini home server with green checkmarks, rocket launch symbol, flat illustration style, blue and green color palette", aspect_ratio: "16:9", session_id: "blog-044", save_as: "044_00_thumbnail.png" -->
 
 ## 현재 상황: 수동 배포의 고통
 
@@ -162,6 +166,8 @@ GitHub Actions 페이지 확인:
 https://github.com/[your-org]/[your-repo]/actions
 
 워크플로우 실행 시작... 기대에 부푼 마음으로 지켜봅니다... 🤞
+
+<!-- 📸 이미지 프롬프트: prompt: "Network diagram showing GitHub Actions cloud trying to connect via SSH to a local Mac Mini behind a router with a big red X blocking the connection, timeout error message, flat illustration, clean tech diagram style", aspect_ratio: "16:9", session_id: "blog-044", save_as: "044_01_ssh-timeout-problem.png" -->
 
 ## 참담한 실패: SSH 타임아웃 😱
 
@@ -553,6 +559,8 @@ Hello from Mac Mini! Auto-deployed! 🚀
 ```
 
 **완벽하게 작동합니다!** 🎉🎉🎉
+
+<!-- 📸 이미지 프롬프트: prompt: "GitHub Actions workflow UI showing all green checkmarks for build and deploy steps on a self-hosted Mac Mini runner, success celebration with confetti, screenshot style illustration with dark UI theme", aspect_ratio: "16:9", session_id: "blog-044", save_as: "044_02_cicd-success.png" -->
 
 ## 전체 배포 시간 측정 ⏱️
 

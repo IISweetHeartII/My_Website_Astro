@@ -4,6 +4,8 @@ description: "공유기 설정 없이, 공인 IP 없이, 무료로 HTTPS 외부 
 publish: true
 created_date: 2025-09-15
 category: DevOps
+featured_image: /images/blogs/043/043_00_thumbnail.png
+featured_image_alt: "Cloudflare Tunnel로 HTTPS 외부 접속 구현"
 slug: cloudflare-tunnel
 tags:
   - Cloudflare
@@ -27,6 +29,8 @@ faq:
 ---
 
 # 포트 포워딩 없이 HTTPS 열기 - Cloudflare Tunnel의 마법 🔒
+
+<!-- 📸 이미지 프롬프트: prompt: "A magic tunnel connecting a home Mac Mini to the Cloudflare cloud network with HTTPS lock icons, orange Cloudflare logo, secure encrypted connection visualization, flat digital illustration, modern tech style", aspect_ratio: "16:9", session_id: "blog-043", save_as: "043_00_thumbnail.png" -->
 
 ## 문제: localhost에서 벗어나고 싶다
 
@@ -86,6 +90,8 @@ faq:
 - 🔴 **유지보수**: 인증서 갱신, IP 변경 추적
 - 🔴 **공유기 의존**: 공유기 지원 필요
 - 🔴 **DDoS 취약**: 공인 IP 노출
+
+<!-- 📸 이미지 프롬프트: prompt: "Old router configuration nightmare versus simple Cloudflare Tunnel setup, left side shows messy port forwarding diagrams with red warning signs, right side shows clean simple tunnel diagram with green checkmarks, before-and-after comparison, flat illustration", aspect_ratio: "16:9", session_id: "blog-043", save_as: "043_01_tunnel-vs-traditional.png" -->
 
 ## 현대적인 방법: Cloudflare Tunnel ✨
 
@@ -463,6 +469,8 @@ sudo launchctl list | grep cloudflare
 **Status: 0** (성공!) ✅
 
 만약 Status가 **1**이면? → 다음 섹션으로!
+
+<!-- 📸 이미지 프롬프트: prompt: "Developer at 2am staring at a terminal showing Status 1 error, empty log file, frustrated expression with coffee cup and dark room, blue screen glow, flat cartoon style illustration", aspect_ratio: "16:9", session_id: "blog-043", save_as: "043_02_status1-debug.png" -->
 
 ## 🔧 삽질 기록: Status 1 에러와의 전쟁
 

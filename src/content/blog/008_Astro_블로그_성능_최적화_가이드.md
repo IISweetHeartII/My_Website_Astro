@@ -20,7 +20,7 @@ twitter_card: summary_large_image
 created_date: 2025-04-19
 updated_date: 2025-04-19
 category: 블로그운영
-featured_image: /images/blogs/shared/placeholder.png
+featured_image: /images/blogs/008/008_00_thumbnail.png
 featured_image_alt: "성능 최적화 그래프가 표시된 노트북 화면"
 slug: astro-performance-optimization-guide
 tags:
@@ -50,9 +50,13 @@ faq:
 
 # Astro 블로그 속도 최적화: 이미지와 마크다운, 이렇게 관리하세요
 
+<!-- 📸 이미지 프롬프트: prompt: "A blazing fast rocket-shaped browser window loading a blog website at lightning speed, performance metrics graph going up, clean tech illustration style with blue and white colors", aspect_ratio: "16:9", session_id: "blog-008", save_as: "008_00_thumbnail.png" -->
+
 Astro는 '느린 웹사이트는 과거의 유물'이라고 선언하듯, 기본적으로 매우 뛰어난 성능을 자랑합니다. 하지만 우리가 추가하는 이미지와 마크다운 콘텐츠를 어떻게 다루느냐에 따라 그 잠재력을 100% 발휘할 수도, 혹은 발목을 잡을 수도 있습니다.
 
 블로그의 로딩 속도는 방문자의 첫인상을 결정하고, 검색 엔진 순위(SEO)에도 직접적인 영향을 미치는 매우 중요한 요소입니다. 오늘은 당신의 Astro 블로그를 한 단계 더 빠르게 만들어 줄 실용적인 이미지 및 마크다운 관리 전략을 공유합니다.
+
+<!-- 📸 이미지 프롬프트: prompt: "Side by side comparison of a heavy unoptimized image file vs a lightweight WebP image file, file size indicators visible, loading speed difference, infographic flat illustration style", aspect_ratio: "16:9", session_id: "blog-008", save_as: "008_01_image-optimization.png" -->
 
 ## 1. 이미지 최적화: 웹사이트 속도의 주범이자 해결사
 
@@ -86,6 +90,8 @@ Astro는 '느린 웹사이트는 과거의 유물'이라고 선언하듯, 기본
 ### 다. 지연 로딩(Lazy Loading)으로 초기 로딩 속도 확보
 
 페이지가 처음 로드될 때 화면에 보이지 않는 이미지까지 한 번에 불러올 필요는 없습니다. `loading="lazy"` 속성은 사용자가 스크롤하여 이미지가 뷰포트에 가까워졌을 때만 해당 이미지를 로드하도록 하는 표준 기술입니다. Astro의 `<Image />` 컴포넌트는 이를 자동으로 처리해줍니다.
+
+<!-- 📸 이미지 프롬프트: prompt: "A well-organized folder structure diagram showing markdown files and images stored systematically in public/images directory, clean developer workflow illustration", aspect_ratio: "16:9", session_id: "blog-008", save_as: "008_02_markdown-management.png" -->
 
 ## 2. 마크다운 콘텐츠 관리: 효율성과 가독성
 

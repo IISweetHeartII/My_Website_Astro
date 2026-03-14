@@ -20,7 +20,7 @@ twitter_card: summary_large_image
 created_date: 2025-04-09
 updated_date: 2025-04-09
 category: AI
-featured_image: /images/blogs/shared/placeholder.png
+featured_image: /images/blogs/004/004_00_thumbnail.png
 slug: chatgpt-custom-instructions-mobile-guide
 tags:
   - ChatGPT
@@ -31,6 +31,8 @@ tags:
 ---
 
 # ChatGPT 효율 10배 높이기: '맞춤형 지침' 설정 완벽 가이드 (모바일)
+
+<!-- 📸 이미지 프롬프트: prompt: "A smartphone showing the ChatGPT app with custom instructions settings screen, glowing UI elements, productivity boost concept, modern tech illustration style", aspect_ratio: "16:9", session_id: "blog-004", save_as: "004_00_thumbnail.png" -->
 
 안녕하세요! ChatGPT를 사용하면서 <strong>"매번 똑같은 말을 반복해야 하네..."</strong>라고 생각해보신 적 없으신가요? 예를 들어, "너는 최고의 개발자라고 생각하고 답변해줘" 라거나 "답변은 항상 한국어로 해줘" 같은 요구사항들 말이죠.
 
