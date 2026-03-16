@@ -456,49 +456,47 @@ transition: slide-up
 
 # 세 가지 케이스 정리
 
-<div class="section-divider mt-1 mb-5" />
+<div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:1rem; margin-top:1.5rem;">
 
-<div class="grid-3">
-
-<div class="compare-card compare-card-1">
-  <div class="compare-num" style="color: var(--dk-red);">01</div>
-  <div class="font-bold mb-1" style="color: var(--dk-red);">Toast 중복</div>
-  <div class="text-xs mb-2" style="color: var(--dk-text-muted);">10개 파일에서 복붙</div>
-  <div class="label-before">before</div>
-  <pre class="compare-code"><code>useState("")
+<div style="background:#13131f; border:1px solid rgba(243,139,168,0.3); border-top:3px solid #f38ba8; border-radius:12px; padding:1rem;">
+  <div style="font-size:1.6rem; font-weight:900; color:#f38ba8; line-height:1; margin-bottom:0.4rem;">01</div>
+  <div style="font-weight:700; color:#f38ba8; margin-bottom:0.25rem;">Toast 중복</div>
+  <div style="font-size:0.72rem; color:rgba(205,214,244,0.5); margin-bottom:0.75rem;">10개 파일에서 복붙</div>
+  <div style="font-size:0.6rem; font-weight:800; text-transform:uppercase; color:#f38ba8; letter-spacing:0.1em; margin-bottom:0.2rem;">BEFORE</div>
+  <pre style="background:rgba(0,0,0,0.3); border-left:2px solid #f38ba8; border-radius:6px; padding:0.4rem 0.6rem; font-size:0.7rem; font-family:monospace; color:#cdd6f4; margin:0 0 0.5rem;"><code>useState("")
 useState(false)
 setTimeout(...)</code></pre>
-  <div class="label-after">after</div>
-  <pre class="compare-code compare-code-after"><code>useToast()</code></pre>
+  <div style="font-size:0.6rem; font-weight:800; text-transform:uppercase; color:#a6e3a1; letter-spacing:0.1em; margin-bottom:0.2rem;">AFTER</div>
+  <pre style="background:rgba(0,0,0,0.3); border-left:2px solid #a6e3a1; border-radius:6px; padding:0.4rem 0.6rem; font-size:0.7rem; font-family:monospace; color:#cdd6f4; margin:0;"><code>useToast()</code></pre>
 </div>
 
-<div class="compare-card compare-card-2">
-  <div class="compare-num" style="color: var(--dk-yellow);">02</div>
-  <div class="font-bold mb-1" style="color: var(--dk-yellow);">상태 7개</div>
-  <div class="text-xs mb-2" style="color: var(--dk-text-muted);">UserInfoFields.tsx</div>
-  <div class="label-before">before</div>
-  <pre class="compare-code"><code>useState(false) // x7
+<div style="background:#13131f; border:1px solid rgba(249,226,175,0.3); border-top:3px solid #f9e2af; border-radius:12px; padding:1rem;">
+  <div style="font-size:1.6rem; font-weight:900; color:#f9e2af; line-height:1; margin-bottom:0.4rem;">02</div>
+  <div style="font-weight:700; color:#f9e2af; margin-bottom:0.25rem;">상태 7개</div>
+  <div style="font-size:0.72rem; color:rgba(205,214,244,0.5); margin-bottom:0.75rem;">UserInfoFields.tsx</div>
+  <div style="font-size:0.6rem; font-weight:800; text-transform:uppercase; color:#f38ba8; letter-spacing:0.1em; margin-bottom:0.2rem;">BEFORE</div>
+  <pre style="background:rgba(0,0,0,0.3); border-left:2px solid #f38ba8; border-radius:6px; padding:0.4rem 0.6rem; font-size:0.7rem; font-family:monospace; color:#cdd6f4; margin:0 0 0.5rem;"><code>useState(false) // x7
 handleSendCode()
 handleVerifyCode()</code></pre>
-  <div class="label-after">after</div>
-  <pre class="compare-code compare-code-after"><code>useEmailVerification(
+  <div style="font-size:0.6rem; font-weight:800; text-transform:uppercase; color:#a6e3a1; letter-spacing:0.1em; margin-bottom:0.2rem;">AFTER</div>
+  <pre style="background:rgba(0,0,0,0.3); border-left:2px solid #a6e3a1; border-radius:6px; padding:0.4rem 0.6rem; font-size:0.7rem; font-family:monospace; color:#cdd6f4; margin:0;"><code>useEmailVerification(
   email, triggerToast
 )</code></pre>
 </div>
 
-<div class="compare-card compare-card-3">
-  <div class="compare-num" style="color: var(--dk-orange);">03</div>
-  <div class="font-bold mb-1" style="color: var(--dk-orange);">Effect 2개</div>
-  <div class="text-xs mb-2" style="color: var(--dk-text-muted);">mainpage/page.tsx</div>
-  <div class="label-before">before</div>
-  <pre class="compare-code"><code>useEffect(() => {
+<div style="background:#13131f; border:1px solid rgba(250,179,135,0.3); border-top:3px solid #fab387; border-radius:12px; padding:1rem;">
+  <div style="font-size:1.6rem; font-weight:900; color:#fab387; line-height:1; margin-bottom:0.4rem;">03</div>
+  <div style="font-weight:700; color:#fab387; margin-bottom:0.25rem;">Effect 2개</div>
+  <div style="font-size:0.72rem; color:rgba(205,214,244,0.5); margin-bottom:0.75rem;">mainpage/page.tsx</div>
+  <div style="font-size:0.6rem; font-weight:800; text-transform:uppercase; color:#f38ba8; letter-spacing:0.1em; margin-bottom:0.2rem;">BEFORE</div>
+  <pre style="background:rgba(0,0,0,0.3); border-left:2px solid #f38ba8; border-radius:6px; padding:0.4rem 0.6rem; font-size:0.7rem; font-family:monospace; color:#cdd6f4; margin:0 0 0.5rem;"><code>useEffect(() => {
   // 이벤트
 }, [refetch])
 useEffect(() => {
-  // Store 동기화
+  // 동기화
 }, [data])</code></pre>
-  <div class="label-after">after</div>
-  <pre class="compare-code compare-code-after"><code>useExceptionMenuSync()</code></pre>
+  <div style="font-size:0.6rem; font-weight:800; text-transform:uppercase; color:#a6e3a1; letter-spacing:0.1em; margin-bottom:0.2rem;">AFTER</div>
+  <pre style="background:rgba(0,0,0,0.3); border-left:2px solid #a6e3a1; border-radius:6px; padding:0.4rem 0.6rem; font-size:0.7rem; font-family:monospace; color:#cdd6f4; margin:0;"><code>useExceptionMenuSync()</code></pre>
 </div>
 
 </div>
