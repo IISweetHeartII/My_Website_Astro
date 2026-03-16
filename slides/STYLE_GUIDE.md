@@ -152,9 +152,9 @@ transition: slide-up
 
 ### 코드 길이 제한 (핵심 규칙)
 
-- 슬라이드 1장에 코드 **최대 20~22줄**
-- 그 이상이면 슬라이드 나누거나 주석으로 생략: `// ...`
-- `style.css`에서 `max-height: 380px` 자동 적용 (초과 시 스크롤)
+- 슬라이드 1장에 코드 **최대 18줄** (헤더+박스 여백 포함 시 더 넘침)
+- 그 이상이면 슬라이드 분리하거나 주석으로 압축: `// ...`
+- `style.css`에서 `max-height: 400px` 자동 적용
 
 ### 라인별 하이라이트 (필수 패턴)
 
@@ -319,13 +319,82 @@ slides/[영문-소문자-하이픈]/slides.md
 
 ---
 
-## 9. 체크리스트 (발표 전)
+## 9. Slidev 렌더링 4대 금지 규칙
+
+실제 사고에서 추출. 이 규칙을 어기면 슬라이드가 깨진다.
+
+### ❌ 규칙 1: HTML div 안에 마크다운 코드블록 금지
+
+```md
+<!-- 깨짐 -->
+<div class="card">
+  ```tsx
+  const x = 1
+  ```
+</div>
+
+<!-- 정상 -->
+<div class="card">
+  <pre><code>const x = 1</code></pre>
+</div>
+```
+
+Slidev는 `<div>` 태그 내부를 raw HTML로 처리 → 마크다운 코드블록 파싱 안 됨.
+
+---
+
+### ❌ 규칙 2: v-motion을 CSS grid 자식에 직접 사용 금지
+
+```md
+<!-- 깨짐: v-motion이 wrapper div 생성 → grid 레이아웃 무너짐 -->
+<div style="display:grid; grid-template-columns:1fr 1fr">
+  <div v-motion :initial="{opacity:0}" class="card">내용</div>
+  <div v-motion :initial="{opacity:0}" class="card">내용</div>
+</div>
+
+<!-- 정상: grid 밖에서 v-motion 사용 -->
+<div v-motion :initial="{opacity:0}">
+  <div style="display:grid; grid-template-columns:1fr 1fr">
+    <div class="card">내용</div>
+    <div class="card">내용</div>
+  </div>
+</div>
+```
+
+---
+
+### ❌ 규칙 3: 중요 레이아웃에 외부 CSS 클래스만 사용 금지
+
+외부 `style.css`의 클래스가 특정 슬라이드에서 적용 안 될 수 있다.
+grid, 카드 배경 등 **구조적으로 중요한 스타일은 inline style 병행 사용**.
+
+```md
+<!-- 불안정 -->
+<div class="grid-3">...</div>
+
+<!-- 안전 -->
+<div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:1rem;">...</div>
+```
+
+---
+
+### ❌ 규칙 4: 코드블록 18줄 초과 금지
+
+헤더(뱃지, 링크)와 하단 박스 여백 포함하면 18줄도 화면에 꽉 찬다.
+초과 시 슬라이드 분리 또는 핵심 라인만 남기고 `// ...` 처리.
+
+---
+
+## 10. 체크리스트 (발표 전)
 
 ```
+□ bun run build 오류 없이 통과하는가
+□ 모든 코드블록 18줄 이하인가
+□ HTML div 안에 마크다운 코드블록(```) 없는가
+□ v-motion이 grid 직접 자식에 붙어있지 않은가
+□ 중요 레이아웃(grid)에 inline style 사용했는가
+□ magic-move 사용하지 않았는가
 □ 슬라이드 수가 발표 시간에 맞는가
 □ 타이틀 슬라이드에 핵심 메시지가 있는가
-□ 코드 슬라이드에 라인 하이라이트가 설정되어 있는가
-□ magic-move 사용하지 않았는가
 □ 마지막 슬라이드가 마무리 형식을 따르는가
-□ bun run build 오류 없이 통과하는가
 ```

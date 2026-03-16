@@ -333,10 +333,26 @@ slides/
    bunx wrangler pages deploy dist --project-name slides-log8kr
    ```
 
-### 주의사항
+### 주의사항 (반드시 숙지)
 
 - `bun run dev`는 반드시 **WSL2 터미널에서 직접 실행** (Claude Code 세션은 TTY 없어서 실행 불가)
 - `slides/node_modules/`, `slides/dist/` 는 `.gitignore`에서 제외됨 (slides/.gitignore)
+
+### Slidev 렌더링 4대 금지 규칙
+
+아래 규칙을 어기면 슬라이드가 깨지거나 레이아웃이 무너진다. 실제 사고 사례에서 추출.
+
+| 규칙 | 잘못된 예 | 올바른 예 |
+|------|----------|---------|
+| **HTML div 안에 마크다운 코드블록 금지** | `<div>` 안에 ` ```tsx ``` ` | `<pre><code>` 태그 사용 |
+| **v-motion을 grid 자식에 직접 금지** | `<div v-motion class="grid-child">` | grid 밖 wrapper에 적용하거나 제거 |
+| **중요 레이아웃은 inline style 사용** | `class="grid-3"` (외부 CSS) | `style="display:grid; grid-template-columns:..."` |
+| **코드블록 18줄 이하** | 20줄+ 코드 1장에 | 슬라이드 분리 또는 압축 |
+
+**왜 이런 문제가 생기나:**
+- Slidev는 마크다운을 HTML로 변환할 때, `<div>` 태그 안은 raw HTML로 처리 → 마크다운 코드블록 파싱 안 됨
+- `v-motion`은 대상 요소를 wrapper `<div>`로 감쌈 → CSS grid의 직접 자식 관계가 깨짐
+- 외부 CSS 파일의 클래스가 Slidev 내부 스타일에 의해 덮어써지는 경우 있음 → inline style은 항상 적용됨
 
 ## Obsidian Setup
 
