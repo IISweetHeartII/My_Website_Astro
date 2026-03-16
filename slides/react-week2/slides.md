@@ -189,9 +189,8 @@ transition: slide-up
   <span class="text-sm" style="color: var(--dk-text-muted);">누군가 이미 만들어뒀는데 안 쓰이고 있음</span>
 </div>
 
-```tsx {all|3-5|7-12|14-20}
-export function useToast(options?: { duration?: number }) {
-  const { duration = 2500 } = options ?? {};
+```tsx {all|2-4|6-11|13-17}
+export function useToast({ duration = 2500 } = {}) {
   const [show, setShow] = useState(false);
   const [message, setMessage] = useState("");
   const timerRef = useRef<number | null>(null);
@@ -203,10 +202,8 @@ export function useToast(options?: { duration?: number }) {
     timerRef.current = window.setTimeout(() => setShow(false), duration);
   }, [duration]);
 
-  useEffect(() => {
-    return () => {
-      if (timerRef.current) window.clearTimeout(timerRef.current); // ✅ cleanup
-    };
+  useEffect(() => () => {
+    if (timerRef.current) window.clearTimeout(timerRef.current); // ✅ cleanup
   }, []);
 
   return { show, message, triggerToast };
@@ -261,21 +258,18 @@ transition: slide-up
   <a class="gh-link" href="https://github.com/Team-Omechu/Omechu-web/blob/main/omechu-app/src/widgets/auth/sign-up-form/ui/UserInfoFields.tsx#L15-L91" target="_blank">UserInfoFields.tsx:15-91</a>
 </div>
 
-```tsx {all|2-8|10-18}
+```tsx {all|2-7|9-16}
 export default function UserInfoFields() {
-  // 😵 상태 7개
   const [passwordBlurred, setPasswordBlurred] = useState(false);
   const [passwordConfirmBlurred, setPasswordConfirmBlurred] = useState(false);
   const [isCodeSent, setIsCodeSent] = useState(false);
   const [isVerified, setIsVerified] = useState(false);
-  const [toastMessage, setToastMessage] = useState("");
-  const [showToast, setShowToast] = useState(false);
+  const [toastMessage, setToastMessage] = useState(""); // 😵 상태 6개
+  const [showToast, setShowToast] = useState(false);    // 😵 + 1개 더
 
   const handleSendCode = () => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(emailToSend)) {
-      triggerToast("올바른 이메일 형식을 입력해 주세요.");
-      return;
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailToSend)) {
+      triggerToast("올바른 이메일 형식을 입력해 주세요."); return;
     }
     sendCode(emailToSend, {
       onSuccess: (data) => { setIsCodeSent(true); triggerToast(data.message); },
@@ -396,33 +390,27 @@ transition: slide-up
   <a class="gh-link" href="https://github.com/Team-Omechu/Omechu-web/blob/main/omechu-app/src/app/(public)/mainpage/page.tsx#L51-L86" target="_blank">mainpage/page.tsx:51-86</a>
 </div>
 
-```tsx {all|1-12|14-22}
-// Effect 1: 페이지 포커스 때마다 API 재요청
+```tsx {all|1-9|11-16}
+// Effect 1: 포커스 때마다 API 재요청
 useEffect(() => {
-  const onPageShow = () => void refetch();
-  const onFocus = () => void refetch();
-  window.addEventListener("pageshow", onPageShow);
-  window.addEventListener("focus", onFocus);
+  const handler = () => void refetch();
+  window.addEventListener("pageshow", handler);
+  window.addEventListener("focus", handler);
   void refetch();
-  return () => {
-    window.removeEventListener("pageshow", onPageShow);
-    window.removeEventListener("focus", onFocus);
-  };
+  return () => { window.removeEventListener("pageshow", handler);
+    window.removeEventListener("focus", handler); };
 }, [refetch]);
 
 // Effect 2: API 응답 → Store 동기화
 useEffect(() => {
-  const exceptedMenus = data?.exceptedMenus;
-  if (!Array.isArray(exceptedMenus)) return;
+  if (!Array.isArray(data?.exceptedMenus)) return;
   resetExceptions();
-  exceptedMenus
-    .filter((m) => m?.name?.trim())
-    .forEach((m) => addException(m.name.trim()));
+  data.exceptedMenus.forEach((m) => addException(m.name.trim()));
 }, [data, addException, resetExceptions]);
 ```
 
-<div v-click class="box-primary mt-3 text-sm">
-  🤔 두 Effect가 논리적으로 연결돼 있는데 (같은 기능) 컴포넌트에 흩어져 있음
+<div class="box-primary mt-3 text-sm">
+  🤔 두 Effect가 <strong style="color: var(--dk-primary-light);">같은 기능</strong>인데 컴포넌트에 흩어져 있음
 </div>
 
 ---
@@ -436,23 +424,20 @@ transition: slide-up
   <span class="text-sm" style="color: var(--dk-text-muted);">useExceptionMenuSync.ts</span>
 </div>
 
-```tsx {all|1-3|5-14|16-21}
+```tsx {all|1-3|5-12|14-18}
 export function useExceptionMenuSync() {
   const { data, refetch } = useRecommendManagement();
   const { addException, resetExceptions } = useQuestionAnswerStore();
 
   useEffect(() => { // Effect 1: 포커스 시 재요청
-    const handler = () => void refetch();
-    window.addEventListener("pageshow", handler);
-    window.addEventListener("focus", handler);
+    const h = () => void refetch();
+    window.addEventListener("pageshow", h);
+    window.addEventListener("focus", h);
     void refetch();
-    return () => {
-      window.removeEventListener("pageshow", handler);
-      window.removeEventListener("focus", handler);
-    };
+    return () => { window.removeEventListener("pageshow", h);
+                   window.removeEventListener("focus", h); };
   }, [refetch]);
-
-  useEffect(() => { // Effect 2: Store 동기화
+  useEffect(() => { // Effect 2
     if (!Array.isArray(data?.exceptedMenus)) return;
     resetExceptions();
     data.exceptedMenus.forEach((m) => addException(m.name.trim()));
