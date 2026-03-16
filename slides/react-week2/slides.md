@@ -10,13 +10,47 @@ drawings:
 css: ../style.css
 ---
 
-# 커스텀 훅과 책임 분리
+<div class="flex flex-col items-center justify-center h-full gap-6">
 
-**React 중급 스터디 — 2주차**
+<div
+  v-motion
+  :initial="{ opacity: 0, y: -30 }"
+  :enter="{ opacity: 1, y: 0, transition: { duration: 600 } }"
+  class="badge badge-purple mb-2"
+>
+  React 중급 스터디 · 2주차
+</div>
 
-<br>
+<h1
+  v-motion
+  :initial="{ opacity: 0, scale: 0.9 }"
+  :enter="{ opacity: 1, scale: 1, transition: { duration: 700, delay: 150 } }"
+  style="font-size: 3rem; font-weight: 900; line-height: 1.1; letter-spacing: -0.03em;"
+>
+  커스텀 훅과<br>책임 분리
+</h1>
 
-<span class="text-purple-300 font-bold">실제 코드</span>에서 뽑은 리팩토링 케이스 3가지
+<div
+  v-motion
+  :initial="{ opacity: 0, y: 20 }"
+  :enter="{ opacity: 1, y: 0, transition: { duration: 500, delay: 350 } }"
+  class="text-gray-400 text-lg"
+>
+  로직은 훅이, 렌더링은 컴포넌트가
+</div>
+
+<div
+  v-motion
+  :initial="{ opacity: 0 }"
+  :enter="{ opacity: 1, transition: { duration: 500, delay: 550 } }"
+  class="flex gap-3 mt-2"
+>
+  <span class="badge badge-purple">실제 코드</span>
+  <span class="badge badge-blue">Omechu 프로젝트</span>
+  <span class="badge badge-green">리팩토링 3케이스</span>
+</div>
+
+</div>
 
 ---
 transition: fade
@@ -24,33 +58,107 @@ transition: fade
 
 # 오늘 다룰 것
 
-<br>
+<div class="section-divider mt-1 mb-6" />
 
-<v-clicks>
+<div class="grid grid-cols-1 gap-4 mt-4">
 
-- 🔴 **Case 1** — Toast 로직이 10개 파일에서 복붙되고 있다
-- 🟡 **Case 2** — 컴포넌트 하나가 상태 7개를 들고 있다
-- 🟠 **Case 3** — useEffect 2개가 서로 얽혀있다
+<div
+  v-motion
+  :initial="{ opacity: 0, x: -30 }"
+  :enter="{ opacity: 1, x: 0, transition: { duration: 450, delay: 100 } }"
+  class="dk-card flex items-center gap-5"
+>
+  <div class="case-number-sm" style="color: var(--dk-red); -webkit-text-fill-color: var(--dk-red); filter: none;">01</div>
+  <div>
+    <div class="font-bold text-lg" style="color: var(--dk-red);">Toast 로직이 10개 파일에서 복붙되고 있다</div>
+    <div class="text-sm" style="color: var(--dk-text-muted);">중복 제거 + 타이머 메모리 누수 수정</div>
+  </div>
+</div>
 
-</v-clicks>
+<div
+  v-motion
+  :initial="{ opacity: 0, x: -30 }"
+  :enter="{ opacity: 1, x: 0, transition: { duration: 450, delay: 250 } }"
+  class="dk-card flex items-center gap-5"
+>
+  <div class="case-number-sm" style="color: var(--dk-yellow); -webkit-text-fill-color: var(--dk-yellow); filter: none;">02</div>
+  <div>
+    <div class="font-bold text-lg" style="color: var(--dk-yellow);">컴포넌트 하나가 상태 7개를 들고 있다</div>
+    <div class="text-sm" style="color: var(--dk-text-muted);">상태와 핸들러를 전용 훅으로 추출</div>
+  </div>
+</div>
 
-<br>
+<div
+  v-motion
+  :initial="{ opacity: 0, x: -30 }"
+  :enter="{ opacity: 1, x: 0, transition: { duration: 450, delay: 400 } }"
+  class="dk-card flex items-center gap-5"
+>
+  <div class="case-number-sm" style="color: var(--dk-orange); -webkit-text-fill-color: var(--dk-orange); filter: none;">03</div>
+  <div>
+    <div class="font-bold text-lg" style="color: var(--dk-orange);">useEffect 2개가 서로 얽혀있다</div>
+    <div class="text-sm" style="color: var(--dk-text-muted);">논리적으로 연결된 Effect를 하나의 훅으로</div>
+  </div>
+</div>
 
-<v-click>
+</div>
+
+<div
+  v-motion
+  :initial="{ opacity: 0 }"
+  :enter="{ opacity: 1, transition: { duration: 400, delay: 600 } }"
+  class="mt-5"
+>
 
 > 모두 현재 운영 중인 [Omechu](https://github.com/Team-Omechu/Omechu-web) 코드베이스에서 가져왔습니다
 
-</v-click>
+</div>
+
+---
+layout: center
+class: text-center
+transition: slide-up
+---
+
+<div class="flex flex-col items-center justify-center gap-4">
+
+<div
+  v-motion
+  :initial="{ opacity: 0, scale: 0.7 }"
+  :enter="{ opacity: 1, scale: 1, transition: { duration: 500 } }"
+  class="case-number"
+>01</div>
+
+<div
+  v-motion
+  :initial="{ opacity: 0, y: 20 }"
+  :enter="{ opacity: 1, y: 0, transition: { duration: 400, delay: 200 } }"
+>
+  <div class="text-3xl font-bold text-white mb-2">Toast가 복붙되고 있다</div>
+  <div class="text-gray-400 text-lg">10개 파일 · 타이머 cleanup 누락</div>
+</div>
+
+<div
+  v-motion
+  :initial="{ opacity: 0 }"
+  :enter="{ opacity: 1, transition: { duration: 400, delay: 400 } }"
+  class="badge badge-red mt-2"
+>
+  메모리 누수 위험
+</div>
+
+</div>
 
 ---
 transition: slide-up
 ---
 
-# Case 1 — Toast가 복붙되고 있다
+# Case 1 — Before: Toast가 복붙되고 있다
 
-<div class="text-gray-400 text-sm mb-3">
-  <a href="https://github.com/Team-Omechu/Omechu-web/blob/main/omechu-app/src/widgets/auth/sign-up-form/ui/UserInfoFields.tsx#L22-L35" target="_blank">UserInfoFields.tsx:22-35</a>
-  · 동일 패턴이 <span class="text-red-400 font-bold">10개 파일</span>에서 반복
+<div class="flex items-center gap-3 mb-3">
+  <span class="badge badge-red">BEFORE</span>
+  <a class="gh-link" href="https://github.com/Team-Omechu/Omechu-web/blob/main/omechu-app/src/widgets/auth/sign-up-form/ui/UserInfoFields.tsx#L22-L35" target="_blank">UserInfoFields.tsx:22-35</a>
+  <span class="text-sm" style="color: var(--dk-text-muted);">동일 패턴이 <span class="font-bold" style="color: var(--dk-red);">10개 파일</span>에서 반복</span>
 </div>
 
 ```tsx {all|2-3|5-9}
@@ -61,23 +169,24 @@ const [showToast, setShowToast] = useState(false);
 const triggerToast = (msg: string) => {
   setToastMessage(msg);
   setShowToast(true);
-  setTimeout(() => setShowToast(false), 2500); // timer cleanup 없음 ⚠️
+  setTimeout(() => setShowToast(false), 2500); // ⚠️ timer cleanup 없음
 };
 ```
 
-<div v-click class="box-primary mt-4 text-sm">
-  ⚠️ <strong class="text-purple-300">문제:</strong> 타이머 cleanup이 없어서 컴포넌트 언마운트 후 setState 호출 가능
+<div v-click class="box-danger mt-4 text-sm">
+  ⚠️ <strong style="color: var(--dk-red);">문제:</strong> 타이머 cleanup이 없어서 컴포넌트 언마운트 후에도 <code>setState</code> 호출 → 메모리 누수 + React 경고
 </div>
 
 ---
 transition: slide-up
 ---
 
-# Case 1 — 이미 훅이 있다
+# Case 1 — After: 이미 훅이 있다
 
-<div class="text-gray-400 text-sm mb-3">
-  <a href="https://github.com/Team-Omechu/Omechu-web/blob/main/omechu-app/src/shared/lib/useToast.ts" target="_blank">shared/lib/useToast.ts</a>
-  — 누군가 이미 만들어뒀는데 안 쓰이고 있음
+<div class="flex items-center gap-3 mb-3">
+  <span class="badge badge-green">AFTER</span>
+  <a class="gh-link" href="https://github.com/Team-Omechu/Omechu-web/blob/main/omechu-app/src/shared/lib/useToast.ts" target="_blank">shared/lib/useToast.ts</a>
+  <span class="text-sm" style="color: var(--dk-text-muted);">누군가 이미 만들어뒀는데 안 쓰이고 있음</span>
 </div>
 
 ```tsx {all|3-5|7-12|14-20}
@@ -96,7 +205,7 @@ export function useToast(options?: { duration?: number }) {
 
   useEffect(() => {
     return () => {
-      if (timerRef.current) window.clearTimeout(timerRef.current); // cleanup ✅
+      if (timerRef.current) window.clearTimeout(timerRef.current); // ✅ cleanup
     };
   }, []);
 
@@ -104,21 +213,59 @@ export function useToast(options?: { duration?: number }) {
 }
 ```
 
-<div v-click class="box-accent mt-3 text-sm">
-  ✅ <strong class="text-blue-300">해결:</strong> 10개 파일에서 <code>const &#123; show, message, triggerToast &#125; = useToast()</code> 한 줄로 교체
+<div v-click class="box-success mt-3 text-sm">
+  ✅ <strong style="color: var(--dk-green);">해결:</strong> 10개 파일에서 <code>const &#123; show, message, triggerToast &#125; = useToast()</code> 한 줄로 교체
+</div>
+
+---
+layout: center
+class: text-center
+transition: slide-up
+---
+
+<div class="flex flex-col items-center justify-center gap-4">
+
+<div
+  v-motion
+  :initial="{ opacity: 0, scale: 0.7 }"
+  :enter="{ opacity: 1, scale: 1, transition: { duration: 500 } }"
+  class="case-number"
+  style="background: linear-gradient(135deg, #f9e2af, #fab387); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 0 30px rgba(249, 226, 175, 0.5));"
+>02</div>
+
+<div
+  v-motion
+  :initial="{ opacity: 0, y: 20 }"
+  :enter="{ opacity: 1, y: 0, transition: { duration: 400, delay: 200 } }"
+>
+  <div class="text-3xl font-bold text-white mb-2">상태 7개짜리 컴포넌트</div>
+  <div class="text-gray-400 text-lg">UserInfoFields.tsx · 하나의 컴포넌트가 너무 많이 알고 있다</div>
+</div>
+
+<div
+  v-motion
+  :initial="{ opacity: 0 }"
+  :enter="{ opacity: 1, transition: { duration: 400, delay: 400 } }"
+  class="badge mt-2"
+  style="color: var(--dk-yellow); background: rgba(249, 226, 175, 0.1); border-color: rgba(249, 226, 175, 0.4);"
+>
+  단일 책임 원칙 위반
+</div>
+
 </div>
 
 ---
 transition: slide-up
 ---
 
-# Case 2 — 상태 7개짜리 컴포넌트
+# Case 2 — Before: 상태 7개짜리 컴포넌트
 
-<div class="text-gray-400 text-sm mb-3">
-  <a href="https://github.com/Team-Omechu/Omechu-web/blob/main/omechu-app/src/widgets/auth/sign-up-form/ui/UserInfoFields.tsx#L15-L91" target="_blank">UserInfoFields.tsx:15-91</a>
+<div class="flex items-center gap-3 mb-3">
+  <span class="badge badge-red">BEFORE</span>
+  <a class="gh-link" href="https://github.com/Team-Omechu/Omechu-web/blob/main/omechu-app/src/widgets/auth/sign-up-form/ui/UserInfoFields.tsx#L15-L91" target="_blank">UserInfoFields.tsx:15-91</a>
 </div>
 
-```tsx {all|2-8|10-25}
+```tsx {all|2-8|10-18}
 export default function UserInfoFields() {
   // 😵 상태 7개
   const [passwordBlurred, setPasswordBlurred] = useState(false);
@@ -136,13 +283,9 @@ export default function UserInfoFields() {
     }
     sendCode(emailToSend, {
       onSuccess: (data) => { setIsCodeSent(true); triggerToast(data.message); },
-      onError: (error: unknown) => {
-        const e = error as ApiClientError;
-        triggerToast(e?.message ?? "인증번호 전송에 실패했습니다.");
-      },
+      onError: (e: ApiClientError) => triggerToast(e?.message ?? "전송 실패"),
     });
   };
-  // handleVerifyCode도 비슷한 길이...
 }
 ```
 
@@ -150,10 +293,14 @@ export default function UserInfoFields() {
 transition: slide-up
 ---
 
-# Case 2 — 훅으로 분리하면
+# Case 2 — After: 훅으로 분리하면
 
-```tsx {all|1-3|5-18|20-24}
-// useEmailVerification.ts (새로 만들 훅)
+<div class="flex items-center gap-3 mb-3">
+  <span class="badge badge-green">AFTER</span>
+  <span class="text-sm" style="color: var(--dk-text-muted);">useEmailVerification.ts (새로 만들 훅)</span>
+</div>
+
+```tsx {all|1-3|5-15|17-24}
 export function useEmailVerification(email: string, onToast: (msg: string) => void) {
   const [isCodeSent, setIsCodeSent] = useState(false);
   const [isVerified, setIsVerified] = useState(false);
@@ -184,17 +331,55 @@ export function useEmailVerification(email: string, onToast: (msg: string) => vo
 ```
 
 <div v-click class="box-primary mt-3 text-sm">
-  ✅ 컴포넌트에서 <strong class="text-purple-300">상태 7개 → 1줄</strong>로: <code>const &#123; isCodeSent, isVerified, ... &#125; = useEmailVerification(email, triggerToast)</code>
+  ✅ 컴포넌트에서 <strong style="color: var(--dk-primary-light);">상태 7개 → 1줄</strong>로: <code>const &#123; isCodeSent, isVerified, ... &#125; = useEmailVerification(email, triggerToast)</code>
+</div>
+
+---
+layout: center
+class: text-center
+transition: slide-up
+---
+
+<div class="flex flex-col items-center justify-center gap-4">
+
+<div
+  v-motion
+  :initial="{ opacity: 0, scale: 0.7 }"
+  :enter="{ opacity: 1, scale: 1, transition: { duration: 500 } }"
+  class="case-number"
+  style="background: linear-gradient(135deg, #fab387, #f38ba8); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 0 30px rgba(250, 179, 135, 0.5));"
+>03</div>
+
+<div
+  v-motion
+  :initial="{ opacity: 0, y: 20 }"
+  :enter="{ opacity: 1, y: 0, transition: { duration: 400, delay: 200 } }"
+>
+  <div class="text-3xl font-bold text-white mb-2">useEffect 2개가 얽혀있다</div>
+  <div class="text-gray-400 text-lg">mainpage/page.tsx · 논리적으로 같은 기능이 흩어져 있다</div>
+</div>
+
+<div
+  v-motion
+  :initial="{ opacity: 0 }"
+  :enter="{ opacity: 1, transition: { duration: 400, delay: 400 } }"
+  class="badge mt-2"
+  style="color: var(--dk-orange); background: rgba(250, 179, 135, 0.1); border-color: rgba(250, 179, 135, 0.4);"
+>
+  관심사 분리 필요
+</div>
+
 </div>
 
 ---
 transition: slide-up
 ---
 
-# Case 3 — useEffect 2개가 얽혀있다
+# Case 3 — Before: useEffect 2개가 얽혀있다
 
-<div class="text-gray-400 text-sm mb-3">
-  <a href="https://github.com/Team-Omechu/Omechu-web/blob/main/omechu-app/src/app/(public)/mainpage/page.tsx#L51-L86" target="_blank">mainpage/page.tsx:51-86</a>
+<div class="flex items-center gap-3 mb-3">
+  <span class="badge badge-red">BEFORE</span>
+  <a class="gh-link" href="https://github.com/Team-Omechu/Omechu-web/blob/main/omechu-app/src/app/(public)/mainpage/page.tsx#L51-L86" target="_blank">mainpage/page.tsx:51-86</a>
 </div>
 
 ```tsx {all|1-12|14-22}
@@ -230,10 +415,14 @@ useEffect(() => {
 transition: slide-up
 ---
 
-# Case 3 — 하나의 훅으로
+# Case 3 — After: 하나의 훅으로
 
-```tsx {all|1-12|14-21|23-25}
-// useExceptionMenuSync.ts
+<div class="flex items-center gap-3 mb-3">
+  <span class="badge badge-green">AFTER</span>
+  <span class="text-sm" style="color: var(--dk-text-muted);">useExceptionMenuSync.ts</span>
+</div>
+
+```tsx {all|1-12|14-21|23-27}
 export function useExceptionMenuSync() {
   const { data, refetch } = useRecommendManagement();
   const { addException, resetExceptions } = useQuestionAnswerStore();
@@ -262,8 +451,7 @@ export function useExceptionMenuSync() {
 
 // 컴포넌트에서는
 export default function MainPage() {
-  useExceptionMenuSync(); // 한 줄!
-  // ...
+  useExceptionMenuSync(); // ✅ 한 줄!
 }
 ```
 
@@ -273,59 +461,75 @@ transition: slide-up
 
 # 세 가지 케이스 정리
 
-<div class="grid grid-cols-3 gap-3 mt-4">
+<div class="section-divider mt-1 mb-5" />
 
-<div class="dk-card">
-  <div class="text-red-400 font-bold text-sm mb-2">Case 1 · Toast 중복</div>
-  <div class="text-xs text-gray-400 mb-3">10개 파일에서 복붙</div>
+<div class="grid-3">
 
-  **before**
+<div
+  v-motion
+  :initial="{ opacity: 0, y: 25 }"
+  :enter="{ opacity: 1, y: 0, transition: { duration: 400, delay: 100 } }"
+  class="compare-card compare-card-1"
+>
+  <div style="font-size: 1.8rem; font-weight: 900; color: var(--dk-red); line-height: 1; margin-bottom: 0.4rem;">01</div>
+  <div class="font-bold mb-1" style="color: var(--dk-red);">Toast 중복</div>
+  <div class="text-xs mb-3" style="color: var(--dk-text-muted);">10개 파일에서 복붙</div>
+  <div class="label-before">before</div>
   ```tsx
-  const [msg, setMsg] = useState("")
-  const [show, setShow] = useState(false)
+  const [msg] = useState("")
+  const [show] = useState(false)
   const trigger = (m) => { ... }
   ```
-  **after**
+  <div class="label-after mt-2">after</div>
   ```tsx
   const { triggerToast } = useToast()
   ```
 </div>
 
-<div class="dk-card">
-  <div class="text-yellow-400 font-bold text-sm mb-2">Case 2 · 상태 7개</div>
-  <div class="text-xs text-gray-400 mb-3">UserInfoFields.tsx</div>
-
-  **before**
+<div
+  v-motion
+  :initial="{ opacity: 0, y: 25 }"
+  :enter="{ opacity: 1, y: 0, transition: { duration: 400, delay: 250 } }"
+  class="compare-card compare-card-2"
+>
+  <div style="font-size: 1.8rem; font-weight: 900; color: var(--dk-yellow); line-height: 1; margin-bottom: 0.4rem;">02</div>
+  <div class="font-bold mb-1" style="color: var(--dk-yellow);">상태 7개</div>
+  <div class="text-xs mb-3" style="color: var(--dk-text-muted);">UserInfoFields.tsx</div>
+  <div class="label-before">before</div>
   ```tsx
   const [isCodeSent] = useState(false)
   const [isVerified] = useState(false)
   // + 5개 더...
-  const handleSendCode = () => { ... }
-  const handleVerifyCode = () => { ... }
   ```
-  **after**
+  <div class="label-after mt-2">after</div>
   ```tsx
   const { isCodeSent, isVerified,
     handleSendCode, handleVerifyCode
-  } = useEmailVerification(email, triggerToast)
+  } = useEmailVerification(
+    email, triggerToast
+  )
   ```
 </div>
 
-<div class="dk-card">
-  <div class="text-orange-400 font-bold text-sm mb-2">Case 3 · Effect 2개</div>
-  <div class="text-xs text-gray-400 mb-3">mainpage/page.tsx</div>
-
-  **before**
+<div
+  v-motion
+  :initial="{ opacity: 0, y: 25 }"
+  :enter="{ opacity: 1, y: 0, transition: { duration: 400, delay: 400 } }"
+  class="compare-card compare-card-3"
+>
+  <div style="font-size: 1.8rem; font-weight: 900; color: var(--dk-orange); line-height: 1; margin-bottom: 0.4rem;">03</div>
+  <div class="font-bold mb-1" style="color: var(--dk-orange);">Effect 2개</div>
+  <div class="text-xs mb-3" style="color: var(--dk-text-muted);">mainpage/page.tsx</div>
+  <div class="label-before">before</div>
   ```tsx
   useEffect(() => {
-    // 포커스 이벤트 리스너
+    // 포커스 이벤트
   }, [refetch])
-
   useEffect(() => {
     // Store 동기화
   }, [data])
   ```
-  **after**
+  <div class="label-after mt-2">after</div>
   ```tsx
   useExceptionMenuSync()
   ```
@@ -339,40 +543,81 @@ transition: fade
 
 # 핵심 원칙
 
-<br>
+<div class="section-divider mt-1 mb-6" />
 
-<v-clicks>
+<div class="grid grid-cols-1 gap-3">
 
-- **컴포넌트는 무엇을 보여줄지만** — 로직은 훅이 책임진다
-- **훅은 이미 만들어져 있을 수 있다** — 먼저 찾아볼 것 (`shared/lib/`)
-- **useEffect가 2개 이상 엮이면** — 훅으로 분리할 신호
-- **같은 상태 조합이 반복되면** — 복붙 말고 훅을 만들어라
+<div v-click class="dk-card flex items-start gap-4">
+  <span class="text-2xl mt-0.5">🎯</span>
+  <div>
+    <div class="font-bold" style="color: var(--dk-primary-light);">컴포넌트는 무엇을 보여줄지만</div>
+    <div class="text-sm mt-1" style="color: var(--dk-text-muted);">로직, 상태, 사이드이펙트는 훅이 책임진다</div>
+  </div>
+</div>
 
-</v-clicks>
+<div v-click class="dk-card flex items-start gap-4">
+  <span class="text-2xl mt-0.5">🔍</span>
+  <div>
+    <div class="font-bold" style="color: var(--dk-accent);">훅은 이미 만들어져 있을 수 있다</div>
+    <div class="text-sm mt-1" style="color: var(--dk-text-muted);">복붙 전에 먼저 <code>shared/lib/</code> 를 확인할 것</div>
+  </div>
+</div>
+
+<div v-click class="dk-card flex items-start gap-4">
+  <span class="text-2xl mt-0.5">⚡</span>
+  <div>
+    <div class="font-bold" style="color: var(--dk-yellow);">useEffect가 2개 이상 엮이면</div>
+    <div class="text-sm mt-1" style="color: var(--dk-text-muted);">같은 관심사를 다루면 → 훅으로 분리할 신호</div>
+  </div>
+</div>
+
+<div v-click class="dk-card flex items-start gap-4">
+  <span class="text-2xl mt-0.5">♻️</span>
+  <div>
+    <div class="font-bold" style="color: var(--dk-green);">같은 상태 조합이 반복되면</div>
+    <div class="text-sm mt-1" style="color: var(--dk-text-muted);">복붙 말고 커스텀 훅을 만들어라</div>
+  </div>
+</div>
+
+</div>
 
 ---
 transition: slide-up
 ---
 
-# 📋 실습 미션
+# 실습 미션
 
-<br>
+<div class="section-divider mt-1 mb-6" />
 
-**미션:** 내 프로젝트(또는 Omechu)에서 커스텀 훅으로 분리할 수 있는 코드를 찾아 리팩토링하세요
+<div class="box-primary mb-5">
+  <div class="font-bold text-base mb-1" style="color: var(--dk-primary-light);">미션</div>
+  내 프로젝트(또는 Omechu)에서 커스텀 훅으로 분리할 수 있는 코드를 찾아 리팩토링하세요
+</div>
 
-<v-clicks>
+<div v-clicks class="grid grid-cols-1 gap-3">
 
-- ✅ 분리 전 코드 (before) + 분리 후 코드 (after) PR로 제출
-- ✅ PR에 "왜 이걸 분리했는지" 한 문단 설명
-- ✅ 팀원 PR에 코드리뷰 최소 2개
+<div class="dk-card flex items-center gap-3">
+  <span class="badge badge-purple">1</span>
+  <span>분리 전 코드 <strong>(before)</strong> + 분리 후 코드 <strong>(after)</strong> PR로 제출</span>
+</div>
 
-</v-clicks>
+<div class="dk-card flex items-center gap-3">
+  <span class="badge badge-purple">2</span>
+  <span>PR에 <strong>"왜 이걸 분리했는지"</strong> 한 문단 설명</span>
+</div>
 
-<v-click>
+<div class="dk-card flex items-center gap-3">
+  <span class="badge badge-purple">3</span>
+  <span>팀원 PR에 코드리뷰 최소 <strong>2개</strong></span>
+</div>
 
-> 💡 찾기 어려우면: 컴포넌트에서 `useState`가 3개 이상인 곳부터 보세요
+</div>
 
-</v-click>
+<div v-click class="mt-5">
+
+> 💡 찾기 어려우면: 컴포넌트에서 `useState`가 **3개 이상**인 곳부터 보세요
+
+</div>
 
 ---
 transition: slide-up
@@ -380,17 +625,41 @@ transition: slide-up
 
 # 토론 주제
 
-<br>
+<div class="section-divider mt-1 mb-6" />
 
-<v-clicks>
+<div v-clicks class="grid grid-cols-1 gap-4">
 
-1. `useToast`가 이미 있었는데 왜 안 쓰였을까? — 팀에서 훅 공유는 어떻게?
+<div class="dk-card">
+  <div class="flex items-start gap-3">
+    <span class="case-number-sm" style="font-size: 1.5rem; -webkit-text-fill-color: var(--dk-primary-light); color: var(--dk-primary-light); filter: none; background: none;">Q1</span>
+    <div>
+      <div class="font-semibold mb-1"><code>useToast</code>가 이미 있었는데 왜 안 쓰였을까?</div>
+      <div class="text-sm" style="color: var(--dk-text-muted);">팀에서 커스텀 훅을 어떻게 공유하고 문서화할까?</div>
+    </div>
+  </div>
+</div>
 
-2. 훅으로 분리하면 항상 좋을까? — 오히려 복잡해지는 경우는?
+<div class="dk-card">
+  <div class="flex items-start gap-3">
+    <span class="case-number-sm" style="font-size: 1.5rem; -webkit-text-fill-color: var(--dk-accent); color: var(--dk-accent); filter: none; background: none;">Q2</span>
+    <div>
+      <div class="font-semibold mb-1">훅으로 분리하면 항상 좋을까?</div>
+      <div class="text-sm" style="color: var(--dk-text-muted);">오히려 복잡해지는 경우는 언제일까?</div>
+    </div>
+  </div>
+</div>
 
-3. `useExceptionMenuSync`처럼 이름이 너무 구체적인 훅, 어떻게 생각해?
+<div class="dk-card">
+  <div class="flex items-start gap-3">
+    <span class="case-number-sm" style="font-size: 1.5rem; -webkit-text-fill-color: var(--dk-yellow); color: var(--dk-yellow); filter: none; background: none;">Q3</span>
+    <div>
+      <div class="font-semibold mb-1"><code>useExceptionMenuSync</code>처럼 이름이 너무 구체적인 훅</div>
+      <div class="text-sm" style="color: var(--dk-text-muted);">재사용성 vs 명확성, 어떻게 균형을 잡을까?</div>
+    </div>
+  </div>
+</div>
 
-</v-clicks>
+</div>
 
 ---
 layout: center
@@ -398,10 +667,37 @@ class: text-center
 transition: fade
 ---
 
-# 수고하셨습니다! 🎉
+<div class="flex flex-col items-center justify-center h-full gap-6">
 
-다음 주: 성능 최적화 (useMemo, useCallback, React.memo)
+<div
+  v-motion
+  :initial="{ opacity: 0, scale: 0.8 }"
+  :enter="{ opacity: 1, scale: 1, transition: { duration: 600 } }"
+>
+  <div style="font-size: 4rem; font-weight: 900; background: linear-gradient(135deg, #a78bfa, #89b4fa, #c4b5fd); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 0 40px rgba(139, 92, 246, 0.5)); line-height: 1.1; letter-spacing: -0.03em;">
+    수고하셨습니다!
+  </div>
+</div>
 
-<br>
+<div
+  v-motion
+  :initial="{ opacity: 0, y: 15 }"
+  :enter="{ opacity: 1, y: 0, transition: { duration: 450, delay: 300 } }"
+  class="text-gray-400 text-xl"
+>
+  다음 주: <span style="color: var(--dk-primary-light); font-weight: 600;">성능 최적화</span>
+  <span class="text-gray-500 mx-2">·</span>
+  <span class="text-gray-500">useMemo, useCallback, React.memo</span>
+</div>
 
-<span class="text-sm text-gray-500">PR 마감: 다음 스터디 전날 자정 · 코드리뷰 2개 필수</span>
+<div
+  v-motion
+  :initial="{ opacity: 0 }"
+  :enter="{ opacity: 1, transition: { duration: 400, delay: 550 } }"
+  class="flex gap-3 flex-wrap justify-center mt-2"
+>
+  <span class="badge badge-purple">PR 마감: 다음 스터디 전날 자정</span>
+  <span class="badge badge-blue">코드리뷰 2개 필수</span>
+</div>
+
+</div>

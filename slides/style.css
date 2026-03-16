@@ -1,51 +1,212 @@
-/* 김덕환 (log8.kr) 브랜드 테마
- * 메인: #8b5cf6 (보라), 강조: #a78bfa (밝은 보라), 포인트: #89b4fa (파랑)
+/* 김덕환 (log8.kr) — Obsidian Blogger Slidev Theme
+ * Brand: #8b5cf6 (purple), #89b4fa (blue), #a78bfa (light purple)
+ * Background: #0a0a14 (deep dark)
  */
 
+/* ─── CSS Variables ─────────────────────────────────────────── */
 :root {
   --dk-primary: #8b5cf6;
   --dk-primary-light: #a78bfa;
   --dk-primary-dim: rgba(139, 92, 246, 0.15);
+  --dk-primary-glow: rgba(139, 92, 246, 0.4);
   --dk-accent: #89b4fa;
-  --dk-accent-dim: rgba(137, 180, 250, 0.15);
+  --dk-accent-dim: rgba(137, 180, 250, 0.12);
+  --dk-accent-glow: rgba(137, 180, 250, 0.35);
   --dk-green: #a6e3a1;
+  --dk-green-dim: rgba(166, 227, 161, 0.12);
+  --dk-green-glow: rgba(166, 227, 161, 0.35);
   --dk-red: #f38ba8;
+  --dk-red-dim: rgba(243, 139, 168, 0.12);
+  --dk-red-glow: rgba(243, 139, 168, 0.35);
   --dk-yellow: #f9e2af;
-  --dk-bg: #0f0f1a;
-  --dk-surface: #1a1a2e;
-  --dk-border: rgba(139, 92, 246, 0.3);
+  --dk-orange: #fab387;
+  --dk-bg: #0a0a14;
+  --dk-bg-2: #0f0f1e;
+  --dk-surface: #13131f;
+  --dk-surface-2: #1a1a2e;
+  --dk-border: rgba(139, 92, 246, 0.25);
+  --dk-text: #cdd6f4;
+  --dk-text-muted: rgba(205, 214, 244, 0.5);
+  --dk-text-dim: rgba(205, 214, 244, 0.35);
 }
 
-/* 슬라이드 배경 */
+/* ─── Base Layout ────────────────────────────────────────────── */
 .slidev-layout {
   background: var(--dk-bg);
-  color: #cdd6f4;
+  color: var(--dk-text);
+  font-family: "Pretendard", "Noto Sans KR", system-ui, sans-serif;
 }
 
-/* 제목 — 보라 그라디언트 */
+/* ─── Slide Enter Animation (UnoCSS compatible) ──────────────── */
+.slidev-layout.slide-enter,
+.slidev-vclick-target {
+  --enter-stage: 0;
+  --enter-step: 60ms;
+}
+
+@keyframes slide-enter-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.slide-enter-content > * {
+  animation: slide-enter-fade-up 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: calc(var(--enter-stage, 0) * var(--enter-step, 60ms));
+}
+
+/* ─── Typography — Headings ──────────────────────────────────── */
 .slidev-layout h1 {
-  background: linear-gradient(135deg, var(--dk-primary-light) 0%, var(--dk-accent) 100%);
+  background: linear-gradient(
+    135deg,
+    var(--dk-primary-light) 0%,
+    var(--dk-accent) 60%,
+    #c4b5fd 100%
+  );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
 }
 
 .slidev-layout h2 {
   color: var(--dk-primary-light);
+  font-weight: 700;
+  letter-spacing: -0.01em;
 }
 
-/* 코드 블록 — 높이 제한 핵심 */
+.slidev-layout h3 {
+  color: var(--dk-accent);
+  font-weight: 600;
+}
+
+/* ─── Section Divider ────────────────────────────────────────── */
+.section-divider {
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--dk-primary) 30%,
+    var(--dk-accent) 70%,
+    transparent 100%
+  );
+  border: none;
+  margin: 1rem 0;
+  border-radius: 2px;
+}
+
+.slidev-layout hr {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--dk-border) 40%,
+    var(--dk-border) 60%,
+    transparent 100%
+  );
+  border: none;
+  margin: 1rem 0;
+}
+
+/* ─── Cover / Title Slide ────────────────────────────────────── */
+.slidev-layout.cover {
+  background:
+    radial-gradient(ellipse 80% 60% at 20% 30%, rgba(139, 92, 246, 0.18) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 80% 70%, rgba(137, 180, 250, 0.14) 0%, transparent 55%),
+    radial-gradient(ellipse 50% 40% at 50% 50%, rgba(167, 139, 250, 0.08) 0%, transparent 70%),
+    var(--dk-bg);
+}
+
+.slidev-layout.cover::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(1px 1px at 20% 20%, rgba(139, 92, 246, 0.4) 0%, transparent 100%),
+    radial-gradient(1px 1px at 60% 40%, rgba(137, 180, 250, 0.3) 0%, transparent 100%),
+    radial-gradient(1px 1px at 80% 15%, rgba(167, 139, 250, 0.35) 0%, transparent 100%),
+    radial-gradient(1px 1px at 35% 75%, rgba(137, 180, 250, 0.25) 0%, transparent 100%),
+    radial-gradient(1px 1px at 90% 60%, rgba(139, 92, 246, 0.3) 0%, transparent 100%);
+  pointer-events: none;
+}
+
+.slidev-layout.cover h1 {
+  font-size: 3.2rem;
+  font-weight: 900;
+  background: linear-gradient(
+    135deg,
+    #c4b5fd 0%,
+    var(--dk-primary-light) 35%,
+    var(--dk-accent) 70%,
+    #7dd3fc 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 0 40px rgba(139, 92, 246, 0.5));
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+}
+
+/* ─── Page Number ────────────────────────────────────────────── */
+.slidev-layout .slidev-page-number {
+  color: var(--dk-primary);
+  font-size: 0.7rem;
+  font-weight: 700;
+  opacity: 0.7;
+  background: var(--dk-primary-dim);
+  border: 1px solid var(--dk-border);
+  border-radius: 6px;
+  padding: 2px 8px;
+  letter-spacing: 0.05em;
+}
+
+/* ─── Code Blocks ────────────────────────────────────────────── */
 .slidev-layout .shiki,
 .slidev-layout pre {
-  max-height: 380px;
+  position: relative;
+  max-height: 400px;
   overflow-y: auto;
-  font-size: 0.82rem;
-  line-height: 1.55;
+  font-size: 0.8rem;
+  line-height: 1.6;
   border: 1px solid var(--dk-border);
   border-radius: 10px;
+  background: var(--dk-surface) !important;
+  border-left: 3px solid var(--dk-primary);
+  box-shadow:
+    0 0 0 1px rgba(139, 92, 246, 0.1),
+    0 4px 24px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
 }
 
-/* 코드 블록 스크롤바 */
+/* Language badge — shown via data attribute or class */
+.slidev-layout pre[data-lang]::before {
+  content: attr(data-lang);
+  position: absolute;
+  top: 0.5rem;
+  right: 0.75rem;
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--dk-primary-light);
+  background: var(--dk-primary-dim);
+  border: 1px solid var(--dk-border);
+  padding: 1px 8px;
+  border-radius: 4px;
+  pointer-events: none;
+  z-index: 10;
+  font-family: "JetBrains Mono", "Fira Code", monospace;
+}
+
+/* Code block scrollbar */
 .slidev-layout pre::-webkit-scrollbar {
   height: 4px;
   width: 4px;
@@ -57,81 +218,419 @@
   background: var(--dk-primary);
   border-radius: 4px;
 }
+.slidev-layout pre::-webkit-scrollbar-thumb:hover {
+  background: var(--dk-primary-light);
+}
 
-/* 인라인 코드 */
+/* ─── Inline Code ────────────────────────────────────────────── */
 .slidev-layout :not(pre) > code {
   background: var(--dk-primary-dim);
   color: var(--dk-primary-light);
-  padding: 0.1em 0.4em;
+  padding: 0.1em 0.45em;
   border-radius: 4px;
-  font-size: 0.88em;
+  font-size: 0.87em;
+  border: 1px solid rgba(139, 92, 246, 0.2);
+  font-family: "JetBrains Mono", "Fira Code", monospace;
 }
 
-/* 링크 */
+/* ─── Links ──────────────────────────────────────────────────── */
 .slidev-layout a {
   color: var(--dk-accent);
   text-decoration: none;
-  border-bottom: 1px solid rgba(137, 180, 250, 0.4);
+  position: relative;
+  padding-bottom: 1px;
+  transition: color 0.2s;
 }
 
-/* 테이블 */
+.slidev-layout a::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: linear-gradient(90deg, var(--dk-accent), var(--dk-primary-light));
+  transition: width 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.slidev-layout a:hover {
+  color: var(--dk-primary-light);
+}
+
+.slidev-layout a:hover::after {
+  width: 100%;
+}
+
+/* ─── Tables ─────────────────────────────────────────────────── */
 .slidev-layout table {
   border-collapse: collapse;
   width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
 }
 .slidev-layout th {
   background: var(--dk-primary-dim);
   color: var(--dk-primary-light);
-  padding: 0.5rem 1rem;
+  padding: 0.6rem 1rem;
   border: 1px solid var(--dk-border);
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
 }
 .slidev-layout td {
   padding: 0.5rem 1rem;
-  border: 1px solid rgba(139, 92, 246, 0.15);
+  border: 1px solid rgba(139, 92, 246, 0.12);
+  font-size: 0.9rem;
 }
 .slidev-layout tr:nth-child(even) td {
   background: rgba(255, 255, 255, 0.02);
 }
+.slidev-layout tr:hover td {
+  background: rgba(139, 92, 246, 0.06);
+}
 
-/* 강조 박스 — 보라 계열 */
+/* ─── Blockquote ─────────────────────────────────────────────── */
+.slidev-layout blockquote {
+  background: var(--dk-primary-dim);
+  border-left: 3px solid var(--dk-primary);
+  border-radius: 0 10px 10px 0;
+  padding: 0.7rem 1.2rem;
+  margin: 0.75rem 0;
+  color: var(--dk-text);
+  box-shadow: 0 0 20px rgba(139, 92, 246, 0.08);
+}
+
+/* ─── Box Variants ───────────────────────────────────────────── */
 .box-primary {
   background: var(--dk-primary-dim);
-  border: 1px solid var(--dk-primary);
-  border-radius: 12px;
-  padding: 1rem 1.25rem;
+  border: 1px solid rgba(139, 92, 246, 0.4);
+  border-radius: 10px;
+  padding: 0.9rem 1.2rem;
+  box-shadow: 0 0 20px rgba(139, 92, 246, 0.12);
 }
 
 .box-accent {
   background: var(--dk-accent-dim);
-  border: 1px solid var(--dk-accent);
-  border-radius: 12px;
-  padding: 1rem 1.25rem;
+  border: 1px solid rgba(137, 180, 250, 0.4);
+  border-radius: 10px;
+  padding: 0.9rem 1.2rem;
+  box-shadow: 0 0 20px rgba(137, 180, 250, 0.1);
 }
 
-/* 카드 */
+.box-success {
+  background: var(--dk-green-dim);
+  border: 1px solid rgba(166, 227, 161, 0.4);
+  border-radius: 10px;
+  padding: 0.9rem 1.2rem;
+  box-shadow: 0 0 20px rgba(166, 227, 161, 0.1);
+}
+
+.box-danger {
+  background: var(--dk-red-dim);
+  border: 1px solid rgba(243, 139, 168, 0.4);
+  border-radius: 10px;
+  padding: 0.9rem 1.2rem;
+  box-shadow: 0 0 20px rgba(243, 139, 168, 0.1);
+}
+
+/* ─── Card ───────────────────────────────────────────────────── */
 .dk-card {
   background: var(--dk-surface);
   border: 1px solid var(--dk-border);
-  border-radius: 12px;
+  border-radius: 14px;
   padding: 1.25rem;
-  transition: border-color 0.2s;
+  transition:
+    border-color 0.25s,
+    box-shadow 0.25s,
+    transform 0.25s;
+  position: relative;
+  overflow: hidden;
 }
+
+.dk-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(139, 92, 246, 0.4), transparent);
+}
+
 .dk-card:hover {
   border-color: var(--dk-primary);
+  box-shadow: 0 0 24px rgba(139, 92, 246, 0.2);
+  transform: translateY(-2px);
 }
 
-/* blockquote — 팁 박스 */
-.slidev-layout blockquote {
-  background: var(--dk-primary-dim);
-  border-left: 3px solid var(--dk-primary);
-  border-radius: 0 8px 8px 0;
-  padding: 0.6rem 1rem;
-  margin: 0.75rem 0;
-  color: #cdd6f4;
+/* Before/After Cards */
+.card-before {
+  background: var(--dk-surface);
+  border: 1px solid rgba(243, 139, 168, 0.35);
+  border-left: 3px solid var(--dk-red);
+  border-radius: 10px;
+  padding: 1rem;
+  box-shadow: 0 0 20px rgba(243, 139, 168, 0.08);
 }
 
-/* 페이지 번호 */
-.slidev-layout .slidev-page-number {
+.card-after {
+  background: var(--dk-surface);
+  border: 1px solid rgba(166, 227, 161, 0.35);
+  border-left: 3px solid var(--dk-green);
+  border-radius: 10px;
+  padding: 1rem;
+  box-shadow: 0 0 20px rgba(166, 227, 161, 0.08);
+}
+
+/* ─── Big Number / Case Number ───────────────────────────────── */
+.case-number {
+  font-size: 5rem;
+  font-weight: 900;
+  line-height: 1;
+  background: linear-gradient(
+    135deg,
+    var(--dk-primary) 0%,
+    var(--dk-primary-light) 50%,
+    var(--dk-accent) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 0 30px rgba(139, 92, 246, 0.6));
+  letter-spacing: -0.04em;
+}
+
+.case-number-sm {
+  font-size: 2.5rem;
+  font-weight: 900;
+  line-height: 1;
+  background: linear-gradient(135deg, var(--dk-primary) 0%, var(--dk-primary-light) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -0.03em;
+}
+
+/* ─── Badge / Tag ────────────────────────────────────────────── */
+.badge {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 3px 10px;
+  border-radius: 6px;
+  border: 1px solid currentColor;
+  vertical-align: middle;
+}
+
+.badge-purple {
   color: var(--dk-primary-light);
-  opacity: 0.5;
+  background: var(--dk-primary-dim);
+  border-color: rgba(139, 92, 246, 0.4);
+}
+
+.badge-blue {
+  color: var(--dk-accent);
+  background: var(--dk-accent-dim);
+  border-color: rgba(137, 180, 250, 0.4);
+}
+
+.badge-red {
+  color: var(--dk-red);
+  background: var(--dk-red-dim);
+  border-color: rgba(243, 139, 168, 0.4);
+}
+
+.badge-green {
+  color: var(--dk-green);
+  background: var(--dk-green-dim);
+  border-color: rgba(166, 227, 161, 0.4);
+}
+
+/* ─── Glow Effects ───────────────────────────────────────────── */
+.glow-purple {
+  box-shadow:
+    0 0 30px rgba(139, 92, 246, 0.4),
+    0 0 60px rgba(139, 92, 246, 0.15);
+}
+
+.glow-blue {
+  box-shadow:
+    0 0 30px rgba(137, 180, 250, 0.35),
+    0 0 60px rgba(137, 180, 250, 0.12);
+}
+
+.text-glow-purple {
+  text-shadow:
+    0 0 20px rgba(139, 92, 246, 0.7),
+    0 0 40px rgba(139, 92, 246, 0.3);
+}
+
+.text-glow-blue {
+  text-shadow:
+    0 0 20px rgba(137, 180, 250, 0.7),
+    0 0 40px rgba(137, 180, 250, 0.3);
+}
+
+/* ─── Section Intro Slide ────────────────────────────────────── */
+.slidev-layout.section-intro {
+  background:
+    radial-gradient(ellipse 70% 60% at 50% 50%, rgba(139, 92, 246, 0.12) 0%, transparent 65%),
+    radial-gradient(ellipse 40% 30% at 20% 80%, rgba(137, 180, 250, 0.08) 0%, transparent 60%),
+    var(--dk-bg);
+}
+
+/* ─── Grid Utilities ─────────────────────────────────────────── */
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+}
+
+.grid-3 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1rem;
+}
+
+/* ─── GitHub Link Badge ──────────────────────────────────────── */
+.gh-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.7rem;
+  color: var(--dk-text-muted);
+  background: var(--dk-surface-2);
+  border: 1px solid rgba(139, 92, 246, 0.2);
+  border-radius: 6px;
+  padding: 3px 10px;
+  text-decoration: none;
+  transition:
+    color 0.2s,
+    border-color 0.2s,
+    background 0.2s;
+  font-family: "JetBrains Mono", monospace;
+}
+
+.gh-link::before {
+  content: "⎋";
+  opacity: 0.6;
+}
+
+.gh-link:hover {
+  color: var(--dk-accent);
+  border-color: rgba(137, 180, 250, 0.5);
+  background: var(--dk-accent-dim);
+}
+
+.gh-link::after {
+  display: none;
+}
+
+/* ─── List Styles ────────────────────────────────────────────── */
+.slidev-layout ul {
+  padding-left: 0;
+  list-style: none;
+}
+
+.slidev-layout ul > li {
+  position: relative;
+  padding-left: 1.4em;
+  margin-bottom: 0.4em;
+  line-height: 1.6;
+}
+
+.slidev-layout ul > li::before {
+  content: "▸";
+  position: absolute;
+  left: 0;
+  color: var(--dk-primary);
+  font-size: 0.85em;
+  top: 0.1em;
+}
+
+.slidev-layout ol {
+  padding-left: 1.5em;
+}
+
+.slidev-layout ol > li {
+  margin-bottom: 0.5em;
+  line-height: 1.6;
+}
+
+.slidev-layout ol > li::marker {
+  color: var(--dk-primary-light);
+  font-weight: 700;
+}
+
+/* ─── Summary Table / Comparison ────────────────────────────── */
+.compare-card {
+  background: var(--dk-surface);
+  border: 1px solid var(--dk-border);
+  border-radius: 14px;
+  padding: 1.2rem 1rem;
+  position: relative;
+  overflow: hidden;
+  transition:
+    box-shadow 0.3s,
+    transform 0.3s;
+}
+
+.compare-card:hover {
+  transform: translateY(-3px);
+}
+
+.compare-card-1 {
+  border-top: 2px solid var(--dk-red);
+}
+.compare-card-2 {
+  border-top: 2px solid var(--dk-yellow);
+}
+.compare-card-3 {
+  border-top: 2px solid var(--dk-orange);
+}
+
+.compare-card .label-before {
+  font-size: 0.65rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--dk-red);
+  margin-bottom: 0.3rem;
+  opacity: 0.8;
+}
+
+.compare-card .label-after {
+  font-size: 0.65rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--dk-green);
+  margin-bottom: 0.3rem;
+  opacity: 0.8;
+}
+
+/* ─── Footer Info Bar ────────────────────────────────────────── */
+.slide-footer {
+  font-size: 0.65rem;
+  color: var(--dk-text-dim);
+  border-top: 1px solid rgba(139, 92, 246, 0.1);
+  padding-top: 0.5rem;
+  margin-top: auto;
+  letter-spacing: 0.03em;
+}
+
+/* ─── Transition polish ──────────────────────────────────────── */
+.slidev-layout * {
+  transition-property: color, background-color, border-color, box-shadow;
+  transition-duration: 0.15s;
+}
+
+/* Override for animations (don't transition everything) */
+.slidev-layout pre,
+.slidev-layout code,
+.slidev-layout pre * {
+  transition: none;
 }
