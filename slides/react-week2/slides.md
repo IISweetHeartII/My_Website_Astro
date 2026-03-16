@@ -436,13 +436,12 @@ transition: slide-up
   <span class="text-sm" style="color: var(--dk-text-muted);">useExceptionMenuSync.ts</span>
 </div>
 
-```tsx {all|1-12|14-21|23-27}
+```tsx {all|1-3|5-14|16-21}
 export function useExceptionMenuSync() {
   const { data, refetch } = useRecommendManagement();
   const { addException, resetExceptions } = useQuestionAnswerStore();
 
-  // Effect 1: 포커스 시 재요청
-  useEffect(() => {
+  useEffect(() => { // Effect 1: 포커스 시 재요청
     const handler = () => void refetch();
     window.addEventListener("pageshow", handler);
     window.addEventListener("focus", handler);
@@ -453,21 +452,18 @@ export function useExceptionMenuSync() {
     };
   }, [refetch]);
 
-  // Effect 2: Store 동기화
-  useEffect(() => {
+  useEffect(() => { // Effect 2: Store 동기화
     if (!Array.isArray(data?.exceptedMenus)) return;
     resetExceptions();
-    data.exceptedMenus
-      .filter((m) => m?.name?.trim())
-      .forEach((m) => addException(m.name.trim()));
+    data.exceptedMenus.forEach((m) => addException(m.name.trim()));
   }, [data, addException, resetExceptions]);
 }
-
-// 컴포넌트에서는
-export default function MainPage() {
-  useExceptionMenuSync(); // ✅ 한 줄!
-}
 ```
+
+<div v-click class="box-success mt-3 text-sm">
+  ✅ 컴포넌트에서는 <code>useExceptionMenuSync()</code> <strong style="color: var(--dk-green);">한 줄!</strong>
+  — useEffect 2개가 훅 안으로 사라짐
+</div>
 
 ---
 transition: slide-up
