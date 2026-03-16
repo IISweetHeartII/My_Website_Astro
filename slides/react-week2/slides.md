@@ -485,19 +485,15 @@ transition: slide-up
   :enter="{ opacity: 1, y: 0, transition: { duration: 400, delay: 100 } }"
   class="compare-card compare-card-1"
 >
-  <div style="font-size: 1.8rem; font-weight: 900; color: var(--dk-red); line-height: 1; margin-bottom: 0.4rem;">01</div>
+  <div class="compare-num" style="color: var(--dk-red);">01</div>
   <div class="font-bold mb-1" style="color: var(--dk-red);">Toast 중복</div>
-  <div class="text-xs mb-3" style="color: var(--dk-text-muted);">10개 파일에서 복붙</div>
+  <div class="text-xs mb-2" style="color: var(--dk-text-muted);">10개 파일에서 복붙</div>
   <div class="label-before">before</div>
-  ```tsx
-  const [msg] = useState("")
-  const [show] = useState(false)
-  const trigger = (m) => { ... }
-  ```
-  <div class="label-after mt-2">after</div>
-  ```tsx
-  const { triggerToast } = useToast()
-  ```
+  <pre class="compare-code"><code>useState("")
+useState(false)
+setTimeout(...)</code></pre>
+  <div class="label-after">after</div>
+  <pre class="compare-code compare-code-after"><code>useToast()</code></pre>
 </div>
 
 <div
@@ -506,23 +502,17 @@ transition: slide-up
   :enter="{ opacity: 1, y: 0, transition: { duration: 400, delay: 250 } }"
   class="compare-card compare-card-2"
 >
-  <div style="font-size: 1.8rem; font-weight: 900; color: var(--dk-yellow); line-height: 1; margin-bottom: 0.4rem;">02</div>
+  <div class="compare-num" style="color: var(--dk-yellow);">02</div>
   <div class="font-bold mb-1" style="color: var(--dk-yellow);">상태 7개</div>
-  <div class="text-xs mb-3" style="color: var(--dk-text-muted);">UserInfoFields.tsx</div>
+  <div class="text-xs mb-2" style="color: var(--dk-text-muted);">UserInfoFields.tsx</div>
   <div class="label-before">before</div>
-  ```tsx
-  const [isCodeSent] = useState(false)
-  const [isVerified] = useState(false)
-  // + 5개 더...
-  ```
-  <div class="label-after mt-2">after</div>
-  ```tsx
-  const { isCodeSent, isVerified,
-    handleSendCode, handleVerifyCode
-  } = useEmailVerification(
-    email, triggerToast
-  )
-  ```
+  <pre class="compare-code"><code>useState(false) // x7
+handleSendCode()
+handleVerifyCode()</code></pre>
+  <div class="label-after">after</div>
+  <pre class="compare-code compare-code-after"><code>useEmailVerification(
+  email, triggerToast
+)</code></pre>
 </div>
 
 <div
@@ -531,22 +521,18 @@ transition: slide-up
   :enter="{ opacity: 1, y: 0, transition: { duration: 400, delay: 400 } }"
   class="compare-card compare-card-3"
 >
-  <div style="font-size: 1.8rem; font-weight: 900; color: var(--dk-orange); line-height: 1; margin-bottom: 0.4rem;">03</div>
+  <div class="compare-num" style="color: var(--dk-orange);">03</div>
   <div class="font-bold mb-1" style="color: var(--dk-orange);">Effect 2개</div>
-  <div class="text-xs mb-3" style="color: var(--dk-text-muted);">mainpage/page.tsx</div>
+  <div class="text-xs mb-2" style="color: var(--dk-text-muted);">mainpage/page.tsx</div>
   <div class="label-before">before</div>
-  ```tsx
-  useEffect(() => {
-    // 포커스 이벤트
-  }, [refetch])
-  useEffect(() => {
-    // Store 동기화
-  }, [data])
-  ```
-  <div class="label-after mt-2">after</div>
-  ```tsx
-  useExceptionMenuSync()
-  ```
+  <pre class="compare-code"><code>useEffect(() => {
+  // 이벤트
+}, [refetch])
+useEffect(() => {
+  // Store 동기화
+}, [data])</code></pre>
+  <div class="label-after">after</div>
+  <pre class="compare-code compare-code-after"><code>useExceptionMenuSync()</code></pre>
 </div>
 
 </div>

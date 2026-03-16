@@ -178,7 +178,7 @@
   line-height: 1.6;
   border: 1px solid var(--dk-border);
   border-radius: 10px;
-  background: var(--dk-surface) !important;
+  background: var(--dk-surface);
   border-left: 3px solid var(--dk-primary);
   box-shadow:
     0 0 0 1px rgba(139, 92, 246, 0.1),
@@ -628,6 +628,35 @@
 }
 .compare-card-3 {
   border-top: 2px solid var(--dk-orange);
+}
+
+.compare-num {
+  font-size: 1.8rem;
+  font-weight: 900;
+  line-height: 1;
+  margin-bottom: 0.4rem;
+}
+
+/* compare-card 안의 pre — 마크다운 블록 대신 사용 */
+.compare-code {
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(243, 139, 168, 0.2);
+  border-left: 2px solid var(--dk-red);
+  border-radius: 6px;
+  padding: 0.5rem 0.75rem;
+  margin: 0.25rem 0 0.5rem;
+  font-size: 0.72rem;
+  line-height: 1.5;
+  font-family: "JetBrains Mono", "Fira Code", monospace;
+  color: #cdd6f4;
+  max-height: none;
+  overflow: visible;
+  box-shadow: none;
+}
+
+.compare-code-after {
+  border: 1px solid rgba(166, 227, 161, 0.2);
+  border-left: 2px solid var(--dk-green);
 }
 
 .compare-card .label-before {
