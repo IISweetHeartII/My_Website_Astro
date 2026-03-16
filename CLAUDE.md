@@ -283,6 +283,12 @@ functions/api/chat.ts (Cloudflare Pages Function)
 /blog-write  →  초안 작성  →  /blog-check  →  수정  →  publish: true  →  커밋
 ```
 
+### 발표 자료 워크플로우
+
+```
+/slides-write  →  초안 작성  →  WSL2 터미널에서 bun run dev 로 확인  →  커밋  →  배포
+```
+
 ### 스킬 목록
 
 | 스킬 | 설명 | 사용 시점 |
@@ -290,8 +296,47 @@ functions/api/chat.ts (Cloudflare Pages Function)
 | `/blog-write` | 블로그 글 초안 작성 (frontmatter + 본문 + 이미지 프롬프트) | 새 글 작성 시작할 때 |
 | `/blog-check` | 특정 글의 frontmatter, SEO, 이미지, 품질 점검 | 발행 전 최종 확인 |
 | `/verify-blog-post` | 발행된 전체 글 일괄 검증 (슬러그 중복, 이미지 프롬프트 잔여, 필수 필드 누락) | PR 전, 정기 점검 |
+| `/slides-write` | Slidev 발표 자료 초안 작성 | 새 발표 준비 시작할 때 |
 | `/manage-skills` | 스킬 커버리지 분석 및 유지보수 | 새 패턴 도입 후 |
 | `/verify-implementation` | 등록된 모든 verify 스킬 병렬 실행 | PR 전 통합 검증 |
+
+## Slides (발표 자료)
+
+발표 자료는 `slides/` 폴더에서 Slidev로 관리됩니다. `slides.log8.kr` 에 별도 배포됩니다.
+
+### 구조
+
+```
+slides/
+├── [발표명]/slides.md   ← 슬라이드 (Slidev Markdown)
+├── build.mjs            ← 멀티 빌드 스크립트 (서브폴더 자동 감지)
+└── package.json
+```
+
+### 배포 구조
+
+| 도메인 | 프로젝트 | 빌드 |
+|--------|---------|------|
+| log8.kr | My_Website_Astro (Astro) | `astro build` |
+| slides.log8.kr | slides-log8kr (Cloudflare Pages) | `bun run build` |
+
+→ **두 배포는 완전히 독립적. Astro CI/CD에 영향 없음.**
+
+### 발표 추가 절차
+
+1. `slides/[발표명]/slides.md` 작성 (또는 `/slides-write` 스킬 사용)
+2. `slides/package.json` scripts에 `dev:[발표명]` 추가
+3. WSL2 터미널에서 `bun run dev:[발표명]` 로 확인
+4. 커밋 후 배포:
+   ```bash
+   cd slides && bun run build
+   bunx wrangler pages deploy dist --project-name slides-log8kr
+   ```
+
+### 주의사항
+
+- `bun run dev`는 반드시 **WSL2 터미널에서 직접 실행** (Claude Code 세션은 TTY 없어서 실행 불가)
+- `slides/node_modules/`, `slides/dist/` 는 `.gitignore`에서 제외됨 (slides/.gitignore)
 
 ## Obsidian Setup
 

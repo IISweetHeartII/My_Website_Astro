@@ -1,0 +1,19 @@
+{
+  "name": "slides-log8kr",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "slidev react-week2/slides.md --open",
+    "dev:week2": "slidev react-week2/slides.md --open",
+    "build": "node build.mjs",
+    "build:week2": "slidev build react-week2/slides.md --base /react-week2/ --out dist/react-week2"
+  },
+  "dependencies": {
+    "@slidev/cli": "^52.14.1",
+    "@slidev/theme-default": "latest",
+    "vue": "^3.5.29"
+  },
+  "devDependencies": {
+    "wrangler": "^4.74.0"
+  }
+}
