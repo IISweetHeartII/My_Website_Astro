@@ -460,12 +460,7 @@ transition: slide-up
 
 <div class="grid-3">
 
-<div
-  v-motion
-  :initial="{ opacity: 0, y: 25 }"
-  :enter="{ opacity: 1, y: 0, transition: { duration: 400, delay: 100 } }"
-  class="compare-card compare-card-1"
->
+<div class="compare-card compare-card-1">
   <div class="compare-num" style="color: var(--dk-red);">01</div>
   <div class="font-bold mb-1" style="color: var(--dk-red);">Toast 중복</div>
   <div class="text-xs mb-2" style="color: var(--dk-text-muted);">10개 파일에서 복붙</div>
@@ -477,12 +472,7 @@ setTimeout(...)</code></pre>
   <pre class="compare-code compare-code-after"><code>useToast()</code></pre>
 </div>
 
-<div
-  v-motion
-  :initial="{ opacity: 0, y: 25 }"
-  :enter="{ opacity: 1, y: 0, transition: { duration: 400, delay: 250 } }"
-  class="compare-card compare-card-2"
->
+<div class="compare-card compare-card-2">
   <div class="compare-num" style="color: var(--dk-yellow);">02</div>
   <div class="font-bold mb-1" style="color: var(--dk-yellow);">상태 7개</div>
   <div class="text-xs mb-2" style="color: var(--dk-text-muted);">UserInfoFields.tsx</div>
@@ -496,12 +486,7 @@ handleVerifyCode()</code></pre>
 )</code></pre>
 </div>
 
-<div
-  v-motion
-  :initial="{ opacity: 0, y: 25 }"
-  :enter="{ opacity: 1, y: 0, transition: { duration: 400, delay: 400 } }"
-  class="compare-card compare-card-3"
->
+<div class="compare-card compare-card-3">
   <div class="compare-num" style="color: var(--dk-orange);">03</div>
   <div class="font-bold mb-1" style="color: var(--dk-orange);">Effect 2개</div>
   <div class="text-xs mb-2" style="color: var(--dk-text-muted);">mainpage/page.tsx</div>
