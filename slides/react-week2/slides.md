@@ -223,14 +223,13 @@ class: text-center
 transition: slide-up
 ---
 
-<div class="flex flex-col items-center justify-center gap-4">
+<div class="case-intro">
 
 <div
   v-motion
   :initial="{ opacity: 0, scale: 0.7 }"
   :enter="{ opacity: 1, scale: 1, transition: { duration: 500 } }"
-  class="case-number"
-  style="background: linear-gradient(135deg, #f9e2af, #fab387); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 0 30px rgba(249, 226, 175, 0.5));"
+  class="case-number case-number-yellow"
 >02</div>
 
 <div
@@ -246,11 +245,8 @@ transition: slide-up
   v-motion
   :initial="{ opacity: 0 }"
   :enter="{ opacity: 1, transition: { duration: 400, delay: 400 } }"
-  class="badge mt-2"
-  style="color: var(--dk-yellow); background: rgba(249, 226, 175, 0.1); border-color: rgba(249, 226, 175, 0.4);"
->
-  단일 책임 원칙 위반
-</div>
+  class="badge badge-yellow mt-2"
+>단일 책임 원칙 위반</div>
 
 </div>
 
@@ -293,21 +289,22 @@ export default function UserInfoFields() {
 transition: slide-up
 ---
 
-# Case 2 — After: 훅으로 분리하면
+# Case 2 — After (1/2): 상태 + sendCode
 
 <div class="flex items-center gap-3 mb-3">
   <span class="badge badge-green">AFTER</span>
-  <span class="text-sm" style="color: var(--dk-text-muted);">useEmailVerification.ts (새로 만들 훅)</span>
+  <span class="text-sm" style="color: var(--dk-text-muted);">useEmailVerification.ts</span>
 </div>
 
-```tsx {all|1-3|5-15|17-24}
+```tsx {all|1-3|5-13}
 export function useEmailVerification(email: string, onToast: (msg: string) => void) {
   const [isCodeSent, setIsCodeSent] = useState(false);
   const [isVerified, setIsVerified] = useState(false);
 
   const handleSendCode = useCallback(() => {
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      onToast("올바른 이메일 형식을 입력해 주세요."); return;
+      onToast("올바른 이메일 형식을 입력해 주세요.");
+      return;
     }
     sendCode(email, {
       onSuccess: (data) => { setIsCodeSent(true); onToast(data.message); },
@@ -315,6 +312,22 @@ export function useEmailVerification(email: string, onToast: (msg: string) => vo
     });
   }, [email, onToast]);
 
+  // ...
+}
+```
+
+---
+transition: slide-up
+---
+
+# Case 2 — After (2/2): verifyCode + 사용
+
+<div class="flex items-center gap-3 mb-3">
+  <span class="badge badge-green">AFTER</span>
+  <span class="text-sm" style="color: var(--dk-text-muted);">useEmailVerification.ts</span>
+</div>
+
+```tsx {all|1-10|12-16}
   const handleVerifyCode = useCallback((code: string) => {
     const messages: Record<string, string> = {
       V001: "인증번호가 올바르지 않습니다.",
@@ -322,16 +335,21 @@ export function useEmailVerification(email: string, onToast: (msg: string) => vo
     };
     verifyCode({ email, code }, {
       onSuccess: (data) => { setIsVerified(true); onToast(data.message); },
-      onError: (e: ApiClientError) => onToast(messages[e?.code ?? ""] ?? "인증 실패"),
+      onError: (e: ApiClientError) =>
+        onToast(messages[e?.code ?? ""] ?? "인증 실패"),
     });
   }, [email, onToast]);
 
   return { isCodeSent, isVerified, handleSendCode, handleVerifyCode };
 }
+
+// 컴포넌트에서
+const { isCodeSent, isVerified, handleSendCode, handleVerifyCode } =
+  useEmailVerification(email, triggerToast); // 상태 7개 → 1줄 ✅
 ```
 
 <div v-click class="box-primary mt-3 text-sm">
-  ✅ 컴포넌트에서 <strong style="color: var(--dk-primary-light);">상태 7개 → 1줄</strong>로: <code>const &#123; isCodeSent, isVerified, ... &#125; = useEmailVerification(email, triggerToast)</code>
+  ✅ 컴포넌트는 <strong style="color: var(--dk-primary-light);">UI만</strong> — 이메일 인증 로직 전체가 훅 안으로
 </div>
 
 ---
@@ -346,8 +364,7 @@ transition: slide-up
   v-motion
   :initial="{ opacity: 0, scale: 0.7 }"
   :enter="{ opacity: 1, scale: 1, transition: { duration: 500 } }"
-  class="case-number"
-  style="background: linear-gradient(135deg, #fab387, #f38ba8); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 0 30px rgba(250, 179, 135, 0.5));"
+  class="case-number case-number-orange"
 >03</div>
 
 <div
@@ -363,11 +380,8 @@ transition: slide-up
   v-motion
   :initial="{ opacity: 0 }"
   :enter="{ opacity: 1, transition: { duration: 400, delay: 400 } }"
-  class="badge mt-2"
-  style="color: var(--dk-orange); background: rgba(250, 179, 135, 0.1); border-color: rgba(250, 179, 135, 0.4);"
->
-  관심사 분리 필요
-</div>
+  class="badge badge-orange mt-2"
+>관심사 분리 필요</div>
 
 </div>
 
