@@ -7,6 +7,7 @@ highlighter: shiki
 lineNumbers: false
 drawings:
   persist: false
+css: ../style.css
 ---
 
 # 커스텀 훅과 책임 분리
@@ -40,9 +41,9 @@ transition: slide-up
 
 # 왜 커스텀 훅이 필요한가?
 
-이 컴포넌트의 문제가 뭘까요?
+<div class="text-gray-400 text-sm mb-3">이 컴포넌트의 문제가 뭘까요?</div>
 
-```tsx {all|3-6|8-11|13-16}
+```tsx {all|3-6|8-10|12-14}
 function LoginForm() {
   // 😵 상태가 너무 많다
   const [email, setEmail] = useState('');
@@ -54,12 +55,10 @@ function LoginForm() {
   const validate = () => {
     if (!email.includes('@')) setErrors({ email: '이메일 형식 오류' });
   };
-
   // 😵 API 호출도 여기 있다
   const handleSubmit = async (e) => {
-    const res = await fetch('/api/login', { method: 'POST' });
+    await fetch('/api/login', { method: 'POST' });
   };
-
   return <form onSubmit={handleSubmit}>...</form>;
 }
 ```
@@ -70,7 +69,11 @@ transition: slide-up
 
 # Before vs After
 
-**Before** — 컴포넌트가 모든 걸 알고 있음
+<div class="grid grid-cols-2 gap-4 mt-2">
+
+<div>
+
+**Before** — 컴포넌트가 모든 걸 앎
 
 ```tsx
 function LoginForm() {
@@ -79,25 +82,41 @@ function LoginForm() {
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
   const validate = () => { /* ... */ };
-  const handleSubmit = async () => { /* fetch 로직 */ };
+  const handleSubmit = async () => { /* ... */ };
 
   return <form>...</form>;
 }
 ```
 
-<v-click>
+</div>
 
-**After** — 컴포넌트는 UI만 담당
+<div v-click>
+
+**After** — UI만 담당
 
 ```tsx
 function LoginForm() {
-  const { values, errors, loading, handleChange, handleSubmit } = useLoginForm();
+  const {
+    values,
+    errors,
+    loading,
+    handleChange,
+    handleSubmit,
+  } = useLoginForm();
 
-  return <form onSubmit={handleSubmit}>...</form>;
+  return (
+    <form onSubmit={handleSubmit}>...</form>
+  );
 }
 ```
 
-</v-click>
+</div>
+
+</div>
+
+<div v-click class="box-primary mt-3 text-sm">
+  ✅ 컴포넌트는 <strong class="text-purple-300">무엇을 보여줄지</strong>만 — 나머지는 훅이 책임
+</div>
 
 ---
 transition: slide-up
@@ -105,25 +124,26 @@ transition: slide-up
 
 # 커스텀 훅 구현
 
-```tsx {all|1|2-5|7-12|14-22|24}
+```tsx {all|2-4|6-8|10-16|18}
 function useLoginForm() {
   const [values, setValues] = useState({ email: '', password: '' });
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
 
-  // 입력 핸들러
   const handleChange = (field) => (e) =>
     setValues(prev => ({ ...prev, [field]: e.target.value }));
 
-  // 유효성 검사
   const validate = () => {
-    if (!values.email.includes('@')) setErrors({ email: '이메일 형식 오류' });
+    const next = {};
+    if (!values.email.includes('@')) next.email = '이메일 형식 오류';
+    if (values.password.length < 8) next.password = '8자 이상';
+    setErrors(next);
+    return Object.keys(next).length === 0;
   };
 
-  // API 호출
   const handleSubmit = async (e) => {
     e.preventDefault();
-    validate();
+    if (!validate()) return;
     setLoading(true);
     await fetch('/api/login', { method: 'POST', body: JSON.stringify(values) });
     setLoading(false);
@@ -139,37 +159,31 @@ transition: slide-up
 
 # 책임 분리 원칙
 
-<div class="grid grid-cols-2 gap-8 mt-4">
+<div class="grid grid-cols-2 gap-6 mt-6">
 
-<div>
+<div class="dk-card">
+  <div class="font-bold text-purple-300 mb-3">컴포넌트의 책임</div>
+  <v-clicks>
 
-### 컴포넌트의 책임
+  - JSX 렌더링
+  - 이벤트 바인딩
+  - 스타일 / 레이아웃
+  - 조건부 표시
 
-<v-clicks>
-
-- JSX 렌더링
-- 이벤트 바인딩
-- 스타일 / 레이아웃
-- 조건부 표시
-
-</v-clicks>
-
+  </v-clicks>
 </div>
 
-<div>
+<div class="dk-card">
+  <div class="font-bold text-blue-300 mb-3">커스텀 훅의 책임</div>
+  <v-clicks>
 
-### 커스텀 훅의 책임
+  - 상태 관리
+  - 사이드 이펙트
+  - API 호출
+  - 비즈니스 로직
+  - 유효성 검사
 
-<v-clicks>
-
-- 상태 관리
-- 사이드 이펙트
-- API 호출
-- 비즈니스 로직
-- 유효성 검사
-
-</v-clicks>
-
+  </v-clicks>
 </div>
 
 </div>
@@ -180,41 +194,73 @@ transition: slide-up
 
 # useReducer + Context 패턴
 
-전역 상태가 필요한데 Zustand/Redux 없이 해결하는 방법
+<div class="text-gray-400 text-sm mb-3">전역 상태 — 라이브러리 없이</div>
 
-```tsx {all|1-8|10-20|22-30}
-// 1단계: Reducer 정의
-type Action = { type: 'INCREMENT' } | { type: 'RESET' };
+<div class="grid grid-cols-3 gap-3">
 
-function reducer(state: { count: number }, action: Action) {
-  if (action.type === 'INCREMENT') return { count: state.count + 1 };
-  if (action.type === 'RESET') return { count: 0 };
-  return state;
+<div class="dk-card">
+
+**1단계: Reducer**
+
+```tsx
+type Action =
+  | { type: 'INCREMENT' }
+  | { type: 'RESET' };
+
+function reducer(state, action) {
+  if (action.type === 'INCREMENT')
+    return { count: state.count + 1 };
+  return { count: 0 };
 }
+```
 
-// 2단계: Context + Provider
-const CountCtx = createContext(null);
+</div>
 
-export function CountProvider({ children }) {
-  const [state, dispatch] = useReducer(reducer, { count: 0 });
+<div v-click class="dk-card">
+
+**2단계: Provider**
+
+```tsx
+const Ctx = createContext(null);
+
+export function Provider({ children }) {
+  const [state, dispatch] =
+    useReducer(reducer, { count: 0 });
   return (
-    <CountCtx.Provider value={{ state, dispatch }}>
+    <Ctx.Provider value={{ state, dispatch }}>
       {children}
-    </CountCtx.Provider>
+    </Ctx.Provider>
   );
 }
+```
 
-// 3단계: 커스텀 훅으로 감싸기
+</div>
+
+<div v-click class="dk-card">
+
+**3단계: 커스텀 훅**
+
+```tsx
 export function useCount() {
-  const ctx = useContext(CountCtx);
-  if (!ctx) throw new Error('CountProvider 밖에서 사용됨!');
+  const ctx = useContext(Ctx);
+  if (!ctx) throw new Error(
+    'Provider 밖에서 사용!'
+  );
   return {
     count: ctx.state.count,
-    increment: () => ctx.dispatch({ type: 'INCREMENT' }),
-    reset: () => ctx.dispatch({ type: 'RESET' }),
+    increment: () =>
+      ctx.dispatch({ type: 'INCREMENT' }),
   };
 }
 ```
+
+</div>
+
+</div>
+
+<div v-click class="box-accent mt-3 text-sm">
+  💡 커스텀 훅이 Context를 <strong class="text-blue-300">캡슐화</strong> — 나중에 내부 구현 바꿔도 호출부 코드는 그대로
+</div>
 
 ---
 transition: slide-up
@@ -222,38 +268,61 @@ transition: slide-up
 
 # 훅 합성 (Composition) 전략
 
-작은 훅을 조합해서 큰 훅을 만든다
+<div class="grid grid-cols-2 gap-4">
 
-```tsx {all|1-3|5-7|9-13|15-24}
-// 작은 단위 훅 1: 입력 관리
+<div>
+
+**작은 단위 훅 3개**
+
+```tsx {all|1-4|6-8|10-14}
 function useInput(initial: string) {
   const [value, setValue] = useState(initial);
   return { value, onChange: (e) => setValue(e.target.value) };
 }
 
-// 작은 단위 훅 2: 유효성 검사
-function useValidation(value: string, rule: (v: string) => string | null) {
+function useValidation(value: string, rule) {
   return { error: rule(value) };
 }
 
-// 작은 단위 훅 3: API 제출
 function useSubmit(fn: () => Promise<void>) {
   const [loading, setLoading] = useState(false);
-  return { loading, submit: async () => { setLoading(true); await fn(); setLoading(false); } };
+  return {
+    loading,
+    submit: async () => { setLoading(true); await fn(); setLoading(false); },
+  };
 }
+```
 
-// 조합해서 큰 훅 만들기
+</div>
+
+<div v-click>
+
+**조합해서 큰 훅 만들기**
+
+```tsx
 function useSignupForm() {
   const email = useInput('');
+
   const { error: emailError } = useValidation(
     email.value,
     v => v.includes('@') ? null : '이메일 형식 오류'
   );
-  const { loading, submit } = useSubmit(() => api.signup(email.value));
+
+  const { loading, submit } = useSubmit(
+    () => api.signup(email.value)
+  );
 
   return { email, emailError, loading, submit };
 }
 ```
+
+<div class="box-primary mt-3 text-sm">
+  🔗 각 훅이 자기 역할만 — 변경해도 서로 영향 없음
+</div>
+
+</div>
+
+</div>
 
 ---
 transition: slide-up
@@ -261,11 +330,9 @@ transition: slide-up
 
 # 같은 기능, 다른 설계
 
-같은 카운터를 3가지 방식으로 구현해보자
+<div class="grid grid-cols-3 gap-3 mt-4">
 
-<div class="grid grid-cols-3 gap-4 mt-4">
-
-<div class="border border-yellow-500 rounded-lg p-3">
+<div class="dk-card border-yellow-600">
 
 **방식 A: 플랫 훅**
 
@@ -281,32 +348,31 @@ function useCounter(init = 0) {
 }
 ```
 
-간단, 기능 추가 시 비대해짐
+<div class="text-xs text-gray-500 mt-2">간단 · 기능 늘수록 비대해짐</div>
 
 </div>
 
-<div class="border border-blue-500 rounded-lg p-3">
+<div class="dk-card border-blue-600">
 
 **방식 B: Reducer 훅**
 
 ```tsx
 function useCounter(init = 0) {
-  const [n, dispatch] = useReducer(
-    (s, a) => {
+  const [n, dispatch] =
+    useReducer((s, a) => {
       if (a === 'UP') return s + 1;
       if (a === 'DOWN') return s - 1;
       return init;
-    }, init
-  );
+    }, init);
   return { n, dispatch };
 }
 ```
 
-액션 추적 가능, 테스트 쉬움
+<div class="text-xs text-gray-500 mt-2">액션 추적 · 테스트 쉬움</div>
 
 </div>
 
-<div class="border border-green-500 rounded-lg p-3">
+<div class="dk-card border-green-600">
 
 **방식 C: 합성 훅**
 
@@ -314,13 +380,13 @@ function useCounter(init = 0) {
 function useCounter(init = 0) {
   const state = useInput(init);
   const { submit } = useSubmit(
-    async () => api.save(state.value)
+    () => api.save(state.value)
   );
   return { ...state, submit };
 }
 ```
 
-재사용성 최고, 학습 비용 있음
+<div class="text-xs text-gray-500 mt-2">재사용 최고 · 학습 비용 있음</div>
 
 </div>
 
@@ -364,7 +430,7 @@ transition: fade
 
 <v-click>
 
-> 💡 훅 설계가 다 다를수록 코드리뷰가 풍성해져요. 일부러 다른 방식으로 구현해보세요!
+> 💡 훅 설계가 다 다를수록 코드리뷰가 풍성해져요!
 
 </v-click>
 
@@ -389,6 +455,7 @@ transition: slide-up
 ---
 layout: center
 class: text-center
+transition: fade
 ---
 
 # 수고하셨습니다! 🎉
@@ -397,4 +464,4 @@ class: text-center
 
 <br>
 
-PR 마감: 다음 스터디 전날 자정 · 코드리뷰 2개 필수
+<span class="text-sm text-gray-500">PR 마감: 다음 스터디 전날 자정 · 코드리뷰 2개 필수</span>

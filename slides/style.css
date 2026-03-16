@@ -1,0 +1,137 @@
+/* 김덕환 (log8.kr) 브랜드 테마
+ * 메인: #8b5cf6 (보라), 강조: #a78bfa (밝은 보라), 포인트: #89b4fa (파랑)
+ */
+
+:root {
+  --dk-primary: #8b5cf6;
+  --dk-primary-light: #a78bfa;
+  --dk-primary-dim: rgba(139, 92, 246, 0.15);
+  --dk-accent: #89b4fa;
+  --dk-accent-dim: rgba(137, 180, 250, 0.15);
+  --dk-green: #a6e3a1;
+  --dk-red: #f38ba8;
+  --dk-yellow: #f9e2af;
+  --dk-bg: #0f0f1a;
+  --dk-surface: #1a1a2e;
+  --dk-border: rgba(139, 92, 246, 0.3);
+}
+
+/* 슬라이드 배경 */
+.slidev-layout {
+  background: var(--dk-bg);
+  color: #cdd6f4;
+}
+
+/* 제목 — 보라 그라디언트 */
+.slidev-layout h1 {
+  background: linear-gradient(135deg, var(--dk-primary-light) 0%, var(--dk-accent) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.slidev-layout h2 {
+  color: var(--dk-primary-light);
+}
+
+/* 코드 블록 — 높이 제한 핵심 */
+.slidev-layout .shiki,
+.slidev-layout pre {
+  max-height: 380px;
+  overflow-y: auto;
+  font-size: 0.82rem;
+  line-height: 1.55;
+  border: 1px solid var(--dk-border);
+  border-radius: 10px;
+}
+
+/* 코드 블록 스크롤바 */
+.slidev-layout pre::-webkit-scrollbar {
+  height: 4px;
+  width: 4px;
+}
+.slidev-layout pre::-webkit-scrollbar-track {
+  background: transparent;
+}
+.slidev-layout pre::-webkit-scrollbar-thumb {
+  background: var(--dk-primary);
+  border-radius: 4px;
+}
+
+/* 인라인 코드 */
+.slidev-layout :not(pre) > code {
+  background: var(--dk-primary-dim);
+  color: var(--dk-primary-light);
+  padding: 0.1em 0.4em;
+  border-radius: 4px;
+  font-size: 0.88em;
+}
+
+/* 링크 */
+.slidev-layout a {
+  color: var(--dk-accent);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(137, 180, 250, 0.4);
+}
+
+/* 테이블 */
+.slidev-layout table {
+  border-collapse: collapse;
+  width: 100%;
+}
+.slidev-layout th {
+  background: var(--dk-primary-dim);
+  color: var(--dk-primary-light);
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--dk-border);
+}
+.slidev-layout td {
+  padding: 0.5rem 1rem;
+  border: 1px solid rgba(139, 92, 246, 0.15);
+}
+.slidev-layout tr:nth-child(even) td {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+/* 강조 박스 — 보라 계열 */
+.box-primary {
+  background: var(--dk-primary-dim);
+  border: 1px solid var(--dk-primary);
+  border-radius: 12px;
+  padding: 1rem 1.25rem;
+}
+
+.box-accent {
+  background: var(--dk-accent-dim);
+  border: 1px solid var(--dk-accent);
+  border-radius: 12px;
+  padding: 1rem 1.25rem;
+}
+
+/* 카드 */
+.dk-card {
+  background: var(--dk-surface);
+  border: 1px solid var(--dk-border);
+  border-radius: 12px;
+  padding: 1.25rem;
+  transition: border-color 0.2s;
+}
+.dk-card:hover {
+  border-color: var(--dk-primary);
+}
+
+/* blockquote — 팁 박스 */
+.slidev-layout blockquote {
+  background: var(--dk-primary-dim);
+  border-left: 3px solid var(--dk-primary);
+  border-radius: 0 8px 8px 0;
+  padding: 0.6rem 1rem;
+  margin: 0.75rem 0;
+  color: #cdd6f4;
+}
+
+/* 페이지 번호 */
+.slidev-layout .slidev-page-number {
+  color: var(--dk-primary-light);
+  opacity: 0.5;
+}
