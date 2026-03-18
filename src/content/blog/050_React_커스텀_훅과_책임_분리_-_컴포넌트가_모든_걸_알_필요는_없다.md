@@ -20,7 +20,7 @@ twitter_card: summary_large_image
 created_date: 2026-03-16
 updated_date: 2026-03-18
 category: "개발"
-featured_image: /images/blogs/050/050_00_thumbnail.png
+featured_image: /images/blogs/050/050_00_thumbnail_v2.png
 featured_image_alt: "React 커스텀 훅 책임 분리 개념 일러스트"
 slug: react-custom-hook-separation-of-concerns
 tags:
@@ -38,7 +38,7 @@ tags:
 
 ---
 
-![Omechu 프로젝트 코드에서 발견한 커스텀 훅 리팩토링 3케이스](/images/blogs/050/050_01_tangled-component.png)
+![Omechu 프로젝트 코드에서 발견한 커스텀 훅 리팩토링 3케이스](/images/blogs/050/050_01_tangled-component_v2.png)
 
 ## Case 1 — Toast가 10개 파일에서 복붙되고 있다
 
@@ -166,7 +166,7 @@ const { isCodeSent, isVerified, handleSendCode, handleVerifyCode } =
 
 ---
 
-![커스텀 훅으로 로직과 UI가 분리된 구조](/images/blogs/050/050_02_separated-structure.png)
+![커스텀 훅으로 로직과 UI가 분리된 구조](/images/blogs/050/050_02_separated-structure_v2.png)
 
 ## Case 3 — useEffect 2개가 서로 얽혀있다
 
@@ -227,7 +227,7 @@ export function useExceptionMenuSync() {
 
 ---
 
-![훅 이름으로 관심사가 명확해지는 구조](/images/blogs/050/050_03_hook-composition.png)
+![훅 이름으로 관심사가 명확해지는 구조](/images/blogs/050/050_03_hook-composition_v2.png)
 
 ## 정리 — 훅을 분리하는 신호 4가지
 
