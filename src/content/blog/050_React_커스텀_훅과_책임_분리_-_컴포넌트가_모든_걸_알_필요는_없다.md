@@ -30,7 +30,7 @@ tags:
   - 중급
 ---
 
-> 📎 **발표 자료**: [슬라이드 보기 →](/slides/react-week2)
+> 📎 **발표 자료**: [슬라이드 보기 →](https://slides.log8.kr/react-week2)
 
 스터디 2주차 주제는 커스텀 훅이었다. 이론 말고, 실제로 운영 중인 [Omechu](https://github.com/Team-Omechu/Omechu-web) 코드베이스를 직접 뜯어서 문제가 되는 패턴을 찾아 발표했다.
 
