@@ -2,7 +2,7 @@
 title: "우리는 과연 TypeScript 6.0을 써야 할까?"
 subtitle: "초보 개발자가 새 버전을 두려워하면서도 올려야 하는 진짜 이유"
 description: "TypeScript 6.0이 출시됐다. 레거시 걱정, 버그 걱정, 영어 장벽까지. 그래도 지금 올려야 하는 이유를 초보 개발자의 시선에서 솔직하게 이야기한다."
-publish: false
+publish: true
 meta_title: "TypeScript 6.0을 써야 할까? 초보 개발자의 솔직한 생각 | 김덕환"
 meta_description: "TypeScript 6.0 출시. 레거시 코드 걱정, 잠재적 버그, 영어 장벽에도 불구하고 지금 업그레이드해야 하는 이유를 초보 개발자 관점에서 이야기합니다."
 keywords:
