@@ -63,7 +63,7 @@ export default defineConfig({
         {
           userAgent: "*",
           allow: "/",
-          disallow: ["/admin", "/private", "/.obsidian", "/.trash"],
+          disallow: ["/private", "/.trash"],
           crawlDelay: 1,
         },
         {

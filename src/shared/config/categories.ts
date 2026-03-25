@@ -86,17 +86,3 @@ export const categoryMap: Record<string, string> = {
   생산성: "productivity",
   블로그운영: "blog",
 };
-
-/**
- * 카테고리 영문 ID -> 한글 이름 매핑 (역매핑)
- */
-export const reverseCategoryMap: Record<string, string> = {
-  daily: "일상",
-  dev: "개발",
-  ai: "AI",
-  security: "보안",
-  education: "교육",
-  devops: "DevOps",
-  productivity: "생산성",
-  blog: "블로그운영",
-};

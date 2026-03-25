@@ -4,7 +4,7 @@ import { categoryMap } from "@/shared/config/categories";
 /**
  * Get a valid timestamp from a date, or return 0 if invalid
  */
-export function getValidTimestamp(date: Date | null | undefined): number {
+function getValidTimestamp(date: Date | null | undefined): number {
   if (!date) return 0;
   const timestamp = date.getTime();
   return Number.isNaN(timestamp) ? 0 : timestamp;
