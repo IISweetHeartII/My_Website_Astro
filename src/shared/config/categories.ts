@@ -86,3 +86,10 @@ export const categoryMap: Record<string, string> = {
   생산성: "productivity",
   블로그운영: "blog",
 };
+
+/**
+ * 카테고리 영문 ID -> 한글 이름 매핑 (categoryMap의 역방향)
+ */
+export const reverseCategoryMap: Record<string, string> = Object.fromEntries(
+  Object.entries(categoryMap).map(([name, id]) => [id, name])
+);
