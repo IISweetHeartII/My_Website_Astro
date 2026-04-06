@@ -16,6 +16,7 @@ public/images/blogs/[번호]/[번호]_[순번]_[description].png
 - 확장자: `.png` 고정
 
 예시:
+
 - `public/images/blogs/050/050_00_thumbnail.png`
 - `public/images/blogs/050/050_01_coding-start.png`
 
@@ -39,6 +40,7 @@ public/images/blogs/[번호]/[번호]_[순번]_[description].png
 
 5. **이미지 생성**: 각 프롬프트에 대해 이미지를 생성한다:
    - 프롬프트: 주석에서 추출한 `prompt` 값 사용
+   - **기법 (중요)**: `16:9` 비율 시 프롬프트 끝에 `wide cinematic landscape 16:9 aspect ratio --ar 16:9`를 명시적으로 추가하여 구성이 넓게 잡히도록 유도한다.
    - 비율: `aspect_ratio` 값 사용 (기본값: 썸네일(`00`)은 `4:3`, 본문은 `16:9`)
    - 파일명: `save_as` 값 사용. 없으면 순서대로 `[번호]_01_image.png`, `[번호]_02_image.png` 자동 부여
    - 저장 경로: `public/images/blogs/[번호]/`
@@ -67,11 +69,13 @@ public/images/blogs/[번호]/[번호]_[순번]_[description].png
 ```
 
 특정 이미지만 재생성하려면:
+
 ```
 /blog-image src/content/blog/051_제목.md --only 01,03
 ```
 
 강제 덮어쓰기:
+
 ```
 /blog-image src/content/blog/051_제목.md --force
 ```

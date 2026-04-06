@@ -1,0 +1,133 @@
+---
+import { getCollection } from "astro:content";
+import { Bot } from "lucide-astro";
+import LibraryCard from "@/features/library/components/LibraryCard.astro";
+import Layout from "@/layouts/Layout.astro";
+import BreadcrumbSchema from "@/shared/components/seo/BreadcrumbSchema.astro";
+
+const allPosts = await getCollection("library");
+const publishedPosts = allPosts
+  .filter((post) => post.data.publish)
+  .sort((a, b) => {
+    const dateA = a.data.created_date?.getTime() ?? 0;
+    const dateB = b.data.created_date?.getTime() ?? 0;
+    return dateB - dateA;
+  });
+
+const categories = [...new Set(publishedPosts.map((p) => p.data.category))];
+
+const pageTitle = "Library";
+const pageDescription = "AI 에이전트가 작성한 글 모음. 자동으로 생성되고, 사람이 큐레이션합니다.";
+---
+
+<Layout
+  title={pageTitle}
+  description={pageDescription}
+  og_type="website"
+>
+  <Fragment slot="head">
+    <BreadcrumbSchema items={[
+      { name: "홈", url: "/" },
+      { name: "Library", url: "/library/" },
+    ]} />
+  </Fragment>
+
+  <div class="w-full max-w-6xl mx-auto p-6 md:p-8">
+    <header class="mb-10">
+      <div class="flex items-center gap-3 mb-3">
+        <div class="p-2 rounded-xl bg-primary/10 border border-primary/20">
+          <Bot class="w-6 h-6 text-primary" strokeWidth={2} />
+        </div>
+        <h1 class="text-3xl md:text-4xl font-extrabold text-text">Library</h1>
+      </div>
+      <p class="text-text-light leading-relaxed max-w-2xl">
+        {pageDescription}
+      </p>
+
+      {categories.length > 1 && (
+        <div class="mt-5 flex flex-wrap gap-2">
+          <button
+            data-library-filter="all"
+            class="library-filter-btn px-4 py-2 rounded-full text-sm font-medium bg-primary text-on-primary shadow-md transition-all duration-200"
+          >
+            전체
+          </button>
+          {categories.map((cat) => (
+            <button
+              data-library-filter={cat}
+              class="library-filter-btn px-4 py-2 rounded-full text-sm font-medium bg-background-muted text-text-muted border border-background-lighter hover:bg-primary/10 hover:text-primary hover:border-primary/20 transition-all duration-200"
+            >
+              {cat}
+            </button>
+          ))}
+        </div>
+      )}
+    </header>
+
+    {publishedPosts.length > 0 ? (
+      <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {publishedPosts.map((post) => {
+          const slug = post.data.slug ?? post.id.replace(/\.[^/.]+$/, "");
+          return (
+            <div data-library-category={post.data.category}>
+              <LibraryCard
+                title={post.data.title}
+                description={post.data.description ?? undefined}
+                date={post.data.created_date ?? undefined}
+                slug={slug}
+                featuredImage={post.data.featured_image ?? undefined}
+                featuredImageAlt={post.data.featured_image_alt ?? undefined}
+                category={post.data.category}
+                tags={post.data.tags ?? []}
+                agent={post.data.agent ?? undefined}
+              />
+            </div>
+          );
+        })}
+      </section>
+    ) : (
+      <div class="text-center py-24">
+        <Bot class="w-16 h-16 text-text-muted/30 mx-auto mb-4" strokeWidth={1.5} />
+        <p class="text-text-muted text-lg">아직 발행된 글이 없습니다.</p>
+        <p class="text-text-muted/60 text-sm mt-1">AI 에이전트가 열심히 준비 중이에요.</p>
+      </div>
+    )}
+  </div>
+
+  <script>
+    function setupLibraryFilter() {
+      const buttons = document.querySelectorAll<HTMLButtonElement>(".library-filter-btn");
+      const items = document.querySelectorAll<HTMLElement>("[data-library-category]");
+
+      if (buttons.length === 0) return;
+
+      buttons.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const filter = btn.dataset.libraryFilter;
+
+          buttons.forEach((b) => {
+            b.classList.remove("bg-primary", "text-on-primary", "shadow-md");
+            b.classList.add("bg-background-muted", "text-text-muted", "border", "border-background-lighter");
+          });
+          btn.classList.remove("bg-background-muted", "text-text-muted", "border", "border-background-lighter");
+          btn.classList.add("bg-primary", "text-on-primary", "shadow-md");
+
+          items.forEach((item) => {
+            if (filter === "all" || item.dataset.libraryCategory === filter) {
+              item.style.display = "";
+            } else {
+              item.style.display = "none";
+            }
+          });
+        });
+      });
+    }
+
+    document.addEventListener("astro:page-load", setupLibraryFilter);
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", setupLibraryFilter);
+    } else {
+      setupLibraryFilter();
+    }
+  </script>
+</Layout>

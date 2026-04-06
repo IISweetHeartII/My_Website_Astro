@@ -72,4 +72,21 @@ const blog = defineCollection({
   }),
 });
 
-export const collections = { blog };
+const library = defineCollection({
+  loader: glob({ base: "./src/content/library", pattern: "**/*.{md,mdx}" }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string().optional().nullable(),
+    publish: z.boolean().default(false),
+    created_date: dateSchema,
+    updated_date: dateSchema,
+    featured_image: z.string().optional().nullable(),
+    featured_image_alt: z.string().optional().nullable(),
+    slug: z.string().optional().nullable(),
+    category: z.string().default("일반"),
+    tags: z.array(z.string()).default([]).nullable(),
+    agent: z.string().optional().nullable(),
+  }),
+});
+
+export const collections = { blog, library };

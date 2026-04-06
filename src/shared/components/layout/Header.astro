@@ -27,6 +27,7 @@ import HeaderLink from "./HeaderLink.astro";
 
     <div class="hidden md:flex items-center space-x-6">
       <HeaderLink href={getUrl("/blog")}>Blog</HeaderLink>
+      <HeaderLink href={getUrl("/library")}>Library</HeaderLink>
       <HeaderLink href={getUrl("/showcase")}>Showcase</HeaderLink>
       <HeaderLink href={getUrl("/portfolio")}>Portfolio</HeaderLink>
       <HeaderLink href={getUrl("/resume")}>Resume</HeaderLink>
@@ -102,6 +103,11 @@ import HeaderLink from "./HeaderLink.astro";
         href={getUrl("/blog")}
         class="text-nav-text hover:text-accent text-xl font-semibold transition-colors duration-200"
         >Blog</a
+      >
+      <a
+        href={getUrl("/library")}
+        class="text-nav-text hover:text-accent text-xl font-semibold transition-colors duration-200"
+        >Library</a
       >
       <a
         href={getUrl("/showcase")}

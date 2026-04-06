@@ -46,6 +46,16 @@ faq:
 
 요즘 AI를 쓰는 방식은 크게 두 가지로 갈린다.
 
+![디스코드에서 말하면 맥미니가 일하기 시작했다](/images/blogs/052/052_00_thumbnail.png)
+
+<!--
+  📸 이미지 프롬프트:
+  prompt: "A sleek Mac mini on a minimalist wooden desk, a glowing Discord logo hovering above it, connected by digital energy lines to floating holographic screens showing code and automated tasks, modern flat illustration, premium dark mode aesthetic, deep blue and purple tones, wide aspect ratio"
+  aspect_ratio: "16:9"
+  session_id: "blog-052"
+  save_as: "052_00_thumbnail.png"
+-->
+
 하나는 **질문하고 답을 받는 방식**이고, 다른 하나는 **일을 맡기고 결과물을 받는 방식**이다.
 
 나는 후자를 원했다.
@@ -80,7 +90,18 @@ Agent Session (예: kkami)
 Mac mini 로컬 파일 시스템
 ```
 
+![OpenClaw 자동화 워크플로우 아키텍처](/images/blogs/052/052_01_architecture.png)
+
+<!--
+  📸 이미지 프롬프트:
+  prompt: "A conceptual diagram showing a smartphone with a Discord interface sending a message to a central 'OpenClaw Gateway' hub, which then fans out to multiple agent sessions performing tasks on a Mac mini, clean modern flat illustration, 16:9 aspect ratio, premium technology aesthetic"
+  aspect_ratio: "16:9"
+  session_id: "blog-052"
+  save_as: "052_01_architecture.png"
+-->
+
 즉, 내가 Discord에서 "까미야, 내 웹사이트 저장소 클론해서 한번 봐줘"라고 말하면,
+
 그건 단순한 채팅이 아니라 **실행 가능한 작업 요청**이 된다.
 
 AI는 답변만 만드는 게 아니라, 실제로:
@@ -115,6 +136,16 @@ My_Website_Astro 저장소 클론해서 어떤 구조인지 봐줘.
 ```
 
 심지어 음성으로 말해도 된다. Discord에서 음성/오디오가 텍스트로 풀리면, 그 내용이 그대로 에이전트 요청으로 들어간다.
+
+![자연어 명령과 쉘 명령의 차이](/images/blogs/052/052_02_interface.png)
+
+<!--
+  📸 이미지 프롬프트:
+  prompt: "A comparison layout: Left side showing a cluttered terminal with complex gray text, Right side showing a clean vibrant Discord chat window with a simple natural language request, a bridge connecting them, flat illustration style, 16:9 aspect ratio"
+  aspect_ratio: "16:9"
+  session_id: "blog-052"
+  save_as: "052_02_interface.png"
+-->
 
 중요한 건 **내가 먼저 쉘 명령을 외울 필요가 없다는 것**이다.
 
@@ -197,6 +228,16 @@ cat astro.config.mjs
 - 여러 저장소를 일관된 규칙으로 관리할 수 있다
 - "AI의 메모"와 "실제 서비스 코드"의 경계를 유지할 수 있다
 
+![에이전트 문맥과 프로젝트 저장소의 분리](/images/blogs/052/052_03_workspace.png)
+
+<!--
+  📸 이미지 프롬프트:
+  prompt: "Two distinct glowing digital zones in a landscape format: one labeled 'Agent Context' with memory files, the other labeled 'Live Projects' with git repositories, connected by controlled data pipes, high-tech architectural feel, flat illustration, 16:9 aspect ratio"
+  aspect_ratio: "16:9"
+  session_id: "blog-052"
+  save_as: "052_03_workspace.png"
+-->
+
 이건 생각보다 중요하다. AI가 파일을 만질 수 있게 되면, **어디까지가 자기 문맥이고 어디부터가 실제 제품 코드인지** 구분하는 게 안전성의 시작이기 때문이다.
 
 ---
@@ -268,6 +309,16 @@ openclaw status
 - 까미가 코드 수정 → 나비가 리뷰
 - 치즈가 콘텐츠 작성 → 까미가 기술 정확성 점검
 - 루나가 리서치 수집 → 로지가 최종 요약
+
+![에이전트 간 협업 (sessions_send)](/images/blogs/052/052_04_collaboration.png)
+
+<!--
+  📸 이미지 프롬프트:
+  prompt: "A group of unique AI character avatars sitting around a virtual conference table in a high-tech digital space, collaborating on a project board, speech bubbles connecting them, vibrant colors, premium flat illustration, 16:9 aspect ratio"
+  aspect_ratio: "16:9"
+  session_id: "blog-052"
+  save_as: "052_04_collaboration.png"
+-->
 
 사람 팀의 역할 분담을 AI 운영에 가져온 셈이다.
 
@@ -484,5 +535,15 @@ AI를 "똑똑한 답변기"로만 쓰면 생산성이 조금 오르는 수준에
 
 AI를 잘 쓰는 사람과,
 AI를 **운영하는 사람** 사이에는 생각보다 큰 차이가 있다.
+
+![AI 작업 시스템의 비전](/images/blogs/052/052_05_vision.png)
+
+<!--
+  📸 이미지 프롬프트:
+  prompt: "A developer standing in a vast, organized digital control room directing a symphony of automated AI agents, glowing circuits and data flows everywhere, hopeful and powerful atmosphere, futuristic flat illustration, 16:9 aspect ratio"
+  aspect_ratio: "16:9"
+  session_id: "blog-052"
+  save_as: "052_05_vision.png"
+-->
 
 나는 이제 전자보다 후자를 더 재밌어한다.

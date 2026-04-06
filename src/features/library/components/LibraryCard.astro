@@ -1,0 +1,95 @@
+---
+import { ArrowRight, Bot } from "lucide-astro";
+import FormattedDate from "@/shared/components/ui/FormattedDate.astro";
+import { getUrl } from "@/shared/utils/url";
+
+interface Props {
+  title: string;
+  description?: string;
+  date?: Date;
+  slug: string;
+  featuredImage?: string;
+  featuredImageAlt?: string;
+  category?: string;
+  tags?: string[];
+  agent?: string;
+}
+
+const {
+  title,
+  description,
+  date,
+  slug,
+  featuredImage,
+  featuredImageAlt = "",
+  category,
+  tags = [],
+  agent,
+} = Astro.props;
+---
+
+<article
+  class="scroll-animate group relative rounded-2xl bg-background border border-background-lighter shadow-sm transition-all duration-300 ease-out overflow-hidden hover:-translate-y-1.5 hover:shadow-xl hover:border-primary/30"
+>
+  <a
+    href={getUrl(`/library/${slug}/`)}
+    class="block text-inherit no-underline h-full"
+  >
+    {featuredImage ? (
+      <div class="relative aspect-[4/3] overflow-hidden bg-background-light">
+        <img
+          src={featuredImage}
+          alt={featuredImageAlt}
+          class="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+          loading="lazy"
+        />
+        <div class="absolute inset-0 bg-linear-to-t from-background/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+      </div>
+    ) : (
+      <div class="relative aspect-[4/3] overflow-hidden bg-linear-to-br from-primary/10 via-accent/5 to-background-light flex items-center justify-center">
+        <Bot class="w-16 h-16 text-primary/20 transition-all duration-500 ease-out group-hover:scale-110 group-hover:text-primary/40" strokeWidth={1.5} />
+      </div>
+    )}
+
+    <div class="p-5 flex flex-col gap-3">
+      <div class="flex items-center gap-2 flex-wrap">
+        {category && (
+          <span class="px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary/10 text-primary border border-primary/20">
+            {category}
+          </span>
+        )}
+        {agent && (
+          <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-accent/10 text-accent border border-accent/20">
+            <Bot class="w-3 h-3" strokeWidth={2} />
+            {agent}
+          </span>
+        )}
+      </div>
+
+      <h2 class="text-lg font-bold leading-snug text-text transition-colors duration-300 group-hover:text-primary line-clamp-2">
+        {title}
+      </h2>
+
+      {description && (
+        <p class="text-sm text-text-light leading-relaxed line-clamp-2">
+          {description}
+        </p>
+      )}
+
+      <div class="flex justify-between items-center mt-auto pt-3 border-t border-background-lighter">
+        {date && (
+          <time class="text-xs text-text-muted font-medium">
+            <FormattedDate date={date} />
+          </time>
+        )}
+        <div class="inline-flex items-center gap-1.5 text-xs font-semibold text-primary transition-all duration-300 ease-out group-hover:gap-2.5 group-hover:text-accent">
+          <span>Read</span>
+          <ArrowRight
+            class="w-3.5 h-3.5 transition-transform duration-500 ease-out group-hover:translate-x-1"
+            strokeWidth={2.5}
+          />
+        </div>
+      </div>
+    </div>
+  </a>
+</article>
