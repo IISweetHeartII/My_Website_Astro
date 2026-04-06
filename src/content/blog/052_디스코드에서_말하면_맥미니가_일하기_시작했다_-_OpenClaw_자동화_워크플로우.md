@@ -30,6 +30,8 @@ tags:
   - MacMini
   - 홈서버
   - 에이전트
+featured_image: /images/blogs/052/052_00_thumbnail.png
+featured_image_alt: "Discord와 Mac mini가 연결된 AI 자동화 워크플로우 컨셉 이미지"
 
 faq:
   - question: "OpenClaw에서는 AI에게 어떻게 일을 시키나요?"
