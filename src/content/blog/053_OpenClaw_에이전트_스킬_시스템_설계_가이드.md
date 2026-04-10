@@ -2,7 +2,7 @@
 title: "OpenClaw 에이전트 스킬 시스템 설계 가이드"
 subtitle: "SKILL.md 하나로 AI 에이전트에게 전문 능력을 부여하는 법"
 description: "OpenClaw의 스킬 시스템 구조를 설계부터 등록까지 단계별로 정리했습니다. SKILL.md 작성법, 트리거 설정, 콘텐츠 파이프라인 연동까지 실제 운영 기준으로 설명합니다."
-publish: false
+publish: true
 meta_title: "OpenClaw 에이전트 스킬 시스템 설계 가이드 | AI 에이전트 전문 능력 부여하기"
 meta_description: "OpenClaw 스킬 시스템의 구조와 설계 원칙을 실제 운영 사례와 함께 정리한 교육 가이드입니다. SKILL.md 작성법부터 파이프라인 연동까지."
 keywords:
