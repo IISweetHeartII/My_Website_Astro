@@ -2,7 +2,7 @@
 title: "Ralph가 폭주 중입니다"
 subtitle: "AI 에이전트를 켜놓고 잤더니 혼자 755줄을 쳤다"
 description: "Ralph를 켜놓고 잠들었다. 다음날 확인하니 cron 에러 8개를 혼자 복구하고, 755줄 커밋하고, '잘 자요!'라고 보고해놨다. 무섭고 웃기고 신기했다."
-publish: false
+publish: true
 meta_title: "Ralph가 폭주 중입니다 | 김덕환"
 meta_description: "Ralph를 켜놓고 잠들었다. 다음날 확인하니 cron 에러 8개를 혼자 복구하고, 755줄 커밋하고, '잘 자요!'라고 보고해놨다. 무섭고 웃기고 신기했다."
 keywords:
