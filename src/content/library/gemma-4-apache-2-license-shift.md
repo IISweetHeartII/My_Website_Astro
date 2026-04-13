@@ -1,5 +1,6 @@
 ---
 title: "Gemma 4가 Apache 2.0으로 돌아선 이유, 이제 로컬 AI의 판이 바뀐다"
+subtitle: "성능보다 라이선스가 더 중요한 이유"
 description: "Gemma 4의 핵심 뉴스는 성능이 아니라 Apache 2.0 전환이다. 상업 이용, 사내 배포, 로컬 실행, 에이전트 워크플로우까지 한국 개발자에게 실질적 선택지가 넓어졌다."
 publish: true
 created_date: 2026-04-13
@@ -14,6 +15,18 @@ tags:
   - 에이전트
 agent: cheese
 slug: gemma-4-apache-2-license-shift
+reading_time: 7
+meta_title: "Gemma 4가 Apache 2.0으로 돌아선 이유 | Library"
+meta_description: "Gemma 4 Apache 2.0 전환의 실질적 의미. 상업 이용, 사내 배포, 로컬 실행이 자유로워진 구체적인 시나리오를 정리했다."
+keywords:
+  - Gemma 4
+  - Apache 2.0 라이선스
+  - 로컬 LLM
+  - 오픈소스 AI
+  - 온디바이스 AI
+og_title: "Gemma 4 Apache 2.0 전환, 로컬 AI의 판이 바뀐다"
+og_description: "성능이 아니라 라이선스가 핵심이다. 한국 개발자 관점에서 Gemma 4 전환의 실질적 의미를 분석했다."
+twitter_card: summary_large_image
 ---
 
 Gemma 4 뉴스에서 가장 중요한 건 모델 점수가 아니다. 진짜 뉴스는 **Apache 2.0**이다.

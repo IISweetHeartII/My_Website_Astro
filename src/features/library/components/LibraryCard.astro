@@ -12,6 +12,8 @@ interface Props {
   featuredImageAlt?: string;
   category?: string;
   agent?: string;
+  readingTime?: number;
+  tags?: string[] | null;
 }
 
 const {
@@ -23,6 +25,8 @@ const {
   featuredImageAlt = "",
   category,
   agent,
+  readingTime,
+  tags,
 } = Astro.props;
 ---
 
@@ -74,12 +78,27 @@ const {
         </p>
       )}
 
+      {tags && tags.length > 0 && (
+        <div class="flex flex-wrap gap-1.5">
+          {tags.slice(0, 3).map((tag) => (
+            <span class="px-2 py-0.5 rounded-md text-xs text-text-muted bg-background-light border border-background-lighter">
+              #{tag}
+            </span>
+          ))}
+        </div>
+      )}
+
       <div class="flex justify-between items-center mt-auto pt-3 border-t border-background-lighter">
-        {date && (
-          <time class="text-xs text-text-muted font-medium">
-            <FormattedDate date={date} />
-          </time>
-        )}
+        <div class="flex items-center gap-2">
+          {date && (
+            <time class="text-xs text-text-muted font-medium">
+              <FormattedDate date={date} />
+            </time>
+          )}
+          {readingTime && (
+            <span class="text-xs text-text-muted">· {readingTime}분</span>
+          )}
+        </div>
         <div class="inline-flex items-center gap-1.5 text-xs font-semibold text-primary transition-all duration-300 ease-out group-hover:gap-2.5 group-hover:text-accent">
           <span>Read</span>
           <ArrowRight

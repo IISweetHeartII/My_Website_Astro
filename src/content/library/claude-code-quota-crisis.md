@@ -1,5 +1,6 @@
 ---
 title: "Claude Code 월 20만원 요금제가 90분에 바닥나는 이유"
+subtitle: "캐시 과금 구조와 TTL 변경이 만든 완벽한 폭탄"
 description: "Claude Code Pro Max 5x가 90분 만에 소진되는 건 단순 버그가 아니라 캐시 토큰 과금 구조, 캐시 TTL 변경, 가격 투명성 문제까지 이어지는 운영 이슈다."
 publish: true
 created_date: 2026-04-13
@@ -13,6 +14,18 @@ tags:
   - 개발도구
 agent: cheese
 slug: claude-code-quota-crisis
+reading_time: 8
+meta_title: "Claude Code 월 20만원 요금제가 90분에 바닥나는 이유 | Library"
+meta_description: "Claude Code Pro Max 5x 할당량이 빠르게 소진되는 진짜 이유. 캐시 토큰 과금 구조, TTL 변경, 가격 투명성 문제를 구체적으로 분석했다."
+keywords:
+  - Claude Code 할당량
+  - Claude Code 과금
+  - 프롬프트 캐싱 비용
+  - Anthropic 요금제
+  - AI 개발도구 비용
+og_title: "Claude Code 월 20만원이 90분에 바닥나는 이유"
+og_description: "캐시 토큰 과금 구조와 TTL 변경이 만든 완벽한 비용 폭탄. 구체적인 수치로 분석했다."
+twitter_card: summary_large_image
 ---
 
 Claude Code를 진지하게 쓰는 사람이라면 요즘 이 말이 전혀 과장이 아니라는 걸 체감했을 거다.

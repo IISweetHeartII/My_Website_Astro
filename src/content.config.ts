@@ -76,6 +76,7 @@ const library = defineCollection({
   loader: glob({ base: "./src/content/library", pattern: "**/*.{md,mdx}" }),
   schema: z.object({
     title: z.string(),
+    subtitle: z.string().optional().nullable(),
     description: z.string().optional().nullable(),
     publish: z.boolean().default(true),
     created_date: dateSchema,
@@ -86,6 +87,18 @@ const library = defineCollection({
     category: z.string().default("일반"),
     tags: z.array(z.string()).default([]).nullable(),
     agent: z.string().optional().nullable(),
+    reading_time: z.number().optional().nullable(),
+    // SEO
+    meta_title: z.string().optional().nullable(),
+    meta_description: z.string().optional().nullable(),
+    keywords: z.array(z.string()).default([]).nullable(),
+    og_title: z.string().optional().nullable(),
+    og_description: z.string().optional().nullable(),
+    og_image: z.string().optional().nullable(),
+    og_type: z.string().default("article"),
+    twitter_card: z.string().default("summary_large_image"),
+    canonical_url: z.string().optional().nullable(),
+    no_index: z.boolean().default(false),
   }),
 });
 
