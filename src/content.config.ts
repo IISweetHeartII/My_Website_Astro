@@ -77,7 +77,7 @@ const library = defineCollection({
   schema: z.object({
     title: z.string(),
     description: z.string().optional().nullable(),
-    publish: z.boolean().default(false),
+    publish: z.boolean().default(true),
     created_date: dateSchema,
     updated_date: dateSchema,
     featured_image: z.string().optional().nullable(),
