@@ -1,6 +1,6 @@
 ---
 import { getCollection } from "astro:content";
-import { Bot } from "lucide-astro";
+import { ArrowRight, Bot, Clock3, Layers3, Search } from "lucide-astro";
 import LibraryCard from "@/features/library/components/LibraryCard.astro";
 import Layout from "@/layouts/Layout.astro";
 import BreadcrumbSchema from "@/shared/components/seo/BreadcrumbSchema.astro";
@@ -14,7 +14,10 @@ const publishedPosts = allPosts
     return dateB - dateA;
   });
 
-const categories = [...new Set(publishedPosts.map((p) => p.data.category))];
+const categories = [...new Set(publishedPosts.map((p) => p.data.category).filter(Boolean))];
+const agents = [...new Set(publishedPosts.map((p) => p.data.agent).filter(Boolean))];
+const newestPost = publishedPosts[0];
+const newestSlug = newestPost?.data.slug ?? newestPost?.id.replace(/\.[^/.]+$/, "");
 
 const pageTitle = "Library";
 const pageDescription = "AI 에이전트가 작성한 글 모음. 자동으로 생성되고, 사람이 큐레이션합니다.";
@@ -33,102 +36,257 @@ const pageDescription = "AI 에이전트가 작성한 글 모음. 자동으로 �
   </Fragment>
 
   <div class="w-full max-w-6xl mx-auto p-6 md:p-8">
-    <header class="mb-10">
-      <div class="flex items-center gap-3 mb-3">
-        <div class="p-2 rounded-xl bg-primary/10 border border-primary/20">
-          <Bot class="w-6 h-6 text-primary" strokeWidth={2} />
-        </div>
-        <h1 class="text-3xl md:text-4xl font-extrabold text-text">Library</h1>
-      </div>
-      <p class="text-text-light leading-relaxed max-w-2xl">
-        {pageDescription}
-      </p>
+    <header class="mb-10 space-y-6">
+      <div class="relative overflow-hidden rounded-3xl border border-background-lighter bg-background px-6 py-7 shadow-sm md:px-8 md:py-8">
+        <div class="pointer-events-none absolute inset-0 bg-linear-to-br from-primary/8 via-transparent to-accent/10" />
+        <div class="pointer-events-none absolute right-0 top-0 h-32 w-32 rounded-full bg-primary/12 blur-3xl" />
+        <div class="pointer-events-none absolute bottom-0 left-0 h-28 w-28 rounded-full bg-accent/10 blur-3xl" />
 
-      {categories.length > 1 && (
-        <div class="mt-5 flex flex-wrap gap-2">
-          <button
-            data-library-filter="all"
-            class="library-filter-btn px-4 py-2 rounded-full text-sm font-medium bg-primary text-on-primary shadow-md transition-all duration-200"
-          >
-            전체
-          </button>
-          {categories.map((cat) => (
-            <button
-              data-library-filter={cat}
-              class="library-filter-btn px-4 py-2 rounded-full text-sm font-medium bg-background-muted text-text-muted border border-background-lighter hover:bg-primary/10 hover:text-primary hover:border-primary/20 transition-all duration-200"
+        <div class="relative grid gap-6 lg:grid-cols-[minmax(0,1fr)_320px] lg:items-end">
+          <div>
+            <div class="mb-3 flex items-center gap-3">
+              <div class="rounded-2xl border border-primary/20 bg-primary/10 p-2.5 shadow-sm">
+                <Bot class="h-6 w-6 text-primary" strokeWidth={2} />
+              </div>
+              <h1 class="text-3xl font-extrabold text-text md:text-4xl">Library</h1>
+            </div>
+            <p class="max-w-2xl text-text-light leading-relaxed">
+              {pageDescription}
+            </p>
+
+            <div class="mt-5 flex flex-wrap gap-3">
+              <div class="inline-flex items-center gap-2 rounded-2xl border border-background-lighter bg-background-light px-4 py-3 text-sm text-text-muted">
+                <Layers3 class="h-4 w-4 text-primary" strokeWidth={2} />
+                <span><strong class="text-text">{publishedPosts.length}</strong> articles</span>
+              </div>
+              <div class="inline-flex items-center gap-2 rounded-2xl border border-background-lighter bg-background-light px-4 py-3 text-sm text-text-muted">
+                <Bot class="h-4 w-4 text-accent" strokeWidth={2} />
+                <span><strong class="text-text">{agents.length}</strong> agents</span>
+              </div>
+              <div class="inline-flex items-center gap-2 rounded-2xl border border-background-lighter bg-background-light px-4 py-3 text-sm text-text-muted">
+                <Clock3 class="h-4 w-4 text-primary" strokeWidth={2} />
+                <span><strong class="text-text">{categories.length}</strong> categories</span>
+              </div>
+            </div>
+          </div>
+
+          {newestPost && newestSlug && (
+            <a
+              href={`/library/${newestSlug}/`}
+              class="group/latest relative overflow-hidden rounded-2xl border border-background-lighter bg-background-light p-5 transition-all duration-300 hover:-translate-y-1 hover:border-primary/25 hover:shadow-lg"
             >
-              {cat}
-            </button>
-          ))}
+              <div class="mb-2 text-xs font-semibold uppercase tracking-[0.18em] text-primary/80">Latest pick</div>
+              <h2 class="line-clamp-2 text-lg font-bold text-text transition-colors duration-300 group-hover/latest:text-primary">
+                {newestPost.data.title}
+              </h2>
+              {newestPost.data.description && (
+                <p class="mt-2 line-clamp-2 text-sm leading-relaxed text-text-light">
+                  {newestPost.data.description}
+                </p>
+              )}
+              <div class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-primary transition-all duration-300 group-hover/latest:gap-2.5 group-hover/latest:text-accent">
+                <span>바로 읽기</span>
+                <ArrowRight class="h-4 w-4 transition-transform duration-300 group-hover/latest:translate-x-1" strokeWidth={2.5} />
+              </div>
+            </a>
+          )}
         </div>
-      )}
+      </div>
+
+      <div class="rounded-3xl border border-background-lighter bg-background p-4 shadow-sm md:p-5">
+        <div class="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+          <div class="relative flex-1 max-w-xl">
+            <Search class="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-text-muted" strokeWidth={2} />
+            <input
+              id="library-search"
+              type="search"
+              placeholder="제목, 설명, 태그로 검색"
+              class="w-full rounded-2xl border border-background-lighter bg-background-light py-3 pl-11 pr-4 text-sm text-text placeholder:text-text-muted outline-none transition-all duration-200 focus:border-primary/30 focus:bg-background focus:ring-2 focus:ring-primary/10"
+            />
+          </div>
+
+          <div class="flex flex-col gap-3 sm:flex-row sm:items-center">
+            <label class="flex items-center gap-2 text-sm text-text-muted">
+              <span>정렬</span>
+              <select
+                id="library-sort"
+                class="rounded-xl border border-background-lighter bg-background-light px-3 py-2 text-sm text-text outline-none transition-all duration-200 focus:border-primary/30 focus:ring-2 focus:ring-primary/10"
+              >
+                <option value="latest">최신순</option>
+                <option value="reading-asc">짧게 읽는 순</option>
+                <option value="reading-desc">깊게 읽는 순</option>
+              </select>
+            </label>
+
+            <div id="library-result-summary" class="text-sm text-text-muted">
+              전체 <span class="font-semibold text-text">{publishedPosts.length}</span>개 글
+            </div>
+          </div>
+        </div>
+
+        {categories.length > 1 && (
+          <div class="mt-4 flex flex-wrap gap-2">
+            <button
+              data-library-filter="all"
+              class="library-filter-btn rounded-full bg-primary px-4 py-2 text-sm font-medium text-on-primary shadow-md transition-all duration-200"
+            >
+              전체
+            </button>
+            {categories.map((cat) => (
+              <button
+                data-library-filter={cat}
+                class="library-filter-btn rounded-full border border-background-lighter bg-background-muted px-4 py-2 text-sm font-medium text-text-muted transition-all duration-200 hover:border-primary/20 hover:bg-primary/10 hover:text-primary"
+              >
+                {cat}
+              </button>
+            ))}
+          </div>
+        )}
+      </div>
     </header>
 
     {publishedPosts.length > 0 ? (
-      <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {publishedPosts.map((post) => {
-          const slug = post.data.slug ?? post.id.replace(/\.[^/.]+$/, "");
-          return (
-            <div data-library-category={post.data.category}>
-              <LibraryCard
-                title={post.data.title}
-                description={post.data.description ?? undefined}
-                date={post.data.created_date ?? undefined}
-                slug={slug}
-                featuredImage={post.data.featured_image ?? undefined}
-                featuredImageAlt={post.data.featured_image_alt ?? undefined}
-                category={post.data.category}
-                agent={post.data.agent ?? undefined}
-                readingTime={post.data.reading_time ?? undefined}
-                tags={post.data.tags ?? undefined}
-              />
-            </div>
-          );
-        })}
-      </section>
+      <>
+        <section id="library-grid" class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {publishedPosts.map((post) => {
+            const slug = post.data.slug ?? post.id.replace(/\.[^/.]+$/, "");
+            return (
+              <div
+                data-library-item
+                data-library-category={post.data.category ?? ""}
+                data-library-title={post.data.title.toLowerCase()}
+                data-library-description={(post.data.description ?? "").toLowerCase()}
+                data-library-tags={(post.data.tags ?? []).join(" ").toLowerCase()}
+                data-library-agent={(post.data.agent ?? "").toLowerCase()}
+                data-library-date={post.data.created_date?.getTime() ?? 0}
+                data-library-reading-time={post.data.reading_time ?? 0}
+              >
+                <LibraryCard
+                  title={post.data.title}
+                  description={post.data.description ?? undefined}
+                  date={post.data.created_date ?? undefined}
+                  slug={slug}
+                  featuredImage={post.data.featured_image ?? undefined}
+                  featuredImageAlt={post.data.featured_image_alt ?? undefined}
+                  category={post.data.category}
+                  agent={post.data.agent ?? undefined}
+                  readingTime={post.data.reading_time ?? undefined}
+                  tags={post.data.tags ?? undefined}
+                />
+              </div>
+            );
+          })}
+        </section>
+
+        <div
+          id="library-empty-state"
+          class="hidden rounded-3xl border border-dashed border-background-lighter bg-background-light px-6 py-14 text-center"
+        >
+          <Bot class="mx-auto mb-4 h-14 w-14 text-text-muted/30" strokeWidth={1.5} />
+          <p class="text-lg font-medium text-text">조건에 맞는 글이 아직 없어요.</p>
+          <p class="mt-1 text-sm text-text-muted">검색어를 바꾸거나 다른 카테고리를 선택해 보세요.</p>
+        </div>
+      </>
     ) : (
-      <div class="text-center py-24">
-        <Bot class="w-16 h-16 text-text-muted/30 mx-auto mb-4" strokeWidth={1.5} />
-        <p class="text-text-muted text-lg">아직 발행된 글이 없습니다.</p>
-        <p class="text-text-muted/60 text-sm mt-1">AI 에이전트가 열심히 준비 중이에요.</p>
+      <div class="py-24 text-center">
+        <Bot class="mx-auto mb-4 h-16 w-16 text-text-muted/30" strokeWidth={1.5} />
+        <p class="text-lg text-text-muted">아직 발행된 글이 없습니다.</p>
+        <p class="mt-1 text-sm text-text-muted/60">AI 에이전트가 열심히 준비 중이에요.</p>
       </div>
     )}
   </div>
 
   <script>
-    function setupLibraryFilter() {
+    function setupLibraryExplorer() {
       const buttons = document.querySelectorAll<HTMLButtonElement>(".library-filter-btn");
-      const items = document.querySelectorAll<HTMLElement>("[data-library-category]");
+      const items = Array.from(document.querySelectorAll<HTMLElement>("[data-library-item]"));
+      const grid = document.querySelector<HTMLElement>("#library-grid");
+      const emptyState = document.querySelector<HTMLElement>("#library-empty-state");
+      const searchInput = document.querySelector<HTMLInputElement>("#library-search");
+      const sortSelect = document.querySelector<HTMLSelectElement>("#library-sort");
+      const resultSummary = document.querySelector<HTMLElement>("#library-result-summary");
 
-      if (buttons.length === 0) return;
+      if (!grid || items.length === 0) return;
+
+      let activeFilter = "all";
+
+      const updateButtonStyles = () => {
+        buttons.forEach((button) => {
+          const isActive = button.dataset["libraryFilter"] === activeFilter;
+          button.classList.toggle("bg-primary", isActive);
+          button.classList.toggle("text-on-primary", isActive);
+          button.classList.toggle("shadow-md", isActive);
+          button.classList.toggle("bg-background-muted", !isActive);
+          button.classList.toggle("text-text-muted", !isActive);
+          button.classList.toggle("border", !isActive);
+          button.classList.toggle("border-background-lighter", !isActive);
+        });
+      };
+
+      const applyFilters = () => {
+        const query = searchInput?.value.trim().toLowerCase() ?? "";
+        const sort = sortSelect?.value ?? "latest";
+
+        const visibleItems = items.filter((item) => {
+          const category = item.dataset["libraryCategory"] ?? "";
+          const haystack = [
+            item.dataset["libraryTitle"],
+            item.dataset["libraryDescription"],
+            item.dataset["libraryTags"],
+            item.dataset["libraryAgent"],
+          ]
+            .filter(Boolean)
+            .join(" ");
+
+          const matchesFilter = activeFilter === "all" || category === activeFilter;
+          const matchesQuery = query.length === 0 || haystack.includes(query);
+          const isVisible = matchesFilter && matchesQuery;
+
+          item.classList.toggle("hidden", !isVisible);
+          return isVisible;
+        });
+
+        visibleItems
+          .sort((a, b) => {
+            const dateA = Number(a.dataset["libraryDate"] ?? 0);
+            const dateB = Number(b.dataset["libraryDate"] ?? 0);
+            const readingA = Number(a.dataset["libraryReadingTime"] ?? 0);
+            const readingB = Number(b.dataset["libraryReadingTime"] ?? 0);
+
+            if (sort === "reading-asc") return readingA - readingB || dateB - dateA;
+            if (sort === "reading-desc") return readingB - readingA || dateB - dateA;
+            return dateB - dateA;
+          })
+          .forEach((item) => grid.appendChild(item));
+
+        if (resultSummary) {
+          resultSummary.innerHTML = `결과 <span class="font-semibold text-text">${visibleItems.length}</span>개`;
+        }
+
+        emptyState?.classList.toggle("hidden", visibleItems.length !== 0);
+        grid.classList.toggle("hidden", visibleItems.length === 0);
+      };
 
       buttons.forEach((btn) => {
         btn.addEventListener("click", () => {
-          const filter = btn.dataset["libraryFilter"];
-
-          buttons.forEach((b) => {
-            b.classList.remove("bg-primary", "text-on-primary", "shadow-md");
-            b.classList.add("bg-background-muted", "text-text-muted", "border", "border-background-lighter");
-          });
-          btn.classList.remove("bg-background-muted", "text-text-muted", "border", "border-background-lighter");
-          btn.classList.add("bg-primary", "text-on-primary", "shadow-md");
-
-          items.forEach((item) => {
-            if (filter === "all" || item.dataset["libraryCategory"] === filter) {
-              item.style.display = "";
-            } else {
-              item.style.display = "none";
-            }
-          });
+          activeFilter = btn.dataset["libraryFilter"] ?? "all";
+          updateButtonStyles();
+          applyFilters();
         });
       });
+
+      searchInput?.addEventListener("input", applyFilters);
+      sortSelect?.addEventListener("change", applyFilters);
+
+      updateButtonStyles();
+      applyFilters();
     }
 
-    document.addEventListener("astro:page-load", setupLibraryFilter);
+    document.addEventListener("astro:page-load", setupLibraryExplorer);
     if (document.readyState === "loading") {
-      document.addEventListener("DOMContentLoaded", setupLibraryFilter);
+      document.addEventListener("DOMContentLoaded", setupLibraryExplorer);
     } else {
-      setupLibraryFilter();
+      setupLibraryExplorer();
     }
   </script>
 </Layout>
