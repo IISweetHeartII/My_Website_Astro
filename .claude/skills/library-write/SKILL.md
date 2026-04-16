@@ -87,13 +87,13 @@ twitter_card: summary_large_image
 
 ```
 public/images/library/[slug]/thumbnail.png      ← featured_image (썸네일)
-public/images/library/[slug]/01-[description].png
-public/images/library/[slug]/02-[description].png
+public/images/library/[slug]/01_[description].png
+public/images/library/[slug]/02_[description].png
 ```
 
 - slug 기반 서브폴더
 - 썸네일: `thumbnail.png`
-- 본문: `01-`, `02-` ... 순번 + 영문 하이픈 설명
+- 본문: `01_`, `02_` ... 순번 + 언더바 + 영문 하이픈 설명
 - 확장자: `.png` 고정
 
 ### 이미지 프롬프트 주석 형식
@@ -101,14 +101,14 @@ public/images/library/[slug]/02-[description].png
 글 안에 이미지가 필요한 위치마다 아래 형식으로 삽입한다:
 
 ```markdown
-![이미지 설명](/images/library/[slug]/01-description.png)
+![이미지 설명](/images/library/[slug]/01_description.png)
 
 <!--
   📸 이미지 프롬프트:
   prompt: "영문 이미지 생성 프롬프트, flat illustration, tech aesthetic, consistent style"
   aspect_ratio: "16:9"
   session_id: "library-[slug]"
-  save_as: "01-description.png"
+  save_as: "01_description.png"
 -->
 ```
 

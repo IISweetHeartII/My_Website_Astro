@@ -8,13 +8,13 @@ library 마크다운 파일을 읽어서 이미지 프롬프트 주석을 파싱
 
 ```
 public/images/library/[slug]/thumbnail.png      ← 썸네일
-public/images/library/[slug]/01-[description].png
-public/images/library/[slug]/02-[description].png
+public/images/library/[slug]/01_[description].png
+public/images/library/[slug]/02_[description].png
 ```
 
 - slug: 파일명 또는 frontmatter의 slug 값
 - 썸네일: `thumbnail.png`
-- 본문: `01-`, `02-` 순번 + 영문 하이픈 설명
+- 본문: `01_`, `02_` 순번 + 언더바 + 영문 하이픈 설명
 - 확장자: `.png` 고정
 
 ## Steps
@@ -50,10 +50,10 @@ public/images/library/[slug]/02-[description].png
 ```
 ✅ 생성 완료:
   - public/images/library/claude-code-quota-crisis/thumbnail.png (4:3)
-  - public/images/library/claude-code-quota-crisis/01-cache-structure.png (16:9)
+  - public/images/library/claude-code-quota-crisis/01_cache-structure.png (16:9)
 
 ⏭️ 스킵 (이미 존재):
-  - public/images/library/claude-code-quota-crisis/02-pricing.png
+  - public/images/library/claude-code-quota-crisis/02_pricing.png
 
 💡 생성 후 마크다운의 이미지 프롬프트 주석을 제거하세요.
 ```
@@ -79,14 +79,14 @@ public/images/library/[slug]/02-[description].png
 library-write 스킬이 생성하는 표준 형식:
 
 ```markdown
-![이미지 설명](/images/library/claude-code-quota-crisis/01-cache-structure.png)
+![이미지 설명](/images/library/claude-code-quota-crisis/01_cache-structure.png)
 
 <!--
   📸 이미지 프롬프트:
   prompt: "A diagram showing token cache structure with billing layers, flat tech illustration, blue and white color scheme"
   aspect_ratio: "16:9"
   session_id: "library-claude-code-quota-crisis"
-  save_as: "01-cache-structure.png"
+  save_as: "01_cache-structure.png"
 -->
 ```
 
