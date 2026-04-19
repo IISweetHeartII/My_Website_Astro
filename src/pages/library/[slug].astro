@@ -47,6 +47,34 @@ const slug = post.data.slug ?? post.id.replace(/\.[^/.]+$/, "");
 const tocHeadings = headings.filter((heading) => heading.depth >= 2 && heading.depth <= 3);
 
 const publishedPosts = (await getCollection("library")).filter((entry) => entry.data.publish);
+const agentDisplayName = agent
+  ? agent
+      .split(/[\s_-]+/)
+      .filter(Boolean)
+      .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+      .join(" ")
+  : undefined;
+const agentPosts = agent ? publishedPosts.filter((entry) => entry.data.agent === agent) : [];
+const agentPostCount = agentPosts.length;
+const agentCategoryCount = new Set(agentPosts.map((entry) => entry.data.category).filter(Boolean))
+  .size;
+const agentFocusAreas = Array.from(
+  new Set(agentPosts.map((entry) => entry.data.category).filter(Boolean))
+).slice(0, 3);
+const agentProfileMap = {
+  cheese: {
+    tagline: "Signal-first tech curator",
+    description:
+      "빠르게 움직이는 AI, 생산성, 보안 이슈에서 중요한 신호만 골라 맥락까지 정리하는 큐레이터형 에이전트입니다.",
+  },
+} as const;
+const agentProfile = agent
+  ? (agentProfileMap[agent.toLowerCase() as keyof typeof agentProfileMap] ?? {
+      tagline: "AI research and editorial agent",
+      description:
+        "핵심 이슈를 빠르게 읽고, 중요한 변화가 왜 의미 있는지 사람 관점에서 정리합니다.",
+    })
+  : null;
 const currentTagSet = new Set(safeTags);
 const relatedPosts = publishedPosts
   .filter((entry) => (entry.data.slug ?? entry.id.replace(/\.[^/.]+$/, "")) !== slug)
@@ -113,7 +141,7 @@ const relatedPosts = publishedPosts
               {agent && (
                 <div class="inline-flex items-center gap-1.5 rounded-full border border-accent/20 bg-accent/10 px-3 py-1.5 text-xs font-semibold text-accent">
                   <Bot class="h-3.5 w-3.5" strokeWidth={2} />
-                  {agent}
+                  {agentDisplayName ?? agent}
                 </div>
               )}
               {category && (
@@ -171,25 +199,83 @@ const relatedPosts = publishedPosts
           </div>
         </div>
 
-        {tocHeadings.length > 0 && (
+        {(tocHeadings.length > 0 || agentDisplayName) && (
           <aside class="space-y-4 xl:sticky xl:top-24">
-            <div class="rounded-3xl border border-background-lighter bg-background p-5 shadow-sm">
-              <div>
-                <p class="text-xs font-semibold uppercase tracking-[0.18em] text-primary/80">On this page</p>
-                <h2 class="mt-2 text-lg font-bold text-text">빠르게 훑어보기</h2>
-              </div>
+            {tocHeadings.length > 0 && (
+              <div class="rounded-3xl border border-background-lighter bg-background p-5 shadow-sm">
+                <div>
+                  <p class="text-xs font-semibold uppercase tracking-[0.18em] text-primary/80">On this page</p>
+                  <h2 class="mt-2 text-lg font-bold text-text">빠르게 훑어보기</h2>
+                </div>
 
-              <nav class="mt-4 space-y-1.5">
-                {tocHeadings.map((heading) => (
-                  <a
-                    href={`#${heading.slug}`}
-                    class={`block rounded-2xl px-3 py-2 text-sm leading-relaxed transition-all duration-200 hover:bg-primary/8 hover:text-primary ${heading.depth === 3 ? "pl-6 text-text-muted" : "font-medium text-text"}`}
-                  >
-                    {heading.text}
-                  </a>
-                ))}
-              </nav>
-            </div>
+                <nav class="mt-4 space-y-1.5">
+                  {tocHeadings.map((heading) => (
+                    <a
+                      href={`#${heading.slug}`}
+                      class={`block rounded-2xl px-3 py-2 text-sm leading-relaxed transition-all duration-200 hover:bg-primary/8 hover:text-primary ${heading.depth === 3 ? "pl-6 text-text-muted" : "font-medium text-text"}`}
+                    >
+                      {heading.text}
+                    </a>
+                  ))}
+                </nav>
+              </div>
+            )}
+
+            {agentDisplayName && agentProfile && (
+              <div class="overflow-hidden rounded-3xl border border-background-lighter bg-background shadow-sm">
+                <div class="relative overflow-hidden px-5 pb-5 pt-6">
+                  <div class="pointer-events-none absolute inset-0 bg-linear-to-br from-accent/10 via-transparent to-primary/10" />
+                  <div class="pointer-events-none absolute right-0 top-0 h-24 w-24 rounded-full bg-accent/10 blur-3xl" />
+
+                  <div class="relative">
+                    <p class="text-xs font-semibold uppercase tracking-[0.18em] text-accent/80">Featured agent</p>
+
+                    <div class="mt-4 flex items-start gap-3">
+                      <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-accent/20 bg-linear-to-br from-accent/14 to-primary/10 text-lg font-bold text-accent shadow-sm">
+                        {agentDisplayName.charAt(0)}
+                      </div>
+                      <div class="min-w-0">
+                        <h2 class="text-lg font-bold text-text">{agentDisplayName}</h2>
+                        <p class="mt-1 text-sm leading-relaxed text-text-light">{agentProfile.tagline}</p>
+                      </div>
+                    </div>
+
+                    <p class="mt-4 text-sm leading-relaxed text-text-light">
+                      {agentProfile.description}
+                    </p>
+
+                    <div class="mt-4 grid grid-cols-2 gap-2">
+                      <div class="rounded-2xl border border-background-lighter bg-background-light px-3 py-3">
+                        <p class="text-[11px] uppercase tracking-[0.12em] text-text-muted">Published</p>
+                        <p class="mt-1 text-lg font-bold text-text">{agentPostCount}</p>
+                      </div>
+                      <div class="rounded-2xl border border-background-lighter bg-background-light px-3 py-3">
+                        <p class="text-[11px] uppercase tracking-[0.12em] text-text-muted">Categories</p>
+                        <p class="mt-1 text-lg font-bold text-text">{agentCategoryCount}</p>
+                      </div>
+                    </div>
+
+                    {agentFocusAreas.length > 0 && (
+                      <div class="mt-4 flex flex-wrap gap-2">
+                        {agentFocusAreas.map((focusArea) => (
+                          <span class="rounded-full border border-background-lighter bg-background-light px-3 py-1 text-xs font-medium text-text">
+                            {focusArea}
+                          </span>
+                        ))}
+                      </div>
+                    )}
+
+                    <a
+                      href="/library/"
+                      class="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-primary transition-all duration-200 hover:gap-2.5 hover:text-accent"
+                    >
+                      <span>{agentDisplayName}의 글 더 보기</span>
+                      <ArrowRight class="h-4 w-4" strokeWidth={2.5} />
+                    </a>
+                  </div>
+                </div>
+              </div>
+            )}
           </aside>
         )}
       </div>
