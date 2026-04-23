@@ -1,0 +1,183 @@
+---
+title: "MCP를 넘어 A2A까지, 에이전트 프로토콜 스택이 개발자의 새 기본기가 된다"
+subtitle: "도구 연결은 MCP, 에이전트 협업은 A2A — 이제 중요한 건 모델보다 연결 방식이다"
+description: "MCP와 A2A는 경쟁 관계가 아니다. 2026년 개발자는 모델 비교보다 에이전트 연결 구조를 이해해야 생산성과 통제력을 함께 가져갈 수 있다."
+publish: true
+created_date: 2026-04-23
+category: "개발"
+tags:
+  - MCP
+  - A2A
+  - AI 에이전트
+  - 멀티 에이전트
+  - 개발자 생산성
+agent: cheese
+slug: mcp-a2a-agent-protocol-stack-2026
+reading_time: 8
+featured_image: /images/library/mcp-a2a-agent-protocol-stack-2026/thumbnail.png
+featured_image_alt: "MCP와 A2A가 함께 구성하는 에이전트 프로토콜 스택을 보여주는 일러스트"
+meta_title: "MCP를 넘어 A2A까지, 에이전트 프로토콜 스택이 개발자의 새 기본기가 된다 | Library"
+meta_description: "MCP와 A2A의 역할 차이와 실무 연결 방식을 정리했다. 2026년 개발자에게 왜 프로토콜 이해가 중요한지 설명한다."
+keywords:
+  - MCP A2A 차이
+  - 에이전트 프로토콜 스택
+  - 멀티 에이전트 아키텍처
+  - AI 개발자 생산성
+  - 에이전트 협업 표준
+og_title: "MCP를 넘어 A2A까지, 개발자의 새 기본기가 된 에이전트 프로토콜"
+og_description: "도구 연결은 MCP, 에이전트 협업은 A2A다. 이제 AI 개발 경쟁의 핵심은 모델보다 연결 구조에 있다."
+og_type: article
+twitter_card: summary_large_image
+---
+
+이제는 “어느 모델이 더 똑똑하냐”만으로는 생산성 격차가 안 난다. 실제 차이는 **AI가 무엇에 연결되고, 다른 에이전트와 어떻게 협업하느냐**에서 벌어진다.
+
+그래서 MCP와 A2A를 같이 봐야 한다. MCP는 AI 애플리케이션이 문서, 데이터, 도구에 붙는 표준이고, A2A는 서로 다른 에이전트가 역할을 나눠 장기 작업을 수행하게 만드는 표준에 가깝다. 둘은 경쟁이 아니라 계층 분담이다.
+
+<!--
+  📸 이미지 프롬프트:
+  prompt: "Editorial illustration of an agent protocol stack, MCP layer connecting AI to tools and documents, A2A layer connecting multiple specialized agents above it, clean minimal tech aesthetic, flat illustration, modern Korean tech media style"
+  aspect_ratio: "4:3"
+  session_id: "library-mcp-a2a-agent-protocol-stack-2026"
+  save_as: "thumbnail.png"
+-->
+
+이 변화가 중요한 이유는 분명하다. 코딩 에이전트, IDE assistant, 내부 업무 자동화가 전부 늘어나는 상황에서, 다음 병목은 모델 IQ가 아니라 **연결 규약의 부재**였기 때문이다. 이제 개발자는 SDK 하나 더 익히는 수준이 아니라, 에이전트가 연결되는 방식을 설계해야 하는 단계로 들어왔다.
+
+## MCP와 A2A는 서로 다른 질문에 답한다
+
+가장 단순하게 정리하면 이렇다.
+
+| 질문 | MCP | A2A |
+|---|---|---|
+| 무엇을 연결하나 | 모델 ↔ 도구·문서·데이터 | 에이전트 ↔ 에이전트 |
+| 핵심 목적 | 컨텍스트와 액션 연결 | 협업과 위임 연결 |
+| 잘하는 일 | 검색, 파일 접근, 실행, 지식 주입 | 역할 분담, 장기 실행, 상태 전달 |
+| 개발자 관점 | "이 에이전트가 뭘 볼 수 있나" | "이 에이전트가 누구와 일하나" |
+
+MCP 공식 문서는 이 프로토콜을 **AI 애플리케이션이 외부 시스템과 연결되는 오픈 표준**으로 설명한다. 쉽게 말해 모델에 눈과 손을 달아주는 규약이다. 저장소를 읽고, 사내 문서를 찾고, 캘린더를 조회하고, 특정 워크플로우를 호출하는 식이다.
+
+A2A 쪽은 결이 다르다. 공개된 문서 기준으로 A2A는 **JSON-RPC 2.0 over HTTP(S)**, **Agent Card 기반 디스커버리**, **SSE 스트리밍**, **비동기 push 알림**, **장기 실행 작업**을 핵심 요소로 둔다. 즉 단일 모델이 툴을 쓰는 수준을 넘어, 서로 다른 에이전트가 서로의 능력을 발견하고 협업하는 계약에 가깝다.
+
+![MCP와 A2A의 역할 분담 다이어그램](/images/library/mcp-a2a-agent-protocol-stack-2026/01_protocol-stack.png)
+
+<!--
+  📸 이미지 프롬프트:
+  prompt: "Clear layered diagram showing MCP as the lower layer connecting one AI agent to documents, APIs, and tools, and A2A as the upper layer connecting multiple specialized agents together, flat editorial infographic, clean labels, modern tech illustration"
+  aspect_ratio: "16:9"
+  session_id: "library-mcp-a2a-agent-protocol-stack-2026"
+  save_as: "01_protocol-stack.png"
+-->
+
+이걸 이해하면 제품 비교 관점도 바뀐다. 앞으로는 “어느 코딩 에이전트가 더 좋냐”보다 **그 에이전트가 어떤 MCP 생태계에 붙고, 어떤 A2A 협업 구조에 참여하느냐**가 더 큰 차이를 만든다.
+
+## 왜 지금 갑자기 프로토콜 스택이 중요해졌나
+
+첫째, AI가 읽어야 할 정보가 너무 많아졌다. 최신 공식 문서, 사내 위키, 이슈 트래커, 런북, 디자인 시스템까지 전부 사람 손으로 붙여넣는 방식은 더 버티기 어렵다. 그래서 최신 문서와 도구를 표준 방식으로 연결하는 MCP 흐름이 빠르게 중요해졌다.
+
+둘째, 단일 에이전트로 처리하기 어려운 작업이 늘었다. 예를 들면 이런 식이다.
+
+- IDE 에이전트가 저장소와 문서를 MCP로 읽는다.
+- 구현 계획을 세운 뒤 테스트 전용 에이전트에게 검증을 위임한다.
+- 보안 리뷰 에이전트가 민감 구간만 다시 본다.
+- 배포 에이전트가 결과를 받아 릴리즈 체크리스트를 진행한다.
+
+이건 더 이상 공상 시나리오가 아니다. 실제로 에이전트 제품들이 서로 다른 역할을 분리하기 시작했고, Google 진영에서도 공식 문서와 개발자 지식을 AI 워크플로우에 직접 연결하려는 흐름이 강해지고 있다. 여기서 MCP는 **지식을 먹이는 표준**, A2A는 **일을 나누는 표준**으로 맞물린다.
+
+코드로 보면 감각이 더 빠르다.
+
+```ts
+// 개념 예시: 한 에이전트가 MCP로 컨텍스트를 모으고 A2A로 일을 위임한다.
+const docs = await mcp.call("developer-docs.search", {
+  query: "OAuth refresh token rotation"
+});
+
+const repo = await mcp.call("repo.search", {
+  query: "refreshTokenHandler"
+});
+
+const reviewTask = await a2a.send("security-reviewer", {
+  goal: "새 인증 플로우 검토",
+  artifacts: [docs, repo]
+});
+
+await a2a.subscribe(reviewTask.id);
+```
+
+핵심은 문서를 더 잘 읽는 모델 하나를 뽑는 게 아니다. **문서 접근, 코드 분석, 리뷰, 테스트를 서로 다른 계약으로 나눠 연결하는 능력**이 생산성을 만든다.
+
+![IDE 에이전트가 MCP와 A2A를 함께 쓰는 워크플로우](/images/library/mcp-a2a-agent-protocol-stack-2026/02_workflow.png)
+
+<!--
+  📸 이미지 프롬프트:
+  prompt: "Workflow illustration of an IDE coding agent using MCP to access docs, repository, and issue tracker, then delegating to QA and security agents through A2A, clean flat tech infographic, modern Korean editorial style"
+  aspect_ratio: "16:9"
+  session_id: "library-mcp-a2a-agent-protocol-stack-2026"
+  save_as: "02_workflow.png"
+-->
+
+## 이제 개발자가 배워야 할 기본기는 모델 프롬프트가 아니라 연결 설계다
+
+나는 2026년의 실무 기본기가 세 가지로 바뀐다고 본다.
+
+### 1. 에이전트가 접근할 수 있는 범위를 설계할 것
+
+좋은 에이전트는 똑똑한 에이전트가 아니라 **정확한 문맥에 붙은 에이전트**다. MCP를 쓴다는 건 단순히 서버를 추가하는 일이 아니라, 어떤 문서와 도구를 어떤 권한으로 노출할지 정하는 일이다.
+
+### 2. 역할 분리와 위임 경계를 설계할 것
+
+모든 일을 하나의 거대 에이전트에 몰아주는 구조는 금방 무너진다. 구현, 테스트, 리뷰, 배포, 관측을 분리하면 품질도 좋아지고 장애 범위도 줄어든다. A2A가 주목받는 이유가 여기 있다.
+
+### 3. 관측성과 실패 복구를 프로토콜 레벨에서 볼 것
+
+장기 실행 작업, 스트리밍, 비동기 알림이 중요해지는 이유는 멀티 에이전트가 실패를 피할 수 없기 때문이다. 누가 어떤 작업을 맡았는지, 어디서 멈췄는지, 어떤 결과물을 넘겼는지 추적할 수 있어야 실제 운영이 된다.
+
+결국 질문은 이렇게 바뀐다.
+
+- 이 모델이 좋은가?
+- 이 제품이 빠른가?
+
+에서,
+
+- 이 에이전트는 어떤 문맥에 붙는가?
+- 어떤 다른 에이전트와 협업하는가?
+- 실패했을 때 어디서 다시 이어붙일 수 있는가?
+
+로 바뀌는 것이다.
+
+## 한국 개발자에게 지금 실질적으로 의미하는 것
+
+한국 개발자 커뮤니티에서는 그동안 모델 성능, 가격, 요금제가 화제의 중심이었다. 물론 그것도 중요하다. 하지만 이제는 그 위에 한 단계가 더 생겼다. **에이전트 연결 구조를 이해하는 팀**과 **그냥 더 좋은 모델만 찾는 팀**의 격차가 벌어질 가능성이 크다.
+
+특히 한국 팀은 아래 네 가지를 빨리 체감하게 될 가능성이 높다.
+
+1. **사내 문서 품질이 곧 AI 품질이 된다.** MCP로 연결할 문서 체계가 엉망이면 모델만 바꿔도 체감이 안 오른다.
+2. **조직 문화가 멀티 에이전트 품질을 결정한다.** 위임 후 검수 문화가 약하면 A2A를 붙여도 결과가 불안정하다.
+3. **벤더 종속 판단 기준이 달라진다.** 모델 성능이 아니라 어떤 프로토콜과 생태계를 지원하는지가 더 중요해진다.
+4. **개발자 채용 기준도 바뀐다.** 프롬프트 잘 쓰는 사람보다, 워크플로우와 권한 경계를 설계할 줄 아는 사람이 더 귀해질 수 있다.
+
+내 추천은 단순하다. 다음 분기에는 “AI 도입”을 추상적으로 말하지 말고, 아래 셋 중 어디부터 할지 정하면 된다.
+
+- **MCP 우선**: 공식 문서, 사내 위키, 저장소, 이슈 트래커를 표준 방식으로 연결한다.
+- **A2A 우선**: 테스트·리뷰·배포처럼 역할이 분명한 작업부터 에이전트 분업을 설계한다.
+- **하이브리드**: 하나의 코딩 에이전트에 MCP를 붙이고, 검증 단계만 별도 에이전트로 위임한다.
+
+이 순서를 잡는 순간 AI 도입이 “시연”에서 “운영”으로 넘어간다.
+
+![한국 개발팀을 위한 에이전트 프로토콜 도입 체크리스트](/images/library/mcp-a2a-agent-protocol-stack-2026/03_korean-dev-checklist.png)
+
+<!--
+  📸 이미지 프롬프트:
+  prompt: "Checklist style editorial infographic for Korean development teams adopting agent protocol stacks, sections for MCP connections, A2A delegation, permissions, observability, and review workflow, clean modern flat design"
+  aspect_ratio: "16:9"
+  session_id: "library-mcp-a2a-agent-protocol-stack-2026"
+  save_as: "03_korean-dev-checklist.png"
+-->
+
+## 결론: 다음 경쟁은 모델 전쟁이 아니라 연결 전쟁이다
+
+MCP는 AI를 도구와 문서에 붙인다. A2A는 에이전트를 다른 에이전트에 붙인다. 이 두 축이 만나면 비로소 “일하는 시스템”이 생긴다.
+
+그래서 앞으로의 차별점은 더 좋은 모델 하나가 아니라, **더 좋은 연결 구조**일 가능성이 높다. 실제로 써보면 생산성을 가르는 건 답변 한 번의 번뜩임이 아니라, 컨텍스트가 끊기지 않고 협업이 이어지는 구조다.
+
+2026년 개발자의 새 기본기는 프롬프트 자체가 아니라, **에이전트 프로토콜 스택을 읽고 설계하는 능력**이 될 것이다.
