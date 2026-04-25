@@ -34,13 +34,7 @@ twitter_card: summary_large_image
 
 그래서 MCP와 A2A를 같이 봐야 한다. MCP는 AI 애플리케이션이 문서, 데이터, 도구에 붙는 표준이고, A2A는 서로 다른 에이전트가 역할을 나눠 장기 작업을 수행하게 만드는 표준에 가깝다. 둘은 경쟁이 아니라 계층 분담이다.
 
-<!--
-  📸 이미지 프롬프트:
-  prompt: "Editorial illustration of an agent protocol stack, MCP layer connecting AI to tools and documents, A2A layer connecting multiple specialized agents above it, clean minimal tech aesthetic, flat illustration, modern Korean tech media style"
-  aspect_ratio: "4:3"
-  session_id: "library-mcp-a2a-agent-protocol-stack-2026"
-  save_as: "thumbnail.png"
--->
+
 
 이 변화가 중요한 이유는 분명하다. 코딩 에이전트, IDE assistant, 내부 업무 자동화가 전부 늘어나는 상황에서, 다음 병목은 모델 IQ가 아니라 **연결 규약의 부재**였기 때문이다. 이제 개발자는 SDK 하나 더 익히는 수준이 아니라, 에이전트가 연결되는 방식을 설계해야 하는 단계로 들어왔다.
 
@@ -61,13 +55,7 @@ A2A 쪽은 결이 다르다. 공개된 문서 기준으로 A2A는 **JSON-RPC 2.0
 
 ![MCP와 A2A의 역할 분담 다이어그램](/images/library/mcp-a2a-agent-protocol-stack-2026/01_protocol-stack.png)
 
-<!--
-  📸 이미지 프롬프트:
-  prompt: "Clear layered diagram showing MCP as the lower layer connecting one AI agent to documents, APIs, and tools, and A2A as the upper layer connecting multiple specialized agents together, flat editorial infographic, clean labels, modern tech illustration"
-  aspect_ratio: "16:9"
-  session_id: "library-mcp-a2a-agent-protocol-stack-2026"
-  save_as: "01_protocol-stack.png"
--->
+
 
 이걸 이해하면 제품 비교 관점도 바뀐다. 앞으로는 “어느 코딩 에이전트가 더 좋냐”보다 **그 에이전트가 어떤 MCP 생태계에 붙고, 어떤 A2A 협업 구조에 참여하느냐**가 더 큰 차이를 만든다.
 
@@ -108,13 +96,7 @@ await a2a.subscribe(reviewTask.id);
 
 ![IDE 에이전트가 MCP와 A2A를 함께 쓰는 워크플로우](/images/library/mcp-a2a-agent-protocol-stack-2026/02_workflow.png)
 
-<!--
-  📸 이미지 프롬프트:
-  prompt: "Workflow illustration of an IDE coding agent using MCP to access docs, repository, and issue tracker, then delegating to QA and security agents through A2A, clean flat tech infographic, modern Korean editorial style"
-  aspect_ratio: "16:9"
-  session_id: "library-mcp-a2a-agent-protocol-stack-2026"
-  save_as: "02_workflow.png"
--->
+
 
 ## 이제 개발자가 배워야 할 기본기는 모델 프롬프트가 아니라 연결 설계다
 
@@ -166,13 +148,7 @@ await a2a.subscribe(reviewTask.id);
 
 ![한국 개발팀을 위한 에이전트 프로토콜 도입 체크리스트](/images/library/mcp-a2a-agent-protocol-stack-2026/03_korean-dev-checklist.png)
 
-<!--
-  📸 이미지 프롬프트:
-  prompt: "Checklist style editorial infographic for Korean development teams adopting agent protocol stacks, sections for MCP connections, A2A delegation, permissions, observability, and review workflow, clean modern flat design"
-  aspect_ratio: "16:9"
-  session_id: "library-mcp-a2a-agent-protocol-stack-2026"
-  save_as: "03_korean-dev-checklist.png"
--->
+
 
 ## 결론: 다음 경쟁은 모델 전쟁이 아니라 연결 전쟁이다
 

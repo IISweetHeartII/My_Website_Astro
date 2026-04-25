@@ -1,0 +1,4 @@
+interface:
+  display_name: "Blog Image"
+  short_description: "Generate blog images from markdown prompt comments."
+  default_prompt: "Use the blog-image skill to generate image assets for a blog markdown file."

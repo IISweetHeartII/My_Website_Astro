@@ -30,13 +30,7 @@ og_type: article
 twitter_card: summary_large_image
 ---
 
-<!--
-  📸 이미지 프롬프트:
-  prompt: "Editorial tech illustration of three AI coding agents competing across a reliability dashboard, Claude Opus 4.7, Codex, and an open-weight model archetype, code editor panels, audit logs, long-running task timeline, clean premium magazine style, blue graphite and amber palette"
-  aspect_ratio: "4:3"
-  session_id: "library-claude-opus-4-7-agentic-coding-reliability-war"
-  save_as: "thumbnail.png"
--->
+
 
 오늘 화제의 본질은 새 모델 하나가 나왔다는 데 있지 않다. **코딩 에이전트를 얼마나 오래, 얼마나 안정적으로, 얼마나 안심하고 맡길 수 있느냐**를 둘러싼 신뢰도 전쟁이 본격적으로 시작됐다는 데 있다.
 
@@ -54,13 +48,7 @@ Anthropic 공식 발표에서 가장 눈에 띄는 문장은 의외로 숫자가
 
 ![모델 성능 경쟁에서 에이전트 신뢰도 경쟁으로 이동하는 흐름](/images/library/claude-opus-4-7-agentic-coding-reliability-war/01-reliability-war-map.png)
 
-<!--
-  📸 이미지 프롬프트:
-  prompt: "Infographic editorial illustration showing the shift from model benchmark race to agent reliability race, benchmark chart fading into long-running task timeline, self-verification loop, audit log, safety shield, clean flat vector tech aesthetic, 16:9"
-  aspect_ratio: "16:9"
-  session_id: "library-claude-opus-4-7-agentic-coding-reliability-war"
-  save_as: "01-reliability-war-map.png"
--->
+
 
 ## 같은 날 Codex와 Qwen이 던진 카드도 완전히 다르지 않다
 
@@ -117,13 +105,7 @@ Hacker News 상위 댓글만 봐도 바로 그 지점이 드러난다. Claude Op
 
 ![모델 라우팅, 비용 통제, 검증 루프를 함께 설계하는 장면](/images/library/claude-opus-4-7-agentic-coding-reliability-war/02-routing-cost-loop.png)
 
-<!--
-  📸 이미지 프롬프트:
-  prompt: "Editorial diagram showing AI coding workflow routing across three models, high-reliability planner, computer-use executor, open-weight local fallback, token budget meter, review gate, verification loop, modern clean tech infographic, 16:9"
-  aspect_ratio: "16:9"
-  session_id: "library-claude-opus-4-7-agentic-coding-reliability-war"
-  save_as: "02-routing-cost-loop.png"
--->
+
 
 내가 보기엔 앞으로의 기본 운영 감각은 대략 이렇게 갈 가능성이 크다.
 
@@ -179,13 +161,7 @@ Opus 4.7이 흥미로운 또 다른 이유는 배포 채널이다. Anthropic 공
 
 ![한국 개발팀이 코딩 에이전트 도입 전에 점검할 체크리스트](/images/library/claude-opus-4-7-agentic-coding-reliability-war/03-korean-dev-checklist.png)
 
-<!--
-  📸 이미지 프롬프트:
-  prompt: "Clean editorial checklist illustration for a Korean developer team evaluating AI coding agents, routing decision, token budget, verification loop, human approval gate, reliability scoreboard, modern flat vector style, 16:9"
-  aspect_ratio: "16:9"
-  session_id: "library-claude-opus-4-7-agentic-coding-reliability-war"
-  save_as: "03-korean-dev-checklist.png"
--->
+
 
 이 셋을 먼저 설계한 팀은 Opus 4.7, Codex, Qwen3.6 중 무엇을 선택하든 훨씬 빨리 감을 잡을 수 있다. 반대로 이 셋 없이 모델만 바꾸면, 기대는 커지는데 운영은 더 흔들릴 가능성이 높다.
 

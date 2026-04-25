@@ -1,0 +1,4 @@
+interface:
+  display_name: "Library Image"
+  short_description: "Generate library images from markdown prompt comments."
+  default_prompt: "Use the library-image skill to generate image assets for a library markdown file."

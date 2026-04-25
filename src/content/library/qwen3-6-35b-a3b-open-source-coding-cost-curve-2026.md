@@ -34,13 +34,7 @@ twitter_card: summary_large_image
 
 결론부터 말하면: 전면 대체는 아직 아니다. 하지만 가격 공식은 이미 깨졌다.
 
-<!--
-  📸 이미지 프롬프트:
-  prompt: "Futuristic open-source AI chip architecture diagram, cheese-orange and electric blue accent on dark background, minimalist flat illustration, MoE sparse activation nodes glowing, clean tech aesthetic"
-  aspect_ratio: "4:3"
-  session_id: "library-qwen3-6-35b-a3b-open-source-coding-cost-curve-2026"
-  save_as: "thumbnail.png"
--->
+
 
 ## 35B인데 왜 3B처럼 빠른가 — MoE 구조 해부
 
@@ -50,13 +44,7 @@ Mixture-of-Experts(MoE) 구조에서 35B 파라미터 전체가 매 토큰마다
 
 ![Qwen3.6-35B-A3B MoE 아키텍처 — 활성화되는 sparse expert 노드](/images/library/qwen3-6-35b-a3b-open-source-coding-cost-curve-2026/01_moe-architecture.png)
 
-<!--
-  📸 이미지 프롬프트:
-  prompt: "Mixture of Experts neural network diagram, sparse activation visualization, 35 nodes total with only 3 highlighted/active in electric blue, dark background, flat vector illustration, clean minimalist tech style"
-  aspect_ratio: "16:9"
-  session_id: "library-qwen3-6-35b-a3b-open-source-coding-cost-curve-2026"
-  save_as: "01_moe-architecture.png"
--->
+
 
 이 구조가 실전에서 의미하는 것:
 
@@ -109,13 +97,7 @@ Anthropic 호환 엔드포인트를 지원한다는 점이 중요하다. Claude 
 
 ![오픈소스 코딩 모델 비용 비교 — 상용 API vs 로컬 호스팅](/images/library/qwen3-6-35b-a3b-open-source-coding-cost-curve-2026/02_cost-comparison.png)
 
-<!--
-  📸 이미지 프롬프트:
-  prompt: "Cost comparison bar chart visualization, commercial AI API vs local self-hosted model, orange bars for expensive commercial, blue bars for affordable open-source, clean infographic style, dark background, minimal flat design"
-  aspect_ratio: "16:9"
-  session_id: "library-qwen3-6-35b-a3b-open-source-coding-cost-curve-2026"
-  save_as: "02_cost-comparison.png"
--->
+
 
 **생태계 현황**:
 
@@ -148,12 +130,6 @@ Qwen3.6-35B-A3B의 로컬 호스팅은 이 세 가지를 동시에 해결한다.
 
 ![하이브리드 코딩 에이전트 워크플로우 — 로컬 + 클라우드 분산 구조](/images/library/qwen3-6-35b-a3b-open-source-coding-cost-curve-2026/03_agent-workflow.png)
 
-<!--
-  📸 이미지 프롬프트:
-  prompt: "Hybrid AI agent workflow diagram, local model node (Qwen, warm orange) handling routine tasks, cloud model node (cool blue) handling complex tasks, arrows showing intelligent routing, clean flat illustration, dark tech background"
-  aspect_ratio: "16:9"
-  session_id: "library-qwen3-6-35b-a3b-open-source-coding-cost-curve-2026"
-  save_as: "03_agent-workflow.png"
--->
+
 
 가격 공식이 깨졌다는 것은 상용 모델이 사라진다는 의미가 아니다. 상용 모델의 *당연한 위치*에 의문이 생겼다는 것이다. 지금까지 "어차피 비쌀 수밖에 없지"가 기본값이었다면, 이제 팀마다 "어디서 어느 모델을 써야 하는가"를 계산하기 시작해야 하는 시대가 됐다.

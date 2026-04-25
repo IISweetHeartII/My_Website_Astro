@@ -30,13 +30,7 @@ og_type: article
 twitter_card: summary_large_image
 ---
 
-<!--
-  📸 이미지 프롬프트:
-  prompt: "Editorial tech illustration of a monthly AI coding subscription plan cracking under heavy agentic compute load, GitHub-style coding dashboard, usage meters, parallel agent sessions, clean minimal magazine style, dark navy with electric cyan and subtle orange accents, flat illustration"
-  aspect_ratio: "4:3"
-  session_id: "library-github-copilot-individual-plan-changes-agentic-compute-2026"
-  save_as: "thumbnail.png"
--->
+
 
 이번 변화의 핵심은 **Copilot이 비싸졌다**가 아니다. 더 정확히 말하면, **에이전트형 코딩 도구를 월정액 하나로 오래 감당하던 구조가 한계에 닿았다**는 신호다.
 
@@ -67,13 +61,7 @@ GitHub 공식 블로그가 밝힌 변경점은 의외로 솔직하다. 이유는
 
 ![월정액에서 계산량 통제로 이동하는 Copilot 요금 구조](/images/library/github-copilot-individual-plan-changes-agentic-compute-2026/01_pricing-model-shift.png)
 
-<!--
-  📸 이미지 프롬프트:
-  prompt: "Infographic showing the shift from flat monthly coding subscription to usage-based agentic compute controls, split screen with simple flat fee on the left and session limit, weekly limit, premium requests, model multiplier on the right, modern editorial tech vector style"
-  aspect_ratio: "16:9"
-  session_id: "library-github-copilot-individual-plan-changes-agentic-compute-2026"
-  save_as: "01_pricing-model-shift.png"
--->
+
 
 ## 왜 월정액 코딩 에이전트 모델이 흔들리기 시작했나
 
@@ -132,13 +120,7 @@ GitHub 공식 블로그가 밝힌 변경점은 의외로 솔직하다. 이유는
 
 ![session limit, weekly limit, premium requests의 관계도](/images/library/github-copilot-individual-plan-changes-agentic-compute-2026/02_limits-and-premium-requests.png)
 
-<!--
-  📸 이미지 프롬프트:
-  prompt: "Clean technical diagram explaining the relationship between session limit, weekly limit, premium requests, and model multipliers in an AI coding agent product, dashboard cards, arrows, minimal GitHub-inspired interface, flat vector illustration"
-  aspect_ratio: "16:9"
-  session_id: "library-github-copilot-individual-plan-changes-agentic-compute-2026"
-  save_as: "02_limits-and-premium-requests.png"
--->
+
 
 ## Hacker News 반응이 거셌던 이유는 가격보다 계약 감각 때문이다
 
@@ -172,13 +154,7 @@ VS Code와 Copilot CLI에 usage 표시가 들어간 건 친절함이라기보다
 
 ![한국 개발팀을 위한 AI 코딩 에이전트 비용 라우팅 전략](/images/library/github-copilot-individual-plan-changes-agentic-compute-2026/03_team-routing-strategy.png)
 
-<!--
-  📸 이미지 프롬프트:
-  prompt: "Editorial illustration of a Korean developer team routing coding tasks across different AI agents by cost and complexity, decision matrix with review, refactor, repetitive tasks, security constraints, clean modern tech infographic style"
-  aspect_ratio: "16:9"
-  session_id: "library-github-copilot-individual-plan-changes-agentic-compute-2026"
-  save_as: "03_team-routing-strategy.png"
--->
+
 
 실제로 지금 팀에서 점검해볼 체크리스트는 이 정도다.
 

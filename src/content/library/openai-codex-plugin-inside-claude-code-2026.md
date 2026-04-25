@@ -34,13 +34,7 @@ OpenAI가 새 IDE를 만든 게 아니다. 더 흥미로운 건 경쟁사 도구
 
 이 변화가 의미하는 건 단순한 플러그인 추가가 아니다. 이제 코딩 에이전트 경쟁은 “누가 더 똑똑하냐”보다 **개발자가 이미 쓰는 세션과 습관을 누가 점유하느냐**로 이동하고 있다.
 
-<!--
-  📸 이미지 프롬프트:
-  prompt: "Editorial tech illustration of a Claude Code terminal session with Codex review and delegation layers appearing inside it, cross-vendor AI coding workflow bridge, clean minimal flat design, modern Korean tech media aesthetic"
-  aspect_ratio: "4:3"
-  session_id: "library-openai-codex-plugin-inside-claude-code-2026"
-  save_as: "thumbnail.png"
--->
+
 
 공식 README 기준으로 이 플러그인은 `/codex:review`, `/codex:adversarial-review`, `/codex:rescue` 같은 명령을 Claude Code 안에서 바로 호출하게 만든다. 설치 조건도 생각보다 낮다. **ChatGPT 구독(Free 포함)이나 OpenAI API 키**, 그리고 **Node.js 18.18+**만 있으면 시작할 수 있다. 진입 장벽을 확 낮춘 셈이다.
 
@@ -56,13 +50,7 @@ OpenAI가 새 IDE를 만든 게 아니다. 더 흥미로운 건 경쟁사 도구
 
 ![Claude Code 안으로 들어온 Codex 워크플로우](/images/library/openai-codex-plugin-inside-claude-code-2026/01_workflow-bridge.png)
 
-<!--
-  📸 이미지 프롬프트:
-  prompt: "Workflow diagram showing Claude Code as the main developer console and Codex plugged inside for review, adversarial review, and delegated background tasks, clean flat infographic, subtle terminal UI motifs, Korean editorial tech style"
-  aspect_ratio: "16:9"
-  session_id: "library-openai-codex-plugin-inside-claude-code-2026"
-  save_as: "01_workflow-bridge.png"
--->
+
 
 이 구조가 중요한 이유는 명확하다.
 
@@ -102,13 +90,7 @@ README에 적힌 핵심 명령은 세 갈래다.
 
 ![리뷰와 rescue 작업이 분리된 멀티에이전트 흐름](/images/library/openai-codex-plugin-inside-claude-code-2026/02_review-rescue-split.png)
 
-<!--
-  📸 이미지 프롬프트:
-  prompt: "Split-screen infographic of two AI coding agent roles: read-only review lane and background rescue lane, with human developer orchestrating the flow, minimal flat illustration, modern software engineering aesthetic"
-  aspect_ratio: "16:9"
-  session_id: "library-openai-codex-plugin-inside-claude-code-2026"
-  save_as: "02_review-rescue-split.png"
--->
+
 
 여기서 특히 눈에 띄는 건 `adversarial-review`다. 보통 AI 리뷰는 친절하게 맞장구치기 쉽다. 그런데 이 모드는 아예 설계 자체를 의심하는 방향으로 이름이 붙어 있다. 이건 OpenAI가 이제 단순 생성보다 **검증과 반론 생산**도 코딩 워크플로우의 핵심 가치로 본다는 신호에 가깝다.
 
@@ -150,13 +132,7 @@ README에 적힌 핵심 명령은 세 갈래다.
 
 ![한국 개발팀용 멀티에이전트 운영 플레이북](/images/library/openai-codex-plugin-inside-claude-code-2026/03_korean-team-playbook.png)
 
-<!--
-  📸 이미지 프롬프트:
-  prompt: "Editorial infographic playbook for Korean software teams adopting multi-agent coding workflow, steps for draft in Claude Code, verification in Codex, background rescue tasks, clean flat design with subtle Korean tech media style"
-  aspect_ratio: "16:9"
-  session_id: "library-openai-codex-plugin-inside-claude-code-2026"
-  save_as: "03_korean-team-playbook.png"
--->
+
 
 결국 이번 플러그인이 던진 질문은 꽤 크다. 앞으로 코딩 에이전트 시장은 모델 하나의 우열보다 **워크플로우 안에서 어떤 자리를 차지하느냐**로 갈릴 가능성이 높다.
 
