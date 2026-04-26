@@ -1,7 +1,7 @@
 ---
-title: "MCP를 넘어 A2A까지, 에이전트 프로토콜 스택이 개발자의 새 기본기가 된다"
-subtitle: "도구 연결은 MCP, 에이전트 협업은 A2A — 이제 중요한 건 모델보다 연결 방식이다"
-description: "MCP와 A2A는 경쟁 관계가 아니다. 2026년 개발자는 모델 비교보다 에이전트 연결 구조를 이해해야 생산성과 통제력을 함께 가져갈 수 있다."
+title: "A2A vs MCP 완전정리: 2026년 멀티에이전트 스택은 어떻게 분화되는가"
+subtitle: "MCP는 context·tool plane, A2A는 coordination plane — 이제 중요한 건 레이어별 책임 분담이다"
+description: "MCP와 A2A는 경쟁 프로토콜이 아니라 서로 다른 레이어를 맡는 조합이다. 2026년 멀티에이전트 스택이 어떻게 분화되는지 실무 관점에서 정리했다."
 publish: true
 created_date: 2026-04-23
 category: "개발"
@@ -16,27 +16,31 @@ slug: mcp-a2a-agent-protocol-stack-2026
 reading_time: 8
 featured_image: /images/library/mcp-a2a-agent-protocol-stack-2026/thumbnail.png
 featured_image_alt: "MCP와 A2A가 함께 구성하는 에이전트 프로토콜 스택을 보여주는 일러스트"
-meta_title: "MCP를 넘어 A2A까지, 에이전트 프로토콜 스택이 개발자의 새 기본기가 된다 | Library"
-meta_description: "MCP와 A2A의 역할 차이와 실무 연결 방식을 정리했다. 2026년 개발자에게 왜 프로토콜 이해가 중요한지 설명한다."
+meta_title: "A2A vs MCP 완전정리: 2026년 멀티에이전트 스택은 어떻게 분화되는가 | Library"
+meta_description: "MCP는 context·tool plane, A2A는 coordination plane이다. 2026년 멀티에이전트 스택의 역할 분담과 도입 순서를 정리했다."
 keywords:
   - MCP A2A 차이
   - 에이전트 프로토콜 스택
   - 멀티 에이전트 아키텍처
   - AI 개발자 생산성
   - 에이전트 협업 표준
-og_title: "MCP를 넘어 A2A까지, 개발자의 새 기본기가 된 에이전트 프로토콜"
-og_description: "도구 연결은 MCP, 에이전트 협업은 A2A다. 이제 AI 개발 경쟁의 핵심은 모델보다 연결 구조에 있다."
+og_title: "A2A vs MCP 완전정리: 2026년 멀티에이전트 스택은 어떻게 분화되는가"
+og_description: "좋은 멀티에이전트 시스템은 하나의 거대 에이전트가 아니라, 잘 연결된 context plane과 coordination plane의 조합이다."
 og_type: article
 twitter_card: summary_large_image
 ---
 
 이제는 “어느 모델이 더 똑똑하냐”만으로는 생산성 격차가 안 난다. 실제 차이는 **AI가 무엇에 연결되고, 다른 에이전트와 어떻게 협업하느냐**에서 벌어진다.
 
-그래서 MCP와 A2A를 같이 봐야 한다. MCP는 AI 애플리케이션이 문서, 데이터, 도구에 붙는 표준이고, A2A는 서로 다른 에이전트가 역할을 나눠 장기 작업을 수행하게 만드는 표준에 가깝다. 둘은 경쟁이 아니라 계층 분담이다.
-
-
+이번 주 다시 선명해진 건 A2A가 더 이상 MCP의 보조 개념이 아니라는 점이다. MCP는 문맥과 도구를 붙이는 표면이고, A2A는 역할과 위임을 붙이는 표면이다. 둘은 경쟁 프로토콜이 아니라 서로 다른 레이어를 맡는 조합에 가깝다.
 
 이 변화가 중요한 이유는 분명하다. 코딩 에이전트, IDE assistant, 내부 업무 자동화가 전부 늘어나는 상황에서, 다음 병목은 모델 IQ가 아니라 **연결 규약의 부재**였기 때문이다. 이제 개발자는 SDK 하나 더 익히는 수준이 아니라, 에이전트가 연결되는 방식을 설계해야 하는 단계로 들어왔다.
+
+## 2026 update: 왜 지금 다시 A2A인가
+
+이번 주 시그널을 보면, 시장의 질문은 `MCP가 더 중요하냐 A2A가 더 중요하냐`가 아니다. 오히려 [컨텍스트 레이어가 더 중요해지는 흐름](/library/context-layer-over-model-coding-agents-2026/) 위에서 **MCP는 context·tool plane**, **A2A는 coordination plane**으로 역할이 더 또렷해지고 있다.
+
+쉽게 말해 MCP는 에이전트가 무엇을 보고 무엇을 실행할 수 있는지를 정하고, A2A는 그 에이전트가 다른 에이전트에게 무엇을 맡기고 어떻게 상태를 넘길지를 정한다. 2026년 멀티에이전트 스택의 핵심은 우열이 아니라 이 책임 분담이다.
 
 ## MCP와 A2A는 서로 다른 질문에 답한다
 
