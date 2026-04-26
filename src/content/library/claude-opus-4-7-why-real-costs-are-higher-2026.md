@@ -34,14 +34,6 @@ twitter_card: summary_large_image
 
 그런데 팀이 실제로 느끼는 비용은 다르다. 이번 변화의 핵심은 가격 인상이 아니라 **토크나이저 변경, adaptive thinking 전환, 그리고 장기 에이전트 루프에서 누적되는 운영비**다. 결국 같은 가격표를 보고도 어떤 팀은 “괜찮네”라고 말하고, 어떤 팀은 “왜 이번 달 청구서가 이렇게 뛰지?”를 묻게 된다.
 
-<!--
-  📸 이미지 프롬프트:
-  prompt: "Editorial illustration of an unchanged price tag beside a rising invoice graph for an AI model, clean Korean tech media style, flat minimal design"
-  aspect_ratio: "4:3"
-  session_id: "library-claude-opus-4-7-why-real-costs-are-higher-2026"
-  save_as: "thumbnail.png"
--->
-
 이 글은 그래서 모델 성능 소개가 아니라 이 질문에 답하려고 한다. **왜 Claude Opus 4.7은 가격표를 그대로 둔 채 실제 팀 비용을 더 올릴 수 있나, 그리고 그 비용을 어떻게 방어할 수 있나.**
 
 ## 가격표는 그대로인데 청구서는 왜 커지나
@@ -68,14 +60,6 @@ twitter_card: summary_large_image
 즉 한국어 팀도 **코드와 운영 문서가 섞이는 순간** 비용 상승을 피하기 어렵다.
 
 ![같은 텍스트가 더 많은 토큰으로 쪼개지며 청구서가 커지는 구조](/images/library/claude-opus-4-7-why-real-costs-are-higher-2026/01_tokenizer-cost-curve.png)
-
-<!--
-  📸 이미지 프롬프트:
-  prompt: "Diagram showing same text being tokenized into more pieces and increasing billing, arrows from text to tokenizer to invoice, modern flat editorial infographic"
-  aspect_ratio: "16:9"
-  session_id: "library-claude-opus-4-7-why-real-costs-are-higher-2026"
-  save_as: "01_tokenizer-cost-curve.png"
--->
 
 내가 보기엔 이건 단순한 가격 논란이 아니다. 코딩 에이전트 시대에는 매 요청이 짧은 채팅 한 번이 아니라, **지침 문서 + 코드베이스 맥락 + 추론 루프**를 같이 태우는 구조라서 토크나이저 변화가 더 직접적으로 체감된다.
 
@@ -125,14 +109,6 @@ thinking: { type: "adaptive", effort: "medium" }
 이건 결국 “더 좋은 모델을 쓰면 비용이 좀 느는구나” 수준이 아니다. 장기 에이전트 운영에서는 **좋은 모델을 어떤 작업에만 쓰고, 어디서 멈추고, 무엇을 캐시할지**가 훨씬 중요한 설계 문제가 된다.
 
 ![장기 에이전트 루프에서 비용이 누적되는 구조와 방어 지점](/images/library/claude-opus-4-7-why-real-costs-are-higher-2026/02_agent-loop-cost-defense.png)
-
-<!--
-  📸 이미지 프롬프트:
-  prompt: "Workflow diagram of long-running AI agent loop with prompt prefix, code context, testing, retries, and cost defense points like caching and routing, flat tech infographic"
-  aspect_ratio: "16:9"
-  session_id: "library-claude-opus-4-7-why-real-costs-are-higher-2026"
-  save_as: "02_agent-loop-cost-defense.png"
--->
 
 ## 그럼 어떻게 방어해야 하나
 
