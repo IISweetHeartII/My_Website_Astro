@@ -166,4 +166,16 @@ cost_defense:
 - [Claude Code vs Codex vs 오픈 Qwen, 2026년 코딩 에이전트는 누구에게 맞을까](https://log8.kr/library/claude-code-vs-codex-vs-open-qwen-2026/)
 - [코딩 에이전트 2막: 왜 이제는 모델보다 컨텍스트 레이어가 더 중요해지나](https://log8.kr/library/context-layer-over-model-coding-agents-2026/)
 
-비용보다 더 중요한 건 결국 운영 감각이다. 이런 실전형 정리를 계속 받고 싶다면 [뉴스레터](https://log8.kr/newsletter)도 같이 구독해두면 좋다.
+비용보다 더 중요한 건 결국 운영 감각이다.
+
+---
+
+## 이런 글이 더 궁금하다면
+
+매주 월요일, AI 자동화와 개발 이야기를 정리해서 보내고 있다.
+블로그에 미처 못 쓴 삽질기와 운영 노하우도 함께 담는다.
+
+[주간 뉴스레터 구독하기 →](https://log8.kr/newsletter?utm_source=blog&utm_medium=cta&utm_campaign=claude-opus-4-7-why-real-costs-are-higher-2026)
+
+비슷한 구조를 우리 팀이 직접 만들어드리기도 한다.
+관심 있으면 [상담 신청](https://log8.kr/consulting?utm_source=blog&utm_medium=cta&utm_campaign=claude-opus-4-7-why-real-costs-are-higher-2026)을 남겨주시면 된다.
