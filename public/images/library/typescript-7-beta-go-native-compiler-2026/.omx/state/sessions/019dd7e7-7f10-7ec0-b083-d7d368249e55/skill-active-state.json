@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "active": true,
+  "skill": "ultrawork",
+  "keyword": "parallel",
+  "phase": "planning",
+  "activated_at": "2026-04-28T08:34:01.611Z",
+  "updated_at": "2026-04-29T06:22:50.174Z",
+  "source": "keyword-detector",
+  "session_id": "019dd7e7-7f10-7ec0-b083-d7d368249e55",
+  "thread_id": "",
+  "turn_id": "019dd7e7-7ff5-75d3-b62a-15cb57e98bbd",
+  "active_skills": [
+    {
+      "skill": "ultrawork",
+      "phase": "planning",
+      "active": true,
+      "activated_at": "2026-04-28T08:34:01.611Z",
+      "updated_at": "2026-04-29T06:22:50.174Z",
+      "session_id": "019dd7e7-7f10-7ec0-b083-d7d368249e55",
+      "thread_id": "",
+      "turn_id": "019dd7e7-7ff5-75d3-b62a-15cb57e98bbd"
+    }
+  ],
+  "initialized_mode": "ultrawork",
+  "initialized_state_path": ".omx/state/sessions/019dd7e7-7f10-7ec0-b083-d7d368249e55/ultrawork-state.json"
+}
