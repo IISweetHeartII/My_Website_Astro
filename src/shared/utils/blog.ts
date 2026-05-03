@@ -92,5 +92,7 @@ export function transformPostForCard(post: CollectionEntry<"blog">) {
     dataTitle: post.data.title,
     dataDescription: post.data.description ?? "",
     dataCategory: categoryMap[post.data.category] || "daily",
+    featuredImage: post.data.featured_image ?? undefined,
+    featuredImageAlt: post.data.featured_image_alt ?? undefined,
   };
 }
