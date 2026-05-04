@@ -87,7 +87,7 @@ function unauthorized(origin: string | null) {
 
 function checkAuth(request: Request, env: Env): boolean {
   const secret = env.ADMIN_SECRET;
-  if (!secret) return true;
+  if (!secret) return false;
   const auth = request.headers.get("Authorization");
   return auth === `Bearer ${secret}`;
 }
@@ -137,6 +137,8 @@ function buildMetricKey(payload: Required<CtaPayload>): string {
 
   return [
     payload.cta_name,
+    payload.cta_section,
+    payload.cta_source,
     payload.cta_campaign || "none",
     payload.cta_page_path,
     destinationPath,
