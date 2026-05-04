@@ -43,7 +43,9 @@ export function setupChatWidget(): void {
   if (!fab || !win || !closeBtn || !input || !sendBtn || !msgContainer) return;
 
   // Prevent re-initialization
+  // biome-ignore lint/complexity/useLiteralKeys: DOMStringMap is index-signature typed here.
   if (fab.dataset["initialized"] === "true") return;
+  // biome-ignore lint/complexity/useLiteralKeys: DOMStringMap is index-signature typed here.
   fab.dataset["initialized"] = "true";
 
   // Restore saved messages
