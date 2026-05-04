@@ -112,7 +112,8 @@ function normalizePayload(payload: CtaPayload): Required<CtaPayload> {
   const section = sanitizeText(payload.cta_section, "unknown");
   const pagePath = sanitizeText(payload.cta_page_path, "unknown");
   const source = sanitizeText(payload.cta_source, "unknown");
-  const ts = typeof payload.ts === "number" && Number.isFinite(payload.ts) ? payload.ts : Date.now();
+  const ts =
+    typeof payload.ts === "number" && Number.isFinite(payload.ts) ? payload.ts : Date.now();
 
   return {
     cta_name: ctaName,
@@ -225,7 +226,10 @@ export async function onRequestPost(context: PagesContext) {
     return json({ ok: true }, 202, origin);
   } catch (error) {
     return json(
-      { error: "failed_to_track_cta", detail: error instanceof Error ? error.message : String(error) },
+      {
+        error: "failed_to_track_cta",
+        detail: error instanceof Error ? error.message : String(error),
+      },
       500,
       origin
     );
