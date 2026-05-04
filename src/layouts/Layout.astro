@@ -169,7 +169,16 @@ const {
           const href = anchor.getAttribute("href") || "";
           const absoluteUrl = new URL(href, window.location.origin);
           const pathname = absoluteUrl.pathname.replace(/\/+$/, "") || "/";
-          const isInlineMeasurementTarget = pathname === "/newsletter" || pathname === "/consulting";
+          const allowedMeasurementHosts = new Set([
+            window.location.hostname,
+            "log8.kr",
+            "www.log8.kr",
+            "localhost",
+            "127.0.0.1",
+          ]);
+          const isSameSiteMeasurementTarget = allowedMeasurementHosts.has(absoluteUrl.hostname);
+          const isInlineMeasurementTarget =
+            isSameSiteMeasurementTarget && (pathname === "/newsletter" || pathname === "/consulting");
           const shouldTrack = anchor.hasAttribute("data-cta-track") || isInlineMeasurementTarget;
 
           if (!shouldTrack) {
