@@ -115,20 +115,93 @@ const {
           return;
         }
 
+        const buildPayload = (anchor, source) => {
+          const href = anchor.getAttribute("href") || "";
+          const absoluteUrl = new URL(href, window.location.origin);
+          const pathname = absoluteUrl.pathname.replace(/\/+$/, "") || "/";
+          const inferredName = pathname === "/newsletter" ? "newsletter" : pathname === "/consulting" ? "consulting" : "unknown";
+
+          return {
+            event: "cta_click",
+            cta_name: anchor.dataset.ctaName || inferredName,
+            cta_section: anchor.dataset.ctaSection || (source === "inline_cta_link" ? "inline_link" : "unknown"),
+            cta_destination: absoluteUrl.toString(),
+            cta_page_path: window.location.pathname,
+            cta_campaign: absoluteUrl.searchParams.get("utm_campaign") || "none",
+            cta_source: source,
+            ts: Date.now(),
+          };
+        };
+
+        const sendMetric = (payload) => {
+          const body = JSON.stringify(payload);
+
+          try {
+            if (navigator.sendBeacon) {
+              const blob = new Blob([body], { type: "application/json" });
+              navigator.sendBeacon("/api/cta", blob);
+              return;
+            }
+          } catch {
+            // fall through to fetch keepalive
+          }
+
+          fetch("/api/cta", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body,
+            keepalive: true,
+          }).catch(() => {});
+        };
+
         const onClick = (event) => {
-          const target = event.target instanceof Element ? event.target.closest("[data-cta-track]") : null;
-          if (!(target instanceof HTMLAnchorElement)) {
+          const explicitTarget = event.target instanceof Element ? event.target.closest("[data-cta-track]") : null;
+          const anchor = explicitTarget instanceof HTMLAnchorElement
+            ? explicitTarget
+            : event.target instanceof Element
+              ? event.target.closest("a[href]")
+              : null;
+
+          if (!(anchor instanceof HTMLAnchorElement)) {
             return;
           }
 
+          const href = anchor.getAttribute("href") || "";
+          const absoluteUrl = new URL(href, window.location.origin);
+          const pathname = absoluteUrl.pathname.replace(/\/+$/, "") || "/";
+          const allowedMeasurementHosts = new Set([
+            window.location.hostname,
+            "log8.kr",
+            "www.log8.kr",
+            "localhost",
+            "127.0.0.1",
+          ]);
+          const isSameSiteMeasurementTarget = allowedMeasurementHosts.has(absoluteUrl.hostname);
+          const isInlineMeasurementTarget =
+            isSameSiteMeasurementTarget && (pathname === "/newsletter" || pathname === "/consulting");
+          const shouldTrack = anchor.hasAttribute("data-cta-track") || isInlineMeasurementTarget;
+
+          if (!shouldTrack) {
+            return;
+          }
+
+          const payload = buildPayload(
+            anchor,
+            anchor.hasAttribute("data-cta-track") ? "data-cta-track" : "inline_cta_link"
+          );
+
           window.dataLayer = window.dataLayer || [];
           window.dataLayer.push({
-            event: "cta_click",
-            cta_name: target.dataset.ctaName || "unknown",
-            cta_section: target.dataset.ctaSection || "unknown",
-            cta_destination: target.getAttribute("href") || "",
-            cta_page_path: window.location.pathname,
+            event: payload.event,
+            cta_name: payload.cta_name,
+            cta_section: payload.cta_section,
+            cta_destination: payload.cta_destination,
+            cta_page_path: payload.cta_page_path,
+            cta_campaign: payload.cta_campaign,
+            cta_source: payload.cta_source,
           });
+
+          sendMetric(payload);
         };
 
         document.addEventListener("click", onClick);
