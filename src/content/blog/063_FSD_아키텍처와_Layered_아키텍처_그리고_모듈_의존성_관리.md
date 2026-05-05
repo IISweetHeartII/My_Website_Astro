@@ -93,6 +93,16 @@ tags:
 
 빌딩으로 비유하면 이렇다. 4층(UI)은 1층(Infra)으로 내려가는 엘리베이터를 탈 수 있다. 그런데 1층은 4층을 모른다. 1층에서 4층으로 올라가는 엘리베이터는 없다. 그래야 1층(인프라)을 통째로 갈아끼워도 4층(UI)이 안 무너진다. 선배가 말한 "swagger로 API를 갈아끼울 수 있어야 한다"가 바로 이거다.
 
+![Layered 4층 빌딩 다이어그램](/images/blogs/063/063_02_layered-building.png)
+
+<!--
+  📸 이미지 프롬프트:
+  prompt: "Cross-section illustration of a 4-floor building, each floor labeled top to bottom: Presentation (UI components), Application (use cases, hooks), Domain (business rules), Infrastructure (API client, storage). One-way elevator going only downward with arrows. Each floor has small icons representing its role. Flat illustration, soft pastel colors, clean educational diagram, isometric perspective"
+  aspect_ratio: "16:9"
+  session_id: "blog-063"
+  save_as: "063_02_layered-building.png"
+-->
+
 ### 한계 — 기능이 4층에 흩어진다
 
 장점은 명확하지만 한계도 명확하다. 한 기능을 추가하려면 4층을 다 건드린다. 로그인 하나 만든다고 치면:
@@ -219,6 +229,16 @@ src/
 
 D-Link는 features를 안 버렸지만 거의 안 쓴다. `payment` 하나만 남았고, 나머지는 widgets/entities로 흡수됐다. 두 프로젝트가 비슷한 결론에 도달한 셈이다.
 
+![Omechu FSD 레이어 다이어트 전후 비교](/images/blogs/063/063_05_omechu-before-after.png)
+
+<!--
+  📸 이미지 프롬프트:
+  prompt: "Side by side comparison illustration. Left side titled 'BEFORE — FSD 7 layers' showing a tall stack of folders: app, processes, pages, widgets, features, entities, shared. Right side titled 'AFTER — Omechu 4 layers' showing a shorter cleaner stack: app, widgets, entities, shared. Two folders 'pages' and 'features' shown with strikethrough on the left, with arrows indicating they were merged into 'app' and 'widgets/entities'. Flat illustration, soft pastel colors, clean educational diagram, before/after format"
+  aspect_ratio: "16:9"
+  session_id: "blog-063"
+  save_as: "063_05_omechu-before-after.png"
+-->
+
 ### 우리는 page 레이어도 버렸다 — Next.js와의 충돌
 
 Next.js App Router를 쓰면 `app/` 폴더가 라우팅을 담당한다. 그런데 FSD에는 `pages` 레이어가 따로 있다. **이름이 겹치고 역할도 겹친다.**
@@ -287,6 +307,16 @@ import { Header } from "@/entities/header"; // ❌ FSD 위반
 이 `LoadingPage`가 다른 페이지 안에서 또 쓰이면? 그 페이지는 보통 자기 layout에서 이미 `Header`를 그리고 있다. 그래서 **헤더가 화면에 두 개 나온다.**
 
 이건 단순한 UI 버그가 아니다. **의존성 방향 위배**가 본질이다. `shared`는 `entities`보다 아래 레이어다. 아래는 위를 모르는 게 원칙이다. 이 한 줄을 어겼더니, "왜 헤더가 두 개지?"부터 시작해서 한참을 헤맸다.
+
+![헤더가 두 개로 렌더된 의존성 위반 사고 다이어그램](/images/blogs/063/063_03_double-header-bug.png)
+
+<!--
+  📸 이미지 프롬프트:
+  prompt: "Diagram showing a webpage rendered with two header bars stacked at the top, with confused user emoji. Below the page, an arrow diagram showing dependency violation: 'shared/LoadingPage' with red arrow pointing UP to 'entities/Header', crossed out with a red X. Caption text: '↑ 위로 import = FSD 위반'. Flat illustration, soft pastel colors with red warning accents, clean educational diagram style"
+  aspect_ratio: "16:9"
+  session_id: "blog-063"
+  save_as: "063_03_double-header-bug.png"
+-->
 
 ### 단방향 의존성 — 지하철 비유
 
@@ -458,6 +488,16 @@ class MockUserRepository implements UserRepository {
 이게 선배가 말한 그 흐름이다. **처음엔 `MockUserRepository`로 FE 다 만들고, 백엔드가 swagger 주면 `ApiUserRepository`로 갈아끼운다.** 컴포넌트는 한 줄도 안 바뀐다. 테스트할 때도 mock 주입하면 끝.
 
 콘센트 비유가 가장 직관적이다. 콘센트 규격(인터페이스)만 같으면 어떤 가전제품(구현)이든 꽂힌다. 가전제품을 바꿔도 콘센트는 그대로다.
+
+![콘센트 비유로 풀어본 DIP 다이어그램](/images/blogs/063/063_04_dip-plug-analogy.png)
+
+<!--
+  📸 이미지 프롬프트:
+  prompt: "Illustration of a wall outlet labeled 'UserRepository (interface)' in the center. Three different appliances with same plug shape on the left side: a coffee machine labeled 'ApiUserRepository', a lamp labeled 'MockUserRepository', a kettle labeled 'CacheUserRepository'. Arrows showing each can plug into the same outlet. Above the outlet, a React component labeled 'UserProfile' depending only on the outlet shape. Flat illustration, soft pastel colors, clean educational style, friendly and intuitive"
+  aspect_ratio: "16:9"
+  session_id: "blog-063"
+  save_as: "063_04_dip-plug-analogy.png"
+-->
 
 DIP는 Layered든 FSD든 둘 다 적용된다. Layered에서는 도메인이 인프라 인터페이스만 의존하는 형태로, FSD에서는 widget이 entity의 Public API(인터페이스 역할)에만 의존하는 형태로. **이름은 다르지만 같은 원칙이다.**
 
