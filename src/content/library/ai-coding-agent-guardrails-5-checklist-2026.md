@@ -2,7 +2,7 @@
 title: "AI 코딩 에이전트를 실전에 넣기 전에 먼저 깔아야 할 가드레일 5가지"
 subtitle: "성능 비교보다 먼저 설계해야 할 권한, rollback, sandbox, 검증, 복구의 운영 체크리스트"
 description: "AI 코딩 에이전트를 실서비스에 붙이기 전, 성능보다 먼저 봐야 할 운영 가드레일 5가지를 정리했다. 권한 분리, rollback, sandbox, 검증, 복구 설계가 핵심이다."
-publish: false
+publish: true
 created_date: 2026-04-28
 category: "AI"
 tags:
@@ -173,6 +173,20 @@ sandbox의 목적은 에이전트를 불신해서가 아니라, 잘못된 추론
 
 > 좋은 코딩 에이전트보다 먼저 필요한 건, 실수했을 때 작게 망가지게 만드는 구조다.
 
-이 다섯 가지 가드레일만 먼저 깔아도 팀은 훨씬 더 자신 있게 자동화를 넓힐 수 있다. 성능 비교표는 그다음에 봐도 늦지 않다.
+이 다섯 가지 가드레일만 먼저 깔아도 팀은 훨씬 더 자신 있게 자동화를 넓힐 수 있다. 성능 비교표는 그다음에 봐도 늦지 않다. 운영 레이어를 더 넓게 보려면 [코딩 에이전트 2막: 왜 이제는 모델보다 컨텍스트 레이어가 더 중요해지나](/library/context-layer-over-model-coding-agents-2026/)와 [Context Mode 열풍, AI 코딩 에이전트의 병목은 모델이 아니라 컨텍스트다](/library/context-mode-mcp-context-window-coding-agent-2026/)도 같이 보면 흐름이 더 또렷해진다.
+
+김덕환 운영자가 봤을 때 이 글의 포인트는 “AI가 뭘 잘하나”보다 “우리 팀이 어디까지 맡겨도 안 터지나”를 체크하는 데 있다. 상담이 실제로 필요한 팀도 보통 여기서 갈린다. 자동화 욕심은 큰데, 권한 분리나 rollback, 검증 루프를 아직 문서화하지 못한 팀 말이다.
+
+---
+
+## 이런 글이 더 궁금하다면
+
+매주 월요일, AI 자동화와 개발 이야기를 정리해서 보내고 있다.
+블로그에 미처 못 쓴 운영 노하우와 실수 방지 패턴도 함께 담는다.
+
+[주간 뉴스레터 구독하기 →](https://log8.kr/newsletter?utm_source=blog&utm_medium=cta&utm_campaign=ai-coding-agent-guardrails-5-checklist-2026)
+
+비슷한 구조를 우리 팀이 직접 설계해드리기도 한다.
+관심 있으면 [AI 자동화 상담 신청 →](https://log8.kr/consulting?utm_source=blog&utm_medium=cta&utm_campaign=ai-coding-agent-guardrails-5-checklist-2026)를 남겨주시면 된다.
 
 KPI impact: merged/uploaded/published = 0
