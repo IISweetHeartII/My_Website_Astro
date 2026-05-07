@@ -67,8 +67,8 @@ const safeTags = tags ?? [];
 // 포스트 slug 추출 (URL 경로에서)
 const postSlug = Astro.url.pathname.replace("/blog/", "").replace("/", "") || "unknown";
 
-// OG image fallback: if no explicit og_image, default to /og/{slug}.png
-const resolvedOgImage = og_image || `/og/${postSlug}.png`;
+// OG image cascade: explicit og_image → featured_image(글 대표) → 동적 satori OG
+const resolvedOgImage = og_image || featured_image || `/og/${postSlug}.png`;
 
 // Full post URL for sharing
 const postUrl = `${SITE_URL}/blog/${postSlug}`;
