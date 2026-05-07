@@ -240,7 +240,6 @@ function buildPublicSummary(store: CtaMetricsStore, filters: PublicSummaryFilter
 
   return {
     updated_at: store.updated_at,
-    total_events: store.total_events,
     matched_events: rows.reduce((sum, row) => sum + row.count, 0),
     filters: {
       page_path: filters.pagePath ?? null,

@@ -189,7 +189,7 @@ curl \
   "https://your-site.com/api/cta?action=summary&public=1&page_path=/library/google-cloud-fraud-defense-agentic-web-security-2026&campaign=ai-coding-agent-guardrails-5-checklist-2026"
 ```
 
-공개 요약 응답은 `counts_by_name`(예: `page_view`, `newsletter`, `consulting`)와 필터에 매칭된 aggregate row만 돌려준다. `recent` 이벤트나 전체 사이트 dump는 여전히 관리자 인증이 필요하다.
+공개 요약 응답은 `matched_events`, `counts_by_name`(예: `page_view`, `newsletter`, `consulting`)와 필터에 매칭된 aggregate row만 돌려준다. 전체 사이트 누적량이나 `recent` 이벤트는 여전히 관리자 인증이 필요하다.
 
 `src/layouts/Layout.astro`는 library 페이지에서 `utm_campaign` 또는 referrer가 있을 때 `page_view`도 same-origin `/api/cta`로 함께 적재한다. 그래서 원문 유입과 CTA 클릭을 같은 KV 집계 경로에서 볼 수 있다.
 
