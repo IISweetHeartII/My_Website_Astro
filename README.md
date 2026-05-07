@@ -168,6 +168,31 @@ curl -X DELETE -H "Authorization: Bearer YOUR_ADMIN_SECRET" \
   "https://your-site.com/api/chat/admin?target=logs"
 ```
 
+### CTA 측정 요약 API
+
+CTA 측정은 Cloudflare KV(`CHAT_KV`)를 사용합니다.
+
+- 관리자 전체 요약: `Authorization: Bearer $ADMIN_SECRET` 필요
+- 공개 집계 요약: **필터가 있는 aggregate-only 조회**는 시크릿 없이 가능
+
+```bash
+# 관리자 전체 요약
+curl -H "Authorization: Bearer ***" \
+  "https://your-site.com/api/cta?action=summary"
+
+# 공개 집계 요약 (library 페이지 1개 + 캠페인 1개만)
+curl \
+  "https://your-site.com/api/cta?action=public_summary&page_path=/library/google-cloud-fraud-defense-agentic-web-security-2026&campaign=ai-coding-agent-guardrails-5-checklist-2026"
+
+# 공개 집계 요약은 action=summary + public=1로도 조회 가능
+curl \
+  "https://your-site.com/api/cta?action=summary&public=1&page_path=/library/google-cloud-fraud-defense-agentic-web-security-2026&campaign=ai-coding-agent-guardrails-5-checklist-2026"
+```
+
+공개 요약 응답은 `counts_by_name`(예: `page_view`, `newsletter`, `consulting`)와 필터에 매칭된 aggregate row만 돌려준다. `recent` 이벤트나 전체 사이트 dump는 여전히 관리자 인증이 필요하다.
+
+`src/layouts/Layout.astro`는 library 페이지에서 `utm_campaign` 또는 referrer가 있을 때 `page_view`도 same-origin `/api/cta`로 함께 적재한다. 그래서 원문 유입과 CTA 클릭을 같은 KV 집계 경로에서 볼 수 있다.
+
 ### 챗봇 없이 사용하기
 
 챗봇이 필요 없으면:
@@ -199,7 +224,8 @@ src/
 functions/                     # Cloudflare Pages Functions
 ├── api/
 │   ├── chat.ts                # AI 챗봇 API (SSE 스트리밍)
-│   └── chat/admin.ts          # 챗봇 관리 API
+│   ├── chat/admin.ts          # 챗봇 관리 API
+│   └── cta.ts                 # CTA/page_view 측정 및 공개 집계 요약 API
 ```
 
 ## 환경변수 정리

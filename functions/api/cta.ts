@@ -55,6 +55,13 @@ const METRICS_KEY = "cta-metrics-v1";
 const MAX_RECENT = 200;
 const ALLOWED_ORIGINS = ["https://log8.kr", "https://www.log8.kr"];
 
+type PublicSummaryFilters = {
+  pagePath?: string;
+  campaign?: string;
+  ctaName?: string;
+  source?: string;
+};
+
 function getCorsHeaders(origin: string | null): Record<string, string> {
   const isAllowed =
     origin &&
@@ -85,6 +92,10 @@ function unauthorized(origin: string | null) {
   return json({ error: "Unauthorized" }, 401, origin);
 }
 
+function badRequest(origin: string | null, message: string) {
+  return json({ error: message }, 400, origin);
+}
+
 function checkAuth(request: Request, env: Env): boolean {
   const secret = env.ADMIN_SECRET;
   if (!secret) return false;
@@ -105,12 +116,21 @@ function sanitizeText(value: string | undefined, fallback: string): string {
   return (value ?? fallback).trim().slice(0, 300) || fallback;
 }
 
+function normalizePath(value: string | undefined): string {
+  return (value || "/").replace(/\/+$/, "") || "/";
+}
+
+function normalizeQueryParam(value: string | null): string | undefined {
+  const sanitized = value?.trim().slice(0, 300);
+  return sanitized ? sanitized : undefined;
+}
+
 function normalizePayload(payload: CtaPayload): Required<CtaPayload> {
   const destination = sanitizeText(payload.cta_destination, "");
   const campaign = sanitizeText(payload.cta_campaign, "none");
   const ctaName = sanitizeText(payload.cta_name, "unknown");
   const section = sanitizeText(payload.cta_section, "unknown");
-  const pagePath = sanitizeText(payload.cta_page_path, "unknown");
+  const pagePath = normalizePath(sanitizeText(payload.cta_page_path, "unknown"));
   const source = sanitizeText(payload.cta_source, "unknown");
   const ts =
     typeof payload.ts === "number" && Number.isFinite(payload.ts) ? payload.ts : Date.now();
@@ -126,22 +146,22 @@ function normalizePayload(payload: CtaPayload): Required<CtaPayload> {
   };
 }
 
-function buildMetricKey(payload: Required<CtaPayload>): string {
-  const destinationPath = (() => {
-    try {
-      return new URL(payload.cta_destination).pathname || payload.cta_destination;
-    } catch {
-      return payload.cta_destination || "unknown";
-    }
-  })();
+function getDestinationPath(destination: string): string {
+  try {
+    return normalizePath(new URL(destination).pathname || destination);
+  } catch {
+    return normalizePath(destination || "unknown");
+  }
+}
 
+function buildMetricKey(payload: Required<CtaPayload>): string {
   return [
     payload.cta_name,
     payload.cta_section,
     payload.cta_source,
     payload.cta_campaign || "none",
     payload.cta_page_path,
-    destinationPath,
+    getDestinationPath(payload.cta_destination),
   ].join("::");
 }
 
@@ -168,6 +188,80 @@ async function readPayload(request: Request): Promise<CtaPayload> {
   const text = await request.text();
   if (!text) return {};
   return JSON.parse(text) as CtaPayload;
+}
+
+function parsePublicFilters(url: URL): PublicSummaryFilters {
+  return {
+    pagePath: normalizeQueryParam(url.searchParams.get("page_path")),
+    campaign: normalizeQueryParam(url.searchParams.get("campaign")),
+    ctaName: normalizeQueryParam(url.searchParams.get("cta_name")),
+    source: normalizeQueryParam(url.searchParams.get("source")),
+  };
+}
+
+function hasPublicFilter(filters: PublicSummaryFilters): boolean {
+  return Boolean(filters.pagePath || filters.campaign || filters.ctaName || filters.source);
+}
+
+function matchesPublicFilters(row: CtaMetricRow, filters: PublicSummaryFilters): boolean {
+  if (filters.pagePath && normalizePath(row.cta_page_path) !== normalizePath(filters.pagePath)) {
+    return false;
+  }
+
+  if (filters.campaign && row.cta_campaign !== filters.campaign) {
+    return false;
+  }
+
+  if (filters.ctaName && row.cta_name !== filters.ctaName) {
+    return false;
+  }
+
+  if (filters.source && row.cta_source !== filters.source) {
+    return false;
+  }
+
+  return true;
+}
+
+function buildPublicSummary(store: CtaMetricsStore, filters: PublicSummaryFilters) {
+  const rows = Object.values(store.rows)
+    .filter((row) => matchesPublicFilters(row, filters))
+    .sort((a, b) => b.count - a.count);
+
+  const countsByName = rows.reduce<Record<string, number>>((acc, row) => {
+    acc[row.cta_name] = (acc[row.cta_name] || 0) + row.count;
+    return acc;
+  }, {});
+
+  const countsBySource = rows.reduce<Record<string, number>>((acc, row) => {
+    acc[row.cta_source] = (acc[row.cta_source] || 0) + row.count;
+    return acc;
+  }, {});
+
+  return {
+    updated_at: store.updated_at,
+    total_events: store.total_events,
+    matched_events: rows.reduce((sum, row) => sum + row.count, 0),
+    filters: {
+      page_path: filters.pagePath ?? null,
+      campaign: filters.campaign ?? null,
+      cta_name: filters.ctaName ?? null,
+      source: filters.source ?? null,
+    },
+    counts_by_name: countsByName,
+    counts_by_source: countsBySource,
+    rows: rows.map((row) => ({
+      cta_name: row.cta_name,
+      cta_section: row.cta_section,
+      cta_destination_path: getDestinationPath(row.cta_destination),
+      cta_page_path: row.cta_page_path,
+      cta_campaign: row.cta_campaign,
+      cta_source: row.cta_source,
+      count: row.count,
+      first_ts: row.first_ts,
+      last_ts: row.last_ts,
+    })),
+  };
 }
 
 export async function onRequestOptions(context: PagesContext) {
@@ -246,13 +340,27 @@ export async function onRequestGet(context: PagesContext) {
     return json({ error: "KV not configured" }, 500, origin);
   }
 
+  const url = new URL(request.url);
+  const action = url.searchParams.get("action") || "summary";
+  const isPublicSummary =
+    action === "public_summary" || (action === "summary" && url.searchParams.get("public") === "1");
+  const store = await readStore(env.CHAT_KV);
+
+  if (isPublicSummary) {
+    const filters = parsePublicFilters(url);
+    if (!hasPublicFilter(filters)) {
+      return badRequest(
+        origin,
+        "public summary requires at least one filter: page_path, campaign, cta_name, or source"
+      );
+    }
+
+    return json(buildPublicSummary(store, filters), 200, origin);
+  }
+
   if (!checkAuth(request, env)) {
     return unauthorized(origin);
   }
-
-  const url = new URL(request.url);
-  const action = url.searchParams.get("action") || "summary";
-  const store = await readStore(env.CHAT_KV);
 
   if (action === "summary") {
     const rows = Object.values(store.rows).sort((a, b) => b.count - a.count);
@@ -279,5 +387,5 @@ export async function onRequestGet(context: PagesContext) {
     );
   }
 
-  return json({ error: "action must be 'summary' or 'recent'" }, 400, origin);
+  return json({ error: "action must be 'summary', 'public_summary', or 'recent'" }, 400, origin);
 }
