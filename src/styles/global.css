@@ -8,6 +8,59 @@
 /* ============================================
    1. Body 기본 설정
    ============================================ */
+html {
+  overflow-x: clip;
+  scrollbar-gutter: stable;
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+  transition: scrollbar-color 0.3s ease;
+}
+
+html:hover {
+  scrollbar-color: rgba(0, 0, 0, 0.28) transparent;
+}
+
+html[data-theme="dark"]:hover {
+  scrollbar-color: rgba(255, 255, 255, 0.28) transparent;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: transparent;
+  border-radius: 5px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+  transition: background 0.3s ease;
+}
+
+html:hover ::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.28);
+  background-clip: padding-box;
+}
+
+html:hover ::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.5);
+  background-clip: padding-box;
+}
+
+html[data-theme="dark"]:hover ::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.28);
+  background-clip: padding-box;
+}
+
+html[data-theme="dark"]:hover ::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.5);
+  background-clip: padding-box;
+}
+
 body {
   font-family: var(--font-body);
   margin: 0;
