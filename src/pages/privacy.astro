@@ -1,4 +1,5 @@
 ---
+import BreadcrumbSchema from "@/shared/components/seo/BreadcrumbSchema.astro";
 import { AUTHOR_EMAIL } from "@/shared/config/consts";
 import Layout from "../layouts/Layout.astro";
 
@@ -13,6 +14,12 @@ const CONTACT_MAILTO = `mailto:${AUTHOR_EMAIL}`;
   featured_image_alt="Log8 개인정보처리방침 페이지 대표 이미지"
   og_type="website"
 >
+  <Fragment slot="head">
+    <BreadcrumbSchema items={[
+      { name: "홈", url: "/" },
+      { name: "Privacy", url: "/privacy/" },
+    ]} />
+  </Fragment>
   <main class="container mx-auto px-4 py-8 max-w-4xl">
     <h1 class="text-4xl font-bold mb-8 text-center text-text">Privacy</h1>
 

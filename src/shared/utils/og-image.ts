@@ -17,6 +17,12 @@ async function loadFont(): Promise<ArrayBuffer> {
   return fontCache;
 }
 
+function getTitleFontSize(title: string): string {
+  if (title.length > 50) return "34px";
+  if (title.length > 30) return "44px";
+  return "54px";
+}
+
 export async function generateOgImage(title: string, category?: string): Promise<Uint8Array> {
   const fontData = await loadFont();
 
@@ -29,97 +35,193 @@ export async function generateOgImage(title: string, category?: string): Promise
           height: "100%",
           display: "flex",
           flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "center",
-          background: "linear-gradient(135deg, #0f172a 0%, #1d4ed8 45%, #0ea5e9 100%)",
-          padding: "60px",
+          justifyContent: "space-between",
+          alignItems: "stretch",
+          background: "linear-gradient(135deg, #1e1b4b 0%, #4c1d95 40%, #6d28d9 70%, #a855f7 100%)",
           fontFamily: "Noto Sans KR",
+          overflow: "hidden",
         },
         children: [
-          // Category badge
-          ...(category
-            ? [
+          // Top decorative row: left accent bar + category badge
+          {
+            type: "div",
+            props: {
+              style: {
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "center",
+                paddingTop: "56px",
+                paddingLeft: "60px",
+                paddingRight: "60px",
+                gap: "20px",
+              },
+              children: [
+                // Left vertical accent bar
+                {
+                  type: "div",
+                  props: {
+                    style: {
+                      display: "flex",
+                      width: "5px",
+                      height: "32px",
+                      borderRadius: "3px",
+                      background: "#c084fc",
+                    },
+                    children: "",
+                  },
+                },
+                // Category badge (or site name if no category)
                 {
                   type: "div",
                   props: {
                     style: {
                       display: "flex",
                       fontSize: "20px",
-                      color: "rgba(255,255,255,0.92)",
-                      background: "rgba(15,23,42,0.32)",
-                      padding: "8px 24px",
-                      borderRadius: "9999px",
-                      marginBottom: "24px",
                       fontWeight: 700,
+                      color: "rgba(255,255,255,0.90)",
+                      background: "rgba(192,132,252,0.18)",
+                      padding: "7px 22px",
+                      borderRadius: "9999px",
+                      border: "1px solid rgba(192,132,252,0.35)",
+                      letterSpacing: "0.02em",
                     },
-                    children: category,
+                    children: category || "log8.kr",
                   },
                 },
-              ]
-            : []),
-          // Title
-          {
-            type: "div",
-            props: {
-              style: {
-                display: "flex",
-                fontSize: title.length > 30 ? "42px" : "52px",
-                fontWeight: 700,
-                color: "#ffffff",
-                textAlign: "center",
-                lineHeight: 1.3,
-                maxWidth: "900px",
-                wordBreak: "keep-all",
-              },
-              children: title,
+              ],
             },
           },
-          // Divider
+
+          // Center: title block
           {
             type: "div",
             props: {
               style: {
                 display: "flex",
-                width: "80px",
-                height: "4px",
-                background: "rgba(255,255,255,0.55)",
-                borderRadius: "2px",
-                marginTop: "40px",
-                marginBottom: "32px",
-              },
-              children: "",
-            },
-          },
-          // Bottom row: branding + author
-          {
-            type: "div",
-            props: {
-              style: {
-                display: "flex",
-                alignItems: "center",
-                gap: "16px",
-                fontSize: "22px",
-                color: "rgba(255,255,255,0.8)",
-                fontWeight: 700,
+                flexDirection: "column",
+                justifyContent: "center",
+                alignItems: "flex-start",
+                flex: 1,
+                paddingLeft: "64px",
+                paddingRight: "80px",
+                paddingTop: "20px",
+                paddingBottom: "20px",
               },
               children: [
                 {
-                  type: "span",
+                  type: "div",
                   props: {
-                    children: "log8.kr",
+                    style: {
+                      display: "flex",
+                      fontSize: getTitleFontSize(title),
+                      fontWeight: 700,
+                      color: "#ffffff",
+                      lineHeight: 1.35,
+                      maxWidth: "1000px",
+                      wordBreak: "keep-all",
+                      textShadow: "0 2px 24px rgba(109,40,217,0.4)",
+                    },
+                    children: title,
                   },
                 },
+              ],
+            },
+          },
+
+          // Bottom row: divider + branding
+          {
+            type: "div",
+            props: {
+              style: {
+                display: "flex",
+                flexDirection: "column",
+                paddingLeft: "64px",
+                paddingRight: "64px",
+                paddingBottom: "52px",
+                gap: "20px",
+              },
+              children: [
+                // Divider line
                 {
-                  type: "span",
+                  type: "div",
                   props: {
-                    style: { color: "rgba(255,255,255,0.5)" },
-                    children: "·",
+                    style: {
+                      display: "flex",
+                      width: "100%",
+                      height: "1px",
+                      background: "rgba(192,132,252,0.30)",
+                    },
+                    children: "",
                   },
                 },
+                // Branding row
                 {
-                  type: "span",
+                  type: "div",
                   props: {
-                    children: "AI Product Engineer",
+                    style: {
+                      display: "flex",
+                      flexDirection: "row",
+                      alignItems: "center",
+                      justifyContent: "space-between",
+                    },
+                    children: [
+                      // Left: heart + domain
+                      {
+                        type: "div",
+                        props: {
+                          style: {
+                            display: "flex",
+                            flexDirection: "row",
+                            alignItems: "center",
+                            gap: "12px",
+                          },
+                          children: [
+                            // Brand mark — purple dot (heart glyph not in Noto Sans KR Korean subset)
+                            {
+                              type: "div",
+                              props: {
+                                style: {
+                                  display: "flex",
+                                  width: "12px",
+                                  height: "12px",
+                                  borderRadius: "9999px",
+                                  background: "#c084fc",
+                                  boxShadow: "0 0 12px rgba(192,132,252,0.6)",
+                                },
+                                children: "",
+                              },
+                            },
+                            {
+                              type: "div",
+                              props: {
+                                style: {
+                                  display: "flex",
+                                  fontSize: "22px",
+                                  fontWeight: 700,
+                                  color: "rgba(255,255,255,0.92)",
+                                  letterSpacing: "0.01em",
+                                },
+                                children: "log8.kr",
+                              },
+                            },
+                          ],
+                        },
+                      },
+                      // Right: role
+                      {
+                        type: "div",
+                        props: {
+                          style: {
+                            display: "flex",
+                            fontSize: "18px",
+                            fontWeight: 700,
+                            color: "rgba(192,132,252,0.85)",
+                            letterSpacing: "0.02em",
+                          },
+                          children: "AI Product Engineer",
+                        },
+                      },
+                    ],
                   },
                 },
               ],

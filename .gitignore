@@ -43,3 +43,4 @@ pnpm-debug.log*
 .dev.vars
 .wrangler/
 
+.omx/

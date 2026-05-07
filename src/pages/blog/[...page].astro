@@ -7,6 +7,7 @@ import BreadcrumbSchema from "@/shared/components/seo/BreadcrumbSchema.astro";
 import CategoryIcon from "@/shared/components/ui/CategoryIcon.astro";
 import PaginationNav from "@/shared/components/ui/PaginationNav.astro";
 import { categories } from "@/shared/config/categories";
+import { SITE_URL } from "@/shared/config/consts";
 import { getSortedPublishedPosts, transformPostForCard } from "@/shared/utils/blog";
 
 type PostCardData = ReturnType<typeof transformPostForCard>;
@@ -29,6 +30,18 @@ const pageVisibleSlugs = new Set<string>(page.data.map((post: PostCardData) => p
 
 const pageTitle = page.currentPage === 1 ? "Blog" : `Blog (Page ${page.currentPage})`;
 const pageDescription = "아끼지 않는 문제 해결사로서, 문제를 정의하고 해결한 기록을 남깁니다.";
+
+const collectionPageSchema = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "@id": `${SITE_URL}/blog/#collection`,
+  name: pageTitle,
+  description: pageDescription,
+  url: `${SITE_URL}${page.url.current}`,
+  isPartOf: { "@id": `${SITE_URL}/#website` },
+  inLanguage: "ko-KR",
+  numberOfItems: page.total,
+};
 ---
 
 <Layout
@@ -42,6 +55,7 @@ const pageDescription = "아끼지 않는 문제 해결사로서, 문제를 정�
   <Fragment slot="head">
     {page.url.prev && <link rel="prev" href={page.url.prev} />}
     {page.url.next && <link rel="next" href={page.url.next} />}
+    <script type="application/ld+json" is:inline set:text={JSON.stringify(collectionPageSchema)} />
     <BreadcrumbSchema items={[
       { name: "홈", url: "/" },
       { name: "블로그", url: "/blog/" },

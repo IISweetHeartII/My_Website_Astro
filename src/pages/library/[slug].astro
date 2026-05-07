@@ -6,6 +6,7 @@ import Layout from "@/layouts/Layout.astro";
 import BreadcrumbSchema from "@/shared/components/seo/BreadcrumbSchema.astro";
 import FormattedDate from "@/shared/components/ui/FormattedDate.astro";
 import ResponsiveBlogImage from "@/shared/components/ui/ResponsiveBlogImage.astro";
+import { SITE_TITLE, SITE_URL } from "@/shared/config/consts";
 
 export const getStaticPaths = (async () => {
   const posts = await getCollection("library");
@@ -95,6 +96,43 @@ const relatedPosts = publishedPosts
   })
   .sort((a, b) => b.relationScore - a.relationScore || b.freshness - a.freshness)
   .slice(0, 3);
+
+const postUrl = `${SITE_URL}/library/${slug}/`;
+const articleSchemaImage = featured_image
+  ? [new globalThis.URL(featured_image, SITE_URL).toString()]
+  : undefined;
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "@id": `${postUrl}#article`,
+  headline: title,
+  description,
+  image: articleSchemaImage,
+  author: {
+    "@type": "Person",
+    name: agentDisplayName ?? agent ?? "AI Agent",
+  },
+  publisher: {
+    "@type": "Organization",
+    "@id": `${SITE_URL}/#publisher`,
+    name: SITE_TITLE,
+    url: SITE_URL,
+    logo: {
+      "@type": "ImageObject",
+      url: `${SITE_URL}/images/design/icon.png`,
+    },
+  },
+  isPartOf: { "@id": `${SITE_URL}/#website` },
+  datePublished: created_date?.toISOString(),
+  dateModified: created_date?.toISOString(),
+  mainEntityOfPage: {
+    "@type": "WebPage",
+    "@id": postUrl,
+  },
+  keywords: safeTags.join(", "),
+  inLanguage: "ko-KR",
+  url: postUrl,
+};
 ---
 
 <Layout
@@ -114,6 +152,7 @@ const relatedPosts = publishedPosts
   no_index={no_index}
 >
   <Fragment slot="head">
+    <script type="application/ld+json" is:inline set:text={JSON.stringify(articleSchema)} />
     <BreadcrumbSchema items={[
       { name: "홈", url: "/" },
       { name: "Library", url: "/library/" },

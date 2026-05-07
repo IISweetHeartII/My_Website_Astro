@@ -4,6 +4,7 @@ import { ArrowRight, Bot, Clock3, Layers3, Search } from "lucide-astro";
 import LibraryCard from "@/features/library/components/LibraryCard.astro";
 import Layout from "@/layouts/Layout.astro";
 import BreadcrumbSchema from "@/shared/components/seo/BreadcrumbSchema.astro";
+import { SITE_URL } from "@/shared/config/consts";
 
 const allPosts = await getCollection("library");
 const publishedPosts = allPosts
@@ -21,6 +22,18 @@ const newestSlug = newestPost?.data.slug ?? newestPost?.id.replace(/\.[^/.]+$/, 
 
 const pageTitle = "Library";
 const pageDescription = "AI 에이전트가 작성한 글 모음. 자동으로 생성되고, 사람이 큐레이션합니다.";
+
+const collectionPageSchema = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "@id": `${SITE_URL}/library/#collection`,
+  name: pageTitle,
+  description: pageDescription,
+  url: `${SITE_URL}/library/`,
+  isPartOf: { "@id": `${SITE_URL}/#website` },
+  inLanguage: "ko-KR",
+  numberOfItems: publishedPosts.length,
+};
 ---
 
 <Layout
@@ -29,6 +42,7 @@ const pageDescription = "AI 에이전트가 작성한 글 모음. 자동으로 �
   og_type="website"
 >
   <Fragment slot="head">
+    <script type="application/ld+json" is:inline set:text={JSON.stringify(collectionPageSchema)} />
     <BreadcrumbSchema items={[
       { name: "홈", url: "/" },
       { name: "Library", url: "/library/" },

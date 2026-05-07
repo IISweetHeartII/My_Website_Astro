@@ -1,5 +1,6 @@
 ---
 import { Award, ExternalLink, Github, Lock } from "lucide-astro";
+import BreadcrumbSchema from "@/shared/components/seo/BreadcrumbSchema.astro";
 import { AUTHOR_GITHUB } from "@/shared/config/consts";
 import Layout from "../layouts/Layout.astro";
 
@@ -174,6 +175,12 @@ const iconMap = {
   featured_image_alt="김덕환 프로젝트 쇼케이스 대표 이미지"
   og_type="website"
 >
+  <Fragment slot="head">
+    <BreadcrumbSchema items={[
+      { name: "홈", url: "/" },
+      { name: "Showcase", url: "/showcase/" },
+    ]} />
+  </Fragment>
   <main class="max-w-5xl mx-auto px-6 py-16">
     <!-- Page Header -->
     <div class="text-center mb-16">

@@ -4,6 +4,7 @@ import type { GetStaticPaths } from "astro";
 import { Archive, Files, FileText, Tag } from "lucide-astro";
 import BlogCard from "@/features/blog/components/BlogCard.astro";
 import Layout from "@/layouts/Layout.astro";
+import BreadcrumbSchema from "@/shared/components/seo/BreadcrumbSchema.astro";
 import CategoryIcon from "@/shared/components/ui/CategoryIcon.astro";
 import PaginationNav from "@/shared/components/ui/PaginationNav.astro";
 import {
@@ -12,6 +13,7 @@ import {
   categoryMap,
   reverseCategoryMap,
 } from "@/shared/config/categories";
+import { SITE_URL } from "@/shared/config/consts";
 import { sortPostsByDate, transformPostForCard } from "@/shared/utils/blog";
 
 type Props = {
@@ -63,6 +65,18 @@ const { category, allCategories, page } = Astro.props as Props;
 const title = category.name;
 const description = category.description;
 const pageTitle = page.currentPage === 1 ? title : `${title} (Page ${page.currentPage})`;
+
+const collectionPageSchema = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "@id": `${SITE_URL}/category/${category.id}/#collection`,
+  name: title,
+  description,
+  url: `${SITE_URL}${page.url.current}`,
+  isPartOf: { "@id": `${SITE_URL}/#website` },
+  inLanguage: "ko-KR",
+  numberOfItems: page.total,
+};
 ---
 
 <Layout
@@ -76,6 +90,12 @@ const pageTitle = page.currentPage === 1 ? title : `${title} (Page ${page.curren
   <Fragment slot="head">
     {page.url.prev && <link rel="prev" href={page.url.prev} />}
     {page.url.next && <link rel="next" href={page.url.next} />}
+    <script type="application/ld+json" is:inline set:text={JSON.stringify(collectionPageSchema)} />
+    <BreadcrumbSchema items={[
+      { name: "홈", url: "/" },
+      { name: "블로그", url: "/blog/" },
+      { name: title, url: `/category/${category.id}/` },
+    ]} />
   </Fragment>
 
   <div class="w-full max-w-7xl mx-auto p-8 flex flex-col">

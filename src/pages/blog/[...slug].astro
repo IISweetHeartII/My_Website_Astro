@@ -5,7 +5,7 @@ import { calculateReadingTime } from "@/shared/utils/reading-time";
 import BlogPost from "../../layouts/BlogPost.astro";
 
 export async function getStaticPaths() {
-  const posts = await getCollection("blog");
+  const posts = await getCollection("blog", ({ data }) => data.publish !== false);
   return posts.map((post) => {
     const slug = post.data.slug || post.id.replace(/\.[^/.]+$/, "");
     return {

@@ -2,9 +2,28 @@
 import { Image } from "astro:assets";
 import { FileText, Github } from "lucide-astro";
 import profileImage from "@/assets/images/design/DH_ID.jpg";
-import { SITE_TITLE } from "@/shared/config/consts";
+import BreadcrumbSchema from "@/shared/components/seo/BreadcrumbSchema.astro";
+import {
+  AUTHOR_GITHUB,
+  AUTHOR_LINKEDIN,
+  SITE_AUTHOR,
+  SITE_TITLE,
+  SITE_URL,
+} from "@/shared/config/consts";
 import { getUrl } from "@/shared/utils/url";
 import Layout from "../layouts/Layout.astro";
+
+const personSchema = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "@id": `${SITE_URL}/#author`,
+  name: SITE_AUTHOR,
+  url: `${SITE_URL}/portfolio`,
+  image: `${SITE_URL}/images/design/DH_ID.jpg`,
+  jobTitle: "Product Engineer",
+  description: "기술로 감동과 사랑을 전하는 개발자",
+  sameAs: [AUTHOR_GITHUB, AUTHOR_LINKEDIN],
+};
 ---
 
 <Layout
@@ -15,6 +34,13 @@ import Layout from "../layouts/Layout.astro";
   featured_image_alt="김덕환 포트폴리오 대표 이미지"
   og_type="website"
 >
+  <Fragment slot="head">
+    <script type="application/ld+json" is:inline set:text={JSON.stringify(personSchema)} />
+    <BreadcrumbSchema items={[
+      { name: "홈", url: "/" },
+      { name: "Portfolio", url: "/portfolio/" },
+    ]} />
+  </Fragment>
   <main class="portfolio-root max-w-[1600px] mx-auto px-6 py-16 bg-background print:max-w-full print:p-0 print:m-0 print:bg-white">
     <!-- Resume Link Banner -->
     <div class="mb-6 p-4 bg-primary/10 rounded-lg border border-primary/20 flex justify-between items-center">

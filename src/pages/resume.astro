@@ -1,8 +1,27 @@
 ---
 import { ExternalLink, FileDown } from "lucide-astro";
-import { SITE_TITLE } from "@/shared/config/consts";
+import BreadcrumbSchema from "@/shared/components/seo/BreadcrumbSchema.astro";
+import {
+  AUTHOR_GITHUB,
+  AUTHOR_LINKEDIN,
+  SITE_AUTHOR,
+  SITE_TITLE,
+  SITE_URL,
+} from "@/shared/config/consts";
 import { getUrl } from "@/shared/utils/url";
 import Layout from "../layouts/Layout.astro";
+
+const personSchema = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "@id": `${SITE_URL}/#author`,
+  name: SITE_AUTHOR,
+  url: `${SITE_URL}/portfolio`,
+  image: `${SITE_URL}/images/design/DH_ID.jpg`,
+  jobTitle: "Product Engineer",
+  description: "아끼지 않는 문제 해결사",
+  sameAs: [AUTHOR_GITHUB, AUTHOR_LINKEDIN],
+};
 
 interface ProofItem {
   id: string;
@@ -70,6 +89,13 @@ const certifications: ProofItem[] = [
   featured_image_alt="김덕환 이력서 대표 이미지"
   og_type="website"
 >
+  <Fragment slot="head">
+    <script type="application/ld+json" is:inline set:text={JSON.stringify(personSchema)} />
+    <BreadcrumbSchema items={[
+      { name: "홈", url: "/" },
+      { name: "Resume", url: "/resume/" },
+    ]} />
+  </Fragment>
   <div class="resume-wrapper max-w-[1600px] mx-auto px-6 py-16 bg-background print:max-w-full print:p-0 print:m-0 print:bg-white">
     <div class="resume-shell">
       <div class="resume-main">
