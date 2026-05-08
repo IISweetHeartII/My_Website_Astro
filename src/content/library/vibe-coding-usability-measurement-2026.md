@@ -1,7 +1,7 @@
 ---
-title: "바이브 코딩 다음 KPI는 배포가 아니라 사용성 측정이다"
-subtitle: "빠르게 만든 제품이 데모로 남지 않으려면, 이제는 measurement loop를 먼저 닫아야 한다"
-description: "바이브 코딩이 배포 속도를 바꿨다면, 그 다음 경쟁은 사용성 측정과 운영 루프에서 갈린다. 왜 이제 event·funnel·ownership이 더 중요한지 정리했다."
+title: "바이브 코딩 이후 진짜 KPI는 사용성 측정과 업무 대체다"
+subtitle: "빠르게 만든 제품이 데모로 남지 않으려면, 이제는 measurement loop와 운영 업무 대체를 먼저 닫아야 한다"
+description: "바이브 코딩이 배포 속도를 바꿨다면, 그 다음 경쟁은 사용성 측정과 업무 대체에서 갈린다. 왜 이제 event·funnel·ownership이 더 중요한지 정리했다."
 publish: false
 created_date: 2026-05-01
 category: "AI"
@@ -16,15 +16,15 @@ slug: vibe-coding-usability-measurement-2026
 reading_time: 8
 featured_image: /images/library/vibe-coding-usability-measurement-2026/thumbnail.png
 featured_image_alt: "빠르게 배포된 제품 위에 사용자 행동 지표와 분석 레이어가 올라가는 모습을 표현한 일러스트"
-meta_title: "바이브 코딩 다음 KPI는 배포가 아니라 사용성 측정이다 | Library"
-meta_description: "바이브 코딩 이후 병목은 코드 생성이 아니라 사용성 측정이다. event, funnel, ownership, fallback source를 중심으로 실전 운영 관점에서 정리했다."
+meta_title: "바이브 코딩 이후 진짜 KPI는 사용성 측정과 업무 대체다 | Library"
+meta_description: "바이브 코딩 이후 병목은 코드 생성이 아니라 사용성 측정과 운영 업무 대체다. event, funnel, ownership, fallback source를 중심으로 실전 운영 관점에서 정리했다."
 keywords:
   - 바이브 코딩 사용성 측정
   - 제품 분석 AI
   - UX measurement loop
   - event funnel ownership
   - AI 제품 운영 레이어
-og_title: "바이브 코딩 다음 KPI는 배포가 아니라 사용성 측정이다"
+og_title: "바이브 코딩 이후 진짜 KPI는 사용성 측정과 업무 대체다"
 og_description: "배포 속도가 빨라질수록 더 중요한 건 누가 어디서 멈췄는지 아는 능력이다."
 og_type: article
 twitter_card: summary_large_image
@@ -63,6 +63,8 @@ twitter_card: summary_large_image
 4. 그 측정 결과가 다음 개선으로 이어지나?
 
 즉 시장이 생성 자체에 감탄하는 단계에서, **생성 이후 운영과 측정이 어떻게 닫히는가**를 보기 시작했다는 뜻이다. 이 흐름은 하네스, 소유권, 운영 레이어 얘기와도 자연스럽게 연결된다. 결국 다 같은 질문이다. “만드는 건 빨라졌는데, 그 다음 책임은 누가 어떻게 지나?”
+
+여기서 말하는 업무 대체도 비슷하다. 이제 먼저 대체되는 건 화면을 찍어내는 코딩만이 아니라, 사용성 로그를 읽고 병목을 찾고 다음 수정 우선순위를 고르는 운영 업무다.
 
 ## 사용성 측정이 없는 바이브 코딩은 왜 데모로 되돌아가나
 
