@@ -115,10 +115,25 @@ const {
           return;
         }
 
+        const normalizePath = (value) => value.replace(/\/+$/, "") || "/";
+
+        const pushDataLayer = (payload) => {
+          window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push({
+            event: payload.event,
+            cta_name: payload.cta_name,
+            cta_section: payload.cta_section,
+            cta_destination: payload.cta_destination,
+            cta_page_path: payload.cta_page_path,
+            cta_campaign: payload.cta_campaign,
+            cta_source: payload.cta_source,
+          });
+        };
+
         const buildPayload = (anchor, source) => {
           const href = anchor.getAttribute("href") || "";
           const absoluteUrl = new URL(href, window.location.origin);
-          const pathname = absoluteUrl.pathname.replace(/\/+$/, "") || "/";
+          const pathname = normalizePath(absoluteUrl.pathname);
           const inferredName = pathname === "/newsletter" ? "newsletter" : pathname === "/consulting" ? "consulting" : "unknown";
 
           return {
@@ -126,9 +141,40 @@ const {
             cta_name: anchor.dataset.ctaName || inferredName,
             cta_section: anchor.dataset.ctaSection || (source === "inline_cta_link" ? "inline_link" : "unknown"),
             cta_destination: absoluteUrl.toString(),
-            cta_page_path: window.location.pathname,
+            cta_page_path: normalizePath(window.location.pathname),
             cta_campaign: absoluteUrl.searchParams.get("utm_campaign") || "none",
             cta_source: source,
+            ts: Date.now(),
+          };
+        };
+
+        const buildPageViewPayload = () => {
+          const currentUrl = new URL(window.location.href);
+          const pathname = normalizePath(currentUrl.pathname);
+          const referrerHost = (() => {
+            try {
+              return document.referrer ? new URL(document.referrer).hostname : "";
+            } catch {
+              return "";
+            }
+          })();
+
+          if (!pathname.startsWith("/library/")) {
+            return null;
+          }
+
+          if (!referrerHost && !currentUrl.searchParams.get("utm_campaign")) {
+            return null;
+          }
+
+          return {
+            event: "cta_page_view",
+            cta_name: "page_view",
+            cta_section: "page_view",
+            cta_destination: currentUrl.toString(),
+            cta_page_path: pathname,
+            cta_campaign: currentUrl.searchParams.get("utm_campaign") || "none",
+            cta_source: `page_view:${referrerHost || "direct"}`,
             ts: Date.now(),
           };
         };
@@ -154,6 +200,26 @@ const {
           }).catch(() => {});
         };
 
+        const trackPageView = () => {
+          const payload = buildPageViewPayload();
+          if (!payload) {
+            return;
+          }
+
+          const dedupeKey = `cta-page-view:${payload.cta_page_path}:${payload.cta_campaign}:${payload.cta_source}`;
+          try {
+            if (window.sessionStorage.getItem(dedupeKey)) {
+              return;
+            }
+            window.sessionStorage.setItem(dedupeKey, "1");
+          } catch {
+            // ignore storage failures and continue best-effort
+          }
+
+          pushDataLayer(payload);
+          sendMetric(payload);
+        };
+
         const onClick = (event) => {
           const explicitTarget = event.target instanceof Element ? event.target.closest("[data-cta-track]") : null;
           const anchor = explicitTarget instanceof HTMLAnchorElement
@@ -168,7 +234,7 @@ const {
 
           const href = anchor.getAttribute("href") || "";
           const absoluteUrl = new URL(href, window.location.origin);
-          const pathname = absoluteUrl.pathname.replace(/\/+$/, "") || "/";
+          const pathname = normalizePath(absoluteUrl.pathname);
           const allowedMeasurementHosts = new Set([
             window.location.hostname,
             "log8.kr",
@@ -190,20 +256,12 @@ const {
             anchor.hasAttribute("data-cta-track") ? "data-cta-track" : "inline_cta_link"
           );
 
-          window.dataLayer = window.dataLayer || [];
-          window.dataLayer.push({
-            event: payload.event,
-            cta_name: payload.cta_name,
-            cta_section: payload.cta_section,
-            cta_destination: payload.cta_destination,
-            cta_page_path: payload.cta_page_path,
-            cta_campaign: payload.cta_campaign,
-            cta_source: payload.cta_source,
-          });
-
+          pushDataLayer(payload);
           sendMetric(payload);
         };
 
+        trackPageView();
+        document.addEventListener("astro:page-load", trackPageView);
         document.addEventListener("click", onClick);
         window.__ctaTrackerBound = true;
       })();
