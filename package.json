@@ -13,7 +13,8 @@
     "type-check": "astro check",
     "prepare": "husky",
     "deps:check": "ncu",
-    "deps:update": "ncu -u && bun install"
+    "deps:update": "ncu -u && bun install",
+    "cta:summary": "node scripts/cta-summary.mjs"
   },
   "dependencies": {
     "@astrojs/rss": "^4.0.15",

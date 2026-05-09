@@ -174,6 +174,7 @@ CTA 측정은 Cloudflare KV(`CHAT_KV`)를 사용합니다.
 
 - 관리자 전체 요약: `Authorization: Bearer $ADMIN_SECRET` 필요
 - 공개 집계 요약: **필터가 있는 aggregate-only 조회**는 시크릿 없이 가능
+- 운영 기본 경로: **campaign/page KPI는 `public_summary`를 먼저 쓴다**
 
 ```bash
 # 관리자 전체 요약
@@ -187,9 +188,16 @@ curl \
 # 공개 집계 요약은 action=summary + public=1로도 조회 가능
 curl \
   "https://your-site.com/api/cta?action=summary&public=1&page_path=/library/google-cloud-fraud-defense-agentic-web-security-2026&campaign=ai-coding-agent-guardrails-5-checklist-2026"
+
+# 로컬 헬퍼 (ADMIN_SECRET 없이 public_summary 사용)
+node scripts/cta-summary.mjs \
+  --page-path /library/ai-coding-agent-guardrails-5-checklist-2026 \
+  --campaign ai-coding-agent-guardrails-5-checklist-2026
 ```
 
 공개 요약 응답은 `matched_events`, `counts_by_name`(예: `page_view`, `newsletter`, `consulting`)와 필터에 매칭된 aggregate row만 돌려준다. 전체 사이트 누적량이나 `recent` 이벤트는 여전히 관리자 인증이 필요하다.
+
+`summary` 401은 auth 경계일 뿐이고, campaign/page 측정 close 자체는 `public_summary`로 계속 진행할 수 있다. 즉 `remote KV token`이나 `access log`가 없어도 aggregate KPI close는 가능하다. 자세한 운영 규칙은 `docs/dev/cta-measurement-runbook.md` 참고.
 
 `src/layouts/Layout.astro`는 library 페이지에서 `utm_campaign` 또는 referrer가 있을 때 `page_view`도 same-origin `/api/cta`로 함께 적재한다. 그래서 원문 유입과 CTA 클릭을 같은 KV 집계 경로에서 볼 수 있다.
 
