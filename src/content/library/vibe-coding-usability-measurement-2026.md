@@ -2,7 +2,7 @@
 title: "바이브 코딩 이후 진짜 KPI는 사용성 측정과 업무 대체다"
 subtitle: "빠르게 만든 제품이 데모로 남지 않으려면, 이제는 measurement loop와 운영 업무 대체를 먼저 닫아야 한다"
 description: "바이브 코딩이 배포 속도를 바꿨다면, 그 다음 경쟁은 사용성 측정과 업무 대체에서 갈린다. 왜 이제 event·funnel·ownership이 더 중요한지 정리했다."
-publish: false
+publish: true
 created_date: 2026-05-01
 category: "AI"
 tags:
@@ -192,7 +192,9 @@ measurement_preflight:
 
 [주간 뉴스레터 구독하기 →](https://log8.kr/newsletter?utm_source=library&utm_medium=cta&utm_campaign=vibe-coding-usability-measurement-2026)
 
-비슷한 측정 루프와 운영 구조를 우리 팀이 직접 설계해드리기도 한다.
-관심 있으면 [상담 신청](https://log8.kr/consulting?utm_source=library&utm_medium=cta&utm_campaign=vibe-coding-usability-measurement-2026)을 남겨주시면 된다.
+팀에서 이미 AI로 배포 속도는 올렸는데, **이벤트 설계 / 퍼널 해석 / 운영 owner 정리**가 비어 있다면 그 구조를 같이 점검해드릴 수 있다.
+지금 제품 흐름을 기준으로 어디부터 측정해야 하는지, 어떤 업무를 자동화 후보로 볼지, 상담 한 번으로 우선순위를 같이 잡아보는 방식이다.
+
+[AI 운영·측정 상담 신청 →](https://log8.kr/consulting?utm_source=library&utm_medium=cta&utm_campaign=vibe-coding-usability-measurement-2026)
 
 KPI impact: published = 0
