@@ -2,7 +2,7 @@
 title: "React 테스트 커버리지 90%인데 E2E에서 박살난 이야기"
 subtitle: "Vitest 5개 프로젝트, 그리고 Cypress에서 Playwright로 갈아탄 이유"
 description: "단위 테스트 커버리지가 높으면 안전할 줄 알았다. E2E를 돌리는 순간 무너졌다. 5개 프로젝트에서 Vitest를 쓰면서 깨달은 함정."
-publish: false
+publish: true
 meta_title: "React 테스트 커버리지 90%인데 E2E에서 박살난 이야기 | 김덕환"
 meta_description: "Vitest, RTL, MSW, Playwright 실전 후기. 커버리지 숫자에 속지 않는 법."
 keywords:
