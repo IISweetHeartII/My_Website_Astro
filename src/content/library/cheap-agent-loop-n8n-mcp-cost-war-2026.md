@@ -2,7 +2,7 @@
 title: "17배 저렴한 에이전트 루프부터 n8n-MCP까지: 2026 AI 자동화 비용전쟁"
 subtitle: "더 좋은 모델보다 더 싼 루프와 더 잘 붙는 연결 레이어가 먼저 클릭을 가져가는 이유"
 description: "DeepClaude의 17배 cheaper headline, n8n-MCP, ruflo, dexter 신호를 같이 보면 AI 자동화 시장은 성능표보다 비용 구조와 연결성 경쟁으로 이동하고 있다."
-publish: false
+publish: true
 created_date: 2026-05-05
 category: "AI"
 tags:
