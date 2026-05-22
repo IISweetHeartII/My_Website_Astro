@@ -30,7 +30,13 @@ og_type: article
 twitter_card: summary_large_image
 ---
 
-
+<!--
+  📸 이미지 프롬프트:
+  prompt: "Editorial tech illustration of GitHub Copilot subscription tiers reshuffling like puzzle pieces. A premium requests meter replacing a flat monthly dial. Agentic compute cost bars rising beyond the subscription ceiling. Dark background, GitHub purple accent, clean Korean developer media style, restrained technical colors"
+  aspect_ratio: "4:3"
+  session_id: "library-github-copilot-individual-plan-changes-agentic-compute-2026"
+  save_as: "thumbnail.png"
+-->
 
 이번 변화의 핵심은 **Copilot이 비싸졌다**가 아니다. 더 정확히 말하면, **에이전트형 코딩 도구를 월정액 하나로 오래 감당하던 구조가 한계에 닿았다**는 신호다.
 

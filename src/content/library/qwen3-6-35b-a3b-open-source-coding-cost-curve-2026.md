@@ -30,6 +30,14 @@ og_type: article
 twitter_card: summary_large_image
 ---
 
+<!--
+  📸 이미지 프롬프트:
+  prompt: "Editorial tech illustration of a downward cost curve labeled 3B active slashing through a price floor labeled commercial LLM API. An open-source symbol radiates from a Mixture of Experts neural architecture diagram. 35B total vs 3B active comparison visualization. Dark background, teal and orange Korean developer media style, restrained technical colors"
+  aspect_ratio: "4:3"
+  session_id: "library-qwen3-6-35b-a3b-open-source-coding-cost-curve-2026"
+  save_as: "thumbnail.png"
+-->
+
 월 수십만 원짜리 API 청구서가 당연한 것처럼 여겨지던 시장에 균열이 생겼다. Qwen3.6-35B-A3B가 공개된 이후, 한국 개발 커뮤니티에서는 조용하지만 진지한 대화가 오가고 있다. "이거 실제로 Claude Code 대체할 수 있는 거 아니야?"
 
 결론부터 말하면: 전면 대체는 아직 아니다. 하지만 가격 공식은 이미 깨졌다.

@@ -30,7 +30,13 @@ og_type: article
 twitter_card: summary_large_image
 ---
 
-
+<!--
+  📸 이미지 프롬프트:
+  prompt: "Editorial tech security illustration of a Vercel triangle logo with a hairline crack running through it. OAuth token chains breaking apart, environment variable keys leaking through the crack. A supply chain diagram with a broken link. Dark navy background, red alert accent, clean Korean developer media style, restrained colors"
+  aspect_ratio: "4:3"
+  session_id: "library-vercel-april-2026-security-incident-ai-supply-chain"
+  save_as: "thumbnail.png"
+-->
 
 이번 Vercel 사고에서 가장 중요한 건 Vercel이 뚫렸다는 사실 자체보다, **AI 도구 하나의 OAuth 타협이 회사 워크스페이스와 배포 비밀정보 경계까지 이어졌다는 점**이다.
 

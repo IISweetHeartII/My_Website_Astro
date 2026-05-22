@@ -37,6 +37,12 @@ tags:
 
 카카오톡, App Store, FaceTime, 시스템 설정, 각종 권한 팝업처럼 웹 밖에 있는 것들은 CDP만으로는 못 건드린다. 지금 에이전트 경쟁에서 진짜 중요한 건 웹페이지를 잘 긁는 능력보다, **운영체제 화면을 보고 판단하고 누르고 다시 확인하는 루프를 얼마나 안정적으로 만들 수 있느냐**다.
 
+<!--
+  📸 이미지 프롬프트:
+  prompt: "Dark navy background flat vector tech illustration. A Mac laptop screen shows an AI agent control loop with three connected panels labeled Peekaboo, Bridge, and Act, connected by warm orange arrows. Below the panels, four neon labels in a row: See in orange, Think in cyan, Act in green, Verify in pink. Bottom bar reads: Peekaboo · OpenClaw Bridge · GUI Automation in white bold text. Nested glowing rectangles frame the inner diagram with orange and blue borders. Clean minimalist design, no Korean text, English only."
+  aspect_ratio: "4:3"
+  save_as: "059_00_thumbnail.png"
+-->
 ![Peekaboo와 OpenClaw Bridge를 통해 macOS GUI 자동화 루프가 동작하는 개념 이미지](/images/blogs/059/059_00_thumbnail.png)
 
 ## 왜 이게 필요한가

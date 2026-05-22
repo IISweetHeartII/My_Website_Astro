@@ -1,0 +1,168 @@
+# Tag → Category 리다이렉트 (구 /tag/ URL → 새 /category/ URL)
+# 2026-05-18: feature-first 리팩토링 시 /tag/ 라우트 삭제됨 (commit 5437da8)
+
+# AI 카테고리
+/tag/AI /category/ai/ 301
+/tag/AI/ /category/ai/ 301
+/tag/Claude/ /category/ai/ 301
+/tag/ChatGPT/ /category/ai/ 301
+/tag/DeepSeek/ /category/ai/ 301
+/tag/Gemini/ /category/ai/ 301
+/tag/GPT/ /category/ai/ 301
+/tag/CursorAI/ /category/ai/ 301
+/tag/MCP/ /category/ai/ 301
+/tag/AI추천/ /category/ai/ 301
+/tag/AI활용/ /category/ai/ 301
+/tag/AI교육/ /category/ai/ 301
+/tag/맞춤형지침 /category/ai/ 301
+/tag/맞춤형지침/ /category/ai/ 301
+/tag/메모리/ /category/ai/ 301
+
+# 개발 카테고리
+/tag/개발 /category/dev/ 301
+/tag/개발/ /category/dev/ 301
+/tag/웹개발 /category/dev/ 301
+/tag/웹개발/ /category/dev/ 301
+/tag/Astro/ /category/dev/ 301
+/tag/Firebase/ /category/dev/ 301
+/tag/C언어/ /category/dev/ 301
+/tag/알고리즘 /category/dev/ 301
+/tag/알고리즘/ /category/dev/ 301
+/tag/프로그래밍/ /category/dev/ 301
+/tag/테스트/ /category/dev/ 301
+/tag/E2E/ /category/dev/ 301
+/tag/Cypress/ /category/dev/ 301
+/tag/오류해결/ /category/dev/ 301
+/tag/개발도구/ /category/dev/ 301
+/tag/개발가이드/ /category/dev/ 301
+/tag/성능최적화/ /category/dev/ 301
+/tag/Git/ /category/dev/ 301
+/tag/이미지 /category/dev/ 301
+/tag/이미지/ /category/dev/ 301
+/tag/비교분석/ /category/dev/ 301
+/tag/포인터/ /category/dev/ 301
+
+# 보안 카테고리
+/tag/보안/ /category/security/ 301
+/tag/웹보안 /category/security/ 301
+/tag/웹보안/ /category/security/ 301
+/tag/JWT /category/security/ 301
+/tag/JWT/ /category/security/ 301
+/tag/OAuth /category/security/ 301
+/tag/OAuth/ /category/security/ 301
+/tag/Cookie/ /category/security/ 301
+/tag/인증/ /category/security/ 301
+/tag/소셜로그인/ /category/security/ 301
+
+# DevOps 카테고리
+/tag/배포/ /category/devops/ 301
+/tag/호스팅/ /category/devops/ 301
+/tag/웹호스팅/ /category/devops/ 301
+/tag/Cloudflare /category/devops/ 301
+/tag/Cloudflare/ /category/devops/ 301
+/tag/도메인 /category/devops/ 301
+/tag/도메인/ /category/devops/ 301
+/tag/가비아/ /category/devops/ 301
+/tag/웹사이트런칭/ /category/devops/ 301
+/tag/비용절감/ /category/devops/ 301
+
+# 생산성 카테고리
+/tag/생산성 /category/productivity/ 301
+/tag/생산성/ /category/productivity/ 301
+/tag/생산성향상 /category/productivity/ 301
+/tag/생산성향상/ /category/productivity/ 301
+/tag/생산성도구/ /category/productivity/ 301
+/tag/Obsidian/ /category/productivity/ 301
+/tag/옵시디언/ /category/productivity/ 301
+/tag/자동화/ /category/productivity/ 301
+/tag/업무자동화/ /category/productivity/ 301
+/tag/워크플로우/ /category/productivity/ 301
+/tag/지식관리/ /category/productivity/ 301
+/tag/노션/ /category/productivity/ 301
+/tag/동기화/ /category/productivity/ 301
+/tag/업무팁 /category/productivity/ 301
+/tag/업무팁/ /category/productivity/ 301
+/tag/마크다운/ /category/productivity/ 301
+/tag/자료공유/ /category/productivity/ 301
+/tag/자료 /category/productivity/ 301
+/tag/엑셀 /category/productivity/ 301
+/tag/엑셀/ /category/productivity/ 301
+/tag/구글서비스/ /category/productivity/ 301
+
+# 블로그운영 카테고리
+/tag/블로그 /category/blog/ 301
+/tag/블로그/ /category/blog/ 301
+/tag/SEO /category/blog/ 301
+/tag/SEO/ /category/blog/ 301
+/tag/애드센스/ /category/blog/ 301
+/tag/GoogleAdSense/ /category/blog/ 301
+/tag/GoogleAnalytics/ /category/blog/ 301
+/tag/GTM/ /category/blog/ 301
+/tag/뉴스레터/ /category/blog/ 301
+/tag/이메일/ /category/blog/ 301
+/tag/수익화 /category/blog/ 301
+/tag/수익화/ /category/blog/ 301
+
+# 일상 카테고리
+/tag/경험담 /category/daily/ 301
+/tag/경험담/ /category/daily/ 301
+/tag/성장/ /category/daily/ 301
+/tag/도전/ /category/daily/ 301
+/tag/꾸준함 /category/daily/ 301
+/tag/꾸준함/ /category/daily/ 301
+/tag/대학생활 /category/daily/ 301
+/tag/대학생활/ /category/daily/ 301
+/tag/대학생/ /category/daily/ 301
+/tag/사회초년생/ /category/daily/ 301
+/tag/인턴 /category/daily/ 301
+/tag/인턴/ /category/daily/ 301
+/tag/자기계발 /category/daily/ 301
+/tag/자기계발/ /category/daily/ 301
+/tag/습관 /category/daily/ 301
+/tag/습관/ /category/daily/ 301
+/tag/글쓰기/ /category/daily/ 301
+/tag/만남/ /category/daily/ 301
+/tag/혁신/ /category/daily/ 301
+/tag/회고/ /category/daily/ 301
+/tag/후기 /category/daily/ 301
+/tag/후기/ /category/daily/ 301
+/tag/학습법/ /category/daily/ 301
+
+# 교육 카테고리
+/tag/교육실습/ /category/education/ 301
+/tag/강연/ /category/education/ 301
+/tag/강의/ /category/education/ 301
+/tag/강연후기/ /category/education/ 301
+/tag/수학교육/ /category/education/ 301
+/tag/미래교육/ /category/education/ 301
+/tag/시니어/ /category/education/ 301
+/tag/한국시니어교류협회 /category/education/ 301
+/tag/한국시니어교류협회/ /category/education/ 301
+/tag/초급가이드/ /category/education/ 301
+/tag/시험공부/ /category/education/ 301
+
+# 전체 보기
+/tag/all /blog/ 301
+/tag/all/ /blog/ 301
+
+# 나머지 /tag/* → 블로그 (위에서 매칭 안 된 태그 폴백)
+/tag/* /blog/ 301
+
+# 삭제된 페이지 리다이렉트 (commit e37032b: streamline site structure)
+/contact /blog/ 301
+/contact/ /blog/ 301
+/now /blog/ 301
+/now/ /blog/ 301
+/newsletter /blog/ 301
+/newsletter/ /blog/ 301
+/consulting /portfolio 301
+/youtube/ /library/ 301
+/youtube /library/ 301
+
+# 구 블로그 URL (리팩토링 전 구조)
+/who-is-dh / 301
+/who-is-dh/ / 301
+/a-good-start-to-writing/ /blog/ 301
+/test-supabase/ /blog/ 301
+/blog/new-post /blog/ 301
+/blog/web-security-deep-dive/ /blog/ 301

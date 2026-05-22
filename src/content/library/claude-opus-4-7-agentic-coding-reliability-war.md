@@ -30,7 +30,13 @@ og_type: article
 twitter_card: summary_large_image
 ---
 
-
+<!--
+  📸 이미지 프롬프트:
+  prompt: "Editorial tech illustration of three AI coding agent pillars labeled Anthropic, OpenAI Codex, and Qwen racing toward a reliability trophy. Long-running task timers, stability gauges, error rate counters. Clean Korean developer media style, dark background, competitive agentic coding aesthetic, restrained technical colors"
+  aspect_ratio: "4:3"
+  session_id: "library-claude-opus-4-7-agentic-coding-reliability-war"
+  save_as: "thumbnail.png"
+-->
 
 오늘 화제의 본질은 새 모델 하나가 나왔다는 데 있지 않다. **코딩 에이전트를 얼마나 오래, 얼마나 안정적으로, 얼마나 안심하고 맡길 수 있느냐**를 둘러싼 신뢰도 전쟁이 본격적으로 시작됐다는 데 있다.
 

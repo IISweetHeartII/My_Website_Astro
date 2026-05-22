@@ -25,8 +25,18 @@ keywords:
   - AI 개발도구 비용
 og_title: "Claude Code 월 20만원이 90분에 바닥나는 이유"
 og_description: "캐시 토큰 과금 구조와 TTL 변경이 만든 완벽한 비용 폭탄. 구체적인 수치로 분석했다."
+featured_image: /images/library/claude-code-quota-crisis/thumbnail.png
+featured_image_alt: "Claude Code 할당량이 빠르게 소진되는 과금 구조 일러스트"
 twitter_card: summary_large_image
 ---
+
+<!--
+  📸 이미지 프롬프트:
+  prompt: "Editorial tech illustration of a depleting quota meter labeled Claude Code dropping from full to empty in 90 minutes, timer frozen at 1:30, orange warning glow, credit card icon in background, clean Korean developer media style, dark neutral workspace, restrained colors"
+  aspect_ratio: "4:3"
+  session_id: "library-claude-code-quota-crisis"
+  save_as: "thumbnail.png"
+-->
 
 Claude Code를 진지하게 쓰는 사람이라면 요즘 이 말이 전혀 과장이 아니라는 걸 체감했을 거다.
 

@@ -26,8 +26,18 @@ keywords:
   - 온디바이스 AI
 og_title: "Gemma 4 Apache 2.0 전환, 로컬 AI의 판이 바뀐다"
 og_description: "성능이 아니라 라이선스가 핵심이다. 한국 개발자 관점에서 Gemma 4 전환의 실질적 의미를 분석했다."
+featured_image: /images/library/gemma-4-apache-2-license-shift/thumbnail.png
+featured_image_alt: "Gemma 4 Apache 2.0 전환으로 로컬 AI 생태계가 열리는 일러스트"
 twitter_card: summary_large_image
 ---
+
+<!--
+  📸 이미지 프롬프트:
+  prompt: "Editorial tech illustration of an Apache feather key unlocking an open-source model gate labeled Gemma 4. Local servers, mobile devices, and enterprise pipelines flow freely through the open gate. Clean minimal Korean developer media style, dark neutral background, open green accent, restrained technical colors"
+  aspect_ratio: "4:3"
+  session_id: "library-gemma-4-apache-2-license-shift"
+  save_as: "thumbnail.png"
+-->
 
 Gemma 4 뉴스에서 가장 중요한 건 모델 점수가 아니다. 진짜 뉴스는 **Apache 2.0**이다.
 
