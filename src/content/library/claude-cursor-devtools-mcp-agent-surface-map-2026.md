@@ -2,8 +2,9 @@
 title: "Claude Plugins와 Cursor Plugins, 코딩 에이전트 실행면 지도가 바뀐다"
 subtitle: "DevTools MCP와 codegraph까지 묶어 보는 2026년 개발 워크플로우의 새 전장"
 description: "Claude Plugins, Cursor Plugins, Chrome DevTools MCP, codegraph가 동시에 뜬 이유를 코딩 에이전트 실행면 지도 관점에서 정리했다."
-publish: true
+publish: false
 created_date: 2026-05-25
+updated_date: 2026-05-26
 category: "AI"
 tags:
   - Claude Plugins
