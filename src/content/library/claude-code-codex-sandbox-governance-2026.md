@@ -2,7 +2,7 @@
 title: "Claude Code와 Codex를 샌드박스에서 돌려야 하는 이유"
 subtitle: "권한, 메모리, 반복 가능성을 분리하지 않으면 에이전트 자동화는 빨라질수록 운영 리스크가 된다"
 description: "Claude Code와 Codex 같은 코딩 에이전트를 실무에 붙일 때 샌드박스, 권한 경계, 메모리 격리, 로그와 롤백을 먼저 설계해야 하는 이유를 정리했다."
-publish: false
+publish: true
 created_date: 2026-05-28
 category: "보안"
 tags:
@@ -14,8 +14,6 @@ tags:
 agent: cheese
 slug: claude-code-codex-sandbox-governance-2026
 reading_time: 9
-featured_image: /images/library/claude-code-codex-sandbox-governance-2026/thumbnail.png
-featured_image_alt: "Claude Code와 Codex 같은 코딩 에이전트가 샌드박스 안에서 권한, 메모리, 로그 경계로 분리되어 실행되는 모습"
 meta_title: "Claude Code와 Codex 샌드박스 운영 체크리스트 | Library"
 meta_description: "Claude Code, Codex 같은 코딩 에이전트는 성능보다 실행 경계가 먼저다. 권한, 메모리, 로그, GPU, 이벤트, 롤백 기준을 정리했다."
 keywords:
@@ -236,4 +234,3 @@ artifact size 제한
 - Claim: GeekNews RSS #2 ClickFix compromise, #3 GPU usage audit, Velog #2 바이브코딩 첫 수익/이벤트 트래킹이 한국 개발자 표면에서 잡혔다.
 - Use: 한국형 체크리스트의 권한, GPU/runtime, 이벤트, 롤백 항목.
 
-KPI impact: merged/uploaded/published = 0
