@@ -247,10 +247,11 @@ const articleSchema = {
                   <h2 class="mt-2 text-lg font-bold text-text">빠르게 훑어보기</h2>
                 </div>
 
-                <nav class="mt-4 space-y-1.5">
+                <nav id="toc-nav" class="mt-4 space-y-1.5">
                   {tocHeadings.map((heading) => (
                     <a
                       href={`#${heading.slug}`}
+                      data-toc-link={heading.slug}
                       class={`block rounded-2xl px-3 py-2 text-sm leading-relaxed transition-all duration-200 hover:bg-primary/8 hover:text-primary ${heading.depth === 3 ? "pl-6 text-text-muted" : "font-medium text-text"}`}
                     >
                       {heading.text}
@@ -374,4 +375,52 @@ const articleSchema = {
       scroll-margin-top: 7rem;
     }
   </style>
+
+  <script>
+    function setupTocHighlight() {
+      const tocNav = document.getElementById("toc-nav");
+      if (!tocNav) return;
+
+      const tocLinks = Array.from(tocNav.querySelectorAll<HTMLAnchorElement>("[data-toc-link]"));
+      if (tocLinks.length === 0) return;
+
+      const headings = tocLinks
+        .map((link) => document.getElementById(link.dataset["tocLink"] ?? ""))
+        .filter((el): el is HTMLElement => el !== null);
+
+      if (headings.length === 0) return;
+
+      const setActive = (slug: string | null) => {
+        tocLinks.forEach((link) => {
+          const isActive = link.dataset["tocLink"] === slug;
+          link.classList.toggle("bg-primary/8", isActive);
+          link.classList.toggle("text-primary", isActive);
+          link.classList.toggle("font-semibold", isActive);
+        });
+      };
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries) {
+            if (entry.isIntersecting) {
+              setActive(entry.target.id);
+              return;
+            }
+          }
+        },
+        { rootMargin: "-10% 0px -80% 0px", threshold: 0 }
+      );
+
+      headings.forEach((h) => observer.observe(h));
+
+      return () => observer.disconnect();
+    }
+
+    document.addEventListener("astro:page-load", setupTocHighlight);
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", setupTocHighlight);
+    } else {
+      setupTocHighlight();
+    }
+  </script>
 </Layout>
