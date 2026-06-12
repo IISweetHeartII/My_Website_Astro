@@ -162,3 +162,8 @@ log8.kr 운영자 관점에서 이번 변화의 핵심은 새 문법 몇 개가 
 ## 소스
 - Node.js 26.0.0 release notes — https://nodejs.org/en/blog/release/v26.0.0/
 - Node.js release status and LTS policy — https://nodejs.org/en/about/previous-releases
+
+## 참고 자료
+
+- https://nodejs.org/en/blog/release/v26.0.0/
+- https://nodejs.org/en/about/previous-releases

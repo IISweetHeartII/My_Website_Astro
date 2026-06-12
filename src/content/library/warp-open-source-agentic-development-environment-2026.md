@@ -159,3 +159,9 @@ Warp는 단순 사용자 커뮤니티가 아니라, 공개 이슈에 readiness l
 - Warp Agents page — https://www.warp.dev/agents
 - Warp docs home — https://docs.warp.dev
 - How Warp Works — https://www.warp.dev/blog/how-warp-works
+
+## 참고 자료
+
+- https://github.com/warpdotdev/warp
+- https://docs.warp.dev
+- https://www.warp.dev/agents
