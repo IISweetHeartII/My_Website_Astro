@@ -189,3 +189,9 @@ Claude Fable 5는 분명히 강력하다. 그리고 다음 버전도 몇 달 안
 3. **캐싱 비용은 업그레이드 후 재검증** — 동일 코드라도 hit rate가 달라진다
 
 빠른 릴리스 사이클은 피할 수 없다. 대응 체계를 먼저 갖추는 게 이 게임의 핵심이다.
+
+## 참고 자료
+
+- [Introducing Claude Fable 5 and Claude Mythos 5 — Anthropic 공식 문서](https://platform.claude.com/docs/en/about-claude/models/introducing-claude-fable-5-and-claude-mythos-5)
+- [Initial impressions of Claude Fable 5 — Simon Willison](https://simonwillison.net/2026/Jun/9/claude-fable-5/)
+- [Claude Fable 5 — Amazon Bedrock Model Card](https://docs.aws.amazon.com/bedrock/latest/userguide/model-card-anthropic-claude-fable-5.html)
