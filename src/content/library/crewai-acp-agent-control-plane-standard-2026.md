@@ -147,3 +147,9 @@ OpenClaw 위에서 6개 에이전트가 돌아가는 구조를 운영하면서, 
 ---
 
 에이전트 컨트롤 플레인 표준 전쟁은 이제 시작됐다. MCP가 툴 연결을 표준화했고, 이제 ACP가 오케스트레이션을 표준화하려 한다. 무엇이 이기든, 이 전쟁의 승자가 에이전트 생태계의 lock-in 구조를 결정한다. 지금 선택이 2-3년 뒤 마이그레이션 비용을 만든다.
+
+## 참고 자료
+
+- [CrewAI Changelog — ACP(Beta) 추가 기록](https://docs.crewai.com/en/changelog) — 공식 CrewAI 릴리즈 노트
+- [What Is an AI Agent Control Plane?](https://cordum.io/blog/what-is-ai-agent-control-plane) — ACP 개념 설명 (Cordum)
+- [crewAIInc/crewAI GitHub](https://github.com/crewaiinc/crewai) — CrewAI 공식 저장소
