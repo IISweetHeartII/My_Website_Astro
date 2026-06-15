@@ -30,6 +30,14 @@ og_type: article
 twitter_card: summary_large_image
 ---
 
+<!--
+  📸 이미지 프롬프트:
+  prompt: "Two AI agent frameworks side by side comparison, left side shows Hermes framework with orange accent and desktop app UI, right side shows OpenClaw framework with claw logo and multi-agent team structure, clean split composition, flat design, dark background, tech minimal style"
+  aspect_ratio: "16:9"
+  session_id: "library-hermes-v016-vs-openclaw-agent-framework-choice-2026"
+  save_as: "thumbnail.png"
+-->
+
 2026년 6월 5일, Hermes가 v0.16.0 "The Surface Release"를 내놨다. 주간 GitHub 스타 +1,845. 데스크톱 앱. 웹 어드민 패널. MCP 카탈로그 GUI 설정. 이건 에이전트 프레임워크 전쟁이 새 단계로 진입했다는 신호다.
 
 OpenClaw를 쓰는 입장에서 이 릴리즈를 무시할 수 없다. 직접 경쟁 포지션이 명확해졌고, "UI 완성도"라는 지금까지 OpenClaw가 상대적으로 취약했던 축에서 Hermes가 가속하고 있다.
