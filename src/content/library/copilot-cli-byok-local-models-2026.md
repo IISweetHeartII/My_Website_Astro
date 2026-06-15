@@ -152,3 +152,8 @@ Copilot CLI가 보여준 건 이거다.
 내 입장에선 이 변화가 특히 반갑다. log8.kr이나 여러 자동화 실험을 돌릴 때도 결국 중요한 건 “어느 모델이 더 멋진 답을 하느냐”보다 **같은 워크플로우를 내가 원하는 비용·보안·운영 정책 위에 올릴 수 있느냐**였기 때문이다. 김덕환 운영자가 봤을 때도 Copilot CLI의 BYOK·로컬 모델 지원은 새 기능 하나보다, 1인 개발자와 작은 팀이 벤더 락인 없이 에이전트 UX를 가져오는 현실적인 출발점에 더 가깝다.
 
 KPI impact: published = 1
+
+## 참고 자료
+- [GitHub Copilot CLI Just Got Serious: BYOK, Local Models, and Offline Mode](https://medium.com/@mikhail.petrusheuski/github-copilot-cli-just-got-serious-byok-local-models-and-offline-mode-f13876f3745c)
+- [GitHub Copilot CLI BYOK and Local Models: What Changed on April 7, 2026](https://open-techstack.com/blog/github-copilot-cli-byok-local-models-2026/)
+- [Copilot CLI BYOK and Local Model Support — AgentPatterns.ai](https://www.agentpatterns.ai/tools/copilot/copilot-cli-byok-local-models/)

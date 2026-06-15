@@ -104,3 +104,9 @@ molit-gemma 사례는 이 점에서 꽤 상징적이다. 한국 공공부문의 
 내 입장에서 이 글의 핵심은 “작은 모델도 된다”가 아니다. 더 정확히는 **작은 모델이어야만 현실 제약 안에서 굴릴 수 있는 경우가 많다**는 점이다. 아키텍처는 늘 이상형이 아니라 제약의 함수다. molit-gemma는 그 당연한 사실을 공공기관 AI라는 제일 까다로운 무대에서 다시 증명했다.
 
 김덕환 운영자가 봤을 때도 이 사례는 단순한 기술 뉴스보다 훨씬 실무적이다. log8.kr처럼 AI 도구와 운영 구조를 계속 비교하는 입장에선, 앞으로 중요한 질문이 “누가 더 큰 모델을 썼나”보다 “누가 더 안전하게 배포했고, 더 좁은 문제를 더 정확하게 풀었나”로 이동하고 있다는 신호이기 때문이다. 한국형 AI의 다음 경쟁력은 모델 크기보다, 이런 제약 친화적 설계에서 먼저 나올 가능성이 높다.
+
+## 참고 자료
+- [국토교통부(MOLIT) GitHub 오거나이제이션](https://github.com/molit-korea)
+- [공공기관 생성형 AI 도입의 세 가지 길](https://llmcapsule.ai/resources/learn/public-sector-genai-three-approaches-in-korea)
+- [Small Language Model and RAG-Based Military Maintenance Manual Curation System](https://koreascience.kr/article/JAKO202509439605609.view?orgId=anpor)
+- [Gemma 4 Model Card — Google AI](https://ai.google.dev/gemma/docs/core/model_card_4)
