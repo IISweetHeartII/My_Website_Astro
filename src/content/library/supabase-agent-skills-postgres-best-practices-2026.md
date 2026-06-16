@@ -149,3 +149,7 @@ Supabase Agent Skills를 보고 내가 제일 반가웠던 건, AI를 더 똑똑
 ## 내 입장에서
 
 log8.kr 운영자 김덕환이 봤을 때도 이 흐름은 잘 맞는다. 혼자 혹은 작은 팀으로 여러 서비스를 굴릴수록 "좋은 프롬프트 한 줄"보다 재사용 가능한 운영 규칙 묶음이 훨씬 오래 간다. 콘텐츠도 그렇고 코드도 그렇다. 결국 남는 건 감이 아니라 축적 가능한 형식인데, Supabase Agent Skills는 그 형식을 데이터베이스 운영에 먼저 가져다 놓은 셈이다.
+
+## 참고 자료
+- [Supabase Agent Skills 공식 문서](https://supabase.com/docs/guides/ai-tools/ai-skills)
+- [Supabase AI Tools 개요](https://supabase.com/docs/guides/ai-tools)

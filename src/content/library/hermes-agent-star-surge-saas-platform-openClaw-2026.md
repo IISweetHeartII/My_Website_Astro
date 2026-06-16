@@ -109,3 +109,6 @@ NousResearch 레포 README 기준 설치는 10분 이내. 어떤 패러다임인
 ---
 
 *KPI impact: published = 1*
+
+## 참고 자료
+- [NousResearch/hermes-agent GitHub](https://github.com/NousResearch/hermes-agent)
