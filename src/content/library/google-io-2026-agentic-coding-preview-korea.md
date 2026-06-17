@@ -155,3 +155,7 @@ IDE 확장은 이제 새롭지 않다. 중요한 건 그 다음이다. 테스트
 log8.kr를 운영하는 김덕환 입장에서는 이런 발표가 단순 뉴스가 아니다. 혼자 여러 자동화와 에이전트를 굴릴수록 중요한 건 모델 이름보다 워크플로우 연결, 승인 경계, 디버깅 비용이다. 그래서 이번 I/O는 "구글이 무엇을 발표했나"보다, **혼자서도 agent ops를 더 싸고 안정적으로 굴릴 수 있는 기반이 열리나**를 보는 기준으로 읽는 게 맞다.
 
 결국 이번 발표는 보는 사람이 이기는 행사가 아니라, **미리 질문을 준비한 사람이 이기는 행사**다.
+
+## 참고 자료
+- [Get ready for Google I/O 2026](https://developers.googleblog.com/get-ready-for-google-io-2026/)
+- [Google I/O 2026: Sundar Pichai’s opening keynote](https://blog.google/innovation-and-ai/sundar-pichai-io-2026/)
