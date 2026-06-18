@@ -198,3 +198,7 @@ Needle의 26M 툴콜링 모델 신호를 과장하면 안 된다. 26M 모델이 
 - research-signals-2026-05-12.md: GeekNews에서 Rapid-MLX가 한국 개발자 피드의 강한 로컬 실행 성능 신호로 잡혔다.
 - research-signals-2026-05-13.md: "Needle: We Distilled Gemini Tool Calling into a 26M Model"이 HN 상위권 신호로 잡혔다.
 - weekly-brief-2026-05-17.md: 로컬·소형·효율형 AI가 취향이 아니라 기본 아키텍처 후보로 올라왔다고 정리했다.
+
+## 참고 자료
+- [GitHub - raullenchai/Rapid-MLX](https://github.com/raullenchai/Rapid-MLX)
+- [GitHub - cactus-compute/needle](https://github.com/cactus-compute/needle)

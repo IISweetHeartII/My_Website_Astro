@@ -221,3 +221,6 @@ $500M 사고를 반면교사 삼아 오늘 바로 실행할 수 있는 항목이
 3. **비용 임계값 체크 cron 작성** — 15분~1시간 주기로 현재 사용량 확인 + 초과 시 알람
 
 AI 도입의 다음 단계는 성능이 아니다. **비용 예측 가능성과 안전한 상한선**이다. 잘 돌아가는 파이프라인이 잘못된 설정 하나 때문에 청구서 폭탄이 되는 일은 기술 문제가 아니라 운영 문제다. 그리고 운영 문제는 항상 먼저 막을 수 있다.
+
+## 참고 자료
+- [When AI costs spiral: A company accidentally spent $500 million in one month on Claude AI- what went wrong?](https://www.livemint.com/companies/news/when-ai-costs-spiral-a-company-accidentally-spent-500-million-in-one-month-on-claude-ai-what-went-wrong-11780022792096.html)

@@ -150,3 +150,7 @@ twitter_card: summary_large_image
 ## 김덕환 운영자가 봤을 때
 
 김덕환처럼 혼자 여러 코드베이스와 자동화를 같이 굴리는 운영자 입장에서는 이 변화가 특히 크다. 혼자 일할수록 손은 부족하고, 반복 작업은 계속 쌓인다. 그래서 `/goal`의 가치는 “AI가 더 똑똑해졌다”보다 **한 번 맡긴 일을 끝까지 추적하게 해줘서 운영자의 attention budget을 아껴준다**는 데 있다. 대신 그만큼 목표 정의, 검증 로그, 승인 경계를 더 잘 설계해야 한다. 이제 1인 개발자의 생산성도 프롬프트 감각보다 작은 에이전트 시스템을 얼마나 잘 운영하느냐로 갈릴 가능성이 크다.
+
+## 참고 자료
+- [Using Goals in Codex](https://developers.openai.com/cookbook/examples/codex/using_goals_in_codex)
+- [Run long horizon tasks with Codex](https://developers.openai.com/blog/run-long-horizon-tasks-with-codex)
