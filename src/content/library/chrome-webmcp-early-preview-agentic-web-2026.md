@@ -199,3 +199,8 @@ WebMCP가 성공하면 적어도 이 가운데 일부는 계약 계층으로 내
 ## 내 입장에서
 
 김덕환 운영자가 봤을 때 이 변화의 본질은 브라우저 뉴스가 아니다. OpenClaw 같은 에이전트 흐름을 굴릴수록 가장 자주 부딪히는 병목은 모델 성능보다 웹 인터페이스의 불안정성이다. 그래서 WebMCP가 의미 있는 건 “AI가 더 똑똑해진다”보다 **웹사이트가 에이전트에게 공식 행동 표면을 열어줄 수 있느냐**에 있다. log8.kr 관점에서도 이 주제는 단순 소개보다, 앞으로 어떤 서비스가 agent-friendly web을 더 잘 설계하는지 보는 기준점으로 가져갈 만하다.
+
+## 참고 자료
+
+- [WebMCP is available for early preview | Blog | Chrome for Developers](https://developer.chrome.com/blog/webmcp-epp)
+- [When to use WebMCP and MCP | Blog | Chrome for Developers](https://developer.chrome.com/blog/webmcp-mcp-usage)

@@ -224,6 +224,11 @@ artifact size 제한
 
 결론은 단순하다. Claude Code와 Codex를 더 많이 쓰고 싶다면, 먼저 샌드박스를 설계해야 한다. 권한, 메모리, 반복 가능성, 자원 제한, 이벤트, 롤백이 보이면 에이전트는 위험한 실험이 아니라 운영 가능한 동료가 된다.
 
+## 참고 자료
+
+- [GitHub - microsoft/agent-governance-toolkit](https://github.com/microsoft/agent-governance-toolkit)
+- [GitHub - thedotmack/claude-mem](https://github.com/thedotmack/claude-mem)
+
 ---
 
 ## Source Map
