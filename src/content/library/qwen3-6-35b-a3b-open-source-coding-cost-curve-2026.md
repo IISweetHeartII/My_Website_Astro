@@ -141,3 +141,9 @@ Qwen3.6-35B-A3B의 로컬 호스팅은 이 세 가지를 동시에 해결한다.
 
 
 가격 공식이 깨졌다는 것은 상용 모델이 사라진다는 의미가 아니다. 상용 모델의 *당연한 위치*에 의문이 생겼다는 것이다. 지금까지 "어차피 비쌀 수밖에 없지"가 기본값이었다면, 이제 팀마다 "어디서 어느 모델을 써야 하는가"를 계산하기 시작해야 하는 시대가 됐다.
+
+## 참고 자료
+- [Qwen3.6-35B-A3B: Agentic Coding Power, Now Open to All](https://www.alibabacloud.com/blog/603043)
+- [GitHub - QwenLM/Qwen3.6](https://github.com/QwenLM/Qwen3.6)
+- [Qwen3.6-35B-A3B · Hugging Face](https://huggingface.co/Qwen/Qwen3.6-35B-A3B)
+- [Qwen3.6-35B-A3B: 73.4% SWE-Bench, Runs Locally](https://www.buildfastwithai.com/blogs/qwen3-6-35b-a3b-review)

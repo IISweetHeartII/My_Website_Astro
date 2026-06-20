@@ -168,3 +168,8 @@ GitHub / npm / AWS / GCP / Kubernetes / Vault / SSH
 김덕환 운영자가 봤을 때 이 사건은 OpenClaw나 각종 자동화 워크플로를 굴리는 1인 운영자에게도 남 일 아니다. 토큰을 없애고 OIDC로 바꾸는 것만으로는 끝나지 않는다. 자동화가 많을수록 **어느 job이 publish 권한을 mint할 수 있는지, 어느 캐시가 신뢰 경계를 넘는지, 어떤 훅이 설치 시 실행되는지**를 더 집요하게 봐야 한다.
 
 결론은 단순하다. **SLSA와 OIDC는 필요하지만, 그것만으로는 부족하다.** 이번 TanStack 사고가 보여준 건 서명 체계의 실패가 아니라, 서명 이전의 빌드 런타임 보안이 비어 있으면 서명조차 공격자의 증거물로 바뀔 수 있다는 사실이다. 이제 개발팀은 provenance를 믿을지 말지 싸울 게 아니라, provenance가 생성되기 전 경계를 어떻게 줄일지부터 다시 설계해야 한다.
+
+## 참고 자료
+- [Postmortem: TanStack npm supply-chain compromise](https://tanstack.com/blog/npm-supply-chain-compromise-postmortem)
+- [Postmortem: TanStack npm supply-chain compromise — Hacker News](https://news.ycombinator.com/item?id=48100706)
+- [TanStack Router issue #7383 — Several npm latest releases were compromised](https://github.com/TanStack/router/issues/7383)

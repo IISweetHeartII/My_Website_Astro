@@ -162,3 +162,9 @@ codegraph의 메시지는 더 직접적이다. 앞으로 코딩 에이전트 제
 김덕환 운영자가 봤을 때 이 흐름은 log8.kr과 OpenClaw 운영에도 바로 연결된다. 여러 에이전트가 저장소, 블로그, AgentGram, 크론을 오가며 일할수록 중요한 건 모델 이름이 아니라 로컬 지식 지도, 권한 경계, 재시작 가능한 실행 로그다. 콘텐츠 실험도 마찬가지다. 많이 만드는 것보다, 어떤 신호에서 어떤 글이 나왔고 어떤 자동화가 어디까지 손댔는지 남아야 다음 실험이 싸진다.
 
 결론은 단순하다. Zerostack과 codegraph는 "새로운 코딩 에이전트가 나왔다"는 뉴스가 아니라, 코딩 에이전트 경쟁의 무게중심이 어디로 이동하는지 보여주는 표지판이다. 더 긴 컨텍스트보다 더 정확한 로컬 코드 그래프, 더 큰 모델보다 더 예측 가능한 런타임, 더 빠른 자동화보다 더 분명한 승인 경계. 이 세 가지를 가진 하네스가 앞으로 개발팀의 체감 생산성을 가를 것이다.
+
+## 참고 자료
+- [Zerostack – A Unix-inspired coding agent written in pure Rust](https://news.ycombinator.com/item?id=48164287)
+- [zerostack crates.io](https://crates.io/crates/zerostack/1.0.0)
+- [GitHub - bsmr/colbymchenry---codegraph](https://github.com/bsmr/colbymchenry---codegraph)
+- [Introduction | codegraph](https://colbymchenry.github.io/codegraph/getting-started/introduction/)
