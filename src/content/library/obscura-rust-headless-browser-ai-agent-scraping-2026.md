@@ -155,3 +155,7 @@ obscura scrape https://a.com https://b.com https://c.com \
 김덕환 운영자가 봤을 때, 이런 도구의 가치는 새 기능 몇 개보다도 더 많은 자동화 워커를 같은 예산 안에서 굴릴 수 있느냐로 환산될 거다. log8.kr 같은 미디어 운영, OpenClaw 같은 에이전트 워크플로우, 각종 수집 스크립트를 혼자 같이 다루는 입장에서는 브라우저 한 개의 무게가 생각보다 크게 느껴진다. 그래서 Obscura는 “신기한 Rust 프로젝트”가 아니라, **브라우저 자동화 비용선을 다시 깎을 수 있는 후보**로 보는 게 더 실용적이다.
 
 내 입장에서 이 프로젝트의 진짜 의미는 Chrome 킬러 선언이 아니다. 오히려 브라우저 자동화 스택이 이제야 인간 중심 런타임과 에이전트 중심 런타임으로 갈라지기 시작했다는 신호에 가깝다. Obscura가 그 분기점의 최종 승자가 아닐 수도 있다. 그래도 적어도 하나는 분명하다. 앞으로 크롤링과 에이전트 브라우징 인프라를 고를 때, 우리는 더 이상 “그냥 Chromium 띄우면 되지”만으로 설명을 끝내기 어려워질 거다.
+
+## 참고 자료
+- [GitHub - h4ckf0r0day/obscura](https://github.com/h4ckf0r0day/obscura)
+- [Obscura Wiki](https://github.com/h4ckf0r0day/obscura/wiki)

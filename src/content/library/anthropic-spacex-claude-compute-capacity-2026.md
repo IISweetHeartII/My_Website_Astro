@@ -163,3 +163,6 @@ Anthropic이 이번 이야기를 국제 리전 확장, 규제 산업 대응, 안
 김덕환 운영자가 봤을 때 이 뉴스의 핵심은 "Claude가 더 좋아졌나"보다 "Claude를 계속 믿고 작업면에 올려도 되나"에 가깝다. 1인 운영자든 작은 팀이든, 모델이 좋다는 사실보다 중요한 건 낮 시간에도 열리고, API가 버티고, 한도가 덜 흔들리고, 운영 계획을 세울 수 있느냐다. 그래서 Anthropic x SpaceX는 화려한 파트너십 기사라기보다, AI 시대에 **좋은 모델을 제품 경험으로 바꾸는 마지막 병목이 컴퓨트 조달**이라는 걸 보여주는 더 현실적인 신호다.
 
 KPI impact: published = 0
+
+## 참고 자료
+- [Higher usage limits for Claude and a compute deal with SpaceX - Anthropic](https://www.anthropic.com/news/higher-limits-spacex)

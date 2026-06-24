@@ -247,3 +247,8 @@ payment_failed:
 [뉴스레터 구독하기 →](https://log8.kr/newsletter?utm_source=library&utm_medium=cta&utm_campaign=vibe-coding-first-revenue-tracking-ops-checklist-2026)
 
 KPI impact: published = 0
+
+## 참고 자료
+
+- [바이브코딩으로 SaaS 만들기 | 쿠팡알바](https://items.mungori.com/vibecoding-saas/)
+- [3단계로 끝내는 AI 바이브코딩 앱 수익화 - 브런치](https://brunch.co.kr/@kap/1827)

@@ -170,4 +170,7 @@ CSA 설명을 풀어 쓰면 구조는 꽤 단순하다. MCP에는 HTTP+SSE처럼
 
 log8.kr 같은 개인 미디어이자 실험실을 운영하는 입장에선 이 이슈가 더 현실적이다. 새로운 AI 도구를 빨리 붙여서 생산성을 올리고 싶은 마음이 늘 앞서는데, 이번 사건은 그 욕심 앞에 아주 선명한 브레이크를 걸어준다. 연결이 늘수록 작업은 빨라지지만, 그 연결이 곧 셸 권한이면 이야기가 달라진다. 김덕환 운영자가 봤을 때 중요한 건 "MCP를 쓰느냐"가 아니라 **MCP를 어디까지 믿지 않을 수 있느냐**다. 그 감각이 앞으로 AI 운영 역량의 핵심이 될 가능성이 크다.
 
+## 참고 자료
+- [A Timeline of Model Context Protocol (MCP) Security Breaches](https://authzed.com/blog/timeline-mcp-breaches)
+
 KPI impact: published = 0

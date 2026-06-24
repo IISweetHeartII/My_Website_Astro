@@ -191,3 +191,8 @@ Codex는 실행 대리인에 더 가깝다. 여러 작업을 병렬로 던지고
 - [AI 에이전트가 macOS를 사람처럼 제어하는 방법](https://log8.kr/blog/peekaboo-macos-gui-automation-openclaw-guide/)
 
 이런 비교 글을 계속 받아보고 싶다면 [주간 뉴스레터](https://log8.kr/newsletter)로 이어서 받아보는 것도 좋다. 제품 발표보다 실제 운영 기준으로 정리해서 보내고 있다.
+
+## 참고 자료
+- [Claude Code overview - Anthropic](https://docs.anthropic.com/en/docs/claude-code/overview)
+- [CLI - Codex | OpenAI Developers](https://developers.openai.com/codex/cli)
+- [GitHub - QwenLM/qwen-code](https://github.com/QwenLM/qwen-code)

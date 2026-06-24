@@ -175,6 +175,9 @@ GitHub가 2025년 4월 공개한 **공식 오픈소스 로컬 GitHub MCP Server*
 
 내가 보기엔 이제 질문이 달라져야 한다. “Copilot이 Cursor보다 낫나?”보다 먼저, **우리 팀이 에이전트를 어디서 실행하고, 어떤 도구를 붙이고, 누가 어떻게 검토할 수 있나**를 봐야 한다.
 
+## 참고 자료
+- [Vibe coding with GitHub Copilot: Agent mode and MCP support rolling out to all VS Code users](https://github.blog/news-insights/product-news/github-copilot-agent-mode-activated/)
+
 ## 결론: 이제 싸움은 모델 IQ가 아니라 에디터 런타임 점유율이다
 
 GitHub Copilot Agent Mode, MCP, 공식 GitHub MCP Server, BYOK, agent session 관리까지 이어서 보면 그림이 꽤 선명하다. **VS Code는 더 이상 AI 기능이 붙은 편집기가 아니라, 여러 모델과 도구가 들어와 실행되는 에이전트 런타임**이 되려 한다.

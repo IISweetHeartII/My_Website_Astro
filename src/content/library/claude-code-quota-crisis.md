@@ -190,3 +190,8 @@ Claude Code 월 20만원 요금제가 90분 만에 바닥나는 사건은 웃고
 내가 보기엔 이번 논란의 핵심은 결국 하나다.
 
 **이제 AI 도구는 성능만 좋다고 선택되지 않는다. 가격 구조와 운영 정책까지 설명 가능해야 선택된다.**
+
+## 참고 자료
+
+- [Manage costs effectively - Claude Code Docs](https://docs.anthropic.com/en/docs/claude-code/costs)
+- [Prompt caching - Claude API Docs](https://docs.anthropic.com/en/docs/build-with-claude/prompt-caching)
