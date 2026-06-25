@@ -159,6 +159,9 @@ Agent Gateway도 마찬가지다. 아직 Private Preview라서 과장하면 안 
 
 그리고 이건 경쟁사들도 결국 따라가야 하는 방향이다. 앞으로 엔터프라이즈에서 중요한 건 더 높은 benchmark 점수보다, **사람 조직처럼 책임 경로가 보이는 에이전트 시스템**일 가능성이 높다. Gemini Enterprise Agent Platform은 그 운영체제 자리를 먼저 먹겠다는 선언에 가깝다.
 
+## 참고 자료
+- [Introducing Gemini Enterprise Agent Platform | Google Cloud Blog](https://cloud.google.com/blog/products/ai-machine-learning/introducing-gemini-enterprise-agent-platform)
+
 ## 김덕환 운영자가 봤을 때
 
 log8.kr를 운영하는 김덕환 입장에서는 이 변화가 특히 실무적이다. 혼자 여러 자동화와 에이전트를 굴릴수록 모델 한 개 잘 붙이는 것보다 세션, 권한, 상태, 실패 추적이 더 큰 문제가 된다. 그래서 이번 발표는 "구글이 새 에이전트 기능을 냈다"보다, **1인 운영자도 결국 작은 엔터프라이즈처럼 agent ops를 설계해야 하는 시대가 왔다**는 신호로 읽는 게 맞다.

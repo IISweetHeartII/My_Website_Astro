@@ -196,3 +196,6 @@ AI가 대신 읽고 추천하는 것까지는 허용할지, 실제 submit이나 
 log8.kr 운영자 김덕환 입장에서 이 주제가 중요한 이유도 뚜렷하다. 앞으로 웹 서비스는 단순 방문자 수보다 **어떤 자동화 주체가 어떤 행동까지 시도했는지**를 먼저 봐야 한다. OpenClaw나 에이전트 워크플로우를 오래 만지다 보면 더 선명해진다. 자동화는 막아야 할 대상이 아니라, **식별하고 권한을 쪼개서 다뤄야 할 실행 주체**가 된다. reCAPTCHA 다음 전장은 그래서 퍼즐이 아니라 신원, 정책, 그리고 인간 개입 설계다.
 
 결론은 이거다. **AI 에이전트 시대의 웹 보안은 봇 차단 기술 경쟁이 아니라, 자동화 신뢰 계약을 어떻게 쓰느냐의 경쟁**이다. Google Cloud Fraud Defense가 던진 메시지는 제품 이름보다 거기에 있다.
+
+## 참고 자료
+- [Introducing Google Cloud Fraud Defense, the next evolution of reCAPTCHA | Google Cloud Blog](https://cloud.google.com/blog/products/identity-security/introducing-google-cloud-fraud-defense-the-next-evolution-of-recaptcha)
