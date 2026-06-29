@@ -179,3 +179,8 @@ cost_defense:
 
 비슷한 구조를 우리 팀이 직접 만들어드리기도 한다.
 관심 있으면 [상담 신청](https://log8.kr/consulting?utm_source=blog&utm_medium=cta&utm_campaign=claude-opus-4-7-why-real-costs-are-higher-2026)을 남겨주시면 된다.
+
+## 참고 자료
+- [Introducing Claude Opus 4.7 - Anthropic](https://www.anthropic.com/news/claude-opus-4-7)
+- [Pricing - Claude Platform Docs](https://docs.anthropic.com/en/docs/about-claude/pricing)
+- [Adaptive thinking - Claude Platform Docs](https://platform.claude.com/docs/en/build-with-claude/adaptive-thinking)

@@ -224,3 +224,7 @@ OpenAI가 보여준 대응은 꽤 명확했다. 증거가 완전히 확정되기
 **우리는 아직도 앱을 빌드하는 팀인가, 아니면 신뢰를 배포하는 팀인가.**
 
 2026년의 공급망 보안은 패키지 이름을 외우는 게임이 아니다. 릴리스 체인의 어느 단계가 신뢰를 증폭하고, 어느 단계가 사고를 확대하는지 구조적으로 보는 팀이 결국 덜 다친다.
+
+## 참고 자료
+- [Our response to the Axios developer tool compromise - OpenAI](https://openai.com/index/axios-developer-tool-compromise/)
+- [North Korea-Nexus Threat Actor Compromises Widely Used Axios NPM Package in Supply Chain Attack - Google Cloud Blog](https://cloud.google.com/blog/topics/threat-intelligence/north-korea-threat-actor-targets-axios-npm-package)

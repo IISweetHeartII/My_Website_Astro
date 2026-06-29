@@ -143,6 +143,8 @@ README에 적힌 핵심 명령은 세 갈래다.
 ---
 
 ## 참고 링크
-
 - [openai/codex-plugin-cc README](https://github.com/openai/codex-plugin-cc)
 - [Introducing Codex Plugin for Claude Code](https://community.openai.com/t/introducing-codex-plugin-for-claude-code/1378186)
+
+## 참고 자료
+- [Codex plugin for Claude Code](https://github.com/openai/codex-plugin-cc)

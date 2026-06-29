@@ -158,3 +158,8 @@ log8.kr와 OpenClaw 콘텐츠를 보면서 내가 자주 느끼는 문제도 비
 ## 김덕환 운영자가 봤을 때
 
 log8.kr를 운영하는 김덕환 입장에선 이런 발표가 반갑다. 이유는 단순하다. 새 모델이 하나 더 늘어나는 것보다, 이미 쓰는 클라우드와 도구가 공식 MCP 표면으로 정리되는 쪽이 실제 생산성에 더 가깝기 때문이다. 다만 운영자 시선에선 흥분보다 기준이 먼저다. 어디까지 읽기 전용으로 둘지, 어떤 액션부터 승인 절차를 걸지, 로그와 권한 체계를 어떻게 남길지부터 정해야 한다. 결국 1인 운영에서도 성패는 도구 수가 아니라 경계 설계에서 갈린다.
+
+## 참고 자료
+- [Announcing official MCP support for Google services | Google Cloud Blog](https://cloud.google.com/blog/products/ai-machine-learning/announcing-official-mcp-support-for-google-services)
+- [GitHub - google/mcp](https://github.com/google/mcp)
+- [Google Cloud MCP servers overview](https://docs.cloud.google.com/mcp/overview)

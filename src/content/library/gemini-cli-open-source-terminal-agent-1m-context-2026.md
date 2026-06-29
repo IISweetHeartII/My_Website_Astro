@@ -139,3 +139,7 @@ Gemini CLI는 그 약점을 정면으로 보완한다.
 ## 내 입장에서
 
 log8.kr를 운영하는 김덕환 같은 1인 개발자·운영자 입장에서 보면 이 변화는 꽤 반갑다. 새 AI 도구를 볼 때 제일 먼저 드는 질문은 늘 "이거 진짜 내 일상에 꽂히나?"인데, Gemini CLI는 적어도 그 질문에는 제대로 답하려고 들어왔다. 비용 부담 없이 바로 실험하고, 터미널에서 굴려 보고, 괜찮으면 자동화나 팀 워크플로우로 이어갈 수 있다. 결국 중요한 건 데모가 아니라 반복 사용인데, 이번 구글의 승부수는 바로 그 반복 사용 구간을 정조준하고 있다.
+
+## 참고 자료
+- [Google announces Gemini CLI: your open-source AI agent](https://blog.google/innovation-and-ai/technology/developers-tools/introducing-gemini-cli-open-source-ai-agent/)
+- [GitHub - google-gemini/gemini-cli](https://github.com/google-gemini/gemini-cli)

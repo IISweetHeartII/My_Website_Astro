@@ -163,6 +163,9 @@ VSCode 확장 침해는 이 질문이 개발자 도구 전체에 적용된다는
 
 악성 VSCode 확장 사건의 핵심은 "확장 조심하세요"가 아니다. 더 큰 결론은 이거다. **에디터는 이제 배포 파이프라인의 일부다.** 개발자의 로컬 환경에서 코드가 작성되고, 테스트가 돌고, 토큰이 쓰이고, AI 에이전트가 diff를 만들고, PR이 열린다. 이 모든 흐름의 시작점에 확장이 있다.
 
+## 참고 자료
+- [Investigation update: GitHub Enterprise Server signing key rotation](https://github.blog/security/investigating-unauthorized-access-to-githubs-internal-repositories/)
+
 그래서 앞으로의 개발자 공급망 보안은 `package.json`만 보는 것으로는 부족하다. VSCode profile, extension allowlist, AI coding tool permission, plugin registry, local secret scanning, terminal execution policy까지 한 묶음으로 봐야 한다.
 
 AI 코딩 시대의 보안 질문은 "이 도구가 똑똑한가"에서 끝나지 않는다. "이 도구가 실패했을 때 어디까지 망가질 수 있고, 나는 그 경계를 알고 있는가"까지 가야 한다. 이번 3,800개 저장소 침해 신호는 그 질문을 더 이상 미룰 수 없게 만든 사건이다.

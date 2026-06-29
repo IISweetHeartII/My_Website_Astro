@@ -161,3 +161,7 @@ MCP는 AI를 도구와 문서에 붙인다. A2A는 에이전트를 다른 에이
 그래서 앞으로의 차별점은 더 좋은 모델 하나가 아니라, **더 좋은 연결 구조**일 가능성이 높다. 실제로 써보면 생산성을 가르는 건 답변 한 번의 번뜩임이 아니라, 컨텍스트가 끊기지 않고 협업이 이어지는 구조다.
 
 2026년 개발자의 새 기본기는 프롬프트 자체가 아니라, **에이전트 프로토콜 스택을 읽고 설계하는 능력**이 될 것이다.
+
+## 참고 자료
+- [A2A Protocol Surpasses 150 Organizations, Lands in Major Cloud Platforms, and Sees Enterprise Production Use in First Year](https://www.linuxfoundation.org/press/a2a-protocol-surpasses-150-organizations-lands-in-major-cloud-platforms-and-sees-enterprise-production-use-in-first-year)
+- [Announcing the Agent2Agent Protocol (A2A)](https://developers.googleblog.com/en/a2a-a-new-era-of-agent-interoperability/)

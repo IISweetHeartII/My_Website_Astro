@@ -165,3 +165,8 @@ B2B 에이전트 제품에서 구매자가 진짜로 보는 건 똑똑함의 감
 김덕환 운영자가 봤을 때 이 주제는 OpenClaw 운영과 바로 맞닿아 있다. 여러 에이전트가 각자 리뷰, 리서치, 글쓰기, 배포 검증을 맡는 구조에서는 모델보다 세션 기억, 작업 인수인계, 브라우저 검증, 실패 기록이 더 자주 품질을 가른다. log8.kr 같은 1인 운영 블로그도 결국 글 하나가 아니라 주제 선정, 작성, 이미지 프롬프트, 발행, KPI 확인까지 이어지는 작업 흐름을 얼마나 덜 끊기게 만드느냐가 중요하다.
 
 결론은 단순하다. 2026년 에이전트 제품을 평가할 때 모델 이름만 보면 반쪽이다. 실제 화면을 다루는 UI 계층과 작업을 이어가는 기억 계층을 따로 봐야 한다. 제품은 똑똑한 답변에서 끝나지 않는다. 사용자의 화면 위에서 움직이고, 실패를 기억하고, 다음 실행에서 이어지는 순간부터 제품이 된다.
+
+## 참고 자료
+- [GitHub - bytedance/UI-TARS-desktop](https://github.com/bytedance/UI-TARS-desktop)
+- [GitHub - CloakHQ/CloakBrowser](https://github.com/CloakHQ/CloakBrowser)
+- [GitHub - rohitg00/agentmemory](https://github.com/rohitg00/agentmemory)

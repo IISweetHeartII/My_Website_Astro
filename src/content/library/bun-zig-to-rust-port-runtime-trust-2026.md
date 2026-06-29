@@ -156,3 +156,7 @@ hyperfine --warmup 2 \
 김덕환 운영자가 봤을 때 이 이슈는 런타임 팬덤 싸움이 아니라, 작은 팀이 어떤 기술을 오래 믿고 사업 자산으로 쌓을 수 있느냐의 문제에 가깝다. log8.kr처럼 기술 변화를 계속 해석해야 하는 운영자 입장에선, Bun의 이번 움직임이 곧바로 “Rust가 답이다”를 뜻하진 않지만, **AI 시대에는 언어 선택이 곧 팀의 신뢰 전략**이 된다는 사실은 꽤 선명하게 보여준다.
 
 결국 이번 Bun 실험의 진짜 메시지는 이거다. 앞으로 런타임 팀은 가장 멋진 언어보다, **가장 오래 검토 가능하고 유지 가능한 언어와 협업 규범**을 고르게 될 가능성이 크다.
+
+## 참고 자료
+- [Zig → Rust porting guide](https://github.com/oven-sh/bun/compare/claude/phase-a-port)
+- [Anthropic's Bun team trials port from Zig to Rust](https://www.theregister.com/software/2026/05/05/anthrophics-bun-team-trials-port-from-zig-to-rust/5222094)
