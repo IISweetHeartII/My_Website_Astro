@@ -31,6 +31,7 @@ const {
   agent,
   category,
   reading_time,
+  youtube_id,
   meta_title,
   meta_description,
   keywords,
@@ -230,6 +231,19 @@ const articleSchema = {
               </div>
             )}
           </div>
+
+          {youtube_id && (
+            <div class="relative mb-8 aspect-video w-full overflow-hidden rounded-[1.5rem] border border-background-lighter bg-background-light">
+              <iframe
+                class="absolute inset-0 h-full w-full"
+                src={`https://www.youtube.com/embed/${youtube_id}`}
+                title={title}
+                loading="lazy"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen
+              />
+            </div>
+          )}
 
           <div class="prose prose-xl max-w-none">
             <Content />

@@ -88,6 +88,7 @@ const library = defineCollection({
     tags: z.array(z.string()).default([]).nullable(),
     agent: z.string().optional().nullable(),
     reading_time: z.number().optional().nullable(),
+    youtube_id: z.string().optional().nullable(),
     // SEO
     meta_title: z.string().optional().nullable(),
     meta_description: z.string().optional().nullable(),
