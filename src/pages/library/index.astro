@@ -1,6 +1,6 @@
 ---
 import { getCollection } from "astro:content";
-import { ArrowRight, Bot, Clock3, Layers3, Search } from "lucide-astro";
+import { ArrowRight, Bot, Clock3, Layers3, Search, X } from "lucide-astro";
 import LibraryCard from "@/features/library/components/LibraryCard.astro";
 import Layout from "@/layouts/Layout.astro";
 import BreadcrumbSchema from "@/shared/components/seo/BreadcrumbSchema.astro";
@@ -114,9 +114,21 @@ const collectionPageSchema = {
             <input
               id="library-search"
               type="search"
-              placeholder="제목, 설명, 태그로 검색"
-              class="w-full rounded-2xl border border-background-lighter bg-background-light py-3 pl-11 pr-4 text-sm text-text placeholder:text-text-muted outline-none transition-all duration-200 focus:border-primary/30 focus:bg-background focus:ring-2 focus:ring-primary/10"
+              placeholder="제목, 설명, 태그, 에이전트로 검색"
+              aria-describedby="library-search-hint"
+              class="w-full rounded-2xl border border-background-lighter bg-background-light py-3 pl-11 pr-12 text-sm text-text placeholder:text-text-muted outline-none transition-all duration-200 focus:border-primary/30 focus:bg-background focus:ring-2 focus:ring-primary/10"
             />
+            <button
+              id="library-search-clear"
+              type="button"
+              aria-label="검색어 지우기"
+              class="absolute right-2.5 top-1/2 hidden h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full border border-background-lighter bg-background text-text-muted shadow-sm transition-all duration-200 hover:border-primary/20 hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/20"
+            >
+              <X class="h-3.5 w-3.5" strokeWidth={2.5} />
+            </button>
+            <p id="library-search-hint" class="sr-only">
+              검색어 입력 후 Escape 키나 지우기 버튼으로 검색어를 초기화할 수 있습니다.
+            </p>
           </div>
 
           <div class="flex flex-col gap-3 sm:flex-row sm:items-center">
@@ -137,6 +149,12 @@ const collectionPageSchema = {
             </div>
           </div>
         </div>
+
+        <div
+          id="library-active-query"
+          class="mt-4 hidden rounded-2xl border border-primary/15 bg-primary/8 px-4 py-3 text-sm text-text-light"
+          aria-live="polite"
+        ></div>
 
         {categories.length > 1 && (
           <div class="mt-4 flex flex-wrap gap-2">
@@ -219,10 +237,17 @@ const collectionPageSchema = {
       const searchInput = document.querySelector<HTMLInputElement>("#library-search");
       const sortSelect = document.querySelector<HTMLSelectElement>("#library-sort");
       const resultSummary = document.querySelector<HTMLElement>("#library-result-summary");
+      const clearButton = document.querySelector<HTMLButtonElement>("#library-search-clear");
+      const activeQuery = document.querySelector<HTMLElement>("#library-active-query");
 
       if (!grid || items.length === 0) return;
 
       let activeFilter = "all";
+
+      const escapeHtml = (value: string) =>
+        value.replace(/[&<>'"]/g, (char) =>
+          ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "'": "&#39;", '"': "&quot;" })[char] ?? char
+        );
 
       const updateButtonStyles = () => {
         buttons.forEach((button) => {
@@ -274,7 +299,26 @@ const collectionPageSchema = {
           .forEach((item) => grid.appendChild(item));
 
         if (resultSummary) {
-          resultSummary.innerHTML = `결과 <span class="font-semibold text-text">${visibleItems.length}</span>개`;
+          const safeFilter = activeFilter !== "all" ? escapeHtml(activeFilter) : null;
+          const safeQuery = query ? `“${escapeHtml(query)}”` : null;
+          const contextLabel = [safeFilter, safeQuery].filter(Boolean).join(" · ");
+          resultSummary.innerHTML = contextLabel
+            ? `<span class="font-semibold text-text">${contextLabel}</span> 결과 <span class="font-semibold text-text">${visibleItems.length}</span>개`
+            : `전체 <span class="font-semibold text-text">${visibleItems.length}</span>개 글`;
+        }
+
+        if (clearButton) {
+          clearButton.classList.toggle("hidden", query.length === 0);
+          clearButton.classList.toggle("flex", query.length > 0);
+        }
+
+        if (activeQuery) {
+          activeQuery.classList.toggle("hidden", query.length === 0 && activeFilter === "all");
+          activeQuery.innerHTML = query.length > 0
+            ? `<span class="font-semibold text-primary">${escapeHtml(query)}</span> 검색 중입니다. Esc 또는 오른쪽 × 버튼으로 검색어를 지울 수 있어요.`
+            : activeFilter !== "all"
+              ? `<span class="font-semibold text-primary">${escapeHtml(activeFilter)}</span> 카테고리만 보고 있어요.`
+              : "";
         }
 
         emptyState?.classList.toggle("hidden", visibleItems.length !== 0);
@@ -290,6 +334,17 @@ const collectionPageSchema = {
       });
 
       searchInput?.addEventListener("input", applyFilters);
+      searchInput?.addEventListener("keydown", (event) => {
+        if (event.key !== "Escape" || searchInput.value.length === 0) return;
+        searchInput.value = "";
+        applyFilters();
+      });
+      clearButton?.addEventListener("click", () => {
+        if (!searchInput) return;
+        searchInput.value = "";
+        searchInput.focus();
+        applyFilters();
+      });
       sortSelect?.addEventListener("change", applyFilters);
 
       updateButtonStyles();
