@@ -9,7 +9,7 @@ import { SITE_AUTHOR, SITE_TITLE, SITE_URL } from "@/shared/config/consts";
 export const getStaticPaths = (async () => {
   const guides = await getCollection("guides");
   return guides
-    .filter((guide) => guide.data.publish)
+    .filter((guide) => guide.data.publish && !guide.data.draft)
     .map((guide) => {
       const slug = guide.data.slug ?? guide.id.replace(/\.[^/.]+$/, "");
       return { params: { slug }, props: { guide } };

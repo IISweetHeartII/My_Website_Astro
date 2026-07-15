@@ -7,7 +7,7 @@ import { SITE_URL } from "@/shared/config/consts";
 
 const allGuides = await getCollection("guides");
 const guides = allGuides
-  .filter((guide) => guide.data.publish)
+  .filter((guide) => guide.data.publish && !guide.data.draft)
   .sort((a, b) => b.data.updatedDate.getTime() - a.data.updatedDate.getTime());
 
 const formatDate = (date: Date) => date.toISOString().slice(0, 10);
