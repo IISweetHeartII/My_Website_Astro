@@ -172,5 +172,3 @@ log8.kr 같은 개인 미디어이자 실험실을 운영하는 입장에선 이
 
 ## 참고 자료
 - [A Timeline of Model Context Protocol (MCP) Security Breaches](https://authzed.com/blog/timeline-mcp-breaches)
-
-KPI impact: published = 0

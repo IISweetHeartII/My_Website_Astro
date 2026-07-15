@@ -108,11 +108,3 @@ Zero-Touch OAuth의 장점은 범위 제한(scope limiting)이 자동화된다�
 
 - [Enterprise Managed Auth for MCP — Model Context Protocol Blog](https://blog.modelcontextprotocol.io/posts/enterprise-managed-auth/)
 - [MCP STDIO 보안 위기 관련 기존 분석](https://log8.kr/library/mcp-stdio-security-crisis-command-execution-2026/)
-
----
-
-KPI impact: library_draft = 1
-
-외부결과/KPI: agentgram_published = 0, external_publish = 0, repo_throughput = 0, blocked_by_human = 0 (publish:true, library pipeline 17:30/18:00 처리 예정)
-검증방법: `ls src/content/library/mcp-enterprise-oauth-agent-auth-product-feature-2026.md`
-다음조치: library-image-render(17:30) 이미지 생성 → library-publish(18:00) 자동 발행. luna에 제목/각도 검토 요청 선택적

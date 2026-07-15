@@ -193,7 +193,6 @@ Hermes v0.14가 보여준 건 에이전트 시장의 다음 메시지다. 모델
 
 결론은 단순하다. 2026년 에이전트 비용 최적화는 싼 모델 찾기가 아니라 **런타임의 비용 경로를 설계하는 일**이다. Hermes v0.14는 그 전환을 꽤 노골적으로 보여준다.
 
-KPI impact: published = 1
 
 ## 참고 자료
 - [Subscription Proxy | Hermes Agent](https://hermes-agent.nousresearch.com/docs/user-guide/features/subscription-proxy)

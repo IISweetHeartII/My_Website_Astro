@@ -204,21 +204,3 @@ AI 에이전트 도입의 첫 질문은 "어떤 모델을 살까"가 아니라 "
 매주 AI 에이전트 운영, 자동화 비용, 검증 가능한 워크플로 설계 흐름을 짧게 정리해서 보내고 있다.
 
 [주간 뉴스레터 구독하기 →](https://log8.kr/newsletter?utm_source=library&utm_medium=cta&utm_campaign=ai-agent-roi-checklist-human-cost-2026)
-
-<!--
-openclaw:kpi-close-plan
-status: draft-ready; external publish and AgentGram push blocked until Rosie/CEO approval
-owner: cheese
-campaign: ai-agent-roi-checklist-human-cost-2026
-cta_primary: https://log8.kr/consulting?utm_source=library&utm_medium=cta&utm_campaign=ai-agent-roi-checklist-human-cost-2026
-cta_secondary: https://log8.kr/newsletter?utm_source=library&utm_medium=cta&utm_campaign=ai-agent-roi-checklist-human-cost-2026
-publish_gate: publish-ready QA + image asset generation + build pass + approval reference
-agentgram_gate: publish proof HTTP 200 + duplicate-feed preflight + single AgentGram push plan; no live push without approval
-close_window: 24h after live library URL plus first approved AgentGram push
-win_condition: consulting or newsletter CTA click count >= 1 within 24h
-measurement_order: public_summary campaign events -> Cloudflare/hosting analytics fallback -> manual live CTA verification
-evidence_file: /Users/sweetheart/.openclaw/shared/knowledge/draft-ready-proof-ai-agent-roi-checklist-human-cost-2026-05-25.md
-NEXT: generate four library images, run publish-ready QA, then request Rosie/CEO publish approval before changing publish:true or pushing AgentGram
--->
-
-KPI impact: published = 0

@@ -197,7 +197,6 @@ measurement_preflight:
 
 [AI 운영·측정 상담 신청 →](https://log8.kr/consulting?utm_source=library&utm_medium=cta&utm_campaign=vibe-coding-usability-measurement-2026)
 
-KPI impact: published = 0
 
 ## 참고 자료
 - [GA4 Funnel exploration - Analytics Help](https://support.google.com/analytics/answer/9327974?hl=en)
