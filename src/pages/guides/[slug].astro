@@ -1,0 +1,222 @@
+---
+import { getCollection, render } from "astro:content";
+import type { GetStaticPaths } from "astro";
+import { ArrowLeft, BookOpen, CalendarDays, Clock3, GitBranch } from "lucide-astro";
+import Layout from "@/layouts/Layout.astro";
+import BreadcrumbSchema from "@/shared/components/seo/BreadcrumbSchema.astro";
+import { SITE_AUTHOR, SITE_TITLE, SITE_URL } from "@/shared/config/consts";
+
+export const getStaticPaths = (async () => {
+  const guides = await getCollection("guides");
+  return guides
+    .filter((guide) => guide.data.publish)
+    .map((guide) => {
+      const slug = guide.data.slug ?? guide.id.replace(/\.[^/.]+$/, "");
+      return { params: { slug }, props: { guide } };
+    });
+}) satisfies GetStaticPaths;
+
+const { guide } = Astro.props;
+const { Content, headings } = await render(guide);
+const {
+  title,
+  subtitle,
+  description,
+  created_date,
+  updatedDate,
+  featured_image,
+  featured_image_alt,
+  tags,
+  reading_time,
+  guideVersion,
+  toolVersion,
+  faq,
+  meta_title,
+  meta_description,
+  keywords,
+  og_title,
+  og_description,
+  og_image,
+  og_type,
+  twitter_card,
+  canonical_url,
+  no_index,
+  draft,
+} = guide.data;
+
+const slug = guide.data.slug ?? guide.id.replace(/\.[^/.]+$/, "");
+const guideUrl = `${SITE_URL}/guides/${slug}/`;
+const formatDate = (date: Date) => date.toISOString().slice(0, 10);
+const updatedDateLabel = formatDate(updatedDate);
+const createdDateIso = (created_date ?? updatedDate).toISOString();
+const updatedDateIso = updatedDate.toISOString();
+const safeTags = tags ?? [];
+const tocHeadings = headings.filter((heading) => heading.depth === 2);
+const ownerEntityRef = { "@id": `${SITE_URL}/#author` };
+const publisherEntity = {
+  "@type": "Organization",
+  "@id": `${SITE_URL}/#publisher`,
+  name: SITE_TITLE,
+  url: SITE_URL,
+  logo: {
+    "@type": "ImageObject",
+    url: `${SITE_URL}/images/design/icon.png`,
+  },
+};
+const guideImage = featured_image
+  ? [new globalThis.URL(featured_image, SITE_URL).toString()]
+  : undefined;
+
+const techArticleSchema = {
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "@id": `${guideUrl}#article`,
+  headline: title,
+  description,
+  image: guideImage,
+  author: ownerEntityRef,
+  editor: ownerEntityRef,
+  publisher: publisherEntity,
+  isPartOf: { "@id": `${SITE_URL}/#website` },
+  datePublished: createdDateIso,
+  dateModified: updatedDateIso,
+  articleSection: "Guides",
+  proficiencyLevel: "Beginner to advanced",
+  mainEntityOfPage: {
+    "@type": "WebPage",
+    "@id": guideUrl,
+  },
+  keywords: (keywords ?? safeTags).join(", "),
+  inLanguage: "ko-KR",
+  isAccessibleForFree: true,
+  url: guideUrl,
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "@id": `${guideUrl}#faq`,
+  mainEntity: faq.map((item) => ({
+    "@type": "Question",
+    name: item.question,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: item.answer,
+    },
+  })),
+};
+---
+
+<Layout
+  title={title}
+  description={description ?? undefined}
+  featured_image={featured_image ?? og_image ?? undefined}
+  featured_image_alt={featured_image_alt ?? undefined}
+  meta_title={meta_title ?? undefined}
+  meta_description={meta_description ?? description ?? undefined}
+  keywords={keywords ?? undefined}
+  og_title={og_title ?? title}
+  og_description={og_description ?? description ?? undefined}
+  og_image={og_image ?? featured_image ?? undefined}
+  og_type={og_type}
+  twitter_card={twitter_card}
+  canonical_url={canonical_url ?? undefined}
+  author={SITE_AUTHOR}
+  no_index={no_index || draft}
+>
+  <Fragment slot="head">
+    <meta property="article:modified_time" content={updatedDateIso} />
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(techArticleSchema)} />
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(faqSchema)} />
+    <BreadcrumbSchema items={[
+      { name: "Home", url: "/" },
+      { name: "Guides", url: "/guides/" },
+      { name: title, url: `/guides/${slug}/` },
+    ]} />
+  </Fragment>
+
+  <div class="mx-auto w-full max-w-6xl p-4 md:p-8">
+    <article data-pagefind-body>
+      <header class="mb-8 overflow-hidden rounded-[2rem] border border-background-lighter bg-background px-5 py-7 text-center shadow-sm md:px-8 md:py-10">
+        <div class="mb-5 flex flex-wrap items-center justify-center gap-2 text-sm text-text-muted">
+          <span class="inline-flex items-center gap-1.5 rounded-full border border-primary/20 bg-primary/10 px-3 py-1.5 font-semibold text-primary">
+            <BookOpen class="h-4 w-4" strokeWidth={2.2} />
+            Guides
+          </span>
+          {draft && (
+            <span class="rounded-full border border-accent/20 bg-accent/10 px-3 py-1.5 text-xs font-semibold text-accent">
+              Draft
+            </span>
+          )}
+        </div>
+
+        <h1 class="mx-auto max-w-4xl text-3xl font-extrabold leading-tight text-text md:text-5xl">{title}</h1>
+        {subtitle && <p class="mx-auto mt-4 max-w-2xl text-lg leading-relaxed text-text-light">{subtitle}</p>}
+        {!subtitle && description && (
+          <p class="mx-auto mt-4 max-w-2xl text-lg leading-relaxed text-text-light">{description}</p>
+        )}
+
+        <div class="mt-6 flex flex-wrap items-center justify-center gap-2 text-sm text-text-muted">
+          <span class="inline-flex items-center gap-1.5 rounded-full border border-background-lighter bg-background-light px-3 py-1.5">
+            <CalendarDays class="h-4 w-4 text-primary" strokeWidth={2} />
+            Last updated: {updatedDateLabel}
+          </span>
+          {reading_time && (
+            <span class="inline-flex items-center gap-1.5 rounded-full border border-background-lighter bg-background-light px-3 py-1.5">
+              <Clock3 class="h-4 w-4 text-primary" strokeWidth={2} />
+              {reading_time}분 읽기
+            </span>
+          )}
+          <span class="inline-flex items-center gap-1.5 rounded-full border border-background-lighter bg-background-light px-3 py-1.5">
+            <GitBranch class="h-4 w-4 text-primary" strokeWidth={2} />
+            Guide v{guideVersion}
+          </span>
+          {toolVersion && (
+            <span class="rounded-full border border-background-lighter bg-background-light px-3 py-1.5">
+              {toolVersion}
+            </span>
+          )}
+        </div>
+        <p class="mt-3 text-sm font-medium text-text-muted">
+          Last updated: {updatedDateLabel} · {reading_time ?? 0}분 읽기 · Guide v{guideVersion}
+        </p>
+      </header>
+
+      {tocHeadings.length > 0 && (
+        <nav class="mb-8 rounded-3xl border border-background-lighter bg-background p-5 shadow-sm" aria-labelledby="guide-toc-title">
+          <p class="text-xs font-semibold uppercase tracking-[0.18em] text-primary/80">On this page</p>
+          <h2 id="guide-toc-title" class="mt-2 text-xl font-bold text-text">목차</h2>
+          <ol class="mt-4 grid gap-2 md:grid-cols-2">
+            {tocHeadings.map((heading) => (
+              <li>
+                <a
+                  href={`#${heading.slug}`}
+                  class="block rounded-2xl border border-background-lighter bg-background-light px-4 py-3 text-sm font-medium text-text transition-all duration-200 hover:border-primary/25 hover:text-primary"
+                >
+                  {heading.text}
+                </a>
+              </li>
+            ))}
+          </ol>
+        </nav>
+      )}
+
+      <div class="prose prose-xl max-w-none">
+        <Content />
+      </div>
+
+      <div class="mt-12 border-t border-background-lighter pt-6 text-center">
+        <a href="/guides/" class="inline-flex items-center gap-2 font-medium text-primary transition-colors duration-200 hover:text-accent">
+          <ArrowLeft class="h-4 w-4" strokeWidth={2.5} />
+          Guides로 돌아가기
+        </a>
+      </div>
+    </article>
+  </div>
+
+  <style>
+    :global(article :is(h2, h3)[id]) {
+      scroll-margin-top: 7rem;
+    }
+  </style>
+</Layout>

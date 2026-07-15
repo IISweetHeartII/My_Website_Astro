@@ -72,6 +72,17 @@ const blog = defineCollection({
   }),
 });
 
+const requiredDateSchema = z.preprocess((val) => {
+  if (val instanceof Date) return Number.isNaN(val.getTime()) ? undefined : val;
+
+  if (typeof val === "string" || typeof val === "number") {
+    const date = new Date(val);
+    return Number.isNaN(date.getTime()) ? undefined : date;
+  }
+
+  return undefined;
+}, z.date());
+
 const library = defineCollection({
   loader: glob({ base: "./src/content/library", pattern: "**/*.{md,mdx}" }),
   schema: z.object({
@@ -103,4 +114,44 @@ const library = defineCollection({
   }),
 });
 
-export const collections = { blog, library };
+const faqSchema = z.array(
+  z.object({
+    question: z.string(),
+    answer: z.string(),
+  })
+);
+
+const guides = defineCollection({
+  loader: glob({ base: "./src/content/guides", pattern: "**/*.{md,mdx}" }),
+  schema: z.object({
+    title: z.string(),
+    subtitle: z.string().optional().nullable(),
+    description: z.string().optional().nullable(),
+    publish: z.boolean().default(true),
+    draft: z.boolean().default(false),
+    created_date: dateSchema,
+    updatedDate: requiredDateSchema,
+    featured_image: z.string().optional().nullable(),
+    featured_image_alt: z.string().optional().nullable(),
+    slug: z.string().optional().nullable(),
+    category: z.string().default("Guides"),
+    tags: z.array(z.string()).default([]).nullable(),
+    reading_time: z.number().optional().nullable(),
+    guideVersion: z.string(),
+    toolVersion: z.string().optional().nullable(),
+    faq: faqSchema,
+    // SEO
+    meta_title: z.string().optional().nullable(),
+    meta_description: z.string().optional().nullable(),
+    keywords: z.array(z.string()).default([]).nullable(),
+    og_title: z.string().optional().nullable(),
+    og_description: z.string().optional().nullable(),
+    og_image: z.string().optional().nullable(),
+    og_type: z.string().default("article"),
+    twitter_card: z.string().default("summary_large_image"),
+    canonical_url: z.string().optional().nullable(),
+    no_index: z.boolean().default(false),
+  }),
+});
+
+export const collections = { blog, library, guides };
