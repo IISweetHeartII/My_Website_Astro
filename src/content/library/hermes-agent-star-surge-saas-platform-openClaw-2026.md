@@ -106,9 +106,6 @@ NousResearch 레포 README 기준 설치는 10분 이내. 어떤 패러다임인
 
 에이전트 프레임워크 시장은 지금 **'누가 플랫폼 지위를 먼저 확보하느냐'** 레이스다. Hermes의 1,845 stars는 그 레이스에서 현재 선두 신호다. 이 흐름에서 어떤 포지션을 잡을지 지금이 결정 타이밍이다.
 
----
-
-*KPI impact: published = 1*
 
 ## 참고 자료
 - [NousResearch/hermes-agent GitHub](https://github.com/NousResearch/hermes-agent)

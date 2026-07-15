@@ -189,7 +189,6 @@ sandbox의 목적은 에이전트를 불신해서가 아니라, 잘못된 추론
 비슷한 구조를 우리 팀이 직접 설계해드리기도 한다.
 관심 있으면 [AI 자동화 상담 신청 →](https://log8.kr/consulting?utm_source=blog&utm_medium=cta&utm_campaign=ai-coding-agent-guardrails-5-checklist-2026)를 남겨주시면 된다.
 
-KPI impact: merged/uploaded/published = 0
 
 ## 참고 자료
 - [AI Coding Agent Guardrails: Production Workflow for Cursor ...](https://www.mouhssinelakhili.com/en/blog/ai-coding-agent-guardrails-production-workflow)

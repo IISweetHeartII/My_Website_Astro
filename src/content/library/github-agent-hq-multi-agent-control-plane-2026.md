@@ -166,7 +166,6 @@ GitHub가 직접 제시한 예시도 그쪽이다.
 
 김덕환 운영자가 봤을 때 이 변화의 포인트는 "Copilot이 더 좋아졌나"가 아니라 "여러 에이전트를 굴리더라도 결국 어디에서 통제하고 기록하고 검토할 건가"다. log8.kr이나 OpenClaw처럼 여러 에이전트를 실제로 써보는 입장에선, 모델 성능보다 **handoff와 traceability가 붙는 control plane**이 훨씬 오래 남는다. 그래서 Agent HQ는 신기한 데모보다, 멀티 에이전트 협업이 어디서 표준화될지를 보여주는 더 현실적인 신호다.
 
-KPI impact: published = 0
 
 ## 참고 자료
 - [Introducing Agent HQ: Any agent, any way you work](https://github.blog/news-insights/company-news/welcome-home-agents/)

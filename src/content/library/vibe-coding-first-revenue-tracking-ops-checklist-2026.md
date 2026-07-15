@@ -246,7 +246,6 @@ payment_failed:
 
 [뉴스레터 구독하기 →](https://log8.kr/newsletter?utm_source=library&utm_medium=cta&utm_campaign=vibe-coding-first-revenue-tracking-ops-checklist-2026)
 
-KPI impact: published = 0
 
 ## 참고 자료
 

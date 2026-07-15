@@ -184,7 +184,6 @@ skills/release-helper/
 
 log8.kr처럼 새 도구를 빨리 실험해보는 운영자 입장에선 이 변화가 꽤 현실적이다. 생산성을 올려주는 스킬, 프롬프트, MCP 연결은 너무 매력적이라서 금방 붙이고 싶어진다. 그런데 김덕환 운영자가 봤을 때 지금 더 중요한 건 “무엇을 추가할까”보다 **무엇을 자동으로 믿지 않을까**다. 그 감각이 있어야 1인 운영에서도 속도와 신뢰를 같이 가져갈 수 있다.
 
-KPI impact: published = 0
 
 ## 참고 자료
 - [Agent Context Poisoning: SKILL.md and the New AI Supply Chain Attack Surface](https://labs.cloudsecurityalliance.org/research/csa-research-note-skill-md-agent-context-poisoning-20260506/)
