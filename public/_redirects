@@ -166,3 +166,15 @@
 /test-supabase/ /blog/ 301
 /blog/new-post /blog/ 301
 /blog/web-security-deep-dive/ /blog/ 301
+
+# log8.kr low-performance library pruning redirects (2026-07-15)
+/library/axios-npm-supply-chain-openai-macos-signing/ /library/ 301
+/library/typescript-7-beta-go-native-compiler-2026/ /library/ 301
+/library/ai-coding-agent-guardrails-5-checklist-2026/ /library/claude-code-codex-sandbox-governance-2026/ 301
+/library/google-cloud-fraud-defense-agentic-web-security-2026/ /library/ 301
+/library/rapid-mlx-26m-tool-calling-local-small-agent-2026/ /library/ 301
+/library/claude-opus-4-8-korean-startup-llm-moat-adoption-2026/ /library/korea-tech-hiring-freeze-mid-career-ai-2026/ 301
+/library/hermes-v016-vs-openclaw-agent-framework-choice-2026/ /library/ 301
+/library/hermes-agent-star-surge-saas-platform-openClaw-2026/ /library/ 301
+/library/xiaomi-1000-token-per-second-ai-inference-benchmark-2026/ /library/ 301
+/library/google-ai-overviews-legal-liability-rag-guardrail-2026/ /library/ 301
