@@ -28,6 +28,7 @@ import HeaderLink from "./HeaderLink.astro";
     <div class="hidden lg:flex items-center space-x-6">
       <HeaderLink href={getUrl("/blog")}>Blog</HeaderLink>
       <HeaderLink href={getUrl("/library")}>Library</HeaderLink>
+      <HeaderLink href={getUrl("/guides")}>Guides</HeaderLink>
       <HeaderLink href={getUrl("/showcase")}>Showcase</HeaderLink>
       <HeaderLink href={getUrl("/portfolio")}>Portfolio</HeaderLink>
       <HeaderLink href={getUrl("/resume")}>Resume</HeaderLink>
@@ -108,6 +109,11 @@ import HeaderLink from "./HeaderLink.astro";
         href={getUrl("/library")}
         class="text-nav-text hover:text-accent text-xl font-semibold transition-colors duration-200"
         >Library</a
+      >
+      <a
+        href={getUrl("/guides")}
+        class="text-nav-text hover:text-accent text-xl font-semibold transition-colors duration-200"
+        >Guides</a
       >
       <a
         href={getUrl("/showcase")}
