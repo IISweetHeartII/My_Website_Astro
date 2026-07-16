@@ -28,7 +28,7 @@ keywords:
   - 클로드 API 비용 관리
   - AI API 비용 폭탄 방지
   - 앤트로픽 API 한도 설정
-og_title: "AI API 비용 폭탄 막는 법 — $500M 사고로 배우는 사용량 제한 실전 가이드"
+og_title: "Claude API 사용량 제한 설정: AI API 비용 폭탄 막는 법"
 og_description: "자동화 파이프라인이 오작동하면 청구서도 멈추지 않는다. Anthropic API 상한선 설정 실전 가이드."
 og_type: article
 twitter_card: summary_large_image

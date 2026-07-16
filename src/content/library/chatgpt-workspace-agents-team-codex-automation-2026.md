@@ -28,7 +28,7 @@ keywords:
   - ChatGPT 워크스페이스 에이전트 사용법
   - 팀 공유형 코덱스 자동화
   - 커스텀 GPT 팀 공유
-og_title: "ChatGPT Workspace Agents, 커스텀 GPT 다음은 팀 공유형 Codex 에이전트다"
+og_title: "ChatGPT Workspace Agents 사용법: 팀 공유형 Codex 자동화"
 og_description: "OpenAI가 Workspace Agents로 커스텀 GPT를 팀 운영 자산으로 확장했다. 핵심은 챗봇이 아니라 공유형 Codex 자동화다."
 og_type: article
 twitter_card: summary_large_image

@@ -28,7 +28,7 @@ keywords:
   - 한국형 소형 언어모델
   - 공공기관 RAG 구축
   - 온프레미스 RAG 사례
-og_title: "공공기관용 한국형 sLLM, molit-gemma가 보여준 온프레미스 AI의 현실 해법"
+og_title: "molit-gemma란? 공공기관 온프레미스 RAG·한국형 sLLM 사례"
 og_description: "이 사례의 핵심은 작은 모델이 아니라, 공공기관 제약을 정면으로 반영한 아키텍처 선택에 있다."
 og_type: article
 twitter_card: summary_large_image

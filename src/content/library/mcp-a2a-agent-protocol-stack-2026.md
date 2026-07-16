@@ -28,7 +28,7 @@ keywords:
   - MCP A2A 비교
   - 멀티에이전트 프로토콜
   - 에이전트 프로토콜 비교
-og_title: "A2A vs MCP 완전정리: 2026년 멀티에이전트 스택은 어떻게 분화되는가"
+og_title: "MCP와 A2A 차이: 멀티에이전트 프로토콜 스택 완전정리"
 og_description: "좋은 멀티에이전트 시스템은 하나의 거대 에이전트가 아니라, 잘 연결된 context plane과 coordination plane의 조합이다."
 og_type: article
 twitter_card: summary_large_image

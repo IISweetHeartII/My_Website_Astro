@@ -28,7 +28,7 @@ keywords:
   - 구글 I/O 2026 개발자
   - 에이전틱 코딩 발표
   - 한국 개발자 구글 I/O
-og_title: "Google I/O 2026, 한국 개발자가 agentic coding 발표를 미리 봐야 하는 이유"
+og_title: "Google I/O 2026 핵심 정리: 한국 개발자가 볼 Agentic Coding"
 og_description: "구글이 I/O 2026에서 예고한 agentic coding 발표를 한국 개발자 관점에서 미리 해석했다. 모델보다 플랫폼을 봐야 하는 이유를 짚는다."
 og_type: article
 twitter_card: summary_large_image
