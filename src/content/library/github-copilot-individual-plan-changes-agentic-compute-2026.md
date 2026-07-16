@@ -1,7 +1,7 @@
 ---
-title: "GitHub Copilot 개인 요금제 급변, 월정액 코딩 에이전트 모델이 흔들리기 시작했다"
+title: "GitHub Copilot 개인 요금제 변경: Pro·Pro+ 사용량 제한 정리"
 subtitle: "신규 가입 중단, usage limit 강화, premium requests 분리. 본질은 가격표가 아니라 agentic compute 통제다"
-description: "GitHub Copilot 개인 요금제 변경은 가격 인상보다 더 큰 사건이다. 에이전트 시대에 월정액 코딩 도구의 경제 모델이 왜 흔들리는지 정리했다."
+description: "GitHub Copilot 개인 요금제 변경의 핵심은 가격 인상이 아니라 Pro·Pro+의 사용량 제한과 premium requests 통제다. 신규 가입, 한도, 추가 과금 기준을 정리했다."
 publish: true
 created_date: 2026-04-22
 category: "개발"
@@ -16,7 +16,7 @@ slug: github-copilot-individual-plan-changes-agentic-compute-2026
 reading_time: 8
 featured_image: /images/library/github-copilot-individual-plan-changes-agentic-compute-2026/thumbnail.png
 featured_image_alt: "월정액 코딩 에이전트 요금제가 균열나는 장면을 보여주는 GitHub Copilot 스타일 기술 일러스트"
-meta_title: "GitHub Copilot 개인 요금제 급변, 월정액 코딩 에이전트 모델이 흔들리는 이유 | Library"
+meta_title: "GitHub Copilot 개인 요금제 변경: Pro·Pro+ 사용량 제한 정리 | 김덕환"
 meta_description: "Copilot 개인 요금제 변경의 본질은 가격표가 아니라 계산량 통제다. Pro, Pro+, premium requests 구조를 실무 관점에서 정리했다."
 keywords:
   - GitHub Copilot 개인 요금제 변경
@@ -24,6 +24,10 @@ keywords:
   - Copilot premium requests
   - AI 코딩 에이전트 가격 정책
   - Copilot 신규 가입 중단
+  - 깃허브 코파일럿 요금제 변경
+  - 코파일럿 프로 사용량 제한
+  - 코파일럿 프로 플러스 차이
+  - 깃허브 코파일럿 프리미엄 요청
 og_title: "GitHub Copilot 개인 요금제 급변, 월정액 코딩 에이전트 모델이 흔들리는 이유"
 og_description: "신규 가입 중단과 usage limit 강화는 단순 가격 조정이 아니다. 에이전트 시대의 지속 가능한 과금 설계를 보여주는 신호다."
 og_type: article

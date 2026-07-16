@@ -1,7 +1,7 @@
 ---
-title: "ChatGPT Workspace Agents, 커스텀 GPT 다음은 팀 공유형 Codex 에이전트다"
+title: "ChatGPT Workspace Agents 사용법: 팀 공유형 Codex 자동화"
 subtitle: "개인용 프롬프트 자산이 팀 운영 자산으로 바뀌는 순간, AI 도입의 기준도 달라진다"
-description: "OpenAI Workspace Agents는 커스텀 GPT를 팀 공유형 Codex 에이전트로 확장하며 Slack·스케줄·승인 흐름까지 내부 자동화 플랫폼으로 끌어올린다."
+description: "ChatGPT Workspace Agents는 커스텀 GPT를 팀 공유형 Codex 자동화로 확장해 Slack·스케줄·승인 흐름을 연결한다. 기능과 팀 도입 포인트를 정리했다."
 publish: true
 created_date: 2026-05-06
 category: "AI"
@@ -16,7 +16,7 @@ slug: chatgpt-workspace-agents-team-codex-automation-2026
 reading_time: 8
 featured_image: /images/library/chatgpt-workspace-agents-team-codex-automation-2026/thumbnail.png
 featured_image_alt: "ChatGPT 안에서 팀 공유형 Codex 에이전트가 여러 업무 툴을 연결해 자동화하는 장면을 표현한 기술 일러스트"
-meta_title: "ChatGPT Workspace Agents, 커스텀 GPT 다음은 팀 공유형 Codex 에이전트다 | Library"
+meta_title: "ChatGPT Workspace Agents 사용법: 팀 공유형 Codex 자동화 | 김덕환"
 meta_description: "Workspace Agents는 ChatGPT를 개인 비서가 아니라 팀 공유형 업무 자동화 레이어로 확장한다."
 keywords:
   - ChatGPT Workspace Agents
@@ -24,6 +24,10 @@ keywords:
   - 팀 공유형 에이전트
   - Slack AI 자동화
   - 커스텀 GPT 다음
+  - 챗지피티 워크스페이스 에이전트
+  - ChatGPT 워크스페이스 에이전트 사용법
+  - 팀 공유형 코덱스 자동화
+  - 커스텀 GPT 팀 공유
 og_title: "ChatGPT Workspace Agents, 커스텀 GPT 다음은 팀 공유형 Codex 에이전트다"
 og_description: "OpenAI가 Workspace Agents로 커스텀 GPT를 팀 운영 자산으로 확장했다. 핵심은 챗봇이 아니라 공유형 Codex 자동화다."
 og_type: article

@@ -1,7 +1,7 @@
 ---
-title: "OpenAI가 Claude Code 안으로 들어왔다, Codex 플러그인이 던진 새 질문"
+title: "Claude Code에서 OpenAI Codex 플러그인 쓰는 법: 리뷰·작업 위임 가이드"
 subtitle: "도구 경쟁이 아니라 워크플로우 점유전이 시작됐다"
-description: "OpenAI의 Codex 플러그인이 Claude Code 안으로 들어왔다. 리뷰·역검토·작업 위임이 한 세션에서 묶일 때 개발팀 워크플로우가 어떻게 바뀌는지 정리했다."
+description: "Claude Code에서 OpenAI Codex 플러그인을 쓰면 같은 세션에서 코드 리뷰와 작업 위임을 나눠 실행할 수 있다. 설치 조건, 핵심 명령, 개발팀 운영 포인트를 정리했다."
 publish: true
 created_date: 2026-04-24
 category: "AI"
@@ -16,7 +16,7 @@ slug: openai-codex-plugin-inside-claude-code-2026
 reading_time: 8
 featured_image: /images/library/openai-codex-plugin-inside-claude-code-2026/thumbnail.png
 featured_image_alt: "Claude Code 세션 안에서 Codex 리뷰와 작업 위임이 연결되는 워크플로우 일러스트"
-meta_title: "OpenAI가 Claude Code 안으로 들어왔다, Codex 플러그인이 던진 새 질문 | Library"
+meta_title: "Claude Code에서 OpenAI Codex 플러그인 쓰는 법: 리뷰·작업 위임 가이드 | 김덕환"
 meta_description: "Codex 플러그인이 Claude Code 안으로 들어오면서 AI 코딩 경쟁은 제품 대결보다 워크플로우 점유전으로 이동했다. 핵심 변화와 실전 의미를 정리했다."
 keywords:
   - OpenAI Codex plugin
@@ -24,6 +24,10 @@ keywords:
   - AI 코딩 에이전트 워크플로우
   - Codex review rescue
   - 개발팀 멀티에이전트 운영
+  - 클로드 코드 코덱스 플러그인
+  - 클로드 코드에서 코덱스
+  - 코덱스 플러그인 사용법
+  - 오픈AI 코덱스 플러그인
 og_title: "OpenAI가 Claude Code 안으로 들어왔다, Codex 플러그인이 던진 새 질문"
 og_description: "Codex 플러그인이 Claude Code 안으로 들어오면서 코딩 에이전트 경쟁의 기준이 달라졌다. 한국 개발팀에 중요한 포인트를 짚었다."
 og_type: article

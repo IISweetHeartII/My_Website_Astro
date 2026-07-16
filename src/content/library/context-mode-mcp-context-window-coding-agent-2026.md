@@ -1,7 +1,7 @@
 ---
-title: "Context Mode 열풍, AI 코딩 에이전트의 병목은 모델이 아니라 컨텍스트다"
+title: "Context Mode 사용법: MCP로 AI 코딩 에이전트 컨텍스트 줄이기"
 subtitle: "좋은 에이전트는 더 큰 모델보다, 더 적은 문맥으로 더 오래 일하게 만드는 쪽이 된다"
-description: "Context Mode와 MCP 흐름은 AI 코딩 에이전트의 병목이 모델 성능보다 컨텍스트 관리와 세션 연속성에 있음을 보여준다."
+description: "Context Mode는 MCP로 큰 도구 출력을 분리하고 필요한 문맥만 다시 불러와 AI 코딩 에이전트의 컨텍스트 비용을 줄인다. 작동 방식과 도입 기준을 정리했다."
 publish: true
 created_date: 2026-05-04
 category: "개발"
@@ -16,7 +16,7 @@ slug: context-mode-mcp-context-window-coding-agent-2026
 reading_time: 8
 featured_image: /images/library/context-mode-mcp-context-window-coding-agent-2026/thumbnail.png
 featured_image_alt: "AI 코딩 에이전트 앞에 거대한 컨텍스트 병목과 이를 정리하는 라우팅 레이어를 표현한 일러스트"
-meta_title: "Context Mode 열풍, AI 코딩 에이전트의 병목은 모델이 아니라 컨텍스트다 | Library"
+meta_title: "Context Mode 사용법: MCP로 AI 코딩 에이전트 컨텍스트 줄이기 | 김덕환"
 meta_description: "Context Mode와 MCP 흐름은 AI 코딩 에이전트 경쟁이 모델 IQ보다 컨텍스트 절감, 세션 복구, retrieval 설계로 이동하고 있음을 보여준다."
 keywords:
   - Context Mode MCP
@@ -24,6 +24,10 @@ keywords:
   - context window coding agent
   - Claude Code context mode
   - MCP context optimization
+  - 컨텍스트 모드 사용법
+  - 엠씨피 컨텍스트 최적화
+  - AI 코딩 에이전트 문맥 관리
+  - 클로드 코드 컨텍스트 줄이기
 og_title: "Context Mode 열풍, AI 코딩 에이전트의 병목은 모델이 아니라 컨텍스트다"
 og_description: "이제 중요한 건 모델이 아니라 어떤 문맥을 남기고, 버리고, 다시 불러오느냐다."
 og_type: article

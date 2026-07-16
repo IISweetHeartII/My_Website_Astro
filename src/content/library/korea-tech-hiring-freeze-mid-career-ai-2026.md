@@ -1,7 +1,7 @@
 ---
-title: "한국 테크 채용 한파 2026: 8년차 경력직이 이직에 실패하는 진짜 이유"
+title: "2026 한국 개발자 이직: 8년차 경력직 채용 한파 대응법"
 subtitle: "포지션 감소보다 더 무서운 것 — 기준이 바뀌었다"
-description: "2026년 한국 테크 채용 시장이 왜 8년차 경력직에게 더 가혹한지 패턴으로 분석. 이직 실패 안티패턴과 성공 케이스 공통분모를 정리했다."
+description: "2026년 한국 테크 채용에서 8년차 경력직이 이직하려면 줄어든 공고보다 높아진 AI 도구 활용·문제 해결 기준에 맞춰 경력을 재구성해야 한다. 실패와 대응 패턴을 정리했다."
 publish: true
 created_date: 2026-06-14
 category: "Career & Market"
@@ -16,7 +16,7 @@ slug: korea-tech-hiring-freeze-mid-career-ai-2026
 reading_time: 9
 featured_image: /images/library/korea-tech-hiring-freeze-mid-career-ai-2026/thumbnail.png
 featured_image_alt: "채용 공고가 사라지는 환경에서 이직을 고민하는 한국 개발자 일러스트"
-meta_title: "한국 테크 채용 한파 2026: 8년차 경력직 이직 실패 이유 | Library"
+meta_title: "2026 한국 개발자 이직: 8년차 경력직 채용 한파 대응법 | 김덕환"
 meta_description: "2026 한국 테크 채용 한파에서 8년차도 이직에 실패하는 구조적 이유와 성공 패턴을 분석한다."
 keywords:
   - 한국 개발자 이직
@@ -24,6 +24,10 @@ keywords:
   - 경력직 취업
   - AI 시대 개발자 커리어
   - 한국 IT 취업 시장
+  - 2026 한국 개발자 이직
+  - 8년차 개발자 이직
+  - 경력직 개발자 취업
+  - 한국 테크 채용 한파
 og_title: "한국 테크 채용 한파 2026: 8년차 경력직이 이직에 실패하는 진짜 이유"
 og_description: "포지션 감소보다 더 무서운 것 — 기준이 바뀌었다. 이직 실패 안티패턴과 성공 패턴을 코드 리뷰하듯 분석한다."
 og_type: article

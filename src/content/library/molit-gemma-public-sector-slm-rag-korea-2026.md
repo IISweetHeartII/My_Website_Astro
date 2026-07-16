@@ -1,7 +1,7 @@
 ---
-title: "공공기관용 한국형 sLLM, molit-gemma가 보여준 온프레미스 AI의 현실 해법"
+title: "molit-gemma란? 공공기관 온프레미스 RAG·한국형 sLLM 사례"
 subtitle: "초거대 모델 경쟁보다 먼저 풀어야 할 건, 한국어 정책 문서를 안전하게 다루는 배포 아키텍처였다"
-description: "molit-gemma는 Gemma-3-1B와 OpenSearch 기반 RAG를 결합해 공공기관 온프레미스 AI의 현실적인 설계 방향을 보여준다. 왜 작은 모델이 오히려 더 실용적인지 정리했다."
+description: "molit-gemma는 Gemma-3-1B와 OpenSearch RAG를 내부망에 배포한 공공기관용 한국형 sLLM 사례다. 온프레미스 AI의 구조와 도입 기준을 정리했다."
 publish: true
 created_date: 2026-05-05
 category: "AI"
@@ -16,7 +16,7 @@ slug: molit-gemma-public-sector-slm-rag-korea-2026
 reading_time: 8
 featured_image: /images/library/molit-gemma-public-sector-slm-rag-korea-2026/thumbnail.png
 featured_image_alt: "공공기관 내부망 안에서 소형 언어모델과 문서 검색 시스템이 함께 동작하는 구조를 표현한 일러스트"
-meta_title: "공공기관용 한국형 sLLM, molit-gemma가 보여준 온프레미스 AI의 현실 해법 | Library"
+meta_title: "molit-gemma란? 공공기관 온프레미스 RAG·한국형 sLLM 사례 | 김덕환"
 meta_description: "molit-gemma는 Gemma-3-1B와 OpenSearch 기반 RAG를 결합해 공공기관 보안 환경에서 실용적인 한국형 sLLM 아키텍처를 제시한다."
 keywords:
   - molit-gemma
@@ -24,6 +24,10 @@ keywords:
   - 한국형 sLLM
   - Gemma-3-1B RAG
   - 국토교통부 AI 챗봇
+  - 몰릿 젬마
+  - 한국형 소형 언어모델
+  - 공공기관 RAG 구축
+  - 온프레미스 RAG 사례
 og_title: "공공기관용 한국형 sLLM, molit-gemma가 보여준 온프레미스 AI의 현실 해법"
 og_description: "이 사례의 핵심은 작은 모델이 아니라, 공공기관 제약을 정면으로 반영한 아키텍처 선택에 있다."
 og_type: article
