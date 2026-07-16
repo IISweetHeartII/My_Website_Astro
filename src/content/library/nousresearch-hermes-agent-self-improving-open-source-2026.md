@@ -1,7 +1,7 @@
 ---
-title: "179K 스타 오픈소스 에이전트: NousResearch Hermes가 'AI가 스스로 배운다'를 현실로 만든 방법"
+title: "Hermes Agent 사용법: NousResearch 오픈소스 자기개선 에이전트"
 subtitle: "경험에서 스킬을 생성하고, 세션 간 기억을 유지하며, 사용자와 함께 성장하는 에이전트 인프라의 성숙"
-description: "NousResearch hermes-agent가 GitHub Trending Python 1위에 오른 이유 — 자기 개선 루프, 80+ 스킬, 22개 플랫폼 지원. 에이전트 인프라가 연구 단계를 넘어 Production에 진입했다는 신호를 분석한다."
+description: "Hermes Agent는 반복 작업을 스킬로 만들고 세션 간 기억을 활용하는 NousResearch의 오픈소스 에이전트다. 자기개선 루프, 스킬, 플랫폼 지원을 정리했다."
 publish: true
 created_date: 2026-06-05
 category: "AI"
@@ -16,7 +16,7 @@ slug: nousresearch-hermes-agent-self-improving-open-source-2026
 reading_time: 9
 featured_image: /images/library/nousresearch-hermes-agent-self-improving-open-source-2026/thumbnail.png
 featured_image_alt: "NousResearch Hermes Agent 자기 개선 루프와 에코시스템을 표현한 기술 일러스트"
-meta_title: "NousResearch Hermes Agent — 자기 개선 오픈소스 에이전트의 성숙 | Library"
+meta_title: "Hermes Agent 사용법: NousResearch 오픈소스 자기개선 에이전트 | 김덕환"
 meta_description: "GitHub 179K 스타를 받은 NousResearch hermes-agent의 자기 개선 루프, 스킬 시스템, 메모리 아키텍처를 분석한다. 에이전트 인프라가 Production에 진입한 신호."
 keywords:
   - hermes agent framework
@@ -24,6 +24,10 @@ keywords:
   - self-improving AI agent
   - agent development infrastructure
   - open source agent 2026
+  - 헤르메스 에이전트 사용법
+  - 누스리서치 헤르메스
+  - 오픈소스 AI 에이전트
+  - 자기개선 에이전트
 og_title: "NousResearch Hermes Agent — 자기 개선 오픈소스 에이전트의 성숙"
 og_description: "GitHub 179K 스타. 경험에서 스킬을 만들고, 세션을 넘어 기억하며, 사용자와 함께 자라는 에이전트. 에이전트 인프라가 연구 단계를 졸업했다."
 og_type: article

@@ -1,7 +1,7 @@
 ---
-title: "AI API 비용 폭탄 막는 법 — $500M 사고로 배우는 사용량 제한 실전 가이드"
+title: "Claude API 사용량 제한 설정: AI API 비용 폭탄 막는 법"
 subtitle: "자동화 파이프라인이 멈추지 않으면 청구서도 멈추지 않는다"
-description: "한 기업이 Claude API로 한 달에 $500M을 소진했다. 원인은 기술 실패가 아니라 사용량 제한 미설정이었다. Anthropic API 상한선 설정부터 알람 훅 연결까지 실전 가이드."
+description: "Claude API 비용 폭탄은 월 사용량 제한과 초과 알림을 설정해 막을 수 있다. $500M 사례에서 확인할 비용 상한·알림·자동 차단 기준을 정리했다."
 publish: true
 created_date: 2026-06-04
 category: "AI"
@@ -16,7 +16,7 @@ slug: ai-api-cost-limit-500m-incident-2026
 reading_time: 8
 featured_image: /images/library/ai-api-cost-limit-500m-incident-2026/thumbnail.png
 featured_image_alt: "AI API 비용 폭탄 막는 법 — 실전 사용량 제한 가이드"
-meta_title: "AI API 비용 폭탄 막는 법 | Library"
+meta_title: "Claude API 사용량 제한 설정: AI API 비용 폭탄 막는 법 | 김덕환"
 meta_description: "$500M 청구 사고에서 배우는 Claude API 사용량 제한 실전 가이드. Monthly spend limit 설정부터 초과 알람 연결까지."
 keywords:
   - AI API 비용 절감
@@ -24,6 +24,10 @@ keywords:
   - AI 비용 폭탄
   - API cost control
   - Claude API limit
+  - 클로드 API 사용량 제한
+  - 클로드 API 비용 관리
+  - AI API 비용 폭탄 방지
+  - 앤트로픽 API 한도 설정
 og_title: "AI API 비용 폭탄 막는 법 — $500M 사고로 배우는 사용량 제한 실전 가이드"
 og_description: "자동화 파이프라인이 오작동하면 청구서도 멈추지 않는다. Anthropic API 상한선 설정 실전 가이드."
 og_type: article

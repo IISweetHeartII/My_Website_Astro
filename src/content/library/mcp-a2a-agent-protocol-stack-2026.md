@@ -1,7 +1,7 @@
 ---
-title: "A2A vs MCP 완전정리: 2026년 멀티에이전트 스택은 어떻게 분화되는가"
+title: "MCP와 A2A 차이: 멀티에이전트 프로토콜 스택 완전정리"
 subtitle: "MCP는 context·tool plane, A2A는 coordination plane — 이제 중요한 건 레이어별 책임 분담이다"
-description: "MCP와 A2A는 경쟁 프로토콜이 아니라 서로 다른 레이어를 맡는 조합이다. 2026년 멀티에이전트 스택이 어떻게 분화되는지 실무 관점에서 정리했다."
+description: "MCP는 모델과 도구·데이터를 연결하고 A2A는 에이전트 간 위임과 상태 전달을 맡는다. 두 프로토콜의 차이와 멀티에이전트 도입 순서를 정리했다."
 publish: true
 created_date: 2026-04-23
 category: "개발"
@@ -16,7 +16,7 @@ slug: mcp-a2a-agent-protocol-stack-2026
 reading_time: 8
 featured_image: /images/library/mcp-a2a-agent-protocol-stack-2026/thumbnail.png
 featured_image_alt: "MCP와 A2A가 함께 구성하는 에이전트 프로토콜 스택을 보여주는 일러스트"
-meta_title: "A2A vs MCP 완전정리: 2026년 멀티에이전트 스택은 어떻게 분화되는가 | Library"
+meta_title: "MCP와 A2A 차이: 멀티에이전트 프로토콜 스택 완전정리 | 김덕환"
 meta_description: "MCP는 context·tool plane, A2A는 coordination plane이다. 2026년 멀티에이전트 스택의 역할 분담과 도입 순서를 정리했다."
 keywords:
   - MCP A2A 차이
@@ -24,6 +24,10 @@ keywords:
   - 멀티 에이전트 아키텍처
   - AI 개발자 생산성
   - 에이전트 협업 표준
+  - 엠씨피 에이투에이 차이
+  - MCP A2A 비교
+  - 멀티에이전트 프로토콜
+  - 에이전트 프로토콜 비교
 og_title: "A2A vs MCP 완전정리: 2026년 멀티에이전트 스택은 어떻게 분화되는가"
 og_description: "좋은 멀티에이전트 시스템은 하나의 거대 에이전트가 아니라, 잘 연결된 context plane과 coordination plane의 조합이다."
 og_type: article

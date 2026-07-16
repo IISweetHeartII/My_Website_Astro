@@ -1,7 +1,7 @@
 ---
-title: "LMCache가 바꾸는 에이전트 운영비: 추론 최적화가 제품 전략이 되는 순간"
+title: "LMCache 사용법: KV 캐시로 LLM 추론비·에이전트 운영비 줄이기"
 subtitle: "프롬프트 캐싱을 넘어, KV 캐시 재사용이 에이전트 손익분기점을 바꾼다"
-description: "LMCache가 왜 에이전트 인프라의 게임체인저인지 — 추론 최적화가 백엔드 문제에서 제품 전략 문제로 바뀌는 순간을 분석한다."
+description: "LMCache는 KV 캐시를 요청·서버 간 재사용해 LLM prefill 비용과 에이전트 운영비를 줄이는 오픈소스 도구다. 동작 원리와 적용 대상을 정리했다."
 publish: true
 created_date: 2026-06-17
 category: "AI"
@@ -16,7 +16,7 @@ slug: lmcache-agent-inference-optimization-operating-cost-2026
 reading_time: 8
 featured_image: /images/library/lmcache-agent-inference-optimization-operating-cost-2026/thumbnail.png
 featured_image_alt: "LMCache KV 캐시 재사용으로 에이전트 운영비가 줄어드는 구조 일러스트"
-meta_title: "LMCache가 바꾸는 에이전트 운영비 | Library"
+meta_title: "LMCache 사용법: KV 캐시로 LLM 추론비·에이전트 운영비 줄이기 | 김덕환"
 meta_description: "추론 최적화가 제품 전략이 되는 이유 — LMCache KV 캐시 재사용이 에이전트 ROI와 손익분기점에 미치는 영향"
 keywords:
   - LMCache
@@ -24,6 +24,10 @@ keywords:
   - agent operating cost
   - prompt cache
   - inference latency
+  - 엘엠캐시 사용법
+  - LMCache KV 캐시
+  - LLM 추론 비용 절감
+  - 에이전트 운영비 최적화
 og_title: "LMCache가 바꾸는 에이전트 운영비"
 og_description: "추론 최적화가 백엔드 개선을 넘어 제품 전략 변수가 되는 순간을 분석한다."
 og_type: article

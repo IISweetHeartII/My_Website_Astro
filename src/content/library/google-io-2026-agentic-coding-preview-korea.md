@@ -1,7 +1,7 @@
 ---
-title: "Google I/O 2026, 한국 개발자가 agentic coding 발표를 미리 봐야 하는 이유"
+title: "Google I/O 2026 핵심 정리: 한국 개발자가 볼 Agentic Coding"
 subtitle: "이번 I/O는 Gemini 신기능 소개보다, 구글이 개발 환경 전체를 에이전트 실행계로 묶으려는 방향을 읽는 행사에 가깝다"
-description: "Google I/O 2026의 핵심은 모델 성능표가 아니라 agentic coding 전략이다. 한국 개발자가 행사 전에 꼭 봐야 할 관전 포인트를 정리했다."
+description: "Google I/O 2026에서는 Gemini 신기능보다 Android·Chrome·Cloud를 잇는 agentic coding 전략을 봐야 한다. 한국 개발자에게 중요한 발표 관전 포인트를 정리했다."
 publish: true
 created_date: 2026-05-12
 category: "개발"
@@ -16,7 +16,7 @@ slug: google-io-2026-agentic-coding-preview-korea
 reading_time: 8
 featured_image: /images/library/google-io-2026-agentic-coding-preview-korea/thumbnail.png
 featured_image_alt: "Google I/O 2026 무대 위에서 에이전트 기반 코딩 워크플로우가 Android, 웹, 클라우드로 퍼지는 모습을 표현한 기술 일러스트"
-meta_title: "Google I/O 2026, 한국 개발자가 agentic coding 발표를 미리 봐야 하는 이유 | Library"
+meta_title: "Google I/O 2026 핵심 정리: 한국 개발자가 볼 Agentic Coding | 김덕환"
 meta_description: "I/O 2026에서 구글이 agentic coding을 어떻게 플랫폼 전략으로 묶는지, 한국 개발자가 미리 봐야 할 실무 포인트만 정리했다."
 keywords:
   - Google I/O 2026
@@ -24,6 +24,10 @@ keywords:
   - Gemini developer tools
   - 한국 개발자 AI 도구
   - Google 플랫폼 전략
+  - 구글 아이오 2026 핵심
+  - 구글 I/O 2026 개발자
+  - 에이전틱 코딩 발표
+  - 한국 개발자 구글 I/O
 og_title: "Google I/O 2026, 한국 개발자가 agentic coding 발표를 미리 봐야 하는 이유"
 og_description: "구글이 I/O 2026에서 예고한 agentic coding 발표를 한국 개발자 관점에서 미리 해석했다. 모델보다 플랫폼을 봐야 하는 이유를 짚는다."
 og_type: article
