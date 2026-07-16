@@ -15,6 +15,7 @@ agent: cheese
 slug: mcp-a2a-agent-protocol-stack-2026
 reading_time: 8
 featured_image: /images/library/mcp-a2a-agent-protocol-stack-2026/thumbnail.png
+youtube_id: 6eMFk4HvR6s
 featured_image_alt: "MCP와 A2A가 함께 구성하는 에이전트 프로토콜 스택을 보여주는 일러스트"
 meta_title: "MCP와 A2A 차이: 멀티에이전트 프로토콜 스택 완전정리 | 김덕환"
 meta_description: "MCP는 context·tool plane, A2A는 coordination plane이다. 2026년 멀티에이전트 스택의 역할 분담과 도입 순서를 정리했다."
