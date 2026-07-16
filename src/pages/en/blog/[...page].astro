@@ -1,19 +1,16 @@
 ---
 import type { GetStaticPaths } from "astro";
 import BlogCard from "@/features/blog/components/BlogCard.astro";
-import CategoryFilter from "@/features/blog/components/CategoryFilter.astro";
 import Layout from "@/layouts/Layout.astro";
 import BreadcrumbSchema from "@/shared/components/seo/BreadcrumbSchema.astro";
-import CategoryIcon from "@/shared/components/ui/CategoryIcon.astro";
 import PaginationNav from "@/shared/components/ui/PaginationNav.astro";
-import { categories } from "@/shared/config/categories";
 import { SITE_URL } from "@/shared/config/consts";
 import { getSortedPublishedPosts, transformPostForCard } from "@/shared/utils/blog";
 
 type PostCardData = ReturnType<typeof transformPostForCard>;
 
 export const getStaticPaths = (async ({ paginate }) => {
-  const allPosts = await getSortedPublishedPosts("ko");
+  const allPosts = await getSortedPublishedPosts("en");
   const postsData = allPosts.map((post) => transformPostForCard(post));
 
   return paginate(postsData, {
@@ -29,17 +26,17 @@ const allPostsData = (Astro.props.allPostsData as PostCardData[]) ?? page.data;
 const pageVisibleSlugs = new Set<string>(page.data.map((post: PostCardData) => post.slug));
 
 const pageTitle = page.currentPage === 1 ? "Blog" : `Blog (Page ${page.currentPage})`;
-const pageDescription = "아끼지 않는 문제 해결사로서, 문제를 정의하고 해결한 기록을 남깁니다.";
+const pageDescription = "English translations of selected Log8 posts.";
 
 const collectionPageSchema = {
   "@context": "https://schema.org",
   "@type": "CollectionPage",
-  "@id": `${SITE_URL}/blog/#collection`,
+  "@id": `${SITE_URL}/en/blog/#collection`,
   name: pageTitle,
   description: pageDescription,
   url: `${SITE_URL}${page.url.current}`,
   isPartOf: { "@id": `${SITE_URL}/#website` },
-  inLanguage: "ko-KR",
+  inLanguage: "en-US",
   numberOfItems: page.total,
 };
 ---
@@ -49,7 +46,7 @@ const collectionPageSchema = {
   description={pageDescription}
   og_image="/og/page/blog.png"
   twitter_image="/og/page/blog.png"
-  featured_image_alt="Log8 블로그 아카이브 대표 이미지"
+  featured_image_alt="Log8 blog archive cover image"
   og_type="website"
 >
   <Fragment slot="head">
@@ -57,8 +54,8 @@ const collectionPageSchema = {
     {page.url.next && <link rel="next" href={page.url.next} />}
     <script type="application/ld+json" is:inline set:text={JSON.stringify(collectionPageSchema)} />
     <BreadcrumbSchema items={[
-      { name: "홈", url: "/" },
-      { name: "블로그", url: "/blog/" },
+      { name: "Home", url: "/en/" },
+      { name: "Blog", url: "/en/blog/" },
     ]} />
   </Fragment>
 
@@ -66,30 +63,6 @@ const collectionPageSchema = {
     <header class="mb-8">
       <h1 class="text-3xl md:text-4xl font-extrabold text-text mb-3">Blog</h1>
       <p class="text-text-light leading-relaxed">{pageDescription}</p>
-
-      <div class="mt-5">
-        <CategoryFilter />
-      </div>
-
-      <div class="mt-4 flex flex-wrap gap-2">
-        <a
-          href="/blog/"
-          class="px-3 py-1.5 rounded-lg bg-background-muted text-text-muted border border-background-lighter hover:bg-primary hover:text-on-primary transition-colors duration-200 text-xs font-medium"
-        >
-          전체 글 페이지
-        </a>
-        {
-          categories.map((category) => (
-            <a
-              href={`/category/${category.id}/`}
-              class="px-3 py-1.5 rounded-lg bg-background-muted text-text-muted border border-background-lighter hover:bg-primary hover:text-on-primary transition-colors duration-200 text-xs font-medium"
-            >
-              <CategoryIcon categoryId={category.id} class="w-3.5 h-3.5" />
-              <span>{category.name}</span>
-            </a>
-          ))
-        }
-      </div>
     </header>
 
     {
@@ -108,18 +81,13 @@ const collectionPageSchema = {
               featuredImage={post.featuredImage}
               featuredImageAlt={post.featuredImageAlt}
               pageVisible={pageVisibleSlugs.has(post.slug)}
+              locale="en"
             />
           ))}
         </section>
-        <div
-          id="blog-filter-empty-state"
-          class="hidden text-center p-16 text-text-light text-lg flex-1 md:p-12 md:text-base"
-        >
-          조건에 맞는 글이 없습니다. 검색어나 카테고리를 변경해보세요.
-        </div>
       ) : (
         <div class="text-center p-16 text-text text-lg flex-1 md:p-12 md:text-base">
-          No posts found. Check back soon!
+          No English posts yet. Check back soon.
         </div>
       )
     }
@@ -135,15 +103,4 @@ const collectionPageSchema = {
       nextUrl={page.url.next}
     />
   </div>
-
-  <script>
-    import { setupBlogFilter } from "../../shared/scripts/blog-filter.ts";
-
-    document.addEventListener("astro:page-load", setupBlogFilter);
-    if (document.readyState === "loading") {
-      document.addEventListener("DOMContentLoaded", setupBlogFilter);
-    } else {
-      setupBlogFilter();
-    }
-  </script>
 </Layout>

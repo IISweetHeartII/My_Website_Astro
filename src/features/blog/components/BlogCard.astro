@@ -1,6 +1,7 @@
 ---
 import { ArrowRight } from "lucide-astro";
 import FormattedDate from "@/shared/components/ui/FormattedDate.astro";
+import { type Locale, withLocalePath } from "@/shared/i18n/ui";
 import { getUrl } from "@/shared/utils/url";
 
 interface Props {
@@ -15,6 +16,7 @@ interface Props {
   pageVisible?: boolean;
   featuredImage?: string;
   featuredImageAlt?: string;
+  locale?: Locale;
 }
 
 const {
@@ -29,7 +31,10 @@ const {
   pageVisible = true,
   featuredImage,
   featuredImageAlt,
+  locale = "ko",
 } = Astro.props;
+
+const href = withLocalePath(`/blog/${slug}/`, locale);
 ---
 
 <article
@@ -44,7 +49,7 @@ const {
   data-page-visible={pageVisible ? "true" : "false"}
 >
   <a
-    href={getUrl(`/blog/${slug}/`)}
+    href={getUrl(href)}
     class="block text-inherit no-underline h-full"
     transition:name={`blog-card-${slug}`}
   >

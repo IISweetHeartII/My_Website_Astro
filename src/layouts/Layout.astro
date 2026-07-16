@@ -5,6 +5,12 @@ import Footer from "@/shared/components/layout/Footer.astro";
 import Header from "@/shared/components/layout/Header.astro";
 import GoogleAnalytics from "@/shared/components/seo/GoogleAnalytics.astro";
 import ProgressIndicator from "@/shared/components/ui/ProgressIndicator.astro";
+import {
+  getLocaleFromPathname,
+  htmlLang,
+  type Locale,
+  type LocalizedCollection,
+} from "@/shared/i18n/ui";
 import "@/styles/theme.css";
 
 interface Props {
@@ -26,6 +32,8 @@ interface Props {
   keywords?: string[];
   author?: string;
   no_index?: boolean;
+  contentCollection?: LocalizedCollection;
+  translationKey?: string | null;
 }
 
 const {
@@ -47,11 +55,16 @@ const {
   keywords,
   author,
   no_index,
+  contentCollection,
+  translationKey,
 } = Astro.props;
+
+const currentLocale =
+  (Astro.currentLocale as Locale | undefined) ?? getLocaleFromPathname(Astro.url.pathname);
 ---
 
 <!doctype html>
-<html lang="ko" data-theme="light">
+<html lang={htmlLang[currentLocale]} data-theme="light">
   <head>
     <GoogleAnalytics />
     <script is:inline>
@@ -81,13 +94,15 @@ const {
       keywords={keywords}
       author={author}
       no_index={no_index}
+      contentCollection={contentCollection}
+      translationKey={translationKey}
     />
     <slot name="head" />
   </head>
   <body class="bg-background text-text flex flex-col min-h-screen">
     <ProgressIndicator />
-    <a href="#main-content" class="skip-link">본문으로 바로가기</a>
-    <Header />
+    <a href="#main-content" class="skip-link">{currentLocale === "en" ? "Skip to content" : "본문으로 바로가기"}</a>
+    <Header locale={currentLocale} />
     <main id="main-content" class="grow" tabindex="-1">
       <slot />
     </main>

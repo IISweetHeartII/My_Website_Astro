@@ -1,7 +1,16 @@
 ---
 import "@/styles/global.css";
+import { getCollection } from "astro:content";
 import Fonts from "@/shared/components/seo/Fonts.astro";
 import { DEFAULT_OG_IMAGE, OG_IMAGE_VERSION } from "@/shared/config/consts";
+import {
+  getEntryPath,
+  getLocaleFromPathname,
+  isPublishedInLocale,
+  type Locale,
+  type LocalizedCollection,
+  ogLocale,
+} from "@/shared/i18n/ui";
 import { getUrl } from "@/shared/utils/url";
 
 interface Props {
@@ -23,6 +32,8 @@ interface Props {
   keywords?: string[];
   author?: string;
   no_index?: boolean;
+  contentCollection?: LocalizedCollection;
+  translationKey?: string | null;
 }
 
 const canonicalURL = new globalThis.URL(Astro.url.pathname, Astro.site);
@@ -46,7 +57,38 @@ const {
   keywords = [],
   author,
   no_index = false,
+  contentCollection,
+  translationKey,
 } = Astro.props;
+
+const currentLocale =
+  (Astro.currentLocale as Locale | undefined) ?? getLocaleFromPathname(Astro.url.pathname);
+const alternateLinks = [] as { locale: Locale | "x-default"; href: string }[];
+
+if (contentCollection && translationKey) {
+  const entries = await getCollection(
+    contentCollection,
+    ({ data }) => data.translationKey === translationKey
+  );
+  const koEntry = entries.find((entry) => isPublishedInLocale(entry, "ko"));
+  const enEntry = entries.find((entry) => isPublishedInLocale(entry, "en"));
+
+  if (koEntry && enEntry) {
+    const koHref = new globalThis.URL(
+      getEntryPath(contentCollection, koEntry),
+      Astro.site
+    ).toString();
+    const enHref = new globalThis.URL(
+      getEntryPath(contentCollection, enEntry),
+      Astro.site
+    ).toString();
+    alternateLinks.push(
+      { locale: "ko", href: koHref },
+      { locale: "en", href: enHref },
+      { locale: "x-default", href: koHref }
+    );
+  }
+}
 
 // Implement cascading fallbacks for all metadata fields
 const finalMetaTitle = meta_title || title;
@@ -122,6 +164,7 @@ const twitterImageType = getImageType(absoluteTwitterImage);
 
 <!-- Canonical URL -->
 <link rel="canonical" href={canonical_url || canonicalURL} />
+{alternateLinks.map((link) => <link rel="alternate" hreflang={link.locale} href={link.href} />)}
 
 <!-- Primary Meta Tags -->
 <title>{finalMetaTitle}</title>
@@ -148,6 +191,10 @@ const twitterImageType = getImageType(absoluteTwitterImage);
 <meta property="og:image:width" content={OG_IMAGE_WIDTH} />
 <meta property="og:image:height" content={OG_IMAGE_HEIGHT} />
 <meta property="og:image:alt" content={finalImageAlt} />
+<meta property="og:locale" content={ogLocale[currentLocale]} />
+{alternateLinks.filter((link): link is { locale: Locale; href: string } => link.locale !== "x-default" && link.locale !== currentLocale).map((link) => (
+  <meta property="og:locale:alternate" content={ogLocale[link.locale]} />
+))}
 
 <!-- Twitter -->
 <meta name="twitter:card" content={twitter_card} />

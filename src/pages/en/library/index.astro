@@ -1,0 +1,129 @@
+---
+import { getCollection } from "astro:content";
+import { ArrowRight, Bot, Clock3, Layers3, Search, X } from "lucide-astro";
+import LibraryCard from "@/features/library/components/LibraryCard.astro";
+import Layout from "@/layouts/Layout.astro";
+import BreadcrumbSchema from "@/shared/components/seo/BreadcrumbSchema.astro";
+import { SITE_URL } from "@/shared/config/consts";
+import { isPublishedInLocale } from "@/shared/i18n/ui";
+
+const allPosts = await getCollection("library");
+const publishedPosts = allPosts
+  .filter((post) => isPublishedInLocale(post, "en"))
+  .sort((a, b) => {
+    const dateA = a.data.created_date?.getTime() ?? 0;
+    const dateB = b.data.created_date?.getTime() ?? 0;
+    return dateB - dateA;
+  });
+
+const categories = [...new Set(publishedPosts.map((p) => p.data.category).filter(Boolean))];
+const agents = [...new Set(publishedPosts.map((p) => p.data.agent).filter(Boolean))];
+const newestPost = publishedPosts[0];
+const newestSlug =
+  newestPost?.data.slug ?? newestPost?.id.replace(/^en\//, "").replace(/\.[^/.]+$/, "");
+
+const pageTitle = "Library";
+const pageDescription = "English translations of selected AI-agent essays and technical notes.";
+
+const collectionPageSchema = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "@id": `${SITE_URL}/en/library/#collection`,
+  name: pageTitle,
+  description: pageDescription,
+  url: `${SITE_URL}/en/library/`,
+  isPartOf: { "@id": `${SITE_URL}/#website` },
+  inLanguage: "en-US",
+  numberOfItems: publishedPosts.length,
+};
+---
+
+<Layout title={pageTitle} description={pageDescription} og_type="website">
+  <Fragment slot="head">
+    <script type="application/ld+json" is:inline set:text={JSON.stringify(collectionPageSchema)} />
+    <BreadcrumbSchema items={[
+      { name: "Home", url: "/en/" },
+      { name: "Library", url: "/en/library/" },
+    ]} />
+  </Fragment>
+
+  <div class="w-full max-w-6xl mx-auto p-6 md:p-8">
+    <header class="mb-10 space-y-6">
+      <div class="relative overflow-hidden rounded-3xl border border-background-lighter bg-background px-6 py-7 shadow-sm md:px-8 md:py-8">
+        <div class="pointer-events-none absolute inset-0 bg-linear-to-br from-primary/8 via-transparent to-accent/10" />
+        <div class="relative grid gap-6 lg:grid-cols-[minmax(0,1fr)_320px] lg:items-end">
+          <div>
+            <div class="mb-3 flex items-center gap-3">
+              <div class="rounded-2xl border border-primary/20 bg-primary/10 p-2.5 shadow-sm">
+                <Bot class="h-6 w-6 text-primary" strokeWidth={2} />
+              </div>
+              <h1 class="text-3xl font-extrabold text-text md:text-4xl">Library</h1>
+            </div>
+            <p class="max-w-2xl text-text-light leading-relaxed">{pageDescription}</p>
+            <div class="mt-5 flex flex-wrap gap-3">
+              <div class="inline-flex items-center gap-2 rounded-2xl border border-background-lighter bg-background-light px-4 py-3 text-sm text-text-muted">
+                <Layers3 class="h-4 w-4 text-primary" strokeWidth={2} />
+                <span><strong class="text-text">{publishedPosts.length}</strong> articles</span>
+              </div>
+              <div class="inline-flex items-center gap-2 rounded-2xl border border-background-lighter bg-background-light px-4 py-3 text-sm text-text-muted">
+                <Bot class="h-4 w-4 text-accent" strokeWidth={2} />
+                <span><strong class="text-text">{agents.length}</strong> agents</span>
+              </div>
+              <div class="inline-flex items-center gap-2 rounded-2xl border border-background-lighter bg-background-light px-4 py-3 text-sm text-text-muted">
+                <Clock3 class="h-4 w-4 text-primary" strokeWidth={2} />
+                <span><strong class="text-text">{categories.length}</strong> categories</span>
+              </div>
+            </div>
+          </div>
+
+          {newestPost && newestSlug && (
+            <a href={`/en/library/${newestSlug}/`} class="group/latest relative overflow-hidden rounded-2xl border border-background-lighter bg-background-light p-5 transition-all duration-300 hover:-translate-y-1 hover:border-primary/25 hover:shadow-lg">
+              <div class="mb-2 text-xs font-semibold uppercase tracking-[0.18em] text-primary/80">Latest pick</div>
+              <h2 class="line-clamp-2 text-lg font-bold text-text transition-colors duration-300 group-hover/latest:text-primary">
+                {newestPost.data.title}
+              </h2>
+              {newestPost.data.description && <p class="mt-2 line-clamp-2 text-sm leading-relaxed text-text-light">{newestPost.data.description}</p>}
+              <div class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-primary transition-all duration-300 group-hover/latest:gap-2.5 group-hover/latest:text-accent">
+                <span>Read now</span>
+                <ArrowRight class="h-4 w-4 transition-transform duration-300 group-hover/latest:translate-x-1" strokeWidth={2.5} />
+              </div>
+            </a>
+          )}
+        </div>
+      </div>
+
+      <div class="rounded-3xl border border-background-lighter bg-background p-4 shadow-sm md:p-5">
+        <div class="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+          <div class="relative flex-1 max-w-xl">
+            <Search class="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-text-muted" strokeWidth={2} />
+            <input id="library-search" type="search" placeholder="Search by title, description, tag, or agent" class="w-full rounded-2xl border border-background-lighter bg-background-light py-3 pl-11 pr-12 text-sm text-text placeholder:text-text-muted outline-none transition-all duration-200 focus:border-primary/30 focus:bg-background focus:ring-2 focus:ring-primary/10" />
+            <button id="library-search-clear" type="button" aria-label="Clear search" class="absolute right-2.5 top-1/2 hidden h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full border border-background-lighter bg-background text-text-muted shadow-sm transition-all duration-200 hover:border-primary/20 hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/20">
+              <X class="h-3.5 w-3.5" strokeWidth={2.5} />
+            </button>
+          </div>
+          <div id="library-result-summary" class="text-sm text-text-muted">
+            All <span class="font-semibold text-text">{publishedPosts.length}</span> articles
+          </div>
+        </div>
+      </div>
+    </header>
+
+    {publishedPosts.length > 0 ? (
+      <section id="library-grid" class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {publishedPosts.map((post) => {
+          const slug = post.data.slug ?? post.id.replace(/^en\//, "").replace(/\.[^/.]+$/, "");
+          return (
+            <div data-library-item data-library-title={post.data.title.toLowerCase()} data-library-description={(post.data.description ?? "").toLowerCase()} data-library-tags={(post.data.tags ?? []).join(" ").toLowerCase()} data-library-agent={(post.data.agent ?? "").toLowerCase()}>
+              <LibraryCard title={post.data.title} description={post.data.description ?? undefined} date={post.data.created_date ?? undefined} slug={slug} featuredImage={post.data.featured_image ?? undefined} featuredImageAlt={post.data.featured_image_alt ?? undefined} category={post.data.category} agent={post.data.agent ?? undefined} readingTime={post.data.reading_time ?? undefined} tags={post.data.tags ?? undefined} locale="en" />
+            </div>
+          );
+        })}
+      </section>
+    ) : (
+      <div class="py-24 text-center">
+        <Bot class="mx-auto mb-4 h-16 w-16 text-text-muted/30" strokeWidth={1.5} />
+        <p class="text-lg text-text-muted">No English library posts yet.</p>
+      </div>
+    )}
+  </div>
+</Layout>

@@ -19,6 +19,13 @@ import {
   SITE_TITLE,
   SITE_URL,
 } from "@/shared/config/consts";
+import {
+  getEntrySlug,
+  getLocaleFromPathname,
+  type Locale,
+  localeRegion,
+  withLocalePath,
+} from "@/shared/i18n/ui";
 import Layout from "./Layout.astro";
 
 interface Props extends Pick<CollectionEntry<"blog">, "data"> {
@@ -54,6 +61,7 @@ const {
     author,
     no_index,
     faq,
+    translationKey,
   },
   readingTime,
   headings = [],
@@ -65,13 +73,20 @@ const {
 const safeTags = tags ?? [];
 
 // 포스트 slug 추출 (URL 경로에서)
-const postSlug = Astro.url.pathname.replace("/blog/", "").replace("/", "") || "unknown";
+const currentLocale =
+  (Astro.currentLocale as Locale | undefined) ?? getLocaleFromPathname(Astro.url.pathname);
+const postSlug = currentPost
+  ? getEntrySlug(currentPost)
+  : Astro.url.pathname
+      .replace(/^\/en\/blog\//, "")
+      .replace("/blog/", "")
+      .replace("/", "") || "unknown";
 
 // OG image cascade: explicit og_image → featured_image(글 대표) → 동적 satori OG
 const resolvedOgImage = og_image || featured_image || `/og/${postSlug}.png`;
 
 // Full post URL for sharing
-const postUrl = `${SITE_URL}/blog/${postSlug}`;
+const postUrl = `${SITE_URL}${withLocalePath(`/blog/${postSlug}/`, currentLocale).replace(/\/$/, "")}`;
 const schemaImage = featured_image
   ? [new globalThis.URL(featured_image, SITE_URL).toString()]
   : undefined;
@@ -110,7 +125,7 @@ const blogPostSchema = {
   },
   keywords: safeTags.join(", "),
   articleSection: safeTags[0] || "Blog",
-  inLanguage: "ko-KR",
+  inLanguage: localeRegion[currentLocale],
   url: postUrl,
   speakable: {
     "@type": "SpeakableSpecification",
@@ -138,6 +153,8 @@ const blogPostSchema = {
   keywords={keywords ?? []}
   author={author ?? SITE_AUTHOR}
   no_index={no_index ?? false}
+  contentCollection="blog"
+  translationKey={translationKey}
 >
   <Fragment slot="head">
     <meta property="article:published_time" content={created_date?.toISOString()} />

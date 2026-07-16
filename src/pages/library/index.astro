@@ -5,10 +5,11 @@ import LibraryCard from "@/features/library/components/LibraryCard.astro";
 import Layout from "@/layouts/Layout.astro";
 import BreadcrumbSchema from "@/shared/components/seo/BreadcrumbSchema.astro";
 import { SITE_URL } from "@/shared/config/consts";
+import { isPublishedInLocale } from "@/shared/i18n/ui";
 
 const allPosts = await getCollection("library");
 const publishedPosts = allPosts
-  .filter((post) => post.data.publish)
+  .filter((post) => isPublishedInLocale(post, "ko"))
   .sort((a, b) => {
     const dateA = a.data.created_date?.getTime() ?? 0;
     const dateB = b.data.created_date?.getTime() ?? 0;

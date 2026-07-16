@@ -131,6 +131,13 @@ const addContentLastmod = (item) => {
 export default defineConfig({
   site: SITE_URL,
   base: "/",
+  i18n: {
+    defaultLocale: "ko",
+    locales: ["ko", "en"],
+    routing: {
+      prefixDefaultLocale: false,
+    },
+  },
   // 이미지 최적화 설정 (Sharp는 기본값)
   image: {
     domains: ["log8.kr"], // 원격 이미지 도메인 보안

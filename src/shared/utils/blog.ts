@@ -1,5 +1,6 @@
 import { type CollectionEntry, getCollection } from "astro:content";
 import { categoryMap } from "@/shared/config/categories";
+import { isPublishedInLocale, type Locale } from "@/shared/i18n/ui";
 
 /**
  * Get a valid timestamp from a date, or return 0 if invalid
@@ -13,9 +14,9 @@ function getValidTimestamp(date: Date | null | undefined): number {
 /**
  * Get all published blog posts
  */
-export async function getPublishedPosts(): Promise<CollectionEntry<"blog">[]> {
+export async function getPublishedPosts(locale: Locale = "ko"): Promise<CollectionEntry<"blog">[]> {
   const posts = await getCollection("blog");
-  return posts.filter((post: CollectionEntry<"blog">) => post.data.publish);
+  return posts.filter((post: CollectionEntry<"blog">) => isPublishedInLocale(post, locale));
 }
 
 /**
@@ -42,8 +43,10 @@ export function getLatestPosts(
 /**
  * Get all published posts, sorted by date
  */
-export async function getSortedPublishedPosts(): Promise<CollectionEntry<"blog">[]> {
-  const posts = await getPublishedPosts();
+export async function getSortedPublishedPosts(
+  locale: Locale = "ko"
+): Promise<CollectionEntry<"blog">[]> {
+  const posts = await getPublishedPosts(locale);
   return sortPostsByDate(posts);
 }
 

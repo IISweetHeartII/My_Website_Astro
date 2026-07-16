@@ -1,14 +1,14 @@
 ---
 import { type CollectionEntry, getCollection, render } from "astro:content";
+import BlogPost from "@/layouts/BlogPost.astro";
 import { isPublishedInLocale } from "@/shared/i18n/ui";
 import { getRelatedPosts } from "@/shared/utils/blog";
 import { calculateReadingTime } from "@/shared/utils/reading-time";
-import BlogPost from "../../layouts/BlogPost.astro";
 
 export async function getStaticPaths() {
-  const posts = (await getCollection("blog")).filter((post) => isPublishedInLocale(post, "ko"));
+  const posts = (await getCollection("blog")).filter((post) => isPublishedInLocale(post, "en"));
   return posts.map((post) => {
-    const slug = post.data.slug || post.id.replace(/\.[^/.]+$/, "");
+    const slug = post.data.slug || post.id.replace(/^en\//, "").replace(/\.[^/.]+$/, "");
     return {
       params: { slug },
       props: { post },
@@ -21,18 +21,11 @@ type Props = {
 };
 
 const { post } = Astro.props;
-
-// Render content and get headings
 const { Content, headings } = await render(post);
-
-// Reading time
 const readingTime = calculateReadingTime(post.body ?? "");
-
-// Related posts
-const allPosts = (await getCollection("blog")).filter((p) => isPublishedInLocale(p, "ko"));
+const allPosts = (await getCollection("blog")).filter((p) => isPublishedInLocale(p, "en"));
 const relatedPosts = getRelatedPosts(post, allPosts);
 
-// Series posts
 let seriesPosts: CollectionEntry<"blog">[] = [];
 if (post.data.series) {
   seriesPosts = allPosts
