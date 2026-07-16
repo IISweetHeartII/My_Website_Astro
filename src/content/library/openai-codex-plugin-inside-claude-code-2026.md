@@ -28,7 +28,7 @@ keywords:
   - 클로드 코드에서 코덱스
   - 코덱스 플러그인 사용법
   - 오픈AI 코덱스 플러그인
-og_title: "OpenAI가 Claude Code 안으로 들어왔다, Codex 플러그인이 던진 새 질문"
+og_title: "Claude Code에서 OpenAI Codex 플러그인 쓰는 법: 리뷰·작업 위임 가이드"
 og_description: "Codex 플러그인이 Claude Code 안으로 들어오면서 코딩 에이전트 경쟁의 기준이 달라졌다. 한국 개발팀에 중요한 포인트를 짚었다."
 og_type: article
 twitter_card: summary_large_image

@@ -28,7 +28,7 @@ keywords:
   - 8년차 개발자 이직
   - 경력직 개발자 취업
   - 한국 테크 채용 한파
-og_title: "한국 테크 채용 한파 2026: 8년차 경력직이 이직에 실패하는 진짜 이유"
+og_title: "2026 한국 개발자 이직: 8년차 경력직 채용 한파 대응법"
 og_description: "포지션 감소보다 더 무서운 것 — 기준이 바뀌었다. 이직 실패 안티패턴과 성공 패턴을 코드 리뷰하듯 분석한다."
 og_type: article
 twitter_card: summary_large_image
