@@ -7,11 +7,19 @@ import BreadcrumbSchema from "@/shared/components/seo/BreadcrumbSchema.astro";
 import FormattedDate from "@/shared/components/ui/FormattedDate.astro";
 import ResponsiveBlogImage from "@/shared/components/ui/ResponsiveBlogImage.astro";
 import { SITE_AUTHOR, SITE_TITLE, SITE_URL } from "@/shared/config/consts";
+import {
+  getEntrySlug,
+  getLocaleFromPathname,
+  isPublishedInLocale,
+  type Locale,
+  localeRegion,
+  withLocalePath,
+} from "@/shared/i18n/ui";
 
 export const getStaticPaths = (async () => {
   const posts = await getCollection("library");
   return posts
-    .filter((post) => post.data.publish)
+    .filter((post) => isPublishedInLocale(post, "ko"))
     .map((post) => {
       const slug = post.data.slug ?? post.id.replace(/\.[^/.]+$/, "");
       return { params: { slug }, props: { post } };
@@ -43,13 +51,18 @@ const {
   twitter_card,
   canonical_url,
   no_index,
+  translationKey,
 } = post.data;
 
 const safeTags = tags ?? [];
-const slug = post.data.slug ?? post.id.replace(/\.[^/.]+$/, "");
+const currentLocale =
+  (Astro.currentLocale as Locale | undefined) ?? getLocaleFromPathname(Astro.url.pathname);
+const slug = getEntrySlug(post);
 const tocHeadings = headings.filter((heading) => heading.depth >= 2 && heading.depth <= 3);
 
-const publishedPosts = (await getCollection("library")).filter((entry) => entry.data.publish);
+const publishedPosts = (await getCollection("library")).filter((entry) =>
+  isPublishedInLocale(entry, currentLocale)
+);
 const agentDisplayName = agent
   ? agent
       .split(/[\s_-]+/)
@@ -84,7 +97,7 @@ const currentTagSet = new Set(safeTags);
 const relatedPosts = publishedPosts
   .filter((entry) => (entry.data.slug ?? entry.id.replace(/\.[^/.]+$/, "")) !== slug)
   .map((entry) => {
-    const entrySlug = entry.data.slug ?? entry.id.replace(/\.[^/.]+$/, "");
+    const entrySlug = getEntrySlug(entry);
     const entryTags = entry.data.tags ?? [];
     const sharedTagCount = entryTags.filter((tag) => currentTagSet.has(tag)).length;
     const sameCategory = category && entry.data.category === category ? 1 : 0;
@@ -101,7 +114,7 @@ const relatedPosts = publishedPosts
   .sort((a, b) => b.relationScore - a.relationScore || b.freshness - a.freshness)
   .slice(0, 3);
 
-const postUrl = `${SITE_URL}/library/${slug}/`;
+const postUrl = `${SITE_URL}${withLocalePath(`/library/${slug}/`, currentLocale)}`;
 const articleSchemaImage = featured_image
   ? [new globalThis.URL(featured_image, SITE_URL).toString()]
   : undefined;
@@ -136,7 +149,7 @@ const articleSchema = {
     "@id": postUrl,
   },
   keywords: safeTags.join(", "),
-  inLanguage: "ko-KR",
+  inLanguage: localeRegion[currentLocale],
   url: postUrl,
 };
 ---
@@ -157,6 +170,8 @@ const articleSchema = {
   canonical_url={canonical_url ?? undefined}
   author={aiAuthorName}
   no_index={no_index}
+  contentCollection="library"
+  translationKey={translationKey}
 >
   <Fragment slot="head">
     <meta property="article:published_time" content={created_date?.toISOString()} />

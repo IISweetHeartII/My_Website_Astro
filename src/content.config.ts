@@ -23,15 +23,33 @@ const dateSchema = z.preprocess(
     .default(() => new Date())
 );
 
+const stripMarkdownExtension = (entry: string) => entry.replace(/\.(md|mdx)$/i, "");
+
+const generateLocalizedId = ({ entry, data }: { entry: string; data: { slug?: unknown } }) => {
+  const dataSlug = data.slug;
+  const slug =
+    typeof dataSlug === "string" && dataSlug.length > 0 ? dataSlug : stripMarkdownExtension(entry);
+  return entry.startsWith("en/") ? `en/${slug}` : slug;
+};
+
 const blog = defineCollection({
   // Load Markdown and MDX files in the `src/content/blog/` directory.
-  loader: glob({ base: "./src/content/blog", pattern: "**/*.{md,mdx}" }),
+  loader: glob({
+    base: "./src/content/blog",
+    pattern: "**/*.{md,mdx}",
+    generateId: generateLocalizedId,
+  }),
   // Type-check frontmatter using a schema
   schema: z.object({
     title: z.string(),
     subtitle: z.string().optional().nullable(),
     description: z.string().optional().nullable(),
     publish: z.boolean().default(true),
+    draft: z.boolean().default(false),
+    lang: z.enum(["ko", "en"]).default("ko"),
+    translationKey: z.string().optional().nullable(),
+    source_hash: z.string().optional().nullable(),
+    translated_at: z.string().optional().nullable(),
     created_date: dateSchema,
     updated_date: dateSchema,
     featured_image: z.string().optional().nullable(),
@@ -84,12 +102,21 @@ const requiredDateSchema = z.preprocess((val) => {
 }, z.date());
 
 const library = defineCollection({
-  loader: glob({ base: "./src/content/library", pattern: "**/*.{md,mdx}" }),
+  loader: glob({
+    base: "./src/content/library",
+    pattern: "**/*.{md,mdx}",
+    generateId: generateLocalizedId,
+  }),
   schema: z.object({
     title: z.string(),
     subtitle: z.string().optional().nullable(),
     description: z.string().optional().nullable(),
     publish: z.boolean().default(true),
+    draft: z.boolean().default(false),
+    lang: z.enum(["ko", "en"]).default("ko"),
+    translationKey: z.string().optional().nullable(),
+    source_hash: z.string().optional().nullable(),
+    translated_at: z.string().optional().nullable(),
     created_date: dateSchema,
     updated_date: dateSchema,
     featured_image: z.string().optional().nullable(),

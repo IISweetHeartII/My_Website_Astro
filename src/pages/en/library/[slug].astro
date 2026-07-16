@@ -1,0 +1,170 @@
+---
+import { getCollection, render } from "astro:content";
+import type { GetStaticPaths } from "astro";
+import { Bot, Clock3 } from "lucide-astro";
+import Layout from "@/layouts/Layout.astro";
+import BreadcrumbSchema from "@/shared/components/seo/BreadcrumbSchema.astro";
+import FormattedDate from "@/shared/components/ui/FormattedDate.astro";
+import ResponsiveBlogImage from "@/shared/components/ui/ResponsiveBlogImage.astro";
+import { SITE_AUTHOR, SITE_TITLE, SITE_URL } from "@/shared/config/consts";
+import { getEntrySlug, isPublishedInLocale, localeRegion, withLocalePath } from "@/shared/i18n/ui";
+
+export const getStaticPaths = (async () => {
+  const posts = await getCollection("library");
+  return posts
+    .filter((post) => isPublishedInLocale(post, "en"))
+    .map((post) => {
+      const slug = getEntrySlug(post);
+      return { params: { slug }, props: { post } };
+    });
+}) satisfies GetStaticPaths;
+
+const { post } = Astro.props;
+const { Content, headings } = await render(post);
+const {
+  title,
+  subtitle,
+  description,
+  created_date,
+  updated_date,
+  featured_image,
+  featured_image_alt,
+  tags,
+  agent,
+  category,
+  reading_time,
+  meta_title,
+  meta_description,
+  keywords,
+  og_title,
+  og_description,
+  og_image,
+  og_type,
+  twitter_card,
+  canonical_url,
+  no_index,
+  translationKey,
+} = post.data;
+
+const safeTags = tags ?? [];
+const slug = getEntrySlug(post);
+const tocHeadings = headings.filter((heading) => heading.depth >= 2 && heading.depth <= 3);
+const postUrl = `${SITE_URL}${withLocalePath(`/library/${slug}/`, "en")}`;
+const aiAuthorName = agent ?? "AI Agent";
+const articleSchemaImage = featured_image
+  ? [new globalThis.URL(featured_image, SITE_URL).toString()]
+  : undefined;
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "@id": `${postUrl}#article`,
+  headline: title,
+  description,
+  image: articleSchemaImage,
+  author: {
+    "@type": "Person",
+    name: aiAuthorName,
+    description: `AI agent operated by ${SITE_AUTHOR}`,
+  },
+  publisher: {
+    "@type": "Organization",
+    "@id": `${SITE_URL}/#publisher`,
+    name: SITE_TITLE,
+    url: SITE_URL,
+    logo: {
+      "@type": "ImageObject",
+      url: `${SITE_URL}/images/design/icon.png`,
+    },
+  },
+  isPartOf: { "@id": `${SITE_URL}/#website` },
+  datePublished: created_date?.toISOString(),
+  dateModified: updated_date?.toISOString() || created_date?.toISOString(),
+  mainEntityOfPage: {
+    "@type": "WebPage",
+    "@id": postUrl,
+  },
+  keywords: safeTags.join(", "),
+  inLanguage: localeRegion.en,
+  url: postUrl,
+};
+---
+
+<Layout
+  title={title}
+  description={description ?? undefined}
+  featured_image={featured_image ?? og_image ?? undefined}
+  featured_image_alt={featured_image_alt ?? undefined}
+  meta_title={meta_title ?? undefined}
+  meta_description={meta_description ?? description ?? undefined}
+  keywords={keywords ?? undefined}
+  og_title={og_title ?? title}
+  og_description={og_description ?? description ?? undefined}
+  og_image={og_image ?? featured_image ?? undefined}
+  og_type={og_type}
+  twitter_card={twitter_card}
+  canonical_url={canonical_url ?? undefined}
+  author={aiAuthorName}
+  no_index={no_index}
+  contentCollection="library"
+  translationKey={translationKey}
+>
+  <Fragment slot="head">
+    <meta property="article:published_time" content={created_date?.toISOString()} />
+    <meta property="article:modified_time" content={(updated_date ?? created_date)?.toISOString()} />
+    <meta property="article:author" content={aiAuthorName} />
+    <script type="application/ld+json" is:inline set:text={JSON.stringify(articleSchema)} />
+    <BreadcrumbSchema items={[
+      { name: "Home", url: "/en/" },
+      { name: "Library", url: "/en/library/" },
+      { name: title, url: `/en/library/${slug}/` },
+    ]} />
+  </Fragment>
+
+  <div class="mx-auto w-full max-w-6xl p-4 md:p-8">
+    <article data-pagefind-body>
+      <div class="grid gap-8 xl:grid-cols-[minmax(0,1fr)_280px] xl:items-start xl:gap-10">
+        <div class="min-w-0">
+          <div class="mb-8 overflow-hidden rounded-[2rem] border border-background-lighter bg-background px-5 py-6 shadow-sm md:px-8 md:py-8">
+            <div class="mb-4 flex flex-wrap items-center justify-center gap-2.5 text-text-muted">
+              {created_date && <div class="inline-flex items-center gap-2 rounded-full border border-background-lighter bg-background-light px-3 py-1.5 text-xs font-medium"><FormattedDate date={created_date} /></div>}
+              {reading_time && <div class="inline-flex items-center gap-1.5 rounded-full border border-background-lighter bg-background-light px-3 py-1.5 text-xs font-medium text-text-muted"><Clock3 class="h-3.5 w-3.5 text-primary" strokeWidth={2} />About {reading_time} min read</div>}
+              {agent && <div class="inline-flex items-center gap-1.5 rounded-full border border-accent/20 bg-accent/10 px-3 py-1.5 text-xs font-semibold text-accent"><Bot class="h-3.5 w-3.5" strokeWidth={2} />{agent}</div>}
+              {category && <div class="rounded-full border border-primary/20 bg-primary/10 px-3 py-1.5 text-xs font-semibold text-primary">{category}</div>}
+            </div>
+
+            <div class="text-center">
+              <h1 class="text-3xl font-bold text-text md:text-5xl">{title}</h1>
+              {subtitle && <p class="mx-auto mt-3 max-w-2xl text-lg leading-relaxed text-text-light">{subtitle}</p>}
+              {!subtitle && description && <p class="mx-auto mt-3 max-w-2xl text-base leading-relaxed text-text-light md:text-lg">{description}</p>}
+            </div>
+
+            {safeTags.length > 0 && <div class="mt-5 flex flex-wrap justify-center gap-2">{safeTags.map((tag: string) => <span class="rounded-full border border-background-lighter bg-background-light px-3 py-1 text-sm text-text">#{tag}</span>)}</div>}
+
+            {featured_image && <div class="mt-6 overflow-hidden rounded-[1.5rem] border border-background-lighter bg-background-light"><ResponsiveBlogImage src={featured_image} alt={featured_image_alt || title} width={1200} height={675} loading="eager" class="featured-image" /></div>}
+          </div>
+
+          <div class="prose prose-xl max-w-none">
+            <Content />
+          </div>
+
+          <div class="mt-12 border-t border-background-lighter pt-6 text-center">
+            <a href="/en/library/" class="inline-flex items-center gap-2 text-primary transition-colors duration-200 hover:text-accent font-medium">
+              Back to Library
+            </a>
+          </div>
+        </div>
+
+        {tocHeadings.length > 0 && (
+          <aside class="space-y-4 xl:sticky xl:top-24">
+            <div class="rounded-3xl border border-background-lighter bg-background p-5 shadow-sm">
+              <p class="text-xs font-semibold uppercase tracking-[0.18em] text-primary/80">On this page</p>
+              <nav class="mt-4 space-y-1.5">
+                {tocHeadings.map((heading) => <a href={`#${heading.slug}`} class="block rounded-2xl px-3 py-2 text-sm leading-relaxed transition-all duration-200 hover:bg-primary/8 hover:text-primary">{heading.text}</a>)}
+              </nav>
+            </div>
+          </aside>
+        )}
+      </div>
+    </article>
+  </div>
+</Layout>
