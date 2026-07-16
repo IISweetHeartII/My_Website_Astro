@@ -53,7 +53,7 @@ faq:
   - question: "장기 실행 작업의 heartbeat는 언제 필요한가요?"
     answer: "수 분 이상 걸리는 빌드, 크롤링, 학습, 대량 검증에는 주기적으로 heartbeat를 남깁니다. Kanban 작업은 오래 침묵하면 dispatcher가 stale run으로 회수할 수 있습니다."
   - question: "운영 문서에 내부 경로를 그대로 써도 되나요?"
-    answer: "공개 글에는 쓰면 안 됩니다. 내부 경로, 토큰명, 개인 채널명, 계정 식별자는 `<PROFILE_HOME>`이나 `<GATEWAY_credential-marker>` 같은 플레이스홀더로 바꾼 뒤 credential-marker grep을 통과해야 합니다."
+    answer: "공개 글에는 쓰면 안 됩니다. 내부 경로, 토큰명, 개인 채널명, 계정 식별자는 `<PROFILE_HOME>`이나 `<GATEWAY_CREDENTIAL>` 같은 플레이스홀더로 바꾼 뒤 공개 패턴 검사를 통과해야 합니다."
   - question: "작은 실패 알림이 반복될 때 운영자는 무엇을 해야 하나요?"
     answer: "동일 원인의 반복 실패는 매번 보고하지 말고 dedupe합니다. 새 정보가 없으면 조용히 누적하고, 인간 결정이 필요할 때만 원인·영향·선택지를 담아 알립니다."
   - question: "가이드 본문은 어떻게 업데이트하나요?"
@@ -277,7 +277,7 @@ Evidence: <검증 명령과 exit code, 공개 가능한 산출물 식별자>
 ```bash
 # 공개 가이드 대상에서 민감한 영문 표식과 사설 주소 형태를 찾는다.
 p1='1''00\.'; p2='4''9\.'
-grep -nEi "credential-marker|${p1}|${p2}" \
+grep -nEi "인증값-표식|${p1}|${p2}" \
   src/content/guides/hermes-operations-guide.md
 ```
 
