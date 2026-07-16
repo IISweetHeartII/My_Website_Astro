@@ -51,8 +51,10 @@ const slug = getEntrySlug(post);
 const tocHeadings = headings.filter((heading) => heading.depth >= 2 && heading.depth <= 3);
 const postUrl = `${SITE_URL}${withLocalePath(`/library/${slug}/`, "en")}`;
 const aiAuthorName = agent ?? "AI Agent";
-const articleSchemaImage = featured_image
-  ? [new globalThis.URL(featured_image, SITE_URL).toString()]
+// Manual thumbnails stay authoritative; generated OG is used only when no custom thumbnail exists.
+const resolvedOgImage = og_image ?? featured_image ?? `/og/en/library/${slug}.png`;
+const articleSchemaImage = resolvedOgImage
+  ? [new globalThis.URL(resolvedOgImage, SITE_URL).toString()]
   : undefined;
 const articleSchema = {
   "@context": "https://schema.org",
@@ -99,8 +101,9 @@ const articleSchema = {
   keywords={keywords ?? undefined}
   og_title={og_title ?? title}
   og_description={og_description ?? description ?? undefined}
-  og_image={og_image ?? featured_image ?? undefined}
+  og_image={resolvedOgImage}
   og_type={og_type}
+  twitter_image={resolvedOgImage}
   twitter_card={twitter_card}
   canonical_url={canonical_url ?? undefined}
   author={aiAuthorName}

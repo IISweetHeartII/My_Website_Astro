@@ -1,30 +1,85 @@
+import { readFile } from "node:fs/promises";
+import path from "node:path";
 import satori from "satori";
 import sharp from "sharp";
+import { SITE_AUTHOR, SITE_TITLE } from "@/shared/config/consts";
 
-const NOTO_SANS_KR_URL =
-  "https://cdn.jsdelivr.net/fontsource/fonts/noto-sans-kr@latest/korean-700-normal.ttf";
+const NOTO_SANS_KR_FONT_PATH = path.join(process.cwd(), "src/assets/fonts/noto-sans-kr-700.ttf");
 
 let fontCache: ArrayBuffer | null = null;
 
 async function loadFont(): Promise<ArrayBuffer> {
   if (fontCache) return fontCache;
 
-  const res = await fetch(NOTO_SANS_KR_URL);
-  if (!res.ok) {
-    throw new Error(`Failed to fetch font: ${res.status}`);
-  }
-  fontCache = await res.arrayBuffer();
+  const fontBuffer = await readFile(NOTO_SANS_KR_FONT_PATH);
+  fontCache = fontBuffer.buffer.slice(
+    fontBuffer.byteOffset,
+    fontBuffer.byteOffset + fontBuffer.byteLength
+  ) as ArrayBuffer;
   return fontCache;
 }
 
 function getTitleFontSize(title: string): string {
-  if (title.length > 50) return "34px";
-  if (title.length > 30) return "44px";
-  return "54px";
+  if (title.length > 64) return "32px";
+  if (title.length > 48) return "38px";
+  if (title.length > 30) return "46px";
+  return "56px";
 }
 
-export async function generateOgImage(title: string, category?: string): Promise<Uint8Array> {
+export interface OgImageOptions {
+  title: string;
+  category?: string | null;
+  author?: string | null;
+  collection?: "blog" | "library" | "guides" | "page" | "default";
+  siteName?: string;
+}
+
+function normalizeOgOptions(
+  titleOrOptions: string | OgImageOptions,
+  category?: string
+): OgImageOptions {
+  if (typeof titleOrOptions === "string") {
+    return {
+      title: titleOrOptions,
+      category,
+      author: SITE_AUTHOR,
+      collection: "blog",
+      siteName: SITE_TITLE,
+    };
+  }
+
+  return {
+    author: SITE_AUTHOR,
+    collection: "blog",
+    siteName: SITE_TITLE,
+    ...titleOrOptions,
+  };
+}
+
+function getCollectionLabel(collection: OgImageOptions["collection"]): string {
+  if (collection === "library") return "Library";
+  if (collection === "guides") return "Guides";
+  if (collection === "page") return "Page";
+  return "Blog";
+}
+
+// Use the existing satori + sharp dependency pair instead of adding astro-og-canvas:
+// it keeps the Astro endpoint lightweight, produces deterministic PNGs at build time,
+// and lets us embed the Korean font from the repository instead of relying on system fonts.
+export async function generateOgImage(
+  titleOrOptions: string | OgImageOptions,
+  category?: string
+): Promise<Uint8Array> {
+  const {
+    title,
+    author,
+    collection,
+    siteName,
+    category: optionCategory,
+  } = normalizeOgOptions(titleOrOptions, category);
+  const categoryLabel = category ?? optionCategory;
   const fontData = await loadFont();
+  const collectionLabel = getCollectionLabel(collection);
 
   const svg = await satori(
     {
@@ -37,12 +92,42 @@ export async function generateOgImage(title: string, category?: string): Promise
           flexDirection: "column",
           justifyContent: "space-between",
           alignItems: "stretch",
-          background: "linear-gradient(135deg, #1e1b4b 0%, #4c1d95 40%, #6d28d9 70%, #a855f7 100%)",
+          background: "linear-gradient(135deg, #1e1b4b 0%, #4c1d95 38%, #6d28d9 68%, #a855f7 100%)",
           fontFamily: "Noto Sans KR",
           overflow: "hidden",
+          position: "relative",
         },
         children: [
-          // Top decorative row: left accent bar + category badge
+          {
+            type: "div",
+            props: {
+              style: {
+                position: "absolute",
+                right: "-140px",
+                top: "-140px",
+                width: "420px",
+                height: "420px",
+                borderRadius: "9999px",
+                background: "rgba(216,180,254,0.18)",
+              },
+              children: "",
+            },
+          },
+          {
+            type: "div",
+            props: {
+              style: {
+                position: "absolute",
+                left: "-120px",
+                bottom: "-160px",
+                width: "520px",
+                height: "520px",
+                borderRadius: "9999px",
+                background: "rgba(49,46,129,0.42)",
+              },
+              children: "",
+            },
+          },
           {
             type: "div",
             props: {
@@ -50,49 +135,74 @@ export async function generateOgImage(title: string, category?: string): Promise
                 display: "flex",
                 flexDirection: "row",
                 alignItems: "center",
+                justifyContent: "space-between",
                 paddingTop: "56px",
-                paddingLeft: "60px",
-                paddingRight: "60px",
-                gap: "20px",
+                paddingLeft: "64px",
+                paddingRight: "64px",
               },
               children: [
-                // Left vertical accent bar
                 {
                   type: "div",
                   props: {
                     style: {
                       display: "flex",
-                      width: "5px",
-                      height: "32px",
-                      borderRadius: "3px",
-                      background: "#c084fc",
+                      flexDirection: "row",
+                      alignItems: "center",
+                      gap: "16px",
                     },
-                    children: "",
+                    children: [
+                      {
+                        type: "div",
+                        props: {
+                          style: {
+                            display: "flex",
+                            width: "5px",
+                            height: "34px",
+                            borderRadius: "3px",
+                            background: "#d8b4fe",
+                          },
+                          children: "",
+                        },
+                      },
+                      {
+                        type: "div",
+                        props: {
+                          style: {
+                            display: "flex",
+                            fontSize: "20px",
+                            fontWeight: 700,
+                            color: "rgba(255,255,255,0.92)",
+                            background: "rgba(192,132,252,0.20)",
+                            padding: "8px 22px",
+                            borderRadius: "9999px",
+                            border: "1px solid rgba(216,180,254,0.38)",
+                            letterSpacing: "0.02em",
+                          },
+                          children: categoryLabel || collectionLabel,
+                        },
+                      },
+                    ],
                   },
                 },
-                // Category badge (or site name if no category)
                 {
                   type: "div",
                   props: {
                     style: {
                       display: "flex",
-                      fontSize: "20px",
+                      fontSize: "18px",
                       fontWeight: 700,
-                      color: "rgba(255,255,255,0.90)",
-                      background: "rgba(192,132,252,0.18)",
-                      padding: "7px 22px",
+                      color: "rgba(255,255,255,0.82)",
+                      background: "rgba(15,23,42,0.18)",
+                      padding: "8px 18px",
                       borderRadius: "9999px",
-                      border: "1px solid rgba(192,132,252,0.35)",
-                      letterSpacing: "0.02em",
+                      border: "1px solid rgba(255,255,255,0.14)",
                     },
-                    children: category || "log8.kr",
+                    children: collectionLabel,
                   },
                 },
               ],
             },
           },
-
-          // Center: title block
           {
             type: "div",
             props: {
@@ -102,10 +212,11 @@ export async function generateOgImage(title: string, category?: string): Promise
                 justifyContent: "center",
                 alignItems: "flex-start",
                 flex: 1,
-                paddingLeft: "64px",
-                paddingRight: "80px",
-                paddingTop: "20px",
-                paddingBottom: "20px",
+                paddingLeft: "68px",
+                paddingRight: "88px",
+                paddingTop: "22px",
+                paddingBottom: "24px",
+                gap: "24px",
               },
               children: [
                 {
@@ -116,19 +227,30 @@ export async function generateOgImage(title: string, category?: string): Promise
                       fontSize: getTitleFontSize(title),
                       fontWeight: 700,
                       color: "#ffffff",
-                      lineHeight: 1.35,
-                      maxWidth: "1000px",
+                      lineHeight: 1.32,
+                      maxWidth: "1020px",
                       wordBreak: "keep-all",
-                      textShadow: "0 2px 24px rgba(109,40,217,0.4)",
+                      textShadow: "0 3px 28px rgba(30,27,75,0.46)",
                     },
                     children: title,
+                  },
+                },
+                {
+                  type: "div",
+                  props: {
+                    style: {
+                      display: "flex",
+                      fontSize: "22px",
+                      fontWeight: 700,
+                      color: "rgba(233,213,255,0.92)",
+                      letterSpacing: "0.01em",
+                    },
+                    children: author ? `by ${author}` : siteName,
                   },
                 },
               ],
             },
           },
-
-          // Bottom row: divider + branding
           {
             type: "div",
             props: {
@@ -141,7 +263,6 @@ export async function generateOgImage(title: string, category?: string): Promise
                 gap: "20px",
               },
               children: [
-                // Divider line
                 {
                   type: "div",
                   props: {
@@ -149,12 +270,11 @@ export async function generateOgImage(title: string, category?: string): Promise
                       display: "flex",
                       width: "100%",
                       height: "1px",
-                      background: "rgba(192,132,252,0.30)",
+                      background: "rgba(216,180,254,0.30)",
                     },
                     children: "",
                   },
                 },
-                // Branding row
                 {
                   type: "div",
                   props: {
@@ -165,7 +285,6 @@ export async function generateOgImage(title: string, category?: string): Promise
                       justifyContent: "space-between",
                     },
                     children: [
-                      // Left: heart + domain
                       {
                         type: "div",
                         props: {
@@ -176,7 +295,6 @@ export async function generateOgImage(title: string, category?: string): Promise
                             gap: "12px",
                           },
                           children: [
-                            // Brand mark — purple dot (heart glyph not in Noto Sans KR Korean subset)
                             {
                               type: "div",
                               props: {
@@ -185,8 +303,8 @@ export async function generateOgImage(title: string, category?: string): Promise
                                   width: "12px",
                                   height: "12px",
                                   borderRadius: "9999px",
-                                  background: "#c084fc",
-                                  boxShadow: "0 0 12px rgba(192,132,252,0.6)",
+                                  background: "#d8b4fe",
+                                  boxShadow: "0 0 14px rgba(216,180,254,0.65)",
                                 },
                                 children: "",
                               },
@@ -196,9 +314,9 @@ export async function generateOgImage(title: string, category?: string): Promise
                               props: {
                                 style: {
                                   display: "flex",
-                                  fontSize: "22px",
+                                  fontSize: "23px",
                                   fontWeight: 700,
-                                  color: "rgba(255,255,255,0.92)",
+                                  color: "rgba(255,255,255,0.94)",
                                   letterSpacing: "0.01em",
                                 },
                                 children: "log8.kr",
@@ -207,7 +325,6 @@ export async function generateOgImage(title: string, category?: string): Promise
                           ],
                         },
                       },
-                      // Right: role
                       {
                         type: "div",
                         props: {
@@ -215,10 +332,10 @@ export async function generateOgImage(title: string, category?: string): Promise
                             display: "flex",
                             fontSize: "18px",
                             fontWeight: 700,
-                            color: "rgba(192,132,252,0.85)",
+                            color: "rgba(216,180,254,0.88)",
                             letterSpacing: "0.02em",
                           },
-                          children: "AI Product Engineer",
+                          children: siteName,
                         },
                       },
                     ],
@@ -244,6 +361,7 @@ export async function generateOgImage(title: string, category?: string): Promise
     }
   );
 
-  const buffer = await sharp(Buffer.from(svg)).png().toBuffer();
+  const svgBytes = new TextEncoder().encode(svg);
+  const buffer = await sharp(svgBytes).png().toBuffer();
   return new Uint8Array(buffer);
 }
