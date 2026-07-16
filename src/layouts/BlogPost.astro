@@ -82,8 +82,11 @@ const postSlug = currentPost
       .replace("/blog/", "")
       .replace("/", "") || "unknown";
 
-// OG image cascade: explicit og_image → featured_image(글 대표) → 동적 satori OG
-const resolvedOgImage = og_image || featured_image || `/og/${postSlug}.png`;
+// OG image cascade: explicit og_image → featured_image(글 대표) → build-time satori OG.
+// Manual thumbnails stay authoritative; generated OG is used only when no custom thumbnail exists.
+const generatedOgImage =
+  currentLocale === "en" ? `/og/en/blog/${postSlug}.png` : `/og/${postSlug}.png`;
+const resolvedOgImage = og_image || featured_image || generatedOgImage;
 
 // Full post URL for sharing
 const postUrl = `${SITE_URL}${withLocalePath(`/blog/${postSlug}/`, currentLocale).replace(/\/$/, "")}`;
