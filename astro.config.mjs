@@ -179,7 +179,6 @@ export default defineConfig({
       customPages: [
         "https://log8.kr/",
         "https://log8.kr/portfolio",
-        "https://log8.kr/showcase",
         "https://log8.kr/resume",
         "https://log8.kr/privacy",
       ],

@@ -2,28 +2,15 @@
 import { Image } from "astro:assets";
 import { FileText, Github } from "lucide-astro";
 import profileImage from "@/assets/images/design/DH_ID.jpg";
+import ProjectCards from "@/features/portfolio/components/ProjectCards.astro";
 import BreadcrumbSchema from "@/shared/components/seo/BreadcrumbSchema.astro";
-import {
-  AUTHOR_GITHUB,
-  AUTHOR_LINKEDIN,
-  SITE_AUTHOR,
-  SITE_TITLE,
-  SITE_URL,
-} from "@/shared/config/consts";
+import ContactCTA from "@/shared/components/ui/ContactCTA.astro";
+import { SITE_TITLE } from "@/shared/config/consts";
 import { getUrl } from "@/shared/utils/url";
 import Layout from "../layouts/Layout.astro";
 
-const personSchema = {
-  "@context": "https://schema.org",
-  "@type": "Person",
-  "@id": `${SITE_URL}/#author`,
-  name: SITE_AUTHOR,
-  url: `${SITE_URL}/portfolio`,
-  image: `${SITE_URL}/images/design/DH_ID.jpg`,
-  jobTitle: "Product Engineer",
-  description: "기술로 감동과 사랑을 전하는 개발자",
-  sameAs: [AUTHOR_GITHUB, AUTHOR_LINKEDIN],
-};
+// The Person node lives in BaseHead so every page carries it; defining it
+// again here would duplicate the same @id.
 ---
 
 <Layout
@@ -35,7 +22,6 @@ const personSchema = {
   og_type="website"
 >
   <Fragment slot="head">
-    <script type="application/ld+json" is:inline set:text={JSON.stringify(personSchema)} />
     <BreadcrumbSchema items={[
       { name: "홈", url: "/" },
       { name: "Portfolio", url: "/portfolio/" },
@@ -43,11 +29,14 @@ const personSchema = {
   </Fragment>
   <main class="portfolio-root max-w-[1600px] mx-auto px-6 py-16 bg-background print:max-w-full print:p-0 print:m-0 print:bg-white">
     <!-- Resume Link Banner -->
-    <div class="mb-6 p-4 bg-primary/10 rounded-lg border border-primary/20 flex justify-between items-center">
-      <span class="text-sm text-text-light">1-2페이지 압축 버전을 원하시나요?</span>
+    <div class="portfolio-extra mb-6 p-4 bg-primary/10 rounded-lg border border-primary/20 flex flex-col sm:flex-row gap-3 justify-between items-start sm:items-center print:hidden">
+      <span class="text-sm text-text-light">1-2페이지로 압축한 이력서 버전도 준비되어 있습니다.</span>
       <a
         href={getUrl("/resume")}
-        class="flex items-center gap-2 text-sm font-semibold text-primary hover:text-primary-light"
+        data-cta-track
+        data-cta-name="portfolio_resume_link"
+        data-cta-section="portfolio_top"
+        class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-primary text-on-primary text-sm font-semibold hover:bg-primary-light transition-colors"
       >
         <FileText class="w-4 h-4" />
         Resume 보기 (PDF 저장 가능)
@@ -407,6 +396,28 @@ const personSchema = {
           }
         </div>
       </div>
+    </section>
+
+    <!-- Project Cards (요약: 카드로 훑기) -->
+    <section id="project-cards" class="portfolio-extra mb-10 print:hidden">
+      <div class="mb-5 flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
+        <div>
+          <h2 class="text-2xl md:text-3xl font-bold text-text">Selected Work</h2>
+          <p class="mt-1 text-sm text-text-light">
+            실제 문제를 해결하기 위해 만든 프로젝트들입니다. 아래에서 각 프로젝트의 상세 기록을 이어서 보실 수 있습니다.
+          </p>
+        </div>
+        <a
+          href="#portfolio-projects-section"
+          data-cta-track
+          data-cta-name="portfolio_cards_to_detail"
+          data-cta-section="portfolio_cards"
+          class="inline-flex shrink-0 items-center gap-2 px-4 py-2 rounded-lg border border-background-lighter bg-background-light text-sm font-semibold text-text hover:border-primary hover:text-primary transition-colors"
+        >
+          상세 기록 보기
+        </a>
+      </div>
+      <ProjectCards ctaSection="portfolio_cards" />
     </section>
 
     <!-- Projects -->
@@ -1363,6 +1374,9 @@ flowchart TB
       </div>
     </section>
 
+    <!-- Contact CTA -->
+    <ContactCTA ctaSection="portfolio_bottom" class="portfolio-extra mt-10 print:hidden" />
+
     <!-- Footer -->
     <div class="mt-12 p-6 bg-background-light rounded-lg text-center">
       <p class="text-sm text-text-light mb-2">이 포트폴리오는 웹에서 확인하실 수 있습니다.</p>
@@ -1373,7 +1387,9 @@ flowchart TB
 
 <style>
   /* === Screen: Desktop A4 simulation === */
-  .portfolio-root > :not(.portfolio-controls):not(#portfolio-projects-section) {
+  /* .portfolio-extra = 화면 전용 블록(요약 카드, Resume 배너, 문의 CTA) — A4 시뮬레이션에서 제외하지 않는다 */
+  .portfolio-root
+    > :not(.portfolio-controls):not(#portfolio-projects-section):not(.portfolio-extra) {
     display: none;
   }
 
@@ -1430,7 +1446,8 @@ flowchart TB
 
   /* === Screen: Mobile/Tablet === */
   @media (max-width: 1024px) {
-    .portfolio-root > :not(.portfolio-controls):not(#portfolio-projects-section) {
+    .portfolio-root
+      > :not(.portfolio-controls):not(#portfolio-projects-section):not(.portfolio-extra) {
       display: none;
     }
 

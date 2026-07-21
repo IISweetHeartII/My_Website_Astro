@@ -159,6 +159,11 @@
 /youtube/ /library/ 301
 /youtube /library/ 301
 
+# Showcase → Work(Portfolio) 통합 (2026-07-21)
+/showcase /portfolio/ 301
+/showcase/ /portfolio/ 301
+/showcase/* /portfolio/ 301
+
 # 구 블로그 URL (리팩토링 전 구조)
 /who-is-dh / 301
 /who-is-dh/ / 301

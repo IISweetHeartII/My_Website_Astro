@@ -7,8 +7,6 @@ import {
   Briefcase,
   Code2,
   FileText,
-  Linkedin,
-  Mail,
   Medal,
   Rocket,
   Server,
@@ -17,21 +15,14 @@ import {
 } from "lucide-astro";
 import profileImage from "@/assets/images/design/DH_ID.jpg";
 import BreadcrumbSchema from "@/shared/components/seo/BreadcrumbSchema.astro";
-import {
-  AUTHOR_EMAIL,
-  AUTHOR_GITHUB,
-  AUTHOR_LINKEDIN,
-  SITE_AUTHOR,
-  SITE_DESCRIPTION,
-  SITE_URL,
-} from "@/shared/config/consts";
+import ContactCTA from "@/shared/components/ui/ContactCTA.astro";
+import { SITE_DESCRIPTION, SITE_URL } from "@/shared/config/consts";
 import { getLatestPosts, getSortedPublishedPosts } from "@/shared/utils/blog";
 import Layout from "../layouts/Layout.astro";
 
 const allPosts = await getSortedPublishedPosts();
 const latestBlogPosts = getLatestPosts(allPosts, 3);
 const latestPost = latestBlogPosts[0];
-const CONTACT_MAILTO = `mailto:${AUTHOR_EMAIL}`;
 
 const websiteSchema = {
   "@context": "https://schema.org",
@@ -42,18 +33,6 @@ const websiteSchema = {
   description: SITE_DESCRIPTION,
   inLanguage: "ko-KR",
   publisher: { "@id": `${SITE_URL}/#author` },
-};
-
-const personSchema = {
-  "@context": "https://schema.org",
-  "@type": "Person",
-  "@id": `${SITE_URL}/#author`,
-  name: SITE_AUTHOR,
-  url: `${SITE_URL}/portfolio`,
-  image: `${SITE_URL}/images/design/DH_ID.jpg`,
-  jobTitle: "Product Engineer",
-  description: SITE_DESCRIPTION,
-  sameAs: [AUTHOR_GITHUB, AUTHOR_LINKEDIN],
 };
 ---
 
@@ -67,7 +46,6 @@ const personSchema = {
 >
   <Fragment slot="head">
     <script type="application/ld+json" is:inline set:text={JSON.stringify(websiteSchema)} />
-    <script type="application/ld+json" is:inline set:text={JSON.stringify(personSchema)} />
     <BreadcrumbSchema items={[{ name: "홈", url: "/" }]} />
   </Fragment>
   <main class="min-h-screen bg-background">
@@ -134,7 +112,7 @@ const personSchema = {
                   <ArrowRight class="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </a>
                 <a
-                  href="/showcase"
+                  href="/portfolio"
                   data-cta-track
                   data-cta-name="hero_showcase"
                   data-cta-section="hero"
@@ -183,11 +161,11 @@ const personSchema = {
             <p class="text-sm font-semibold tracking-wide text-primary mb-2">Start Here</p>
             <h2 class="text-2xl md:text-3xl font-bold text-text">어디부터 볼지 고민되면, 여기서 시작하세요</h2>
             <p class="mt-2 text-text-light">
-              블로그는 인사이트, 쇼케이스는 결과물 중심입니다. 목적에 맞게 바로 이동할 수 있게 구성했습니다.
+              블로그는 인사이트, Work는 결과물 중심입니다. 목적에 맞게 바로 이동할 수 있게 구성했습니다.
             </p>
           </div>
           <a
-            href="/showcase"
+            href="/portfolio"
             data-cta-track
             data-cta-name="start_showcase_primary"
             data-cta-section="start_here"
@@ -200,8 +178,7 @@ const personSchema = {
 
         <div class="mb-6 flex flex-wrap items-center gap-2">
           <span class="px-3 py-1.5 rounded-full text-xs font-medium bg-background-light border border-background-lighter text-text-light">읽기 중심: 블로그</span>
-          <span class="px-3 py-1.5 rounded-full text-xs font-medium bg-background-light border border-background-lighter text-text-light">결과 중심: 쇼케이스</span>
-          <span class="px-3 py-1.5 rounded-full text-xs font-medium bg-background-light border border-background-lighter text-text-light">검증 중심: 포트폴리오</span>
+          <span class="px-3 py-1.5 rounded-full text-xs font-medium bg-background-light border border-background-lighter text-text-light">결과·검증 중심: Work</span>
         </div>
 
         <!-- Grid Layout -->
@@ -242,9 +219,9 @@ const personSchema = {
             )
           }
 
-          <!-- Showcase Card -->
+          <!-- Work Card -->
           <a
-            href="/showcase"
+            href="/portfolio"
             data-cta-track
             data-cta-name="bento_showcase_card"
             data-cta-section="bento_grid"
@@ -256,7 +233,7 @@ const personSchema = {
                 <h3
                   class="text-xl font-bold text-text mb-2 group-hover:text-primary transition-colors"
                 >
-                  Showcase
+                  Work
                 </h3>
                 <p class="text-text-light text-sm mb-2">직접 만든 프로젝트들을 확인해보세요</p>
                 <p class="text-xs text-text-muted">대표 프로젝트 6개 · 실서비스 링크 포함</p>
@@ -337,7 +314,7 @@ const personSchema = {
 
           <!-- Achievement Badge 1 -->
           <a
-            href="/showcase"
+            href="/portfolio"
             data-cta-track
             data-cta-name="bento_award_1"
             data-cta-section="bento_grid"
@@ -360,7 +337,7 @@ const personSchema = {
 
           <!-- Achievement Badge 2 -->
           <a
-            href="/showcase"
+            href="/portfolio"
             data-cta-track
             data-cta-name="bento_award_2"
             data-cta-section="bento_grid"
@@ -444,36 +421,7 @@ const personSchema = {
           </a>
         </div>
 
-        <div class="mt-8 rounded-2xl border border-background-lighter bg-background-light p-5 md:p-6 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-          <div>
-            <p class="text-sm font-semibold text-text">협업/의뢰 문의는 여기로 보내주세요</p>
-            <p class="text-sm text-text-light mt-1">빠른 답장은 LinkedIn DM, 상세 논의는 이메일이 가장 효율적입니다.</p>
-          </div>
-          <div class="flex flex-wrap items-center gap-2">
-            <a
-              href={AUTHOR_LINKEDIN}
-              target="_blank"
-              rel="noopener noreferrer"
-              data-cta-track
-              data-cta-name="contact_linkedin"
-              data-cta-section="bento_bottom"
-              class="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl border border-background-lighter bg-background hover:border-primary text-text hover:text-primary font-semibold transition-colors"
-            >
-              <Linkedin class="w-4 h-4" />
-              LinkedIn DM
-            </a>
-            <a
-              href={CONTACT_MAILTO}
-              data-cta-track
-              data-cta-name="contact_email"
-              data-cta-section="bento_bottom"
-              class="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-primary text-on-primary font-semibold hover:bg-primary-light transition-colors"
-            >
-              <Mail class="w-4 h-4" />
-              이메일 문의
-            </a>
-          </div>
-        </div>
+        <ContactCTA ctaSection="bento_bottom" class="mt-8" />
       </div>
     </section>
   </main>

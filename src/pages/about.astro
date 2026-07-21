@@ -1,10 +1,27 @@
 ---
-import { SITE_URL } from "@/shared/config/consts";
+import ContactCTA from "@/shared/components/ui/ContactCTA.astro";
+import { AUTHOR_GITHUB, AUTHOR_LINKEDIN, SITE_AUTHOR, SITE_URL } from "@/shared/config/consts";
 
 const title = "김덕환 — A Time Capsule";
 const description =
   "수학도에서 AI 활용 개발자로. 터미널로 읽거나 글로 읽는, 김덕환 인터랙티브 소개.";
 const canonical = `${SITE_URL}/about`;
+const ogImage = `${SITE_URL}/og/page/about.png`;
+
+// This page renders its own document rather than going through Layout, so the
+// author identity that BaseHead injects everywhere else has to be repeated here.
+const personSchema = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "@id": `${SITE_URL}/#author`,
+  name: SITE_AUTHOR,
+  url: SITE_URL,
+  image: `${SITE_URL}/images/design/DH_ID.jpg`,
+  jobTitle: "Product Engineer",
+  description:
+    "아끼지 않는 문제 해결사. 사람 중심의 AI 제품을 설계하고 구현해 고객과 비즈니스의 실제 문제를 해결합니다.",
+  sameAs: [AUTHOR_GITHUB, AUTHOR_LINKEDIN],
+};
 ---
 
 <!doctype html>
@@ -19,7 +36,12 @@ const canonical = `${SITE_URL}/about`;
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
-    <meta name="twitter:card" content="summary" />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:secure_url" content={ogImage} />
+    <meta property="og:image:alt" content={title} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content={ogImage} />
+    <script type="application/ld+json" is:inline set:text={JSON.stringify(personSchema)} />
     <link rel="stylesheet" href="/fonts/pretendard-subset.css" />
     <script is:inline>
       (() => {
@@ -68,6 +90,10 @@ const canonical = `${SITE_URL}/about`;
     </footer>
     <div class="statusbar" id="statusbar">
       <span id="hint">/ 로 명령어 입력</span><span id="progress"></span>
+    </div>
+
+    <div class="contact-outro">
+      <ContactCTA ctaSection="about_bottom" />
     </div>
 
     <div class="modal" id="modal" hidden>
@@ -481,6 +507,24 @@ const canonical = `${SITE_URL}/about`;
         font-family: var(--mono);
         font-size: 0.78rem;
         color: var(--t-dim);
+      }
+
+      /* 문의 CTA (ContactCTA 공용 컴포넌트) */
+      .contact-outro {
+        max-width: var(--maxw);
+        width: 100%;
+        margin: 0 auto;
+        padding: 0 clamp(1.1rem, 4vw, 1.6rem) 2.5rem;
+      }
+      /* 터미널 뷰에서는 ContactCTA 폴백 변수를 터미널 팔레트로 치환 */
+      :root[data-view="terminal"] .contact-outro {
+        --bg: var(--t-bg);
+        --surface: var(--t-panel);
+        --line: var(--t-line);
+        --ink: var(--t-fg);
+        --muted: var(--t-dim);
+        --accent: var(--t-accent);
+        --accent-soft: var(--t-accent);
       }
 
       :root[data-view="terminal"] body {
