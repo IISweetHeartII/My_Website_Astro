@@ -3,6 +3,17 @@ import { Github, Linkedin, Mail } from "lucide-astro";
 import { AUTHOR_EMAIL, AUTHOR_GITHUB, AUTHOR_LINKEDIN } from "@/shared/config/consts";
 
 const today = new Date();
+
+// Guides and Resume are no longer in the header; this keeps them one click
+// away and crawlable from every page.
+const siteLinks = [
+  { href: "/about/", label: "About" },
+  { href: "/portfolio/", label: "Work" },
+  { href: "/resume/", label: "Resume" },
+  { href: "/blog/", label: "Blog" },
+  { href: "/library/", label: "Library" },
+  { href: "/guides/", label: "Guides" },
+];
 ---
 
 <footer class="bg-nav text-nav-text body-font py-8 border-t border-nav-border">
@@ -37,6 +48,20 @@ const today = new Date();
         <Mail class="w-6 h-6" />
       </a>
     </div>
+
+    <!-- Site Links — the header stays slim, so everything stays reachable here -->
+    <nav class="text-nav-text flex flex-wrap justify-center gap-x-5 gap-y-2 mb-4" aria-label="Site">
+      {
+        siteLinks.map((link) => (
+          <a
+            href={link.href}
+            class="text-nav-text hover:text-accent text-sm transition-colors duration-200"
+          >
+            {link.label}
+          </a>
+        ))
+      }
+    </nav>
 
     <!-- Policy Links -->
     <div class="text-nav-text flex flex-wrap justify-center gap-4 mb-4">

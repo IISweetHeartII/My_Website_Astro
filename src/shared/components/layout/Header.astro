@@ -7,6 +7,7 @@ import {
   hasLocalizedIndex,
   type Locale,
   localeLabels,
+  localeNames,
   stripLocaleFromPath,
   ui,
   withLocalePath,
@@ -54,12 +55,10 @@ const localizedHref = (pathname: string) => getUrl(withLocalePath(pathname, curr
     </div>
 
     <div class="hidden lg:flex items-center space-x-6">
+      <HeaderLink href={getUrl("/about/")}>{t.about}</HeaderLink>
+      <HeaderLink href={getUrl("/portfolio/")}>{t.work}</HeaderLink>
       <HeaderLink href={localizedHref("/blog/")}>{t.blog}</HeaderLink>
       <HeaderLink href={localizedHref("/library/")}>{t.library}</HeaderLink>
-      <HeaderLink href={getUrl("/guides/")}>{t.guides}</HeaderLink>
-      <HeaderLink href={getUrl("/showcase/")}>{t.showcase}</HeaderLink>
-      <HeaderLink href={getUrl("/portfolio/")}>{t.portfolio}</HeaderLink>
-      <HeaderLink href={getUrl("/resume/")}>{t.resume}</HeaderLink>
     </div>
 
     <div class="flex items-center space-x-2">
@@ -142,6 +141,16 @@ const localizedHref = (pathname: string) => getUrl(withLocalePath(pathname, curr
     </div>
     <nav class="flex flex-col items-center space-y-6 py-8">
       <a
+        href={getUrl("/about/")}
+        class="text-nav-text hover:text-accent text-xl font-semibold transition-colors duration-200"
+        >{t.about}</a
+      >
+      <a
+        href={getUrl("/portfolio/")}
+        class="text-nav-text hover:text-accent text-xl font-semibold transition-colors duration-200"
+        >{t.work}</a
+      >
+      <a
         href={localizedHref("/blog/")}
         class="text-nav-text hover:text-accent text-xl font-semibold transition-colors duration-200"
         >{t.blog}</a
@@ -151,26 +160,17 @@ const localizedHref = (pathname: string) => getUrl(withLocalePath(pathname, curr
         class="text-nav-text hover:text-accent text-xl font-semibold transition-colors duration-200"
         >{t.library}</a
       >
-      <a
-        href={getUrl("/guides/")}
-        class="text-nav-text hover:text-accent text-xl font-semibold transition-colors duration-200"
-        >{t.guides}</a
-      >
-      <a
-        href={getUrl("/showcase/")}
-        class="text-nav-text hover:text-accent text-xl font-semibold transition-colors duration-200"
-        >{t.showcase}</a
-      >
-      <a
-        href={getUrl("/portfolio/")}
-        class="text-nav-text hover:text-accent text-xl font-semibold transition-colors duration-200"
-        >{t.portfolio}</a
-      >
-      <a
-        href={getUrl("/resume/")}
-        class="text-nav-text hover:text-accent text-xl font-semibold transition-colors duration-200"
-        >{t.resume}</a
-      >
+      {
+        languageSwitchHref && (
+          <a
+            href={getUrl(languageSwitchHref)}
+            class="text-nav-text/80 hover:text-accent text-lg font-semibold transition-colors duration-200"
+            hreflang={otherLocale}
+          >
+            {localeNames[otherLocale]}
+          </a>
+        )
+      }
       <!-- Mobile search button -->
       <button
         data-search-trigger
