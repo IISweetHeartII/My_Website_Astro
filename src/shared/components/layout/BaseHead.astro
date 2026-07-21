@@ -1,12 +1,10 @@
 ---
 import "@/styles/global.css";
-import { getCollection } from "astro:content";
 import Fonts from "@/shared/components/seo/Fonts.astro";
 import { DEFAULT_OG_IMAGE, OG_IMAGE_VERSION } from "@/shared/config/consts";
 import {
-  getEntryPath,
   getLocaleFromPathname,
-  isPublishedInLocale,
+  getTranslationPaths,
   type Locale,
   type LocalizedCollection,
   ogLocale,
@@ -64,30 +62,16 @@ const {
 const currentLocale =
   (Astro.currentLocale as Locale | undefined) ?? getLocaleFromPathname(Astro.url.pathname);
 const alternateLinks = [] as { locale: Locale | "x-default"; href: string }[];
+const translationPaths = await getTranslationPaths(contentCollection, translationKey);
 
-if (contentCollection && translationKey) {
-  const entries = await getCollection(
-    contentCollection,
-    ({ data }) => data.translationKey === translationKey
+if (translationPaths) {
+  const koHref = new globalThis.URL(translationPaths.ko, Astro.site).toString();
+  const enHref = new globalThis.URL(translationPaths.en, Astro.site).toString();
+  alternateLinks.push(
+    { locale: "ko", href: koHref },
+    { locale: "en", href: enHref },
+    { locale: "x-default", href: koHref }
   );
-  const koEntry = entries.find((entry) => isPublishedInLocale(entry, "ko"));
-  const enEntry = entries.find((entry) => isPublishedInLocale(entry, "en"));
-
-  if (koEntry && enEntry) {
-    const koHref = new globalThis.URL(
-      getEntryPath(contentCollection, koEntry),
-      Astro.site
-    ).toString();
-    const enHref = new globalThis.URL(
-      getEntryPath(contentCollection, enEntry),
-      Astro.site
-    ).toString();
-    alternateLinks.push(
-      { locale: "ko", href: koHref },
-      { locale: "en", href: enHref },
-      { locale: "x-default", href: koHref }
-    );
-  }
 }
 
 // Implement cascading fallbacks for all metadata fields

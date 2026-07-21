@@ -97,3 +97,39 @@ export const isPublishedInLocale = (
   locale: Locale
 ): boolean =>
   entry.data.publish !== false && entry.data.draft !== true && getEntryLocale(entry) === locale;
+
+/**
+ * Routes that are built in every locale. Article routes are not listed here:
+ * whether they have a counterpart depends on the translation existing, which
+ * getTranslationPaths answers.
+ */
+const LOCALIZED_INDEX_ROUTE = /^\/(blog|library)\/(\d+\/)?$/;
+
+export const hasLocalizedIndex = (pathname: string): boolean => {
+  const stripped = stripLocaleFromPath(pathname);
+  return stripped === "/" || LOCALIZED_INDEX_ROUTE.test(stripped);
+};
+
+/**
+ * Paths of a piece of content in both locales, or null when it is only
+ * published in one. Used for the hreflang tags and for deciding whether the
+ * language switch has anywhere to go.
+ */
+export const getTranslationPaths = async (
+  collection: LocalizedCollection | undefined,
+  translationKey: string | null | undefined
+): Promise<Record<Locale, string> | null> => {
+  if (!collection || !translationKey) return null;
+
+  const { getCollection } = await import("astro:content");
+  const entries = await getCollection(
+    collection,
+    ({ data }: CollectionEntry<LocalizedCollection>) => data.translationKey === translationKey
+  );
+
+  const ko = entries.find((entry) => isPublishedInLocale(entry, "ko"));
+  const en = entries.find((entry) => isPublishedInLocale(entry, "en"));
+  if (!ko || !en) return null;
+
+  return { ko: getEntryPath(collection, ko), en: getEntryPath(collection, en) };
+};

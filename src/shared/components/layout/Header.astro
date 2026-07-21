@@ -4,6 +4,7 @@ import SearchDialog from "@/features/blog/components/SearchDialog.astro";
 import { AUTHOR_EMAIL, AUTHOR_GITHUB, AUTHOR_LINKEDIN, SITE_TITLE } from "@/shared/config/consts";
 import {
   getLocaleFromPathname,
+  hasLocalizedIndex,
   type Locale,
   localeLabels,
   stripLocaleFromPath,
@@ -15,11 +16,20 @@ import HeaderLink from "./HeaderLink.astro";
 
 interface Props {
   locale?: Locale;
+  /** Exact counterpart path, for pages that know their own translation. */
+  languageSwitchHref?: string;
 }
 
 const currentLocale = Astro.props.locale ?? getLocaleFromPathname(Astro.url.pathname);
 const otherLocale: Locale = currentLocale === "en" ? "ko" : "en";
-const languageSwitchHref = withLocalePath(stripLocaleFromPath(Astro.url.pathname), otherLocale);
+
+// Only offer the switch where the other locale actually exists. Without this
+// the button sent visitors from /about/, /resume/ and friends straight to 404.
+const languageSwitchHref =
+  Astro.props.languageSwitchHref ??
+  (hasLocalizedIndex(Astro.url.pathname)
+    ? withLocalePath(stripLocaleFromPath(Astro.url.pathname), otherLocale)
+    : null);
 const t = ui[currentLocale];
 const localizedHref = (pathname: string) => getUrl(withLocalePath(pathname, currentLocale));
 ---
@@ -62,14 +72,18 @@ const localizedHref = (pathname: string) => getUrl(withLocalePath(pathname, curr
         <Search class="w-5 h-5" />
       </button>
 
-      <a
-        href={getUrl(languageSwitchHref)}
-        class="inline-flex items-center justify-center rounded-lg border border-nav-border px-2.5 py-1.5 text-xs font-semibold text-nav-text/80 hover:bg-nav-hover/20 hover:text-nav-text transition-all duration-200"
-        hreflang={otherLocale}
-        aria-label={`Switch language to ${otherLocale === "en" ? "English" : "Korean"}`}
-      >
-        {localeLabels[otherLocale]}
-      </a>
+      {
+        languageSwitchHref && (
+          <a
+            href={getUrl(languageSwitchHref)}
+            class="inline-flex items-center justify-center rounded-lg border border-nav-border px-2.5 py-1.5 text-xs font-semibold text-nav-text/80 hover:bg-nav-hover/20 hover:text-nav-text transition-all duration-200"
+            hreflang={otherLocale}
+            aria-label={`Switch language to ${otherLocale === "en" ? "English" : "Korean"}`}
+          >
+            {localeLabels[otherLocale]}
+          </a>
+        )
+      }
 
       <button
         id="theme-toggle"

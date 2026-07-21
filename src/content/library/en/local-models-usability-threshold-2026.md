@@ -3,7 +3,7 @@ title: "Local LLMs Are Finally Good Enough: Privacy, Latency, and Cost Compared"
 subtitle: "What changed in 2026, and when local actually wins"
 description: "Vicky Boykis's #2 Hacker News post argues local models hit an inflection point. Here's how they compare to hosted APIs on privacy, latency, and cost — and how to decide which workloads to move local."
 publish: true
-draft: true
+draft: false
 lang: "en"
 translationKey: "library:local-models-usability-threshold-2026"
 source_hash: "057589d27cc8d6edb818e9b3a0e05d42f45f2372b621cac7b0cd5421428fe79a"
