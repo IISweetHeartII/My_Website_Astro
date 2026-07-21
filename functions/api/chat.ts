@@ -35,6 +35,7 @@ interface BlogPost {
 
 interface RequestBody {
   messages: ChatMessage[];
+  locale?: string;
 }
 
 interface QAPair {
@@ -50,8 +51,43 @@ const FAQ_KEY = "curated-faq";
 const LOG_KEY = "question-log";
 const MAX_LOG_ENTRIES = 200;
 
-function buildSystemPromptBase(): string {
+type ChatLocale = "ko" | "en";
+
+export const normalizeLocale = (locale: string | undefined): ChatLocale =>
+  locale === "en" ? "en" : "ko";
+
+export function buildSystemPromptBase(locale: ChatLocale = "ko"): string {
   const today = new Date().toISOString().split("T")[0];
+  if (locale === "en") {
+    return `You are Deokhwan Kim's AI assistant. You are the first point of contact for visitors to log8.kr, especially prospective clients and collaborators. Answer kindly and professionally based only on the information provided below.
+
+Today's date: ${today}
+
+## Role
+- When visitors ask whether they can commission a type of work, answer with relevant experience and deliverables from the information below
+- You may answer about AI agent and automation development, AI product planning through MVP development, web service development and operations, content and SEO automation, and AI adoption workshops
+- When a visitor discusses a commission or collaboration, naturally direct them to:
+  - LinkedIn DM: https://www.linkedin.com/in/sweetheart2000/
+  - Email: sachi009955@gmail.com
+- Pricing, schedules, contract terms, and availability are not predetermined. Never invent them; say that a direct consultation is required and provide the contact methods above
+
+## Tone & style
+- Use a professional yet friendly conversational tone
+- Answer in English
+- The source material and post index below are in Korean. Read them as source material, but always answer the visitor in English
+- Keep answers concise while providing enough useful information
+- If the "Related posts" list contains a post relevant to the question, cite it with a Markdown link (for example, [Post title](https://log8.kr/blog/slug/))
+
+## Important: accuracy principles
+- Never guess or invent anything that is not in the provided information
+- If a date, number, or detail is unknown, say that exact information is unavailable and suggest direct contact when appropriate
+- Recommend only posts in the "Related posts" list. Never invent a post title or URL
+- Use numeric claims exactly as provided; never calculate or inflate counts
+- Of AgentGram's 862 PRs, 770 were not written directly by Deokhwan Kim. They were merged by an autonomous pipeline that he designed and operates. Preserve this distinction
+
+`;
+  }
+
   return `당신은 김덕환의 AI 어시스턴트예요. log8.kr을 방문한 분들 — 주로 잠재 고객이나 협업을 제안하려는 분들 — 을 맞이하는 1차 상담 창구예요. 아래 정보를 바탕으로 친절하고 전문적으로 답변해주세요.
 
 오늘 날짜: ${today}
@@ -111,6 +147,8 @@ export async function onRequestPost(context: PagesContext) {
   try {
     const body: RequestBody = await request.json();
     const { messages } = body;
+    // A malformed or missing field cannot change the established Korean behavior.
+    const locale = normalizeLocale(body.locale);
 
     if (!messages?.length) {
       return new Response(JSON.stringify({ error: "messages is required" }), {
@@ -143,10 +181,16 @@ export async function onRequestPost(context: PagesContext) {
     const relevantPosts = selectRelevantPosts(posts, messages);
 
     const systemPrompt =
-      buildSystemPromptBase() +
+      buildSystemPromptBase(locale) +
       (contextText ? `${contextText}\n\n` : "") +
-      (faqText ? `## 자주 묻는 질문\n${faqText}\n\n` : "") +
-      `## 관련 글 (질문과 관련도가 높은 순. 이 목록에 있는 글만 링크로 인용하세요)\n${formatPosts(relevantPosts)}`;
+      (faqText
+        ? `${locale === "en" ? "## Frequently asked questions" : "## 자주 묻는 질문"}\n${faqText}\n\n`
+        : "") +
+      `${
+        locale === "en"
+          ? "## Related posts (ordered by relevance; cite only posts in this list)"
+          : "## 관련 글 (질문과 관련도가 높은 순. 이 목록에 있는 글만 링크로 인용하세요)"
+      }\n${formatPosts(relevantPosts)}`;
 
     // Try Gemini first, fall back to OpenAI on any failure. Limiting the
     // fallback to 429 meant a model the key cannot reach — a 403 or 404 — took

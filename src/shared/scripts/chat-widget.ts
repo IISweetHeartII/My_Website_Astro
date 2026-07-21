@@ -4,6 +4,7 @@ interface Message {
 }
 
 interface ChatWidgetConfig {
+  locale: "ko" | "en";
   welcome: string;
   thinking: string;
   requestError: string;
@@ -15,6 +16,14 @@ const MAX_HISTORY = 20;
 const STORAGE_KEY = "chat-messages";
 let messages: Message[] = [];
 let isStreaming = false;
+
+export const createChatRequestBody = (
+  chatMessages: Message[],
+  locale: ChatWidgetConfig["locale"]
+) => ({
+  messages: chatMessages,
+  locale,
+});
 
 function saveMessages() {
   try {
@@ -222,7 +231,7 @@ async function streamResponse(container: HTMLElement, config: ChatWidgetConfig) 
     const res = await fetch("/api/chat", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ messages }),
+      body: JSON.stringify(createChatRequestBody(messages, config.locale)),
     });
 
     if (!res.ok) {

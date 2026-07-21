@@ -86,12 +86,12 @@ export const ui = {
     readMore: "Read More",
     backToLibrary: "Back to Library",
     chatOpen: "Open chat",
-    chatTitle: "Ask Kim Deog Hwan",
+    chatTitle: "Ask Deokhwan Kim",
     chatSubtitle: "AI will answer",
     chatNew: "New chat",
     chatClose: "Close chat",
     chatWelcome:
-      "Hello! Feel free to ask anything about Kim Deog Hwan.<br><br>Ask about his projects, tech stack, experience, or anything else!",
+      "Hello! Feel free to ask anything about Deokhwan Kim.<br><br>Ask about his projects, tech stack, experience, or anything else!",
     chatSuggestionProjects: "What have you been working on recently?",
     chatSuggestionTechStack: "What technologies do you work with?",
     chatSuggestionAwards: "Have you won any awards?",
@@ -150,7 +150,7 @@ export const isPublishedInLocale = (
  * getTranslationPaths answers. Paginated indexes are excluded because locale
  * post counts differ, so the same page number may not be built in both locales.
  */
-const LOCALIZED_COUNTERPART_ROUTES = new Set([
+export const LOCALIZED_COUNTERPART_ROUTES = new Set([
   "/",
   "/about/",
   "/portfolio/",

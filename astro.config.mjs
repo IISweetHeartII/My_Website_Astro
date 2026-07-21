@@ -10,6 +10,7 @@ import { defineConfig } from "astro/config";
 import expressiveCode from "astro-expressive-code";
 import pagefind from "astro-pagefind";
 import robotsTxt from "astro-robots-txt";
+import { LOCALIZED_COUNTERPART_ROUTES } from "./src/shared/i18n/ui.ts";
 
 const SITE_URL = "https://log8.kr";
 const PROJECT_ROOT = path.dirname(fileURLToPath(import.meta.url));
@@ -127,6 +128,35 @@ const addContentLastmod = (item) => {
   return lastmod ? { ...item, lastmod } : item;
 };
 
+/** @param {string} outputDirectory */
+export const assertLocalizedCounterparts = (outputDirectory) => {
+  const missingPaths = [];
+
+  for (const route of LOCALIZED_COUNTERPART_ROUTES) {
+    const routeDirectory = route === "/" ? "" : route.slice(1);
+    for (const localePrefix of ["", "en"]) {
+      const outputPath = path.join(outputDirectory, localePrefix, routeDirectory, "index.html");
+      if (!fs.existsSync(outputPath)) {
+        missingPaths.push(path.relative(outputDirectory, outputPath));
+      }
+    }
+  }
+
+  if (missingPaths.length > 0) {
+    throw new Error(
+      `Missing localized counterpart output:\n${missingPaths.map((missingPath) => `- ${missingPath}`).join("\n")}`
+    );
+  }
+};
+
+/** @type {import("astro").AstroIntegration} */
+const localizedCounterpartGuard = {
+  name: "localized-counterpart-guard",
+  hooks: {
+    "astro:build:done": ({ dir }) => assertLocalizedCounterparts(fileURLToPath(dir)),
+  },
+};
+
 // https://astro.build/config
 export default defineConfig({
   site: SITE_URL,
@@ -167,6 +197,7 @@ export default defineConfig({
     },
   },
   integrations: [
+    localizedCounterpartGuard,
     expressiveCode({
       themes: ["github-light", "github-dark"], // 다크모드 지원
       defaultProps: {

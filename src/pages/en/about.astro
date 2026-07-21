@@ -1,5 +1,11 @@
 ---
-import { AUTHOR_EMAIL, AUTHOR_GITHUB, AUTHOR_LINKEDIN, SITE_URL } from "@/shared/config/consts";
+import {
+  AUTHOR_EMAIL,
+  AUTHOR_GITHUB,
+  AUTHOR_LINKEDIN,
+  SITE_AUTHOR,
+  SITE_URL,
+} from "@/shared/config/consts";
 
 const title = "Deokhwan Kim — A Time Capsule";
 const description =
@@ -12,12 +18,12 @@ const personSchema = {
   "@context": "https://schema.org",
   "@type": "Person",
   "@id": `${SITE_URL}/#author`,
-  name: "Deokhwan Kim",
+  name: SITE_AUTHOR,
   url: SITE_URL,
   image: `${SITE_URL}/images/design/DH_ID.jpg`,
   jobTitle: "Product Engineer",
   description:
-    "A resourceful problem solver who designs and builds human-centered AI products for real customer and business problems.",
+    "아끼지 않는 문제 해결사. 사람 중심의 AI 제품을 설계하고 구현해 고객과 비즈니스의 실제 문제를 해결합니다.",
   sameAs: [AUTHOR_GITHUB, AUTHOR_LINKEDIN],
 };
 ---
