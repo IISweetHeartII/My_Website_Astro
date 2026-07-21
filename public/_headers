@@ -19,13 +19,16 @@
   # Permissions Policy (불필요한 기능 비활성화)
   Permissions-Policy: accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=(), interest-cohort=()
 
-# HTML 페이지 (짧은 캐시)
+# HTML 페이지 — 브라우저에 남기지 않는다.
+# 자산 파일명은 빌드마다 해시가 바뀌는데 HTML을 캐시해두면, 배포 직후
+# 재방문자의 브라우저가 옛 HTML을 그대로 쓰면서 사라진 해시 파일을 요청해
+# 스타일이 통째로 깨진다. 나머지 경로는 Cloudflare 기본값이 이미 max-age=0.
 /*.html
-  Cache-Control: public, max-age=3600, must-revalidate
+  Cache-Control: public, max-age=0, must-revalidate
 
 # 루트 페이지
 /
-  Cache-Control: public, max-age=3600, must-revalidate
+  Cache-Control: public, max-age=0, must-revalidate
 
 # API 엔드포인트 (캐시 안함)
 /api/*
