@@ -33,7 +33,11 @@ export const localeRegion: Record<Locale, string> = {
 
 export const ui = {
   ko: {
+    siteTitle: "김덕환의 WebSite",
     search: "검색",
+    searchClose: "검색 닫기",
+    searchUnavailable:
+      "검색 인덱스를 불러오지 못했습니다. `bun run build` 후 `bun run preview`로 확인해주세요.",
     themeToggle: "테마 전환",
     skipToContent: "본문으로 바로가기",
     about: "About",
@@ -45,9 +49,31 @@ export const ui = {
     resume: "Resume",
     readMore: "Read More",
     backToLibrary: "Library로 돌아가기",
+    chatOpen: "채팅 열기",
+    chatTitle: "김덕환에게 물어보세요",
+    chatSubtitle: "AI가 답변해드려요",
+    chatNew: "새 채팅",
+    chatClose: "채팅 닫기",
+    chatWelcome:
+      "안녕하세요! 김덕환에 대해 궁금한 것이 있으시면 편하게 물어보세요.<br><br>프로젝트, 기술 스택, 경력 등 무엇이든 질문해주세요!",
+    chatSuggestionProjects: "최근 프로젝트가 뭔가요?",
+    chatSuggestionTechStack: "기술 스택을 알려주세요",
+    chatSuggestionAwards: "수상 경력이 있나요?",
+    chatSuggestionContact: "연락처가 어떻게 돼요?",
+    chatInputPlaceholder: "메시지를 입력하세요...",
+    chatInputLabel: "메시지 입력",
+    chatSend: "전송",
+    chatThinking: "생각하는 중...",
+    chatRequestError: "일시적인 문제가 발생했어요. 잠시 후 다시 시도해주세요.",
+    chatEmptyResponse: "답변을 생성하지 못했어요. 질문을 다시 해주세요.",
+    chatConnectionError: "연결이 불안정해요. 인터넷 연결을 확인해주세요.",
   },
   en: {
+    siteTitle: "Deokhwan Kim",
     search: "Search",
+    searchClose: "Close search",
+    searchUnavailable:
+      "Search is unavailable. Run `bun run build`, then use `bun run preview` to check it.",
     themeToggle: "Toggle theme",
     skipToContent: "Skip to content",
     about: "About",
@@ -59,6 +85,24 @@ export const ui = {
     resume: "Resume",
     readMore: "Read More",
     backToLibrary: "Back to Library",
+    chatOpen: "Open chat",
+    chatTitle: "Ask Kim Deog Hwan",
+    chatSubtitle: "AI will answer",
+    chatNew: "New chat",
+    chatClose: "Close chat",
+    chatWelcome:
+      "Hello! Feel free to ask anything about Kim Deog Hwan.<br><br>Ask about his projects, tech stack, experience, or anything else!",
+    chatSuggestionProjects: "What have you been working on recently?",
+    chatSuggestionTechStack: "What technologies do you work with?",
+    chatSuggestionAwards: "Have you won any awards?",
+    chatSuggestionContact: "How can I contact you?",
+    chatInputPlaceholder: "Type a message...",
+    chatInputLabel: "Message input",
+    chatSend: "Send",
+    chatThinking: "Thinking...",
+    chatRequestError: "Something went wrong. Please try again in a moment.",
+    chatEmptyResponse: "I couldn't generate a response. Please try asking again.",
+    chatConnectionError: "The connection seems unstable. Please check your internet connection.",
   },
 } satisfies Record<Locale, Record<string, string>>;
 

@@ -1,7 +1,8 @@
 ---
 import { FileText, Github, Mail } from "lucide-astro";
 import BreadcrumbSchema from "@/shared/components/seo/BreadcrumbSchema.astro";
-import { AUTHOR_EMAIL, AUTHOR_LINKEDIN, SITE_TITLE } from "@/shared/config/consts";
+import { AUTHOR_EMAIL, AUTHOR_LINKEDIN } from "@/shared/config/consts";
+import { ui } from "@/shared/i18n/ui";
 import Layout from "../../layouts/Layout.astro";
 
 const projects = [
@@ -223,7 +224,7 @@ const certifications = [
 ---
 
 <Layout
-  title={`Portfolio - ${SITE_TITLE}`}
+  title={`Portfolio - ${ui.en.siteTitle}`}
   description="Deokhwan Kim designs and ships human-centered products, AI workflows, and reliable automation systems."
   og_image="/og/page/portfolio.png"
   twitter_image="/og/page/portfolio.png"

@@ -1,7 +1,7 @@
 ---
 import { ExternalLink, FileDown } from "lucide-astro";
 import BreadcrumbSchema from "@/shared/components/seo/BreadcrumbSchema.astro";
-import { SITE_TITLE } from "@/shared/config/consts";
+import { ui } from "@/shared/i18n/ui";
 import Layout from "../../layouts/Layout.astro";
 
 interface ProofItem {
@@ -63,7 +63,7 @@ const certifications: ProofItem[] = [
 ---
 
 <Layout
-  title={`Resume - ${SITE_TITLE}`}
+  title={`Resume - ${ui.en.siteTitle}`}
   description="Deokhwan Kim — product engineer and resourceful problem solver building human-centered AI products."
   og_image="/og/page/resume.png"
   twitter_image="/og/page/resume.png"

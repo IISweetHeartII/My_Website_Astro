@@ -3,6 +3,14 @@ interface Message {
   content: string;
 }
 
+interface ChatWidgetConfig {
+  welcome: string;
+  thinking: string;
+  requestError: string;
+  emptyResponse: string;
+  connectionError: string;
+}
+
 const MAX_HISTORY = 20;
 const STORAGE_KEY = "chat-messages";
 let messages: Message[] = [];
@@ -42,6 +50,16 @@ export function setupChatWidget(): void {
 
   if (!fab || !win || !closeBtn || !input || !sendBtn || !msgContainer) return;
 
+  const configJson = win.getAttribute("data-chat-config");
+  if (!configJson) return;
+
+  let config: ChatWidgetConfig;
+  try {
+    config = JSON.parse(configJson) as ChatWidgetConfig;
+  } catch {
+    return;
+  }
+
   // Prevent re-initialization
   // biome-ignore lint/complexity/useLiteralKeys: DOMStringMap is index-signature typed here.
   if (fab.dataset["initialized"] === "true") return;
@@ -80,7 +98,7 @@ export function setupChatWidget(): void {
     const welcome = msgContainer.querySelector(".chat-welcome");
     msgContainer.innerHTML = "";
     if (welcome) msgContainer.appendChild(welcome);
-    else renderWelcome(msgContainer);
+    else renderWelcome(msgContainer, config);
   });
 
   // Close on Escape
@@ -105,7 +123,7 @@ export function setupChatWidget(): void {
     }
     saveMessages();
 
-    streamResponse(msgContainer);
+    streamResponse(msgContainer, config);
   };
 
   sendBtn.addEventListener("click", send);
@@ -130,7 +148,7 @@ export function setupChatWidget(): void {
   });
 }
 
-function renderWelcome(container: HTMLElement) {
+function renderWelcome(container: HTMLElement, config: ChatWidgetConfig) {
   const wrapper = document.createElement("div");
   wrapper.className = "chat-msg chat-msg-assistant chat-welcome";
 
@@ -140,8 +158,7 @@ function renderWelcome(container: HTMLElement) {
 
   const bubble = document.createElement("div");
   bubble.className = "chat-bubble";
-  bubble.innerHTML =
-    "안녕하세요! 김덕환에 대해 궁금한 것이 있으시면 편하게 물어보세요.<br><br>프로젝트, 기술 스택, 경력 등 무엇이든 질문해주세요!";
+  bubble.innerHTML = config.welcome;
 
   wrapper.appendChild(avatar);
   wrapper.appendChild(bubble);
@@ -193,13 +210,13 @@ function appendMessage(
   return bubble;
 }
 
-async function streamResponse(container: HTMLElement) {
+async function streamResponse(container: HTMLElement, config: ChatWidgetConfig) {
   isStreaming = true;
   const sendBtn = document.getElementById("chat-send");
   if (sendBtn) sendBtn.classList.add("chat-send-disabled");
 
   const bubble = appendMessage(container, "assistant", "");
-  bubble.innerHTML = '<span class="chat-typing">생각하는 중...</span>';
+  bubble.innerHTML = `<span class="chat-typing">${escapeHtml(config.thinking)}</span>`;
 
   try {
     const res = await fetch("/api/chat", {
@@ -210,9 +227,7 @@ async function streamResponse(container: HTMLElement) {
 
     if (!res.ok) {
       const errorData = await res.json().catch(() => null);
-      const errorMsg =
-        (errorData as { error?: string })?.error ??
-        "일시적인 문제가 발생했어요. 잠시 후 다시 시도해주세요.";
+      const errorMsg = (errorData as { error?: string })?.error ?? config.requestError;
       bubble.innerHTML = `<span class="chat-error">${escapeHtml(errorMsg)}</span>`;
       return;
     }
@@ -258,12 +273,10 @@ async function streamResponse(container: HTMLElement) {
       }
       saveMessages();
     } else if (!bubble.innerHTML) {
-      bubble.innerHTML =
-        '<span class="chat-error">답변을 생성하지 못했어요. 질문을 다시 해주세요.</span>';
+      bubble.innerHTML = `<span class="chat-error">${escapeHtml(config.emptyResponse)}</span>`;
     }
   } catch {
-    bubble.innerHTML =
-      '<span class="chat-error">연결이 불안정해요. 인터넷 연결을 확인해주세요.</span>';
+    bubble.innerHTML = `<span class="chat-error">${escapeHtml(config.connectionError)}</span>`;
   } finally {
     isStreaming = false;
     if (sendBtn) sendBtn.classList.remove("chat-send-disabled");

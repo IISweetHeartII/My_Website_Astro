@@ -1,7 +1,7 @@
 ---
 import { Github, Linkedin, Mail, Menu, Moon, Search, Sun, X } from "lucide-astro";
 import SearchDialog from "@/features/blog/components/SearchDialog.astro";
-import { AUTHOR_EMAIL, AUTHOR_GITHUB, AUTHOR_LINKEDIN, SITE_TITLE } from "@/shared/config/consts";
+import { AUTHOR_EMAIL, AUTHOR_GITHUB, AUTHOR_LINKEDIN } from "@/shared/config/consts";
 import {
   getLocaleFromPathname,
   hasLocalizedCounterpart,
@@ -50,7 +50,7 @@ const localizedHref = (pathname: string) => getUrl(withLocalePath(pathname, curr
           alt="Log8 Icon"
           class="w-6 h-6 rounded-md hover:scale-105 transition-transform duration-300 shrink-0"
         />
-        <span class="hidden sm:inline">{SITE_TITLE}</span>
+        <span class="hidden sm:inline">{t.siteTitle}</span>
       </a>
     </div>
 

@@ -1,4 +1,8 @@
 ---
+import { getLocaleFromPathname, ui } from "@/shared/i18n/ui";
+
+const currentLocale = getLocaleFromPathname(Astro.url.pathname);
+const t = ui[currentLocale];
 ---
 
 <dialog
@@ -17,7 +21,7 @@
       class="relative w-full max-w-2xl bg-background rounded-2xl shadow-2xl border border-background-lighter pointer-events-auto overflow-hidden"
     >
       <div class="flex items-center justify-between px-4 py-3 border-b border-background-lighter">
-        <span class="text-sm text-text-muted">검색</span>
+        <span class="text-sm text-text-muted">{t.search}</span>
         <div class="flex items-center gap-2">
           <kbd
             class="hidden sm:inline-flex items-center px-1.5 py-0.5 text-xs text-text-muted bg-background-muted rounded border border-gray-200"
@@ -27,7 +31,7 @@
             id="search-close"
             type="button"
             class="text-text-muted hover:text-text transition-colors"
-            aria-label="검색 닫기"
+            aria-label={t.searchClose}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -45,7 +49,11 @@
           </button>
         </div>
       </div>
-      <div id="pagefind-search" class="pagefind-search-container"></div>
+      <div
+        id="pagefind-search"
+        class="pagefind-search-container"
+        data-unavailable-message={t.searchUnavailable}
+      ></div>
     </div>
   </div>
 </dialog>
@@ -143,8 +151,13 @@
     var container = document.getElementById("pagefind-search");
     if (!container) return;
 
-    container.innerHTML =
-      '<div class="search-unavailable">검색 인덱스를 불러오지 못했습니다. `bun run build` 후 `bun run preview`로 확인해주세요.</div>';
+    var message = container.getAttribute("data-unavailable-message");
+    if (!message) return;
+
+    var unavailable = document.createElement("div");
+    unavailable.className = "search-unavailable";
+    unavailable.textContent = message;
+    container.replaceChildren(unavailable);
   }
 
   function focusSearchInput() {
