@@ -24,8 +24,11 @@ interface ChatMessage {
 interface BlogPost {
   title: string;
   slug: string;
+  url: string;
+  collection: "blog" | "library";
   category: string;
   tags: string[];
+  keywords: string[];
   description: string;
   created_date: string | null;
 }
@@ -40,28 +43,39 @@ interface QAPair {
   count: number;
 }
 
-const GEMINI_MODEL = "gemini-2.5-flash-lite";
-const OPENAI_MODEL = "gpt-4.1-nano";
+const GEMINI_MODEL = "gemini-2.5-flash";
+const OPENAI_MODEL = "gpt-4.1-mini";
+const MAX_OUTPUT_TOKENS = 2048;
 const FAQ_KEY = "curated-faq";
 const LOG_KEY = "question-log";
 const MAX_LOG_ENTRIES = 200;
 
 function buildSystemPromptBase(): string {
   const today = new Date().toISOString().split("T")[0];
-  return `당신은 김덕환의 AI 어시스턴트예요. 방문자가 김덕환에 대해 궁금한 것을 물어보면 아래 정보를 바탕으로 친절하고 전문적으로 답변해주세요.
+  return `당신은 김덕환의 AI 어시스턴트예요. log8.kr을 방문한 분들 — 주로 잠재 고객이나 협업을 제안하려는 분들 — 을 맞이하는 1차 상담 창구예요. 아래 정보를 바탕으로 친절하고 전문적으로 답변해주세요.
 
 오늘 날짜: ${today}
 
+## 역할
+- 방문자가 "이런 작업을 의뢰할 수 있나요?", "이런 것도 만들어 주시나요?" 라고 물으면, 아래 정보에서 관련된 경험·산출물을 근거로 들어 답해주세요
+- 답할 수 있는 범위: AI 에이전트/자동화 구축, AI 제품 기획~MVP 개발, 웹 서비스 개발·운영, 콘텐츠/SEO 자동화, AI 도입 워크숍
+- 의뢰·협업 이야기가 나오면 자연스럽게 연락 수단으로 연결해주세요:
+  - LinkedIn DM: https://www.linkedin.com/in/sweetheart2000/
+  - 이메일: sachi009955@gmail.com
+- 견적, 기간, 계약 조건, 가용성은 정해진 값이 없어요. 절대 임의로 답하지 말고 "직접 상담이 필요해요"라고 안내하며 위 연락 수단으로 연결해주세요
+
 ## 톤 & 스타일
 - ~해요 체를 사용해주세요 (전문적이면서 친근하게)
-- 관련된 블로그 글이 있으면 자연스럽게 링크를 포함해주세요 (마크다운 링크 형식)
 - 한국어로 답변해주세요
 - 답변은 간결하면서도 충분한 정보를 담아주세요
+- 아래 "관련 글" 목록에 질문과 관련된 글이 있으면 반드시 마크다운 링크로 인용해주세요 (예: [글 제목](https://log8.kr/blog/slug/))
 
-## 중요: 정확성 원칙
+## 중요: 정확성 원칙 (가장 중요)
 - 아래 제공된 정보에 없는 내용은 절대 추측하거나 지어내지 마세요
-- 날짜, 수치, 세부 사항을 모를 때는 반드시 "정확한 정보가 없어요"라고 솔직하게 말해주세요
-- 블로그 글 목록에 있는 글만 추천하고, 없는 글을 만들어내지 마세요
+- 날짜, 수치, 세부 사항을 모를 때는 반드시 "정확한 정보가 없어요"라고 솔직하게 말하고, 필요하면 직접 문의를 안내해주세요
+- 아래 "관련 글" 목록에 있는 글만 추천하세요. 목록에 없는 글의 제목이나 URL을 만들어내면 안 돼요
+- 숫자(cron 개수, PR 개수, 글 편수 등)는 아래 적힌 값을 그대로만 쓰고, 임의로 계산하거나 부풀리지 마세요
+- AgentGram PR 862개 중 770개는 "김덕환이 직접 작성한 PR"이 아니라 "김덕환이 설계·운영하는 자율 파이프라인이 머지시킨 PR"이에요. 이 구분을 반드시 지켜서 표현해주세요
 
 `;
 }
@@ -119,28 +133,30 @@ export async function onRequestPost(context: PagesContext) {
       waitUntil(logQuestion(env.CHAT_KV, lastUserMsg.content));
     }
 
-    // Build system prompt: base + context.md + FAQ + blog index
-    const [contextText, blogIndexText, faqText] = await Promise.all([
+    // Build system prompt: base + context.md + FAQ + question-relevant posts
+    const [contextText, posts, faqText] = await Promise.all([
       fetchChatContext(env, request.url),
-      fetchBlogIndex(env, request.url),
+      fetchPosts(env, request.url),
       fetchCuratedFAQ(env),
     ]);
+
+    const relevantPosts = selectRelevantPosts(posts, messages);
 
     const systemPrompt =
       buildSystemPromptBase() +
       (contextText ? `${contextText}\n\n` : "") +
       (faqText ? `## 자주 묻는 질문\n${faqText}\n\n` : "") +
-      `## 블로그 글 목록 (관련 글을 찾아 링크해주세요. 목록에 없는 글은 절대 추천하지 마세요)\n${blogIndexText}`;
+      `## 관련 글 (질문과 관련도가 높은 순. 이 목록에 있는 글만 링크로 인용하세요)\n${formatPosts(relevantPosts)}`;
 
-    // Try Gemini first, fallback to OpenAI
+    // Try Gemini first, fall back to OpenAI on any failure. Limiting the
+    // fallback to 429 meant a model the key cannot reach — a 403 or 404 — took
+    // the whole chat down instead of degrading to the other provider.
     try {
       return await streamGemini(env.GEMINI_API_KEY, systemPrompt, messages, cors, waitUntil);
     } catch (error: unknown) {
-      const status = (error as { status?: number }).status;
-      if (status === 429 && env.OPENAI_API_KEY) {
-        return await streamOpenAI(env.OPENAI_API_KEY, systemPrompt, messages, cors, waitUntil);
-      }
-      throw error;
+      if (!env.OPENAI_API_KEY) throw error;
+      console.error("Gemini failed, falling back to OpenAI:", error);
+      return await streamOpenAI(env.OPENAI_API_KEY, systemPrompt, messages, cors, waitUntil);
     }
   } catch (error: unknown) {
     const status = (error as { status?: number }).status ?? 500;
@@ -189,7 +205,7 @@ async function fetchCuratedFAQ(env: Env): Promise<string> {
 // ===== In-memory cache (lives for the Worker instance lifetime) =====
 
 let cachedContext: string | null = null;
-let cachedBlogIndex: string | null = null;
+let cachedPosts: BlogPost[] | null = null;
 
 // ===== Chat Context (from chat-context.md) =====
 
@@ -206,25 +222,133 @@ async function fetchChatContext(env: Env, requestUrl: string): Promise<string> {
   }
 }
 
-// ===== Blog Index =====
+// ===== Post Index (blog + library) =====
 
-async function fetchBlogIndex(env: Env, requestUrl: string): Promise<string> {
-  if (cachedBlogIndex !== null) return cachedBlogIndex;
+async function fetchPosts(env: Env, requestUrl: string): Promise<BlogPost[]> {
+  if (cachedPosts !== null) return cachedPosts;
   try {
     const res = await env.ASSETS.fetch(new URL("/blog-index.json", requestUrl).toString());
-    if (!res.ok) return "";
+    if (!res.ok) return [];
     const { posts } = (await res.json()) as { posts: BlogPost[] };
-    cachedBlogIndex = posts
-      .map((p) => {
-        const date = p.created_date ? ` (${p.created_date})` : "";
-        const tags = p.tags.length ? ` [${p.tags.join(", ")}]` : "";
-        return `- [${p.title}](https://log8.kr/blog/${p.slug})${date} [${p.category}]${tags}${p.description ? `: ${p.description}` : ""}`;
-      })
-      .join("\n");
-    return cachedBlogIndex;
+    cachedPosts = posts;
+    return cachedPosts;
   } catch {
-    return "";
+    return [];
   }
+}
+
+// ===== Keyword retrieval =====
+// No embeddings: Pages Functions have no vector store. Weighted substring
+// matching over title/tags/keywords/category/description is enough for ~200 posts.
+
+const MAX_RELEVANT_POSTS = 12;
+const MIN_RELEVANT_POSTS = 6;
+
+const STOPWORDS = new Set([
+  "그리고",
+  "그런데",
+  "무엇",
+  "어떤",
+  "어떻게",
+  "있나요",
+  "있어요",
+  "알려줘",
+  "알려주세요",
+  "관련",
+  "대해",
+  "대한",
+  "정도",
+  "혹시",
+  "가능",
+  "가능한가요",
+  "what",
+  "when",
+  "where",
+  "which",
+  "about",
+  "with",
+  "from",
+  "that",
+  "this",
+  "have",
+  "does",
+  "you",
+  "the",
+  "and",
+  "for",
+]);
+
+function tokenize(text: string): string[] {
+  return text
+    .toLowerCase()
+    .split(/[^a-z0-9가-힣]+/)
+    .filter((t) => t.length >= 2 && !STOPWORDS.has(t));
+}
+
+/** Korean particles glue onto nouns ("자동화에"), so also try the trimmed stem. */
+function variantsOf(token: string): string[] {
+  const isHangul = /[가-힣]/.test(token);
+  if (isHangul && token.length >= 3) return [token, token.slice(0, -1)];
+  return [token];
+}
+
+function scorePost(post: BlogPost, tokens: string[]): number {
+  const title = post.title.toLowerCase();
+  const terms = [...post.tags, ...post.keywords].join(" ").toLowerCase();
+  const category = post.category.toLowerCase();
+  const description = post.description.toLowerCase();
+
+  let score = 0;
+  for (const token of tokens) {
+    const forms = variantsOf(token);
+    if (forms.some((f) => title.includes(f))) score += 5;
+    if (forms.some((f) => terms.includes(f))) score += 3;
+    if (forms.some((f) => category.includes(f))) score += 2;
+    if (forms.some((f) => description.includes(f))) score += 1;
+  }
+  return score;
+}
+
+function selectRelevantPosts(posts: BlogPost[], messages: ChatMessage[]): BlogPost[] {
+  if (!posts.length) return [];
+
+  // Last two user turns: enough for follow-up questions, short enough to stay focused.
+  const query = messages
+    .filter((m) => m.role === "user")
+    .slice(-2)
+    .map((m) => m.content)
+    .join(" ");
+  const tokens = tokenize(query);
+
+  const scored = posts
+    .map((post) => ({ post, score: scorePost(post, tokens) }))
+    .filter((entry) => entry.score > 0)
+    .sort(
+      (a, b) =>
+        b.score - a.score || (b.post.created_date ?? "").localeCompare(a.post.created_date ?? "")
+    )
+    .slice(0, MAX_RELEVANT_POSTS)
+    .map((entry) => entry.post);
+
+  // Always leave the model something to point at, even on a zero-match question.
+  if (scored.length >= MIN_RELEVANT_POSTS) return scored;
+  const picked = new Set(scored.map((p) => p.url));
+  const recent = posts
+    .filter((p) => !picked.has(p.url))
+    .slice(0, MIN_RELEVANT_POSTS - scored.length);
+  return [...scored, ...recent];
+}
+
+function formatPosts(posts: BlogPost[]): string {
+  if (!posts.length) return "(제공된 글 목록이 없어요. 글을 추천하지 마세요.)";
+  return posts
+    .map((p) => {
+      const date = p.created_date ? ` (${p.created_date})` : "";
+      const tags = p.tags.length ? ` 태그: ${p.tags.join(", ")}` : "";
+      const author = p.collection === "library" ? "에이전트 자율 발행" : "김덕환 작성";
+      return `- [${p.title}](${p.url})${date} [${p.category} / ${author}]${tags}${p.description ? ` — ${p.description}` : ""}`;
+    })
+    .join("\n");
 }
 
 // ===== Gemini Streaming =====
@@ -249,7 +373,13 @@ async function streamGemini(
       body: JSON.stringify({
         contents,
         systemInstruction: { parts: [{ text: systemPrompt }] },
-        generationConfig: { temperature: 0.4, maxOutputTokens: 1024 },
+        generationConfig: {
+          temperature: 0.4,
+          maxOutputTokens: MAX_OUTPUT_TOKENS,
+          // 2.5 Flash thinks by default and thinking tokens eat maxOutputTokens,
+          // which would truncate the answer and stall the first streamed chunk.
+          thinkingConfig: { thinkingBudget: 0 },
+        },
       }),
     }
   );
@@ -286,7 +416,7 @@ async function streamOpenAI(
         ...messages.map((m) => ({ role: m.role, content: m.content })),
       ],
       temperature: 0.4,
-      max_tokens: 1024,
+      max_tokens: MAX_OUTPUT_TOKENS,
     }),
   });
 
