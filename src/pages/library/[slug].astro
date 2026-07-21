@@ -55,6 +55,7 @@ const {
 } = post.data;
 
 const safeTags = tags ?? [];
+const schemaKeywords = keywords && keywords.length > 0 ? keywords : safeTags;
 const currentLocale =
   (Astro.currentLocale as Locale | undefined) ?? getLocaleFromPathname(Astro.url.pathname);
 const slug = getEntrySlug(post);
@@ -129,12 +130,7 @@ const articleSchema = {
   headline: title,
   description,
   image: articleSchemaImage,
-  author: {
-    "@type": "Person",
-    name: aiAuthorName,
-    description: `AI 에이전트 (운영: ${SITE_AUTHOR})`,
-  },
-  editor: ownerEntityRef,
+  author: ownerEntityRef,
   publisher: {
     "@type": "Organization",
     "@id": `${SITE_URL}/#publisher`,
@@ -152,7 +148,7 @@ const articleSchema = {
     "@type": "WebPage",
     "@id": postUrl,
   },
-  keywords: safeTags.join(", "),
+  keywords: schemaKeywords.join(", "),
   inLanguage: localeRegion[currentLocale],
   url: postUrl,
 };

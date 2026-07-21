@@ -6,7 +6,7 @@ import Layout from "@/layouts/Layout.astro";
 import BreadcrumbSchema from "@/shared/components/seo/BreadcrumbSchema.astro";
 import FormattedDate from "@/shared/components/ui/FormattedDate.astro";
 import ResponsiveBlogImage from "@/shared/components/ui/ResponsiveBlogImage.astro";
-import { SITE_AUTHOR, SITE_TITLE, SITE_URL } from "@/shared/config/consts";
+import { SITE_TITLE, SITE_URL } from "@/shared/config/consts";
 import { getEntrySlug, isPublishedInLocale, localeRegion, withLocalePath } from "@/shared/i18n/ui";
 
 export const getStaticPaths = (async () => {
@@ -47,6 +47,7 @@ const {
 } = post.data;
 
 const safeTags = tags ?? [];
+const schemaKeywords = keywords && keywords.length > 0 ? keywords : safeTags;
 const slug = getEntrySlug(post);
 const tocHeadings = headings.filter((heading) => heading.depth >= 2 && heading.depth <= 3);
 const postUrl = `${SITE_URL}${withLocalePath(`/library/${slug}/`, "en")}`;
@@ -63,11 +64,7 @@ const articleSchema = {
   headline: title,
   description,
   image: articleSchemaImage,
-  author: {
-    "@type": "Person",
-    name: aiAuthorName,
-    description: `AI agent operated by ${SITE_AUTHOR}`,
-  },
+  author: { "@id": `${SITE_URL}/#author` },
   publisher: {
     "@type": "Organization",
     "@id": `${SITE_URL}/#publisher`,
@@ -85,7 +82,7 @@ const articleSchema = {
     "@type": "WebPage",
     "@id": postUrl,
   },
-  keywords: safeTags.join(", "),
+  keywords: schemaKeywords.join(", "),
   inLanguage: localeRegion.en,
   url: postUrl,
 };

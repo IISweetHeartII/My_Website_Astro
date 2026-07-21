@@ -12,13 +12,7 @@ import FAQSchema from "@/shared/components/seo/FAQSchema.astro";
 import FAQItem from "@/shared/components/ui/FAQItem.astro";
 import FormattedDate from "@/shared/components/ui/FormattedDate.astro";
 import ResponsiveBlogImage from "@/shared/components/ui/ResponsiveBlogImage.astro";
-import {
-  AUTHOR_GITHUB,
-  AUTHOR_LINKEDIN,
-  SITE_AUTHOR,
-  SITE_TITLE,
-  SITE_URL,
-} from "@/shared/config/consts";
+import { SITE_AUTHOR, SITE_TITLE, SITE_URL } from "@/shared/config/consts";
 import {
   getEntrySlug,
   getLocaleFromPathname,
@@ -90,9 +84,10 @@ const resolvedOgImage = og_image || featured_image || generatedOgImage;
 
 // Full post URL for sharing
 const postUrl = `${SITE_URL}${withLocalePath(`/blog/${postSlug}/`, currentLocale).replace(/\/$/, "")}`;
-const schemaImage = featured_image
-  ? [new globalThis.URL(featured_image, SITE_URL).toString()]
+const schemaImage = resolvedOgImage
+  ? [new globalThis.URL(resolvedOgImage, SITE_URL).toString()]
   : undefined;
+const schemaKeywords = keywords && keywords.length > 0 ? keywords : safeTags;
 
 // JSON-LD Schema 생성 (Entity-first with stable @id)
 const blogPostSchema = {
@@ -102,13 +97,7 @@ const blogPostSchema = {
   headline: title,
   description: description,
   image: schemaImage,
-  author: {
-    "@type": "Person",
-    "@id": `${SITE_URL}/#author`,
-    name: author || SITE_AUTHOR,
-    url: `${SITE_URL}/portfolio`,
-    sameAs: [AUTHOR_GITHUB, AUTHOR_LINKEDIN],
-  },
+  author: { "@id": `${SITE_URL}/#author` },
   publisher: {
     "@type": "Organization",
     "@id": `${SITE_URL}/#publisher`,
@@ -126,7 +115,7 @@ const blogPostSchema = {
     "@type": "WebPage",
     "@id": postUrl,
   },
-  keywords: safeTags.join(", "),
+  keywords: schemaKeywords.join(", "),
   articleSection: safeTags[0] || "Blog",
   inLanguage: localeRegion[currentLocale],
   url: postUrl,

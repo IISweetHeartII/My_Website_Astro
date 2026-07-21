@@ -1,27 +1,9 @@
 ---
 import { ExternalLink, FileDown } from "lucide-astro";
 import BreadcrumbSchema from "@/shared/components/seo/BreadcrumbSchema.astro";
-import {
-  AUTHOR_GITHUB,
-  AUTHOR_LINKEDIN,
-  SITE_AUTHOR,
-  SITE_TITLE,
-  SITE_URL,
-} from "@/shared/config/consts";
+import { SITE_TITLE } from "@/shared/config/consts";
 import { getUrl } from "@/shared/utils/url";
 import Layout from "../layouts/Layout.astro";
-
-const personSchema = {
-  "@context": "https://schema.org",
-  "@type": "Person",
-  "@id": `${SITE_URL}/#author`,
-  name: SITE_AUTHOR,
-  url: `${SITE_URL}/portfolio`,
-  image: `${SITE_URL}/images/design/DH_ID.jpg`,
-  jobTitle: "Product Engineer",
-  description: "아끼지 않는 문제 해결사",
-  sameAs: [AUTHOR_GITHUB, AUTHOR_LINKEDIN],
-};
 
 interface ProofItem {
   id: string;
@@ -90,7 +72,6 @@ const certifications: ProofItem[] = [
   og_type="website"
 >
   <Fragment slot="head">
-    <script type="application/ld+json" is:inline set:text={JSON.stringify(personSchema)} />
     <BreadcrumbSchema items={[
       { name: "홈", url: "/" },
       { name: "Resume", url: "/resume/" },

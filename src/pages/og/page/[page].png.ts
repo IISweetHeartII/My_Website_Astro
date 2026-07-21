@@ -3,6 +3,7 @@ import { generateOgImage } from "@/shared/utils/og-image";
 
 const PAGE_OG_PRESETS = {
   home: { title: "김덕환의 WebSite", category: "Home" },
+  about: { title: "A Time Capsule | Log8", category: "About" },
   blog: { title: "Blog | Log8", category: "Insights" },
   category: { title: "Category Archive | Log8", category: "Blog" },
   showcase: { title: "Showcase | Log8", category: "Projects" },
