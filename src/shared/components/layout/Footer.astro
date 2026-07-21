@@ -1,18 +1,23 @@
 ---
 import { Github, Linkedin, Mail } from "lucide-astro";
 import { AUTHOR_EMAIL, AUTHOR_GITHUB, AUTHOR_LINKEDIN } from "@/shared/config/consts";
+import { getLocaleFromPathname, ui, withLocalePath } from "@/shared/i18n/ui";
+import { getUrl } from "@/shared/utils/url";
 
 const today = new Date();
+const currentLocale = getLocaleFromPathname(Astro.url.pathname);
+const t = ui[currentLocale];
+const localizedHref = (pathname: string) => getUrl(withLocalePath(pathname, currentLocale));
 
-// Guides and Resume are no longer in the header; this keeps them one click
-// away and crawlable from every page.
+// Guides has no English counterpart, so English visitors should not be sent
+// into Korean-only content.
 const siteLinks = [
-  { href: "/about/", label: "About" },
-  { href: "/portfolio/", label: "Work" },
-  { href: "/resume/", label: "Resume" },
-  { href: "/blog/", label: "Blog" },
-  { href: "/library/", label: "Library" },
-  { href: "/guides/", label: "Guides" },
+  { href: localizedHref("/about/"), label: t.about },
+  { href: localizedHref("/portfolio/"), label: t.work },
+  { href: localizedHref("/resume/"), label: t.resume },
+  { href: localizedHref("/blog/"), label: t.blog },
+  { href: localizedHref("/library/"), label: t.library },
+  ...(currentLocale === "ko" ? [{ href: getUrl("/guides/"), label: t.guides }] : []),
 ];
 ---
 
@@ -63,11 +68,13 @@ const siteLinks = [
       }
     </nav>
 
-    <!-- Policy Links -->
+    <!-- Policy Links. Only written in Korean, but a privacy policy has to stay
+         reachable from every page, so this one link is not locale-gated. -->
     <div class="text-nav-text flex flex-wrap justify-center gap-4 mb-4">
       <a
-        href="/privacy"
+        href={getUrl("/privacy")}
         class="text-nav-text hover:text-accent text-sm transition-colors duration-200 underline"
+        hreflang="ko"
       >
         Privacy
       </a>

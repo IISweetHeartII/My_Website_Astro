@@ -32,6 +32,9 @@ const personSchema = {
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
+    <link rel="alternate" hreflang="ko" href={`${SITE_URL}/about/`} />
+    <link rel="alternate" hreflang="en" href={`${SITE_URL}/en/about/`} />
+    <link rel="alternate" hreflang="x-default" href={`${SITE_URL}/about/`} />
     <meta property="og:type" content="profile" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
@@ -55,6 +58,7 @@ const personSchema = {
   <body>
     <div class="switch" role="group" aria-label="읽기 모드">
       <a class="switch__home" href="/">← log8.kr</a>
+      <a class="switch__btn" href="/en/about/" hreflang="en">EN</a>
       <button id="btn-term" class="switch__btn" aria-pressed="true">&gt;_ 터미널로 읽기</button>
       <button id="btn-read" class="switch__btn" aria-pressed="false">¶ 글로 읽기</button>
     </div>
@@ -209,6 +213,7 @@ const personSchema = {
         background: transparent;
         color: var(--muted);
         cursor: pointer;
+        text-decoration: none;
         transition: all 0.18s ease;
       }
       .switch__btn:hover {

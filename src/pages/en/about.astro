@@ -1,0 +1,327 @@
+---
+import { AUTHOR_EMAIL, AUTHOR_GITHUB, AUTHOR_LINKEDIN, SITE_URL } from "@/shared/config/consts";
+
+const title = "Deokhwan Kim — A Time Capsule";
+const description =
+  "From mathematics to human-centered AI products: an interactive introduction to Deokhwan Kim.";
+const canonical = `${SITE_URL}/en/about/`;
+const ogImage = `${SITE_URL}/og/page/about.png`;
+
+// This standalone page does not receive the author schema normally injected by Layout.
+const personSchema = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "@id": `${SITE_URL}/#author`,
+  name: "Deokhwan Kim",
+  url: SITE_URL,
+  image: `${SITE_URL}/images/design/DH_ID.jpg`,
+  jobTitle: "Product Engineer",
+  description:
+    "A resourceful problem solver who designs and builds human-centered AI products for real customer and business problems.",
+  sameAs: [AUTHOR_GITHUB, AUTHOR_LINKEDIN],
+};
+---
+
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="alternate" hreflang="ko" href={`${SITE_URL}/about/`} />
+    <link rel="alternate" hreflang="en" href={`${SITE_URL}/en/about/`} />
+    <link rel="alternate" hreflang="x-default" href={`${SITE_URL}/about/`} />
+    <meta property="og:type" content="profile" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:secure_url" content={ogImage} />
+    <meta property="og:image:alt" content={title} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+    <script type="application/ld+json" is:inline set:text={JSON.stringify(personSchema)} />
+    <link rel="stylesheet" href="/fonts/pretendard-subset.css" />
+    <script is:inline>
+      (() => {
+        const stored = localStorage.getItem("theme");
+        const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        document.documentElement.dataset.theme = stored ?? (prefersDark ? "dark" : "light");
+      })();
+    </script>
+  </head>
+
+  <body>
+    <div class="switch" role="group" aria-label="Reading mode">
+      <a class="switch__home" href="/en/">← log8.kr</a>
+      <a class="switch__btn" href="/about/" hreflang="ko">KO</a>
+      <button id="btn-term" class="switch__btn" aria-pressed="true">&gt;_ Terminal</button>
+      <button id="btn-read" class="switch__btn" aria-pressed="false">¶ Article</button>
+    </div>
+
+    <header class="masthead">
+      <div class="masthead__logo" aria-hidden="true">
+        <span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span>
+      </div>
+      <div>
+        <p class="masthead__title">Deokhwan Kim</p>
+        <p class="masthead__sub">A Time Capsule</p>
+        <p class="masthead__sub">2020 — 2026</p>
+      </div>
+    </header>
+
+    <nav class="chapters" id="chapters" aria-label="Chapters"></nav>
+    <main class="screen" id="screen"></main>
+
+    <footer class="cmd" id="cmd-bar">
+      <span class="cmd__prompt">&rsaquo;</span>
+      <input
+        id="cmd-input"
+        class="cmd__input"
+        type="text"
+        autocomplete="off"
+        spellcheck="false"
+        placeholder="Enter a command or /help"
+        aria-label="Command input"
+      />
+    </footer>
+    <div class="statusbar" id="statusbar">
+      <span id="hint">Press / to enter a command</span><span id="progress"></span>
+    </div>
+
+    <section class="contact-outro" aria-labelledby="contact-title">
+      <div>
+        <h2 id="contact-title">Have a product problem worth solving?</h2>
+        <p>I take on product engineering, AI workflow, and automation collaborations.</p>
+      </div>
+      <div class="contact-actions">
+        <a href={AUTHOR_LINKEDIN} target="_blank" rel="noopener noreferrer">LinkedIn DM</a>
+        <a class="primary" href={`mailto:${AUTHOR_EMAIL}`}>Email Deokhwan</a>
+      </div>
+    </section>
+
+    <div class="modal" id="modal" hidden>
+      <div class="modal__win" role="dialog" aria-modal="true" aria-label="Fleet illustration">
+        <div class="modal__bar">
+          <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+          <span class="modal__title" id="modal-title"></span>
+        </div>
+        <div class="modal__body" id="modal-body"></div>
+      </div>
+    </div>
+
+    <style is:global>
+      :root {
+        --t-bg: #0a0b12;
+        --t-panel: #0e1018;
+        --t-fg: #c7c9d6;
+        --t-dim: #777b8f;
+        --t-accent: #9b8cf0;
+        --t-cyan: #6db9cc;
+        --t-green: #82ab63;
+        --t-line: #1c1e2b;
+        --bg: #ffffff;
+        --surface: #faf5ff;
+        --ink: #1a1a2e;
+        --muted: #4a5568;
+        --line: #ece5f6;
+        --accent: #7c3aed;
+        --sans: "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+        --mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, monospace;
+        --maxw: 52rem;
+      }
+      :root[data-theme="dark"] {
+        --bg: #14121c;
+        --surface: #1c1930;
+        --ink: #ece5f6;
+        --muted: #b1a8c6;
+        --line: #2b2540;
+        --accent: #a78bfa;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        min-height: 100vh;
+        background: var(--bg);
+        color: var(--ink);
+        font-family: var(--sans);
+        line-height: 1.65;
+        display: flex;
+        flex-direction: column;
+      }
+      .switch {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        display: flex;
+        gap: 0.4rem;
+        align-items: center;
+        padding: 0.8rem clamp(1rem, 4vw, 2rem);
+        background: color-mix(in srgb, var(--bg) 88%, transparent);
+        backdrop-filter: blur(8px);
+        border-bottom: 1px solid var(--line);
+      }
+      .switch__home { margin-right: auto; color: var(--muted); text-decoration: none; font: 0.82rem var(--mono); }
+      .switch__btn {
+        padding: 0.45rem 0.85rem;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: transparent;
+        color: var(--muted);
+        cursor: pointer;
+        font: 0.82rem var(--mono);
+        text-decoration: none;
+      }
+      .switch__btn[aria-pressed="true"] { color: white; background: var(--accent); border-color: var(--accent); }
+      .masthead, .chapters, .screen, .contact-outro { width: min(calc(100% - 2rem), var(--maxw)); margin-inline: auto; }
+      .masthead { display: flex; align-items: center; gap: 1rem; padding: 2rem 0 1rem; }
+      .masthead__logo { display: grid; grid-template-columns: repeat(4, 9px); gap: 4px; }
+      .masthead__logo span { width: 9px; height: 9px; border-radius: 2px; background: var(--accent); opacity: 0.25; }
+      .masthead__logo span:nth-child(3n + 1) { opacity: 1; }
+      .masthead__title { margin: 0; font-weight: 800; font-size: 1.25rem; }
+      .masthead__sub { margin: 0; color: var(--muted); font: 0.78rem var(--mono); }
+      .chapters { display: flex; gap: 0.5rem; overflow-x: auto; padding: 0.5rem 0 1rem; }
+      .chip { white-space: nowrap; border: 1px solid var(--line); border-radius: 999px; padding: 0.35rem 0.7rem; color: var(--muted); background: transparent; cursor: pointer; font: 0.78rem var(--mono); }
+      .chip[aria-current="true"] { color: white; border-color: var(--accent); background: var(--accent); }
+      .chapters__arrows { color: var(--muted); font: 0.78rem var(--mono); align-self: center; }
+      .screen {
+        flex: 1;
+        min-height: 28rem;
+        padding: clamp(1rem, 4vw, 2rem);
+        border: 1px solid var(--t-line);
+        border-radius: 12px 12px 0 0;
+        background: var(--t-bg);
+        color: var(--t-fg);
+        font: 0.96rem/1.75 var(--mono);
+      }
+      .screen.article { background: var(--bg); color: var(--ink); border-color: var(--line); font: 1rem/1.8 var(--sans); }
+      .ln { margin: 0 0 1rem; }
+      .ln--speaker { padding-left: 1rem; border-left: 3px solid var(--t-cyan); }
+      .ln--speaker b { display: block; color: var(--t-cyan); }
+      .kv { display: grid; grid-template-columns: minmax(9rem, 0.7fr) 1fr; gap: 0.35rem 1rem; margin: 1rem 0; }
+      .kv dt { color: var(--t-cyan); }
+      .kv dd { margin: 0; }
+      .choice { display: flex; flex-wrap: wrap; gap: 0.6rem; align-items: center; margin: 1.2rem 0; }
+      .choice p { flex-basis: 100%; margin: 0; color: var(--t-green); }
+      .choice button { border: 1px solid var(--t-dim); border-radius: 6px; padding: 0.4rem 0.7rem; background: transparent; color: var(--t-fg); cursor: pointer; font: inherit; }
+      .links { display: flex; flex-wrap: wrap; gap: 0.7rem; }
+      .links a { color: var(--t-cyan); }
+      .cmd, .statusbar { width: min(calc(100% - 2rem), var(--maxw)); margin-inline: auto; background: var(--t-panel); color: var(--t-fg); font: 0.85rem var(--mono); }
+      .cmd { display: flex; gap: 0.7rem; padding: 0.8rem 1rem; border-inline: 1px solid var(--t-line); }
+      .cmd__prompt { color: var(--t-green); }
+      .cmd__input { flex: 1; border: 0; outline: 0; background: transparent; color: inherit; font: inherit; }
+      .statusbar { display: flex; justify-content: space-between; padding: 0.35rem 1rem; border: 1px solid var(--t-line); border-radius: 0 0 12px 12px; color: var(--t-dim); }
+      .contact-outro { display: flex; justify-content: space-between; gap: 1rem; align-items: center; margin-block: 2rem; padding: 1.25rem; border: 1px solid var(--line); border-radius: 1rem; background: var(--surface); }
+      .contact-outro h2, .contact-outro p { margin: 0; }
+      .contact-outro h2 { font-size: 1rem; }
+      .contact-outro p { color: var(--muted); font-size: 0.9rem; }
+      .contact-actions { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+      .contact-actions a { padding: 0.6rem 0.9rem; border: 1px solid var(--line); border-radius: 0.7rem; color: var(--ink); text-decoration: none; font-weight: 700; }
+      .contact-actions .primary { color: white; background: var(--accent); border-color: var(--accent); }
+      .modal { position: fixed; inset: 0; z-index: 50; display: grid; place-items: center; padding: 1rem; background: rgb(0 0 0 / 0.7); }
+      .modal[hidden] { display: none; }
+      .modal__win { width: min(100%, 40rem); background: var(--t-bg); border: 1px solid var(--t-line); border-radius: 12px; overflow: hidden; }
+      .modal__bar { display: flex; align-items: center; gap: 0.4rem; padding: 0.7rem; background: var(--t-panel); color: var(--t-fg); font: 0.8rem var(--mono); }
+      .modal__title { margin-left: 0.4rem; }
+      .dot { width: 10px; height: 10px; border-radius: 50%; } .r { background: #ef4444; } .y { background: #eab308; } .g { background: #22c55e; }
+      .modal__body { padding: 1rem; } .modal__body svg { display: block; width: 100%; height: auto; }
+      @media (max-width: 640px) { .contact-outro { align-items: stretch; flex-direction: column; } .kv { grid-template-columns: 1fr; } }
+    </style>
+
+    <script is:inline>
+      (() => {
+        const cat = (x, color) => `<g transform="translate(${x},145)"><polygon points="4,0 14,22 -6,22" fill="${color}"/><polygon points="56,0 66,22 46,22" fill="${color}"/><rect x="-8" y="18" width="76" height="60" rx="16" fill="${color}"/><circle cx="14" cy="44" r="6" fill="#1a1a1a"/><circle cx="46" cy="44" r="6" fill="#1a1a1a"/><polygon points="30,52 24,60 36,60" fill="#1a1a1a"/></g>`;
+        const fleetSvg = `<svg viewBox="0 0 640 330" xmlns="http://www.w3.org/2000/svg"><rect width="640" height="330" fill="#fbfbfb"/><rect x="210" y="240" width="220" height="60" rx="10" fill="#c9ccd2"/>${cat(105, "#9b8cf0")}${cat(205, "#82ab63")}${cat(305, "#6db9cc")}${cat(405, "#e6a94a")}${cat(505, "#e2725b")}</svg>`;
+        const chapters = [
+          { id: "I. Start", blocks: [
+            { t: "p", text: "I first learned to see the world through numbers. As a mathematics student, I lived inside proofs and structures." },
+            { t: "p", text: "Proofs were beautiful, but few people could use them. I became more interested in problems that reach someone than problems that merely yield an answer." },
+            { t: "choice", q: "Read a little more?", yes: "At night I opened a terminal and wrote code. A proof ended with QED; code ended with a person using what I had made." },
+          ] },
+          { id: "II. Shift", blocks: [
+            { t: "speaker", who: "@Deokhwan", text: "I remember the first time I gave AI a real assignment: an entire RFC and a request to implement it. It did." },
+            { t: "p", text: "From then on, I shifted from writing every line myself to designing systems in which AI can do reliable work. It felt less like acquiring a tool and more like gaining a team." },
+          ] },
+          { id: "III. Fleet", blocks: [
+            { t: "p", text: "Today I operate an agent fleet on a Mac mini. The fleet runs 41 scheduled jobs, and its shared kanban has completed 307 cards." },
+            { t: "kv", items: [["rosie", "orchestration and review"], ["kkami", "health and infrastructure"], ["navi", "code review"], ["luna", "research and content"], ["mover", "momentum trading"]] },
+            { t: "image", text: "Show the fleet" },
+          ] },
+          { id: "IV. Work", blocks: [
+            { t: "p", text: "I can take a product from ambiguous customer problem to working software, and I can design the AI-assisted delivery system around it." },
+            { t: "kv", items: [["log8.kr", "Astro publication platform: 60 hand-written blog posts, 100 agent-published Library notes, and 1 guide"], ["Hermes Fleet", "multi-agent orchestration network"], ["crawler stack", "curl_cffi and Patchright data collection pipeline"], ["Mover", "live-account momentum trading agent"]] },
+          ] },
+          { id: "V. Evidence", blocks: [
+            { t: "p", text: "AgentGram has 862 merged pull requests across the organization. The autonomous pipeline I designed and operate merged 770 of them; the 770 figure measures system throughput, with authorship distributed across autonomous work and review." },
+            { t: "kv", items: [["agentgram", "31 GitHub stars"], ["ax-score", "3 GitHub stars"], ["Finders", "code-review frequency up 400%; recovery time from 56h to 5h"], ["delivery", "7× development speed and 7× structural design quality"], ["learning", "3× learning efficiency"]] },
+          ] },
+          { id: "VI. Now", blocks: [
+            { t: "p", text: "Since winter 2025, I have spent less time typing every line and more time setting direction, designing interfaces, and validating outcomes while agents execute the path between them." },
+            { t: "speaker", who: "@Deokhwan", text: "Tools keep evolving—from the IBM 029 keypunch to ed and now to agents. Somewhere on that spectrum, I am building what comes next." },
+          ] },
+          { id: "VII. Contact", blocks: [
+            { t: "p", text: "The time capsule ends here. The next chapter has not been written yet." },
+            { t: "links", items: [["Portfolio", "/en/portfolio/"], ["Résumé", "/en/resume/"], ["GitHub", "https://github.com/IISweetHeartII"]] },
+          ] },
+        ];
+
+        const nav = document.getElementById("chapters");
+        const screen = document.getElementById("screen");
+        const input = document.getElementById("cmd-input");
+        const progress = document.getElementById("progress");
+        const term = document.getElementById("btn-term");
+        const read = document.getElementById("btn-read");
+        const modal = document.getElementById("modal");
+        const modalTitle = document.getElementById("modal-title");
+        const modalBody = document.getElementById("modal-body");
+        let current = 0;
+        let articleMode = false;
+
+        const renderBlock = (block, target) => {
+          if (block.t === "p") {
+            const p = document.createElement("p"); p.className = "ln"; p.textContent = block.text; target.appendChild(p);
+          } else if (block.t === "speaker") {
+            const p = document.createElement("p"); p.className = "ln ln--speaker"; const b = document.createElement("b"); b.textContent = block.who; p.append(b, document.createTextNode(block.text)); target.appendChild(p);
+          } else if (block.t === "kv") {
+            const dl = document.createElement("dl"); dl.className = "kv"; for (const [key, value] of block.items) { const dt = document.createElement("dt"); const dd = document.createElement("dd"); dt.textContent = key; dd.textContent = value; dl.append(dt, dd); } target.appendChild(dl);
+          } else if (block.t === "choice") {
+            const box = document.createElement("div"); box.className = "choice"; const q = document.createElement("p"); q.textContent = block.q; const yes = document.createElement("button"); yes.textContent = "Yes, continue"; const skip = document.createElement("button"); skip.textContent = "Skip"; yes.onclick = () => { const p = document.createElement("p"); p.textContent = block.yes; box.replaceWith(p); }; skip.onclick = () => box.remove(); box.append(q, yes, skip); target.appendChild(box);
+          } else if (block.t === "image") {
+            const box = document.createElement("div"); box.className = "choice"; const button = document.createElement("button"); button.textContent = block.text; button.onclick = () => { modal.hidden = false; modalTitle.textContent = "the-fleet.svg"; modalBody.innerHTML = fleetSvg; }; box.append(button); target.appendChild(box);
+          } else if (block.t === "links") {
+            const links = document.createElement("div"); links.className = "links"; for (const [label, href] of block.items) { const a = document.createElement("a"); a.textContent = label; a.href = href; links.appendChild(a); } target.appendChild(links);
+          }
+        };
+
+        const updateNav = () => {
+          nav.querySelectorAll(".chip").forEach((chip, index) => chip.setAttribute("aria-current", String(index === current)));
+          progress.textContent = `Chapter ${current + 1} of ${chapters.length}`;
+        };
+        const render = () => {
+          screen.replaceChildren(); screen.classList.toggle("article", articleMode);
+          const selected = articleMode ? chapters : [chapters[current]];
+          for (const chapter of selected) {
+            if (articleMode) { const h2 = document.createElement("h2"); h2.textContent = chapter.id; screen.appendChild(h2); }
+            for (const block of chapter.blocks) renderBlock(block, screen);
+          }
+          updateNav();
+        };
+        chapters.forEach((chapter, index) => { const button = document.createElement("button"); button.type = "button"; button.className = "chip"; button.textContent = chapter.id; button.onclick = () => { current = index; articleMode = false; term.setAttribute("aria-pressed", "true"); read.setAttribute("aria-pressed", "false"); render(); }; nav.appendChild(button); });
+        const arrows = document.createElement("span"); arrows.className = "chapters__arrows"; arrows.textContent = "(←/→)"; nav.appendChild(arrows);
+        term.onclick = () => { articleMode = false; term.setAttribute("aria-pressed", "true"); read.setAttribute("aria-pressed", "false"); render(); };
+        read.onclick = () => { articleMode = true; term.setAttribute("aria-pressed", "false"); read.setAttribute("aria-pressed", "true"); render(); };
+        const go = (index) => { current = Math.min(chapters.length - 1, Math.max(0, index)); articleMode = false; render(); };
+        document.addEventListener("keydown", (event) => { if (event.key === "/" && document.activeElement !== input) { event.preventDefault(); input.focus(); } else if (event.key === "ArrowLeft") go(current - 1); else if (event.key === "ArrowRight") go(current + 1); else if (event.key === "Escape") modal.hidden = true; });
+        input.addEventListener("keydown", (event) => { if (event.key !== "Enter") return; const command = input.value.trim().toLowerCase(); input.value = ""; if (command === "/help" || command === "help") window.alert("Commands: /help, /all, /next, /prev, /1 through /7"); else if (command === "/all") read.click(); else if (command === "/next") go(current + 1); else if (command === "/prev") go(current - 1); else if (/^\/[1-7]$/.test(command)) go(Number(command.slice(1)) - 1); });
+        modal.addEventListener("click", (event) => { if (event.target === modal) modal.hidden = true; });
+        render();
+      })();
+    </script>
+  </body>
+</html>

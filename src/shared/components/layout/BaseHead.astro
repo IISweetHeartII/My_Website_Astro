@@ -12,9 +12,12 @@ import {
 import {
   getLocaleFromPathname,
   getTranslationPaths,
+  hasLocalizedCounterpart,
   type Locale,
   type LocalizedCollection,
   ogLocale,
+  stripLocaleFromPath,
+  withLocalePath,
 } from "@/shared/i18n/ui";
 import { getUrl } from "@/shared/utils/url";
 
@@ -87,6 +90,15 @@ const translationPaths = await getTranslationPaths(contentCollection, translatio
 if (translationPaths) {
   const koHref = new globalThis.URL(translationPaths.ko, Astro.site).toString();
   const enHref = new globalThis.URL(translationPaths.en, Astro.site).toString();
+  alternateLinks.push(
+    { locale: "ko", href: koHref },
+    { locale: "en", href: enHref },
+    { locale: "x-default", href: koHref }
+  );
+} else if (hasLocalizedCounterpart(Astro.url.pathname)) {
+  const counterpartPath = stripLocaleFromPath(Astro.url.pathname);
+  const koHref = new globalThis.URL(withLocalePath(counterpartPath, "ko"), Astro.site).toString();
+  const enHref = new globalThis.URL(withLocalePath(counterpartPath, "en"), Astro.site).toString();
   alternateLinks.push(
     { locale: "ko", href: koHref },
     { locale: "en", href: enHref },

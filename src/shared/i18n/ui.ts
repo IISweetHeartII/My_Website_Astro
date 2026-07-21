@@ -103,14 +103,20 @@ export const isPublishedInLocale = (
 /**
  * Routes that are built in every locale. Article routes are not listed here:
  * whether they have a counterpart depends on the translation existing, which
- * getTranslationPaths answers.
+ * getTranslationPaths answers. Paginated indexes are excluded because locale
+ * post counts differ, so the same page number may not be built in both locales.
  */
-const LOCALIZED_INDEX_ROUTE = /^\/(blog|library)\/(\d+\/)?$/;
+const LOCALIZED_COUNTERPART_ROUTES = new Set([
+  "/",
+  "/about/",
+  "/portfolio/",
+  "/resume/",
+  "/blog/",
+  "/library/",
+]);
 
-export const hasLocalizedIndex = (pathname: string): boolean => {
-  const stripped = stripLocaleFromPath(pathname);
-  return stripped === "/" || LOCALIZED_INDEX_ROUTE.test(stripped);
-};
+export const hasLocalizedCounterpart = (pathname: string): boolean =>
+  LOCALIZED_COUNTERPART_ROUTES.has(stripLocaleFromPath(pathname));
 
 /**
  * Paths of a piece of content in both locales, or null when it is only

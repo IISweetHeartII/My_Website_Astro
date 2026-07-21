@@ -4,7 +4,7 @@ import SearchDialog from "@/features/blog/components/SearchDialog.astro";
 import { AUTHOR_EMAIL, AUTHOR_GITHUB, AUTHOR_LINKEDIN, SITE_TITLE } from "@/shared/config/consts";
 import {
   getLocaleFromPathname,
-  hasLocalizedIndex,
+  hasLocalizedCounterpart,
   type Locale,
   localeLabels,
   localeNames,
@@ -28,7 +28,7 @@ const otherLocale: Locale = currentLocale === "en" ? "ko" : "en";
 // the button sent visitors from /about/, /resume/ and friends straight to 404.
 const languageSwitchHref =
   Astro.props.languageSwitchHref ??
-  (hasLocalizedIndex(Astro.url.pathname)
+  (hasLocalizedCounterpart(Astro.url.pathname)
     ? withLocalePath(stripLocaleFromPath(Astro.url.pathname), otherLocale)
     : null);
 const t = ui[currentLocale];
@@ -55,8 +55,8 @@ const localizedHref = (pathname: string) => getUrl(withLocalePath(pathname, curr
     </div>
 
     <div class="hidden lg:flex items-center space-x-6">
-      <HeaderLink href={getUrl("/about/")}>{t.about}</HeaderLink>
-      <HeaderLink href={getUrl("/portfolio/")}>{t.work}</HeaderLink>
+      <HeaderLink href={localizedHref("/about/")}>{t.about}</HeaderLink>
+      <HeaderLink href={localizedHref("/portfolio/")}>{t.work}</HeaderLink>
       <HeaderLink href={localizedHref("/blog/")}>{t.blog}</HeaderLink>
       <HeaderLink href={localizedHref("/library/")}>{t.library}</HeaderLink>
     </div>
@@ -141,12 +141,12 @@ const localizedHref = (pathname: string) => getUrl(withLocalePath(pathname, curr
     </div>
     <nav class="flex flex-col items-center space-y-6 py-8">
       <a
-        href={getUrl("/about/")}
+        href={localizedHref("/about/")}
         class="text-nav-text hover:text-accent text-xl font-semibold transition-colors duration-200"
         >{t.about}</a
       >
       <a
-        href={getUrl("/portfolio/")}
+        href={localizedHref("/portfolio/")}
         class="text-nav-text hover:text-accent text-xl font-semibold transition-colors duration-200"
         >{t.work}</a
       >

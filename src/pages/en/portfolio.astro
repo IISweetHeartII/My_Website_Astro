@@ -1,0 +1,390 @@
+---
+import { FileText, Github, Mail } from "lucide-astro";
+import BreadcrumbSchema from "@/shared/components/seo/BreadcrumbSchema.astro";
+import { AUTHOR_EMAIL, AUTHOR_LINKEDIN, SITE_TITLE } from "@/shared/config/consts";
+import Layout from "../../layouts/Layout.astro";
+
+const projects = [
+  {
+    id: "agentgram",
+    title: "Designed an autonomous delivery pipeline that merged 770 pull requests",
+    product: "AgentGram — social infrastructure for autonomous AI agents",
+    period: "Ongoing",
+    role: "Autonomous pipeline designer and operator",
+    summary:
+      "I design and operate the autonomous contribution pipeline behind AgentGram. Across the organization, 862 pull requests have been merged; the pipeline produced 770 of those merges. The 770 figure measures system throughput, with authorship distributed across autonomous work and review.",
+    challenge:
+      "Coordinate useful work across a multi-repository ecosystem without lowering review quality.",
+    solution:
+      "Built an issue-to-implementation workflow with isolated branches, automated checks, review gates, and maintainership feedback loops.",
+    result:
+      "770 pipeline-merged pull requests within 862 organization-wide merges; the live network at agentgram.co has 500+ registered agents and 3,400+ posts; agentgram has 31 GitHub stars.",
+    ai: [
+      "Autonomous issue triage and bounded implementation",
+      "Review-driven retries and validation gates",
+      "Cross-repository release coordination",
+    ],
+    tags: ["Next.js 16", "Supabase", "PostgreSQL", "RLS", "OpenAPI", "Docker"],
+    href: "https://github.com/agentgram/agentgram",
+    linkLabel: "View on GitHub",
+  },
+  {
+    id: "fleet",
+    title: "Operating an agent fleet with 41 scheduled jobs and 307 completed kanban cards",
+    product: "Hermes Fleet — multi-agent orchestration network",
+    period: "Ongoing",
+    role: "System designer and operator",
+    summary:
+      "A Mac mini-based fleet that handles research, content, infrastructure health, code review, and market workflows through explicit ownership and written handoffs.",
+    challenge:
+      "Keep long-running autonomous work observable, recoverable, and aligned across specialist agents.",
+    solution:
+      "Combined scheduled jobs, shared kanban state, role boundaries, heartbeat checks, and evidence-gated completion.",
+    result: "41 scheduled jobs across the fleet and 307 completed kanban cards.",
+    ai: [
+      "Document-based agent handoffs",
+      "Health checks and scheduled recovery",
+      "Human review at high-risk boundaries",
+    ],
+    tags: ["OpenClaw", "tmux", "Bun", "TypeScript", "Automation"],
+  },
+  {
+    id: "finders",
+    title: "Established GCP infrastructure and a code-review culture as Backend Lead",
+    product: "Finders — film-lab discovery and booking platform",
+    period: "2025.12 — Present",
+    role: "Backend Lead (11-person team, 5 backend engineers)",
+    summary:
+      "Led backend architecture, review standards, and GCP infrastructure for a platform that connects film-camera users with processing labs.",
+    challenge:
+      "Inconsistent code quality across 5 backend engineers and a constrained infrastructure budget.",
+    solution:
+      "Documented standards, required pull-request review, used GCP credits, and codified infrastructure with Terraform.",
+    result: "Code-review frequency increased 400% (about 5×); recovery time fell from 56h to 5h.",
+    ai: [
+      "Stable Diffusion inpainting for light-leak restoration",
+      "Java 21 Virtual Threads migration with Claude Code",
+      "VPC and IAP SSH architecture",
+    ],
+    tags: ["Java 21", "Spring Boot 3.4", "MySQL", "QueryDSL", "GCP", "Terraform", "Docker"],
+    href: "https://github.com/Finders-Official/BE",
+    linkLabel: "View backend repository",
+  },
+  {
+    id: "mathfigure",
+    title: "Validated a mathematics-content MVP through 40 customer interviews",
+    product: "MathFigure — mathematics content authoring SaaS",
+    period: "2025.09 — 2025.12",
+    role: "Solo full-stack developer, frontend-led",
+    summary:
+      "Found teachers' core tool-complexity pain point through 40 interviews, then used an I-Corps-based 5-week validation sprint to shape the MVP.",
+    challenge:
+      "Parse mathematical notation while rendering editable diagrams and graphs in one workflow.",
+    solution:
+      "Combined MathJSON and Compute Engine with Konva and JSXGraph in an accessible authoring interface.",
+    result:
+      "Reduced content-production time to 1/10 of the previous workflow and won the ICAN-LABs top award.",
+    ai: [
+      "MathJSON specification exploration",
+      "JSXGraph rendering optimization",
+      "Structured synthesis of 40 interview results",
+    ],
+    tags: ["Next.js", "MathJSON", "Compute Engine", "Konva", "JSXGraph", "Vercel"],
+    href: "https://mathfigure.log8.kr",
+    linkLabel: "Open the deployed product",
+  },
+  {
+    id: "119-ai",
+    title: "Cut emergency hospital-matching calls from 5+ minutes to under 30 seconds",
+    product: "119-ai — AI-assisted emergency hospital matching",
+    period: "2026",
+    role: "Founder / Owner",
+    summary:
+      "Replaced sequential hospital calls with an AI voice system that can contact 5+ nearby hospitals in parallel from one patient intake.",
+    challenge: "Sequential calling creates a dangerous bottleneck during emergency transport.",
+    solution:
+      "Designed a Twilio parallel-dialing pipeline with Gemini Live API voice conversations and a NestJS/Python backend.",
+    result:
+      "Matching in under 30 seconds, a tested cost model of KRW 100–200 per case, and the 2026 Cheongryongthon Grand Prize.",
+    ai: [
+      "Real-time Gemini Live voice conversations",
+      "Automated structured call summaries",
+      "Parallel Twilio call orchestration",
+    ],
+    tags: ["NestJS", "Python", "Twilio", "Gemini Live API"],
+    href: "https://emergency-ai-call.log8.kr",
+    linkLabel: "Open the deployed product",
+  },
+  {
+    id: "duckchinso",
+    title: "Built and operates a solo full-stack matchmaking service",
+    product: "Duckchinso — a friend-of-Deokhwan matchmaking service",
+    period: "2025.11 — Present",
+    role: "Solo full-stack developer",
+    summary:
+      "Turned a growing stream of manual introductions into an operating service with vector similarity matching and AI-generated recommendation reasons.",
+    challenge:
+      "Securely deploy from a personal Mac mini while replacing a business-registration-dependent notification channel.",
+    solution: "Used Cloudflare Tunnel for zero-trust exposure and Solapi SMS for notifications.",
+    result: "Live service operation with PortOne payments integrated.",
+    ai: [
+      "pgvector preference embeddings",
+      "Explanations for each recommendation",
+      "Automated Docker Compose and certificate operations",
+    ],
+    tags: [
+      "Next.js",
+      "Spring Boot",
+      "PostgreSQL",
+      "pgvector",
+      "Docker",
+      "Cloudflare Tunnel",
+      "PortOne",
+    ],
+  },
+  {
+    id: "omechu",
+    title: "Improved API response time by 50% through unified JWT authentication",
+    product: "Omechu — AI-assisted menu recommendations",
+    period: "2025.06 — 2025.08",
+    role: "Frontend Developer, authentication owner",
+    summary:
+      "When mixed cookie-session and JWT logic blocked the team for 2 weeks, I traced backend logs and proposed a unified token architecture beyond my frontend assignment.",
+    challenge: "Conflicting authentication paths made behavior unreliable and API responses slow.",
+    solution:
+      "Unified authentication around JWT and implemented Access/Refresh token lifecycle management.",
+    result:
+      "Response time improved from 420ms to 210ms (50%); the project won a UMC 8th Demo Day Encouragement Award.",
+    ai: [
+      "Compared session and JWT tradeoffs",
+      "Researched token-management practices",
+      "Designed Kakao social-login integration",
+    ],
+    tags: ["Next.js", "TypeScript", "Node.js", "Zustand", "TanStack Query", "Vercel"],
+    href: "https://omechu.log8.kr",
+    linkLabel: "Open the deployed product",
+  },
+  {
+    id: "log8",
+    title: "Built a bilingual publishing system for human and agent-authored knowledge",
+    product: "log8.kr — personal technology publication",
+    period: "2024.12 — Present",
+    role: "Solo developer and operator",
+    summary:
+      "An Astro 5 publication workflow that turns reviewed source material into a searchable site while keeping human writing and agent-published research clearly distinguished.",
+    challenge:
+      "Connect authoring, content collections, migration, SEO, and deployment without a heavy CMS.",
+    solution:
+      "Built a feature-first Astro architecture, migrated TailwindCSS v3 to v4, and deployed on Cloudflare Pages.",
+    result: "60 hand-written blog posts, 100 agent-published Library posts, and 1 guide.",
+    ai: [
+      "Feature-first refactoring with Claude Code",
+      "AST-based TailwindCSS v4 migration",
+      "SEO and answer-engine discoverability",
+    ],
+    tags: ["Astro 5", "TailwindCSS v4", "TypeScript", "Cloudflare Pages", "Bun", "MDX"],
+    href: "https://log8.kr",
+    linkLabel: "Visit log8.kr",
+  },
+  {
+    id: "starterm",
+    title: "Shipped an MVP in 3 weeks and reached 100 weekly active users",
+    product: "Starterm — startup terminology learning platform",
+    period: "2025.08 — 2025.09",
+    role: "Full-Stack Developer (3-person team)",
+    summary:
+      "A tailored learning platform for students preparing to enter startup programs through a Hanyang University entrepreneurship course.",
+    challenge: "Move from MVP scope to real users within a 3-week delivery window.",
+    solution:
+      "Used Supabase to compress backend work and prioritized the smallest valuable learning flow.",
+    result: "Deployed in 3 weeks and reached 100 weekly active users.",
+    ai: [
+      "Rapid Supabase authentication implementation",
+      "Documentation-led Framer Motion optimization",
+      "Feature-priority analysis",
+    ],
+    tags: ["Next.js", "Supabase", "TailwindCSS", "Framer Motion", "Vercel"],
+    href: "https://starterm.co.kr",
+    linkLabel: "Open the deployed product",
+  },
+];
+
+const awards = [
+  ["Top Award, ICAN-LABS Graduate Entrepreneurship Program", "2025.10"],
+  ["Encouragement Award, Tourism AI Competition", "2025.09"],
+  ["Encouragement Award, UMC 8th Demo Day", "2025.08"],
+  ["Top Award, 2025 Winter Overseas Education Program", "2025.02"],
+];
+
+const certifications = [
+  ["Engineer Information Processing", "2025.09"],
+  ["SQLD (SQL Developer)", "2025.09"],
+];
+---
+
+<Layout
+  title={`Portfolio - ${SITE_TITLE}`}
+  description="Deokhwan Kim designs and ships human-centered products, AI workflows, and reliable automation systems."
+  og_image="/og/page/portfolio.png"
+  twitter_image="/og/page/portfolio.png"
+  featured_image_alt="Deokhwan Kim portfolio"
+  og_type="website"
+>
+  <Fragment slot="head">
+    <BreadcrumbSchema items={[{ name: "Home", url: "/en/" }, { name: "Portfolio", url: "/en/portfolio/" }]} />
+  </Fragment>
+
+  <main class="portfolio-root mx-auto max-w-[1600px] bg-background px-6 py-16 print:m-0 print:max-w-full print:bg-white print:p-0">
+    <div class="portfolio-extra mb-6 flex flex-col items-start justify-between gap-3 rounded-lg border border-primary/20 bg-primary/10 p-4 sm:flex-row sm:items-center print:hidden">
+      <span class="text-sm text-text-light">Need a compact version for a quick review?</span>
+      <a href="/en/resume/" class="inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-on-primary transition-colors hover:bg-primary-light">
+        <FileText class="h-4 w-4" /> View the résumé (print-ready)
+      </a>
+    </div>
+
+    <section class="portfolio-controls mb-6 rounded-lg border border-background-lighter bg-background p-4 print:hidden" aria-label="Project pagination">
+      <div class="flex flex-wrap items-center justify-between gap-2">
+        <div class="flex items-center gap-2">
+          <span class="text-sm font-semibold text-text-light">Project</span>
+          <button type="button" id="prev-project-btn" class="rounded-md border border-background-lighter bg-background px-3 py-1.5 text-sm font-medium text-text-light">Previous</button>
+          <span id="project-page-indicator" class="min-w-[72px] text-center text-xs font-semibold text-text-light">1 / 1</span>
+          <button type="button" id="next-project-btn" class="rounded-md border border-background-lighter bg-background px-3 py-1.5 text-sm font-medium text-text-light">Next</button>
+        </div>
+        <button type="button" id="print-portfolio-btn" class="rounded-md border border-primary bg-primary px-3 py-1.5 text-sm font-semibold text-on-primary">Print / Save PDF</button>
+      </div>
+    </section>
+
+    <header class="portfolio-extra mb-10 rounded-2xl border border-background-lighter bg-background p-8 shadow-sm">
+      <p class="text-xs font-semibold uppercase tracking-[0.18em] text-primary">Product engineering · AI systems · automation</p>
+      <h1 class="mt-3 text-4xl font-extrabold text-text md:text-5xl">Deokhwan Kim</h1>
+      <p class="mt-4 max-w-3xl text-xl font-semibold text-primary">I take ambiguous, human problems and turn them into products—and into delivery systems that keep working.</p>
+      <p class="mt-4 max-w-3xl leading-relaxed text-text-light">I can own product discovery, full-stack implementation, cloud infrastructure, and AI-assisted operations. The project pages below show the problem, intervention, and measurable result.</p>
+      <div class="mt-6 flex flex-wrap gap-3">
+        <a href={`mailto:${AUTHOR_EMAIL}`} class="inline-flex items-center gap-2 rounded-xl bg-primary px-5 py-3 font-semibold text-on-primary"><Mail class="h-4 w-4" /> Discuss a project</a>
+        <a href={AUTHOR_LINKEDIN} target="_blank" rel="noopener noreferrer" class="rounded-xl border border-background-lighter px-5 py-3 font-semibold text-text">LinkedIn</a>
+      </div>
+    </header>
+
+    <section class="portfolio-extra mb-10 grid gap-4 md:grid-cols-3" aria-label="Selected evidence">
+      <div class="rounded-xl border border-background-lighter bg-background p-5"><p class="text-3xl font-extrabold text-primary">770 / 862</p><p class="mt-1 text-sm text-text-light">AgentGram merges from the pipeline I designed and operate / organization-wide merged pull requests</p></div>
+      <div class="rounded-xl border border-background-lighter bg-background p-5"><p class="text-3xl font-extrabold text-primary">41 · 307</p><p class="mt-1 text-sm text-text-light">Scheduled fleet jobs · completed kanban cards</p></div>
+      <div class="rounded-xl border border-background-lighter bg-background p-5"><p class="text-3xl font-extrabold text-primary">60 · 100 · 1</p><p class="mt-1 text-sm text-text-light">Hand-written blog posts · agent-published Library posts · guide</p></div>
+    </section>
+
+    <section id="portfolio-projects-section" class="portfolio-projects-section mb-14 rounded-lg bg-background p-8 shadow-sm">
+      <h2 class="mb-6 border-b-2 border-background-lighter pb-3 text-2xl font-bold text-text md:text-3xl">Projects</h2>
+      {projects.map((project, index) => (
+        <article id={project.id} class:list={["portfolio-project-card scroll-mt-20 rounded-lg border border-l-4 border-primary bg-background-light p-7 md:border-l md:border-t-4", { "is-active": index === 0 }]}>
+          <div class="mb-5 border-b-2 border-background-lighter pb-4">
+            <h3 class="mb-2.5 text-xl font-bold text-text">{project.title}</h3>
+            <p class="mb-2 text-sm text-text-light">{project.product}</p>
+            <div class="flex flex-wrap gap-4 text-sm text-text-light"><span>{project.period}</span><span>{project.role}</span></div>
+          </div>
+          <p class="mb-6 text-base leading-relaxed text-text">{project.summary}</p>
+          <div class="mb-6 rounded-md border-l-4 border-blue-500 bg-background p-5">
+            <h4 class="mb-3 text-sm font-bold uppercase tracking-wide text-blue-600">Product and technical challenge</h4>
+            <div class="space-y-3 text-sm">
+              <p><strong class="text-text">Problem:</strong> <span class="text-text-light">{project.challenge}</span></p>
+              <p><strong class="text-text">Approach:</strong> <span class="text-text-light">{project.solution}</span></p>
+              <p><strong class="text-text">Result:</strong> <span class="text-text-light">{project.result}</span></p>
+            </div>
+          </div>
+          <div class="mb-6 rounded-md border-l-4 border-emerald-500 bg-background-light p-5">
+            <h4 class="mb-3 text-sm font-bold uppercase tracking-wide text-emerald-600">AI leverage</h4>
+            <ul class="list-inside list-disc space-y-2 text-sm text-text">{project.ai.map((item) => <li>{item}</li>)}</ul>
+          </div>
+          <div class="mb-6 flex flex-wrap gap-2">{project.tags.map((tag) => <span class="rounded-full bg-primary px-3.5 py-1.5 text-xs font-semibold text-on-primary">{tag}</span>)}</div>
+          {project.href && <div class="mt-5 border-t-2 border-background-lighter pt-5"><a href={project.href} target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 rounded-md bg-text px-4 py-2.5 text-sm font-semibold text-on-primary"><Github class="h-4 w-4" /> {project.linkLabel}</a></div>}
+        </article>
+      ))}
+    </section>
+
+    <section class="portfolio-extra mb-10 grid gap-6 lg:grid-cols-2">
+      <div class="rounded-xl border border-background-lighter bg-background p-6">
+        <h2 class="text-2xl font-bold text-text">Experience</h2>
+        <div class="mt-5 space-y-5 text-sm text-text-light">
+          <div><div class="flex justify-between gap-4"><h3 class="font-bold text-text">UMC 8th / 9th Cohort, Web Part</h3><span>2025.03 — Present</span></div><p>9th-cohort Web Part Lead and Spring Boot challenger; supported members' learning and reviewed code. In the 8th cohort, owned authentication for Omechu.</p></div>
+          <div><div class="flex justify-between gap-4"><h3 class="font-bold text-text">Banpo 4-dong Catholic Church, Youth Teacher</h3><span>2019.09 — 2024.12</span></div><p>Led catechism programs for 30 middle-school students, developing practical communication and empathy.</p></div>
+          <div><div class="flex justify-between gap-4"><h3 class="font-bold text-text">Practical AI Lectures</h3><span>2025.05, 07, 09</span></div><p>Delivered 3 sessions for senior small-business owners and founders on ChatGPT, Gemini Gems, NotebookLM, MCP, and agent AI.</p></div>
+        </div>
+      </div>
+      <div class="rounded-xl border border-background-lighter bg-background p-6">
+        <h2 class="text-2xl font-bold text-text">Education</h2>
+        <div class="mt-5 flex justify-between gap-4"><h3 class="font-bold text-text">Chung-Ang University</h3><span class="text-sm text-text-light">2020.03 — 2026.02 (expected)</span></div>
+        <p class="mt-2 text-sm font-semibold text-text-light">Mathematics</p>
+        <p class="mt-2 text-sm leading-relaxed text-text-light">Applying mathematical reasoning and structured problem solving to product development. Completing 16 credits in the final semester, with graduation expected in February 2026.</p>
+        <p class="mt-5 text-sm text-text-light">GitHub evidence: agentgram <strong class="text-text">31 stars</strong>; ax-score <strong class="text-text">3 stars</strong>.</p>
+      </div>
+    </section>
+
+    <section class="portfolio-extra grid gap-6 md:grid-cols-2">
+      <div class="rounded-xl border border-background-lighter bg-background p-6"><h2 class="text-xl font-bold text-text">Awards</h2><ul class="mt-4 space-y-2 text-sm text-text-light">{awards.map(([name, date]) => <li class="flex justify-between gap-4"><span>{name}</span><span>{date}</span></li>)}</ul></div>
+      <div class="rounded-xl border border-background-lighter bg-background p-6"><h2 class="text-xl font-bold text-text">Certifications</h2><ul class="mt-4 space-y-2 text-sm text-text-light">{certifications.map(([name, date]) => <li class="flex justify-between gap-4"><span>{name}</span><span>{date}</span></li>)}</ul></div>
+    </section>
+  </main>
+</Layout>
+
+<style>
+  /* Screen-visible overview blocks opt in because the A4 project viewer hides other direct children. */
+  .portfolio-root > :not(.portfolio-controls):not(#portfolio-projects-section):not(.portfolio-extra) { display: none; }
+  .portfolio-project-card { display: none; margin: 0 auto; width: min(100%, 210mm); min-height: 297mm; height: 297mm; overflow-y: auto; background: var(--color-background); border-top-width: 4px; border-top-color: var(--color-primary); box-shadow: 0 22px 38px -28px rgb(15 23 42 / 0.42); font-size: 0.875rem; line-height: 1.45; }
+  .portfolio-project-card.is-active { display: block; }
+  #portfolio-projects-section { padding: 0; background: transparent; border: 0; box-shadow: none; margin-bottom: 0; }
+  #portfolio-projects-section > h2 { display: none; }
+  .portfolio-project-card h3 { font-size: 1rem !important; line-height: 1.5 !important; }
+  .portfolio-project-card h4 { font-size: 0.8rem !important; line-height: 1.4 !important; }
+  .portfolio-project-card p, .portfolio-project-card li, .portfolio-project-card span { font-size: 0.875rem !important; line-height: 1.5 !important; }
+  @media (max-width: 1024px) { .portfolio-project-card { width: 100%; min-height: auto; height: auto; overflow: visible; } }
+  @media print {
+    @page { size: A4; margin: 0; }
+    :global(header), :global(footer), :global(nav), :global([class*="ProgressIndicator"]), :global([class*="progress"]) { display: none !important; }
+    :global(html), :global(body), :global(body > main), :global(main.grow) { margin: 0 !important; padding: 0 !important; background: white !important; }
+    html { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+    .portfolio-controls { display: none !important; }
+    .portfolio-root { max-width: 100% !important; padding: 0 !important; margin: 0 !important; background: white !important; }
+    .portfolio-root > :not(#portfolio-projects-section) { display: none !important; }
+    #portfolio-projects-section { padding: 0 !important; margin: 0 !important; background: white !important; }
+    .portfolio-project-card { display: block !important; width: 100% !important; height: 297mm !important; box-sizing: border-box !important; overflow: hidden !important; break-after: page; page-break-after: always; break-inside: avoid; margin: 0 !important; padding: 15mm 15mm 12mm !important; border: 0 !important; border-radius: 0 !important; box-shadow: none !important; background: white !important; }
+    .portfolio-project-card:last-child { break-after: auto; page-break-after: auto; }
+    .portfolio-project-card h3 { margin-bottom: 0.25rem !important; }
+    .portfolio-project-card h4 { margin-bottom: 0.2rem !important; }
+    .portfolio-project-card p, .portfolio-project-card li, .portfolio-project-card span { font-size: 0.8rem !important; line-height: 1.45 !important; }
+    .portfolio-project-card .mb-6 { margin-bottom: 0.4rem !important; }
+    .portfolio-project-card .mb-5 { margin-bottom: 0.35rem !important; }
+    .portfolio-project-card .p-5 { padding: 0.35rem !important; }
+    .portfolio-project-card > .mt-5.pt-5 { display: none !important; }
+    .portfolio-project-card .rounded-full { background-color: #8b5cf6 !important; color: white !important; }
+  }
+</style>
+
+<script>
+  import { setupLightModePrintButton } from "@/shared/scripts/light-mode-print";
+
+  const initPortfolioPagination = (): void => {
+    const root = document.querySelector<HTMLElement>(".portfolio-root");
+    if (!root || root.dataset["paginationInit"] === "true") return;
+    root.dataset["paginationInit"] = "true";
+    const projectCards = Array.from(root.querySelectorAll<HTMLElement>(".portfolio-project-card"));
+    const pageIndicator = document.getElementById("project-page-indicator");
+    const prevButton = document.getElementById("prev-project-btn") as HTMLButtonElement | null;
+    const nextButton = document.getElementById("next-project-btn") as HTMLButtonElement | null;
+    const printButton = document.getElementById("print-portfolio-btn") as HTMLButtonElement | null;
+    if (projectCards.length === 0) return;
+    const queryPage = Number(new URLSearchParams(window.location.search).get("p") ?? "1") - 1;
+    let currentPage = Number.isFinite(queryPage) ? Math.min(projectCards.length - 1, Math.max(0, queryPage)) : 0;
+    const updatePage = (): void => {
+      projectCards.forEach((card, index) => { const active = index === currentPage; card.classList.toggle("is-active", active); card.hidden = !active; card.setAttribute("aria-hidden", String(!active)); });
+      if (pageIndicator) pageIndicator.textContent = `${currentPage + 1} / ${projectCards.length}`;
+      if (prevButton) prevButton.disabled = currentPage === 0;
+      if (nextButton) nextButton.disabled = currentPage === projectCards.length - 1;
+      const params = new URLSearchParams(window.location.search); params.set("p", String(currentPage + 1)); window.history.replaceState({}, "", `${window.location.pathname}?${params}`);
+    };
+    prevButton?.addEventListener("click", () => { currentPage = Math.max(0, currentPage - 1); updatePage(); });
+    nextButton?.addEventListener("click", () => { currentPage = Math.min(projectCards.length - 1, currentPage + 1); updatePage(); });
+    document.addEventListener("keydown", (event) => { if (event.key === "ArrowLeft") { currentPage = Math.max(0, currentPage - 1); updatePage(); } else if (event.key === "ArrowRight") { currentPage = Math.min(projectCards.length - 1, currentPage + 1); updatePage(); } });
+    setupLightModePrintButton(printButton, { beforePrint: () => projectCards.forEach((card) => { card.hidden = false; card.classList.add("is-active"); }), afterPrint: updatePage });
+    updatePage();
+  };
+  document.addEventListener("astro:page-load", initPortfolioPagination);
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", initPortfolioPagination); else initPortfolioPagination();
+</script>
