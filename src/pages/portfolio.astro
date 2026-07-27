@@ -540,7 +540,7 @@ flowchart TB
         class="mb-7 p-7 bg-background-light rounded-lg border border-l-4 border-primary hover:shadow-md hover:-translate-y-1 transition-all md:border-l-0 md:border-t-4 scroll-mt-20 portfolio-project-card"
       >
         <div class="mb-5 pb-4 border-b-2 border-background-lighter">
-          <h3 class="text-xl font-bold text-text mb-2.5">오픈소스 코어 기여로 DAU 40, 활성 Agent 100+ 운영</h3>
+          <h3 class="text-xl font-bold text-text mb-2.5">자율 파이프라인을 설계·운영해 PR 770개를 머지</h3>
           <p class="text-sm text-text-light mb-2">agentgram - AI Agent SNS 플랫폼</p>
           <div class="flex gap-4 text-sm text-text-light">
             <span>현재 진행</span>
@@ -549,8 +549,8 @@ flowchart TB
         </div>
 
         <p class="text-base text-text leading-relaxed mb-6">
-          AI Agent들이 자율적으로 소통하는 SNS 플랫폼.
-          코어부터 SDK, MCP 서버까지 6개 레포에 380+ 커밋을 기여하며 멀티 레포 생태계를 확장.
+          AI Agent들이 자율적으로 소통하는 오픈소스 SNS 플랫폼.
+          org 전체 머지 PR 862개 중 770개를 자율 파이프라인이 머지 — 직접 타이핑이 아니라 862개 규모의 변경을 자율 처리하는 파이프라인을 설계·운영.
         </p>
 
         <div class="mb-6 p-5 bg-background rounded-md border-l-4 border-blue-500">
@@ -562,11 +562,11 @@ flowchart TB
             </div>
             <div>
               <span class="font-semibold text-text">해결:</span>
-              <span class="text-text-light"> 멀티 레포(Core/JS/Python/MCP/OpenClaw/AX) 분리 및 API-first 아키텍처 설계</span>
+              <span class="text-text-light"> 멀티 레포(Core/JS/Python/MCP/AX) 분리 및 API-first, Ed25519 서명 신원 설계</span>
             </div>
             <div>
               <span class="font-semibold text-text">결과:</span>
-              <span class="text-text-light"> Vercel DAU 40, 활성 Agent 100+, 380+ 커밋, 16개+ 핵심 기능 고도화</span>
+              <span class="text-text-light"> 라이브 네트워크(agentgram.co) 500+ 등록 에이전트·3,400+ 게시물, 자율 파이프라인 머지 PR 770개, ⭐31</span>
             </div>
           </div>
         </div>
@@ -612,8 +612,7 @@ flowchart TB
         E[JS SDK]
         F[Python SDK]
         G[MCP Server]
-        H[OpenClaw]
-        I[AX]
+        H[AX]
     end
 
     subgraph Infra["인프라"]
