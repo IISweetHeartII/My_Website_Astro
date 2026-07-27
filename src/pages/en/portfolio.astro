@@ -8,18 +8,18 @@ import Layout from "../../layouts/Layout.astro";
 const projects = [
   {
     id: "agentgram",
-    title: "Designed an autonomous delivery pipeline that merged 770 pull requests",
+    title: "Designed an autonomous delivery pipeline that merged 789 pull requests",
     product: "AgentGram — social infrastructure for autonomous AI agents",
     period: "Ongoing",
     role: "Autonomous pipeline designer and operator",
     summary:
-      "I design and operate the autonomous contribution pipeline behind AgentGram. Across the organization, 862 pull requests have been merged; the pipeline produced 770 of those merges. The 770 figure measures system throughput, with authorship distributed across autonomous work and review.",
+      "I design and operate the autonomous contribution pipeline behind AgentGram. Across the organization, 881 pull requests have been merged; the pipeline produced 789 of those merges. The 789 figure measures system throughput, with authorship distributed across autonomous work and review.",
     challenge:
       "Coordinate useful work across a multi-repository ecosystem without lowering review quality.",
     solution:
       "Built an issue-to-implementation workflow with isolated branches, automated checks, review gates, and maintainership feedback loops.",
     result:
-      "770 pipeline-merged pull requests within 862 organization-wide merges; the live network at agentgram.co has 500+ registered agents and 3,400+ posts; agentgram has 31 GitHub stars.",
+      "789 pipeline-merged pull requests within 881 organization-wide merges; the live network at agentgram.co has 520+ registered agents and 3,600+ posts; agentgram has 32 GitHub stars.",
     ai: [
       "Autonomous issue triage and bounded implementation",
       "Review-driven retries and validation gates",
@@ -31,7 +31,7 @@ const projects = [
   },
   {
     id: "fleet",
-    title: "Operating an agent fleet with 41 scheduled jobs and 307 completed kanban cards",
+    title: "Operating an agent fleet with 45 scheduled jobs and 383 completed kanban cards",
     product: "Hermes Fleet — multi-agent orchestration network",
     period: "Ongoing",
     role: "System designer and operator",
@@ -41,13 +41,13 @@ const projects = [
       "Keep long-running autonomous work observable, recoverable, and aligned across specialist agents.",
     solution:
       "Combined scheduled jobs, shared kanban state, role boundaries, heartbeat checks, and evidence-gated completion.",
-    result: "41 scheduled jobs across the fleet and 307 completed kanban cards.",
+    result: "45 scheduled jobs across the fleet and 383 completed kanban cards.",
     ai: [
       "Document-based agent handoffs",
       "Health checks and scheduled recovery",
       "Human review at high-risk boundaries",
     ],
-    tags: ["OpenClaw", "tmux", "Bun", "TypeScript", "Automation"],
+    tags: ["Hermes", "tmux", "Bun", "TypeScript", "Automation"],
   },
   {
     id: "finders",
@@ -243,21 +243,19 @@ const certifications = [
       </a>
     </div>
 
-    <section class="portfolio-controls mb-6 rounded-lg border border-background-lighter bg-background p-4 print:hidden" aria-label="Project pagination">
-      <div class="flex flex-wrap items-center justify-between gap-2">
-        <div class="flex items-center gap-2">
-          <span class="text-sm font-semibold text-text-light">Project</span>
-          <button type="button" id="prev-project-btn" class="rounded-md border border-background-lighter bg-background px-3 py-1.5 text-sm font-medium text-text-light">Previous</button>
-          <span id="project-page-indicator" class="min-w-[72px] text-center text-xs font-semibold text-text-light">1 / 1</span>
-          <button type="button" id="next-project-btn" class="rounded-md border border-background-lighter bg-background px-3 py-1.5 text-sm font-medium text-text-light">Next</button>
+    <section class="portfolio-controls mb-6 rounded-lg border border-background-lighter bg-background p-4 print:hidden">
+      <div class="flex flex-wrap items-center justify-between gap-3">
+        <div>
+          <h1 class="text-xl font-bold text-text">Portfolio</h1>
+          <p class="mt-0.5 text-sm text-text-light">Projects I built to solve real problems. Pick one from the list.</p>
         </div>
-        <button type="button" id="print-portfolio-btn" class="rounded-md border border-primary bg-primary px-3 py-1.5 text-sm font-semibold text-on-primary">Print / Save PDF</button>
+        <button type="button" id="print-portfolio-btn" class="rounded-md border border-primary bg-primary px-3 py-1.5 text-sm font-semibold text-on-primary">Export PDF</button>
       </div>
     </section>
 
     <header class="portfolio-extra mb-10 rounded-2xl border border-background-lighter bg-background p-8 shadow-sm">
       <p class="text-xs font-semibold uppercase tracking-[0.18em] text-primary">Product engineering · AI systems · automation</p>
-      <h1 class="mt-3 text-4xl font-extrabold text-text md:text-5xl">Deokhwan Kim</h1>
+      <p class="mt-3 text-4xl font-extrabold text-text md:text-5xl">Deokhwan Kim</p>
       <p class="mt-4 max-w-3xl text-xl font-semibold text-primary">I take ambiguous, human problems and turn them into products—and into delivery systems that keep working.</p>
       <p class="mt-4 max-w-3xl leading-relaxed text-text-light">I can own product discovery, full-stack implementation, cloud infrastructure, and AI-assisted operations. The project pages below show the problem, intervention, and measurable result.</p>
       <div class="mt-6 flex flex-wrap gap-3">
@@ -267,38 +265,54 @@ const certifications = [
     </header>
 
     <section class="portfolio-extra mb-10 grid gap-4 md:grid-cols-3" aria-label="Selected evidence">
-      <div class="rounded-xl border border-background-lighter bg-background p-5"><p class="text-3xl font-extrabold text-primary">770 / 862</p><p class="mt-1 text-sm text-text-light">AgentGram merges from the pipeline I designed and operate / organization-wide merged pull requests</p></div>
-      <div class="rounded-xl border border-background-lighter bg-background p-5"><p class="text-3xl font-extrabold text-primary">41 · 307</p><p class="mt-1 text-sm text-text-light">Scheduled fleet jobs · completed kanban cards</p></div>
-      <div class="rounded-xl border border-background-lighter bg-background p-5"><p class="text-3xl font-extrabold text-primary">60 · 100 · 1</p><p class="mt-1 text-sm text-text-light">Hand-written blog posts · agent-published Library posts · guide</p></div>
+      <div class="rounded-xl border border-background-lighter bg-background p-5"><p class="text-3xl font-extrabold text-primary">789 / 881</p><p class="mt-1 text-sm text-text-light">AgentGram merges from the pipeline I designed and operate / organization-wide merged pull requests</p></div>
+      <div class="rounded-xl border border-background-lighter bg-background p-5"><p class="text-3xl font-extrabold text-primary">45 · 383</p><p class="mt-1 text-sm text-text-light">Scheduled fleet jobs · completed kanban cards</p></div>
+      <div class="rounded-xl border border-background-lighter bg-background p-5"><p class="text-3xl font-extrabold text-primary">61 · 100 · 2</p><p class="mt-1 text-sm text-text-light">Hand-written blog posts · agent-published Library posts · guides</p></div>
     </section>
 
-    <section id="portfolio-projects-section" class="portfolio-projects-section mb-14 rounded-lg bg-background p-8 shadow-sm">
-      <h2 class="mb-6 border-b-2 border-background-lighter pb-3 text-2xl font-bold text-text md:text-3xl">Projects</h2>
-      {projects.map((project, index) => (
-        <article id={project.id} class:list={["portfolio-project-card scroll-mt-20 rounded-lg border border-l-4 border-primary bg-background-light p-7 md:border-l md:border-t-4", { "is-active": index === 0 }]}>
-          <div class="mb-5 border-b-2 border-background-lighter pb-4">
-            <h3 class="mb-2.5 text-xl font-bold text-text">{project.title}</h3>
-            <p class="mb-2 text-sm text-text-light">{project.product}</p>
-            <div class="flex flex-wrap gap-4 text-sm text-text-light"><span>{project.period}</span><span>{project.role}</span></div>
-          </div>
-          <p class="mb-6 text-base leading-relaxed text-text">{project.summary}</p>
-          <div class="mb-6 rounded-md border-l-4 border-blue-500 bg-background p-5">
-            <h4 class="mb-3 text-sm font-bold uppercase tracking-wide text-blue-600">Product and technical challenge</h4>
-            <div class="space-y-3 text-sm">
-              <p><strong class="text-text">Problem:</strong> <span class="text-text-light">{project.challenge}</span></p>
-              <p><strong class="text-text">Approach:</strong> <span class="text-text-light">{project.solution}</span></p>
-              <p><strong class="text-text">Result:</strong> <span class="text-text-light">{project.result}</span></p>
+    <div class="portfolio-workbench">
+      <nav class="portfolio-project-nav print:hidden" aria-label="Project list">
+        <p class="portfolio-project-nav-title">PROJECTS</p>
+        <ul>
+          {projects.map((project, index) => (
+            <li>
+              <button type="button" class="portfolio-project-nav-item" data-project-target={project.id} data-project-index={index} aria-current="false">
+                <span class="portfolio-project-nav-label">{project.product.split("—")[0]?.trim() ?? project.product}</span>
+                <span class="portfolio-project-nav-caption">{project.role.length > 32 ? project.role.slice(0, 32) : project.role}</span>
+              </button>
+            </li>
+          ))}
+        </ul>
+      </nav>
+
+      <section id="portfolio-projects-section" class="portfolio-projects-section mb-14 rounded-lg bg-background p-8 shadow-sm">
+        <h2 class="mb-6 border-b-2 border-background-lighter pb-3 text-2xl font-bold text-text md:text-3xl">Projects</h2>
+        {projects.map((project, index) => (
+          <article id={project.id} class:list={["portfolio-project-card scroll-mt-20 rounded-lg border border-l-4 border-primary bg-background-light p-7 md:border-l md:border-t-4", { "is-active": index === 0 }]}>
+            <div class="mb-5 border-b-2 border-background-lighter pb-4">
+              <h3 class="mb-2.5 text-xl font-bold text-text">{project.title}</h3>
+              <p class="mb-2 text-sm text-text-light">{project.product}</p>
+              <div class="flex flex-wrap gap-4 text-sm text-text-light"><span>{project.period}</span><span>{project.role}</span></div>
             </div>
-          </div>
-          <div class="mb-6 rounded-md border-l-4 border-emerald-500 bg-background-light p-5">
-            <h4 class="mb-3 text-sm font-bold uppercase tracking-wide text-emerald-600">AI leverage</h4>
-            <ul class="list-inside list-disc space-y-2 text-sm text-text">{project.ai.map((item) => <li>{item}</li>)}</ul>
-          </div>
-          <div class="mb-6 flex flex-wrap gap-2">{project.tags.map((tag) => <span class="rounded-full bg-primary px-3.5 py-1.5 text-xs font-semibold text-on-primary">{tag}</span>)}</div>
-          {project.href && <div class="mt-5 border-t-2 border-background-lighter pt-5"><a href={project.href} target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 rounded-md bg-text px-4 py-2.5 text-sm font-semibold text-on-primary"><Github class="h-4 w-4" /> {project.linkLabel}</a></div>}
-        </article>
-      ))}
-    </section>
+            <p class="mb-6 text-base leading-relaxed text-text">{project.summary}</p>
+            <div class="mb-6 rounded-md border-l-4 border-blue-500 bg-background p-5">
+              <h4 class="mb-3 text-sm font-bold uppercase tracking-wide text-blue-600">Product and technical challenge</h4>
+              <div class="space-y-3 text-sm">
+                <p><strong class="text-text">Problem:</strong> <span class="text-text-light">{project.challenge}</span></p>
+                <p><strong class="text-text">Approach:</strong> <span class="text-text-light">{project.solution}</span></p>
+                <p><strong class="text-text">Result:</strong> <span class="text-text-light">{project.result}</span></p>
+              </div>
+            </div>
+            <div class="mb-6 rounded-md border-l-4 border-emerald-500 bg-background-light p-5">
+              <h4 class="mb-3 text-sm font-bold uppercase tracking-wide text-emerald-600">AI leverage</h4>
+              <ul class="list-inside list-disc space-y-2 text-sm text-text">{project.ai.map((item) => <li>{item}</li>)}</ul>
+            </div>
+            <div class="mb-6 flex flex-wrap gap-2">{project.tags.map((tag) => <span class="rounded-full bg-primary px-3.5 py-1.5 text-xs font-semibold text-on-primary">{tag}</span>)}</div>
+            {project.href && <div class="mt-5 border-t-2 border-background-lighter pt-5"><a href={project.href} target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 rounded-md bg-text px-4 py-2.5 text-sm font-semibold text-on-primary"><Github class="h-4 w-4" /> {project.linkLabel}</a></div>}
+          </article>
+        ))}
+      </section>
+    </div>
 
     <section class="portfolio-extra mb-10 grid gap-6 lg:grid-cols-2">
       <div class="rounded-xl border border-background-lighter bg-background p-6">
@@ -314,7 +328,7 @@ const certifications = [
         <div class="mt-5 flex justify-between gap-4"><h3 class="font-bold text-text">Chung-Ang University</h3><span class="text-sm text-text-light">2020.03 — 2026.08</span></div>
         <p class="mt-2 text-sm font-semibold text-text-light">Mathematics</p>
         <p class="mt-2 text-sm leading-relaxed text-text-light">Applying mathematical reasoning and structured problem solving to product development. Completing 16 credits in the final semester, graduating in August 2026.</p>
-        <p class="mt-5 text-sm text-text-light">GitHub evidence: agentgram <strong class="text-text">31 stars</strong>; ax-score <strong class="text-text">3 stars</strong>.</p>
+        <p class="mt-5 text-sm text-text-light">GitHub evidence: agentgram <strong class="text-text">32 stars</strong>; ax-score <strong class="text-text">3 stars</strong>.</p>
       </div>
     </section>
 
@@ -327,15 +341,35 @@ const certifications = [
 
 <style>
   /* Screen-visible overview blocks opt in because the A4 project viewer hides other direct children. */
-  .portfolio-root > :not(.portfolio-controls):not(#portfolio-projects-section):not(.portfolio-extra) { display: none; }
-  .portfolio-project-card { display: none; margin: 0 auto; width: min(100%, 210mm); min-height: 297mm; height: 297mm; overflow-y: auto; background: var(--color-background); border-top-width: 4px; border-top-color: var(--color-primary); box-shadow: 0 22px 38px -28px rgb(15 23 42 / 0.42); font-size: 0.875rem; line-height: 1.45; }
+  .portfolio-root > :not(.portfolio-controls):not(.portfolio-workbench):not(.portfolio-extra) { display: none; }
+  .portfolio-root { --portfolio-shell: calc(232px + 1.5rem + 210mm); }
+  .portfolio-workbench { display: grid; grid-template-columns: 232px minmax(0, 210mm); gap: 1.5rem; justify-content: center; align-items: start; }
+  .portfolio-controls, .portfolio-extra { width: min(100%, var(--portfolio-shell)); margin-inline: auto; }
+  .portfolio-project-nav { position: sticky; top: 5.5rem; padding: 1rem; background: var(--color-background); border: 1px solid var(--color-background-lighter); border-radius: 0.875rem; }
+  .portfolio-project-nav-title { margin-bottom: 0.75rem; color: var(--color-text-light); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.08em; }
+  .portfolio-project-nav ul { display: flex; flex-direction: column; gap: 0.25rem; margin: 0; padding: 0; list-style: none; }
+  .portfolio-project-nav-item { display: flex; flex-direction: column; gap: 0.1rem; width: 100%; padding: 0.5rem 0.65rem; text-align: left; border-radius: 0.5rem; border-left: 3px solid transparent; background: transparent; cursor: pointer; transition: background-color 0.15s, border-color 0.15s; }
+  .portfolio-project-nav-item:hover { background: var(--color-background-light); }
+  .portfolio-project-nav-item[aria-current="true"] { background: var(--color-background-light); border-left-color: var(--color-primary); }
+  .portfolio-project-nav-label { color: var(--color-text); font-size: 0.875rem; font-weight: 600; }
+  .portfolio-project-nav-item[aria-current="true"] .portfolio-project-nav-label { color: var(--color-primary); }
+  .portfolio-project-nav-caption { color: var(--color-text-light); font-size: 0.7rem; }
+  .portfolio-project-card { display: none; margin: 0 auto; width: 100%; min-height: 297mm; background: var(--color-background); border-top-width: 4px; border-top-color: var(--color-primary); box-shadow: 0 22px 38px -28px rgb(15 23 42 / 0.42); font-size: 0.875rem; line-height: 1.45; }
   .portfolio-project-card.is-active { display: block; }
   #portfolio-projects-section { padding: 0; background: transparent; border: 0; box-shadow: none; margin-bottom: 0; }
   #portfolio-projects-section > h2 { display: none; }
   .portfolio-project-card h3 { font-size: 1rem !important; line-height: 1.5 !important; }
   .portfolio-project-card h4 { font-size: 0.8rem !important; line-height: 1.4 !important; }
   .portfolio-project-card p, .portfolio-project-card li, .portfolio-project-card span { font-size: 0.875rem !important; line-height: 1.5 !important; }
-  @media (max-width: 1024px) { .portfolio-project-card { width: 100%; min-height: auto; height: auto; overflow: visible; } }
+  @media (max-width: 1024px) {
+    .portfolio-workbench { grid-template-columns: minmax(0, 1fr); gap: 1rem; }
+    .portfolio-project-nav { position: static; padding: 0.75rem; }
+    .portfolio-project-nav ul { flex-direction: row; overflow-x: auto; gap: 0.5rem; scrollbar-width: thin; }
+    .portfolio-project-nav-item { flex-direction: row; align-items: center; gap: 0.4rem; width: auto; white-space: nowrap; border-left: 0; border-bottom: 2px solid transparent; border-radius: 0.5rem 0.5rem 0 0; }
+    .portfolio-project-nav-item[aria-current="true"] { border-left-color: transparent; border-bottom-color: var(--color-primary); }
+    .portfolio-project-nav-caption { display: none; }
+    .portfolio-project-card { width: 100%; min-height: auto; height: auto; overflow: visible; }
+  }
   @media print {
     @page { size: A4; margin: 0; }
     :global(header), :global(footer), :global(nav), :global([class*="ProgressIndicator"]), :global([class*="progress"]) { display: none !important; }
@@ -343,7 +377,9 @@ const certifications = [
     html { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
     .portfolio-controls { display: none !important; }
     .portfolio-root { max-width: 100% !important; padding: 0 !important; margin: 0 !important; background: white !important; }
-    .portfolio-root > :not(#portfolio-projects-section) { display: none !important; }
+    .portfolio-root > :not(.portfolio-workbench) { display: none !important; }
+    .portfolio-workbench { display: block !important; }
+    .portfolio-project-nav { display: none !important; }
     #portfolio-projects-section { padding: 0 !important; margin: 0 !important; background: white !important; }
     .portfolio-project-card { display: block !important; width: 100% !important; height: 297mm !important; box-sizing: border-box !important; overflow: hidden !important; break-after: page; page-break-after: always; break-inside: avoid; margin: 0 !important; padding: 15mm 15mm 12mm !important; border: 0 !important; border-radius: 0 !important; box-shadow: none !important; background: white !important; }
     .portfolio-project-card:last-child { break-after: auto; page-break-after: auto; }
@@ -361,28 +397,57 @@ const certifications = [
 <script>
   import { setupLightModePrintButton } from "@/shared/scripts/light-mode-print";
 
+  const readStoredPageIndex = (): number => {
+    try {
+      const raw = localStorage.getItem("portfolio:project-page");
+      const parsed = Number(raw ?? "0");
+      return Number.isFinite(parsed) && parsed >= 0 ? parsed : 0;
+    } catch (error) {
+      console.warn("Failed to read project page index from storage", error);
+      return 0;
+    }
+  };
+
+  const saveStoredPageIndex = (index: number): void => {
+    try {
+      localStorage.setItem("portfolio:project-page", String(index));
+    } catch (error) {
+      console.warn("Failed to save project page index to storage", error);
+    }
+  };
+
   const initPortfolioPagination = (): void => {
     const root = document.querySelector<HTMLElement>(".portfolio-root");
     if (!root || root.dataset["paginationInit"] === "true") return;
     root.dataset["paginationInit"] = "true";
     const projectCards = Array.from(root.querySelectorAll<HTMLElement>(".portfolio-project-card"));
-    const pageIndicator = document.getElementById("project-page-indicator");
-    const prevButton = document.getElementById("prev-project-btn") as HTMLButtonElement | null;
-    const nextButton = document.getElementById("next-project-btn") as HTMLButtonElement | null;
+    const projectNavButtons = Array.from(root.querySelectorAll<HTMLButtonElement>(".portfolio-project-nav-item"));
     const printButton = document.getElementById("print-portfolio-btn") as HTMLButtonElement | null;
     if (projectCards.length === 0) return;
-    const queryPage = Number(new URLSearchParams(window.location.search).get("p") ?? "1") - 1;
-    let currentPage = Number.isFinite(queryPage) ? Math.min(projectCards.length - 1, Math.max(0, queryPage)) : 0;
+    const hashPage = projectCards.findIndex((card) => card.id === window.location.hash.slice(1));
+    const queryValue = new URLSearchParams(window.location.search).get("p");
+    const queryPage = queryValue === null ? Number.NaN : Number(queryValue) - 1;
+    const initialPage = hashPage >= 0 ? hashPage : Number.isFinite(queryPage) && queryPage >= 0 ? queryPage : readStoredPageIndex();
+    let currentPage = Math.min(projectCards.length - 1, Math.max(0, initialPage));
     const updatePage = (): void => {
       projectCards.forEach((card, index) => { const active = index === currentPage; card.classList.toggle("is-active", active); card.hidden = !active; card.setAttribute("aria-hidden", String(!active)); });
-      if (pageIndicator) pageIndicator.textContent = `${currentPage + 1} / ${projectCards.length}`;
-      if (prevButton) prevButton.disabled = currentPage === 0;
-      if (nextButton) nextButton.disabled = currentPage === projectCards.length - 1;
-      const params = new URLSearchParams(window.location.search); params.set("p", String(currentPage + 1)); window.history.replaceState({}, "", `${window.location.pathname}?${params}`);
+      projectNavButtons.forEach((button, index) => button.setAttribute("aria-current", String(index === currentPage)));
+      saveStoredPageIndex(currentPage);
+      const params = new URLSearchParams(window.location.search); params.set("p", String(currentPage + 1)); window.history.replaceState({}, "", `${window.location.pathname}?${params.toString()}`);
     };
-    prevButton?.addEventListener("click", () => { currentPage = Math.max(0, currentPage - 1); updatePage(); });
-    nextButton?.addEventListener("click", () => { currentPage = Math.min(projectCards.length - 1, currentPage + 1); updatePage(); });
-    document.addEventListener("keydown", (event) => { if (event.key === "ArrowLeft") { currentPage = Math.max(0, currentPage - 1); updatePage(); } else if (event.key === "ArrowRight") { currentPage = Math.min(projectCards.length - 1, currentPage + 1); updatePage(); } });
+    projectNavButtons.forEach((button) => button.addEventListener("click", () => {
+      const index = Number(button.dataset["projectIndex"]);
+      if (!Number.isInteger(index) || index < 0 || index >= projectCards.length) return;
+      currentPage = index;
+      updatePage();
+      document.getElementById("portfolio-projects-section")?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }));
+    document.addEventListener("keydown", (event) => {
+      if (!root.isConnected) return;
+      if (event.target instanceof HTMLElement && event.target.closest("input, textarea, [contenteditable]")) return;
+      if (event.key === "ArrowLeft") { event.preventDefault(); currentPage = Math.max(0, currentPage - 1); updatePage(); }
+      else if (event.key === "ArrowRight") { event.preventDefault(); currentPage = Math.min(projectCards.length - 1, currentPage + 1); updatePage(); }
+    });
     setupLightModePrintButton(printButton, { beforePrint: () => projectCards.forEach((card) => { card.hidden = false; card.classList.add("is-active"); }), afterPrint: updatePage });
     updatePage();
   };
