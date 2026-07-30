@@ -123,7 +123,7 @@ const certifications: ProofItem[] = [
         <h2 class="text-lg font-bold text-primary mb-2 border-b border-background-lighter pb-1">Summary</h2>
         <div class="text-sm text-text-light space-y-1">
           <p><strong class="font-semibold text-text">아끼지 않는 문제 해결사 김덕환</strong>입니다. 사람 중심 AI 제품으로 고객과 비즈니스의 실제 문제를 해결합니다.</p>
-          <p class="text-text"><strong class="font-semibold">핵심 지표</strong>: 코드리뷰 400%↑, 복구 56h→5h, 학습효율 3배·개발 속도 7배·설계 구조 7배 향상</p>
+          <p class="text-text"><strong class="font-semibold">핵심 지표</strong>: 코드리뷰 400%↑, 복구 56h→5h, 학습효율 5배·개발 속도 10배 향상</p>
           <p class="text-text font-semibold">"아끼지 않는 문제 해결사"의 기준</p>
           <ul class="pl-4 list-disc space-y-0.5">
             <li>신기술 검증에 시간과 비용을 아끼지 않습니다.</li>
@@ -137,7 +137,63 @@ const certifications: ProofItem[] = [
       <section class="mb-4">
         <h2 class="text-lg font-bold text-primary mb-3 border-b border-background-lighter pb-1">Projects</h2>
 
-        <!-- Project 1: Finders -->
+        <!-- Project 1: 퍼플페퍼 -->
+        <div class="mb-5 project-card">
+          <div class="mb-1.5">
+            <h3 class="font-bold text-primary-light text-base">
+              퍼플페퍼 — 프로덕션 인프라 무중단 이관 및 무인 관측 체계 구축
+            </h3>
+            <span class="text-sm text-text-muted">2026.03 - 현재 | 백엔드 · AI 엔지니어</span>
+          </div>
+          <div class="grid grid-cols-2 gap-x-6 text-sm project-grid">
+            <div>
+              <p class="font-semibold text-text-light mb-1">문제 해결</p>
+              <ul class="text-text-light space-y-0.5 pl-4 list-disc">
+                <li>통제실험으로 무인 야간 배치 병목이 <strong class="font-semibold text-text">CPU가 아닌 메모리</strong>임을 규명, 처리 시간(Takt Time) <strong class="font-semibold text-text">41%</strong> 단축</li>
+                <li>매일 "성공"으로 오탐지되던 백업 파이프라인의 silent failure를 발견·정상화(내부 인프라 백업 <strong class="font-semibold text-text">232GB</strong> 회수, 고객 데이터 손실 아님), 표준 템플릿에 반영해 전 서비스 확산 차단</li>
+                <li>AI 에이전트 세션 <strong class="font-semibold text-text">505개 전수 감사</strong>로 실패율 산출·위험 명령 차단 훅 설치, 자율 에이전트 함대가 크롤링 서버 <strong class="font-semibold text-text">408대</strong>에 매일 접속해 이상 유무를 점검·보고하는 <strong class="font-semibold text-text">무인 관측 체계</strong> 구축</li>
+              </ul>
+            </div>
+            <div>
+              <p class="font-semibold text-text-light mb-1">구현</p>
+              <ul class="text-text-light space-y-0.5 pl-4 list-disc">
+                <li><strong class="font-semibold text-text">Supabase → NestJS + AWS(ECS Fargate)</strong> 전면 마이그레이션, Terraform 블루그린 배포</li>
+                <li>레거시 시스템 <strong class="font-semibold text-text">무중단 이관</strong>(호출자 39개 계정 무변경, 롤백 1줄, 일 3.8만 건)</li>
+                <li>무인 야간 배치 플랫폼(<strong class="font-semibold text-text">8박스 64레인</strong>) OS 레벨 자동복구 체계로 전환, 하룻밤 <strong class="font-semibold text-text">49만+ 건</strong> 처리·성공률 98.4% — <strong class="font-semibold text-text">Mac·Linux 서버군 + AWS</strong> 인프라 세팅·운영 포함</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 2: 냥머니 -->
+        <div class="mb-5 project-card">
+          <div class="mb-1.5">
+            <h3 class="font-bold text-primary-light text-base">
+              리워드 앱 냥머니 iOS 출시 — B2B2C 사용자 확보 채널 설계
+            </h3>
+            <span class="text-sm text-text-muted">2026 - 현재 | 기획 · 개발 (iOS 출시, Android 비공개 테스트)</span>
+          </div>
+          <div class="grid grid-cols-2 gap-x-6 text-sm project-grid">
+            <div>
+              <p class="font-semibold text-text-light mb-1">문제 해결</p>
+              <ul class="text-text-light space-y-0.5 pl-4 list-disc">
+                <li>회사 <strong class="font-semibold text-text">B2B2C 구조</strong>의 난제(광고주·사용자 동시 확보)를 해결하기 위해 독립 리워드 앱으로 사용자 유입 채널 별도 구축</li>
+                <li>광고 소비형 리워드 구조로 설계해 <strong class="font-semibold text-text">광고주 유치 이전에 사용자 풀 확보</strong>가 가능하도록 순서 역전</li>
+                <li><strong class="font-semibold text-text">iOS 정식 출시</strong> 완료, Android는 네이티브 소셜 로그인 이슈 등 실기기 배포 문제를 직접 해결하며 비공개 테스트 진행 중</li>
+              </ul>
+            </div>
+            <div>
+              <p class="font-semibold text-text-light mb-1">구현</p>
+              <ul class="text-text-light space-y-0.5 pl-4 list-disc">
+                <li><strong class="font-semibold text-text">Next.js + Capacitor</strong>로 웹/iOS/Android 단일 코드베이스 하이브리드 앱</li>
+                <li><strong class="font-semibold text-text">Supabase + Firebase</strong>(FCM, Admin) 인증/푸시/데이터 계층, AdMob 광고 리워드 연동</li>
+                <li>Google/Apple <strong class="font-semibold text-text">소셜 로그인</strong> 네이티브 통합, 앱스토어 심사 대응 자산 파이프라인 구축</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 3: Finders -->
         <div class="mb-5 project-card">
           <div class="mb-1.5">
             <h3 class="font-bold text-primary-light text-base">
@@ -167,7 +223,7 @@ const certifications: ProofItem[] = [
           </div>
         </div>
 
-        <!-- Project 2: agentgram -->
+        <!-- Project 4: agentgram -->
         <div class="mb-5 project-card">
           <div class="mb-1.5">
             <h3 class="font-bold text-primary-light text-base">
@@ -182,22 +238,22 @@ const certifications: ProofItem[] = [
               <p class="font-semibold text-text-light mb-1">문제 해결</p>
               <ul class="text-text-light space-y-0.5 pl-4 list-disc">
               <li>라이브 네트워크 <strong class="font-semibold text-text">520+ 등록 에이전트</strong>, <strong class="font-semibold text-text">3,600+ 게시물</strong></li>
-              <li>org 머지 PR <strong class="font-semibold text-text">881개</strong> 중 <strong class="font-semibold text-text">789개</strong>를 자율 파이프라인이 머지 (직접 타이핑 아님)</li>
-                <li>코어/JS/Python/MCP/AX <strong class="font-semibold text-text">멀티 레포</strong>, Ed25519 서명 신원 설계</li>
+              <li><strong class="font-semibold text-text">Hermes 멀티 에이전트 파이프라인</strong>이 org 머지 PR <strong class="font-semibold text-text">881개</strong> 중 <strong class="font-semibold text-text">789개</strong>를 자율 구현·리뷰·머지(직접 타이핑 아님), 브랜치 보호·CI 게이트로 안전한 자동 머지 구조 확립</li>
+                <li>Kanban 기반 <strong class="font-semibold text-text">자율 의사결정</strong> 체계로 백로그 분해·태스크 배정·재시도를 사람 개입 없이 처리, 비가역 결정만 승인 게이트로 에스컬레이션</li>
               </ul>
             </div>
             <div>
               <p class="font-semibold text-text-light mb-1">구현</p>
               <ul class="text-text-light space-y-0.5 pl-4 list-disc">
                 <li><strong class="font-semibold text-text">Next.js 16</strong>, TailwindCSS v4</li>
-                <li><strong class="font-semibold text-text">Supabase(PostgreSQL + RLS)</strong> API-first 구조</li>
+                <li><strong class="font-semibold text-text">Supabase(PostgreSQL + RLS)</strong> API-first 구조, 코어/JS/Python/MCP/AX 멀티 레포 + Ed25519 서명 신원 설계</li>
                 <li>Self-hosting + Docker + REST API/OpenAPI 운영</li>
               </ul>
             </div>
           </div>
         </div>
 
-        <!-- Project 3: MathFigure -->
+        <!-- Project 5: MathFigure -->
         <div class="mb-5 project-card">
           <div class="mb-1.5">
             <h3 class="font-bold text-primary-light text-base">
@@ -227,35 +283,6 @@ const certifications: ProofItem[] = [
           </div>
         </div>
 
-        <!-- Project 4: 119-ai -->
-        <div class="mb-4 project-card">
-          <div class="mb-1.5">
-            <h3 class="font-bold text-primary-light text-base">
-              <a href="https://emergency-ai-call.log8.kr" target="_blank" rel="noopener noreferrer" class="hover:text-primary">
-                119-ai: Twilio AI 기반 병렬 전화로 응급 병원 매칭 시간 단축
-              </a>
-            </h3>
-            <span class="text-sm text-text-muted">2026 | Founder / Owner</span>
-          </div>
-          <div class="grid grid-cols-2 gap-x-6 text-sm project-grid">
-            <div>
-              <p class="font-semibold text-text-light mb-1">문제 해결</p>
-              <ul class="text-text-light space-y-0.5 pl-4 list-disc">
-                <li>응급 이송 병목 해소를 위해 <strong class="font-semibold text-text">AI 병렬 발신</strong> 구조 설계</li>
-                <li>환자 정보 1회 입력으로 인근 <strong class="font-semibold text-text">5+ 병원 동시 발신</strong> 자동화</li>
-                <li>순차 전화(평균 5분+)를 병렬 처리(<strong class="font-semibold text-text">30초 이내</strong>)로 단축</li>
-              </ul>
-            </div>
-            <div>
-              <p class="font-semibold text-text-light mb-1">구현</p>
-              <ul class="text-text-light space-y-0.5 pl-4 list-disc">
-                <li><strong class="font-semibold text-text">Twilio + Gemini Live API</strong> 기반 음성 대화 자동화</li>
-                <li><strong class="font-semibold text-text">NestJS + Python</strong>으로 AI 통화 파이프라인 구성</li>
-                <li>건당 <strong class="font-semibold text-text">100~200원</strong> 수준의 비용 모델로 운영 가능성 검증</li>
-              </ul>
-            </div>
-          </div>
-        </div>
       </section>
 
       <!-- Page Break for Print -->
@@ -283,7 +310,7 @@ const certifications: ProofItem[] = [
           </div>
           <div class="flex col-span-2">
             <span class="font-semibold text-text w-20">DevOps</span>
-            <span class="text-text-light">GCP (GCS, Cloud SQL, GCE), Docker, Cloudflare Tunnel, GitHub Actions, Sentry, tmux</span>
+            <span class="text-text-light">AWS (ECS Fargate, ECR), GCP (GCS, Cloud SQL, GCE), Terraform, Docker, Cloudflare Tunnel, GitHub Actions, Sentry, tmux</span>
           </div>
         </div>
       </section>
@@ -292,9 +319,10 @@ const certifications: ProofItem[] = [
       <section class="mb-4">
         <h2 class="text-lg font-bold text-primary mb-2 border-b border-background-lighter pb-1">AI Orchestration Lab</h2>
         <ul class="text-sm text-text-light space-y-1 pl-4 list-disc">
-          <li><strong class="font-semibold text-text">Antigravity + Claude Code Team(tmux) + OMO</strong> 멀티 에이전트 오케스트레이션 운영</li>
-          <li>워크플로우 전환 후 <strong class="font-semibold text-text">학습효율 3배</strong>, <strong class="font-semibold text-text">개발 속도 7배</strong>, <strong class="font-semibold text-text">설계 구조 7배</strong> 향상</li>
-          <li><strong class="font-semibold text-text">Hermes 함대</strong>: Mac mini 1대에서 24시간 가동, cron 45개, 칸반 카드 383장 처리 (원자적 claim → 격리 워크스페이스 → 문서 핸드오프)</li>
+          <li><strong class="font-semibold text-text">Claude Code + Codex + agy(Gemini)</strong> 동시 오케스트레이션, <strong class="font-semibold text-text">OMC/OMX</strong> 기반 Loop Engineering(생성→테스트→검증 반복 루프)으로 완결된 작업 수행</li>
+          <li>워크플로우 전환 후 <strong class="font-semibold text-text">학습효율 5배</strong>, <strong class="font-semibold text-text">개발 속도 10배</strong> 향상 (2026년 1월 대비)</li>
+          <li><strong class="font-semibold text-text">Hermes 함대</strong>: Mac mini 1대에서 24시간 자율 가동(cron 45개, 칸반 카드 383장), 원자적 claim → 격리 워크스페이스 → 문서 핸드오프 구조</li>
+          <li><strong class="font-semibold text-text">자율 수행 영역</strong>: 블로그 자동 발행, GA 데이터 자동 분석, 유튜브 영상 자동 제작·업로드, agentgram 자율 개발·QA</li>
           <li>비가역 작업은 <strong class="font-semibold text-text">사람 승인 게이트</strong>에서 멈춤 — 자율성과 안전성 동시 확보</li>
         </ul>
       </section>

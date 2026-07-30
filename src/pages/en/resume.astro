@@ -113,6 +113,22 @@ const certifications: ProofItem[] = [
           <section class="mb-4">
             <h2 class="mb-3 border-b border-background-lighter pb-1 text-lg font-bold text-primary">Projects</h2>
             <div class="project-card mb-5">
+              <div class="mb-1.5"><h3 class="text-base font-bold text-primary-light">PurplePepper — zero-downtime production infrastructure and unmanned observability</h3><span class="text-sm text-text-muted">2026.03 — Present | Backend &amp; AI Engineer</span></div>
+              <div class="project-grid grid grid-cols-2 gap-x-6 text-sm">
+                <ul class="list-disc space-y-0.5 pl-4 text-text-light"><li>Ran controlled experiments to prove the overnight batch bottleneck was <strong class="text-text">memory, not CPU</strong>; cut processing time (Takt Time) by <strong class="text-text">41%</strong>.</li><li>Found and fixed a backup pipeline silently mis-reporting "success" daily (recovered <strong class="text-text">232GB</strong> of internal infra backups, not customer data); folded the fix into the shared template to block the same failure elsewhere.</li><li>Audited <strong class="text-text">505 AI agent sessions</strong> to compute failure rates and installed hooks blocking risky commands; an autonomous agent fleet checks <strong class="text-text">408 crawling servers</strong> daily and reports anomalies.</li></ul>
+                <ul class="list-disc space-y-0.5 pl-4 text-text-light"><li>Migrated <strong class="text-text">Supabase to NestJS + AWS (ECS Fargate)</strong> with Terraform-based blue-green deployment.</li><li>Zero-downtime legacy migration (<strong class="text-text">39 caller accounts</strong> unchanged, one-line rollback, <strong class="text-text">38K requests/day</strong>).</li><li>Converted the overnight batch platform (<strong class="text-text">8 boxes, 64 lanes</strong>) to OS-level self-healing — <strong class="text-text">490K+ jobs/night</strong> at 98.4% success, including Mac/Linux fleet + AWS setup.</li></ul>
+              </div>
+            </div>
+
+            <div class="project-card mb-5">
+              <div class="mb-1.5"><h3 class="text-base font-bold text-primary-light">Shipped the Nyangmoney reward app on iOS — designed a B2B2C user-acquisition channel</h3><span class="text-sm text-text-muted">2026 — Present | Product &amp; engineering (iOS shipped, Android closed beta)</span></div>
+              <div class="project-grid grid grid-cols-2 gap-x-6 text-sm">
+                <ul class="list-disc space-y-0.5 pl-4 text-text-light"><li>Built an independent reward app to solve the company's <strong class="text-text">B2B2C cold start</strong> (needing advertisers and users at once) via a dedicated acquisition channel.</li><li>Designed an ad-consuming reward loop so a <strong class="text-text">user pool forms before advertisers are signed</strong>, reversing the usual sequencing.</li><li>Shipped to the <strong class="text-text">iOS App Store</strong>; resolved native social-login issues on real devices while running Android closed beta.</li></ul>
+                <ul class="list-disc space-y-0.5 pl-4 text-text-light"><li><strong class="text-text">Next.js + Capacitor</strong> single codebase across web/iOS/Android.</li><li><strong class="text-text">Supabase + Firebase</strong> (FCM, Admin) for auth/push/data, with AdMob ad-reward integration.</li><li>Native <strong class="text-text">Google/Apple social login</strong> and an asset pipeline for app store review.</li></ul>
+              </div>
+            </div>
+
+            <div class="project-card mb-5">
               <div class="mb-1.5"><h3 class="text-base font-bold text-primary-light"><a href="https://finders.it.kr" target="_blank" rel="noopener noreferrer">Built GCP infrastructure and established team code review as Backend Lead</a></h3><span class="text-sm text-text-muted">2025.12 — Present | Backend Lead (5-person backend team)</span></div>
               <div class="project-grid grid grid-cols-2 gap-x-6 text-sm">
                 <ul class="list-disc space-y-0.5 pl-4 text-text-light"><li>Raised review frequency <strong class="text-text">400% (about 5×)</strong>.</li><li>Reduced Terraform-based recovery from <strong class="text-text">56h to 5h</strong>.</li><li>Scripted the rebuild path for an estimated <strong class="text-text">about 2h</strong> next lead time.</li></ul>
@@ -123,8 +139,8 @@ const certifications: ProofItem[] = [
             <div class="project-card mb-5">
               <div class="mb-1.5"><h3 class="text-base font-bold text-primary-light"><a href="https://github.com/agentgram/agentgram" target="_blank" rel="noopener noreferrer">Designed and operates AgentGram's autonomous contribution pipeline</a></h3><span class="text-sm text-text-muted">Ongoing | Pipeline designer and operator</span></div>
               <div class="project-grid grid grid-cols-2 gap-x-6 text-sm">
-                <ul class="list-disc space-y-0.5 pl-4 text-text-light"><li><strong class="text-text">789 pipeline merges</strong> within <strong class="text-text">881 organization-wide merges</strong>.</li><li>Review-gated autonomous work across a multi-repository ecosystem.</li><li>The metric describes autonomous-system throughput with distributed authorship.</li></ul>
-                <ul class="list-disc space-y-0.5 pl-4 text-text-light"><li><strong class="text-text">Next.js 16</strong>, TailwindCSS v4.</li><li><strong class="text-text">Supabase (PostgreSQL + RLS)</strong>, API-first architecture.</li><li>Self-hosting, Docker, REST API, OpenAPI.</li></ul>
+                <ul class="list-disc space-y-0.5 pl-4 text-text-light"><li>The <strong class="text-text">Hermes multi-agent pipeline</strong> autonomously implements, reviews, and merges <strong class="text-text">789 of 881</strong> organization-wide pull requests; branch protection and CI gates keep autonomous merges safe.</li><li>Kanban-based <strong class="text-text">autonomous decision-making</strong> decomposes the backlog and assigns tasks without human intervention — only irreversible calls escalate to a human approval gate.</li><li>Review-gated autonomous work across a multi-repository ecosystem.</li></ul>
+                <ul class="list-disc space-y-0.5 pl-4 text-text-light"><li><strong class="text-text">Next.js 16</strong>, TailwindCSS v4.</li><li><strong class="text-text">Supabase (PostgreSQL + RLS)</strong>, API-first architecture across core/JS/Python/MCP/AX repos with Ed25519-signed identity.</li><li>Self-hosting, Docker, REST API, OpenAPI.</li></ul>
               </div>
             </div>
 
@@ -136,13 +152,6 @@ const certifications: ProofItem[] = [
               </div>
             </div>
 
-            <div class="project-card mb-4">
-              <div class="mb-1.5"><h3 class="text-base font-bold text-primary-light"><a href="https://emergency-ai-call.log8.kr" target="_blank" rel="noopener noreferrer">119-ai: parallel AI calls for emergency hospital matching</a></h3><span class="text-sm text-text-muted">2026 | Founder / Owner</span></div>
-              <div class="project-grid grid grid-cols-2 gap-x-6 text-sm">
-                <ul class="list-disc space-y-0.5 pl-4 text-text-light"><li>Calls <strong class="text-text">5+ hospitals</strong> in parallel from one intake.</li><li>Reduced a <strong class="text-text">5+ minute</strong> sequence to <strong class="text-text">under 30 seconds</strong>.</li><li>Won the 2026 Cheongryongthon Grand Prize.</li></ul>
-                <ul class="list-disc space-y-0.5 pl-4 text-text-light"><li>Twilio + Gemini Live API voice automation.</li><li>NestJS + Python AI call pipeline.</li><li>Validated a <strong class="text-text">KRW 100–200</strong> per-case cost model.</li></ul>
-              </div>
-            </div>
           </section>
 
           <div class="hidden print:block print:break-before-page"></div>
@@ -154,16 +163,17 @@ const certifications: ProofItem[] = [
               <p><strong class="inline-block w-20 text-text">Frontend</strong><span class="text-text-light">Next.js, Astro, React, TailwindCSS</span></p>
               <p><strong class="inline-block w-20 text-text">Backend</strong><span class="text-text-light">Spring Boot, NestJS, Supabase</span></p>
               <p><strong class="inline-block w-20 text-text">Database</strong><span class="text-text-light">PostgreSQL, MySQL, pgvector</span></p>
-              <p class="col-span-2"><strong class="inline-block w-20 text-text">DevOps</strong><span class="text-text-light">GCP, Docker, Cloudflare Tunnel, GitHub Actions, Sentry, tmux</span></p>
+              <p class="col-span-2"><strong class="inline-block w-20 text-text">DevOps</strong><span class="text-text-light">AWS (ECS Fargate, ECR), GCP, Terraform, Docker, Cloudflare Tunnel, GitHub Actions, Sentry, tmux</span></p>
             </div>
           </section>
 
           <section class="mb-4">
             <h2 class="mb-2 border-b border-background-lighter pb-1 text-lg font-bold text-primary">AI Orchestration Lab</h2>
             <ul class="list-disc space-y-1 pl-4 text-sm text-text-light">
-              <li>Operates multi-agent orchestration with Antigravity, Claude Code Team (tmux), and OMO.</li>
-              <li>Measured <strong class="text-text">3× learning efficiency</strong>, <strong class="text-text">7× development speed</strong>, and <strong class="text-text">7× structural design quality</strong> after the workflow shift.</li>
-              <li><strong class="text-text">Hermes fleet</strong>: runs 24/7 on a single Mac mini with <strong class="text-text">45 scheduled jobs</strong> and <strong class="text-text">383 completed kanban cards</strong> (atomic claim → isolated workspace → written handoff).</li>
+              <li>Runs <strong class="text-text">Claude Code, Codex, and agy (Gemini)</strong> concurrently via <strong class="text-text">OMC/OMX</strong>-driven Loop Engineering (generate → test → verify) to ship fully verified work.</li>
+              <li>Measured <strong class="text-text">5× learning efficiency</strong> and <strong class="text-text">10× development speed</strong> after the workflow shift (vs. January 2026).</li>
+              <li><strong class="text-text">Hermes fleet</strong>: runs 24/7 on a single Mac mini with <strong class="text-text">45 scheduled jobs</strong> and <strong class="text-text">383 completed kanban cards</strong>, atomic claim → isolated workspace → written handoff.</li>
+              <li><strong class="text-text">Autonomous work areas</strong>: automated blog publishing, GA data analysis, YouTube video production and upload, and AgentGram's autonomous development and QA.</li>
               <li>Irreversible work stops at a <strong class="text-text">human approval gate</strong>, so autonomy and safety hold together.</li>
             </ul>
           </section>
