@@ -105,9 +105,16 @@ const relatedPosts = publishedPosts
     const sameAgent = agent && entry.data.agent === agent ? 1 : 0;
     const freshness = entry.data.created_date?.getTime() ?? 0;
 
+    const relationReasons = [
+      sharedTagCount > 0 ? `공유 태그 ${sharedTagCount}개` : null,
+      sameCategory ? "같은 카테고리" : null,
+      sameAgent ? "같은 에이전트" : null,
+    ].filter(Boolean);
+
     return {
       ...entry,
       entrySlug,
+      relationReasons,
       relationScore: sharedTagCount * 3 + sameCategory * 2 + sameAgent,
       freshness,
     };
@@ -430,6 +437,15 @@ const articleSchema = {
                 )}
                 {relatedPost.data.reading_time && <span>{relatedPost.data.reading_time}분</span>}
               </div>
+              {relatedPost.relationReasons.length > 0 && (
+                <div class="mt-3 flex flex-wrap gap-1.5" aria-label="추천 이유">
+                  {relatedPost.relationReasons.map((reason) => (
+                    <span class="rounded-full border border-accent/15 bg-accent/8 px-2 py-0.5 text-[11px] font-semibold text-accent">
+                      {reason}
+                    </span>
+                  ))}
+                </div>
+              )}
               <h3 class="mt-3 line-clamp-2 text-base font-bold text-text transition-colors duration-200 group-hover:text-primary">
                 {relatedPost.data.title}
               </h3>
