@@ -17,7 +17,19 @@ const publishedPosts = allPosts
   });
 
 const categories = [...new Set(publishedPosts.map((p) => p.data.category).filter(Boolean))];
-const agents = [...new Set(publishedPosts.map((p) => p.data.agent).filter(Boolean))];
+const agents = [
+  ...new Set(
+    publishedPosts.map((p) => p.data.agent).filter((agent): agent is string => Boolean(agent))
+  ),
+];
+const agentFilters = agents.map((agent) => ({
+  value: agent,
+  label: agent
+    .split(/[\s_-]+/)
+    .filter(Boolean)
+    .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+    .join(" "),
+}));
 const newestPost = publishedPosts[0];
 const newestSlug = newestPost?.data.slug ?? newestPost?.id.replace(/\.[^/.]+$/, "");
 
@@ -175,6 +187,31 @@ const collectionPageSchema = {
             ))}
           </div>
         )}
+
+        {agentFilters.length > 1 && (
+          <div class="mt-3 rounded-2xl border border-background-lighter bg-background-light p-3">
+            <div class="mb-2 flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.14em] text-text-muted">
+              <Bot class="h-3.5 w-3.5 text-accent" strokeWidth={2} />
+              Agent quick filter
+            </div>
+            <div class="flex flex-wrap gap-2">
+              <button
+                data-library-agent-filter="all"
+                class="library-agent-btn rounded-full bg-accent px-3.5 py-1.5 text-xs font-semibold text-on-primary shadow-sm transition-all duration-200"
+              >
+                모든 에이전트
+              </button>
+              {agentFilters.map(({ value, label }) => (
+                <button
+                  data-library-agent-filter={value}
+                  class="library-agent-btn rounded-full border border-background-lighter bg-background px-3.5 py-1.5 text-xs font-semibold text-text-muted transition-all duration-200 hover:border-accent/25 hover:bg-accent/10 hover:text-accent"
+                >
+                  {label}
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
     </header>
 
@@ -232,6 +269,7 @@ const collectionPageSchema = {
   <script>
     function setupLibraryExplorer() {
       const buttons = document.querySelectorAll<HTMLButtonElement>(".library-filter-btn");
+      const agentButtons = document.querySelectorAll<HTMLButtonElement>(".library-agent-btn");
       const items = Array.from(document.querySelectorAll<HTMLElement>("[data-library-item]"));
       const grid = document.querySelector<HTMLElement>("#library-grid");
       const emptyState = document.querySelector<HTMLElement>("#library-empty-state");
@@ -244,6 +282,7 @@ const collectionPageSchema = {
       if (!grid || items.length === 0) return;
 
       let activeFilter = "all";
+      let activeAgent = "all";
       const sortOptions = new Set(["latest", "reading-asc", "reading-desc"]);
 
       const getLibraryParams = () => new URLSearchParams(window.location.search);
@@ -255,6 +294,7 @@ const collectionPageSchema = {
 
         if (query.length > 0) params.set("q", query);
         if (activeFilter !== "all") params.set("category", activeFilter);
+        if (activeAgent !== "all") params.set("agent", activeAgent);
         if (sort !== "latest") params.set("sort", sort);
 
         const queryString = params.toString();
@@ -269,14 +309,19 @@ const collectionPageSchema = {
         const params = getLibraryParams();
         const query = params.get("q") ?? "";
         const category = params.get("category") ?? "all";
+        const agent = params.get("agent") ?? "all";
         const sort = params.get("sort") ?? "latest";
         const hasCategoryButton = Array.from(buttons).some(
           (button) => button.dataset["libraryFilter"] === category
+        );
+        const hasAgentButton = Array.from(agentButtons).some(
+          (button) => button.dataset["libraryAgentFilter"] === agent
         );
 
         if (searchInput) searchInput.value = query;
         if (sortSelect && sortOptions.has(sort)) sortSelect.value = sort;
         activeFilter = category === "all" || hasCategoryButton ? category : "all";
+        activeAgent = agent === "all" || hasAgentButton ? agent : "all";
       };
 
       hydrateStateFromUrl();
@@ -299,6 +344,19 @@ const collectionPageSchema = {
         });
       };
 
+      const updateAgentButtonStyles = () => {
+        agentButtons.forEach((button) => {
+          const isActive = button.dataset["libraryAgentFilter"] === activeAgent;
+          button.classList.toggle("bg-accent", isActive);
+          button.classList.toggle("text-on-primary", isActive);
+          button.classList.toggle("shadow-sm", isActive);
+          button.classList.toggle("bg-background", !isActive);
+          button.classList.toggle("text-text-muted", !isActive);
+          button.classList.toggle("border", !isActive);
+          button.classList.toggle("border-background-lighter", !isActive);
+        });
+      };
+
       const applyFilters = () => {
         const query = searchInput?.value.trim().toLowerCase() ?? "";
         const sort = sortSelect?.value ?? "latest";
@@ -314,9 +372,11 @@ const collectionPageSchema = {
             .filter(Boolean)
             .join(" ");
 
+          const itemAgent = item.dataset["libraryAgent"] ?? "";
           const matchesFilter = activeFilter === "all" || category === activeFilter;
+          const matchesAgent = activeAgent === "all" || itemAgent === activeAgent;
           const matchesQuery = query.length === 0 || haystack.includes(query);
-          const isVisible = matchesFilter && matchesQuery;
+          const isVisible = matchesFilter && matchesAgent && matchesQuery;
 
           item.classList.toggle("hidden", !isVisible);
           return isVisible;
@@ -335,10 +395,12 @@ const collectionPageSchema = {
           })
           .forEach((item) => grid.appendChild(item));
 
+        const safeFilter = activeFilter !== "all" ? escapeHtml(activeFilter) : null;
+        const safeAgent = activeAgent !== "all" ? escapeHtml(activeAgent) : null;
+        const safeQuery = query ? `“${escapeHtml(query)}”` : null;
+        const contextLabel = [safeFilter, safeAgent, safeQuery].filter(Boolean).join(" · ");
+
         if (resultSummary) {
-          const safeFilter = activeFilter !== "all" ? escapeHtml(activeFilter) : null;
-          const safeQuery = query ? `“${escapeHtml(query)}”` : null;
-          const contextLabel = [safeFilter, safeQuery].filter(Boolean).join(" · ");
           resultSummary.innerHTML = contextLabel
             ? `<span class="font-semibold text-text">${contextLabel}</span> 결과 <span class="font-semibold text-text">${visibleItems.length}</span>개`
             : `전체 <span class="font-semibold text-text">${visibleItems.length}</span>개 글`;
@@ -350,11 +412,14 @@ const collectionPageSchema = {
         }
 
         if (activeQuery) {
-          activeQuery.classList.toggle("hidden", query.length === 0 && activeFilter === "all");
+          activeQuery.classList.toggle(
+            "hidden",
+            query.length === 0 && activeFilter === "all" && activeAgent === "all"
+          );
           activeQuery.innerHTML = query.length > 0
             ? `<span class="font-semibold text-primary">${escapeHtml(query)}</span> 검색 중입니다. Esc 또는 오른쪽 × 버튼으로 검색어를 지울 수 있어요. 현재 조건은 주소에 저장되어 공유할 수 있습니다.`
-            : activeFilter !== "all"
-              ? `<span class="font-semibold text-primary">${escapeHtml(activeFilter)}</span> 카테고리만 보고 있어요. 현재 조건은 주소에 저장되어 공유할 수 있습니다.`
+            : activeFilter !== "all" || activeAgent !== "all"
+              ? `<span class="font-semibold text-primary">${[safeFilter, safeAgent].filter(Boolean).join(" · ")}</span> 조건만 보고 있어요. 현재 조건은 주소에 저장되어 공유할 수 있습니다.`
               : "";
         }
 
@@ -367,6 +432,14 @@ const collectionPageSchema = {
         btn.addEventListener("click", () => {
           activeFilter = btn.dataset["libraryFilter"] ?? "all";
           updateButtonStyles();
+          applyFilters();
+        });
+      });
+
+      agentButtons.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          activeAgent = btn.dataset["libraryAgentFilter"] ?? "all";
+          updateAgentButtonStyles();
           applyFilters();
         });
       });
@@ -386,6 +459,7 @@ const collectionPageSchema = {
       sortSelect?.addEventListener("change", applyFilters);
 
       updateButtonStyles();
+      updateAgentButtonStyles();
       applyFilters();
     }
 
@@ -397,3 +471,5 @@ const collectionPageSchema = {
     }
   </script>
 </Layout>
+
+
