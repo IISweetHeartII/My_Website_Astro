@@ -17,27 +17,26 @@
   },
   "dependencies": {
     "@astrojs/rss": "^4.0.19",
-    "astro": "^5.16.15",
-    "astro-pagefind": "^1.8.5",
+    "astro": "^7.2.0",
+    "astro-pagefind": "^2.0.1",
     "astro-robots-txt": "^1.0.0",
     "lucide-astro": "^0.556.0",
     "mermaid": "^11.16.1",
-    "satori": "^0.19.2",
-
-    "sharp": "^0.34.5"
+    "satori": "^0.29.0",
+    "sharp": "^0.35.3"
   },
   "engines": {
     "node": ">=22.13.1"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.10",
-    "@astrojs/mdx": "^4.3.13",
+    "@astrojs/mdx": "^7.0.5",
     "@astrojs/sitemap": "^3.7.3",
     "@biomejs/biome": "^2.5.7",
-    "@commitlint/cli": "^20.3.1",
-    "@commitlint/config-conventional": "^20.3.1",
+    "@commitlint/cli": "^21.2.1",
+    "@commitlint/config-conventional": "^21.2.0",
     "@tailwindcss/vite": "^4.3.3",
-    "astro-expressive-code": "^0.41.6",
+    "astro-expressive-code": "^0.44.1",
     "husky": "^9.1.7",
     "npm-check-updates": "^23.0.2",
     "tailwindcss": "^4.3.3",

@@ -189,8 +189,8 @@ export default defineConfig({
       cssCodeSplit: true, // CSS 청크 분할로 성능 향상
       rollupOptions: {
         output: {
-          manualChunks: {
-            vendor: ["astro"], // Astro 코어 별도 번들
+          manualChunks(id) {
+            return id.includes("node_modules/astro") ? "vendor" : undefined; // Astro 코어 별도 번들
           },
         },
       },
