@@ -342,6 +342,10 @@ functions/api/chat.ts (Cloudflare Pages Function)
   모든 JSON-LD 파싱·sitemap 중복·`<main>` 1개를 검사한다 — 페이지에 `<main>`을 또 만들지 말 것(Layout이 제공).
 - **챗 API 가드**(`functions/api/chat.ts`): Origin 필수(허용 외 403), 메시지 1~20개·각 1000자·총 15000자·role user/assistant,
   본문 32KB, IP당 20회/10분(CHAT_KV, 초과 429), 업스트림 25초 타임아웃.
+- **홈 카피·숫자의 사실 원천 = `src/content/chat-context.md`** (2026-08-19 히어로/Proof bar/서비스 섹션/Library 소개/About 요약 전부 여기서만 가져옴).
+  숫자를 바꾸면 chat-context.md → 홈 Proof bar(`index.astro`) → About 요약(`about.astro`·`en/about.astro`) → Library 소개를 함께 고친다.
+  PR 수는 반드시 "자율 파이프라인이 머지" 표현. "24시간 안에 회신" 같은 근거 없는 약속 문구 금지.
+- **라이트 테마 primary = `#7c3aed`**(흰 글자 5.70:1). 흰 글자 solid 버튼 hover는 `hover:bg-primary-dark`(`#6d28d9`), `hover:bg-primary-light`는 대비 2.7:1이라 쓰지 않는다.
 - **Git Workflow**: `main` is the primary development and production branch
 
 ## Skills

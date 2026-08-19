@@ -4,7 +4,8 @@
   /* ============================================
      Primary Colors (보라색 시스템)
      ============================================ */
-  --color-primary: #8b5cf6; /* 메인 보라 */
+  --color-primary: #7c3aed; /* 메인 보라 — 흰 글자 대비 5.70:1 (구 #8b5cf6=4.23, AA 미달) */
+  --color-primary-dark: #6d28d9; /* 흰 글자 solid 버튼 hover (7.10:1) */
   --color-primary-light: #a78bfa;
   --color-primary-lighter: #f5f3ff; /* 매우 연한 보라 배경 */
 
@@ -88,6 +89,7 @@ html[data-theme="dark"] {
   color-scheme: dark;
 
   --color-primary: #cba6f7;
+  --color-primary-dark: #b48ef0;
   --color-primary-light: #d4b4fe;
   --color-primary-lighter: #313244;
 

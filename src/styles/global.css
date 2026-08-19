@@ -402,6 +402,7 @@ body {
 }
 @media (hover: hover) and (pointer: fine) {
   .group:hover .link-arrow > svg:last-child,
+  a:hover .link-arrow > svg:last-child,
   .link-arrow:hover > svg:last-child {
     translate: 3px 0;
   }

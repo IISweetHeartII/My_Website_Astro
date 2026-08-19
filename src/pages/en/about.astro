@@ -65,6 +65,8 @@ const personSchema = {
   <body>
     <div class="switch" role="group" aria-label="Reading mode">
       <a class="switch__home" href="/en/">← log8.kr</a>
+      <a class="switch__nav" href="/en/portfolio/">Portfolio</a>
+      <a class="switch__nav" href="/en/blog/">Blog</a>
       <a class="switch__btn" href="/about/" hreflang="ko">KO</a>
       <button id="btn-term" class="switch__btn" aria-pressed="true">&gt;_ Terminal</button>
       <button id="btn-read" class="switch__btn" aria-pressed="false">¶ Article</button>
@@ -82,6 +84,12 @@ const personSchema = {
         <p class="masthead__sub">2020 — 2026</p>
       </div>
     </header>
+    <ul class="summary" aria-label="Summary">
+      <li><strong>Product Engineer</strong> · AI agent systems and full-stack MVPs</li>
+      <li><strong>24/7</strong> autonomous agent fleet · 7 profiles · 45 cron jobs</li>
+      <li>Pipeline that merged <strong>881 PRs</strong> · <strong>6</strong> awards</li>
+    </ul>
+
 
     <nav class="chapters" id="chapters" aria-label="Chapters"></nav>
     <main class="screen" id="screen"></main>
@@ -192,6 +200,38 @@ const personSchema = {
       .masthead__logo span { width: 9px; height: 9px; border-radius: 2px; background: var(--accent); opacity: 0.25; }
       .masthead__logo span:nth-child(3n + 1) { opacity: 1; }
       .masthead__title { margin: 0; font-weight: 800; font-size: 1.25rem; }
+
+      /* 바쁜 의사결정자용 3줄 요약 (숫자는 chat-context.md 와 동일) */
+      .summary {
+        list-style: none;
+        margin: 0 auto;
+        padding: 0 clamp(1.1rem, 4vw, 1.6rem) 0.6rem;
+        max-width: var(--maxw);
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.4rem 0.6rem;
+      }
+      .summary li {
+        font: 0.8rem/1.4 var(--mono);
+        color: var(--muted);
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        padding: 0.3rem 0.7rem;
+      }
+      .summary li strong {
+        color: var(--ink);
+        font-weight: 600;
+      }
+      .switch__nav {
+        color: var(--muted);
+        text-decoration: none;
+        font: 0.82rem var(--mono);
+        margin-right: 0.6rem;
+      }
+      .switch__nav:hover {
+        color: var(--ink);
+      }
       .masthead__sub { margin: 0; color: var(--muted); font: 0.78rem var(--mono); }
       .chapters { display: flex; gap: 0.5rem; overflow-x: auto; padding: 0.5rem 0 1rem; }
       .chip { white-space: nowrap; border: 1px solid var(--line); border-radius: 999px; padding: 0.35rem 0.7rem; color: var(--muted); background: transparent; cursor: pointer; font: 0.78rem var(--mono); }

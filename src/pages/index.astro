@@ -3,15 +3,22 @@ import { Image } from "astro:assets";
 import {
   ArrowRight,
   Award,
+  Bot,
   Brain,
   Briefcase,
+  ChartNoAxesCombined,
   Code2,
   FileText,
+  GitMerge,
   Medal,
   Rocket,
   Server,
+  ServerCog,
   Target,
+  Timer,
+  Trophy,
   Users,
+  Workflow,
 } from "lucide-astro";
 import profileImage from "@/assets/images/design/DH_ID.jpg";
 import BreadcrumbSchema from "@/shared/components/seo/BreadcrumbSchema.astro";
@@ -75,26 +82,24 @@ const websiteSchema = {
                 style="--delay: 0.05s"
               >
                 <Target class="w-4 h-4" />
-                실전 중심의 문제 해결
+                Product Engineer · AI 자동화 · 제품 개발
               </div>
 
               <!-- Main Heading -->
               <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold text-text leading-tight">
-                <span class="blur-word" style="--delay: 0.2s">아끼지</span>
-                <span class="blur-word" style="--delay: 0.3s"> 않는</span><br />
+                <span class="blur-word" style="--delay: 0.2s">AI 자동화부터</span><br />
                 <span
                   class="blur-word bg-linear-to-r from-primary to-accent bg-clip-text text-transparent"
-                  style="--delay: 0.45s"
+                  style="--delay: 0.4s"
                 >
-                  문제 해결사
+                  제품 구현·운영까지
                 </span>
               </h1>
 
               <!-- Subtitle -->
               <p class="blur-word text-lg md:text-xl lg:text-2xl text-text-light leading-relaxed" style="--delay: 0.6s">
-                사람 중심의 AI 제품을 설계하고 구현해,<br class="hidden md:block" />
-                고객과 비즈니스의 실제 문제를 해결합니다.
-                <strong class="text-text"> 김덕환</strong>입니다.
+                에이전트 파이프라인부터 AI MVP·웹 서비스까지<br class="hidden md:block" />
+                직접 설계하고 구현합니다. Product Engineer <strong class="text-text">김덕환</strong>입니다.
               </p>
 
               <!-- CTA Buttons -->
@@ -103,36 +108,32 @@ const websiteSchema = {
                 style="--delay: 0.75s"
               >
                 <a
-                  href="/blog"
-                  data-cta-track
-                  data-cta-name="hero_blog"
-                  data-cta-section="hero"
-                  class="group inline-flex items-center gap-2 px-8 py-4 bg-primary hover:bg-primary-light text-on-primary font-semibold rounded-xl transition-ui duration-(--duration-base) ease-out shadow-lg hover:shadow-2xl hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.97] active:duration-(--duration-press)"
-                >
-                  블로그 보기
-                  <ArrowRight class="w-5 h-5 group-hover:translate-x-0.5 transition-transform duration-(--duration-base) ease-out" />
-                </a>
-                <a
-                  href="/portfolio"
-                  data-cta-track
-                  data-cta-name="hero_showcase"
-                  data-cta-section="hero"
-                  class="group inline-flex items-center gap-2 px-8 py-4 bg-background-light hover:bg-background-lighter text-primary font-semibold rounded-xl border-2 border-primary-light transition-ui duration-(--duration-base) ease-out shadow-lg hover:shadow-xl active:scale-[0.97] active:duration-(--duration-press)"
-                >
-                  프로젝트 보기
-                  <Code2 class="w-5 h-5" />
-                </a>
-                <a
-                  href="/portfolio"
+                  href="/portfolio/"
                   data-cta-track
                   data-cta-name="hero_portfolio"
                   data-cta-section="hero"
-                  class="group inline-flex items-center gap-2 px-8 py-4 bg-linear-to-r from-info to-primary hover:from-info-light hover:to-primary-light text-on-primary font-semibold rounded-xl transition-ui duration-(--duration-base) ease-out shadow-lg hover:shadow-2xl hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.97] active:duration-(--duration-press)"
+                  class="group inline-flex items-center gap-2 px-8 py-4 bg-primary hover:bg-primary-dark text-on-primary font-semibold rounded-xl transition-ui duration-(--duration-base) ease-out shadow-lg hover:shadow-2xl hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.97] active:duration-(--duration-press)"
                 >
-                  포트폴리오 보기
+                  프로젝트와 성과 보기
+                  <ArrowRight class="w-5 h-5 group-hover:translate-x-0.5 transition-transform duration-(--duration-base) ease-out" />
+                </a>
+                <a
+                  href="#contact"
+                  data-cta-track
+                  data-cta-name="hero_contact"
+                  data-cta-section="hero"
+                  class="group inline-flex items-center gap-2 px-8 py-4 bg-background-light hover:bg-background-lighter text-primary font-semibold rounded-xl border-2 border-primary-light transition-ui duration-(--duration-base) ease-out shadow-lg hover:shadow-xl active:scale-[0.97] active:duration-(--duration-press)"
+                >
+                  의뢰·협업 문의
                   <Briefcase class="w-5 h-5" />
                 </a>
               </div>
+              <p class="blur-word text-sm text-text-muted" style="--delay: 0.85s">
+                <a href="/blog/" class="link-arrow inline-flex items-center gap-1 font-medium hover:text-primary transition-colors">
+                  블로그에서 생각과 기록 보기
+                  <ArrowRight class="w-3.5 h-3.5" />
+                </a>
+              </p>
             </div>
 
             <!-- Right: Profile Image -->
@@ -150,7 +151,68 @@ const websiteSchema = {
               </div>
             </div>
           </div>
+
+          <!-- Proof bar: 숫자는 전부 src/content/chat-context.md 에 있는 것만 (PR은 "파이프라인이 머지" 표현 고정) -->
+          <div class="blur-word w-full mt-10 lg:mt-14" style="--delay: 0.95s">
+          <dl class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4" aria-label="핵심 지표">
+            {
+              [
+                { icon: Workflow, value: "24시간", label: "에이전트 상시 운영", sub: "프로필 7 · cron 45" },
+                { icon: GitMerge, value: "881 PR", label: "자율 파이프라인 머지", sub: "AgentGram org, 손으로 쓴 PR 아님" },
+                { icon: Timer, value: "120초 내", label: "응급 병원 매칭", sub: "119-ai · 청룡톤 2026 대상" },
+                { icon: Trophy, value: "6회", label: "대회·프로그램 수상", sub: "2025–2026" },
+              ].map(({ icon: Icon, value, label, sub }) => (
+                <div class="rounded-2xl border border-background-lighter bg-background/80 backdrop-blur-sm px-4 py-3.5 text-left">
+                  <dt class="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wide text-text-muted">
+                    <Icon class="w-3.5 h-3.5 text-primary" />
+                    {label}
+                  </dt>
+                  <dd class="mt-1 text-2xl md:text-3xl font-bold text-text leading-none">{value}</dd>
+                  <dd class="mt-1.5 text-xs text-text-muted">{sub}</dd>
+                </div>
+              ))
+            }
+          </dl>
+          </div>
         </div>
+      </div>
+    </section>
+
+    <!-- 무엇을 맡길 수 있나 (src/content/chat-context.md "상담 가능한 영역"과 동일 범위) -->
+    <section class="py-16 md:py-20 px-4 md:px-8 border-b border-background-lighter" aria-labelledby="services-heading">
+      <div class="max-w-7xl mx-auto">
+        <div class="mb-8 md:mb-10">
+          <p class="text-sm font-semibold text-primary">Services</p>
+          <h2 id="services-heading" class="mt-1 text-2xl md:text-3xl font-bold text-text">무엇을 맡길 수 있나</h2>
+          <p class="mt-2 text-text-light">
+            반복 업무 자동화부터 AI 제품과 웹 서비스 구축·운영까지 맡길 수 있습니다.
+          </p>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">
+          {
+            [
+              { icon: Bot, title: "AI 에이전트 자동화", desc: "리서치·문서화·코드리뷰·발행·모니터링 같은 반복 업무를 승인 게이트가 있는 에이전트 파이프라인으로 전환합니다." },
+              { icon: Rocket, title: "AI 제품 MVP 개발", desc: "고객 인터뷰 기반 문제 정의부터 LLM·음성 API·RAG를 연동한 동작하는 제품까지 풀스택으로 만듭니다." },
+              { icon: ServerCog, title: "웹 서비스 개발·운영", desc: "Next.js/Astro 프론트엔드, Spring Boot/NestJS 백엔드, GCP/Cloudflare 인프라와 CI/CD·모니터링까지 구축합니다." },
+              { icon: ChartNoAxesCombined, title: "콘텐츠·SEO 자동화", desc: "블로그 자동 발행과 GA4·Search Console 피드백 루프, 유튜브 제작 파이프라인을 설계합니다." },
+            ].map(({ icon: Icon, title, desc }) => (
+              <div class="group rounded-2xl border border-background-lighter bg-background-light p-6 transition-ui duration-(--duration-base) ease-out hover:-translate-y-1 hover:border-primary/30 hover:shadow-lg">
+                <div class="w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center mb-4">
+                  <Icon class="w-6 h-6 text-primary" />
+                </div>
+                <h3 class="text-lg font-bold text-text">{title}</h3>
+                <p class="mt-2 text-sm leading-relaxed text-text-light">{desc}</p>
+              </div>
+            ))
+          }
+        </div>
+        <p class="mt-5 text-sm text-text-muted">
+          AI 도입 워크숍·강의(시니어 대상 생성형 AI, 스타트업 커뮤니티 MCP/Agent 세션)도 진행합니다.
+          <a href="#contact" class="link-arrow inline-flex items-center gap-1 font-medium text-primary hover:text-accent transition-colors ml-1">
+            문의하기
+            <ArrowRight class="w-3.5 h-3.5" />
+          </a>
+        </p>
       </div>
     </section>
 

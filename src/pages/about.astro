@@ -59,6 +59,8 @@ const personSchema = {
   <body>
     <div class="switch" role="group" aria-label="읽기 모드">
       <a class="switch__home" href="/">← log8.kr</a>
+      <a class="switch__nav" href="/portfolio/">Portfolio</a>
+      <a class="switch__nav" href="/blog/">Blog</a>
       <a class="switch__btn" href="/en/about/" hreflang="en">EN</a>
       <button id="btn-term" class="switch__btn" aria-pressed="true">&gt;_ 터미널로 읽기</button>
       <button id="btn-read" class="switch__btn" aria-pressed="false">¶ 글로 읽기</button>
@@ -76,6 +78,12 @@ const personSchema = {
         <p class="masthead__sub">2020 — 2026</p>
       </div>
     </header>
+
+    <ul class="summary" aria-label="핵심 요약">
+      <li><strong>Product Engineer</strong> · AI 에이전트 시스템과 풀스택 MVP를 구현</li>
+      <li><strong>24시간</strong> 자율 에이전트 운영 · 프로필 7 · cron 45</li>
+      <li><strong>881 PR</strong> 자율 파이프라인 머지 · 대회·프로그램 수상 <strong>6회</strong></li>
+    </ul>
 
     <nav class="chapters" id="chapters" aria-label="챕터"></nav>
 
@@ -275,6 +283,38 @@ const personSchema = {
         font-weight: 700;
         margin: 0;
         font-size: 1.05rem;
+      }
+
+      /* 바쁜 의사결정자용 3줄 요약 (숫자는 chat-context.md 와 동일) */
+      .summary {
+        list-style: none;
+        margin: 0 auto;
+        padding: 0 clamp(1.1rem, 4vw, 1.6rem) 0.6rem;
+        max-width: var(--maxw);
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.4rem 0.6rem;
+      }
+      .summary li {
+        font: 0.8rem/1.4 var(--mono);
+        color: var(--muted);
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        padding: 0.3rem 0.7rem;
+      }
+      .summary li strong {
+        color: var(--ink);
+        font-weight: 600;
+      }
+      .switch__nav {
+        color: var(--muted);
+        text-decoration: none;
+        font: 0.82rem var(--mono);
+        margin-right: 0.6rem;
+      }
+      .switch__nav:hover {
+        color: var(--ink);
       }
       .masthead__sub {
         font-family: var(--mono);
