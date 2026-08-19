@@ -1,5 +1,6 @@
 ---
 import { Picture } from "astro:assets";
+import { getImageMeta } from "@/shared/utils/image-meta";
 
 interface Props {
   src: string;
@@ -24,20 +25,42 @@ const {
 // 블로그 포스트에 최적화된 반응형 크기
 const responsiveWidths = [400, 600, 800, 1200];
 const modernFormats = ["avif", "webp"];
+
+// public/images 경로(문자열 src)는 astro:assets가 최적화하지 못한다 — 원본 PNG(2~4MB)가 그대로 나갔다.
+// scripts/build-webp.mjs 메타가 있으면 WebP <picture> 로 직접 렌더한다.
+const meta = getImageMeta(src);
 ---
 
 <figure class={`blog-image-container ${className}`}>
-  <Picture
-    src={src}
-    alt={alt}
-    width={width}
-    height={height}
-    widths={responsiveWidths}
-    formats={modernFormats}
-    loading={loading}
-    class="blog-image"
-    sizes="(max-width: 640px) 100vw, (max-width: 768px) 90vw, (max-width: 1024px) 80vw, 70vw"
-  />
+  {
+    meta ? (
+      <picture class="contents">
+        <source type="image/webp" srcset={meta.webp} />
+        <img
+          src={src}
+          alt={alt}
+          width={meta.width}
+          height={meta.height}
+          loading={loading}
+          decoding="async"
+          fetchpriority={loading === "eager" ? "high" : undefined}
+          class="blog-image"
+        />
+      </picture>
+    ) : (
+      <Picture
+        src={src}
+        alt={alt}
+        width={width}
+        height={height}
+        widths={responsiveWidths}
+        formats={modernFormats}
+        loading={loading}
+        class="blog-image"
+        sizes="(max-width: 640px) 100vw, (max-width: 768px) 90vw, (max-width: 1024px) 80vw, 70vw"
+      />
+    )
+  }
   {caption && <figcaption class="image-caption">{caption}</figcaption>}
 </figure>
 

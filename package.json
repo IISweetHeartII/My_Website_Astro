@@ -4,7 +4,9 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "node scripts/build-webp.mjs && astro build",
+    "images:webp": "node scripts/build-webp.mjs",
+    "verify:dist": "node scripts/verify-dist.mjs",
     "preview": "astro preview",
     "astro": "astro",
     "lint": "biome lint .",
@@ -40,7 +42,8 @@
     "husky": "^9.1.7",
     "npm-check-updates": "^23.0.2",
     "tailwindcss": "^4.3.3",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "unist-util-visit": "^5"
   },
   "trustedDependencies": [
     "sharp"

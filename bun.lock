@@ -27,6 +27,7 @@
         "npm-check-updates": "^23.0.2",
         "tailwindcss": "^4.3.3",
         "typescript": "^5.9.3",
+        "unist-util-visit": "^5",
       },
     },
   },
