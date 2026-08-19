@@ -133,7 +133,7 @@ const collectionPageSchema = {
               .map((cat) => (
                 <a
                   href={`/category/${cat.id}/`}
-                  class="px-4 py-2 rounded-lg bg-background hover:bg-primary hover:text-on-primary transition-all duration-200 font-medium text-sm flex items-center gap-2 border border-background-lighter hover:border-primary"
+                  class="px-4 py-2 rounded-lg bg-background hover:bg-primary hover:text-on-primary transition-ui duration-200 font-medium text-sm flex items-center gap-2 border border-background-lighter hover:border-primary"
                 >
                   <CategoryIcon categoryId={cat.id} class="w-4 h-4" />
                   <span>{cat.name}</span>
@@ -142,7 +142,7 @@ const collectionPageSchema = {
           }
           <a
             href="/blog/"
-            class="px-4 py-2 rounded-lg bg-background hover:bg-accent hover:text-on-primary transition-all duration-200 font-medium text-sm flex items-center gap-2 border border-background-lighter hover:border-accent"
+            class="px-4 py-2 rounded-lg bg-background hover:bg-accent hover:text-on-primary transition-ui duration-200 font-medium text-sm flex items-center gap-2 border border-background-lighter hover:border-accent"
           >
             <Archive class="w-4 h-4" />
             <span>전체 글</span>

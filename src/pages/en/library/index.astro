@@ -77,13 +77,13 @@ const collectionPageSchema = {
           </div>
 
           {newestPost && newestSlug && (
-            <a href={`/en/library/${newestSlug}/`} class="group/latest relative overflow-hidden rounded-2xl border border-background-lighter bg-background-light p-5 transition-all duration-300 hover:-translate-y-1 hover:border-primary/25 hover:shadow-lg">
+            <a href={`/en/library/${newestSlug}/`} class="group/latest relative overflow-hidden rounded-2xl border border-background-lighter bg-background-light p-5 transition-ui duration-300 hover:-translate-y-1 hover:border-primary/25 hover:shadow-lg">
               <div class="mb-2 text-xs font-semibold uppercase tracking-[0.18em] text-primary/80">Latest pick</div>
               <h2 class="line-clamp-2 text-lg font-bold text-text transition-colors duration-300 group-hover/latest:text-primary">
                 {newestPost.data.title}
               </h2>
               {newestPost.data.description && <p class="mt-2 line-clamp-2 text-sm leading-relaxed text-text-light">{newestPost.data.description}</p>}
-              <div class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-primary transition-all duration-300 group-hover/latest:gap-2.5 group-hover/latest:text-accent">
+              <div class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-primary transition-ui duration-300 group-hover/latest:gap-2.5 group-hover/latest:text-accent">
                 <span>Read now</span>
                 <ArrowRight class="h-4 w-4 transition-transform duration-300 group-hover/latest:translate-x-1" strokeWidth={2.5} />
               </div>
@@ -96,8 +96,8 @@ const collectionPageSchema = {
         <div class="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
           <div class="relative flex-1 max-w-xl">
             <Search class="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-text-muted" strokeWidth={2} />
-            <input id="library-search" type="search" placeholder="Search by title, description, tag, or agent" class="w-full rounded-2xl border border-background-lighter bg-background-light py-3 pl-11 pr-12 text-sm text-text placeholder:text-text-muted outline-none transition-all duration-200 focus:border-primary/30 focus:bg-background focus:ring-2 focus:ring-primary/10" />
-            <button id="library-search-clear" type="button" aria-label="Clear search" class="absolute right-2.5 top-1/2 hidden h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full border border-background-lighter bg-background text-text-muted shadow-sm transition-all duration-200 hover:border-primary/20 hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/20">
+            <input id="library-search" type="search" placeholder="Search by title, description, tag, or agent" class="w-full rounded-2xl border border-background-lighter bg-background-light py-3 pl-11 pr-12 text-sm text-text placeholder:text-text-muted outline-none transition-ui duration-200 focus:border-primary/30 focus:bg-background focus:ring-2 focus:ring-primary/10" />
+            <button id="library-search-clear" type="button" aria-label="Clear search" class="absolute right-2.5 top-1/2 hidden h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full border border-background-lighter bg-background text-text-muted shadow-sm transition-ui duration-200 hover:border-primary/20 hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/20">
               <X class="h-3.5 w-3.5" strokeWidth={2.5} />
             </button>
           </div>

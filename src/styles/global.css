@@ -376,19 +376,56 @@ body {
 
 /* ============================================
    4. Scroll Animations
-   토스 스타일 부드러운 애니메이션
+   진입은 ease-out, 이동량은 작게, 0.5s 안에 끝낸다.
    ============================================ */
 .scroll-animate {
   opacity: 0;
-  transform: translateY(30px);
+  transform: translateY(16px);
   transition:
-    opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1),
-    transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-  /* Stagger: --stagger-delay로 개별 딜레이 설정 (기본 0s, 최대 0.6s) */
+    opacity 0.5s var(--ease-out),
+    transform 0.5s var(--ease-out);
+  /* Stagger: --stagger-delay로 개별 딜레이 설정 (기본 0s, 최대 0.36s) */
   transition-delay: var(--stagger-delay, 0s);
 }
 
 .scroll-animate.animate-fade-in {
   opacity: 1;
   transform: translateY(0);
+}
+
+/* ============================================
+   5. Interaction primitives
+   ============================================ */
+/* 화살표 링크: gap(레이아웃) 대신 화살표만 transform으로 민다 */
+.link-arrow > svg:last-child {
+  transition: translate var(--duration-base) var(--ease-out);
+}
+@media (hover: hover) and (pointer: fine) {
+  .group:hover .link-arrow > svg:last-child,
+  .link-arrow:hover > svg:last-child {
+    translate: 3px 0;
+  }
+}
+
+/* ============================================
+   6. Reduced motion
+   움직임(transform)은 끄고, 이해를 돕는 opacity/색 전환은 남긴다.
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+  .scroll-animate {
+    transform: none;
+    transition: opacity 0.2s ease;
+    transition-delay: 0s;
+  }
+  .link-arrow > svg:last-child {
+    transition: none;
+    translate: 0;
+  }
+  /* hover 리프트·눌림·슬라이드는 즉시 상태만 바꾼다(움직임 없음). 색·불투명도 전환은 유지. */
+  *,
+  ::before,
+  ::after {
+    /* biome-ignore lint/complexity/noImportantStyles: 접근성 오버라이드 — 유틸리티 클래스보다 우선해야 한다 */
+    transition-property: color, background-color, border-color, opacity, box-shadow !important;
+  }
 }

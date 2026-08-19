@@ -214,7 +214,14 @@ const personSchema = {
         color: var(--muted);
         cursor: pointer;
         text-decoration: none;
-        transition: all 0.18s ease;
+        transition:
+          color var(--duration-fast) ease,
+          background-color var(--duration-fast) ease,
+          border-color var(--duration-fast) ease,
+          transform var(--duration-press) var(--ease-out);
+      }
+      .switch__btn:active {
+        transform: scale(0.96);
       }
       .switch__btn:hover {
         color: var(--ink);
@@ -299,7 +306,13 @@ const personSchema = {
         color: var(--muted);
         cursor: pointer;
         border-radius: 6px;
-        transition: all 0.15s ease;
+        transition:
+          color var(--duration-fast) ease,
+          background-color var(--duration-fast) ease,
+          transform var(--duration-press) var(--ease-out);
+      }
+      .chip:active {
+        transform: scale(0.95);
       }
       .chip:hover {
         color: var(--ink);

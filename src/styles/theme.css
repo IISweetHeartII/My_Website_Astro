@@ -53,6 +53,31 @@
      ============================================ */
   --font-body: "Pretendard", sans-serif;
   --font-mono: "Consolas", "Monaco", "Courier New", monospace;
+
+  /* ============================================
+     Motion tokens
+     - 기본 CSS 이징은 약해서 의도가 안 보인다. 강한 커브로 통일.
+     - `ease-out`/`ease-in-out` 유틸리티도 이 값을 쓴다.
+     ============================================ */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1); /* 진입·퇴장·hover 복귀 */
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1); /* 화면 안 이동·모핑 */
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1); /* 사이드 시트·모바일 메뉴 */
+  --default-transition-timing-function: cubic-bezier(0.23, 1, 0.32, 1);
+
+  --duration-press: 120ms; /* 버튼 눌림 피드백 */
+  --duration-fast: 160ms; /* 색·아이콘 스왑 */
+  --duration-base: 220ms; /* hover 리프트·드롭다운 */
+  --duration-panel: 320ms; /* 패널·시트·메뉴 진입 */
+}
+
+/* `transition-all` 대체 — 레이아웃(gap/height/width/padding)은 빼고
+   GPU 합성 가능한 속성 + 색만 전환한다. */
+@utility transition-ui {
+  transition-property:
+    color, background-color, border-color, box-shadow, opacity, transform, translate, scale, rotate,
+    filter, text-decoration-color;
+  transition-timing-function: var(--default-transition-timing-function);
+  transition-duration: var(--default-transition-duration);
 }
 
 :root {

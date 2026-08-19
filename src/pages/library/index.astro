@@ -100,7 +100,7 @@ const collectionPageSchema = {
           {newestPost && newestSlug && (
             <a
               href={`/library/${newestSlug}/`}
-              class="group/latest relative overflow-hidden rounded-2xl border border-background-lighter bg-background-light p-5 transition-all duration-300 hover:-translate-y-1 hover:border-primary/25 hover:shadow-lg"
+              class="group/latest relative overflow-hidden rounded-2xl border border-background-lighter bg-background-light p-5 transition-ui duration-300 hover:-translate-y-1 hover:border-primary/25 hover:shadow-lg"
             >
               <div class="mb-2 text-xs font-semibold uppercase tracking-[0.18em] text-primary/80">Latest pick</div>
               <h2 class="line-clamp-2 text-lg font-bold text-text transition-colors duration-300 group-hover/latest:text-primary">
@@ -111,7 +111,7 @@ const collectionPageSchema = {
                   {newestPost.data.description}
                 </p>
               )}
-              <div class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-primary transition-all duration-300 group-hover/latest:gap-2.5 group-hover/latest:text-accent">
+              <div class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-primary transition-ui duration-300 group-hover/latest:gap-2.5 group-hover/latest:text-accent">
                 <span>바로 읽기</span>
                 <ArrowRight class="h-4 w-4 transition-transform duration-300 group-hover/latest:translate-x-1" strokeWidth={2.5} />
               </div>
@@ -129,13 +129,13 @@ const collectionPageSchema = {
               type="search"
               placeholder="제목, 설명, 태그, 에이전트로 검색"
               aria-describedby="library-search-hint"
-              class="w-full rounded-2xl border border-background-lighter bg-background-light py-3 pl-11 pr-12 text-sm text-text placeholder:text-text-muted outline-none transition-all duration-200 focus:border-primary/30 focus:bg-background focus:ring-2 focus:ring-primary/10"
+              class="w-full rounded-2xl border border-background-lighter bg-background-light py-3 pl-11 pr-12 text-sm text-text placeholder:text-text-muted outline-none transition-ui duration-200 focus:border-primary/30 focus:bg-background focus:ring-2 focus:ring-primary/10"
             />
             <button
               id="library-search-clear"
               type="button"
               aria-label="검색어 지우기"
-              class="absolute right-2.5 top-1/2 hidden h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full border border-background-lighter bg-background text-text-muted shadow-sm transition-all duration-200 hover:border-primary/20 hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/20"
+              class="absolute right-2.5 top-1/2 hidden h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full border border-background-lighter bg-background text-text-muted shadow-sm transition-ui duration-200 hover:border-primary/20 hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/20"
             >
               <X class="h-3.5 w-3.5" strokeWidth={2.5} />
             </button>
@@ -149,7 +149,7 @@ const collectionPageSchema = {
               <span>정렬</span>
               <select
                 id="library-sort"
-                class="rounded-xl border border-background-lighter bg-background-light px-3 py-2 text-sm text-text outline-none transition-all duration-200 focus:border-primary/30 focus:ring-2 focus:ring-primary/10"
+                class="rounded-xl border border-background-lighter bg-background-light px-3 py-2 text-sm text-text outline-none transition-ui duration-200 focus:border-primary/30 focus:ring-2 focus:ring-primary/10"
               >
                 <option value="latest">최신순</option>
                 <option value="reading-asc">짧게 읽는 순</option>
@@ -172,7 +172,7 @@ const collectionPageSchema = {
           <button
             id="library-reset-filters"
             type="button"
-            class="inline-flex shrink-0 items-center justify-center rounded-full border border-primary/20 bg-background px-3 py-1.5 text-xs font-semibold text-primary shadow-sm transition-all duration-200 hover:border-primary/30 hover:bg-primary/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/20"
+            class="inline-flex shrink-0 items-center justify-center rounded-full border border-primary/20 bg-background px-3 py-1.5 text-xs font-semibold text-primary shadow-sm transition-ui duration-200 hover:border-primary/30 hover:bg-primary/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/20"
           >
             전체 조건 초기화
           </button>
@@ -182,14 +182,14 @@ const collectionPageSchema = {
           <div class="mt-4 flex flex-wrap gap-2">
             <button
               data-library-filter="all"
-              class="library-filter-btn rounded-full bg-primary px-4 py-2 text-sm font-medium text-on-primary shadow-md transition-all duration-200"
+              class="library-filter-btn rounded-full bg-primary px-4 py-2 text-sm font-medium text-on-primary shadow-md transition-ui duration-200"
             >
               전체
             </button>
             {categories.map((cat) => (
               <button
                 data-library-filter={cat}
-                class="library-filter-btn rounded-full border border-background-lighter bg-background-muted px-4 py-2 text-sm font-medium text-text-muted transition-all duration-200 hover:border-primary/20 hover:bg-primary/10 hover:text-primary"
+                class="library-filter-btn rounded-full border border-background-lighter bg-background-muted px-4 py-2 text-sm font-medium text-text-muted transition-ui duration-200 hover:border-primary/20 hover:bg-primary/10 hover:text-primary"
               >
                 {cat}
               </button>
@@ -206,14 +206,14 @@ const collectionPageSchema = {
             <div class="flex flex-wrap gap-2">
               <button
                 data-library-agent-filter="all"
-                class="library-agent-btn rounded-full bg-accent px-3.5 py-1.5 text-xs font-semibold text-on-primary shadow-sm transition-all duration-200"
+                class="library-agent-btn rounded-full bg-accent px-3.5 py-1.5 text-xs font-semibold text-on-primary shadow-sm transition-ui duration-200"
               >
                 모든 에이전트
               </button>
               {agentFilters.map(({ value, label }) => (
                 <button
                   data-library-agent-filter={value}
-                  class="library-agent-btn rounded-full border border-background-lighter bg-background px-3.5 py-1.5 text-xs font-semibold text-text-muted transition-all duration-200 hover:border-accent/25 hover:bg-accent/10 hover:text-accent"
+                  class="library-agent-btn rounded-full border border-background-lighter bg-background px-3.5 py-1.5 text-xs font-semibold text-text-muted transition-ui duration-200 hover:border-accent/25 hover:bg-accent/10 hover:text-accent"
                 >
                   {label}
                 </button>

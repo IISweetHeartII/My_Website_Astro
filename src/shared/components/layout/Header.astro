@@ -37,18 +37,18 @@ const localizedHref = (pathname: string) => getUrl(withLocalePath(pathname, curr
 
 <header
   id="main-header"
-  class="sticky top-0 z-50 bg-nav border-b border-nav-border transition-all duration-300"
+  class="sticky top-0 z-50 bg-nav border-b border-nav-border transition-[background-color,box-shadow] duration-(--duration-base)"
 >
   <nav class="container mx-auto px-4 h-16 flex items-center justify-between">
     <div class="flex items-center">
       <a
         href={localizedHref("/")}
-        class="flex items-center space-x-2 text-nav-text font-semibold text-lg hover:text-accent transition-colors duration-200 hover:bg-nav-hover/20 rounded px-2 -ml-2 py-1 whitespace-nowrap"
+        class="flex items-center space-x-2 text-nav-text font-semibold text-lg hover:text-accent transition-ui duration-(--duration-fast) hover:bg-nav-hover/20 rounded px-2 -ml-2 py-1 whitespace-nowrap active:scale-[0.97] active:duration-(--duration-press)"
       >
         <img
           src={getUrl("/images/design/icon.png")}
           alt="Log8 Icon"
-          class="w-6 h-6 rounded-md hover:scale-105 transition-transform duration-300 shrink-0"
+          class="w-6 h-6 rounded-md shrink-0"
         />
         <span class="hidden sm:inline">{t.siteTitle}</span>
       </a>
@@ -65,7 +65,7 @@ const localizedHref = (pathname: string) => getUrl(withLocalePath(pathname, curr
       <button
         data-search-trigger
         type="button"
-        class="inline-flex items-center justify-center w-9 h-9 text-nav-text/80 hover:text-nav-text hover:bg-nav-hover/20 rounded-lg transition-all duration-200"
+        class="inline-flex items-center justify-center w-9 h-9 text-nav-text/80 hover:text-nav-text hover:bg-nav-hover/20 rounded-lg transition-ui duration-(--duration-fast) active:scale-90 active:duration-(--duration-press)"
         aria-label={t.search}
       >
         <Search class="w-5 h-5" />
@@ -75,7 +75,7 @@ const localizedHref = (pathname: string) => getUrl(withLocalePath(pathname, curr
         languageSwitchHref && (
           <a
             href={getUrl(languageSwitchHref)}
-            class="inline-flex items-center justify-center rounded-lg border border-nav-border px-2.5 py-1.5 text-xs font-semibold text-nav-text/80 hover:bg-nav-hover/20 hover:text-nav-text transition-all duration-200"
+            class="inline-flex items-center justify-center rounded-lg border border-nav-border px-2.5 py-1.5 text-xs font-semibold text-nav-text/80 hover:bg-nav-hover/20 hover:text-nav-text transition-ui duration-(--duration-fast) active:scale-95 active:duration-(--duration-press)"
             hreflang={otherLocale}
             aria-label={`Switch language to ${otherLocale === "en" ? "English" : "Korean"}`}
           >
@@ -87,12 +87,12 @@ const localizedHref = (pathname: string) => getUrl(withLocalePath(pathname, curr
       <button
         id="theme-toggle"
         type="button"
-        class="inline-flex items-center justify-center w-9 h-9 text-nav-text/80 hover:text-nav-text hover:bg-nav-hover/20 rounded-lg transition-all duration-200"
+        class="relative inline-flex items-center justify-center w-9 h-9 text-nav-text/80 hover:text-nav-text hover:bg-nav-hover/20 rounded-lg transition-ui duration-(--duration-fast) active:scale-90 active:duration-(--duration-press)"
         aria-label={t.themeToggle}
         aria-pressed="false"
       >
-        <Sun data-icon="sun" class="w-5 h-5 hidden" />
-        <Moon data-icon="moon" class="w-5 h-5" />
+        <Sun data-icon="sun" class="theme-icon w-5 h-5" />
+        <Moon data-icon="moon" class="theme-icon w-5 h-5" />
       </button>
 
       <!-- Social Icons -->
@@ -100,7 +100,7 @@ const localizedHref = (pathname: string) => getUrl(withLocalePath(pathname, curr
         href={AUTHOR_GITHUB}
         target="_blank"
         rel="noopener noreferrer"
-        class="hidden lg:inline-flex items-center justify-center w-9 h-9 text-nav-text/80 hover:text-nav-text hover:bg-nav-hover/20 rounded-lg transition-all duration-200"
+        class="hidden lg:inline-flex items-center justify-center w-9 h-9 text-nav-text/80 hover:text-nav-text hover:bg-nav-hover/20 rounded-lg transition-ui duration-(--duration-fast) active:scale-90 active:duration-(--duration-press)"
         title="GitHub"
       >
         <Github class="w-5 h-5" />
@@ -109,21 +109,21 @@ const localizedHref = (pathname: string) => getUrl(withLocalePath(pathname, curr
         href={AUTHOR_LINKEDIN}
         target="_blank"
         rel="noopener noreferrer"
-        class="hidden lg:inline-flex items-center justify-center w-9 h-9 text-nav-text/80 hover:text-nav-text hover:bg-nav-hover/20 rounded-lg transition-all duration-200"
+        class="hidden lg:inline-flex items-center justify-center w-9 h-9 text-nav-text/80 hover:text-nav-text hover:bg-nav-hover/20 rounded-lg transition-ui duration-(--duration-fast) active:scale-90 active:duration-(--duration-press)"
         title="LinkedIn"
       >
         <Linkedin class="w-5 h-5" />
       </a>
       <a
         href={`mailto:${AUTHOR_EMAIL}`}
-        class="hidden lg:inline-flex items-center justify-center w-9 h-9 text-nav-text/80 hover:text-nav-text hover:bg-nav-hover/20 rounded-lg transition-all duration-200"
+        class="hidden lg:inline-flex items-center justify-center w-9 h-9 text-nav-text/80 hover:text-nav-text hover:bg-nav-hover/20 rounded-lg transition-ui duration-(--duration-fast) active:scale-90 active:duration-(--duration-press)"
         title="Email"
       >
         <Mail class="w-5 h-5" />
       </a>
 
       <!-- Mobile menu toggle button -->
-      <button class="lg:hidden text-nav-text focus:outline-none" id="mobile-menu-toggle">
+      <button class="lg:hidden inline-flex items-center justify-center w-9 h-9 rounded-lg text-nav-text focus:outline-none transition-transform duration-(--duration-fast) active:scale-90 active:duration-(--duration-press)" id="mobile-menu-toggle" aria-label="Open menu" aria-controls="mobile-menu" aria-expanded="false">
         <Menu class="w-6 h-6" />
       </button>
     </div>
@@ -131,33 +131,33 @@ const localizedHref = (pathname: string) => getUrl(withLocalePath(pathname, curr
 
   <!-- Mobile menu content (initially hidden) -->
   <div
-    class="lg:hidden fixed inset-0 bg-nav/95 z-40 transition-transform duration-300 ease-in-out transform translate-x-full"
+    class="lg:hidden fixed inset-0 bg-nav/95 z-40 translate-x-full transition-transform duration-(--duration-panel) ease-drawer data-[state=closed]:duration-(--duration-base) data-[state=closed]:ease-out"
     id="mobile-menu"
   >
     <div class="flex justify-end p-4">
-      <button class="text-nav-text focus:outline-none" id="mobile-menu-close">
+      <button class="inline-flex items-center justify-center w-9 h-9 rounded-lg text-nav-text focus:outline-none transition-transform duration-(--duration-fast) active:scale-90 active:duration-(--duration-press)" id="mobile-menu-close" aria-label="Close menu">
         <X class="w-6 h-6" />
       </button>
     </div>
     <nav class="flex flex-col items-center space-y-6 py-8">
       <a
         href={localizedHref("/about/")}
-        class="text-nav-text hover:text-accent text-xl font-semibold transition-colors duration-200"
+        class="text-nav-text hover:text-accent text-xl font-semibold transition-ui duration-(--duration-fast) active:scale-[0.97] active:duration-(--duration-press)"
         >{t.about}</a
       >
       <a
         href={localizedHref("/portfolio/")}
-        class="text-nav-text hover:text-accent text-xl font-semibold transition-colors duration-200"
+        class="text-nav-text hover:text-accent text-xl font-semibold transition-ui duration-(--duration-fast) active:scale-[0.97] active:duration-(--duration-press)"
         >{t.work}</a
       >
       <a
         href={localizedHref("/blog/")}
-        class="text-nav-text hover:text-accent text-xl font-semibold transition-colors duration-200"
+        class="text-nav-text hover:text-accent text-xl font-semibold transition-ui duration-(--duration-fast) active:scale-[0.97] active:duration-(--duration-press)"
         >{t.blog}</a
       >
       <a
         href={localizedHref("/library/")}
-        class="text-nav-text hover:text-accent text-xl font-semibold transition-colors duration-200"
+        class="text-nav-text hover:text-accent text-xl font-semibold transition-ui duration-(--duration-fast) active:scale-[0.97] active:duration-(--duration-press)"
         >{t.library}</a
       >
       {
@@ -214,6 +214,23 @@ const localizedHref = (pathname: string) => getUrl(withLocalePath(pathname, curr
 </header>
 
 <SearchDialog />
+
+<style>
+  /* 테마 토글: 아이콘을 겹쳐 두고 크로스페이드+살짝 회전. hidden 토글(순간이동) 대체 */
+  #theme-toggle .theme-icon {
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    transition:
+      opacity var(--duration-fast) var(--ease-out),
+      transform var(--duration-fast) var(--ease-out);
+  }
+  #theme-toggle:not([data-theme="dark"]) [data-icon="sun"],
+  #theme-toggle[data-theme="dark"] [data-icon="moon"] {
+    opacity: 0;
+    transform: scale(0.6) rotate(-40deg);
+  }
+</style>
 
 <script>
   import { setupMobileMenu } from "@/shared/scripts/mobile-menu";

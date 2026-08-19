@@ -124,22 +124,29 @@ const chatConfig = {
     align-items: center;
     justify-content: center;
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.18), 0 1px 4px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+    transition:
+      transform var(--duration-base) var(--ease-out),
+      box-shadow var(--duration-base) var(--ease-out),
+      opacity var(--duration-fast) ease;
   }
 
-  #chat-fab:hover {
-    transform: scale(1.08);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.22);
+  @media (hover: hover) and (pointer: fine) {
+    #chat-fab:hover {
+      transform: scale(1.06);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.22);
+    }
   }
 
   #chat-fab:active {
-    transform: scale(0.96);
+    transform: scale(0.94);
+    transition-duration: var(--duration-press);
   }
 
   #chat-fab.chat-fab-hidden {
     opacity: 0;
     pointer-events: none;
-    transform: scale(0.5);
+    /* 완전히 사라졌다 나타나지 않게(scale 0.5 → 0.85): 형태가 남아 있어야 자연스럽다 */
+    transform: scale(0.85);
   }
 
   /* ===== Chat Panel (사이드 패널) ===== */
@@ -154,7 +161,10 @@ const chatConfig = {
     z-index: 9998;
     display: flex;
     flex-direction: column;
-    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.2s ease;
+    /* 진입: 드로어 커브로 320ms. 퇴장은 아래 .chat-hidden에서 더 빠르게 */
+    transition:
+      transform var(--duration-panel) var(--ease-drawer),
+      opacity var(--duration-fast) ease;
     box-shadow: -4px 0 24px rgba(0, 0, 0, 0.08);
   }
 
@@ -162,6 +172,9 @@ const chatConfig = {
     transform: translateX(100%);
     opacity: 0;
     pointer-events: none;
+    transition:
+      transform var(--duration-base) var(--ease-out),
+      opacity var(--duration-fast) ease 40ms;
   }
 
   /* ===== Header ===== */
@@ -245,12 +258,22 @@ const chatConfig = {
     display: flex;
     gap: 10px;
     max-width: 90%;
-    animation: chatFadeIn 0.3s ease;
+    animation: chatFadeIn 260ms var(--ease-out);
   }
 
   @keyframes chatFadeIn {
-    from { opacity: 0; transform: translateY(8px); }
-    to { opacity: 1; transform: translateY(0); }
+    from { opacity: 0; transform: translateY(6px) scale(0.98); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .chat-msg {
+      animation: chatFadeOnly 200ms ease;
+    }
+    @keyframes chatFadeOnly {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
   }
 
   .chat-msg-assistant {
@@ -444,12 +467,19 @@ const chatConfig = {
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
-    transition: opacity 0.15s, transform 0.15s;
+    transition:
+      opacity var(--duration-fast) ease,
+      transform var(--duration-press) var(--ease-out);
   }
 
-  #chat-send:hover {
-    opacity: 0.9;
-    transform: scale(1.05);
+  @media (hover: hover) and (pointer: fine) {
+    #chat-send:hover {
+      opacity: 0.9;
+    }
+  }
+
+  #chat-send:active {
+    transform: scale(0.94);
   }
 
   #chat-send.chat-send-disabled {

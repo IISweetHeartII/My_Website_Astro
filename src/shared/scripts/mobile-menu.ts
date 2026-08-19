@@ -13,6 +13,8 @@ export function setupMobileMenu(): void {
   mobileMenuToggle.addEventListener("click", () => {
     mobileMenu.classList.remove("translate-x-full");
     mobileMenu.classList.add("translate-x-0");
+    mobileMenu.setAttribute("data-state", "open");
+    mobileMenuToggle.setAttribute("aria-expanded", "true");
   });
 
   // 메뉴 닫기
@@ -46,6 +48,9 @@ export function setupMobileMenu(): void {
     if (mobileMenu) {
       mobileMenu.classList.remove("translate-x-0");
       mobileMenu.classList.add("translate-x-full");
+      // 닫힘은 진입보다 빠르게(ease-out, base duration) — CSS data-[state=closed] 변형이 처리
+      mobileMenu.setAttribute("data-state", "closed");
+      mobileMenuToggle?.setAttribute("aria-expanded", "false");
     }
   }
 }

@@ -106,17 +106,17 @@ const websiteSchema = {
                   data-cta-track
                   data-cta-name="hero_blog"
                   data-cta-section="hero"
-                  class="group inline-flex items-center gap-2 px-8 py-4 bg-primary hover:bg-primary-light text-on-primary font-semibold rounded-xl transition-all duration-300 shadow-lg hover:shadow-2xl transform hover:-translate-y-1"
+                  class="group inline-flex items-center gap-2 px-8 py-4 bg-primary hover:bg-primary-light text-on-primary font-semibold rounded-xl transition-ui duration-(--duration-base) ease-out shadow-lg hover:shadow-2xl hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.97] active:duration-(--duration-press)"
                 >
                   블로그 보기
-                  <ArrowRight class="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                  <ArrowRight class="w-5 h-5 group-hover:translate-x-0.5 transition-transform duration-(--duration-base) ease-out" />
                 </a>
                 <a
                   href="/portfolio"
                   data-cta-track
                   data-cta-name="hero_showcase"
                   data-cta-section="hero"
-                  class="group inline-flex items-center gap-2 px-8 py-4 bg-background-light hover:bg-background-lighter text-primary font-semibold rounded-xl border-2 border-primary-light transition-all duration-300 shadow-lg hover:shadow-xl"
+                  class="group inline-flex items-center gap-2 px-8 py-4 bg-background-light hover:bg-background-lighter text-primary font-semibold rounded-xl border-2 border-primary-light transition-ui duration-(--duration-base) ease-out shadow-lg hover:shadow-xl active:scale-[0.97] active:duration-(--duration-press)"
                 >
                   프로젝트 보기
                   <Code2 class="w-5 h-5" />
@@ -126,7 +126,7 @@ const websiteSchema = {
                   data-cta-track
                   data-cta-name="hero_portfolio"
                   data-cta-section="hero"
-                  class="group inline-flex items-center gap-2 px-8 py-4 bg-linear-to-r from-info to-primary hover:from-info-light hover:to-primary-light text-on-primary font-semibold rounded-xl transition-all duration-300 shadow-lg hover:shadow-2xl transform hover:-translate-y-1"
+                  class="group inline-flex items-center gap-2 px-8 py-4 bg-linear-to-r from-info to-primary hover:from-info-light hover:to-primary-light text-on-primary font-semibold rounded-xl transition-ui duration-(--duration-base) ease-out shadow-lg hover:shadow-2xl hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.97] active:duration-(--duration-press)"
                 >
                   포트폴리오 보기
                   <Briefcase class="w-5 h-5" />
@@ -169,7 +169,7 @@ const websiteSchema = {
             data-cta-track
             data-cta-name="start_showcase_primary"
             data-cta-section="start_here"
-            class="inline-flex items-center gap-2 px-5 py-3 rounded-xl border border-primary/20 bg-primary/10 text-primary font-semibold hover:bg-primary/15 transition-colors"
+            class="inline-flex items-center gap-2 px-5 py-3 rounded-xl border border-primary/20 bg-primary/10 text-primary font-semibold hover:bg-primary/15 transition-ui duration-(--duration-fast) active:scale-[0.97] active:duration-(--duration-press) link-arrow"
           >
             대표 프로젝트 먼저 보기
             <ArrowRight class="w-4 h-4" />
@@ -188,7 +188,7 @@ const websiteSchema = {
             latestPost && (
               <a
                 href={`/blog/${latestPost.data.slug ?? latestPost.id.replace(/\.[^/.]+$/, "")}`}
-                class="group lg:col-span-2 lg:row-span-2 bg-background-light rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-background-lighter"
+                class="group lg:col-span-2 lg:row-span-2 bg-background-light rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-ui duration-(--duration-base) ease-out hover:-translate-y-1 active:translate-y-0 active:scale-[0.99] active:duration-(--duration-press) border border-background-lighter"
               >
                 <div class="h-full flex flex-col justify-between">
                   <div>
@@ -209,7 +209,7 @@ const websiteSchema = {
                         ? new Date(latestPost.data.created_date).toLocaleDateString("ko-KR")
                         : ""}
                     </span>
-                    <span class="inline-flex items-center gap-1 text-primary font-medium group-hover:gap-2 transition-all">
+                    <span class="link-arrow inline-flex items-center gap-1 text-primary font-medium transition-colors">
                       읽기
                       <ArrowRight class="w-4 h-4" />
                     </span>
@@ -225,7 +225,7 @@ const websiteSchema = {
             data-cta-track
             data-cta-name="bento_showcase_card"
             data-cta-section="bento_grid"
-            class="group lg:col-span-1 bg-background-light rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-background-lighter"
+            class="group lg:col-span-1 bg-background-light rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-ui duration-(--duration-base) ease-out hover:-translate-y-1 active:translate-y-0 active:scale-[0.99] active:duration-(--duration-press) border border-background-lighter"
           >
             <div class="h-full flex flex-col justify-between">
               <div>
@@ -239,7 +239,7 @@ const websiteSchema = {
                 <p class="text-xs text-text-muted">프로젝트 8개 · 문제 → 해결 → 결과 기록</p>
               </div>
               <span
-                class="inline-flex items-center gap-1 text-primary font-medium text-sm group-hover:gap-2 transition-all"
+                class="link-arrow inline-flex items-center gap-1 text-primary font-medium text-sm transition-colors"
               >
                 보러가기
                 <ArrowRight class="w-4 h-4" />
@@ -291,7 +291,7 @@ const websiteSchema = {
             data-cta-track
             data-cta-name="bento_about"
             data-cta-section="bento_grid"
-            class="group lg:col-span-2 bg-background-light rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-background-lighter"
+            class="group lg:col-span-2 bg-background-light rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-ui duration-(--duration-base) ease-out hover:-translate-y-1 active:translate-y-0 active:scale-[0.99] active:duration-(--duration-press) border border-background-lighter"
           >
             <div class="h-full flex flex-col justify-between">
               <div>
@@ -304,7 +304,7 @@ const websiteSchema = {
                 <p class="text-text-light text-sm">수학도에서 AI 활용 개발자로 전환한 김덕환</p>
               </div>
               <span
-                class="inline-flex items-center gap-1 text-primary font-medium text-sm mt-4 group-hover:gap-2 transition-all"
+                class="link-arrow inline-flex items-center gap-1 text-primary font-medium text-sm mt-4 transition-colors"
               >
                 더 알아보기
                 <ArrowRight class="w-4 h-4" />
@@ -318,11 +318,11 @@ const websiteSchema = {
             data-cta-track
             data-cta-name="bento_award_1"
             data-cta-section="bento_grid"
-            class="group lg:col-span-1 bg-linear-to-br from-amber-500/5 via-background-light to-primary/5 rounded-2xl p-6 shadow-lg border border-background-lighter hover:shadow-[0_20px_40px_-12px_rgba(139,92,246,0.15)] hover:scale-[1.02] transition-all duration-500 ease-out"
+            class="group lg:col-span-1 bg-linear-to-br from-amber-500/5 via-background-light to-primary/5 rounded-2xl p-6 shadow-lg border border-background-lighter hover:shadow-[0_20px_40px_-12px_rgba(139,92,246,0.15)] hover:-translate-y-1 transition-ui duration-(--duration-base) ease-out active:translate-y-0 active:scale-[0.99] active:duration-(--duration-press)"
           >
             <div class="h-full flex flex-col justify-center items-center text-center">
               <div
-                class="w-14 h-14 mb-3 rounded-full bg-linear-to-br from-amber-500/15 to-accent/15 flex items-center justify-center ring-2 ring-amber-500/10 group-hover:ring-amber-500/25 transition-all duration-500"
+                class="w-14 h-14 mb-3 rounded-full bg-linear-to-br from-amber-500/15 to-accent/15 flex items-center justify-center ring-2 ring-amber-500/10 group-hover:ring-amber-500/25 transition-ui duration-(--duration-base)"
               >
                 <Award class="w-8 h-8 text-accent" />
               </div>
@@ -341,11 +341,11 @@ const websiteSchema = {
             data-cta-track
             data-cta-name="bento_award_2"
             data-cta-section="bento_grid"
-            class="group lg:col-span-1 bg-linear-to-br from-primary/5 via-background-light to-amber-500/5 rounded-2xl p-6 shadow-lg border border-background-lighter hover:shadow-[0_20px_40px_-12px_rgba(139,92,246,0.15)] hover:scale-[1.02] transition-all duration-500 ease-out"
+            class="group lg:col-span-1 bg-linear-to-br from-primary/5 via-background-light to-amber-500/5 rounded-2xl p-6 shadow-lg border border-background-lighter hover:shadow-[0_20px_40px_-12px_rgba(139,92,246,0.15)] hover:-translate-y-1 transition-ui duration-(--duration-base) ease-out active:translate-y-0 active:scale-[0.99] active:duration-(--duration-press)"
           >
             <div class="h-full flex flex-col justify-center items-center text-center">
               <div
-                class="w-14 h-14 mb-3 rounded-full bg-linear-to-br from-primary/15 to-accent/15 flex items-center justify-center ring-2 ring-primary/10 group-hover:ring-primary/25 transition-all duration-500"
+                class="w-14 h-14 mb-3 rounded-full bg-linear-to-br from-primary/15 to-accent/15 flex items-center justify-center ring-2 ring-primary/10 group-hover:ring-primary/25 transition-ui duration-(--duration-base)"
               >
                 <Medal class="w-8 h-8 text-primary" />
               </div>
@@ -363,7 +363,7 @@ const websiteSchema = {
             href="https://agentgram.co"
             target="_blank"
             rel="noopener noreferrer"
-            class="group lg:col-span-1 bg-background-light rounded-2xl shadow-lg hover:shadow-[0_20px_40px_-12px_rgba(139,92,246,0.15)] hover:scale-[1.02] transition-all duration-500 ease-out border border-background-lighter overflow-hidden"
+            class="group lg:col-span-1 bg-background-light rounded-2xl shadow-lg hover:shadow-[0_20px_40px_-12px_rgba(139,92,246,0.15)] hover:-translate-y-1 transition-ui duration-(--duration-base) ease-out active:translate-y-0 active:scale-[0.99] active:duration-(--duration-press) border border-background-lighter overflow-hidden"
           >
             <div class="h-1 w-full bg-linear-to-r from-primary to-info"></div>
             <div class="h-full flex flex-col justify-between p-6">
@@ -381,7 +381,7 @@ const websiteSchema = {
             <p class="text-text-light text-sm">Open-Source AI Agent Network</p>
               </div>
               <span
-                class="inline-flex items-center gap-1 text-primary font-medium text-sm mt-3 group-hover:gap-2 transition-all"
+                class="link-arrow inline-flex items-center gap-1 text-primary font-medium text-sm mt-3 transition-colors"
               >
                 agentgram.co
                 <ArrowRight class="w-4 h-4" />
@@ -394,7 +394,7 @@ const websiteSchema = {
             href="https://finders.it.kr"
             target="_blank"
             rel="noopener noreferrer"
-            class="group lg:col-span-1 bg-background-light rounded-2xl shadow-lg hover:shadow-[0_20px_40px_-12px_rgba(139,92,246,0.15)] hover:scale-[1.02] transition-all duration-500 ease-out border border-background-lighter overflow-hidden"
+            class="group lg:col-span-1 bg-background-light rounded-2xl shadow-lg hover:shadow-[0_20px_40px_-12px_rgba(139,92,246,0.15)] hover:-translate-y-1 transition-ui duration-(--duration-base) ease-out active:translate-y-0 active:scale-[0.99] active:duration-(--duration-press) border border-background-lighter overflow-hidden"
           >
             <div class="h-1 w-full bg-linear-to-r from-info to-primary"></div>
             <div class="h-full flex flex-col justify-between p-6">
@@ -412,7 +412,7 @@ const websiteSchema = {
             <p class="text-text-light text-sm">Backend Lead, GCP Infra</p>
               </div>
               <span
-                class="inline-flex items-center gap-1 text-primary font-medium text-sm mt-3 group-hover:gap-2 transition-all"
+                class="link-arrow inline-flex items-center gap-1 text-primary font-medium text-sm mt-3 transition-colors"
               >
                 finders.it.kr
                 <ArrowRight class="w-4 h-4" />

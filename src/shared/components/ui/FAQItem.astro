@@ -28,7 +28,7 @@ const id = `faq-${Math.random().toString(36).substring(7)}`;
     </span>
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      class="faq-icon w-6 h-6 text-text-muted group-hover:text-accent transition-all duration-300 transform"
+      class="faq-icon w-6 h-6 text-text-muted group-hover:text-accent transition-[transform,color] duration-300 ease-out"
       fill="none"
       viewBox="0 0 24 24"
       stroke="currentColor"
@@ -38,12 +38,34 @@ const id = `faq-${Math.random().toString(36).substring(7)}`;
     </svg>
   </button>
 
-  <div id={id} class="faq-answer overflow-hidden transition-all duration-300 ease-in-out max-h-0">
-    <div class="pb-6 text-text-light leading-relaxed">
+  <div id={id} class="faq-answer overflow-hidden transition-[max-height] duration-300 ease-out max-h-0">
+    <div class="faq-answer-body pb-6 text-text-light leading-relaxed">
       {answer}
     </div>
   </div>
 </div>
+
+<style>
+  /* 답변 본문: 높이와 함께 살짝 떠오르며 나타난다. 닫힘은 더 빠르게. */
+  .faq-answer-body {
+    opacity: 0;
+    transform: translateY(-4px);
+    transition:
+      opacity 160ms var(--ease-out),
+      transform 160ms var(--ease-out);
+  }
+  .faq-answer.is-open .faq-answer-body {
+    opacity: 1;
+    transform: translateY(0);
+    transition:
+      opacity 260ms var(--ease-out) 60ms,
+      transform 260ms var(--ease-out) 60ms;
+  }
+  .faq-answer.is-open {
+    /* 열릴 때는 320ms, 닫힐 때는 기본 300ms 유지 */
+    transition-duration: 320ms;
+  }
+</style>
 
 <script>
   document.addEventListener("DOMContentLoaded", () => {
@@ -58,6 +80,7 @@ const id = `faq-${Math.random().toString(36).substring(7)}`;
         // Toggle current item
         if (isExpanded) {
           question.setAttribute("aria-expanded", "false");
+          answer.classList.remove("is-open");
           answer.style.maxHeight = "0";
           icon.style.transform = "rotate(0deg)";
         } else {
@@ -66,12 +89,14 @@ const id = `faq-${Math.random().toString(36).substring(7)}`;
             const a = q.nextElementSibling as HTMLElement;
             const i = q.querySelector(".faq-icon") as HTMLElement;
             q.setAttribute("aria-expanded", "false");
+            a.classList.remove("is-open");
             a.style.maxHeight = "0";
             i.style.transform = "rotate(0deg)";
           });
 
           // Open clicked item
           question.setAttribute("aria-expanded", "true");
+          answer.classList.add("is-open");
           answer.style.maxHeight = answer.scrollHeight + "px";
           icon.style.transform = "rotate(180deg)";
         }

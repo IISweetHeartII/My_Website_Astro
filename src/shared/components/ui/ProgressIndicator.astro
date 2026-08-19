@@ -9,8 +9,7 @@
 >
   <div
     id="progress-bar"
-    class="h-full bg-linear-to-r from-primary to-primary-light transition-all duration-150 ease-out"
-    style="width: 0%"
+    class="h-full w-full origin-left [transform:scaleX(0)] bg-linear-to-r from-primary to-primary-light transition-transform duration-150 ease-out"
   >
   </div>
 </div>
@@ -19,7 +18,7 @@
 <button
   id="scroll-to-top"
   type="button"
-  class="fixed bottom-8 right-8 z-50 w-12 h-12 bg-primary hover:bg-primary-light text-on-primary rounded-full shadow-lg hover:shadow-xl transform translate-y-20 opacity-0 transition-all duration-300 flex items-center justify-center group"
+  class="fixed bottom-8 right-8 z-50 w-12 h-12 bg-primary hover:bg-primary-light text-on-primary rounded-full shadow-lg hover:shadow-xl transform translate-y-20 opacity-0 transition-ui duration-300 flex items-center justify-center group"
   aria-label="Scroll to top"
 >
   <svg
@@ -53,7 +52,8 @@
 
       // Calculate scroll percentage
       const scrollPercentage = (scrollTop / (documentHeight - windowHeight)) * 100;
-      progressBar.style.width = `${scrollPercentage}%`;
+      // width(레이아웃) 대신 scaleX(합성) — 스크롤마다 리플로우 없이 GPU에서 처리
+      progressBar.style.transform = `scaleX(${scrollPercentage / 100})`;
 
       // Show/hide progress bar and scroll to top button
       if (scrollTop > 100) {

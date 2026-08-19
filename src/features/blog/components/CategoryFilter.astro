@@ -16,7 +16,7 @@ import { categories } from "@/shared/config/categories";
       <!-- 전체글 버튼 -->
       <button
         data-category="all"
-        class="category-item px-5 py-2.5 rounded-full transition-all duration-200 font-medium text-sm hover:scale-105 hover:shadow-lg current-category bg-primary text-on-primary shadow-md flex items-center gap-2"
+        class="category-item px-5 py-2.5 rounded-full transition-ui duration-(--duration-fast) ease-out font-medium text-sm hover:shadow-md active:scale-95 active:duration-(--duration-press) current-category bg-primary text-on-primary shadow-md flex items-center gap-2"
       >
         <Layers class="w-4 h-4" />
         <span>전체</span>
@@ -27,7 +27,7 @@ import { categories } from "@/shared/config/categories";
         categories.map((category) => (
           <button
             data-category={category.id}
-            class="category-item px-4 py-2.5 rounded-full transition-all duration-200 text-sm font-medium hover:scale-105 hover:shadow-lg bg-background-muted text-text-muted hover:bg-primary hover:text-on-primary flex items-center gap-2"
+            class="category-item px-4 py-2.5 rounded-full transition-ui duration-(--duration-fast) ease-out text-sm font-medium hover:shadow-md active:scale-95 active:duration-(--duration-press) bg-background-muted text-text-muted hover:bg-primary hover:text-on-primary flex items-center gap-2"
           >
             <CategoryIcon categoryId={category.id} class="w-4 h-4" />
             <span>{category.name}</span>
@@ -44,7 +44,7 @@ import { categories } from "@/shared/config/categories";
         type="text"
         id="post-search"
         placeholder="제목이나 내용으로 검색하세요..."
-        class="w-full px-4 py-3 pl-12 pr-4 text-sm bg-background border-2 border-text-light rounded-full focus:border-primary focus:outline-none transition-all duration-200 placeholder-text-light shadow-sm hover:shadow-md"
+        class="w-full px-4 py-3 pl-12 pr-4 text-sm bg-background border-2 border-text-light rounded-full focus:border-primary focus:outline-none transition-[border-color,box-shadow] duration-(--duration-fast) placeholder-text-light shadow-sm hover:shadow-md"
       />
       <Search
         class="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-primary pointer-events-none"
@@ -87,9 +87,11 @@ import { categories } from "@/shared/config/categories";
     cursor: pointer;
   }
 
-  .category-item:hover {
-    transform: translateY(-2px);
-    border-color: var(--color-primary);
+  @media (hover: hover) and (pointer: fine) {
+    .category-item:hover {
+      transform: translateY(-1px);
+      border-color: var(--color-primary);
+    }
   }
 
   .category-item.current-category {

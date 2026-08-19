@@ -69,7 +69,7 @@ const collectionPageSchema = {
           return (
             <a
               href={`/guides/${slug}/`}
-              class="group relative overflow-hidden rounded-3xl border border-background-lighter bg-background p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-primary/25 hover:shadow-xl"
+              class="group relative overflow-hidden rounded-3xl border border-background-lighter bg-background p-6 shadow-sm transition-ui duration-300 hover:-translate-y-1 hover:border-primary/25 hover:shadow-xl"
             >
               <div class="pointer-events-none absolute inset-0 bg-linear-to-br from-primary/8 via-transparent to-accent/10 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
               <div class="relative">
@@ -105,7 +105,7 @@ const collectionPageSchema = {
                   {guide.data.toolVersion && <span>{guide.data.toolVersion}</span>}
                 </div>
 
-                <div class="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-primary transition-all duration-300 group-hover:gap-2.5 group-hover:text-accent">
+                <div class="link-arrow mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-primary transition-colors duration-200 group-hover:text-accent">
                   <span>가이드 열기</span>
                   <ArrowRight class="h-4 w-4" strokeWidth={2.5} />
                 </div>

@@ -325,6 +325,14 @@ functions/api/chat.ts (Cloudflare Pages Function)
 - **CRITICAL**: Use `bg-linear-to-*` (NOT `bg-gradient-to-*`) for gradients in TailwindCSS v4
   - ✅ Correct: `bg-linear-to-br`, `bg-linear-to-r`, `bg-linear-to-t`
   - ❌ Wrong: `bg-gradient-to-br`, `bg-gradient-to-r`, `bg-gradient-to-t`
+- **모션 규칙 (2026-08-19, emilkowalski/skills 기준으로 정비)** — 토큰은 `src/styles/theme.css` `@theme`
+  - `transition-all` 금지 → **`transition-ui`** (색·그림자·opacity·transform/translate/scale만 전환. gap/height/width 같은 레이아웃 속성은 애니메이션하지 않는다)
+  - 이징: `ease-out`(진입·hover 복귀, 강한 커브로 재정의됨) / `ease-in-out`(화면 안 이동) / `ease-drawer`(시트·모바일 메뉴). `ease-in`은 UI에 쓰지 않는다
+  - 시간: `duration-(--duration-press)` 120ms(눌림) · `--duration-fast` 160ms(색·아이콘) · `--duration-base` 220ms(hover 리프트) · `--duration-panel` 320ms(패널 진입). UI 전환은 300ms 이내, 퇴장은 진입보다 빠르게
+  - 누를 수 있는 것에는 `active:scale-[0.97]`(카드는 0.99, 아이콘 버튼은 0.9) + `active:duration-(--duration-press)`
+  - "더 보기 →" 링크는 `hover:gap-*` 대신 컨테이너에 `link-arrow` 클래스(화살표만 3px 이동)
+  - hover 모션은 Tailwind `hover:`가 이미 `@media (hover: hover)`로 게이트됨. raw CSS `:hover`는 직접 감쌀 것
+  - `prefers-reduced-motion`은 `global.css`가 전역 처리(움직임 제거, 색·opacity 유지). 새 `@keyframes`엔 자체 reduce 블록 추가
 - **Git Workflow**: `main` is the primary development and production branch
 
 ## Skills

@@ -17,12 +17,8 @@ function updateToggleUI(toggle: HTMLButtonElement): void {
   const isDark = current === "dark";
 
   toggle.setAttribute("aria-pressed", String(isDark));
+  // 아이콘 표시는 CSS(Header.astro)가 data-theme로 결정한다 — 크로스페이드를 위해 hidden 토글 안 함
   toggle.setAttribute("data-theme", current);
-
-  const sun = toggle.querySelector<HTMLElement>("[data-icon='sun']");
-  const moon = toggle.querySelector<HTMLElement>("[data-icon='moon']");
-  sun?.classList.toggle("hidden", !isDark);
-  moon?.classList.toggle("hidden", isDark);
 }
 
 export function setupThemeToggle(): void {

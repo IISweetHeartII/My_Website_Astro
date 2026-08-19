@@ -301,7 +301,7 @@ const articleSchema = {
                 {tocHeadings.map((heading) => (
                   <a
                     href={`#${heading.slug}`}
-                    class={`snap-start whitespace-nowrap rounded-full border border-background-lighter bg-background-light px-3 py-2 text-sm transition-all duration-200 hover:border-primary/25 hover:bg-primary/8 hover:text-primary ${heading.depth === 3 ? "text-text-muted" : "font-semibold text-text"}`}
+                    class={`snap-start whitespace-nowrap rounded-full border border-background-lighter bg-background-light px-3 py-2 text-sm transition-ui duration-200 hover:border-primary/25 hover:bg-primary/8 hover:text-primary ${heading.depth === 3 ? "text-text-muted" : "font-semibold text-text"}`}
                   >
                     {heading.text}
                   </a>
@@ -338,7 +338,7 @@ const articleSchema = {
                     <a
                       href={`#${heading.slug}`}
                       data-toc-link={heading.slug}
-                      class={`block rounded-2xl px-3 py-2 text-sm leading-relaxed transition-all duration-200 hover:bg-primary/8 hover:text-primary ${heading.depth === 3 ? "pl-6 text-text-muted" : "font-medium text-text"}`}
+                      class={`block rounded-2xl px-3 py-2 text-sm leading-relaxed transition-ui duration-200 hover:bg-primary/8 hover:text-primary ${heading.depth === 3 ? "pl-6 text-text-muted" : "font-medium text-text"}`}
                     >
                       {heading.text}
                     </a>
@@ -393,7 +393,7 @@ const articleSchema = {
 
                     <a
                       href="/library/"
-                      class="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-primary transition-all duration-200 hover:gap-2.5 hover:text-accent"
+                      class="link-arrow mt-5 inline-flex items-center gap-2 text-sm font-semibold text-primary transition-colors duration-200 hover:text-accent"
                     >
                       <span>{agentDisplayName}의 글 더 보기</span>
                       <ArrowRight class="h-4 w-4" strokeWidth={2.5} />
@@ -416,7 +416,7 @@ const articleSchema = {
           </div>
           <a
             href="/library/"
-            class="inline-flex items-center gap-1.5 text-sm font-semibold text-primary transition-all duration-200 hover:gap-2 hover:text-accent"
+            class="link-arrow inline-flex items-center gap-1.5 text-sm font-semibold text-primary transition-colors duration-200 hover:text-accent"
           >
             <span>더 보러 가기</span>
             <ArrowRight class="h-4 w-4" strokeWidth={2.5} />
@@ -427,7 +427,7 @@ const articleSchema = {
           {relatedPosts.map((relatedPost) => (
             <a
               href={`/library/${relatedPost.entrySlug}/`}
-              class="group block rounded-3xl border border-background-lighter bg-background p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-primary/20 hover:shadow-lg"
+              class="group block rounded-3xl border border-background-lighter bg-background p-5 shadow-sm transition-ui duration-300 hover:-translate-y-1 hover:border-primary/20 hover:shadow-lg"
             >
               <div class="flex flex-wrap items-center gap-2 text-[11px] font-semibold text-text-muted">
                 {relatedPost.data.category && (
@@ -454,9 +454,9 @@ const articleSchema = {
                   {relatedPost.data.description}
                 </p>
               )}
-              <div class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-primary transition-all duration-200 group-hover:gap-2 group-hover:text-accent">
+              <div class="link-arrow mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-primary transition-colors duration-200 group-hover:text-accent">
                 <span>읽어보기</span>
-                <ArrowRight class="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" strokeWidth={2.5} />
+                <ArrowRight class="h-4 w-4" strokeWidth={2.5} />
               </div>
             </a>
           ))}

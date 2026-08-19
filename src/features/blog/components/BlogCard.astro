@@ -39,7 +39,7 @@ const href = withLocalePath(`/blog/${slug}/`, locale);
 
 <article
   class:list={[
-    "scroll-animate group relative rounded-2xl bg-background border border-background-lighter shadow-sm transition-all duration-300 ease-out overflow-hidden hover:-translate-y-1 hover:shadow-xl hover:border-primary/30",
+    "scroll-animate group relative rounded-2xl bg-background border border-background-lighter shadow-sm transition-ui duration-(--duration-base) ease-out overflow-hidden hover:-translate-y-1 hover:shadow-xl hover:border-primary/30 active:translate-y-0 active:scale-[0.99] active:duration-(--duration-press)",
     { hidden: !pageVisible },
   ]}
   data-title={dataTitle}
@@ -61,7 +61,7 @@ const href = withLocalePath(`/blog/${slug}/`, locale);
             alt={featuredImageAlt || title}
             loading="lazy"
             decoding="async"
-            class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+            class="absolute inset-0 w-full h-full object-cover transition-transform duration-400 ease-out group-hover:scale-105"
           />
         </div>
       )
@@ -70,7 +70,7 @@ const href = withLocalePath(`/blog/${slug}/`, locale);
     <div class="relative z-10 p-7 flex flex-col gap-4 h-full">
       <!-- Accent bar -->
       <div
-        class="absolute top-0 left-0 w-1.5 h-0 bg-linear-to-b from-primary via-accent to-primary-light rounded-r-full transition-all duration-500 ease-out group-hover:h-full"
+        class="absolute top-0 left-0 w-1.5 h-full origin-top scale-y-0 bg-linear-to-b from-primary via-accent to-primary-light rounded-r-full transition-transform duration-300 ease-out group-hover:scale-y-100"
       >
       </div>
 
@@ -102,11 +102,11 @@ const href = withLocalePath(`/blog/${slug}/`, locale);
           )
         }
         <div
-          class="inline-flex items-center gap-2 text-sm font-semibold text-primary transition-all duration-300 ease-out group-hover:gap-3 group-hover:text-accent"
+          class="link-arrow inline-flex items-center gap-2 text-sm font-semibold text-primary transition-colors duration-200 group-hover:text-accent"
         >
           <span>Read More</span>
           <ArrowRight
-            class="w-4 h-4 transition-transform duration-500 ease-out group-hover:translate-x-1.5"
+            class="w-4 h-4"
             strokeWidth={2.5}
           />
         </div>

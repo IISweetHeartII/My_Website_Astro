@@ -40,7 +40,7 @@ const shareLinks = [
         href={link.href}
         target="_blank"
         rel="noopener noreferrer"
-        class="group relative inline-flex items-center justify-center w-11 h-11 rounded-full border border-background-lighter bg-background-light hover:border-primary hover:bg-primary/10 transition-all duration-200 no-underline"
+        class="group relative inline-flex items-center justify-center w-11 h-11 rounded-full border border-background-lighter bg-background-light hover:border-primary hover:bg-primary/10 transition-ui duration-200 no-underline"
         title={link.label}
       >
         {link.icon === "x" && (
@@ -60,11 +60,11 @@ const shareLinks = [
     ))}
     <button
       type="button"
-      class="copy-url-btn group relative inline-flex items-center justify-center w-11 h-11 rounded-full border border-background-lighter bg-background-light hover:border-primary hover:bg-primary/10 transition-all duration-200"
+      class="copy-url-btn group relative inline-flex items-center justify-center w-11 h-11 rounded-full border border-background-lighter bg-background-light hover:border-primary hover:bg-primary/10 transition-ui duration-200"
       title="링크 복사"
       data-url={url}
     >
-      <svg class="copy-icon w-4 h-4 text-text group-hover:text-primary transition-all duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+      <svg class="copy-icon w-4 h-4 text-text group-hover:text-primary transition-ui duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
         <path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
       </svg>
       <svg class="check-icon hidden w-4 h-4 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
@@ -78,7 +78,7 @@ const shareLinks = [
 </section>
 
 <!-- Toast notification -->
-<div id="copy-toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 px-5 py-2.5 rounded-full bg-text text-background text-sm font-medium shadow-lg opacity-0 -translate-y-2 transition-all duration-300 pointer-events-none z-50">
+<div id="copy-toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 px-5 py-2.5 rounded-full bg-text text-background text-sm font-medium shadow-lg opacity-0 -translate-y-2 transition-ui duration-300 pointer-events-none z-50">
   링크가 복사되었습니다
 </div>
 
