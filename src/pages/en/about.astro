@@ -6,6 +6,7 @@ import {
   SITE_AUTHOR,
   SITE_URL,
 } from "@/shared/config/consts";
+import { serializeJsonLd } from "@/shared/utils/json-ld";
 
 const title = "Deokhwan Kim — A Time Capsule";
 const description =
@@ -50,7 +51,7 @@ const personSchema = {
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
-    <script type="application/ld+json" is:inline set:text={JSON.stringify(personSchema)} />
+    <script type="application/ld+json" is:inline set:html={serializeJsonLd(personSchema)} />
     <link rel="stylesheet" href="/fonts/pretendard-subset.css" />
     <script is:inline>
       (() => {

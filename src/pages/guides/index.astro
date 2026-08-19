@@ -4,6 +4,7 @@ import { ArrowRight, BookOpen, Clock3, Sparkles } from "lucide-astro";
 import Layout from "@/layouts/Layout.astro";
 import BreadcrumbSchema from "@/shared/components/seo/BreadcrumbSchema.astro";
 import { SITE_URL } from "@/shared/config/consts";
+import { serializeJsonLd } from "@/shared/utils/json-ld";
 
 const allGuides = await getCollection("guides");
 const guides = allGuides
@@ -32,7 +33,7 @@ const collectionPageSchema = {
 
 <Layout title={pageTitle} description={pageDescription} og_type="website">
   <Fragment slot="head">
-    <script type="application/ld+json" is:inline set:html={JSON.stringify(collectionPageSchema)} />
+    <script type="application/ld+json" is:inline set:html={serializeJsonLd(collectionPageSchema)} />
     <BreadcrumbSchema items={[
       { name: "홈", url: "/" },
       { name: "Guides", url: "/guides/" },

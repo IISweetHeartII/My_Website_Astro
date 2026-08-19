@@ -9,6 +9,7 @@ import PaginationNav from "@/shared/components/ui/PaginationNav.astro";
 import { categories } from "@/shared/config/categories";
 import { SITE_URL } from "@/shared/config/consts";
 import { getSortedPublishedPosts, transformPostForCard } from "@/shared/utils/blog";
+import { serializeJsonLd } from "@/shared/utils/json-ld";
 
 type PostCardData = ReturnType<typeof transformPostForCard>;
 
@@ -55,7 +56,7 @@ const collectionPageSchema = {
   <Fragment slot="head">
     {page.url.prev && <link rel="prev" href={page.url.prev} />}
     {page.url.next && <link rel="next" href={page.url.next} />}
-    <script type="application/ld+json" is:inline set:text={JSON.stringify(collectionPageSchema)} />
+    <script type="application/ld+json" is:inline set:html={serializeJsonLd(collectionPageSchema)} />
     <BreadcrumbSchema items={[
       { name: "홈", url: "/" },
       { name: "블로그", url: "/blog/" },

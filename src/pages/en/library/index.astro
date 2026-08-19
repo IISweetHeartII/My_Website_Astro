@@ -6,6 +6,7 @@ import Layout from "@/layouts/Layout.astro";
 import BreadcrumbSchema from "@/shared/components/seo/BreadcrumbSchema.astro";
 import { SITE_URL } from "@/shared/config/consts";
 import { isPublishedInLocale } from "@/shared/i18n/ui";
+import { serializeJsonLd } from "@/shared/utils/json-ld";
 
 const allPosts = await getCollection("library");
 const publishedPosts = allPosts
@@ -40,7 +41,7 @@ const collectionPageSchema = {
 
 <Layout title={pageTitle} description={pageDescription} og_type="website">
   <Fragment slot="head">
-    <script type="application/ld+json" is:inline set:text={JSON.stringify(collectionPageSchema)} />
+    <script type="application/ld+json" is:inline set:html={serializeJsonLd(collectionPageSchema)} />
     <BreadcrumbSchema items={[
       { name: "Home", url: "/en/" },
       { name: "Library", url: "/en/library/" },

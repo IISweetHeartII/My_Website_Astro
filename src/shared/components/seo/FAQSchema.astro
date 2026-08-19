@@ -1,4 +1,6 @@
 ---
+import { serializeJsonLd } from "@/shared/utils/json-ld";
+
 /**
  * FAQ Schema Component for AEO (Answer Engine Optimization)
  *
@@ -51,4 +53,4 @@ const schema = {
 ---
 
 <!-- FAQ Schema (JSON-LD) for AEO -->
-<script type="application/ld+json" is:inline set:text={JSON.stringify(schema)} />
+<script type="application/ld+json" is:inline set:html={serializeJsonLd(schema)} />

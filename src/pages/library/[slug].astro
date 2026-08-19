@@ -15,6 +15,7 @@ import {
   localeRegion,
   withLocalePath,
 } from "@/shared/i18n/ui";
+import { serializeJsonLd } from "@/shared/utils/json-ld";
 
 export const getStaticPaths = (async () => {
   const posts = await getCollection("library");
@@ -185,7 +186,7 @@ const articleSchema = {
     <meta property="article:published_time" content={created_date?.toISOString()} />
     <meta property="article:modified_time" content={(updated_date ?? created_date)?.toISOString()} />
     <meta property="article:author" content={aiAuthorName} />
-    <script type="application/ld+json" is:inline set:text={JSON.stringify(articleSchema)} />
+    <script type="application/ld+json" is:inline set:html={serializeJsonLd(articleSchema)} />
     <BreadcrumbSchema items={[
       { name: "홈", url: "/" },
       { name: "Library", url: "/library/" },

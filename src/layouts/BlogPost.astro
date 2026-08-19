@@ -20,6 +20,7 @@ import {
   localeRegion,
   withLocalePath,
 } from "@/shared/i18n/ui";
+import { serializeJsonLd } from "@/shared/utils/json-ld";
 import Layout from "./Layout.astro";
 
 interface Props extends Pick<CollectionEntry<"blog">, "data"> {
@@ -155,7 +156,7 @@ const blogPostSchema = {
     {safeTags.map((tag: string) => <meta property="article:tag" content={tag} />)}
 
     <!-- SEO Structured Data (JSON-LD) - AEO Optimized -->
-    <script type="application/ld+json" is:inline set:text={JSON.stringify(blogPostSchema)} />
+    <script type="application/ld+json" is:inline set:html={serializeJsonLd(blogPostSchema)} />
 
     <!-- BreadcrumbList Schema -->
     <BreadcrumbSchema items={[

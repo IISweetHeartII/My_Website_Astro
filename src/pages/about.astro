@@ -1,6 +1,7 @@
 ---
 import ContactCTA from "@/shared/components/ui/ContactCTA.astro";
 import { AUTHOR_GITHUB, AUTHOR_LINKEDIN, SITE_AUTHOR, SITE_URL } from "@/shared/config/consts";
+import { serializeJsonLd } from "@/shared/utils/json-ld";
 
 const title = "김덕환 — A Time Capsule";
 const description =
@@ -44,7 +45,7 @@ const personSchema = {
     <meta property="og:image:alt" content={title} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:image" content={ogImage} />
-    <script type="application/ld+json" is:inline set:text={JSON.stringify(personSchema)} />
+    <script type="application/ld+json" is:inline set:html={serializeJsonLd(personSchema)} />
     <link rel="stylesheet" href="/fonts/pretendard-subset.css" />
     <script is:inline>
       (() => {

@@ -18,6 +18,7 @@ import BreadcrumbSchema from "@/shared/components/seo/BreadcrumbSchema.astro";
 import ContactCTA from "@/shared/components/ui/ContactCTA.astro";
 import { SITE_DESCRIPTION, SITE_URL } from "@/shared/config/consts";
 import { getLatestPosts, getSortedPublishedPosts } from "@/shared/utils/blog";
+import { serializeJsonLd } from "@/shared/utils/json-ld";
 import Layout from "../layouts/Layout.astro";
 
 const allPosts = await getSortedPublishedPosts();
@@ -45,10 +46,10 @@ const websiteSchema = {
   og_type="website"
 >
   <Fragment slot="head">
-    <script type="application/ld+json" is:inline set:text={JSON.stringify(websiteSchema)} />
+    <script type="application/ld+json" is:inline set:html={serializeJsonLd(websiteSchema)} />
     <BreadcrumbSchema items={[{ name: "홈", url: "/" }]} />
   </Fragment>
-  <main class="min-h-screen bg-background">
+  <div class="min-h-screen bg-background">
     <!-- Full-screen Hero Section -->
     <section
       id="hero-section"
@@ -249,7 +250,7 @@ const websiteSchema = {
 
           <!-- Tech Stack Card -->
           <a
-            href="/portfolio#tech-stack"
+            href="/resume/#tech-stack"
             data-cta-track
             data-cta-name="bento_tech_stack"
             data-cta-section="bento_grid"
@@ -287,7 +288,7 @@ const websiteSchema = {
 
           <!-- About Me Card -->
           <a
-            href="/portfolio"
+            href="/about/"
             data-cta-track
             data-cta-name="bento_about"
             data-cta-section="bento_grid"
@@ -314,7 +315,7 @@ const websiteSchema = {
 
           <!-- Achievement Badge 1 -->
           <a
-            href="/portfolio"
+            href="/portfolio/#119-ai"
             data-cta-track
             data-cta-name="bento_award_1"
             data-cta-section="bento_grid"
@@ -337,7 +338,7 @@ const websiteSchema = {
 
           <!-- Achievement Badge 2 -->
           <a
-            href="/portfolio"
+            href="/portfolio/#finders"
             data-cta-track
             data-cta-name="bento_award_2"
             data-cta-section="bento_grid"
@@ -360,9 +361,10 @@ const websiteSchema = {
 
           <!-- Featured Project: agentgram -->
           <a
-            href="https://agentgram.co"
-            target="_blank"
-            rel="noopener noreferrer"
+            href="/portfolio/#agentgram"
+            data-cta-track
+            data-cta-name="bento_agentgram"
+            data-cta-section="bento_grid"
             class="group lg:col-span-1 bg-background-light rounded-2xl shadow-lg hover:shadow-[0_20px_40px_-12px_rgba(139,92,246,0.15)] hover:-translate-y-1 transition-ui duration-(--duration-base) ease-out active:translate-y-0 active:scale-[0.99] active:duration-(--duration-press) border border-background-lighter overflow-hidden"
           >
             <div class="h-1 w-full bg-linear-to-r from-primary to-info"></div>
@@ -383,7 +385,7 @@ const websiteSchema = {
               <span
                 class="link-arrow inline-flex items-center gap-1 text-primary font-medium text-sm mt-3 transition-colors"
               >
-                agentgram.co
+                케이스 스터디 보기
                 <ArrowRight class="w-4 h-4" />
               </span>
             </div>
@@ -391,9 +393,10 @@ const websiteSchema = {
 
           <!-- Featured Project: Finders -->
           <a
-            href="https://finders.it.kr"
-            target="_blank"
-            rel="noopener noreferrer"
+            href="/portfolio/#finders"
+            data-cta-track
+            data-cta-name="bento_finders"
+            data-cta-section="bento_grid"
             class="group lg:col-span-1 bg-background-light rounded-2xl shadow-lg hover:shadow-[0_20px_40px_-12px_rgba(139,92,246,0.15)] hover:-translate-y-1 transition-ui duration-(--duration-base) ease-out active:translate-y-0 active:scale-[0.99] active:duration-(--duration-press) border border-background-lighter overflow-hidden"
           >
             <div class="h-1 w-full bg-linear-to-r from-info to-primary"></div>
@@ -414,7 +417,7 @@ const websiteSchema = {
               <span
                 class="link-arrow inline-flex items-center gap-1 text-primary font-medium text-sm mt-3 transition-colors"
               >
-                finders.it.kr
+                케이스 스터디 보기
                 <ArrowRight class="w-4 h-4" />
               </span>
             </div>
@@ -424,7 +427,7 @@ const websiteSchema = {
         <ContactCTA ctaSection="bento_bottom" class="mt-8" />
       </div>
     </section>
-  </main>
+  </div>
 
   <style>
     /* ──────────────────────────────────────────

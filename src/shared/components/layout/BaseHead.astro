@@ -1,4 +1,5 @@
 ---
+import { serializeJsonLd } from "@/shared/utils/json-ld";
 import "@/styles/global.css";
 import Fonts from "@/shared/components/seo/Fonts.astro";
 import {
@@ -171,7 +172,8 @@ const twitterImageType = getImageType(absoluteTwitterImage);
 <meta name="mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-<link rel="icon" type="image/png" href={getUrl("/images/design/icon.png")} />
+<link rel="icon" type="image/png" sizes="48x48" href={getUrl("/images/design/icon-48.png")} />
+<link rel="icon" type="image/png" sizes="192x192" href={getUrl("/images/design/icon-192x192.png")} />
 <meta name="generator" content={Astro.generator} />
 <meta name="naver-site-verification" content="18e465aad2a2421233f4ec39c0f509141b3f8048" />
 
@@ -185,7 +187,7 @@ const twitterImageType = getImageType(absoluteTwitterImage);
 <!-- Author identity. Article schemas across the site reference this node by
      @id, so it has to be defined somewhere on every page or those references
      resolve to nothing. -->
-<script type="application/ld+json" is:inline set:text={JSON.stringify(personSchema)} />
+<script type="application/ld+json" is:inline set:html={serializeJsonLd(personSchema)} />
 
 <!-- Primary Meta Tags -->
 <title>{finalMetaTitle}</title>
@@ -228,4 +230,4 @@ const twitterImageType = getImageType(absoluteTwitterImage);
 
   <!-- PWA Support -->
   <link rel="manifest" href={getUrl("/manifest.json")} />
-  <link rel="apple-touch-icon" href={getUrl("/images/design/icon.png")} />
+  <link rel="apple-touch-icon" sizes="180x180" href={getUrl("/images/design/icon-180.png")} />

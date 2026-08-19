@@ -1,5 +1,6 @@
 ---
 import { SITE_URL } from "@/shared/config/consts";
+import { serializeJsonLd } from "@/shared/utils/json-ld";
 
 interface BreadcrumbItem {
   name: string;
@@ -24,4 +25,4 @@ const breadcrumbSchema = {
 };
 ---
 
-<script type="application/ld+json" is:inline set:html={JSON.stringify(breadcrumbSchema)} />
+<script type="application/ld+json" is:inline set:html={serializeJsonLd(breadcrumbSchema)} />

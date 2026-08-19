@@ -10,6 +10,7 @@ import { defineConfig } from "astro/config";
 import expressiveCode from "astro-expressive-code";
 import pagefind from "astro-pagefind";
 import robotsTxt from "astro-robots-txt";
+import rehypePicture from "./scripts/rehype-picture.mjs";
 import { LOCALIZED_COUNTERPART_ROUTES } from "./src/shared/i18n/ui.ts";
 
 const SITE_URL = "https://log8.kr";
@@ -109,9 +110,12 @@ const buildContentLastmodMap = () => {
       if (!date) continue;
 
       const relativePath = path.relative(contentDirectory, filePath).split(path.sep).join("/");
-      const fallbackSlug = stripMarkdownExtension(relativePath);
+      // `<collection>/en/*.md` 는 /en/<prefix>/<slug>/ 로 라우팅된다 — locale 접두사를 잃으면
+      // EN 페이지에 lastmod가 안 붙는다(2026-08-19 수정).
+      const localePrefix = relativePath.startsWith("en/") ? "/en" : "";
+      const fallbackSlug = stripMarkdownExtension(relativePath.replace(/^en\//, ""));
       const slug = frontmatter.slug || fallbackSlug;
-      const routePath = normalizeSitemapPath(`/${routePrefix}/${slug}/`);
+      const routePath = normalizeSitemapPath(`${localePrefix}/${routePrefix}/${slug}/`);
 
       lastmodByPath.set(routePath, date);
     }
@@ -182,6 +186,8 @@ export default defineConfig({
     remarkRehype: {
       allowDangerousHtml: true,
     },
+    // 본문 이미지 → <picture>(WebP) + width/height + lazy. 데이터=scripts/build-webp.mjs
+    rehypePlugins: [rehypePicture],
   },
   vite: {
     plugins: [tailwindcss()],
@@ -207,11 +213,12 @@ export default defineConfig({
     mdx(),
     pagefind(),
     sitemap({
+      // 자동 발견 URL과 같은 trailing-slash 정책을 쓴다 — 슬래시 없는 값은 중복 <loc>을 만든다.
       customPages: [
         "https://log8.kr/",
-        "https://log8.kr/portfolio",
-        "https://log8.kr/resume",
-        "https://log8.kr/privacy",
+        "https://log8.kr/portfolio/",
+        "https://log8.kr/resume/",
+        "https://log8.kr/privacy/",
       ],
       serialize: addContentLastmod,
     }),

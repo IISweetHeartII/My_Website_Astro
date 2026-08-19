@@ -8,6 +8,7 @@ import FormattedDate from "@/shared/components/ui/FormattedDate.astro";
 import ResponsiveBlogImage from "@/shared/components/ui/ResponsiveBlogImage.astro";
 import { SITE_TITLE, SITE_URL } from "@/shared/config/consts";
 import { getEntrySlug, isPublishedInLocale, localeRegion, withLocalePath } from "@/shared/i18n/ui";
+import { serializeJsonLd } from "@/shared/utils/json-ld";
 
 export const getStaticPaths = (async () => {
   const posts = await getCollection("library");
@@ -112,7 +113,7 @@ const articleSchema = {
     <meta property="article:published_time" content={created_date?.toISOString()} />
     <meta property="article:modified_time" content={(updated_date ?? created_date)?.toISOString()} />
     <meta property="article:author" content={aiAuthorName} />
-    <script type="application/ld+json" is:inline set:text={JSON.stringify(articleSchema)} />
+    <script type="application/ld+json" is:inline set:html={serializeJsonLd(articleSchema)} />
     <BreadcrumbSchema items={[
       { name: "Home", url: "/en/" },
       { name: "Library", url: "/en/library/" },
