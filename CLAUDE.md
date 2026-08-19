@@ -198,9 +198,13 @@ public/images/blogs/050/
 - 확장자: `.png` 고정
 - slug: 영문 소문자 + 하이픈 (`how-i-got-hired-with-ai`)
 
-**성능:**
-PNG 원본을 저장해도 Cloudflare Polish(Lossless) 활성화 시 방문자에게 자동 WebP로 변환·제공됩니다.
-→ Cloudflare Dashboard → Speed → Optimization → Polish → `Lossless`
+**성능 (2026-08-19 정정):**
+Cloudflare Polish는 **꺼져 있다**(실측: 4MB PNG가 그대로 전송됨). 대신 빌드가 WebP를 만든다.
+- `bun run build` = `node scripts/build-webp.mjs && astro build`. 스크립트가 `public/images/**/*.{png,jpg}`의
+  **WebP 형제 파일**(gitignore)과 메타 `src/shared/generated/image-meta.json`(원본 크기·경로)을 만든다. 843MB→64MB, 첫 실행 ~15초.
+- 마크다운 본문 `<img>`는 `scripts/rehype-picture.mjs`가 `<picture><source webp><img width height loading=lazy>`로 바꾼다.
+  컴포넌트(BlogCard·LibraryCard·ResponsiveBlogImage)는 `getImageMeta(src)`(`src/shared/utils/image-meta.ts`)로 같은 일을 한다.
+- 글에서는 **계속 `.png` 경로만 쓰면 된다.** 새 이미지를 추가하면 다음 빌드에서 자동 변환. WebP를 커밋하지 말 것.
 
 **이미지 생성:**
 `/blog-image [파일경로]` 워크플로우를 실행하여 블로그 글의 이미지 프롬프트 주석을 자동 파싱해 이미지를 생성할 수 있습니다. 16:9 비율이 필요한 경우 프롬프트 끝에 `wide cinematic landscape 16:9 aspect ratio --ar 16:9`를 포함하면 구성이 효과적으로 잡힙니다.
@@ -333,6 +337,11 @@ functions/api/chat.ts (Cloudflare Pages Function)
   - "더 보기 →" 링크는 `hover:gap-*` 대신 컨테이너에 `link-arrow` 클래스(화살표만 3px 이동)
   - hover 모션은 Tailwind `hover:`가 이미 `@media (hover: hover)`로 게이트됨. raw CSS `:hover`는 직접 감쌀 것
   - `prefers-reduced-motion`은 `global.css`가 전역 처리(움직임 제거, 색·opacity 유지). 새 `@keyframes`엔 자체 reduce 블록 추가
+- **JSON-LD는 반드시 `set:html={serializeJsonLd(obj)}`** (`src/shared/utils/json-ld.ts`). `set:text`는 `&quot;`로 이스케이프돼
+  스키마가 통째로 무효가 된다(2026-08-19 라이브에서 Person/WebSite 깨진 채 배포 중이었음). `scripts/verify-dist.mjs`(CI)가
+  모든 JSON-LD 파싱·sitemap 중복·`<main>` 1개를 검사한다 — 페이지에 `<main>`을 또 만들지 말 것(Layout이 제공).
+- **챗 API 가드**(`functions/api/chat.ts`): Origin 필수(허용 외 403), 메시지 1~20개·각 1000자·총 15000자·role user/assistant,
+  본문 32KB, IP당 20회/10분(CHAT_KV, 초과 429), 업스트림 25초 타임아웃.
 - **Git Workflow**: `main` is the primary development and production branch
 
 ## Skills
