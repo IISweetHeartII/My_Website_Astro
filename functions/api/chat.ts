@@ -1,6 +1,6 @@
 interface KVNamespace {
   get: (key: string, options?: { type?: string }) => Promise<string | null>;
-  put: (key: string, value: string) => Promise<void>;
+  put: (key: string, value: string, options?: { expirationTtl?: number }) => Promise<void>;
 }
 
 interface Env {
@@ -118,13 +118,18 @@ Today's date: ${today}
 
 const ALLOWED_ORIGINS = ["https://log8.kr", "https://www.log8.kr"];
 
-function getCorsHeaders(origin: string | null): Record<string, string> {
-  const isAllowed =
+function isAllowedOrigin(origin: string | null): boolean {
+  return Boolean(
     origin &&
-    (ALLOWED_ORIGINS.includes(origin) ||
-      origin.includes(".pages.dev") ||
-      origin.includes("localhost") ||
-      origin.includes("127.0.0.1"));
+      (ALLOWED_ORIGINS.includes(origin) ||
+        origin.includes(".pages.dev") ||
+        origin.includes("localhost") ||
+        origin.includes("127.0.0.1"))
+  );
+}
+
+function getCorsHeaders(origin: string | null): Record<string, string> {
+  const isAllowed = isAllowedOrigin(origin);
   return {
     "Access-Control-Allow-Origin": isAllowed ? origin! : "https://log8.kr",
     "Access-Control-Allow-Methods": "POST, OPTIONS",
@@ -138,33 +143,138 @@ export async function onRequestOptions(context: PagesContext) {
 }
 
 const MAX_MESSAGE_LENGTH = 1000;
+const MAX_MESSAGES = 20;
+const MAX_TOTAL_LENGTH = 15000; // 한국어 답변 1건이 2~3천자라 6000은 정상 대화도 막는다
+const MAX_BODY_BYTES = 32 * 1024;
+const RATE_LIMIT_MAX = 20;
+const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000;
+const RATE_LIMIT_TTL = 600;
+
+/**
+ * 위젯이 실제로 보내는 형태만 통과시켜요. 프로바이더를 부르기 전에 전부 걸러냅니다.
+ * 통과하면 messages는 ChatMessage[]로 다뤄도 안전해요.
+ */
+function validateMessages(messages: unknown): string | null {
+  if (!Array.isArray(messages) || messages.length === 0) {
+    return "messages is required";
+  }
+  if (messages.length > MAX_MESSAGES) {
+    return `messages must contain at most ${MAX_MESSAGES} items`;
+  }
+
+  let total = 0;
+  let lastRole = "";
+  for (const message of messages) {
+    if (typeof message !== "object" || message === null) {
+      return "each message must be an object";
+    }
+    const { role, content } = message as { role?: unknown; content?: unknown };
+    if (role !== "user" && role !== "assistant") {
+      return "each message role must be 'user' or 'assistant'";
+    }
+    if (typeof content !== "string") {
+      return "each message content must be a string";
+    }
+    if (content.length > MAX_MESSAGE_LENGTH) {
+      return `메시지는 ${MAX_MESSAGE_LENGTH}자 이하로 입력해주세요.`;
+    }
+    total += content.length;
+    lastRole = role;
+  }
+  if (total > MAX_TOTAL_LENGTH) {
+    return "대화가 너무 길어졌어요. 새 대화로 시작해주세요.";
+  }
+  if (lastRole !== "user") {
+    return "last message must be from the user";
+  }
+  return null;
+}
+
+interface RateWindow {
+  count: number;
+  resetAt: number;
+}
+
+/**
+ * IP 고정 윈도우 레이트 리밋 (10분 20회). 읽기만 await 하고 쓰기는 waitUntil로 흘려보내요.
+ * KV가 없거나 실패하면 통과시킵니다 — 저장소 문제로 챗봇이 죽으면 안 되니까요.
+ * 초과면 Retry-After 초를, 통과면 null을 돌려줘요.
+ */
+async function checkRateLimit(
+  kv: KVNamespace,
+  ip: string,
+  waitUntil: (promise: Promise<unknown>) => void
+): Promise<number | null> {
+  const key = `rl:chat:${ip}`;
+  const now = Date.now();
+  try {
+    const raw = await kv.get(key);
+    const stored: RateWindow | null = raw ? (JSON.parse(raw) as RateWindow) : null;
+    const state: RateWindow =
+      stored && stored.resetAt > now ? stored : { count: 0, resetAt: now + RATE_LIMIT_WINDOW_MS };
+
+    if (state.count >= RATE_LIMIT_MAX) {
+      return Math.max(1, Math.ceil((state.resetAt - now) / 1000));
+    }
+
+    state.count += 1;
+    waitUntil(kv.put(key, JSON.stringify(state), { expirationTtl: RATE_LIMIT_TTL }));
+    return null;
+  } catch (error: unknown) {
+    console.error("Rate limit check failed, allowing request:", error);
+    return null;
+  }
+}
 
 export async function onRequestPost(context: PagesContext) {
   const { request, env, waitUntil } = context;
   const origin = request.headers.get("Origin");
   const cors = getCorsHeaders(origin);
+  const jsonError = (message: string, status: number, extra?: Record<string, string>) =>
+    new Response(JSON.stringify({ error: message }), {
+      status,
+      headers: { ...cors, "Content-Type": "application/json", ...extra },
+    });
+
+  // 브라우저는 POST에 언제나 Origin을 붙여요. 없거나 허용 목록 밖이면 우리 위젯이 아닙니다.
+  if (!isAllowedOrigin(origin)) {
+    return jsonError("forbidden", 403);
+  }
+
+  // Content-Length가 있으면 파싱 전에 컷. 없으면 아래 per-message 상한이 받아냅니다.
+  const declaredLength = Number(request.headers.get("Content-Length") ?? 0);
+  if (declaredLength > MAX_BODY_BYTES) {
+    return jsonError("request body is too large", 413);
+  }
 
   try {
-    const body: RequestBody = await request.json();
+    let body: RequestBody;
+    try {
+      body = (await request.json()) as RequestBody;
+    } catch {
+      return jsonError("invalid JSON body", 400);
+    }
     const { messages } = body;
     // A malformed or missing field cannot change the established Korean behavior.
     const locale = normalizeLocale(body.locale);
 
-    if (!messages?.length) {
-      return new Response(JSON.stringify({ error: "messages is required" }), {
-        status: 400,
-        headers: { ...cors, "Content-Type": "application/json" },
-      });
+    const invalid = validateMessages(messages);
+    if (invalid) {
+      return jsonError(invalid, 400);
     }
 
-    // Validate last user message length
-    const lastUserMsg = messages.findLast((m) => m.role === "user");
-    if (lastUserMsg && lastUserMsg.content.length > MAX_MESSAGE_LENGTH) {
-      return new Response(
-        JSON.stringify({ error: `메시지는 ${MAX_MESSAGE_LENGTH}자 이하로 입력해주세요.` }),
-        { status: 400, headers: { ...cors, "Content-Type": "application/json" } }
-      );
+    // 스키마가 통과한 요청만 KV를 건드려요 (쓰레기 요청에 KV 읽기를 낭비하지 않게).
+    if (env.CHAT_KV) {
+      const ip = request.headers.get("CF-Connecting-IP") ?? "unknown";
+      const retryAfter = await checkRateLimit(env.CHAT_KV, ip, waitUntil);
+      if (retryAfter !== null) {
+        return jsonError("요청이 너무 많아요. 잠시 후 다시 시도해주세요.", 429, {
+          "Retry-After": String(retryAfter),
+        });
+      }
     }
+
+    const lastUserMsg = messages.findLast((m) => m.role === "user");
 
     // Log the latest user question to KV (non-blocking)
     if (lastUserMsg && env.CHAT_KV) {
@@ -395,6 +505,22 @@ function formatPosts(posts: BlogPost[]): string {
     .join("\n");
 }
 
+const UPSTREAM_TIMEOUT_MS = 25_000;
+
+/**
+ * 프로바이더가 응답 헤더를 줄 때까지의 상한. 초과하면 abort되어 평범한 실패로 던져지고,
+ * 기존 폴백(Gemini → OpenAI)이 그대로 이어받아요. 헤더가 온 뒤 스트림 본문은 제한하지 않아요.
+ */
+async function fetchWithTimeout(url: string, init: RequestInit): Promise<Response> {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), UPSTREAM_TIMEOUT_MS);
+  try {
+    return await fetch(url, { ...init, signal: controller.signal });
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
 // ===== Gemini Streaming =====
 
 async function streamGemini(
@@ -409,7 +535,7 @@ async function streamGemini(
     parts: [{ text: m.content }],
   }));
 
-  const res = await fetch(
+  const res = await fetchWithTimeout(
     `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:streamGenerateContent?alt=sse&key=${apiKey}`,
     {
       method: "POST",
@@ -446,7 +572,7 @@ async function streamOpenAI(
   cors: Record<string, string>,
   waitUntil: (promise: Promise<unknown>) => void
 ): Promise<Response> {
-  const res = await fetch("https://api.openai.com/v1/chat/completions", {
+  const res = await fetchWithTimeout("https://api.openai.com/v1/chat/completions", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
