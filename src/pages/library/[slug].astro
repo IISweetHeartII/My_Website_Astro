@@ -96,6 +96,21 @@ const agentProfile = agent
     })
   : null;
 const currentTagSet = new Set(safeTags);
+const makeLibraryFilterHref = (params: Record<string, string | undefined>) => {
+  const searchParams = new URLSearchParams();
+
+  Object.entries(params).forEach(([key, value]) => {
+    if (value) searchParams.set(key, value);
+  });
+
+  const query = searchParams.toString();
+  return `${withLocalePath("/library/", currentLocale)}${query ? `?${query}` : ""}`;
+};
+const libraryIndexHref = withLocalePath("/library/", currentLocale);
+const categoryLibraryHref = category ? makeLibraryFilterHref({ category }) : undefined;
+const agentLibraryHref = agent ? makeLibraryFilterHref({ agent }) : undefined;
+const relatedLibraryHref = categoryLibraryHref ?? agentLibraryHref ?? libraryIndexHref;
+
 const relatedPosts = publishedPosts
   .filter((entry) => (entry.data.slug ?? entry.id.replace(/\.[^/.]+$/, "")) !== slug)
   .map((entry) => {
@@ -317,7 +332,7 @@ const articleSchema = {
 
           <div class="mt-12 border-t border-background-lighter pt-6 text-center">
             <a
-              href="/library/"
+              href={libraryIndexHref}
               class="inline-flex items-center gap-2 text-primary transition-colors duration-200 hover:text-accent font-medium"
             >
               Library로 돌아가기
@@ -393,10 +408,10 @@ const articleSchema = {
                     )}
 
                     <a
-                      href="/library/"
+                      href={agentLibraryHref ?? libraryIndexHref}
                       class="link-arrow mt-5 inline-flex items-center gap-2 text-sm font-semibold text-primary transition-colors duration-200 hover:text-accent"
                     >
-                      <span>{agentDisplayName}의 글 더 보기</span>
+                      <span>{agentDisplayName}의 글만 모아보기</span>
                       <ArrowRight class="h-4 w-4" strokeWidth={2.5} />
                     </a>
                   </div>
@@ -410,16 +425,34 @@ const articleSchema = {
 
     {relatedPosts.length > 0 && (
       <section class="mt-14 border-t border-background-lighter pt-10">
-        <div class="mb-5 flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
+        <div class="mb-5 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
           <div>
             <p class="text-xs font-semibold uppercase tracking-[0.18em] text-accent/80">Related reads</p>
             <h2 class="mt-2 text-2xl font-bold text-text">함께 읽으면 좋은 글</h2>
+            <div class="mt-3 flex flex-wrap gap-2">
+              {categoryLibraryHref && (
+                <a
+                  href={categoryLibraryHref}
+                  class="rounded-full border border-primary/20 bg-primary/8 px-3 py-1 text-xs font-semibold text-primary transition-all duration-200 hover:border-primary/30 hover:bg-primary/12"
+                >
+                  {category} 더 보기
+                </a>
+              )}
+              {agentLibraryHref && agentDisplayName && (
+                <a
+                  href={agentLibraryHref}
+                  class="rounded-full border border-accent/20 bg-accent/8 px-3 py-1 text-xs font-semibold text-accent transition-all duration-200 hover:border-accent/30 hover:bg-accent/12"
+                >
+                  {agentDisplayName} 글 모아보기
+                </a>
+              )}
+            </div>
           </div>
           <a
-            href="/library/"
+            href={relatedLibraryHref}
             class="link-arrow inline-flex items-center gap-1.5 text-sm font-semibold text-primary transition-colors duration-200 hover:text-accent"
           >
-            <span>더 보러 가기</span>
+            <span>관련 글 더 찾기</span>
             <ArrowRight class="h-4 w-4" strokeWidth={2.5} />
           </a>
         </div>
