@@ -173,6 +173,7 @@ const collectionPageSchema = {
                 <option value="latest">최신순</option>
                 <option value="reading-asc">짧게 읽는 순</option>
                 <option value="reading-desc">깊게 읽는 순</option>
+                <option value="title-asc">제목순</option>
               </select>
             </label>
 
@@ -313,7 +314,7 @@ const collectionPageSchema = {
 
       let activeFilter = "all";
       let activeAgent = "all";
-      const sortOptions = new Set(["latest", "reading-asc", "reading-desc"]);
+      const sortOptions = new Set(["latest", "reading-asc", "reading-desc", "title-asc"]);
 
       const getLibraryParams = () => new URLSearchParams(window.location.search);
 
@@ -421,6 +422,12 @@ const collectionPageSchema = {
 
             if (sort === "reading-asc") return readingA - readingB || dateB - dateA;
             if (sort === "reading-desc") return readingB - readingA || dateB - dateA;
+            if (sort === "title-asc") {
+              return (a.dataset["libraryTitle"] ?? "").localeCompare(
+                b.dataset["libraryTitle"] ?? "",
+                "ko"
+              );
+            }
             return dateB - dateA;
           })
           .forEach((item) => grid.appendChild(item));
