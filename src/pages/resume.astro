@@ -149,16 +149,16 @@ const certifications: ProofItem[] = [
             <div>
               <p class="font-semibold text-text-light mb-1">문제 해결</p>
               <ul class="text-text-light space-y-0.5 pl-4 list-disc">
-                <li>통제실험으로 무인 야간 배치 병목이 <strong class="font-semibold text-text">CPU가 아닌 메모리</strong>임을 규명, 처리 시간(Takt Time) <strong class="font-semibold text-text">41%</strong> 단축</li>
-                <li>매일 "성공"으로 오탐지되던 백업 파이프라인의 silent failure를 발견·정상화(내부 인프라 백업 <strong class="font-semibold text-text">232GB</strong> 회수, 고객 데이터 손실 아님), 표준 템플릿에 반영해 전 서비스 확산 차단</li>
-                <li>AI 에이전트 세션 <strong class="font-semibold text-text">505개 전수 감사</strong>로 실패율 산출·위험 명령 차단 훅 설치, 자율 에이전트 함대가 크롤링 서버 <strong class="font-semibold text-text">408대</strong>에 매일 접속해 이상 유무를 점검·보고하는 <strong class="font-semibold text-text">무인 관측 체계</strong> 구축</li>
+                <li>통제실험으로 "병목은 CPU뿐"이던 기존 레인 규칙을 뒤집고 16GB 장비의 병목이 <strong class="font-semibold text-text">메모리(스왑)</strong>임을 규명(레인 14%↓·처리량 13%↑), 렌더링 설정 실험으로 건당 처리 시간(Takt Time) <strong class="font-semibold text-text">41%</strong> 단축</li>
+                <li>매일 "backup ok"로 오탐되던 백업 가드의 silent failure를 발견·정상화(방치된 WAL 로그 <strong class="font-semibold text-text">232GB</strong> 정리, 디스크 75%→24%), 표준 템플릿에 반영해 전 서비스 확산 차단</li>
+                <li>AI 에이전트 세션 <strong class="font-semibold text-text">505개 전수 감사</strong>로 실패율 산출·위험 명령 차단 훅 설치, 크롤링 서버 <strong class="font-semibold text-text">408대</strong>의 상태를 자동 수집하고 LLM이 요약·보고하는 <strong class="font-semibold text-text">무인 관측 체계</strong> 구축(프롬프트 인젝션 대비 LLM에는 도구 권한 없음)</li>
               </ul>
             </div>
             <div>
               <p class="font-semibold text-text-light mb-1">구현</p>
               <ul class="text-text-light space-y-0.5 pl-4 list-disc">
                 <li><strong class="font-semibold text-text">Supabase → NestJS + AWS(ECS Fargate)</strong> 전면 마이그레이션, Terraform 블루그린 배포</li>
-                <li>레거시 시스템 <strong class="font-semibold text-text">무중단 이관</strong>(호출자 39개 계정 무변경, 롤백 1줄, 일 3.8만 건)</li>
+                <li>레거시 시스템 <strong class="font-semibold text-text">무중단 이관</strong>(호출자 계약 무변경·롤백 1줄, 대상 39개 계정·일 3.8만 건 중 1차 전환)</li>
                 <li>무인 야간 배치 플랫폼(<strong class="font-semibold text-text">8박스 64레인</strong>) OS 레벨 자동복구 체계로 전환, 하룻밤 <strong class="font-semibold text-text">49만+ 건</strong> 처리·성공률 98.4% — <strong class="font-semibold text-text">Mac·Linux 서버군 + AWS</strong> 인프라 세팅·운영 포함</li>
               </ul>
             </div>
