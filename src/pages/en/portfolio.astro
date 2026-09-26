@@ -7,6 +7,29 @@ import Layout from "../../layouts/Layout.astro";
 
 const projects = [
   {
+    id: "purplepepper",
+    title:
+      "Revised designs from measurements while running an LLM service and an overnight batch platform",
+    product: "PurplePepper — B2B2C reward-advertising startup (current employer)",
+    period: "2026.03 — Present",
+    role: "Backend & AI Engineer",
+    summary:
+      "I own an LLM service that drafts replies to small-business reviews and an unattended overnight batch platform that processes hundreds of thousands of jobs a night, validating each design decision with measurements.",
+    challenge:
+      "Across 8 boxes and 64 lanes, the 16GB boxes produced about 40% less than the 24GB boxes, and three lanes repeated the same failure 181 times while every monitor still reported them as healthy.",
+    solution:
+      "Re-tested my own CPU-only lane rule with controlled experiments, replaced it with a formula that also accounts for memory (swap), cleaned up orphaned browsers, and added automatic restarts for lanes that stop reporting.",
+    result:
+      "Cutting lanes 14% raised throughput 13% (reproduced by swapping roles); one night processed 494,126 jobs at a 98.4% success rate.",
+    ai: [
+      "Review-reply LLM: dropped an ontology approach after a 44% miss rate on 765 reviews, cut LLM calls from 3 to 1–2, and replaced LLM self-grading with three drafts the owner picks from",
+      "LoRA-tuned Qwen3-4B on 1,883 owner replies for a zero-API-cost option at 92.5% of API quality",
+      "Switched business-license OCR from CLOVA to AWS Bedrock Claude, cutting cost 96%",
+      "Monitoring for 408 crawling servers: automated collection plus LLM summaries, with no tool access for the LLM to contain prompt injection",
+    ],
+    tags: ["NestJS", "AWS ECS Fargate", "Terraform", "PostgreSQL", "AWS Bedrock", "Qwen3 LoRA"],
+  },
+  {
     id: "agentgram",
     title: "Designed an autonomous delivery pipeline that merged 789 pull requests",
     product: "AgentGram — social infrastructure for autonomous AI agents",
@@ -31,12 +54,12 @@ const projects = [
   },
   {
     id: "fleet",
-    title: "Operating an agent fleet with 45 scheduled jobs and 383 completed kanban cards",
+    title: "Operated an agent fleet with 45 scheduled jobs and 383 completed kanban cards",
     product: "Hermes Fleet — multi-agent orchestration network",
-    period: "Ongoing",
+    period: "2026 (retired Sept 2026)",
     role: "System designer and operator",
     summary:
-      "A Mac mini-based fleet that handles research, content, infrastructure health, code review, and market workflows through explicit ownership and written handoffs.",
+      "A Mac mini-based fleet that handled research, content, infrastructure health, code review, and market workflows through explicit ownership and written handoffs.",
     challenge:
       "Keep long-running autonomous work observable, recoverable, and aligned across specialist agents.",
     solution:
@@ -96,17 +119,17 @@ const projects = [
   },
   {
     id: "119-ai",
-    title: "Cut emergency hospital-matching calls from 5+ minutes to under 30 seconds",
+    title: "Removed the sequential-calling bottleneck in emergency hospital matching (prototype)",
     product: "119-ai — AI-assisted emergency hospital matching",
     period: "2026",
     role: "Founder / Owner",
     summary:
-      "Replaced sequential hospital calls with an AI voice system that can contact 5+ nearby hospitals in parallel from one patient intake.",
+      "A hackathon prototype that calls several hospitals in parallel from one patient intake and hangs up the remaining calls once one hospital accepts.",
     challenge: "Sequential calling creates a dangerous bottleneck during emergency transport.",
     solution:
       "Designed a Twilio parallel-dialing pipeline with Gemini Live API voice conversations and a NestJS/Python backend.",
     result:
-      "Matching in under 30 seconds, a tested cost model of KRW 100–200 per case, and the 2026 Cheongryongthon Grand Prize.",
+      "Parallel dialing with automatic hang-up after acceptance, an estimated cost model of KRW 100–200 per case, and the 2026 Cheongryongthon Grand Prize (prototype, not deployed with real hospitals).",
     ai: [
       "Real-time Gemini Live voice conversations",
       "Automated structured call summaries",
@@ -211,7 +234,7 @@ const projects = [
 ];
 
 const awards = [
-  ["Top Award, ICAN-LABS Graduate Entrepreneurship Program", "2025.10"],
+  ["Top Award, CAU ICAN-LABs Entrepreneurship Exploration Program", "2025.10"],
   ["Encouragement Award, Tourism AI Competition", "2025.09"],
   ["Encouragement Award, UMC 8th Demo Day", "2025.08"],
   ["Top Award, 2025 Winter Overseas Education Program", "2025.02"],

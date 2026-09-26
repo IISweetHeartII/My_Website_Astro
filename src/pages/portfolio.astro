@@ -9,6 +9,7 @@ import { getUrl } from "@/shared/utils/url";
 import Layout from "../layouts/Layout.astro";
 
 const projectNavItems = [
+  { id: "purplepepper", label: "퍼플페퍼", caption: "백엔드 · AI 엔지니어" },
   { id: "finders", label: "Finders", caption: "Backend Lead" },
   { id: "agentgram", label: "agentgram", caption: "Core Contributor" },
   { id: "mathfigure", label: "MathFigure", caption: "Founder" },
@@ -425,10 +426,73 @@ const projectNavItems = [
           Projects
         </h2>
 
+        <!-- 0. 퍼플페퍼 -->
+        <div
+          id="purplepepper"
+          class="mb-7 p-7 bg-background-light rounded-lg border border-l-4 border-primary hover:shadow-md hover:-translate-y-1 transition-ui md:border-l-0 md:border-t-4 scroll-mt-20 portfolio-project-card is-active"
+        >
+        <div class="mb-5 pb-4 border-b-2 border-background-lighter">
+          <h3 class="text-xl font-bold text-text mb-2.5">측정으로 설계를 뒤집으며 LLM 서비스와 야간 배치 플랫폼 운영</h3>
+          <p class="text-sm text-text-light mb-2">퍼플페퍼 - 리워드 광고 B2B2C 스타트업 (재직 중)</p>
+          <div class="flex gap-4 text-sm text-text-light">
+            <span>2026.03 - 현재</span>
+            <span>백엔드 · AI 엔지니어</span>
+          </div>
+        </div>
+
+        <p class="text-base text-text leading-relaxed mb-6">
+          소상공인 리뷰에 답글을 쓰는 LLM 서비스와 하룻밤 수십만 건을 처리하는 무인 야간 배치 플랫폼을 맡아,
+          설계 결정마다 실측 데이터로 검증하고 운영 중 틀리지 않게 만드는 일을 합니다.
+        </p>
+
+        <div class="mb-6 p-5 bg-background rounded-md border-l-4 border-blue-500">
+          <h4 class="text-sm font-bold text-blue-600 uppercase tracking-wide mb-3">기술적 도전</h4>
+          <div class="space-y-3 text-sm">
+            <div>
+              <span class="font-semibold text-text">문제:</span>
+              <span class="text-text-light"> 8대·64레인 야간 배치에서 16GB 장비의 처리량이 24GB 장비보다 약 40% 낮았고, 레인이 같은 실패를 181번 반복해도 감시는 모두 "정상"이라고 답함</span>
+            </div>
+            <div>
+              <span class="font-semibold text-text">해결:</span>
+              <span class="text-text-light"> CPU만 보던 기존 레인 규칙을 대조군 실험으로 재검증해 메모리(스왑)까지 반영한 공식으로 교체, 잔여 브라우저 정리와 무보고 레인 자동 재기동 장치 추가</span>
+            </div>
+            <div>
+              <span class="font-semibold text-text">결과:</span>
+              <span class="text-text-light"> 레인 14% 감소로 처리량 13% 증가(역할 교차 재현 확인), 하룻밤 494,126건을 성공률 98.4%로 처리</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="mb-6 p-5 bg-background-light rounded-md border-l-4 border-emerald-500">
+          <h4 class="text-sm font-bold text-emerald-600 uppercase tracking-wide mb-3">AI 활용</h4>
+          <ul class="list-disc list-inside text-sm text-text space-y-2">
+            <li>AI 리뷰 답글 서비스: 리뷰 765건 검증에서 누락률 44%가 나온 온톨로지 방식을 폐기하고 LLM 호출을 3회→1~2회로 축소, LLM 자기채점 대신 "초안 3종 + 사장님 선택" 구조로 비용 폭증 해결</li>
+            <li>사장님 답글 1,883건으로 Qwen3-4B를 LoRA 학습해 API 대비 품질 92.5%, API 비용 0인 대안 확보</li>
+            <li>사업자등록증 OCR을 CLOVA에서 AWS Bedrock Claude로 교체해 비용 96% 절감, 기존 오인식 데이터는 검증 에이전트 3개로 병렬 판정 후 백업·트랜잭션을 거쳐 수정</li>
+            <li>크롤링 서버 408대 관측 체계: 자동 수집 + LLM 요약 보고, 프롬프트 인젝션 대비 LLM에는 도구 권한을 주지 않음</li>
+            <li>AI 작업 세션 505개 전수 감사로 완료 보고의 73%가 검증 없이 이뤄진 것을 찾아 문서 대신 강제 훅 설치</li>
+          </ul>
+        </div>
+
+        <div class="mb-6">
+          <div class="flex flex-wrap gap-2">
+            {
+              ["NestJS", "AWS ECS Fargate", "Terraform", "PostgreSQL", "AWS Bedrock", "Qwen3 LoRA", "Python"].map(
+                (tag) => (
+                  <span class="px-3.5 py-1.5 bg-primary text-on-primary text-xs font-semibold rounded-full">
+                    {tag}
+                  </span>
+                )
+              )
+            }
+          </div>
+        </div>
+      </div>
+
         <!-- 1. Finders -->
         <div
           id="finders"
-          class="mb-7 p-7 bg-background-light rounded-lg border border-l-4 border-primary hover:shadow-md hover:-translate-y-1 transition-ui md:border-l-0 md:border-t-4 scroll-mt-20 portfolio-project-card is-active"
+          class="mb-7 p-7 bg-background-light rounded-lg border border-l-4 border-primary hover:shadow-md hover:-translate-y-1 transition-ui md:border-l-0 md:border-t-4 scroll-mt-20 portfolio-project-card"
         >
         <div class="mb-5 pb-4 border-b-2 border-background-lighter">
           <h3 class="text-xl font-bold text-text mb-2.5">BE Lead로 GCP 인프라 구축 및 팀 코드 리뷰 문화 정착</h3>
@@ -734,7 +798,7 @@ flowchart LR
         class="mb-7 p-7 bg-background-light rounded-lg border border-l-4 border-primary hover:shadow-md hover:-translate-y-1 transition-ui md:border-l-0 md:border-t-4 scroll-mt-20 portfolio-project-card"
       >
         <div class="mb-5 pb-4 border-b-2 border-background-lighter">
-          <h3 class="text-xl font-bold text-text mb-2.5">AI 병렬 발신으로 응급 병원 매칭 시간 5분 → 30초 단축</h3>
+          <h3 class="text-xl font-bold text-text mb-2.5">AI 병렬 발신으로 순차 전화 병목을 푼 응급 병원 매칭 프로토타입</h3>
           <p class="text-sm text-text-light mb-2">119-ai - AI 기반 응급 병원 매칭 시스템</p>
           <div class="flex gap-4 text-sm text-text-light">
             <span>2026</span>
@@ -744,7 +808,7 @@ flowchart LR
 
         <p class="text-base text-text leading-relaxed mb-6">
           응급 이송 시 순차 전화로 발생하는 병목을 AI 병렬 발신으로 해결.
-          환자 정보 1회 입력으로 5+개 병원에 동시 발신하여 매칭 시간을 대폭 단축.
+          환자 정보를 한 번 입력하면 여러 병원에 동시 발신하고, 한 곳이 수락하면 나머지 통화를 자동 종료하는 해커톤 프로토타입.
           2026 청룡톤 대상 수상.
         </p>
 
@@ -753,7 +817,7 @@ flowchart LR
           <div class="space-y-3 text-sm">
             <div>
               <span class="font-semibold text-text">문제:</span>
-              <span class="text-text-light"> 응급 환자 이송 시 병원 순차 전화로 평균 5분+ 소요</span>
+              <span class="text-text-light"> 응급 환자 이송 시 병원에 한 곳씩 순차로 전화해야 하는 병목</span>
             </div>
             <div>
               <span class="font-semibold text-text">해결:</span>
@@ -761,7 +825,7 @@ flowchart LR
             </div>
             <div>
               <span class="font-semibold text-text">결과:</span>
-              <span class="text-text-light"> 5+ 병원 동시 발신으로 매칭 30초 이내, 건당 100~200원 비용 모델 검증</span>
+              <span class="text-text-light"> 여러 병원 동시 발신과 수락 시 나머지 통화 자동 종료 구현, 건당 100~200원 비용 모델 추정 (실제 병원 운영 적용 전 프로토타입)</span>
             </div>
           </div>
         </div>
@@ -772,6 +836,7 @@ flowchart LR
             <li>Gemini Live API 기반 실시간 음성 대화 자동화</li>
             <li>NestJS + Python AI 통화 파이프라인 설계</li>
             <li>Twilio 병렬 발신 아키텍처 구현</li>
+            <li>function calling으로 병원 수락 결정 기록</li>
           </ul>
         </div>
 
@@ -1309,7 +1374,7 @@ flowchart TB
           <div class="space-y-2.5">
             {
               [
-                { name: "ICAN-LABS 대학원 창업프로그램 최우수상", date: "2025.10" },
+                { name: "ICAN-LABs 창업 탐색 프로그램 최우수상", date: "2025.10" },
                 { name: "관광AI 공모전 장려상", date: "2025.09" },
                 { name: "UMC 8기 데모데이 장려상", date: "2025.08" },
                 { name: "2025 동계 해외교육 프로그램 최우수상", date: "2025.02" },
