@@ -4,3 +4,8 @@ compatibility_date = "2024-09-23"
 [[kv_namespaces]]
 binding = "CHAT_KV"
 id = "e901b7837851406f902dff7fa70eeecf"
+
+[[durable_objects.bindings]]
+name = "CHAT_RATE_LIMITER"
+class_name = "ChatRateLimiter"
+script_name = "log8-chat-rate-limiter"

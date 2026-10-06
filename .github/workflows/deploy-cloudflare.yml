@@ -43,6 +43,21 @@ jobs:
         env:
           NODE_ENV: production
 
+      - name: Deploy atomic chat admission
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: bunx wrangler deploy --config workers/chat-rate-limiter/wrangler.toml
+
+      - name: Preserve Pages configuration and bind chat admission
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CLOUDFLARE_PAGES_PROJECT_NAME: ${{ secrets.CLOUDFLARE_PAGES_PROJECT_NAME }}
+        run: |
+          bunx wrangler pages download config "$CLOUDFLARE_PAGES_PROJECT_NAME" --force
+          bun scripts/prepare-pages-config.mjs
+
       - name: Deploy to Cloudflare Pages
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}

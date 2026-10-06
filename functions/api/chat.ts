@@ -7,6 +7,10 @@ interface Env {
   GEMINI_API_KEY: string;
   OPENAI_API_KEY: string;
   CHAT_KV?: KVNamespace;
+  CHAT_RATE_LIMITER?: {
+    idFromName: (name: string) => unknown;
+    get: (id: unknown) => { fetch: (request: Request) => Promise<Response> };
+  };
   ASSETS: { fetch: (input: Request | string) => Promise<Response> };
 }
 
@@ -146,9 +150,6 @@ const MAX_MESSAGE_LENGTH = 1000;
 const MAX_MESSAGES = 20;
 const MAX_TOTAL_LENGTH = 15000; // 한국어 답변 1건이 2~3천자라 6000은 정상 대화도 막는다
 const MAX_BODY_BYTES = 32 * 1024;
-const RATE_LIMIT_MAX = 20;
-const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000;
-const RATE_LIMIT_TTL = 600;
 
 /**
  * 위젯이 실제로 보내는 형태만 통과시켜요. 프로바이더를 부르기 전에 전부 걸러냅니다.
@@ -190,42 +191,6 @@ function validateMessages(messages: unknown): string | null {
   return null;
 }
 
-interface RateWindow {
-  count: number;
-  resetAt: number;
-}
-
-/**
- * IP 고정 윈도우 레이트 리밋 (10분 20회). 읽기만 await 하고 쓰기는 waitUntil로 흘려보내요.
- * KV가 없거나 실패하면 통과시킵니다 — 저장소 문제로 챗봇이 죽으면 안 되니까요.
- * 초과면 Retry-After 초를, 통과면 null을 돌려줘요.
- */
-async function checkRateLimit(
-  kv: KVNamespace,
-  ip: string,
-  waitUntil: (promise: Promise<unknown>) => void
-): Promise<number | null> {
-  const key = `rl:chat:${ip}`;
-  const now = Date.now();
-  try {
-    const raw = await kv.get(key);
-    const stored: RateWindow | null = raw ? (JSON.parse(raw) as RateWindow) : null;
-    const state: RateWindow =
-      stored && stored.resetAt > now ? stored : { count: 0, resetAt: now + RATE_LIMIT_WINDOW_MS };
-
-    if (state.count >= RATE_LIMIT_MAX) {
-      return Math.max(1, Math.ceil((state.resetAt - now) / 1000));
-    }
-
-    state.count += 1;
-    waitUntil(kv.put(key, JSON.stringify(state), { expirationTtl: RATE_LIMIT_TTL }));
-    return null;
-  } catch (error: unknown) {
-    console.error("Rate limit check failed, allowing request:", error);
-    return null;
-  }
-}
-
 export async function onRequestPost(context: PagesContext) {
   const { request, env, waitUntil } = context;
   const origin = request.headers.get("Origin");
@@ -263,15 +228,24 @@ export async function onRequestPost(context: PagesContext) {
       return jsonError(invalid, 400);
     }
 
-    // 스키마가 통과한 요청만 KV를 건드려요 (쓰레기 요청에 KV 읽기를 낭비하지 않게).
-    if (env.CHAT_KV) {
+    // All paid calls require durable, serialized admission, even without optional logging KV.
+    try {
+      if (!env.CHAT_RATE_LIMITER) throw new Error("CHAT_RATE_LIMITER is not configured");
       const ip = request.headers.get("CF-Connecting-IP") ?? "unknown";
-      const retryAfter = await checkRateLimit(env.CHAT_KV, ip, waitUntil);
-      if (retryAfter !== null) {
+      const id = env.CHAT_RATE_LIMITER.idFromName(ip);
+      const admission = await env.CHAT_RATE_LIMITER.get(id).fetch(
+        new Request("https://rate-limit.internal/admit", { method: "POST" })
+      );
+      if (admission.status === 429) {
         return jsonError("요청이 너무 많아요. 잠시 후 다시 시도해주세요.", 429, {
-          "Retry-After": String(retryAfter),
+          "Retry-After": admission.headers.get("Retry-After") ?? "600",
         });
       }
+      if (admission.status !== 204) throw new Error("Rate limit admission failed");
+    } catch {
+      return jsonError("일시적인 문제가 발생했어요. 잠시 후 다시 시도해주세요.", 503, {
+        "Retry-After": "60",
+      });
     }
 
     const lastUserMsg = messages.findLast((m) => m.role === "user");

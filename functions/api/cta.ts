@@ -53,6 +53,8 @@ interface CtaMetricsStore {
 
 const METRICS_KEY = "cta-metrics-v1";
 const MAX_RECENT = 200;
+const MAX_ROWS = 256;
+const MAX_BODY_BYTES = 8 * 1024;
 const ALLOWED_ORIGINS = ["https://log8.kr", "https://www.log8.kr"];
 
 type PublicSummaryFilters = {
@@ -132,8 +134,8 @@ function normalizePayload(payload: CtaPayload): Required<CtaPayload> {
   const section = sanitizeText(payload.cta_section, "unknown");
   const pagePath = normalizePath(sanitizeText(payload.cta_page_path, "unknown"));
   const source = sanitizeText(payload.cta_source, "unknown");
-  const ts =
-    typeof payload.ts === "number" && Number.isFinite(payload.ts) ? payload.ts : Date.now();
+  // Client timestamps cannot pin attacker-controlled rows in the retention window.
+  const ts = Date.now();
 
   return {
     cta_name: ctaName,
@@ -175,19 +177,62 @@ async function readStore(kv: KVNamespace): Promise<CtaMetricsStore> {
   }
 }
 
-async function writeStore(kv: KVNamespace, store: CtaMetricsStore) {
+async function writeStore(kv: KVNamespace, store: CtaMetricsStore, updatedKey: string) {
+  // Keep recently updated aggregates and the existing all-time event counter.
+  store.rows = Object.fromEntries(
+    Object.entries(store.rows)
+      .sort((a, b) => {
+        if (a[0] === updatedKey) return -1;
+        if (b[0] === updatedKey) return 1;
+        return b[1].last_ts - a[1].last_ts;
+      })
+      .slice(0, MAX_ROWS)
+  );
   await kv.put(METRICS_KEY, JSON.stringify(store));
 }
 
 async function readPayload(request: Request): Promise<CtaPayload> {
-  const contentType = request.headers.get("Content-Type") || "";
-  if (contentType.includes("application/json")) {
-    return (await request.json()) as CtaPayload;
+  if (Number(request.headers.get("Content-Length")) > MAX_BODY_BYTES) {
+    throw new RangeError("request body is too large");
   }
-
-  const text = await request.text();
-  if (!text) return {};
-  return JSON.parse(text) as CtaPayload;
+  const reader = request.body?.getReader();
+  if (!reader) return {};
+  const chunks: Uint8Array[] = [];
+  let size = 0;
+  while (true) {
+    const { value, done } = await reader.read();
+    if (done) break;
+    size += value.byteLength;
+    if (size > MAX_BODY_BYTES) {
+      await reader.cancel();
+      throw new RangeError("request body is too large");
+    }
+    chunks.push(value);
+  }
+  const bytes = new Uint8Array(size);
+  let offset = 0;
+  for (const chunk of chunks) {
+    bytes.set(chunk, offset);
+    offset += chunk.byteLength;
+  }
+  const payload: unknown = JSON.parse(new TextDecoder().decode(bytes));
+  if (!payload || typeof payload !== "object" || Array.isArray(payload)) {
+    throw new SyntaxError("payload must be an object");
+  }
+  for (const field of [
+    "cta_name",
+    "cta_section",
+    "cta_destination",
+    "cta_page_path",
+    "cta_campaign",
+    "cta_source",
+  ]) {
+    const value = (payload as Record<string, unknown>)[field];
+    if (value !== undefined && typeof value !== "string") {
+      throw new SyntaxError(`${field} must be a string`);
+    }
+  }
+  return payload as CtaPayload;
 }
 
 function parsePublicFilters(url: URL): PublicSummaryFilters {
@@ -317,9 +362,11 @@ export async function onRequestPost(context: PagesContext) {
     });
     store.recent = store.recent.slice(-MAX_RECENT);
 
-    await writeStore(env.CHAT_KV, store);
+    await writeStore(env.CHAT_KV, store, key);
     return json({ ok: true }, 202, origin);
   } catch (error) {
+    if (error instanceof RangeError) return json({ error: error.message }, 413, origin);
+    if (error instanceof SyntaxError) return badRequest(origin, error.message);
     return json(
       {
         error: "failed_to_track_cta",

@@ -143,6 +143,13 @@ Cloudflare Dashboard → Pages → Settings → Environment variables:
    - Namespace: 생성한 KV
 3. `wrangler.toml`의 `id`를 생성한 KV ID로 수정
 
+#### 필수: 채팅 요청 제한
+
+`CHAT_RATE_LIMITER` Durable Object 바인딩이 유료 AI 호출 전에 IP별 10분 20회 한도를
+원자적으로 차감합니다. 바인딩 누락·저장소 장애는 503, 한도 초과는 429로 응답합니다.
+질문 기록용 `CHAT_KV`는 선택이지만 요청 제한 바인딩은 필수입니다.
+배포 순서와 로컬 실행은 [Cloudflare 배포 가이드](docs/dev/cloudflare-cli-iac-runbook.md)를 따릅니다.
+
 ### 챗봇 관리 API
 
 KV가 설정되면 질문 로그가 자동 저장됩니다.
@@ -171,6 +178,12 @@ curl -X DELETE -H "Authorization: Bearer YOUR_ADMIN_SECRET" \
 ### CTA 측정 요약 API
 
 CTA 측정은 Cloudflare KV(`CHAT_KV`)를 사용합니다.
+
+요청 본문은 실제 수신 바이트 기준 8 KiB까지 허용합니다. 집계는 최근 갱신된 키
+256개, 개별 이벤트는 최근 200개를 보관합니다. 새 키가 한도를 넘으면 가장 오래
+갱신되지 않은 집계를 교체하며, 기존 데이터가 한도를 넘는 경우 다음 정상 쓰기에서
+동일한 제한을 적용합니다. `total_events`는 누적 이벤트 수를 유지하므로 보관 중인
+집계의 합과 다를 수 있습니다. 이벤트 시각은 서버 수신 시각을 사용합니다.
 
 - 관리자 전체 요약: `Authorization: Bearer $ADMIN_SECRET` 필요
 - 공개 집계 요약: **필터가 있는 aggregate-only 조회**는 시크릿 없이 가능
