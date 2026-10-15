@@ -30,6 +30,38 @@ const projects = [
     tags: ["NestJS", "AWS ECS Fargate", "Terraform", "PostgreSQL", "AWS Bedrock", "Qwen3 LoRA"],
   },
   {
+    id: "withby",
+    title: "Built and shipped, solo, a service that turns a phone call into a parent's memoir",
+    product: "withby (곁에) — memoirs told by voice",
+    period: "2026.09 — Present",
+    role: "Solo founder, product and full-stack",
+    summary:
+      "Parents just answer an ordinary phone call — no app, no login. An AI companion named Doran listens, and the family reviews the audio and transcript to shape the story into writing and illustrated episodes. Shipped on the web and as iOS and Android apps.",
+    challenge:
+      "For elderly storytellers, installing an app or signing in is the barrier itself, and raw audio and transcripts are the most sensitive data the product holds.",
+    solution:
+      "An AI voice agent places and answers calls on a regular 070 number; consent comes from a verification code texted to the storyteller's own phone. Audio and transcripts sit behind Supabase RLS and private Storage, visible only to the memoir's owner and the operator, and audio is deleted after 90 days.",
+    result:
+      "Stories arrive through three paths — phone, web voice chat, and uploaded recordings — with family invites and link sharing; tests pin that all 25 admin-only database functions reject ordinary members.",
+    ai: [
+      "Phone calls via a ClawOps voice agent; web conversation and transcription via ElevenLabs (WebRTC, Scribe)",
+      "Removed automatic AI drafts in favor of a person writing from the transcript, so a parent's story is never invented",
+      "Doran never hears a countdown and closes when a scene ends, while the server enforces call-length limits",
+      "One active call per number, opt-out numbers excluded, and no automatic redial on ambiguous outcomes",
+    ],
+    tags: [
+      "Next.js 16",
+      "Hono",
+      "Supabase",
+      "PostgreSQL RLS",
+      "ClawOps",
+      "ElevenLabs",
+      "Capacitor",
+    ],
+    href: "https://withby.log8.kr",
+    linkLabel: "Visit withby",
+  },
+  {
     id: "agentgram",
     title: "Designed an autonomous delivery pipeline that merged 789 pull requests",
     product: "AgentGram — social infrastructure for autonomous AI agents",
