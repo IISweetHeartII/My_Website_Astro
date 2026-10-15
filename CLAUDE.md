@@ -26,7 +26,7 @@ This is **Obsidian Blogger** - an Astro-based personal blog by 김덕환 (log8.k
 
 - **자동 실행**: `main` 브랜치 push 및 PR 생성 시
 - **검사 항목**: 코드 포맷팅, TypeScript 타입 체크, 빌드, 보안 감사, Lighthouse 성능
-- **워크플로우 파일**: `.github/workflows/ci.yml`, `.github/workflows/deploy-cloudflare.yml`
+- **워크플로우 파일**: `.github/workflows/ci.yml`, `.github/workflows/deploy-cloudflare.yml`(수동 실행 전용 — 사이트 배포는 아래 Cloudflare Git 연동이 한다)
 
 ### Cloudflare Pages (Continuous Deployment)
 
