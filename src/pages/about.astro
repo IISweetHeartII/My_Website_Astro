@@ -1,5 +1,4 @@
 ---
-import ContactCTA from "@/shared/components/ui/ContactCTA.astro";
 import { AUTHOR_GITHUB, AUTHOR_LINKEDIN, SITE_AUTHOR, SITE_URL } from "@/shared/config/consts";
 import { serializeJsonLd } from "@/shared/utils/json-ld";
 
@@ -105,9 +104,6 @@ const personSchema = {
       <span id="hint">/ 로 명령어 입력</span><span id="progress"></span>
     </div>
 
-    <div class="contact-outro">
-      <ContactCTA ctaSection="about_bottom" />
-    </div>
 
     <div class="modal" id="modal" hidden>
       <div class="modal__win" role="dialog" aria-modal="true" aria-label="이미지">
@@ -566,24 +562,6 @@ const personSchema = {
         font-family: var(--mono);
         font-size: 0.78rem;
         color: var(--t-dim);
-      }
-
-      /* 문의 CTA (ContactCTA 공용 컴포넌트) */
-      .contact-outro {
-        max-width: var(--maxw);
-        width: 100%;
-        margin: 0 auto;
-        padding: 0 clamp(1.1rem, 4vw, 1.6rem) 2.5rem;
-      }
-      /* 터미널 뷰에서는 ContactCTA 폴백 변수를 터미널 팔레트로 치환 */
-      :root[data-view="terminal"] .contact-outro {
-        --bg: var(--t-bg);
-        --surface: var(--t-panel);
-        --line: var(--t-line);
-        --ink: var(--t-fg);
-        --muted: var(--t-dim);
-        --accent: var(--t-accent);
-        --accent-soft: var(--t-accent);
       }
 
       :root[data-view="terminal"] body {

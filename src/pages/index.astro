@@ -5,7 +5,6 @@ import {
   Award,
   Bot,
   Brain,
-  Briefcase,
   ChartNoAxesCombined,
   Code2,
   FileText,
@@ -22,7 +21,6 @@ import {
 } from "lucide-astro";
 import profileImage from "@/assets/images/design/DH_ID.jpg";
 import BreadcrumbSchema from "@/shared/components/seo/BreadcrumbSchema.astro";
-import ContactCTA from "@/shared/components/ui/ContactCTA.astro";
 import { SITE_DESCRIPTION, SITE_URL } from "@/shared/config/consts";
 import { getLatestPosts, getSortedPublishedPosts } from "@/shared/utils/blog";
 import { serializeJsonLd } from "@/shared/utils/json-ld";
@@ -60,7 +58,7 @@ const websiteSchema = {
     <!-- Full-screen Hero Section -->
     <section
       id="hero-section"
-      class="relative isolate min-h-screen flex items-center justify-center overflow-hidden bg-background"
+      class="relative isolate min-h-screen py-12 md:py-20 flex items-center justify-center overflow-hidden bg-background"
     >
       <!-- Aurora Background -->
       <div class="aurora-bg" aria-hidden="true">
@@ -78,10 +76,10 @@ const websiteSchema = {
             <div class="space-y-8 text-center lg:text-left">
               <!-- Badge -->
               <div
-                class="blur-word inline-flex items-center gap-2 px-4 py-2 bg-background/95 backdrop-blur-sm border border-background-lighter rounded-full text-sm font-medium text-primary shadow-md"
+                class="blur-word inline-flex max-w-full items-center justify-center gap-2 px-3 sm:px-4 py-2 bg-background/95 backdrop-blur-sm border border-background-lighter rounded-full text-sm font-medium text-primary shadow-md"
                 style="--delay: 0.05s"
               >
-                <Target class="w-4 h-4" />
+                <Target class="w-4 h-4 shrink-0" />
                 Product Engineer · AI 자동화 · 제품 개발
               </div>
 
@@ -116,16 +114,6 @@ const websiteSchema = {
                 >
                   프로젝트와 성과 보기
                   <ArrowRight class="w-5 h-5 group-hover:translate-x-0.5 transition-transform duration-(--duration-base) ease-out" />
-                </a>
-                <a
-                  href="#contact"
-                  data-cta-track
-                  data-cta-name="hero_contact"
-                  data-cta-section="hero"
-                  class="group inline-flex items-center gap-2 px-8 py-4 bg-background-light hover:bg-background-lighter text-primary font-semibold rounded-xl border-2 border-primary-light transition-ui duration-(--duration-base) ease-out shadow-lg hover:shadow-xl active:scale-[0.97] active:duration-(--duration-press)"
-                >
-                  의뢰·협업 문의
-                  <Briefcase class="w-5 h-5" />
                 </a>
               </div>
               <p class="blur-word text-sm text-text-muted" style="--delay: 0.85s">
@@ -178,14 +166,14 @@ const websiteSchema = {
       </div>
     </section>
 
-    <!-- 무엇을 맡길 수 있나 (src/content/chat-context.md "상담 가능한 영역"과 동일 범위) -->
+    <!-- 주요 기술 분야 -->
     <section class="py-16 md:py-20 px-4 md:px-8 border-b border-background-lighter" aria-labelledby="services-heading">
       <div class="max-w-7xl mx-auto">
         <div class="mb-8 md:mb-10">
-          <p class="text-sm font-semibold text-primary">Services</p>
-          <h2 id="services-heading" class="mt-1 text-2xl md:text-3xl font-bold text-text">무엇을 맡길 수 있나</h2>
+          <p class="text-sm font-semibold text-primary">Expertise</p>
+          <h2 id="services-heading" class="mt-1 text-2xl md:text-3xl font-bold text-text">주로 다루는 기술과 분야</h2>
           <p class="mt-2 text-text-light">
-            반복 업무 자동화부터 AI 제품과 웹 서비스 구축·운영까지 맡길 수 있습니다.
+            반복 업무 자동화부터 AI 제품과 웹 서비스 구축·운영까지 직접 경험한 분야입니다.
           </p>
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">
@@ -208,10 +196,6 @@ const websiteSchema = {
         </div>
         <p class="mt-5 text-sm text-text-muted">
           AI 도입 워크숍·강의(시니어 대상 생성형 AI, 스타트업 커뮤니티 MCP/Agent 세션)도 진행합니다.
-          <a href="#contact" class="link-arrow inline-flex items-center gap-1 font-medium text-primary hover:text-accent transition-colors ml-1">
-            문의하기
-            <ArrowRight class="w-3.5 h-3.5" />
-          </a>
         </p>
       </div>
     </section>
@@ -485,8 +469,6 @@ const websiteSchema = {
             </div>
           </a>
         </div>
-
-        <ContactCTA ctaSection="bento_bottom" class="mt-8" />
       </div>
     </section>
   </div>

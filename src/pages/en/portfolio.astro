@@ -1,7 +1,7 @@
 ---
-import { FileText, Github, Mail } from "lucide-astro";
+import { FileText, Github } from "lucide-astro";
 import BreadcrumbSchema from "@/shared/components/seo/BreadcrumbSchema.astro";
-import { AUTHOR_EMAIL, AUTHOR_LINKEDIN } from "@/shared/config/consts";
+import { AUTHOR_LINKEDIN } from "@/shared/config/consts";
 import { ui } from "@/shared/i18n/ui";
 import Layout from "../../layouts/Layout.astro";
 
@@ -314,7 +314,6 @@ const certifications = [
       <p class="mt-4 max-w-3xl text-xl font-semibold text-primary">I take ambiguous, human problems and turn them into products—and into delivery systems that keep working.</p>
       <p class="mt-4 max-w-3xl leading-relaxed text-text-light">I can own product discovery, full-stack implementation, cloud infrastructure, and AI-assisted operations. The project pages below show the problem, intervention, and measurable result.</p>
       <div class="mt-6 flex flex-wrap gap-3">
-        <a href={`mailto:${AUTHOR_EMAIL}`} class="inline-flex items-center gap-2 rounded-xl bg-primary px-5 py-3 font-semibold text-on-primary"><Mail class="h-4 w-4" /> Discuss a project</a>
         <a href={AUTHOR_LINKEDIN} target="_blank" rel="noopener noreferrer" class="rounded-xl border border-background-lighter px-5 py-3 font-semibold text-text">LinkedIn</a>
       </div>
     </header>

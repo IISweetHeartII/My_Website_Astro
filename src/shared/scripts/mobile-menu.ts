@@ -9,12 +9,17 @@ export function setupMobileMenu(): void {
     return;
   }
 
+  let previousOverflow = "";
+
   // 메뉴 열기
   mobileMenuToggle.addEventListener("click", () => {
-    mobileMenu.classList.remove("translate-x-full");
-    mobileMenu.classList.add("translate-x-0");
+    previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    mobileMenu.inert = false;
+    mobileMenu.setAttribute("aria-hidden", "false");
     mobileMenu.setAttribute("data-state", "open");
     mobileMenuToggle.setAttribute("aria-expanded", "true");
+    mobileMenuClose.focus();
   });
 
   // 메뉴 닫기
@@ -45,12 +50,13 @@ export function setupMobileMenu(): void {
   });
 
   function closeMobileMenu(): void {
-    if (mobileMenu) {
-      mobileMenu.classList.remove("translate-x-0");
-      mobileMenu.classList.add("translate-x-full");
-      // 닫힘은 진입보다 빠르게(ease-out, base duration) — CSS data-[state=closed] 변형이 처리
+    if (mobileMenu?.getAttribute("data-state") === "open") {
+      mobileMenu.inert = true;
+      mobileMenu.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = previousOverflow;
       mobileMenu.setAttribute("data-state", "closed");
       mobileMenuToggle?.setAttribute("aria-expanded", "false");
+      mobileMenuToggle?.focus();
     }
   }
 }

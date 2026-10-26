@@ -33,9 +33,6 @@ const languageSwitchHref =
     : null);
 const t = ui[currentLocale];
 const localizedHref = (pathname: string) => getUrl(withLocalePath(pathname, currentLocale));
-// KO 홈에는 ContactCTA(#contact)가 있고 EN 페이지에는 없다 → EN은 mailto로 바로.
-const contactHref =
-  currentLocale === "en" ? `mailto:${AUTHOR_EMAIL}` : `${localizedHref("/")}#contact`;
 ---
 
 <header
@@ -100,18 +97,6 @@ const contactHref =
         <Moon data-icon="moon" class="theme-icon w-5 h-5" />
       </button>
 
-      <!-- 협업 문의 CTA: 어느 페이지에서든 바로 연락 동선으로 -->
-      <a
-        href={contactHref}
-        data-cta-track
-        data-cta-name="header_contact"
-        data-cta-section="header"
-        class="hidden lg:inline-flex items-center gap-1.5 rounded-lg bg-nav-text/10 px-3 py-1.5 text-sm font-semibold text-nav-text hover:bg-nav-text/20 transition-ui duration-(--duration-fast) active:scale-95 active:duration-(--duration-press) whitespace-nowrap"
-      >
-        <Mail class="w-4 h-4" />
-        {t.contactCta}
-      </a>
-
       <!-- Social Icons -->
       <a
         href={AUTHOR_GITHUB}
@@ -146,9 +131,14 @@ const contactHref =
     </div>
   </nav>
 
+</header>
+
   <!-- Mobile menu content (initially hidden) -->
   <div
-    class="lg:hidden fixed inset-0 bg-nav/95 z-40 translate-x-full transition-transform duration-(--duration-panel) ease-drawer data-[state=closed]:duration-(--duration-base) data-[state=closed]:ease-out"
+    class="lg:hidden fixed inset-0 overflow-y-auto overscroll-contain bg-nav z-[60]"
+    data-state="closed"
+    aria-hidden="true"
+    inert
     id="mobile-menu"
   >
     <div class="flex justify-end p-4">
@@ -198,16 +188,6 @@ const contactHref =
         <Search class="w-5 h-5" />
         <span>{t.search}</span>
       </button>
-      <a
-        href={contactHref}
-        data-cta-track
-        data-cta-name="mobile_menu_contact"
-        data-cta-section="header"
-        class="inline-flex items-center gap-2 rounded-xl bg-primary px-6 py-3 text-base font-semibold text-on-primary transition-ui duration-(--duration-fast) active:scale-[0.97] active:duration-(--duration-press)"
-      >
-        <Mail class="w-5 h-5" />
-        {t.contactCta}
-      </a>
       <!-- Mobile social links -->
       <div class="flex items-center space-x-4 pt-4 border-t border-nav-text/20">
         <a
@@ -238,11 +218,22 @@ const contactHref =
       </div>
     </nav>
   </div>
-</header>
 
 <SearchDialog />
 
 <style>
+  #mobile-menu {
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--duration-base) var(--ease-out), visibility var(--duration-base);
+  }
+  #mobile-menu[data-state="open"] {
+    visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
+  }
+
   /* 테마 토글: 아이콘을 겹쳐 두고 크로스페이드+살짝 회전. hidden 토글(순간이동) 대체 */
   #theme-toggle .theme-icon {
     position: absolute;
