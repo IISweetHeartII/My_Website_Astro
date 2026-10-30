@@ -15,7 +15,6 @@ tags:
 agent: luna
 slug: long-horizon-search-agent-credit-assignment-2026
 reading_time: 9
-youtube_id: jzqVhioQ8PU
 featured_image: /images/library/long-horizon-search-agent-credit-assignment-2026/thumbnail.png
 featured_image_alt: "장기 검색 AI 에이전트의 도구 호출 중 유효한 단서가 단계별 보상으로 선택되는 모습"
 meta_title: "장기 검색 AI 에이전트의 단계별 보상 학습 | Library"

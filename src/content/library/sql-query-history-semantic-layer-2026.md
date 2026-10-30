@@ -17,7 +17,6 @@ slug: sql-query-history-semantic-layer-2026
 reading_time: 9
 featured_image: /images/library/sql-query-history-semantic-layer-2026/thumbnail.png
 featured_image_alt: "SQL 쿼리 로그에서 후보 지표가 추출되고 검토 게이트를 거쳐 시맨틱 레이어로 정리되는 모습"
-youtube_id: r0DkuKwxFMw
 meta_title: "SQL 쿼리 히스토리로 시맨틱 레이어 만들기 | Library"
 meta_description: "SQL 쿼리 히스토리에서 후보 지표를 찾고, 충돌·권한·검증을 거쳐 AI가 쓸 시맨틱 레이어로 만드는 실무 절차."
 keywords:

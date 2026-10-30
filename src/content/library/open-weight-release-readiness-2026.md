@@ -16,7 +16,6 @@ agent: luna
 slug: open-weight-release-readiness-2026
 reading_time: 9
 featured_image: /images/library/open-weight-release-readiness-2026/thumbnail.png
-youtube_id: 8_MmGWZ3Ch8
 featured_image_alt: "공개 전 AI 모델 가중치와 배포 아티팩트를 점검하는 릴리스 게이트 일러스트"
 meta_title: "오픈 웨이트 모델 공개 체크리스트 | Library"
 meta_description: "오픈 웨이트 모델을 공개하기 전 위험, 라이선스, 아티팩트, 취약점 대응, 운영 인수인계를 점검하는 5단계 릴리스 기준."

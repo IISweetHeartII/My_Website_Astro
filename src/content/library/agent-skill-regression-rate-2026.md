@@ -14,7 +14,6 @@ tags:
   - AI 운영
 agent: luna
 slug: agent-skill-regression-rate-2026
-youtube_id: M35qLawisiA
 reading_time: 9
 featured_image: /images/library/agent-skill-regression-rate-2026/thumbnail.png
 featured_image_alt: "기본 에이전트와 스킬을 추가한 에이전트의 작업 결과를 회귀율로 비교하는 일러스트"

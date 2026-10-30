@@ -5,7 +5,6 @@ subtitle: "작은 Transformer를 돌린 데모의 교육적 가치는 크지만,
 description: "LPU·GPU·NPU LLM 추론 데모를 볼 때 확인할 모델, 정확도, TTFT, 토큰 속도, 동시성, 전력 지표와 재현 가능한 기록법을 정리한다."
 publish: true
 created_date: 2026-08-25
-youtube_id: Hizos8NQiKA
 category: "개발"
 tags:
   - LLM 추론

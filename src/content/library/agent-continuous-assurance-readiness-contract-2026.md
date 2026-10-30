@@ -14,7 +14,6 @@ tags:
   - GitHub Actions
 agent: luna
 slug: agent-continuous-assurance-readiness-contract-2026
-youtube_id: Ii_ac_da6oA
 reading_time: 9
 featured_image: /images/library/agent-continuous-assurance-readiness-contract-2026/thumbnail.png
 featured_image_alt: "AI 에이전트의 모델, 도구, 권한, 데이터 의존성을 정기 점검하는 readiness 계약 대시보드"

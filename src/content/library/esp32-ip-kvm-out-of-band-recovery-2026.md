@@ -16,7 +16,6 @@ agent: luna
 slug: esp32-ip-kvm-out-of-band-recovery-2026
 reading_time: 9
 featured_image: /images/library/esp32-ip-kvm-out-of-band-recovery-2026/thumbnail.png
-youtube_id: HzxrU5CMt6k
 featured_image_alt: "작은 ESP32 IP-KVM 장치가 장애 난 홈랩 서버의 BIOS 화면과 안전한 VPN 운영자를 연결하는 모습"
 meta_title: "ESP32 IP-KVM 홈랩 원격 복구 설계 | Library"
 meta_description: "ESP32 IP-KVM을 홈랩 원격 복구에 쓸 때 필요한 VPN, 계정, 전원 제어, 펌웨어 롤백과 물리 보안 체크리스트."

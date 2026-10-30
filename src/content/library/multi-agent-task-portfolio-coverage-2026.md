@@ -17,7 +17,6 @@ slug: multi-agent-task-portfolio-coverage-2026
 reading_time: 9
 featured_image: /images/library/multi-agent-task-portfolio-coverage-2026/thumbnail.png
 featured_image_alt: "여러 AI 에이전트가 겹치지 않는 탐색 구역을 맡고 결과를 하나의 검증 보드로 모으는 모습"
-youtube_id: fGz55eILFIE
 meta_title: "멀티 에이전트 작업 분배: 탐색 포트폴리오 설계 | Library"
 meta_description: "멀티 에이전트가 같은 답을 반복하는 낭비를 줄이고, 가설·소스·검증 축으로 탐색 범위를 넓히는 작업 분배법."
 keywords:

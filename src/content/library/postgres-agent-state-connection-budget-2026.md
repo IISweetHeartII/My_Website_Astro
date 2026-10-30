@@ -17,7 +17,6 @@ slug: postgres-agent-state-connection-budget-2026
 reading_time: 9
 featured_image: /images/library/postgres-agent-state-connection-budget-2026/thumbnail.png
 featured_image_alt: "여러 AI 에이전트 워커의 데이터베이스 연결이 제한된 예산과 대기열을 통해 제어되는 모습"
-youtube_id: tM9rsdFrA9Y
 meta_title: "Postgres AI 에이전트 상태 저장: 커넥션 예산 | 김덕환"
 meta_description: "AI 에이전트 상태용 Postgres가 과부하 나는 원인과 커넥션 예산·짧은 트랜잭션·잠금 관측으로 막는 실무 설계법."
 keywords:

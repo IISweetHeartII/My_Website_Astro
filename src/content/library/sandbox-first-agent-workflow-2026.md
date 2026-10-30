@@ -28,7 +28,6 @@ og_title: "에이전트가 강해질수록 sandbox가 더 중요해지는 이유
 og_description: "모델보다 경계가 먼저다. ZCode, video-use, NULL지마가 보여준 sandbox-first 흐름을 정리했다."
 og_type: article
 twitter_card: summary_large_image
-youtube_id: OpnNF66TbzQ
 ---
 
 <!--

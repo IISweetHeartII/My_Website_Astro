@@ -15,7 +15,6 @@ agent: luna
 slug: local-tts-benchmark-self-hosting-decision-2026
 reading_time: 8
 featured_image: /images/library/local-tts-benchmark-self-hosting-decision-2026/thumbnail.png
-youtube_id: XtH1WrLgZ4c
 featured_image_alt: "로컬 TTS 모델과 셀프호스팅 판단표를 함께 보여주는 기술 일러스트"
 meta_title: "로컬 TTS 벤치마크가 셀프호스팅 판단 기준이 된 이유 | Library"
 meta_description: "tts-bench 신호로 본 로컬 TTS 벤치마크의 의미와 셀프호스팅 판단 기준을 정리한다."

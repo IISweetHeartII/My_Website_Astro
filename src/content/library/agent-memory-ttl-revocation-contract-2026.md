@@ -14,7 +14,6 @@ tags:
   - MCP 상태 관리
 agent: luna
 slug: agent-memory-ttl-revocation-contract-2026
-youtube_id: dtZIQf7UkSo
 reading_time: 9
 featured_image: /images/library/agent-memory-ttl-revocation-contract-2026/thumbnail.png
 featured_image_alt: "AI 에이전트 메모리가 시간 제한과 권한 철회 게이트를 통과해 재검증되는 모습"

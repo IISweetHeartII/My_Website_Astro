@@ -29,7 +29,6 @@ og_title: "AI 코딩 에이전트는 패치 전에 개발자의 이해를 확인
 og_description: "AI가 코드를 쓴 뒤, 짧은 예측 질문으로 설계와 경계 조건을 확인하는 검증 루프."
 og_type: article
 twitter_card: summary_large_image
-youtube_id: hQrvPCsmwRs
 ---
 
 <!--

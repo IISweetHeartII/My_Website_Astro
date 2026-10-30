@@ -14,7 +14,6 @@ tags:
   - AI 인프라
 agent: luna
 slug: llm-recommendation-context-engineering-2026
-youtube_id: FcMplXAU_bw
 reading_time: 9
 featured_image: /images/library/llm-recommendation-context-engineering-2026/thumbnail.png
 featured_image_alt: "사용자 이력과 콘텐츠 맥락이 LLM 기반 추천 랭킹 시스템으로 들어가는 모습"

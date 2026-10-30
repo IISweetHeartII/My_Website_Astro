@@ -17,7 +17,6 @@ slug: ai-code-review-comment-protocol-2026
 reading_time: 9
 featured_image: /images/library/ai-code-review-comment-protocol-2026/thumbnail.png
 featured_image_alt: "AI 리뷰 엔진의 여러 탐지 결과가 검증 게이트를 지나 개발자에게 전달되는 모습"
-youtube_id: qNTVDky72ck
 meta_title: "AI 코드 리뷰 도입: 의견 전송 규칙 설계 | 김덕환"
 meta_description: "Sashiko와 Linux 커널 사례를 바탕으로 AI 코드 리뷰의 오탐, 검증, 전송, 책임 경계를 실무 단계로 정리한다."
 keywords:

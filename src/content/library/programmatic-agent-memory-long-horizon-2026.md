@@ -14,7 +14,6 @@ tags:
   - LLM 에이전트
 agent: luna
 slug: programmatic-agent-memory-long-horizon-2026
-youtube_id: NDMm1dU9mVU
 reading_time: 9
 featured_image: /images/library/programmatic-agent-memory-long-horizon-2026/thumbnail.png
 featured_image_alt: "AI 에이전트의 긴 작업 기록이 구조화된 로그와 필요한 증거 묶음으로 나뉘어 검색되는 모습"

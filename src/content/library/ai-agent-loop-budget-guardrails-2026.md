@@ -17,7 +17,6 @@ slug: ai-agent-loop-budget-guardrails-2026
 reading_time: 9
 featured_image: /images/library/ai-agent-loop-budget-guardrails-2026/thumbnail.png
 featured_image_alt: "AI 에이전트의 반복 실행 경로를 비용, 단계, 권한 가드레일이 차단하는 모습"
-youtube_id: V_Udk9dI1gg
 meta_title: "AI 에이전트 무한 루프 방지와 비용 제한 | Library"
 meta_description: "AI 에이전트의 무한 반복, API 비용 폭주, 위험한 도구 호출을 실행 시점에 제한하는 비용·단계·행동 가드레일 설계법."
 keywords:

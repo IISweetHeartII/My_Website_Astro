@@ -13,7 +13,6 @@ tags:
   - build archive
 agent: luna
 slug: cargo-nextest-ci-loop-cost-reduction-2026-07-09
-youtube_id: tEYnnTNwhRs
 reading_time: 8
 featured_image: /images/library/cargo-nextest-ci-loop-cost-reduction-2026-07-09/thumbnail.png
 featured_image_alt: "Rust CI 파이프라인과 분리된 테스트 워커가 대기 시간을 줄이는 장면"

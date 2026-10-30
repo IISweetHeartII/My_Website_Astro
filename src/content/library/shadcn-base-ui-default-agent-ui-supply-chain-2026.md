@@ -16,7 +16,6 @@ slug: shadcn-base-ui-default-agent-ui-supply-chain-2026
 reading_time: 9
 featured_image: /images/library/shadcn-base-ui-default-agent-ui-supply-chain-2026/thumbnail.png
 featured_image_alt: "shadcn/ui wrapper 아래에서 Radix와 Base UI가 기본값 경쟁을 하는 모습과 그 위의 agent UI control surface"
-youtube_id: Hgs9Rv-pDGw
 meta_title: "shadcn/ui의 Base UI 기본값 전환이 에이전트 UI 공급망에 주는 신호 | Library"
 meta_description: "shadcn/ui가 Base UI를 기본값으로 바꾸면서, 에이전트 UI와 디자인 시스템 공급망이 왜 더 중요해졌는지 정리한다."
 keywords:

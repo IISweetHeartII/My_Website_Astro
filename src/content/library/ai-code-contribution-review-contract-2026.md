@@ -17,7 +17,6 @@ slug: ai-code-contribution-review-contract-2026
 reading_time: 9
 featured_image: /images/library/ai-code-contribution-review-contract-2026/thumbnail.png
 featured_image_alt: "AI가 제안한 코드 변경이 사람 리뷰어의 근거·테스트·소유자 검증 게이트를 통과하는 모습"
-youtube_id: 6gzQQQoJCCU
 meta_title: "AI 코드 기여 검토 가이드 | 김덕환"
 meta_description: "AI가 만든 코드의 출처보다 변경 근거·테스트·책임자를 확인하는 PR 검토 계약과 실무 체크리스트를 소개한다."
 keywords:

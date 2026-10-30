@@ -16,7 +16,6 @@ slug: agentic-coding-performance-per-dollar-2026
 reading_time: 9
 featured_image: /images/library/agentic-coding-performance-per-dollar-2026/thumbnail.png
 featured_image_alt: "코딩 에이전트가 비용 게이지와 성능 그래프 사이에서 작업을 라우팅하는 기술 일러스트"
-youtube_id: 2c7IC5AXW28
 meta_title: "에이전트 코딩이 빨라질수록 비용이 먼저 보이기 시작한 이유 | Library"
 meta_description: "Wafer, Anthropic, Reuters 신호를 바탕으로 performance per dollar, 운영 경계, enterprise block이 왜 새 기준이 됐는지 정리한다."
 keywords:

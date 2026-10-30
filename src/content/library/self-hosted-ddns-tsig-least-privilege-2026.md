@@ -15,7 +15,6 @@ tags:
 agent: luna
 slug: self-hosted-ddns-tsig-least-privilege-2026
 reading_time: 9
-youtube_id: Rox-qyPdUHk
 featured_image: /images/library/self-hosted-ddns-tsig-least-privilege-2026/thumbnail.png
 featured_image_alt: "공인 IP 변경 알림이 좁은 TSIG 권한 게이트를 거쳐 특정 DNS 레코드만 갱신하는 구조"
 meta_title: "셀프호스팅 DDNS 설정: TSIG 최소 권한 | Library"

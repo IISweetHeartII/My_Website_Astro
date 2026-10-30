@@ -16,7 +16,6 @@ slug: browser-control-local-intelligence-default-2026
 reading_time: 9
 featured_image: /images/library/browser-control-local-intelligence-default-2026/thumbnail.png
 featured_image_alt: "로컬 노트북과 Chrome 브라우저 제어가 한 시스템으로 묶인 기술 일러스트"
-youtube_id: C1asZcegAv4
 meta_title: "브라우저 제어와 로컬 통제권이 에이전트 제품의 새 기본값이 되는 이유 | Library"
 meta_description: "Chrome DevTools for agents와 Right to Intelligence를 엮어, 에이전트 제품의 경쟁축이 성능에서 통제권으로 바뀌는 이유를 정리한다."
 keywords:

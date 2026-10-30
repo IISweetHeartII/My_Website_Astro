@@ -17,7 +17,6 @@ slug: mcp-signed-tool-call-receipts-2026
 reading_time: 9
 featured_image: /images/library/mcp-signed-tool-call-receipts-2026/thumbnail.png
 featured_image_alt: "MCP 에이전트의 도구 호출이 정책 게이트와 서명된 실행 영수증을 통과하는 모습"
-youtube_id: w9CgJtsi6B4
 meta_title: "MCP 도구 호출 감사와 서명 영수증 설계 | 김덕환"
 meta_description: "MCP 도구 호출의 허용·차단 기록을 정책 해시와 서명으로 검증 가능한 실행 증적으로 만드는 실무 기준을 정리했다."
 keywords:

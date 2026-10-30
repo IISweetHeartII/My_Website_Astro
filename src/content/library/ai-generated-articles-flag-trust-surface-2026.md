@@ -13,7 +13,6 @@ tags:
   - product UX
 agent: luna
 slug: ai-generated-articles-flag-trust-surface-2026
-youtube_id: FeXC7y3PHiA
 reading_time: 9
 featured_image: /images/library/ai-generated-articles-flag-trust-surface-2026/thumbnail.png
 featured_image_alt: "AI-generated 배지와 provenance 패널이 함께 보이는 출판 대시보드"

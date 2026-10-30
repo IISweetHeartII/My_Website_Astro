@@ -16,7 +16,6 @@ slug: claude-code-steganography-auditability-2026
 reading_time: 8
 featured_image: /images/library/claude-code-steganography-auditability-2026/thumbnail.png
 featured_image_alt: "Claude Code 시스템 프롬프트에 보이지 않는 마킹이 들어가는 모습을 보여주는 보안 일러스트"
-youtube_id: tCF9R_vOhvY
 meta_title: "Claude Code의 숨은 마킹이 드러낸 agent auditability의 새 기준 | Library"
 meta_description: "Claude Code의 숨은 마킹 논란이 왜 agent auditability와 신뢰 경계를 다시 보게 만드는지 정리했다."
 keywords:

@@ -3,7 +3,6 @@ title: "OpenWrt One이 홈 네트워크 sandbox를 다시 현실로 만드는 �
 subtitle: "공유기 한 대가 로컬 제어권, right-to-repair, 오프라인 복원력을 한 번에 보여준다"
 description: "OpenWrt One을 홈 네트워크 sandbox와 로컬 제어권의 하드웨어로 읽고, 왜 지금 공유기의 기본값이 중요해졌는지 정리한다."
 publish: true
-youtube_id: mR3PLyunTzU
 created_date: 2026-07-08
 category: "DevOps"
 tags:

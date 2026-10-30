@@ -16,7 +16,6 @@ slug: low-friction-sandbox-workflow-2026
 reading_time: 8
 featured_image: /images/library/low-friction-sandbox-workflow-2026/thumbnail.png
 featured_image_alt: "요청 라우팅, 정책 스펙, fallback 경로가 한 화면에 정리된 에이전트 운영 다이어그램"
-youtube_id: oR0j4K3Hdwk
 meta_title: "에이전트의 다음 경쟁력은 성능이 아니라 라우팅과 스펙이다 | Library"
 meta_description: "Wayfinder Router, DESIGN.md, agentgateway 신호를 바탕으로 에이전트 제품의 deterministic routing과 spec-first 운영을 정리한다."
 keywords:

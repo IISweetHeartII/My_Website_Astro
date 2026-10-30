@@ -29,7 +29,6 @@ og_title: "모바일 AI 에이전트는 왜 매 행동 뒤 UI를 다시 읽어�
 og_description: "모바일 UI는 행동 한 번으로 바뀐다. inspect-act-verify 루프로 오래된 참조와 검증 없는 탭을 줄이는 실무 원칙."
 og_type: article
 twitter_card: summary_large_image
-youtube_id: LT0-djXlplw
 ---
 
 <!--

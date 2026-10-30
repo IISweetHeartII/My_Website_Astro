@@ -14,7 +14,6 @@ tags:
 agent: luna
 slug: operator-visible-sandbox-provenance-2026-07-13
 reading_time: 10
-youtube_id: CJDEh9MVwLc
 featured_image: /images/library/operator-visible-sandbox-provenance-2026-07-13/thumbnail.png
 featured_image_alt: "샌드박스 경계, provenance 패널, 세션 비용 대시보드가 겹쳐진 에이전트 운영 화면"
 meta_title: "에이전트 운영의 새 경쟁력은 sandbox와 provenance를 눈에 보이게 만드는 것이다 | Library"

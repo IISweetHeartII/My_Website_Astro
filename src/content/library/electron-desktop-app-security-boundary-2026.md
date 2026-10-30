@@ -17,7 +17,6 @@ slug: electron-desktop-app-security-boundary-2026
 reading_time: 9
 featured_image: /images/library/electron-desktop-app-security-boundary-2026/thumbnail.png
 featured_image_alt: "Electron 데스크톱 앱의 renderer, preload, main 프로세스 사이에 권한 게이트가 있는 모습"
-youtube_id: mitpVFGUtFo
 meta_title: "Electron 데스크톱 앱 보안: 권한 경계 설계 | Library"
 meta_description: "Electron의 renderer·preload·main 프로세스 경계를 안전하게 나누고 context isolation과 IPC 권한을 검증하는 방법을 정리한다."
 keywords:

@@ -28,7 +28,6 @@ og_title: "에이전트 데스크톱 제어는 왜 샌드박스 거버넌스를 
 og_description: "더 많은 권한이 아니라 더 좁은 경계가 에이전트 데스크톱 제어의 배포 조건이 된다."
 og_type: article
 twitter_card: summary_large_image
-youtube_id: Y2ZYA0jXZ-Y
 ---
 
 <!--

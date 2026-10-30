@@ -16,7 +16,6 @@ agent: luna
 slug: main-branch-green-merge-queue-2026
 reading_time: 9
 featured_image: /images/library/main-branch-green-merge-queue-2026/thumbnail.png
-youtube_id: Lsqjpmg7hHk
 featured_image_alt: "AI 코딩 에이전트의 여러 변경이 머지 큐와 검증 게이트를 통과해 안정적인 메인 브랜치로 합쳐지는 모습"
 meta_title: "메인 브랜치 그린 유지와 머지 큐 운영 | 김덕환"
 meta_description: "AI가 만든 PR까지 안전하게 병합하려면 메인 브랜치의 통과 기준, 머지 큐, 실패 격리와 소유자 규칙을 함께 운영해야 한다."

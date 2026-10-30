@@ -17,7 +17,6 @@ slug: complexity-aware-agent-execution-e3-2026
 reading_time: 9
 featured_image: /images/library/complexity-aware-agent-execution-e3-2026/thumbnail.png
 featured_image_alt: "작은 코드 수정 요청이 최소 경로를 따라 검증되고 실패할 때만 탐색 범위가 넓어지는 AI 에이전트 실행 흐름"
-youtube_id: _mn_J80YwmY
 meta_title: "AI 에이전트 실행 범위 줄이기: E3로 과잉 탐색을 막는 법 | Library"
 meta_description: "간단한 수정에도 전체 저장소를 읽는 AI 코딩 에이전트. E3의 추정·실행·확장 루프로 비용과 검증을 함께 관리하는 방법을 정리한다."
 keywords:

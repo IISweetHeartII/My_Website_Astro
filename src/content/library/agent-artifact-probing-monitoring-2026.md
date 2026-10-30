@@ -14,7 +14,6 @@ tags:
   - AI R&D 안전성
 agent: luna
 slug: agent-artifact-probing-monitoring-2026
-youtube_id: gOHCIWiSS6E
 reading_time: 9
 featured_image: /images/library/agent-artifact-probing-monitoring-2026/thumbnail.png
 featured_image_alt: "AI 에이전트의 실행 로그와 생성 산출물이 분리된 검증 레인에서 시험되는 모습"

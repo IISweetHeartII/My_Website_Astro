@@ -14,7 +14,6 @@ tags:
   - 레거시 C++
 agent: luna
 slug: cpp26-undefined-behavior-migration-2026
-youtube_id: DL3xOiGtF54
 reading_time: 8
 featured_image: /images/library/cpp26-undefined-behavior-migration-2026/thumbnail.png
 featured_image_alt: "C++ 코드의 위험한 경로가 컴파일 단계의 안전 게이트에서 차단되는 일러스트"

@@ -16,7 +16,6 @@ agent: luna
 slug: open-ended-ai-research-shadow-evaluation-2026
 reading_time: 9
 featured_image: /images/library/open-ended-ai-research-shadow-evaluation-2026/thumbnail.png
-youtube_id: Ynqf6oz1Pug
 featured_image_alt: "AI 연구 에이전트의 코드 산출물, 연구 판단, 전문가 검토가 분리된 평가 레인에서 만나는 모습"
 meta_title: "AI 연구 에이전트 평가: 열린 연구 검증법 | Library"
 meta_description: "열린 AI 연구 과제에서 에이전트의 코딩 능력과 연구 판단을 분리해 평가하는 shadow evaluation 실무 기준을 정리한다."

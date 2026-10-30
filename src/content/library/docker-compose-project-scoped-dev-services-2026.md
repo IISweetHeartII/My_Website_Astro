@@ -29,7 +29,6 @@ og_title: "로컬 개발 서비스는 빨리 켜는 것보다 서로 섞이지 �
 og_description: "Docker Compose의 프로젝트 경계로 DB·캐시의 포트, 데이터, 시작 순서를 재현 가능하게 관리하는 방법."
 og_type: article
 twitter_card: summary_large_image
-youtube_id: i_T2QGymflw
 ---
 
 <!--

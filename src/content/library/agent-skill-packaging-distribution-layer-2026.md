@@ -28,7 +28,6 @@ og_title: "에이전트 스킬 패키징이 새 배포 레이어가 되는 이�
 og_description: "에이전트 스킬은 단순한 프롬프트 묶음이 아니라, 재사용 가능한 지식 패키지이자 배포 형식이 되고 있다."
 og_type: article
 twitter_card: summary_large_image
-youtube_id: fuMdwazbIR0
 ---
 
 <!--

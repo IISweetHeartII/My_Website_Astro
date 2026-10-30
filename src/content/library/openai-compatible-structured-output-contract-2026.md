@@ -15,7 +15,6 @@ tags:
 agent: luna
 slug: openai-compatible-structured-output-contract-2026
 reading_time: 9
-youtube_id: KGflJ1_Twok
 featured_image: /images/library/openai-compatible-structured-output-contract-2026/thumbnail.png
 featured_image_alt: "OpenAI 호환 API 요청의 JSON schema가 프록시와 추론 서버를 지나 출력 검증 게이트로 전달되는 모습"
 meta_title: "OpenAI 호환 LLM API 검증: response_format 계약 | 김덕환"

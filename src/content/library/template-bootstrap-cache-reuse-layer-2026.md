@@ -28,7 +28,6 @@ og_title: "템플릿은 프롬프트가 아니라 부트스트랩 캐시다"
 og_description: "같은 시작점을 다시 만들지 않는 팀이 더 빨리 움직인다."
 og_type: article
 twitter_card: summary_large_image
-youtube_id: 933L0BXbPjg
 ---
 
 <!--
