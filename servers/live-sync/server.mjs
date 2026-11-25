@@ -15,7 +15,12 @@ const rooms = new Map();
 const room = (name) => {
   let r = rooms.get(name);
   if (!r) {
-    r = { state: { slide: 0, video: { playing: false, pos: 0 }, videoId: null }, stateAt: Date.now(), admins: new Set(), viewers: new Set() };
+    r = {
+      state: { slide: 0, video: { playing: false, pos: 0 }, videoId: null },
+      stateAt: Date.now(),
+      admins: new Set(),
+      viewers: new Set(),
+    };
     rooms.set(name, r);
   }
   return r;
@@ -30,22 +35,33 @@ const current = (r) => {
 
 const peers = (r) => {
   const list = [...r.viewers].map((ws) => ws.data.slide);
-  return { type: "peers", viewers: list.length, synced: list.filter((x) => x === r.state.slide).length };
+  return {
+    type: "peers",
+    viewers: list.length,
+    synced: list.filter((x) => x === r.state.slide).length,
+  };
 };
 const tellAdmins = (r) => {
   const msg = JSON.stringify(peers(r));
   for (const ws of r.admins) ws.send(msg);
 };
 
-const cleanRoom = (v) => (String(v || "otr").replace(/[^a-z0-9_-]/gi, "").slice(0, 40) || "otr");
+const cleanRoom = (v) =>
+  String(v || "otr")
+    .replace(/[^a-z0-9_-]/gi, "")
+    .slice(0, 40) || "otr";
 
 Bun.serve({
   port: PORT,
   async fetch(req, server) {
     const url = new URL(req.url);
     if (url.pathname === "/ws") {
-      const isAdmin = !!ADMIN_KEY ? url.searchParams.get("key") === ADMIN_KEY : url.searchParams.has("key");
-      const ok = server.upgrade(req, { data: { room: cleanRoom(url.searchParams.get("room")), admin: isAdmin, slide: -1 } });
+      const isAdmin = ADMIN_KEY
+        ? url.searchParams.get("key") === ADMIN_KEY
+        : url.searchParams.has("key");
+      const ok = server.upgrade(req, {
+        data: { room: cleanRoom(url.searchParams.get("room")), admin: isAdmin, slide: -1 },
+      });
       return ok ? undefined : new Response("upgrade failed", { status: 400 });
     }
     if (url.pathname === "/healthz") return new Response("ok");
@@ -54,7 +70,9 @@ Bun.serve({
     const file = Bun.file(join(ROOT, path));
     if (!(await file.exists())) return new Response("not found", { status: 404 });
     // 영상은 Bun.file 이 Range 요청을 처리해 준다(태블릿 탐색·부분 로드).
-    return new Response(file, { headers: { "Cache-Control": path.endsWith(".html") ? "no-cache" : "public, max-age=300" } });
+    return new Response(file, {
+      headers: { "Cache-Control": path.endsWith(".html") ? "no-cache" : "public, max-age=300" },
+    });
   },
   websocket: {
     idleTimeout: 120,
@@ -67,10 +85,21 @@ Bun.serve({
     },
     message(ws, raw) {
       let m;
-      try { m = JSON.parse(String(raw)); } catch { return; }
+      try {
+        m = JSON.parse(String(raw));
+      } catch {
+        return;
+      }
       const r = room(ws.data.room);
-      if (m.type === "ping") { ws.send('{"type":"pong"}'); return; }
-      if (m.type === "here" && typeof m.slide === "number") { ws.data.slide = m.slide; tellAdmins(r); return; }
+      if (m.type === "ping") {
+        ws.send('{"type":"pong"}');
+        return;
+      }
+      if (m.type === "here" && typeof m.slide === "number") {
+        ws.data.slide = m.slide;
+        tellAdmins(r);
+        return;
+      }
       if (m.type === "state" && ws.data.admin && m.state && typeof m.state.slide === "number") {
         const s = m.state;
         r.state = {
@@ -87,7 +116,8 @@ Bun.serve({
     },
     close(ws) {
       const r = room(ws.data.room);
-      r.admins.delete(ws); r.viewers.delete(ws);
+      r.admins.delete(ws);
+      r.viewers.delete(ws);
       tellAdmins(r);
     },
   },
