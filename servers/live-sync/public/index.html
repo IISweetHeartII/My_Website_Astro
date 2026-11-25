@@ -218,6 +218,7 @@ button:disabled{opacity:.45;cursor:default}
       vid.src = /^(https:\/\/|\/)/.test(id) ? id : "/_blob/" + encodeURIComponent(id);
       vid.preload = "auto"; vid.playsInline = true; vid.setAttribute("playsinline","");
       vid.controls = false;
+      vid.loop = true; // the film is a loop; position is wrapped to its length below
       box().appendChild(vid);
     }
     function clipNow(){ return clipPlaying ? Math.min(CLIP_LEN, clipPos + (performance.now()-clipStart)/1000) : clipPos; }
@@ -241,6 +242,7 @@ button:disabled{opacity:.45;cursor:default}
       async play(pos){
         if (mode==="clip"){ cancelAnimationFrame(raf); clipPos = pos; clipStart = performance.now(); clipPlaying = true; drawClip(); setLabel(); return; }
         if (!vid) return;
+        pos = this.wrap(pos);
         try { vid.currentTime = pos; } catch {}
         try { await vid.play(); }
         catch { vid.muted = true; try { await vid.play(); $("soundChip").hidden = false; } catch {} }
@@ -251,6 +253,8 @@ button:disabled{opacity:.45;cursor:default}
         if (vid){ vid.pause(); if (pos != null) try { vid.currentTime = pos; } catch {} }
         setLabel();
       },
+      wrap(t){ const d = mode==="video" && vid ? vid.duration : 0; return d && isFinite(d) ? ((t % d) + d) % d : t; },
+      span(){ const d = mode==="video" && vid ? vid.duration : 0; return d && isFinite(d) ? d : 0; },
       now(){ return mode==="clip" ? clipNow() : (vid ? vid.currentTime : 0); },
       unmute(){ if (vid) vid.muted = false; },
       prime(){ // called from the viewer's tap so later play() is allowed with sound
@@ -265,8 +269,10 @@ button:disabled{opacity:.45;cursor:default}
     if (v.playing){
       const drift = v.at ? Math.max(0, (Date.now() - v.at)/1000) : 0;
       // only correct when we are visibly off; avoids stutter on every snapshot
-      const target = v.pos + Math.min(drift, 3600);
-      if (Math.abs(player.now() - target) > 0.6 || !(state._localPlaying)) { player.play(target); }
+      const target = player.wrap(v.pos + Math.min(drift, 3600));
+      let off = Math.abs(player.now() - target);
+      const span = player.span(); if (span) off = Math.min(off, span - off);
+      if (off > 0.6 || !(state._localPlaying)) { player.play(target); }
       state._localPlaying = true;
     } else {
       player.pause(v.pos); state._localPlaying = false;
@@ -383,6 +389,12 @@ button:disabled{opacity:.45;cursor:default}
         if (isAdmin && !first) return; // the presenter already shows its own change
         applyState({ slide: s.slide, videoId: s.videoId || null, video: { playing: !!s.video?.playing, pos: +s.video?.pos || 0, at: 0 } });
         if (isAdmin) { state.video = { playing: !!s.video?.playing, pos: +s.video?.pos || 0, at: 0 }; $("vurl").value = s.videoId || ""; }
+        if (isAdmin && first && !s.videoId) {
+          fetch("/media/ofr-brand-film.mp4", { method: "HEAD" }).then((r) => {
+            if (!r.ok || state.videoId) return;
+            $("vurl").value = "/media/ofr-brand-film.mp4"; $("vset").click();
+          }).catch(() => {});
+        }
         if (!isAdmin) sendWs({ type:"here", slide: state.slide });
       } else if (m.type === "peers" && isAdmin) {
         renderPeers(m);
