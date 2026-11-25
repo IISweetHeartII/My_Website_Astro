@@ -1,0 +1,11 @@
+services:
+  live-sync:
+    build: .
+    restart: unless-stopped
+    ports:
+      - "8787:8787"
+    environment:
+      ADMIN_KEY: ${ADMIN_KEY:?set ADMIN_KEY in .env}
+    volumes:
+      # 행사 영상은 여기 넣는다: ./public/media/otr.mp4 → https://<host>/media/otr.mp4
+      - ./public/media:/app/public/media:ro

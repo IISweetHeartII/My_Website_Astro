@@ -101,6 +101,8 @@ button:disabled{opacity:.45;cursor:default}
       <button id="vplay">▶ 다같이 재생</button>
       <button id="vpause">❚❚ 멈춤</button>
       <button id="vzero">처음으로</button>
+      <input id="vurl" placeholder="/media/otr.mp4" aria-label="영상 주소" style="font:inherit;font-size:14px;width:170px;padding:8px 10px;background:#0f1114;color:var(--paper);border:1px solid var(--line);border-radius:6px">
+      <button id="vset">영상 적용</button>
       <span id="vmsg" class="note"></span>
     </div>
     <span class="sep"></span>
@@ -123,15 +125,6 @@ button:disabled{opacity:.45;cursor:default}
 </div>
 <button id="soundChip" hidden>소리 켜기</button>
 
-<script>
-  // 공개 값만 넣는다(anon 키는 브라우저에 원래 노출되는 키). 비어 있으면 동기화 없이 혼자 보기로 열린다.
-  window.LIVE_CONFIG = {
-    url: "",
-    anonKey: "",
-    videoSrc: ""  // 예: "/live/otr.mp4" (Pages 파일 한 개 25MB 제한)
-  };
-</script>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
 <script>
 (() => {
   const SLIDES = [
@@ -287,26 +280,24 @@ button:disabled{opacity:.45;cursor:default}
     if (s.video) { state.video = s.video; applyVideo(s.video); }
   }
 
-  // ---------- transport: Supabase Realtime (broadcast + presence) ----------
-  const CFG = window.LIVE_CONFIG || {};
+  // ---------- transport: our own WebSocket server (servers/live-sync/server.mjs) ----------
   const params = new URLSearchParams(location.search);
   const roomName = (params.get("room") || "otr").replace(/[^a-z0-9_-]/gi, "").slice(0, 40) || "otr";
-  isAdmin = params.has("admin");
+  const adminKey = params.get("admin");
+  const wantAdmin = adminKey !== null;
   const pill = $("pill"), pillText = $("pillText");
   function setPill(cls, text){ pill.className = cls; pillText.textContent = text; }
-  let ch = null, live = false;
-  room = { presence: (p) => (ch && live ? ch.track(p) : Promise.resolve()) };
+  let ws = null, live = false, retry = 0;
+  const sendWs = (o) => { if (ws && live) ws.send(JSON.stringify(o)); };
+  room = { presence: (p) => { if (!isAdmin) sendWs({ type:"here", slide: p.slide }); return Promise.resolve(); } };
 
-  // the presenter always sends absolute state with the clip position measured right now,
-  // so a viewer never needs to trust its own clock
+  // the presenter sends absolute state with the clip position measured right now;
+  // the server keeps its own clock from there, so no device has to trust its clock
   function snapshot(){
-    const v = state.video.playing ? { playing:true, pos: player.now(), at:0 } : { playing:false, pos: state.video.pos || 0, at:0 };
+    const v = state.video.playing ? { playing:true, pos: player.now() } : { playing:false, pos: state.video.pos || 0 };
     return { slide: state.slide, video: v, videoId: state.videoId || null };
   }
-  function send(){
-    try { localStorage.setItem("live-admin-" + roomName, JSON.stringify({ slide: state.slide, videoId: state.videoId })); } catch {}
-    if (ch && live) ch.send({ type:"broadcast", event:"state", payload: snapshot() }).catch(()=>{});
-  }
+  function send(){ if (isAdmin) sendWs({ type:"state", state: snapshot() }); }
 
   function go(i){
     if (!isAdmin) return;
@@ -334,10 +325,16 @@ button:disabled{opacity:.45;cursor:default}
   $("vplay").onclick = vplay;
   $("vpause").onclick = () => vpause(false);
   $("vzero").onclick = () => vpause(true);
+  $("vset").onclick = () => {
+    const v = $("vurl").value.trim();
+    state.videoId = v || null; state.video = { playing:false, pos:0, at:0 };
+    player.setSource(state.videoId); send();
+    $("vurl").blur();
+  };
   $("fs").onclick = () => { const d = document.documentElement; (document.fullscreenElement ? document.exitFullscreen() : d.requestFullscreen?.())?.catch?.(()=>{}); };
   $("asViewer").onclick = () => { location.href = location.pathname + (roomName !== "otr" ? "?room=" + roomName : ""); };
   document.addEventListener("keydown", (e) => {
-    if (!isAdmin) return;
+    if (!isAdmin || e.target.closest("input")) return;
     if (["ArrowRight","PageDown"," ","Enter"].includes(e.key)) { e.preventDefault(); go(state.slide+1); }
     else if (["ArrowLeft","PageUp","Backspace"].includes(e.key)) { e.preventDefault(); go(state.slide-1); }
     else if (e.key === "p" || e.key === "P") { state.video.playing ? vpause(false) : vplay(); }
@@ -354,51 +351,54 @@ button:disabled{opacity:.45;cursor:default}
   };
   $("soundChip").onclick = () => { player.unmute(); $("soundChip").hidden = true; };
 
-  function renderPeers(list){
-    const viewers = list.filter(p => p && p.role === "viewer");
-    const synced = viewers.filter(p => p.slide === state.slide).length;
+  function renderPeers(m){
     const el = $("peers"); el.textContent = "";
-    if (!viewers.length) { el.textContent = "접속한 화면 없음"; return; }
-    const b = document.createElement("b"); b.textContent = `${viewers.length}대`;
-    el.append("접속한 화면 ", b, ` · ${synced}대가 같은 장표`);
+    if (!m.viewers) { el.textContent = "접속한 화면 없음"; return; }
+    const b = document.createElement("b"); b.textContent = `${m.viewers}대`;
+    el.append("접속한 화면 ", b, ` · ${m.synced}대가 같은 장표`);
   }
 
-  if (isAdmin) {
-    $("dock").hidden = false; requestAnimationFrame(fit);
-    try { const saved = JSON.parse(localStorage.getItem("live-admin-" + roomName) || "null"); if (saved) { state.slide = saved.slide|0; state.videoId = saved.videoId || null; } } catch {}
-  } else {
-    $("tap").hidden = false;
-  }
-  if (!state.videoId && CFG.videoSrc) state.videoId = CFG.videoSrc;
-  player.setSource(state.videoId);
-  showSlide(state.slide);
+  if (!wantAdmin) $("tap").hidden = false;
+  showSlide(0);
 
-  if (!window.supabase || !CFG.url || !CFG.anonKey) {
-    setPill("bad", "동기화 설정 없음 · 혼자 보기");
-  } else {
-    const sb = window.supabase.createClient(CFG.url, CFG.anonKey, { realtime: { params: { eventsPerSecond: 20 } } });
-    const me = (crypto.randomUUID && crypto.randomUUID()) || String(Math.random()).slice(2);
-    ch = sb.channel("live-slides:" + roomName, { config: { broadcast: { self: false }, presence: { key: me } } });
-    ch.on("broadcast", { event: "state" }, ({ payload }) => { if (!isAdmin) applyState(payload); });
-    ch.on("broadcast", { event: "hello" }, () => { if (isAdmin) send(); });
-    ch.on("presence", { event: "sync" }, () => {
-      if (!isAdmin) return;
-      const all = Object.values(ch.presenceState()).flat();
-      renderPeers(all);
-    });
-    ch.subscribe((status) => {
-      if (status === "SUBSCRIBED") {
-        live = true;
-        setPill("ok", isAdmin ? "발표자 · 넘기면 모두 따라와요" : "실시간 연결됨 · 자동으로 넘어가요");
-        ch.track({ role: isAdmin ? "admin" : "viewer", slide: state.slide }).catch(()=>{});
-        if (isAdmin) send(); else ch.send({ type:"broadcast", event:"hello", payload:{} }).catch(()=>{});
-      } else if (status === "CHANNEL_ERROR" || status === "TIMED_OUT" || status === "CLOSED") {
-        live = false; setPill("bad", "연결 끊김 · 다시 잇는 중");
+  function connect(){
+    const proto = location.protocol === "https:" ? "wss:" : "ws:";
+    const q = new URLSearchParams({ room: roomName });
+    if (wantAdmin) q.set("key", adminKey);
+    ws = new WebSocket(`${proto}//${location.host}/ws?${q}`);
+    ws.onopen = () => { live = true; retry = 0; };
+    ws.onmessage = (ev) => {
+      let m; try { m = JSON.parse(ev.data); } catch { return; }
+      if (m.type === "hello") {
+        isAdmin = !!m.admin;
+        if (isAdmin) { $("dock").hidden = false; requestAnimationFrame(fit); }
+        else if (wantAdmin) setPill("bad", "발표자 키가 틀렸어요 · 뷰어로 보는 중");
+        if (!isAdmin || !wantAdmin) setPill("ok", "실시간 연결됨 · 자동으로 넘어가요");
+        if (isAdmin) setPill("ok", "발표자 · 넘기면 모두 따라와요");
+        if (wantAdmin && !isAdmin) setPill("bad", "발표자 키가 틀렸어요 · 뷰어로 보는 중");
+      } else if (m.type === "state" && m.state) {
+        const s = m.state;
+        const first = shown === -1 || !state._synced;
+        state._synced = true;
+        if (isAdmin && !first) return; // the presenter already shows its own change
+        applyState({ slide: s.slide, videoId: s.videoId || null, video: { playing: !!s.video?.playing, pos: +s.video?.pos || 0, at: 0 } });
+        if (isAdmin) { state.video = { playing: !!s.video?.playing, pos: +s.video?.pos || 0, at: 0 }; $("vurl").value = s.videoId || ""; }
+        if (!isAdmin) sendWs({ type:"here", slide: state.slide });
+      } else if (m.type === "peers" && isAdmin) {
+        renderPeers(m);
       }
-    });
-    // a slow heartbeat so a tablet that missed a message (Wi-Fi blip) catches up on its own
-    if (isAdmin) setInterval(send, 4000);
+    };
+    ws.onclose = () => {
+      live = false;
+      setPill("bad", "연결 끊김 · 다시 잇는 중");
+      const wait = Math.min(8000, 500 * 2 ** retry++);
+      setTimeout(connect, wait);
+    };
+    ws.onerror = () => { try { ws.close(); } catch {} };
   }
+  connect();
+  // keepalive through proxies, and a slow re-send so a tablet that missed a message catches up
+  setInterval(() => { sendWs({ type:"ping" }); if (isAdmin) send(); }, 5000);
 })();
 </script>
 </body>

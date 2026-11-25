@@ -58,10 +58,3 @@
 
 /*.txt
   Cache-Control: public, max-age=86400, must-revalidate
-
-# 태블릿 동기화 장표(/live/) — Supabase Realtime(wss) 연결을 위해 CSP만 이 경로에서 교체한다.
-/live/*
-  ! Content-Security-Policy
-  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: https:; media-src 'self' https: blob:; connect-src 'self' https://*.supabase.co wss://*.supabase.co; object-src 'none'; base-uri 'self'; frame-ancestors 'none'
-  Cache-Control: public, max-age=0, must-revalidate
-  X-Robots-Tag: noindex
