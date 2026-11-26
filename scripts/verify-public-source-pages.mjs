@@ -23,6 +23,14 @@ test("the channel's experiment has a canonical HTML page linked from Log8", asyn
   assert.match(home, /href="\/ai-how-duck\//);
 });
 
+test("the Korean profile has its live canonical URL and links the author's public work", async () => {
+  const profile = await output("about/index.html");
+  assert.match(profile, /rel="canonical" href="https:\/\/log8\.kr\/about\/"/);
+  assert.match(profile, /김덕환 소개 · AI 에이전트와 마케팅 자동화 \| Log8/);
+  assert.match(profile, /href="\/ai-how-duck\/"[^>]*>AI어떡환 실험 기록/);
+  assert.match(profile, /href="https:\/\/salemorning\.com\/"[^>]*>세일모닝/);
+});
+
 test("the existing Black Friday article links the current calendar and marks the old forecast", async () => {
   const article = await output("blog/black-friday-2026-korea-sale-calendar/index.html");
 

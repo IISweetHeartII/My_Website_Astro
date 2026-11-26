@@ -2,10 +2,10 @@
 import { AUTHOR_GITHUB, AUTHOR_LINKEDIN, SITE_AUTHOR, SITE_URL } from "@/shared/config/consts";
 import { serializeJsonLd } from "@/shared/utils/json-ld";
 
-const title = "김덕환 — A Time Capsule";
+const title = `${SITE_AUTHOR} 소개 · AI 에이전트와 마케팅 자동화 | Log8`;
 const description =
-  "수학도에서 AI 활용 개발자로. 터미널로 읽거나 글로 읽는, 김덕환 인터랙티브 소개.";
-const canonical = `${SITE_URL}/about`;
+  "김덕환은 AI 에이전트로 마케팅 리서치, 콘텐츠 제작, 모니터링을 자동화하는 제품 개발자입니다. AI어떡환 실험 기록과 세일모닝 작업을 소개합니다.";
+const canonical = `${SITE_URL}/about/`;
 const ogImage = `${SITE_URL}/og/page/about.png`;
 
 // This page renders its own document rather than going through Layout, so the
@@ -18,8 +18,7 @@ const personSchema = {
   url: SITE_URL,
   image: `${SITE_URL}/images/design/DH_ID.jpg`,
   jobTitle: "Product Engineer",
-  description:
-    "아끼지 않는 문제 해결사. 사람 중심의 AI 제품을 설계하고 구현해 고객과 비즈니스의 실제 문제를 해결합니다.",
+  description,
   sameAs: [AUTHOR_GITHUB, AUTHOR_LINKEDIN],
 };
 ---
@@ -83,6 +82,12 @@ const personSchema = {
       <li>자율 에이전트 함대 운영 경험 · 프로필 7 · cron 45 · 칸반 383장</li>
       <li><strong>881 PR</strong> 자율 파이프라인 머지 · 대회·프로그램 수상 <strong>6회</strong></li>
     </ul>
+
+    <p class="public-work">
+      김덕환은 AI 에이전트로 마케팅 리서치, 콘텐츠 제작, 모니터링을 자동화하는 제품 개발자입니다.
+      <a href="/ai-how-duck/">AI어떡환 실험 기록</a>에는 실제 AI 서비스 사용 결과를,
+      <a href="https://salemorning.com/">세일모닝</a>에는 판매처 발표를 확인한 세일 일정을 공개합니다.
+    </p>
 
     <nav class="chapters" id="chapters" aria-label="챕터"></nav>
 
@@ -302,6 +307,18 @@ const personSchema = {
       .summary li strong {
         color: var(--ink);
         font-weight: 600;
+      }
+      .public-work {
+        margin: 0 auto 0.75rem;
+        padding: 0 clamp(1.1rem, 4vw, 1.6rem);
+        max-width: var(--maxw);
+        width: 100%;
+        font-size: 0.9rem;
+        color: var(--muted);
+      }
+      .public-work a {
+        color: var(--accent);
+        text-underline-offset: 0.15em;
       }
       .switch__nav {
         color: var(--muted);
