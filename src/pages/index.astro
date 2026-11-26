@@ -21,7 +21,7 @@ import {
 } from "lucide-astro";
 import profileImage from "@/assets/images/design/DH_ID.jpg";
 import BreadcrumbSchema from "@/shared/components/seo/BreadcrumbSchema.astro";
-import { SITE_DESCRIPTION, SITE_URL } from "@/shared/config/consts";
+import { SITE_URL } from "@/shared/config/consts";
 import { getLatestPosts, getSortedPublishedPosts } from "@/shared/utils/blog";
 import { serializeJsonLd } from "@/shared/utils/json-ld";
 import Layout from "../layouts/Layout.astro";
@@ -29,6 +29,9 @@ import Layout from "../layouts/Layout.astro";
 const allPosts = await getSortedPublishedPosts();
 const latestBlogPosts = getLatestPosts(allPosts, 3);
 const latestPost = latestBlogPosts[0];
+const homeTitle = "김덕환 · AI 에이전트와 마케팅 자동화 | Log8";
+const homeDescription =
+  "김덕환은 AI 에이전트로 리서치·콘텐츠 제작·모니터링을 자동화하고, 서비스로 구현하고 운영하는 제품 개발자입니다.";
 
 const websiteSchema = {
   "@context": "https://schema.org",
@@ -36,15 +39,15 @@ const websiteSchema = {
   "@id": `${SITE_URL}/#website`,
   name: "김덕환의 WebSite",
   url: SITE_URL,
-  description: SITE_DESCRIPTION,
+  description: homeDescription,
   inLanguage: "ko-KR",
   publisher: { "@id": `${SITE_URL}/#author` },
 };
 ---
 
 <Layout
-  title="Home | Log8"
-  description={SITE_DESCRIPTION}
+  title={homeTitle}
+  description={homeDescription}
   og_image="/og/page/home.png"
   twitter_image="/og/page/home.png"
   featured_image_alt="김덕환의 WebSite 홈 대표 이미지"
@@ -80,24 +83,24 @@ const websiteSchema = {
                 style="--delay: 0.05s"
               >
                 <Target class="w-4 h-4 shrink-0" />
-                AI Native Engineer · AI 자동화 · 제품 개발
+                제품 개발자 김덕환
               </div>
 
               <!-- Main Heading -->
               <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold text-text leading-tight">
-                <span class="blur-word" style="--delay: 0.2s">AI 자동화부터</span><br />
+                <span class="blur-word" style="--delay: 0.2s">AI 에이전트로</span><br />
                 <span
                   class="blur-word bg-linear-to-r from-primary to-accent bg-clip-text text-transparent"
                   style="--delay: 0.4s"
                 >
-                  제품 구현·운영까지
+                  마케팅을 자동화합니다
                 </span>
               </h1>
 
               <!-- Subtitle -->
               <p class="blur-word text-lg md:text-xl lg:text-2xl text-text-light leading-relaxed" style="--delay: 0.6s">
-                에이전트 파이프라인부터 AI MVP·웹 서비스까지<br class="hidden md:block" />
-                직접 설계하고 구현합니다. Product Engineer <strong class="text-text">김덕환</strong>입니다.
+                반복되는 리서치, 콘텐츠 제작, 모니터링을 자동화합니다.
+                그 흐름을 실제 웹 서비스로 만들고 운영합니다.
               </p>
 
               <!-- CTA Buttons -->
@@ -124,6 +127,11 @@ const websiteSchema = {
                 <span aria-hidden="true" class="mx-2">·</span>
                 <a href="/ai-how-duck/" class="link-arrow inline-flex items-center gap-1 font-medium hover:text-primary transition-colors">
                   AI어떡환 실험 기록
+                  <ArrowRight class="w-3.5 h-3.5" />
+                </a>
+                <span aria-hidden="true" class="mx-2">·</span>
+                <a href="https://salemorning.com/" class="link-arrow inline-flex items-center gap-1 font-medium hover:text-primary transition-colors">
+                  세일모닝 운영 사례
                   <ArrowRight class="w-3.5 h-3.5" />
                 </a>
               </p>
