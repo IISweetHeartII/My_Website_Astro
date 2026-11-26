@@ -1,0 +1,57 @@
+---
+import { SITE_AUTHOR, SITE_URL } from "@/shared/config/consts";
+import { serializeJsonLd } from "@/shared/utils/json-ld";
+import Layout from "../layouts/Layout.astro";
+
+const channel = "https://www.youtube.com/@ai.howduck";
+const video = "https://www.youtube.com/watch?v=w0ucWL4mFTc";
+const pageUrl = `${SITE_URL}/ai-how-duck/`;
+const title = "AI어떡환 · 피클 모닝콜 실험 기록";
+const description =
+  "김덕환이 운영하는 AI어떡환(AI How Duck)의 피클 모닝콜 실험. 실제 전화 수신과 발신자 표시, 통화 요약 결과를 원본 영상과 함께 확인할 수 있습니다.";
+const pageSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  name: title,
+  description,
+  url: pageUrl,
+  author: { "@id": `${SITE_URL}/#author` },
+  citation: video,
+};
+---
+
+<Layout title={title} description={description} canonical_url={pageUrl}>
+  <Fragment slot="head">
+    <script type="application/ld+json" is:inline set:html={serializeJsonLd(pageSchema)} />
+  </Fragment>
+  <article class="mx-auto max-w-3xl px-5 py-12 md:py-20">
+    <p class="mb-4 text-sm font-medium text-text-muted">AI How Duck · Log8</p>
+    <h1 class="text-4xl font-bold leading-tight text-text md:text-5xl">{title}</h1>
+    <p class="mt-5 text-lg leading-relaxed text-text-light">
+      AI어떡환(AI How Duck)은 <a class="underline underline-offset-4" href="/about/">{SITE_AUTHOR}</a>이
+      운영하는 한국어 AI 실사용 채널입니다. AI 서비스에 실제 작업을 맡겨 보고 결과를 영상으로 남깁니다.
+    </p>
+    <section class="mt-10 space-y-4" aria-labelledby="pickle-call">
+      <h2 id="pickle-call" class="text-2xl font-bold text-text">피클에 모닝콜을 맡기면 실제로 전화가 올까?</h2>
+      <p class="leading-relaxed text-text-light">
+        <strong class="text-text">공개 영상에서 테스트한 모닝콜은 실제로 전화가 왔습니다.</strong>
+        전화를 받는 화면에는 ‘대출 권유’가 표시됐고, 수신자는 통화를 7초 만에 끝냈습니다.
+        전화 앱의 AI 요약도 통화 내용을 대출 권유 스팸과 관련된 논의로 분류했습니다.
+        이 기록은 영상에서 확인한 사례 한 건의 결과입니다.
+      </p>
+      <p class="leading-relaxed text-text-light">
+        실험에서 사용한 요청은 제작자와 동생을 다음 날 아침 깨워 달라는 것이었습니다.
+        영상에서 모닝콜을 맡긴 과정, 실제 통화, 연락처에 번호를 저장한 뒤 화면을 각각 확인할 수 있습니다.
+      </p>
+      <ul class="space-y-2 pl-5 text-text-light list-disc">
+        <li><a class="underline underline-offset-4" href={`${video}&t=162s`}>02:42 · 모닝콜 요청</a></li>
+        <li><a class="underline underline-offset-4" href={`${video}&t=215s`}>03:35 · 실제 통화 기록</a></li>
+        <li><a class="underline underline-offset-4" href={`${video}&t=339s`}>05:39 · 연락처 이름을 저장한 뒤 확인</a></li>
+      </ul>
+      <p class="flex flex-wrap gap-x-5 gap-y-2 pt-3 text-primary">
+        <a class="font-semibold underline underline-offset-4" href={video}>피클 모닝콜 원본 영상</a>
+        <a class="font-semibold underline underline-offset-4" href={channel}>AI어떡환 유튜브 채널</a>
+      </p>
+    </section>
+  </article>
+</Layout>
