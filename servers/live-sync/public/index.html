@@ -250,7 +250,12 @@ button:disabled{opacity:.45;cursor:default}
       },
       pause(pos){
         if (mode==="clip"){ clipPos = pos ?? clipNow(); clipPlaying = false; cancelAnimationFrame(raf); drawClip(); setLabel(); return; }
-        if (vid){ vid.pause(); if (pos != null) try { vid.currentTime = pos; } catch {} }
+        // the presenter re-sends state every few seconds; re-seeking a paused video to the
+        // same spot makes some tablets flash the nearest keyframe, so only seek when it moved
+        if (vid){
+          if (!vid.paused) vid.pause();
+          if (pos != null){ pos = this.wrap(pos); if (Math.abs(vid.currentTime - pos) > 0.05) try { vid.currentTime = pos; } catch {} }
+        }
         setLabel();
       },
       wrap(t){ const d = mode==="video" && vid ? vid.duration : 0; return d && isFinite(d) ? ((t % d) + d) % d : t; },
